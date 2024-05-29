@@ -1,0 +1,6 @@
+@PresTrust.FarmLand.API_HostAddress = http://localhost:5243
+
+GET {{PresTrust.FarmLand.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
