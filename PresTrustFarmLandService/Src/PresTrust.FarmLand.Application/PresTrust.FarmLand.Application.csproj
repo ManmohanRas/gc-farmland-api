@@ -7,11 +7,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Queries\NewFolder1\**" />
+    <Compile Remove="Queries\NewFolder2\**" />
+    <Compile Remove="Queries\NewFolder3\**" />
+    <EmbeddedResource Remove="Queries\NewFolder1\**" />
+    <EmbeddedResource Remove="Queries\NewFolder2\**" />
+    <EmbeddedResource Remove="Queries\NewFolder3\**" />
+    <None Remove="Queries\NewFolder1\**" />
+    <None Remove="Queries\NewFolder2\**" />
+    <None Remove="Queries\NewFolder3\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.1" />
     <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="ApiExceptions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PresTrust.FarmLand.Domain\PresTrust.FarmLand.Domain.csproj" />
+    <ProjectReference Include="..\PresTrust.FarmLand.Infrastructure\PresTrust.FarmLand.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
