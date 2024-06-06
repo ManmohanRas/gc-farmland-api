@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{61F1C680-6A23-46B8-AD31-EB2125839F20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{AF273830-3968-4820-BA52-5D17DF2D728E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresTrust.FarmLand.API", "Src\APIs\PresTrust.FarmLand.API\PresTrust.FarmLand.API.csproj", "{6B056598-E04E-46DD-AB93-CBF5CE916CFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresTrust.FarmLand.Application", "Src\PresTrust.FarmLand.Application\PresTrust.FarmLand.Application.csproj", "{5CD64DF3-85D5-440D-92DA-7F2CC2F4F7B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresTrust.FarmLand.Domain", "Src\PresTrust.FarmLand.Domain\PresTrust.FarmLand.Domain.csproj", "{350CE314-2B9E-4FC7-B32D-61BB999C2E4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresTrust.FarmLand.Infrastructure", "Src\PresTrust.FarmLand.Infrastructure\PresTrust.FarmLand.Infrastructure.csproj", "{9FE69810-3449-4B0B-BE74-9F3FDA2C3ACD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B056598-E04E-46DD-AB93-CBF5CE916CFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B056598-E04E-46DD-AB93-CBF5CE916CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B056598-E04E-46DD-AB93-CBF5CE916CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B056598-E04E-46DD-AB93-CBF5CE916CFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CD64DF3-85D5-440D-92DA-7F2CC2F4F7B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CD64DF3-85D5-440D-92DA-7F2CC2F4F7B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CD64DF3-85D5-440D-92DA-7F2CC2F4F7B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CD64DF3-85D5-440D-92DA-7F2CC2F4F7B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{350CE314-2B9E-4FC7-B32D-61BB999C2E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{350CE314-2B9E-4FC7-B32D-61BB999C2E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{350CE314-2B9E-4FC7-B32D-61BB999C2E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{350CE314-2B9E-4FC7-B32D-61BB999C2E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FE69810-3449-4B0B-BE74-9F3FDA2C3ACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FE69810-3449-4B0B-BE74-9F3FDA2C3ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FE69810-3449-4B0B-BE74-9F3FDA2C3ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FE69810-3449-4B0B-BE74-9F3FDA2C3ACD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AF273830-3968-4820-BA52-5D17DF2D728E} = {61F1C680-6A23-46B8-AD31-EB2125839F20}
+		{6B056598-E04E-46DD-AB93-CBF5CE916CFA} = {AF273830-3968-4820-BA52-5D17DF2D728E}
+		{5CD64DF3-85D5-440D-92DA-7F2CC2F4F7B1} = {61F1C680-6A23-46B8-AD31-EB2125839F20}
+		{350CE314-2B9E-4FC7-B32D-61BB999C2E4C} = {61F1C680-6A23-46B8-AD31-EB2125839F20}
+		{9FE69810-3449-4B0B-BE74-9F3FDA2C3ACD} = {61F1C680-6A23-46B8-AD31-EB2125839F20}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD623569-52D7-429D-B3BA-76B64572CDA1}
+	EndGlobalSection
+EndGlobal
