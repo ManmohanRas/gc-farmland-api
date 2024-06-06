@@ -1,7 +1,4 @@
-﻿global using FluentValidation;
-global using FluentValidation.AspNetCore;
-
-namespace PresTrust.FarmLand.API.DependencyInjection
+﻿namespace PresTrust.FarmLand.API.DependencyInjection
 {
     public class RegisterFluentValidator : IDependencyInjectionService
     {

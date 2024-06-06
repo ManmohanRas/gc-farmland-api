@@ -3,5 +3,16 @@ global using AutoMapper;
 
 global using PresTrust.FarmLand.Infrastructure.SqlServerDb.Contracts;
 global using PresTrust.FarmLand.Domain.Entities;
+global using System.Text;
+global using Microsoft.AspNetCore.Authentication;
+global using Microsoft.AspNetCore.Http;
+global using PresTrust.FarmLand.Domain.Enums;
+global using static PresTrust.FarmLand.Domain.Constants.FarmLandDomainConstants;
+global using System.Net.Http.Json;
+global using Newtonsoft.Json;
+global using System.Net;
+global using System.Net.Http.Headers;
+
+
 
 

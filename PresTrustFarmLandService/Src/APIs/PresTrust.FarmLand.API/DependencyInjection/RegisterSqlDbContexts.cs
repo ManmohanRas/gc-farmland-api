@@ -1,7 +1,4 @@
-﻿
-using PresTrust.FarmLand.Infrastructure.SqlServerDb;
-
-namespace PresTrust.FarmLand.API.DependencyInjection
+﻿namespace PresTrust.FarmLand.API.DependencyInjection
 {
     public class RegisterSqlDbContexts : IDependencyInjectionService
     {

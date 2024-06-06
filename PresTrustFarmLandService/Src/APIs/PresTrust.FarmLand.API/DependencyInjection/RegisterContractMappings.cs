@@ -1,7 +1,6 @@
 ﻿
 using PresTrust.FarmLand.Infrastructure.SqlServerDb.Contracts;
 using PresTrust.FarmLand.Infrastructure.SqlServerDb.Repositories;
-using PresTrust.FarmLand.Infrastructure.SqlServerDb;
 
 namespace PresTrust.FarmLand.API.DependencyInjection
 {

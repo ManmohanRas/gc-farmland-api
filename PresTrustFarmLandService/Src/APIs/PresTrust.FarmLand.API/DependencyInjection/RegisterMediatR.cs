@@ -8,6 +8,10 @@
 
                 config.RegisterServicesFromAssemblies(Assembly.Load("PresTrust.FarmLand.Application"));
             });
+
+            // Register MediatR pipeline behaviors, in the same order the behaviors should be called.
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
         }
     }
 

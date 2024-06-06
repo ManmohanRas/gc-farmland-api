@@ -17,8 +17,18 @@
 
         public async Task<List<GetApplicationsQueryViewModel>> Handle(GetApplicationsQuery request, CancellationToken cancellationToken)
         {
-            var applications = await repoApplication.GetApplicationsAsync();
-            var results = mapper.Map<List<FarmLandApplicationEntity>, List<GetApplicationsQueryViewModel>>(applications);
+            //var applications = await repoApplication.GetApplicationsAsync();
+            //var results = mapper.Map<List<FarmLandApplicationEntity>, List<GetApplicationsQueryViewModel>>(applications);
+            List<GetApplicationsQueryViewModel> results = new List<GetApplicationsQueryViewModel>()
+            {
+                new GetApplicationsQueryViewModel
+                {
+                    Id = 1,
+                    Title = "Test Farm",
+                    AgencyId = 1401,
+                    AgencyName = "test test",
+                }
+            };
             
             return results;
         }
