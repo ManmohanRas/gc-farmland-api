@@ -21,11 +21,15 @@ global using PresTrust.FarmLand.Domain.Configurations;
 global using PresTrust.FarmLand.Domain.Constants;
 global using Polly;
 global using System.Net.Http.Headers;
-global using static PresTrust.FarmLand.Domain.Constants.FloodMitigationDomainConstants;
+global using static PresTrust.FarmLand.Domain.Constants.FarmLandDomainConstants;
 global using PresTrust.FarmLand.API.Infrastructure.Behaviours;
 global using FluentValidation;
 global using FluentValidation.AspNetCore;
 global using FluentValidation.Results;
+global using PresTrust.FarmLand.Application;
+global using PresTrust.FarmLand.Infrastructure.SqlServerDb.Contracts;
+global using PresTrust.FarmLand.Infrastructure.SqlServerDb.Repositories;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 
 
