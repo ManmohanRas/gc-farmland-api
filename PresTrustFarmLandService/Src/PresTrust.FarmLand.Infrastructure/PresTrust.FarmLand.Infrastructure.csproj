@@ -14,7 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SqlServerDb\DatabaseScripts\" />
+    <Folder Include="SqlServerDb\DatabaseScripts\Seed\" />
+    <Folder Include="SqlServerDb\DatabaseScripts\Tables\" />
     <Folder Include="SqlServerDb\SqlCommands\Applications\" />
   </ItemGroup>
 
