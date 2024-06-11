@@ -79,11 +79,11 @@ namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.Repositories
             param: new
             {
                     @p_Title = application.Title,
-                    //@p_AgencyId = application.AgencyId,
-                    //@p_ApplicationTypeId = application.ApplicationTypeId,
-                    //@p_StatusId = application.StatusId,
-                    //@p_CreatedByProgramAdmin = application.CreatedByProgramAdmin,
-                    //@p_LastUpdatedBy = application.LastUpdatedBy
+                    @p_AgencyId = application.AgencyId,
+                    @p_ApplicationTypeId = application.ApplicationTypeId,
+                    @p_StatusId = application.StatusId,
+                    @p_CreatedByProgramAdmin = application.CreatedByProgramAdmin,
+                    @p_LastUpdatedBy = application.LastUpdatedBy
                 });
 
             application.Id = id;
