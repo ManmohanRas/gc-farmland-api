@@ -66,9 +66,7 @@ public sealed class PresTrustUserContext : IPresTrustUserContext
         userProfile.Role = UserRoleEnum.NONE;
 
         this.accessToken = accessor.HttpContext.GetTokenAsync("access_token").GetAwaiter().GetResult();
-
-        //userProfile.Email = this.accessor.HttpContext.User.FindFirst(IdentityClaimTypes.EMAIL)?.Value;
-        //userProfile.Name = this.accessor.HttpContext.User.FindFirst(IdentityClaimTypes.NAME)?.Value;
+     
 
         userProfile.Name = this.accessor.HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname")?.Value;
         userProfile.Email = this.accessor.HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")?.Value;

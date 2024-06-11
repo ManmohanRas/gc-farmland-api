@@ -27,10 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PresTrust.FarmLand.Domain\PresTrust.FarmLand.Domain.csproj" />
     <ProjectReference Include="..\PresTrust.FarmLand.Infrastructure\PresTrust.FarmLand.Infrastructure.csproj" />
   </ItemGroup>
