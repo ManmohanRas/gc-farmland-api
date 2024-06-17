@@ -6,6 +6,7 @@
         {
             services.AddTransient<IPresTrustUserContext, PresTrustUserContext>();
             services.AddTransient<IApplicationRepository, ApplicationRepository>();
+            services.AddTransient<IFarmRolesRepository, FarmRolesRepository>();
             services.AddTransient<IFarmListRepository, FarmListRepository>();
         }
     }
