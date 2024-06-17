@@ -1,9 +1,9 @@
-﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands.Applications
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
+
+public class UpdateApplicationSqlCommand
 {
-    public class UpdateApplicationSqlCommand
-    {
-        private readonly string _sqlCommand =
-        @" UPDATE [Flood].[FloodApplication]
+    private readonly string _sqlCommand =
+    @" UPDATE [Farm].[FarmApplication]
                SET
                         [Title] = @p_Title,
                         [AgencyId] = @p_AgencyId,
@@ -12,11 +12,10 @@
                         [LastUpdatedOn] = GetDate()
                WHERE    [Id] = @p_ApplicationId;";
 
-        public UpdateApplicationSqlCommand() { }
+    public UpdateApplicationSqlCommand() { }
 
-        public override string ToString()
-        {
-            return _sqlCommand;
-        }
+    public override string ToString()
+    {
+        return _sqlCommand;
     }
 }
