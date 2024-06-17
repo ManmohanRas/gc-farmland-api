@@ -10,7 +10,7 @@
                 applicationBuilder.UseSwagger();
                 applicationBuilder.UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("../swagger/v1/swagger.json", "PresTrust.FloodMitigation.API v1");
+                    options.SwaggerEndpoint("../swagger/v1/swagger.json", "PresTrust.FarmLand.API v1");
                 });
             }
 
