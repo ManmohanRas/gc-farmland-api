@@ -8,6 +8,9 @@ global using PresTrust.FarmLand.Infrastructure.SqlServerDb.Contracts;
 global using Dapper;
 global using PresTrust.FarmLand.Domain.Entities;
 global using PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries;
+global using PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
 global using Microsoft.Extensions.Options;
 global using PresTrust.FarmLand.Domain.Configurations;
+global using PresTrust.FarmLand.Domain.Configurations;
+global using PresTrust.FarmLand.Domain.Utils;
 
