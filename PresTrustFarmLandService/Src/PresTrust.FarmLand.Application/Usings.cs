@@ -12,6 +12,9 @@ global using System.Net.Http.Json;
 global using Newtonsoft.Json;
 global using System.Net;
 global using System.Net.Http.Headers;
+global using Microsoft.Extensions.Options;
+global using PresTrust.FarmLand.Domain.Configurations;
+global using PresTrust.FarmLand.Domain.Utils;
 
 
 
