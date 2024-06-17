@@ -16,7 +16,7 @@ namespace PresTrust.FarmLand.Application
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<FarmLandApplicationEntity> GetIfApplicationExists(int id)
+        public async Task<FarmApplicationEntity> GetIfApplicationExists(int id)
         {
             var application = await repoApplication.GetApplicationAsync(id);
 
