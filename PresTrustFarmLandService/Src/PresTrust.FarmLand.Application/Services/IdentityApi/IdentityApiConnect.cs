@@ -13,7 +13,7 @@ public class IdentityApiConnect : IIdentityApiConnect
     public async Task<TResponse> GetDataAsync<TResponse>(string endPoint)
     {
         TResponse data = default;
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", userContext.AccessToken);
+       // _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", userContext.AccessToken);
 
         try
         {
