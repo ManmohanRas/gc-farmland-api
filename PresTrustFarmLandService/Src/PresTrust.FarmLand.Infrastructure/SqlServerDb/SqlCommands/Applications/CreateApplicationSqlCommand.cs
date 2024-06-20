@@ -1,15 +1,19 @@
-﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands.Applications
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
+
+public class CreateApplicationSqlCommand
 {
-    public class CreateApplicationSqlCommand
-    {
-        private readonly string _sqlCommand =
-        @" INSERT INTO [Flood].[FloodApplication]
+    private readonly string _sqlCommand =
+    @" INSERT INTO [Farm].[FarmApplication]
                (
                 [Title]
                ,[AgencyId]
+               ,[FarmListId]
                ,[ApplicationTypeId]
                ,[StatusId]
-               ,[CreatedByProgramAdmin]
+               ,[CreatedByProgramUser]
+               ,[IsApprovedByMunicipality]
+               ,[CreatedBy]
+               ,[CreatedOn] 
                ,[LastUpdatedBy]
                ,[LastUpdatedOn]
                )
@@ -17,20 +21,22 @@
                (
                 @p_Title
                ,@p_AgencyId
+               ,@p_FarmListId
                ,@p_ApplicationTypeId
-               ,@p_ApplicationSubTypeId
                ,@p_StatusId
-               ,@p_CreatedByProgramAdmin
+               ,@p_CreatedByProgramUser
+               ,@p_IsApprovedByMunicipality
+               ,@p_CreatedBy
+               ,GETDATE()
                ,@p_LastUpdatedBy
-               ,GetDate()
+               ,GETDATE()
                );
              SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
-        public CreateApplicationSqlCommand() { }
+    public CreateApplicationSqlCommand() { }
 
-        public override string ToString()
-        {
-            return _sqlCommand;
-        }
+    public override string ToString()
+    {
+        return _sqlCommand;
     }
 }

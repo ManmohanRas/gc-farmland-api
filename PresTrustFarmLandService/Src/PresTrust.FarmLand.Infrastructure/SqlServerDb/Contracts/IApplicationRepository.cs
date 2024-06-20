@@ -8,19 +8,26 @@
         /// </summary>
         /// <param name="applicationId"></param>
         /// <returns></returns>
-        Task<FarmLandApplicationEntity> GetApplicationAsync(int applicationId);
+        Task<FarmApplicationEntity> GetApplicationAsync(int applicationId);
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public Task<List<FarmLandApplicationEntity>> GetApplicationsAsync();
+        public Task<List<FarmApplicationEntity>> GetApplicationsAsync();
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="application"></param>
         /// <returns></returns>
-        Task<FarmLandApplicationEntity> SaveAsync(FarmLandApplicationEntity application);
+        Task<FarmApplicationEntity> SaveAsync(FarmApplicationEntity application);
+
+        // <summary>
+        /// Save Application Status Log
+        /// </summary>
+        /// <param name="application"></param>
+        /// <returns></returns>
+        Task<bool> SaveStatusLogAsync(FarmApplicationStatusLogEntity applicationStatusLog);
     }
 }

@@ -7,83 +7,83 @@
         /// <summary>
         /// Constant to hold router link for Location View screen
         /// </summary>
-        public const string LOCATION_VIEW = "app/term/location/view";
+        public const string LOCATION_VIEW = "app/location/view";
         /// <summary>
         /// Constant to hold router link for Location Edit screen
         /// </summary>
-        public const string LOCATION_EDIT = "app/term/location/edit";
+        public const string LOCATION_EDIT = "app/location/edit";
 
         /// <summary>
         /// Constant to hold router link for Owner details View screen
         /// </summary>
-        public const string OWNER_DETAILS_VIEW = "app/term/ownerdetails/view";
+        public const string OWNER_DETAILS_VIEW = "app/ownerdetails/view";
         /// <summary>
         /// Constant to hold router link for Owner details Edit screen
         /// </summary>
-        public const string OWNER_DETAILS_EDIT = "app/term/ownerdetails/edit";
+        public const string OWNER_DETAILS_EDIT = "app/ownerdetails/edit";
 
         /// <summary>
         /// Constant to hold router link for Roles View screen
         /// </summary>
-        public const string ROLES_VIEW = "app/term/roles/view";
+        public const string ROLES_VIEW = "app/roles/view";
         /// <summary>
         /// Constant to hold router link for Roles Edit screen
         /// </summary>
-        public const string ROLES_EDIT = "app/term/roles/edit";
+        public const string ROLES_EDIT = "app/roles/edit";
 
         /// <summary>
         /// Constant to hold router link for SITE CHARACTERISTICS View screen
         /// </summary>
-        public const string SITE_CHARACTERISTICS_VIEW = "app/term/sitecharacteristics/view";
+        public const string SITE_CHARACTERISTICS_VIEW = "app/sitecharacteristics/view";
         /// <summary>
         /// Constant to hold router link for SITE_CHARACTERISTICS Edit screen
         /// </summary>
-        public const string SITE_CHARACTERISTICS_EDIT = "app/term/sitecharacteristics/edit";
+        public const string SITE_CHARACTERISTICS_EDIT = "app/sitecharacteristics/edit";
 
         /// <summary>
         /// Constant to hold router link for Signatory View screen
         /// </summary>
-        public const string SIGNATORY_VIEW = "app/term/signatory/view";
+        public const string SIGNATORY_VIEW = "app/signatory/view";
         /// <summary>
         /// Constant to hold router link for Signatory Edit screen
         /// </summary>
-        public const string SIGNATORY_EDIT = "app/term/signatory/edit";
+        public const string SIGNATORY_EDIT = "app/signatory/edit";
 
         /// <summary>
         /// Constant to hold router link for Other Documents View screen
         /// </summary>
-        public const string OTHER_DOCUMENTS_VIEW = "app/term/otherdocs/view";
+        public const string OTHER_DOCUMENTS_VIEW = "app/otherdocs/view";
         /// <summary>
         /// Constant to hold router link for Other Documents Edit screen
         /// </summary>
-        public const string OTHER_DOCUMENTS_EDIT = "app/term/otherdocs/edit";
+        public const string OTHER_DOCUMENTS_EDIT = "app/otherdocs/edit";
 
         /// Constant to hold router link for Admin Document Checklist View screen
         /// </summary>
-        public const string ADMIN_DOCUMENT_CHECKLIST_VIEW = "appadmin/term/docchecklist/view";
+        public const string ADMIN_DOCUMENT_CHECKLIST_VIEW = "appadmin/docchecklist/view";
         /// <summary>
         /// Constant to hold router link for Admin Document Checklist Edit screen
         /// </summary>
-        public const string ADMIN_DOCUMENT_CHECKLIST_EDIT = "appadmin/term/docchecklist/edit";
+        public const string ADMIN_DOCUMENT_CHECKLIST_EDIT = "appadmin/docchecklist/edit";
 
         /// <summary>
         /// Constant to hold router link for Admin Details View screen
         /// </summary>
-        public const string ADMIN_DETAILS_VIEW = "appadmin/term/details/view";
+        public const string ADMIN_DETAILS_VIEW = "appadmin/details/view";
         /// <summary>
         /// Constant to hold router link for Admin Details Edit screen
         /// </summary>
-        public const string ADMIN_DETAILS_EDIT = "appadmin/term/details/edit";
+        public const string ADMIN_DETAILS_EDIT = "appadmin/details/edit";
 
 
          /// <summary>
         /// Constant to hold router link for DEED Details View screen
         /// </summary>
-        public const string DEED_DETAILS_VIEW = "appadmin/term/deeddetails/view";
+        public const string DEED_DETAILS_VIEW = "appadmin/deeddetails/view";
         /// <summary>
         /// Constant to hold router link for DEED Details Edit screen
         /// </summary>
-        public const string DEED_DETAILS_EDIT = "appadmin/term/deeddetails/edit";
+        public const string DEED_DETAILS_EDIT = "appadmin/deeddetails/edit";
     }
     }
 }
