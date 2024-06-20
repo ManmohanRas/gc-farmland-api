@@ -2,7 +2,7 @@
 {
     public class FarmListEntity
     {
-        public int ProjectID { get; set; }
+        public int FarmListId { get; set; }
         public int AgencyId { get; set; }
         public int MunicipalID { get; set; }
         public string Municipality {  get; set; }

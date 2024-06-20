@@ -28,7 +28,7 @@ public class AssignRolesCommandHandler : BaseHandler, IRequestHandler<AssignRole
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 
-        var reqApplicationUsers = mapper.Map<IEnumerable<AssignRolesCommandViewModel>, IEnumerable<FarmRolesEntity>>(request.ApplicationUsers).ToList();
+        var reqApplicationUsers = mapper.Map<IEnumerable<FarmRolesViewModel>, IEnumerable<FarmRolesEntity>>(request.ApplicationUsers).ToList();
 
         List<FarmRolesEntity> users = reqApplicationUsers.Where(au => (au.IsPrimaryContact) || (au.IsAlternateContact)).ToList();
 

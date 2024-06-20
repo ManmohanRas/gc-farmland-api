@@ -4,7 +4,7 @@
     {
         private readonly string _sqlCommand =
             @" SELECT 
-               ProjectID,
+               ProjectID AS FarmListId,
                AgencyId,
                MunicipalID,
                Municipality,
@@ -18,7 +18,8 @@
                City,
                State,
                ZipCode
-               FROM [Farm].[OwnerPropertyLEGACY_Rev01];";
+               FROM [Farm].[OwnerPropertyLEGACY_Rev01]
+               WHERE FarmName IS NOT NULL;";
 
         public override string ToString()
         {

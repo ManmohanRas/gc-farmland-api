@@ -1,4 +1,4 @@
-﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries;
 
 public class GetRoleSqlCommand
 {

@@ -1,7 +1,4 @@
-﻿using PresTrust.FarmLand.Application.Services.IdentityApi;
-using PresTrust.FarmLand.Domain.Configurations;
-
-namespace PresTrust.FarmLand.Application.Queries;
+﻿namespace PresTrust.FarmLand.Application.Queries;
 /// <summary>
 /// This class handles the query to fetch data and build response
 /// </summary>

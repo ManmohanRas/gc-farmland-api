@@ -9,4 +9,5 @@ public class CreateApplicationCommand: IRequest<CreateApplicationCommandViewMode
     public int AgencyId { get; set; }
     public string ApplicationType { get; set; }
     public bool IsMunicipallyApproved { get; set; }
+    public int FarmListId { get; set; }  
 }
