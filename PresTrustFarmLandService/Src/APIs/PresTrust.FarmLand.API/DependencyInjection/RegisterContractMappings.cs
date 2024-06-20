@@ -8,6 +8,7 @@
             services.AddTransient<IApplicationRepository, ApplicationRepository>();
             services.AddTransient<IFarmRolesRepository, FarmRolesRepository>();
             services.AddTransient<IFarmListRepository, FarmListRepository>();
+            services.AddTransient<ITermFeedbacksRepository, TermFeedbacksRepository>();
         }
     }
 }

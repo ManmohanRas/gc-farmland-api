@@ -28,6 +28,12 @@ namespace PresTrust.FarmLand.API.Controllers.v1
         {
             return Single(await QueryAsync(query));
         }
+        [HttpPost("getTermFeedbacks")]
+        [ProducesResponseType(typeof(IEnumerable<GetTermFeedbacksQueryViewModel>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<GetTermFeedbacksQueryViewModel>>> getApplicationFeedbacks([FromBody] GetTermFeedbacksQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
 
         /// <summary>
         /// Assign Application Users like Primary Contact, Applicant Contractor
@@ -46,6 +52,35 @@ namespace PresTrust.FarmLand.API.Controllers.v1
         public async Task<ActionResult<CreateApplicationCommandViewModel>> GetFarmList([FromBody] CreateApplicationCommand query)
         {
             return Single(await CommandAsync(query));
+        }
+
+        [HttpPost("saveTermFeedback")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<int>> SaveApplicationFeedback([FromBody] SaveTermFeedbackCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
+
+        [HttpPost("markTermFeedbacksAsRead")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<bool>> MarkApplicationFeedbacksAsRead([FromBody] MarkTermFeedbacksAsReadCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
+
+
+        [HttpPost("requestForApplicationCorrectionTerm")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<bool>> RequestForApplicationCorrectionCommand([FromBody] RequestForApplicationCorrectionCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
+
+        [HttpPost("responseToRequestForApplicationCorrectionTerm")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<bool>> ResponseToRequestForApplicationCorrectionCommand([FromBody] ResponseToRequestForApplicationCorrectionCommand command)
+        {
+            return Single(await CommandAsync(command));
         }
     }
 }
