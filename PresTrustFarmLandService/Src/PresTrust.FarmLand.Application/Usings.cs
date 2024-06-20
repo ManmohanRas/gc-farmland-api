@@ -20,7 +20,4 @@ global using PresTrust.FarmLand.Application.ApiExceptions;
 
 global using PresTrust.FarmLand.Domain.Configurations;
 global using PresTrust.FarmLand.Domain.Utils;
-
-
-
-
+global using PresTrust.FarmLand.Infrastructure.SqlServerDb;
