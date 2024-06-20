@@ -18,7 +18,4 @@ global using FluentValidation;
 
 global using PresTrust.FarmLand.Domain.Configurations;
 global using PresTrust.FarmLand.Domain.Utils;
-
-
-
-
+global using PresTrust.FarmLand.Infrastructure.SqlServerDb;
