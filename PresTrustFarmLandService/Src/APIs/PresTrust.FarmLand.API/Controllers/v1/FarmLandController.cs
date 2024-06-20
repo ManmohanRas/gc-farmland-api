@@ -1,7 +1,9 @@
-﻿using PresTrust.FarmLand.Application.Commands;
+﻿using Microsoft.AspNetCore.Authorization;
+using PresTrust.FarmLand.Application.Commands;
 
 namespace PresTrust.FarmLand.API.Controllers.v1
 {
+    [Authorize()]
     [Route("api/v1/farm")]
     [ApiController]
     public class FarmLandController: ApiBaseController
@@ -11,6 +13,13 @@ namespace PresTrust.FarmLand.API.Controllers.v1
         [HttpPost("getApplications")]
         [ProducesResponseType(typeof(List<GetApplicationsQueryViewModel>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<List<GetApplicationsQueryViewModel>>> GetApplications([FromBody] GetApplicationsQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
+
+        [HttpPost("getApplicationDetails")]
+        [ProducesResponseType(typeof(GetApplicationDetailsQueryViewModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetApplicationDetailsQueryViewModel>> GetApplications([FromBody] GetApplicationDetailsQuery query)
         {
             return Single(await QueryAsync(query));
         }

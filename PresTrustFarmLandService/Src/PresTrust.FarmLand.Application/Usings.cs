@@ -15,6 +15,8 @@ global using System.Net.Http.Headers;
 global using Microsoft.Extensions.Options;
 global using PresTrust.FarmLand.Application.Services.IdentityApi;
 global using FluentValidation;
+global using PresTrust.FarmLand.Application.ApiExceptions;
+ 
 
 global using PresTrust.FarmLand.Domain.Configurations;
 global using PresTrust.FarmLand.Domain.Utils;
