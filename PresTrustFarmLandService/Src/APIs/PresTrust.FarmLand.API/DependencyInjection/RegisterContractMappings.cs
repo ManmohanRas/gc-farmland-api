@@ -6,6 +6,11 @@
         {
             services.AddTransient<IPresTrustUserContext, PresTrustUserContext>();
             services.AddTransient<IApplicationRepository, ApplicationRepository>();
+            services.AddTransient<IFarmRolesRepository, FarmRolesRepository>();
+            services.AddTransient<IFarmListRepository, FarmListRepository>();
+            services.AddTransient<IMunicipalFinanceRepository, MunicipalFinanceRepository>();
+            services.AddTransient<IMunicipalTrustFundPermittedUsesRepository, MunicipalTrustFundPermittedUsesRepository>();
+            services.AddTransient<ITermFeedbacksRepository, TermFeedbacksRepository>();
         }
     }
 }

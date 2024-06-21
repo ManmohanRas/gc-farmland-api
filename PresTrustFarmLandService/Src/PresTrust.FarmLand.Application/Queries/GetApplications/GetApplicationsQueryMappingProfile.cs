@@ -4,7 +4,7 @@
     {
         public GetApplicationsQueryMappingProfile()
         {
-            CreateMap<FarmLandApplicationEntity, GetApplicationsQueryViewModel>();
+            CreateMap<FarmApplicationEntity, GetApplicationsQueryViewModel>();
         }
     }
 }

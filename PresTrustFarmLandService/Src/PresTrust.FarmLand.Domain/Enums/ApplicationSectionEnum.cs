@@ -1,4 +1,6 @@
-﻿public enum ApplicationSectionEnum
+namespace PresTrust.FarmLand.Domain.Enums;
+
+public enum ApplicationSectionEnum
 {
     /// <summary>
     /// Section Type for None
@@ -6,24 +8,23 @@
     NONE = 0,
 
     /// <summary>
-    /// Section Type for Location
+    /// Section Type for Roles
     /// </summary>
     LOCATION = 1,
-
-    /// <summary>
-    /// Section Type for Owner Details
-    /// </summary>
-    OWNER_DETAILS = 2,
-
     /// <summary>
     /// Section Type for Roles
     /// </summary>
-    ROLES = 3,
+    ROLES = 2,
 
     /// <summary>
-    /// Section Type for Site Characteristics
+    /// Section Type for Overview
     /// </summary>
-    SITE_CHARACTERISTICS = 4,
+    OWNER_DETAILS = 3,
+
+    /// <summary>
+    /// Section Type for Project Area
+    /// </summary>
+   SITE_CHARACTERISTICS = 4,
 
     /// <summary>
     /// Section Type for Signatory
@@ -48,5 +49,5 @@
     /// <summary>
     /// Section Type for Deed Details
     /// </summary>
-    DEED_DETAILS = 9,
+    DEED_DETAILS = 9
 }

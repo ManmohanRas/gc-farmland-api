@@ -1,0 +1,9 @@
+﻿namespace PresTrust.FarmLand.Application.Commands;
+/// <summary>
+/// This class represents api's command input model and returns the response object
+/// </summary>
+public class AssignRolesCommand : IRequest<Unit>
+{
+    public int ApplicationId { get; set; }
+    public IEnumerable<FarmRolesViewModel>? ApplicationUsers { get; set; }
+}
