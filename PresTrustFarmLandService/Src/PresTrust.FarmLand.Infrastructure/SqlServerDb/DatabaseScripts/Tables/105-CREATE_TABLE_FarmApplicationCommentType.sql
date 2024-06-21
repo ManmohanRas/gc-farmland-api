@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS [Farm].[FarmApplicationCommentType];
 GO
 
 -- Create Table
-CREATE TABLE [Farm].[FarmApplicationCommentType](
+CREATE TABLE [Farm].[FarmAppCommentType](
 	[Id]				[smallint] 			NOT NULL,
 	[Title]				[varchar](128)		NOT NULL,
 	[Description]		[varchar](512)		NULL,		
@@ -29,11 +29,11 @@ CONSTRAINT [PK_FarmApplicationCommentType_Id] PRIMARY KEY CLUSTERED
 GO
 
 -- Create Constraints
-ALTER TABLE [Farm].[FarmApplicationCommentType] WITH NOCHECK ADD  CONSTRAINT [DF_FarmApplicationCommentType_Description]  DEFAULT ('') FOR [Description]
+ALTER TABLE [Farm].[FarmAppCommentType] WITH NOCHECK ADD  CONSTRAINT [DF_FarmAppCommentType_Description]  DEFAULT ('') FOR [Description]
 GO 
  
-ALTER TABLE [Farm].[FarmApplicationCommentType] WITH NOCHECK ADD  CONSTRAINT [DF_FarmApplicationCommentType_IsActive]  DEFAULT (1) FOR [IsActive]
+ALTER TABLE [Farm].[FarmAppCommentType] WITH NOCHECK ADD  CONSTRAINT [DF_FarmAppCommentType_IsActive]  DEFAULT (1) FOR [IsActive]
 GO
 
-ALTER TABLE [Farm].[FarmApplicationCommentType] ADD CONSTRAINT [FK_ApplicationTypeId_FarmApplicationCommentType]  FOREIGN KEY (ApplicationTypeId) REFERENCES [Farm].FarmApplicationType(Id);
+ALTER TABLE [Farm].[FarmAppCommentType] ADD CONSTRAINT [FK_ApplicationTypeId_FarmAppCommentType]  FOREIGN KEY (ApplicationTypeId) REFERENCES [Farm].FarmApplicationType(Id);
 GO 
