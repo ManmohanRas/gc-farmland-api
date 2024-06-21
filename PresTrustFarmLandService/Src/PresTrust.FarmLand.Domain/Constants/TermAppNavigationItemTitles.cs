@@ -2,7 +2,7 @@
 {
     public partial class FarmLandDomainConstants
     {
-        public static class TermApplicationNavigationItemTitles
+        public static class TermAppNavigationItemTitles
         {
 
             /// Constant to hold title for Location 

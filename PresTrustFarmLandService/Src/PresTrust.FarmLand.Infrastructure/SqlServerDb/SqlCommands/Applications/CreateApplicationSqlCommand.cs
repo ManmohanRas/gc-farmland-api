@@ -7,6 +7,7 @@ public class CreateApplicationSqlCommand
                (
                 [Title]
                ,[AgencyId]
+               ,[FarmListId]
                ,[ApplicationTypeId]
                ,[StatusId]
                ,[CreatedByProgramUser]
@@ -20,14 +21,15 @@ public class CreateApplicationSqlCommand
                (
                 @p_Title
                ,@p_AgencyId
+               ,@p_FarmListId
                ,@p_ApplicationTypeId
                ,@p_StatusId
                ,@p_CreatedByProgramUser
                ,@p_IsApprovedByMunicipality
                ,@p_CreatedBy
-               ,GetDate()
+               ,GETDATE()
                ,@p_LastUpdatedBy
-               ,GetDate()
+               ,GETDATE()
                );
              SELECT CAST(SCOPE_IDENTITY() AS INT);";
 

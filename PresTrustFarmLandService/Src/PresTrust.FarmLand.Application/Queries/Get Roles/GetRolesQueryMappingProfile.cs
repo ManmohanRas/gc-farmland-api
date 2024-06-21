@@ -1,6 +1,4 @@
-﻿using PresTrust.FarmLand.Application.Services.IdentityApi;
-
-namespace PresTrust.FarmLand.Application.Queries;
+﻿namespace PresTrust.FarmLand.Application.Queries;
 
 public class GetRolesQueryMappingProfile : Profile
 {

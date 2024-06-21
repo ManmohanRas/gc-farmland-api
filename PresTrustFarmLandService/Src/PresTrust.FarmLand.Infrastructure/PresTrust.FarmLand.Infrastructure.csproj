@@ -17,6 +17,7 @@
     <Folder Include="SqlServerDb\DatabaseScripts\" />
     <Folder Include="SqlServerDb\DatabaseScripts\Seed\" />
     <Folder Include="SqlServerDb\DatabaseScripts\Tables\" />
+    <Folder Include="SqlServerDb\SqlQueries\Roles\" />
   </ItemGroup>
 
   <ItemGroup>
