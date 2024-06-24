@@ -11,6 +11,9 @@
             services.AddTransient<IMunicipalFinanceRepository, MunicipalFinanceRepository>();
             services.AddTransient<IMunicipalTrustFundPermittedUsesRepository, MunicipalTrustFundPermittedUsesRepository>();
             services.AddTransient<ITermFeedbacksRepository, TermFeedbacksRepository>();
+           
+
+            services.AddTransient<ITermCommentsRepository, TermCommentsRepository>();
         }
     }
 }
