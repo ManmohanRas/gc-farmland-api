@@ -30,6 +30,8 @@ global using PresTrust.FarmLand.Application;
 global using PresTrust.FarmLand.Infrastructure.SqlServerDb.Contracts;
 global using PresTrust.FarmLand.Infrastructure.SqlServerDb.Repositories;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.AspNetCore.Authorization;
+global using PresTrust.FarmLand.Application.Commands;
 
 
 

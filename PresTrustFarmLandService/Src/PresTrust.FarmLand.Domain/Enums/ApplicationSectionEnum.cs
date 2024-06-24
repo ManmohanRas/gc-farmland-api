@@ -1,8 +1,7 @@
-﻿namespace PresTrust.FarmLand.Domain.Enums;
+namespace PresTrust.FarmLand.Domain.Enums;
 
 public enum ApplicationSectionEnum
 {
-
     /// <summary>
     /// Section Type for None
     /// </summary>
@@ -33,13 +32,22 @@ public enum ApplicationSectionEnum
     SIGNATORY = 5,
 
     /// <summary>
-    /// Section Type for Signatory
-    /// </summary>
-    SIGNATORY_MUNCIPAL_APPROVED = 6,
-
-
-    /// <summary>
     /// Section Type for Other Documents
     /// </summary>
-    OTHER_DOCUMENTS = 7,
+    OTHER_DOCUMENTS = 6,
+
+    /// <summary>
+    /// Section Type for Admin Document Checklist
+    /// </summary>
+    ADMIN_DOCUMENT_CHECKLIST = 7,
+
+    /// <summary>
+    /// Section Type for Admin Details
+    /// </summary>
+    ADMIN_DETAILS = 8,
+
+    /// <summary>
+    /// Section Type for Deed Details
+    /// </summary>
+    DEED_DETAILS = 9
 }

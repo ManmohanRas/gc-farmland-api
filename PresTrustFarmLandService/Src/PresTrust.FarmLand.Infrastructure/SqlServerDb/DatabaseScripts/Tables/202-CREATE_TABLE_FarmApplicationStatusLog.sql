@@ -13,10 +13,9 @@ GO
 -- Create Table
 CREATE TABLE [Farm].[FarmApplicationStatusLog](
 	[ApplicationId]							[integer]						NOT NULL,
-	[ApplicationTypeId]						[smallint]						NOT NULL,
 	[StatusId]								[integer]						NOT NULL,
 	[StatusDate]							[datetime]						NULL,
-	[Notes]									[varchar](max)					NOT NULL,
+	[Notes]									[varchar](max)					NULL,
 	[LastUpdatedBy]							[varchar](128)					NULL,
 	[LastUpdatedOn]							[datetime]						NOT NULL)
 GO

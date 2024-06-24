@@ -8,12 +8,11 @@
             services.AddTransient<IApplicationRepository, ApplicationRepository>();
             services.AddTransient<IFarmRolesRepository, FarmRolesRepository>();
             services.AddTransient<IFarmListRepository, FarmListRepository>();
+            services.AddTransient<IMunicipalFinanceRepository, MunicipalFinanceRepository>();
+            services.AddTransient<IMunicipalTrustFundPermittedUsesRepository, MunicipalTrustFundPermittedUsesRepository>();
             services.AddTransient<ITermFeedbacksRepository, TermFeedbacksRepository>();
-
-
-
-
             services.AddTransient<IOwnerDetailsRepository, OwnerDetailsRepository>();
+            services.AddTransient<ITermCommentsRepository, TermCommentsRepository>();
         }
     }
 }

@@ -1,0 +1,16 @@
+﻿namespace PresTrust.FarmLand.Application.Queries;
+
+public class GetApplicationDetailsQueryViewModel
+{
+    public int Id { get; set; }
+    public int AgencyId { get; set; }
+    public string Title { get; set; }
+    public int ApplicationTypeId { get; set; }
+    public string ApplicationType { get; set; }
+    public string Status { get; set; }
+    public TermAppPermissionEntity Permission { get; set; } = new TermAppPermissionEntity();
+    public IEnumerable<NavigationItemEntity> NavigationItems { get; set; } = new List<NavigationItemEntity>();
+    public IEnumerable<NavigationItemEntity> AdminNavigationItems { get; set; } = new List<NavigationItemEntity>();
+    public IEnumerable<NavigationItemEntity> PostApprovedNavigationItems { get; set; } = new List<NavigationItemEntity>();
+    public NavigationItemEntity DefaultNavigationItem { get; set; } = new NavigationItemEntity();
+}

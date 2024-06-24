@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public int AgencyId { get; set; }
+        public int FarmListId {  get; set; }
         public string Title { get; set; }
         public string ApplicationType { get; set; }
         public int ApplicationTypeId { get; set; }
@@ -15,5 +16,7 @@
         public int MunicipalID { get; set; }
         public string FarmName { get; set; }
         public string Municipality { get; set; }
+        public string OriginalLandowner { get; set; }
+
     }
 }

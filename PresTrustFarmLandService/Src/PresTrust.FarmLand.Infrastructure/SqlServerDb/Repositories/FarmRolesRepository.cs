@@ -25,7 +25,7 @@ public class FarmRolesRepository : IFarmRolesRepository
         List<FarmRolesEntity>? results = default;
 
         using var conn = context.CreateConnection();
-        var sqlCommand = new GetRoleSqlCommand();
+        var sqlCommand = new GetRolesSqlCommand();
         results = (await conn.QueryAsync<FarmRolesEntity>(sqlCommand.ToString(),
                     commandType: CommandType.Text,
                     commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,

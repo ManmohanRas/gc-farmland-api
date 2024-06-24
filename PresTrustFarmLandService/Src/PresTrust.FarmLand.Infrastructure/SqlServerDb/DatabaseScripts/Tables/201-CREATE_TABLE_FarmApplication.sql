@@ -1,12 +1,15 @@
 IF OBJECT_ID('[Farm].[FarmApplication]') IS NOT NULL
 BEGIN
 	-- Drop Constraints
-	ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_CreatedByProgramAdmin_FarmApplication];
+	ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_CreatedByProgramUser_FarmApplication];
 
 	ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmApplication];
+	
+	ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_CreatedOn_FarmApplication];
 
 	ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_IsActive_FarmApplication];
 
+	ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_IsApprovedByMunicipality_FarmApplication];
 END;
 GO
  
@@ -21,11 +24,15 @@ CREATE TABLE [Farm].[FarmApplication](
 	[Title]						[varchar](256)					NOT NULL,
 	[AgencyId]					[integer]						NOT NULL,
 	[ApplicationTypeId]			[smallint]						NOT NULL,
+	[ProjectId]					[smallint]						NOT NULL,
 	[StatusId]					[smallint]						NOT NULL,
-	[CreatedByProgramAdmin]		[bit]							NOT NULL,
+	[CreatedByProgramUser]		[bit]							NOT NULL,
+	[IsApprovedByMunicipality]	[bit]							NOT NULL,
+	[CreatedOn]					[datetime]						NOT NULL,
+	[CreatedBy]					[varchar](128)					NULL	,
 	[LastUpdatedBy]				[varchar](128)					NULL	,
 	[LastUpdatedOn]				[datetime]						NOT NULL,
-	[IsActive]					[bit]							NOT NULL,	
+	[IsActive]					[bit]							NULL,	
 CONSTRAINT [PK_FarmApplication_Id] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -35,11 +42,17 @@ CONSTRAINT [PK_FarmApplication_Id] PRIMARY KEY CLUSTERED
 GO
 
 -- Create Constraints
-ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_CreatedByProgramAdmin_FarmApplication]  DEFAULT (0) FOR [CreatedByProgramAdmin]
+ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_CreatedByProgramUser_FarmApplication]  DEFAULT (0) FOR [CreatedByProgramUser]
 GO
 
 ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmApplication]  DEFAULT (GETDATE()) FOR [LastUpdatedOn]
 GO  
 
+ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_CreatedOn_FarmApplication]  DEFAULT (GETDATE()) FOR [CreatedOn]
+GO 
+
 ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_IsActive_FarmApplication]  DEFAULT (1) FOR [IsActive]
+GO
+
+ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_IsApprovedByMunicipality_FarmApplication]  DEFAULT (0) FOR [IsApprovedByMunicipality]
 GO

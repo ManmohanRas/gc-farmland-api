@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace PresTrust.FarmLand.Application.Queries;
+﻿namespace PresTrust.FarmLand.Application.Queries;
 
 public class GetRolesQueryValidator : AbstractValidator<GetRolesQuery>
 {

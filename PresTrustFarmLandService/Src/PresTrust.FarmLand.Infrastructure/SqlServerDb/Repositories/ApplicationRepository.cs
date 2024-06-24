@@ -33,7 +33,7 @@ public class ApplicationRepository : IApplicationRepository
     {
         FarmApplicationEntity result = default;
         using var conn = context.CreateConnection();
-        var sqlCommand = new GetApplicationSqlQuery();
+        var sqlCommand = new GetApplicationDetailsSqlCommand();
         var results = await conn.QueryAsync<FarmApplicationEntity>(sqlCommand.ToString(),
                             commandType: CommandType.Text,
                             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
@@ -47,7 +47,7 @@ public class ApplicationRepository : IApplicationRepository
     {
         List<FarmApplicationEntity> results = default;
         using var conn = context.CreateConnection();
-        var sqlCommand = new GetApplicationSqlQuery();
+        var sqlCommand = new GetApplicationsSqlQuery();
         results = (await conn.QueryAsync<FarmApplicationEntity>(sqlCommand.ToString(),
                             commandType: CommandType.Text,
                             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
@@ -79,6 +79,7 @@ public class ApplicationRepository : IApplicationRepository
         {
                 @p_Title = application.Title,
                 @p_AgencyId = application.AgencyId,
+                @p_FarmListId = application.FarmListId,
                 @p_ApplicationTypeId = application.ApplicationTypeId,
                 @p_StatusId = application.StatusId,
                 @p_CreatedByProgramUser = application.CreatedByProgramUser,

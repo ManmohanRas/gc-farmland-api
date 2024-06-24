@@ -1,6 +1,6 @@
-﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries;
 
-public class GetRoleSqlCommand
+public class GetRolesSqlCommand
 {
     private readonly string _sqlCommand =
        @"      SELECT		 Id
@@ -16,7 +16,7 @@ public class GetRoleSqlCommand
                             ,IsAlternateContact
                 FROM		[Flood].[FloodApplicationUser]
                 WHERE		ApplicationId = @p_ApplicationId;";
-    public GetRoleSqlCommand() { }
+    public GetRolesSqlCommand() { }
 
     public override string ToString()
     {
