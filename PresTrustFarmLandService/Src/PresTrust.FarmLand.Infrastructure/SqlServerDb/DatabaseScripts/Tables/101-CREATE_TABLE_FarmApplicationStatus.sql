@@ -1,3 +1,8 @@
+
+-- Drop Constraints
+ALTER TABLE [Farm].[FarmApplicationStatus] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationStatus] 
+GO
+
 -- Drop Table
 DROP TABLE IF EXISTS [Farm].[FarmApplicationStatus]
 GO
@@ -14,9 +19,6 @@ CONSTRAINT [PK_FarmApplicationStatus_Id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-GO
--- Drop Constraints
-ALTER TABLE [Farm].[FarmApplicationStatus] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationStatus] 
 GO
 
 -- Create Constraints
