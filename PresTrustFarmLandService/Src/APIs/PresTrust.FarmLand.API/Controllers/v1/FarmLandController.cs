@@ -86,9 +86,17 @@ public class FarmLandController: ApiBaseController
     {
         return Single(await QueryAsync(query));
     }
+
     [HttpPost("getTermFeedbacks")]
     [ProducesResponseType(typeof(IEnumerable<GetTermFeedbacksQueryViewModel>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<GetTermFeedbacksQueryViewModel>>> getApplicationFeedbacks([FromBody] GetTermFeedbacksQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("getTermComments")]
+    [ProducesResponseType(typeof(IEnumerable<GetTermCommentsQueryViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<GetTermCommentsQueryViewModel>>> getTermComments([FromBody] GetTermCommentsQuery query)
     {
         return Single(await QueryAsync(query));
     }
@@ -145,6 +153,22 @@ public class FarmLandController: ApiBaseController
         return Single(await CommandAsync(command));
     }
 
+    [HttpPost("saveTermComment")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    
+    public async Task<ActionResult<int>> saveTermComment([FromBody] SaveTermCommentCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("deleteTermComment")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    
+    public async Task<ActionResult<bool>> deleteTermComment([FromBody] DeleteTermCommentCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
     [HttpPost("markTermFeedbacksAsRead")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<bool>> MarkApplicationFeedbacksAsRead([FromBody] MarkTermFeedbacksAsReadCommand command)
@@ -165,4 +189,6 @@ public class FarmLandController: ApiBaseController
     {
         return Single(await CommandAsync(command));
     }
+
+   
 }
