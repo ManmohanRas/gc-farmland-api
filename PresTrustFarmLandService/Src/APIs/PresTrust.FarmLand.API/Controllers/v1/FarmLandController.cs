@@ -17,7 +17,7 @@ namespace PresTrust.FarmLand.API.Controllers.v1
 
         [HttpPost("getRoles")]
         [ProducesResponseType(typeof(IEnumerable<FarmRolesViewModel>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<FarmRolesViewModel>>> getRoles([FromBody] GetRolesQuery query)
+        public async Task<ActionResult<IEnumerable<FarmRolesViewModel>>> GetRoles([FromBody] GetRolesQuery query)
          {
             return Single(await QueryAsync(query));
         }
@@ -30,10 +30,18 @@ namespace PresTrust.FarmLand.API.Controllers.v1
         }
         [HttpPost("getTermFeedbacks")]
         [ProducesResponseType(typeof(IEnumerable<GetTermFeedbacksQueryViewModel>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<GetTermFeedbacksQueryViewModel>>> getApplicationFeedbacks([FromBody] GetTermFeedbacksQuery query)
+        public async Task<ActionResult<IEnumerable<GetTermFeedbacksQueryViewModel>>> GetApplicationFeedbacks([FromBody] GetTermFeedbacksQuery query)
         {
             return Single(await QueryAsync(query));
         }
+
+        [HttpPost("getOwnerDetails")]
+        [ProducesResponseType(typeof(GetOwnerDetailsQueryViewModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetOwnerDetailsQueryViewModel>> GetOwnerDetails([FromBody] GetOwnerDetailsQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
+
 
         /// <summary>
         /// Assign Application Users like Primary Contact, Applicant Contractor
@@ -79,6 +87,14 @@ namespace PresTrust.FarmLand.API.Controllers.v1
         [HttpPost("responseToRequestForApplicationCorrectionTerm")]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<bool>> ResponseToRequestForApplicationCorrectionCommand([FromBody] ResponseToRequestForApplicationCorrectionCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
+
+
+        [HttpPost("SaveOwnerDetails")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<int>> SaveOwnerDetails([FromBody] SaveOwnerDetailsCommand command)
         {
             return Single(await CommandAsync(command));
         }

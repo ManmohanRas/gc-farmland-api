@@ -3,7 +3,7 @@
 public class ResponseToRequestForApplicationCorrectionCommand
 {
     private readonly string _sqlCommand =
-        @"UPDATE		       [Farm].[FarmTermFeedback]
+        @"UPDATE		       [Farm].[FarmApplicationFeedback]
              SET			   [CorrectionStatus] = @p_CorrectionStatus
              WHERE		       ApplicationId = @p_ApplicationId    
                                AND SectionId = @p_SectionId

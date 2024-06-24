@@ -9,6 +9,11 @@
             services.AddTransient<IFarmRolesRepository, FarmRolesRepository>();
             services.AddTransient<IFarmListRepository, FarmListRepository>();
             services.AddTransient<ITermFeedbacksRepository, TermFeedbacksRepository>();
+
+
+
+
+            services.AddTransient<IOwnerDetailsRepository, OwnerDetailsRepository>();
         }
     }
 }

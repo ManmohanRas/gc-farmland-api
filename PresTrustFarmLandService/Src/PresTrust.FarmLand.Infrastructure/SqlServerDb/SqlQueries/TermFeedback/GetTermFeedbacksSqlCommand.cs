@@ -5,6 +5,7 @@ public class GetTermFeedbacksSqlCommand
     private readonly string _sqlCommand =
        @"  SELECT		   [Id]
 							  ,[ApplicationId]
+							  ,[ApplicationTypeId]
 							  ,[SectionId]
 							  ,[Feedback]
 							  ,[RequestForCorrection]
@@ -12,7 +13,7 @@ public class GetTermFeedbacksSqlCommand
 							  ,[MarkRead]
 							  ,[LastUpdatedBy]
 							  ,[LastUpdatedOn]
-				FROM		  [Farm].[FarmtermFeedback]
+				FROM		  [Farm].[FarmApplicationFeedback]
 				WHERE		   ApplicationId = @p_ApplicationId
 							   AND CorrectionStatus = CASE WHEN @p_CorrectionStatus = '' THEN CorrectionStatus ELSE @p_CorrectionStatus END;";
 
