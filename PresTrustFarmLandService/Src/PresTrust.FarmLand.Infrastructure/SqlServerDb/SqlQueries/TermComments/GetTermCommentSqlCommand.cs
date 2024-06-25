@@ -10,7 +10,7 @@ public class GetTermCommentSqlCommand
                       ,[ApplicationTypeId]
                       ,[LastUpdatedOn]
                       ,[LastUpdatedBy]
-                FROM [Flood].[FloodApplicationComment] 
+                FROM [Farm].[FarmApplicationComment] 
                 WHERE [ApplicationId] = @p_ApplicationId;"
         ;
     public GetTermCommentSqlCommand()
