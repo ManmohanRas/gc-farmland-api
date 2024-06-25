@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using PresTrust.FarmLand.Application.Queries;
-
-namespace PresTrust.FloodMitigation.Application.Queries;
+﻿namespace PresTrust.FarmLand.Application.Queries;
 
 public class GetCountyUsersQueryValidator : AbstractValidator<GetCountyUsersQuery>
 {

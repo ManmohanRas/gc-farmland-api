@@ -14,7 +14,7 @@ public class GetRolesSqlCommand
 			                ,PhoneNumber
 			                ,IsPrimaryContact
                             ,IsAlternateContact
-                FROM		[Flood].[FloodApplicationUser]
+                FROM		[Farm].[FarmApplicationUser]
                 WHERE		ApplicationId = @p_ApplicationId;";
     public GetRolesSqlCommand() { }
 

@@ -3,9 +3,9 @@
 public class CreateRolesSqlCommand
 {
     private readonly string _sqlCommand =
-   @"	INSERT INTO [Flood].[FloodApplicationUser]
+   @"	INSERT INTO [Farm].[FarmApplicationUser]
                        ([ApplicationId]
-                       ,[email]
+                       ,[Email]
                        ,[UserId]
                        ,[UserName]
                        ,[FirstName]
