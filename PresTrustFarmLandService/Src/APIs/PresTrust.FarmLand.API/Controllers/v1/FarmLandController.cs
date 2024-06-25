@@ -159,20 +159,6 @@ public class FarmLandController : ApiBaseController
         return Single(await QueryAsync(query));
     }
 
-    [HttpPost("getRoles")]
-    [ProducesResponseType(typeof(IEnumerable<FarmRolesViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<FarmRolesViewModel>>> getRoles([FromBody] GetRolesQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
-
-    [HttpPost("createApplication")]
-    [ProducesResponseType(typeof(CreateApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CreateApplicationCommandViewModel>> CreateApplication([FromBody] CreateApplicationCommand query)
-    {
-        return Single(await CommandAsync(query));
-    }
-
     /// <summary>
     /// Get municipal finances
     /// </summary>
@@ -180,9 +166,6 @@ public class FarmLandController : ApiBaseController
     /// <returns></returns>
     [HttpPost("getMunicipalFinance")]
     [ProducesResponseType(typeof(GetMunicipalFinanceQueryViewModel), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     public async Task<ActionResult<GetMunicipalFinanceQueryViewModel>> GetMunicipalFinance([FromBody] GetMunicipalFinanceQuery query)
     {
         return Single(await QueryAsync(query));
@@ -195,9 +178,6 @@ public class FarmLandController : ApiBaseController
     /// <returns></returns>
     [HttpPost("saveMunicipalTrustFundPermittedUses")]
     [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     public async Task<ActionResult<int>> SaveMunicipalTrustFundPermittedUses([FromBody] SaveMunicipalTrustFundPermittedUsesCommand query)
     {
         return Single(await CommandAsync(query));
@@ -210,19 +190,9 @@ public class FarmLandController : ApiBaseController
     /// <returns></returns>
     [HttpPost("saveMunicipalFinance")]
     [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     public async Task<ActionResult<int>> SaveMunicipalFinance([FromBody] SaveMunicipalFinanceCommand query)
     {
         return Single(await CommandAsync(query));
-    }
-
-    [HttpPost("getTermFeedbacks")]
-    [ProducesResponseType(typeof(IEnumerable<GetTermFeedbacksQueryViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<GetTermFeedbacksQueryViewModel>>> getApplicationFeedbacks([FromBody] GetTermFeedbacksQuery query)
-    {
-        return Single(await QueryAsync(query));
     }
 
     [HttpPost("getTermComments")]
