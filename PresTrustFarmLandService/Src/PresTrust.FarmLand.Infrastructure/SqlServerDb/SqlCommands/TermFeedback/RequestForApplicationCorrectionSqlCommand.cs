@@ -3,7 +3,7 @@
 public class RequestForApplicationCorrectionSqlCommand
 {
     private readonly string _sqlCommand =
-        @"    UPDATE	    [Farm].[FarmTermFeedback]
+        @"    UPDATE	    [Farm].[FarmApplicationFeedback]
                 SET			[CorrectionStatus] = @p_CorrectionStatus,
 			                [LastUpdatedOn] = GETDATE()
                 WHERE	    [ApplicationId] = @p_ApplicationId 

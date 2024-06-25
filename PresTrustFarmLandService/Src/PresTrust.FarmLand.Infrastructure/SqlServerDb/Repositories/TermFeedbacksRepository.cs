@@ -73,6 +73,7 @@ public class TermFeedbacksRepository : ITermFeedbacksRepository
             param: new
             {
                 @p_ApplicationId = feedback.ApplicationId,
+                @p_ApplicationTypeId = feedback.ApplicationTypeId,
                 @p_SectionId = feedback.SectionId,
                 @p_Feedback = feedback.Feedback,
                 @p_RequestForCorrection = feedback.RequestForCorrection,
@@ -102,6 +103,7 @@ public class TermFeedbacksRepository : ITermFeedbacksRepository
             {
                 @p_Id = feedback.Id,
                 @p_ApplicationId = feedback.ApplicationId,
+                @p_ApplicationTypeId = feedback.ApplicationTypeId,
                 @p_SectionId = feedback.SectionId,
                 @p_Feedback = feedback.Feedback,
                 @p_RequestForCorrection = feedback.RequestForCorrection,
