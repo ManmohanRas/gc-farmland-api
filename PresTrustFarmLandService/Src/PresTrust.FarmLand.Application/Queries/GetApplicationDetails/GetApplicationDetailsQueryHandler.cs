@@ -6,19 +6,25 @@ public class GetApplicationDetailsQueryHandler : BaseHandler, IRequestHandler<Ge
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
+    private readonly ITermCommentsRepository repoComment;
+    private readonly ITermFeedbacksRepository repoFeedback;
 
     public GetApplicationDetailsQueryHandler
         (
         IMapper mapper,
         IPresTrustUserContext userContext,
         IOptions<SystemParameterConfiguration> systemParamOptions,
-        IApplicationRepository repoApplication
-        ): base (repoApplication: repoApplication)
+        IApplicationRepository repoApplication,
+        ITermCommentsRepository repoComment,
+        ITermFeedbacksRepository repoFeedback
+        ) : base (repoApplication: repoApplication)
     {
         this.mapper = mapper;
         this.userContext = userContext;
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;
+        this.repoComment = repoComment;
+        this.repoFeedback = repoFeedback;
     }
 
     public async Task<GetApplicationDetailsQueryViewModel> Handle(GetApplicationDetailsQuery request, CancellationToken cancellationToken)
@@ -33,6 +39,11 @@ public class GetApplicationDetailsQueryHandler : BaseHandler, IRequestHandler<Ge
 
         securityMgr = new FarmApplicationSecurityManager(application.ApplicationType);
 
+        var comments = await repoComment.GetAllCommentsAsync(request.ApplicationId);
+        var feedbacks = await repoFeedback.GetFeedbacksAsync(request.ApplicationId);
+
+        result.Comments = comments;
+        result.Feedbacks = feedbacks;
         result.Permission = securityMgr.Permission;
         result.NavigationItems = securityMgr.NavigationItems;
         result.AdminNavigationItems = securityMgr.AdminNavigationItems;
