@@ -126,5 +126,18 @@ public class OwnerDetailsRepository : IOwnerDetailsRepository
         return farmOwnerDetails;
     }
 
+    public async Task DeleteOwnerDetailsAsync(int applicationId, int id)
+    {
+        using var conn = context.CreateConnection();
+        var sqlCommand = new DeleteOwnerDetailsSqlCommand();
+        await conn.ExecuteAsync(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+            param: new
+            {
+                @p_Id = id,
+                @p_ApplicationId = applicationId
+            });
 
+    }
 }

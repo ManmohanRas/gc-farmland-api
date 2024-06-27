@@ -17,7 +17,7 @@ public class GetOwnerDetailsSqlCommand
                         ,[ZipCode]                                   
                         ,[LastUpdatedBy]                                           
                         ,[LastUpdatedOn]
-            FROM [Farm].[FarmTermAppOwnerDetails]";
+            FROM [Farm].[FarmTermAppOwnerDetails] WHERE ApplicationId = @p_ApplicationId";
 
      public GetOwnerDetailsSqlCommand()
     {
