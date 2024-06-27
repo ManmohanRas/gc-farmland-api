@@ -4,6 +4,6 @@ public class GetOwnerDetailsQueryMappingProfile : Profile
 {
     public GetOwnerDetailsQueryMappingProfile()
     {
-        CreateMap<OwnerDetailsEntity, GetOwnerDetailsQueryViewModel>();
+        CreateMap<OwnerDetailsEntity, OwnerDetails>();
     }
 }

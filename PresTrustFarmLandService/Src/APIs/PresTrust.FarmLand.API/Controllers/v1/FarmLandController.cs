@@ -100,6 +100,13 @@ public class FarmLandController : ApiBaseController
             return Single(await CommandAsync(command));
         }
 
+        [HttpPost("deleteOwnerDetails")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<bool>> DeleteOwnerDetails([FromBody] DeleteOwnerDetailsCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
+
     /// <summary>
     /// Get County Users 
     /// </summary>

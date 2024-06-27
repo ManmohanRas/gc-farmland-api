@@ -8,8 +8,8 @@ public class UpdateOwnerDetailsSqlCommand
                         [ApplicationId]       = @P_ApplicationId,
                        [FirstName]           = @P_FirstName,
                        [LastName]            = @P_LastName,         
-                        [PropertyLocation]    = @P_PropertyLocation                      
-                        [Municipality]        = @P_Municipality
+                        [PropertyLocation]    = @P_PropertyLocation,                     
+                        [Municipality]        = @P_Municipality,
                         [MailingAddress1]     = @P_MailingAddress1,                   
                         [MailingAddress2]     = @P_MailingAddress2,                  
                         [PhoneNumber]         = @P_PhoneNumber,                            
