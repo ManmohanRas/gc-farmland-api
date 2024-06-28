@@ -22,18 +22,18 @@ public class CreateOwnerDetailsSqlCommand
 
 			  VALUES
 			  (  
-                      @P_ApplicationId,
-                      @P_FirstName,
-                      @P_LastName,                      
-                       @P_PropertyLocation,                        
-                       @P_Municipality,   
-                       @P_MailingAddress1,
-                       @P_MailingAddress2,
-                       @P_PhoneNumber,
-                       @P_City,                            
-                       @P_State,                                  
-                       @P_ZipCode,                                   
-                       @P_LastUpdatedBy,
+                      @p_ApplicationId,
+                      @p_FirstName,
+                      @p_LastName,                      
+                       @p_PropertyLocation,                        
+                       @p_Municipality,   
+                       @p_MailingAddress1,
+                       @p_MailingAddress2,
+                       @p_PhoneNumber,
+                       @p_City,                            
+                       @p_State,                                  
+                       @p_ZipCode,                                   
+                       @p_LastUpdatedBy,
                        GETDATE()
 						);
 
