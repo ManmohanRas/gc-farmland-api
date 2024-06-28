@@ -2,8 +2,4 @@
 
 public class DeleteOwnerDetailsCommandMappingProfile : Profile
 {
-    public DeleteOwnerDetailsCommandMappingProfile()
-    {
-        CreateMap<DeleteOwnerDetailsCommand, OwnerDetailsEntity>();
-    }
 }
