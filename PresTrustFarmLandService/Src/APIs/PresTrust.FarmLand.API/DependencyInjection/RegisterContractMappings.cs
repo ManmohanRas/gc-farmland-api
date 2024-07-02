@@ -13,6 +13,8 @@
             services.AddTransient<ITermFeedbacksRepository, TermFeedbacksRepository>();
             services.AddTransient<IOwnerDetailsRepository, OwnerDetailsRepository>();
             services.AddTransient<ITermCommentsRepository, TermCommentsRepository>();
+
+            services.AddTransient<ITermOtherDocumentsRepository, TermOtherDocumentsRepository>();
         }
     }
 }

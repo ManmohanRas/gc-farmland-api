@@ -1,3 +1,5 @@
+using PresTrust.FarmLand.Domain.CommonViewModels;
+
 namespace PresTrust.FarmLand.API.Controllers.v1;
 
 [Authorize()]
@@ -251,4 +253,30 @@ public class FarmLandController : ApiBaseController
     {
         return Single(await CommandAsync(command));
     }
+
+    [HttpPost("getTermDocuments")]
+    [ProducesResponseType(typeof(IEnumerable<TermDocumentTypeViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<TermDocumentTypeViewModel>>> GetTermDocuments([FromBody] GetTermDocumentsBySectionQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveTermDocument")]
+    [ProducesResponseType(typeof(SaveTermAppDocumentCommandViewModel), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+    public async Task<ActionResult<SaveTermAppDocumentCommandViewModel>> SaveTermDocument([FromBody] SaveTermAppDocumentCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+
+    [HttpPost("deleteTermDocument")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<bool>> DeleteTermDocument([FromBody] DeleteTermAppDocumentCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
 }
