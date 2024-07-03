@@ -37,7 +37,7 @@ public class GetApplicationDetailsQueryHandler : BaseHandler, IRequestHandler<Ge
         FarmApplicationSecurityManager securityMgr = default;
         userContext.DeriveRole(application.AgencyId);
 
-        securityMgr = new FarmApplicationSecurityManager(application.ApplicationType);
+        securityMgr = new FarmApplicationSecurityManager(userContext.Role,application.Status, application.ApplicationType);
 
         var comments = await repoComment.GetAllCommentsAsync(request.ApplicationId);
         var feedbacks = await repoFeedback.GetFeedbacksAsync(request.ApplicationId);
