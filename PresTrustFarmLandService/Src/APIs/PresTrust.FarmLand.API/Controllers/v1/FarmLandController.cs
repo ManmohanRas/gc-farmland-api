@@ -255,6 +255,15 @@ public class FarmLandController : ApiBaseController
 
     }
 
+
+    [HttpPost("requestApplication")]
+    [ProducesResponseType(typeof(RequestApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<RequestApplicationCommandViewModel>> RequestApplication([FromBody] RequestApplicationCommand query)
+    {
+        return Single(await CommandAsync(query));
+    }
+
+
     [HttpPost("getTermDocuments")]
     [ProducesResponseType(typeof(IEnumerable<TermDocumentTypeViewModel>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<TermDocumentTypeViewModel>>> GetTermDocuments([FromBody] GetTermDocumentsBySectionQuery query)

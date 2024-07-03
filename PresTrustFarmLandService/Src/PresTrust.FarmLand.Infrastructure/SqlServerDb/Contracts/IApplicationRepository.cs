@@ -29,5 +29,13 @@
         /// <param name="application"></param>
         /// <returns></returns>
         Task<bool> SaveStatusLogAsync(FarmApplicationStatusLogEntity applicationStatusLog);
+        /// <summary>
+        /// Save Application Workflow Status
+        /// </summary>
+        /// <param name="application"></param>
+        /// <returns></returns>
+        Task<FarmApplicationEntity> SaveApplicationWorkflowStatusAsync(FarmApplicationEntity application);
+
+
     }
 }
