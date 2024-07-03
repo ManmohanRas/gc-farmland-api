@@ -16,7 +16,7 @@ public class GetTermOtherDocumentsSqlCommand
 		                ,D.[ApplicationId]		    AS  ApplicationId
                         ,D.[ApplicationTypeId]      AS  ApplicationTypeId
                         ,D.[ShowCommittee]          AS  ShowCommittee
-            FROM		[Farm].[FarmTermAppDocument] D
+            FROM		[Farm].[FarmApplicationDocument] D
             INNER JOIN	[Farm].[FarmApplicationDocumentType] DT
 			            ON (DT.Id = D.DocumentTypeId)
             WHERE		DT.SectionId = CASE WHEN @p_SectionId > 0 THEN @p_SectionId ELSE DT.SectionId END
