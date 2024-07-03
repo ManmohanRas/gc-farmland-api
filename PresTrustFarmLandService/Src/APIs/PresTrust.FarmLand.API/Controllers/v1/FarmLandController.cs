@@ -251,4 +251,12 @@ public class FarmLandController : ApiBaseController
     {
         return Single(await CommandAsync(command));
     }
+
+
+    [HttpPost("requestApplication")]
+    [ProducesResponseType(typeof(RequestApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<RequestApplicationCommandViewModel>> RequestApplication([FromBody] RequestApplicationCommand query)
+    {
+        return Single(await CommandAsync(query));
+    }
 }
