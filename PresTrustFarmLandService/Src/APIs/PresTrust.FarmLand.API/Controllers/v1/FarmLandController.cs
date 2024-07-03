@@ -1,3 +1,5 @@
+using PresTrust.FarmLand.Domain.CommonViewModels;
+
 namespace PresTrust.FarmLand.API.Controllers.v1;
 
 [Authorize()]
@@ -19,7 +21,7 @@ public class FarmLandController : ApiBaseController
         [HttpPost("getRoles")]
         [ProducesResponseType(typeof(IEnumerable<FarmRolesViewModel>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<FarmRolesViewModel>>> GetRoles([FromBody] GetRolesQuery query)
-         {
+        {
             return Single(await QueryAsync(query));
         }
 
@@ -58,7 +60,7 @@ public class FarmLandController : ApiBaseController
 
         [HttpPost("createApplication")]
         [ProducesResponseType(typeof(CreateApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<CreateApplicationCommandViewModel>> GetFarmList([FromBody] CreateApplicationCommand query)
+        public async Task<ActionResult<CreateApplicationCommandViewModel>> CreateApplication([FromBody] CreateApplicationCommand query)
         {
             return Single(await CommandAsync(query));
         }
@@ -250,6 +252,7 @@ public class FarmLandController : ApiBaseController
     public async Task<ActionResult<bool>> deleteTermComment([FromBody] DeleteTermCommentCommand command)
     {
         return Single(await CommandAsync(command));
+
     }
 
 
@@ -259,4 +262,45 @@ public class FarmLandController : ApiBaseController
     {
         return Single(await CommandAsync(query));
     }
-}
+
+
+    [HttpPost("getTermDocuments")]
+    [ProducesResponseType(typeof(IEnumerable<TermDocumentTypeViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<TermDocumentTypeViewModel>>> GetTermDocuments([FromBody] GetTermDocumentsBySectionQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveTermDocument")]
+    [ProducesResponseType(typeof(SaveTermAppDocumentCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<SaveTermAppDocumentCommandViewModel>> SaveTermDocument([FromBody] SaveTermAppDocumentCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+
+    [HttpPost("deleteTermDocument")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<bool>> DeleteTermDocument([FromBody] DeleteTermAppDocumentCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+
+        //Application Signatory 
+
+        [HttpPost("getApplicationSignatoryDetails")]
+        [ProducesResponseType(typeof(GetApplicationSignatoryQueryViewModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetApplicationSignatoryQueryViewModel>> GetApplicationSignatoryDetails([FromBody] GetApplicationSignatoryQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
+
+        [HttpPost("saveApplicationSignatoryDetails")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<int>> SaveApplicationSignatoryDetails([FromBody] SaveApplicationSignatoryCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
+    }
+

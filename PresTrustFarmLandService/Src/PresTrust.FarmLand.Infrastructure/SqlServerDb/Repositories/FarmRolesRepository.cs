@@ -64,4 +64,23 @@ public class FarmRolesRepository : IFarmRolesRepository
                 });
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="applicationId"></param>
+    /// <returns></returns>
+    public async Task DeleteRolesAsync(int applicationId)
+    {
+        using var conn = context.CreateConnection();
+        var sqlCommand = new DeleteRolesSqlCommand();
+        await conn.ExecuteAsync(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+            param:
+            new
+            {
+                @p_ApplicationId = applicationId
+            });
+    }
 }
