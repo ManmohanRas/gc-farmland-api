@@ -34,6 +34,8 @@
         //  Application Details Permissions
         //---------------------------------------------------------------------//
 
+        public bool CanCreateApplication { get; set; } = false;
+
         public bool CanViewComments { get; set; } = false;
         public bool CanEditComments { get; set; } = false;
         public bool CanDeleteComments { get; set; } = false;

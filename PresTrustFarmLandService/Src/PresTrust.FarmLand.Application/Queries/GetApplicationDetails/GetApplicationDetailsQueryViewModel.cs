@@ -8,6 +8,8 @@ public class GetApplicationDetailsQueryViewModel
     public int ApplicationTypeId { get; set; }
     public string ApplicationType { get; set; }
     public string Status { get; set; }
+    public bool IsApprovedByMunicipality { get; set; }
+    public FarmAgencyEntity Agency { get; set; }
     public IEnumerable<TermCommentsEntity> Comments { get; set; }
     public IEnumerable<TermFeedbacksEntity> Feedbacks { get; set; }
     public TermAppPermissionEntity Permission { get; set; } = new TermAppPermissionEntity();

@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace PresTrust.FarmLand.Domain.Entities;
+﻿namespace PresTrust.FarmLand.Domain.Entities;
 
 public class FarmApplicationEntity
 {
@@ -21,6 +19,7 @@ public class FarmApplicationEntity
     public string FarmName { get; set; }
     public string Municipality { get; set; }
     public string OriginalLandowner { get; set; }
+    public string AgencyJSON { get; set; }
     public string CommentsJSON { get; set; }
     public string FeedbacksJSON { get; set; }
     public ApplicationTypeEnum ApplicationType
@@ -44,6 +43,14 @@ public class FarmApplicationEntity
         set
         {
             this.StatusId = (int)value;
+        }
+    }
+
+    public FarmAgencyEntity Agency
+    {
+        get
+        {
+            return this.AgencyJSON == null ? new() : JsonSerializer.Deserialize<FarmAgencyEntity>(this.AgencyJSON);
         }
     }
 

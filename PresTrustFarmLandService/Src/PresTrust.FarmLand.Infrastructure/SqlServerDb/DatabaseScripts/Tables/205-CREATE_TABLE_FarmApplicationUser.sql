@@ -21,7 +21,7 @@ GO
 CREATE TABLE [Farm].[FarmApplicationUser](
 	[Id]							[integer] 		IDENTITY(1,1)	NOT NULL,
 	[ApplicationId]					[integer]						NOT NULL,
-	[ApplicationTypeId]             [smallint]                      NOT NULL,
+	--[ApplicationTypeId]             [smallint]                      NOT NULL,
 	[Email]							[varchar](128)					NULL	,
 	[UserId]						[varchar](128)					NOT NULL,
 	[UserName]						[varchar](128)					NOT NULL,

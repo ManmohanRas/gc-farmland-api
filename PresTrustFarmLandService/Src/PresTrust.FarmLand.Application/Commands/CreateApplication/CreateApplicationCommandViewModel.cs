@@ -6,11 +6,20 @@ public class CreateApplicationCommandViewModel
     public int AgencyId { get; set; }
     public string Title { get; set; }
     public int ApplicationTypeId { get; set; }
-    public int StatusId { get; set; }
+    public string ApplicationType { get; set; }
+    public string Status { get; set; }
     public bool CreatedByProgramUser { get; set; }
     public bool IsApprovedByMunicipality { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
     public string CreatedBy { get; set; }
     public DateTime CreatedOn { get; set; }
+    public FarmAgencyEntity Agency { get; set; }
+    public IEnumerable<TermCommentsEntity> Comments { get; set; }
+    public IEnumerable<TermFeedbacksEntity> Feedbacks { get; set; }
+    public TermAppPermissionEntity Permission { get; set; } = new TermAppPermissionEntity();
+    public IEnumerable<NavigationItemEntity> NavigationItems { get; set; } = new List<NavigationItemEntity>();
+    public IEnumerable<NavigationItemEntity> AdminNavigationItems { get; set; } = new List<NavigationItemEntity>();
+    public IEnumerable<NavigationItemEntity> PostApprovedNavigationItems { get; set; } = new List<NavigationItemEntity>();
+    public NavigationItemEntity DefaultNavigationItem { get; set; } = new NavigationItemEntity();
 }
