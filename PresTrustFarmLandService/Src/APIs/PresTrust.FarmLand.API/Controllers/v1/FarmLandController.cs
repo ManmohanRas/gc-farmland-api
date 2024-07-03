@@ -58,7 +58,7 @@ public class FarmLandController : ApiBaseController
 
         [HttpPost("createApplication")]
         [ProducesResponseType(typeof(CreateApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<CreateApplicationCommandViewModel>> GetFarmList([FromBody] CreateApplicationCommand query)
+        public async Task<ActionResult<CreateApplicationCommandViewModel>> CreateApplication([FromBody] CreateApplicationCommand query)
         {
             return Single(await CommandAsync(query));
         }
@@ -250,5 +250,22 @@ public class FarmLandController : ApiBaseController
     public async Task<ActionResult<bool>> deleteTermComment([FromBody] DeleteTermCommentCommand command)
     {
         return Single(await CommandAsync(command));
+
     }
-}
+        //Application Signatory 
+
+        [HttpPost("getApplicationSignatoryDetails")]
+        [ProducesResponseType(typeof(GetApplicationSignatoryQueryViewModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetApplicationSignatoryQueryViewModel>> GetApplicationSignatoryDetails([FromBody] GetApplicationSignatoryQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
+
+        [HttpPost("saveApplicationSignatoryDetails")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<int>> SaveApplicationSignatoryDetails([FromBody] SaveApplicationSignatoryCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
+    }
+
