@@ -19,7 +19,7 @@ public class FarmLandController : ApiBaseController
         [HttpPost("getRoles")]
         [ProducesResponseType(typeof(IEnumerable<FarmRolesViewModel>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<FarmRolesViewModel>>> GetRoles([FromBody] GetRolesQuery query)
-         {
+        {
             return Single(await QueryAsync(query));
         }
 
