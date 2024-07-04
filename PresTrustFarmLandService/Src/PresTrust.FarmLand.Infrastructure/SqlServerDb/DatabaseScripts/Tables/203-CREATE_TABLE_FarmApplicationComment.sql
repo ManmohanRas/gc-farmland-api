@@ -16,7 +16,6 @@ GO
 CREATE TABLE [Farm].[FarmApplicationComment](
 	[Id]									[integer] 		IDENTITY(1,1)	NOT NULL,
 	[ApplicationId]							[integer]						NOT NULL,
-	[ApplicationTypeId]						[smallint]						NOT NULL,
 	[Comment]								[varchar](4000)					NOT NULL,
 	[CommentTypeId]							[smallint]						NOT NULL,
 	[LastUpdatedBy]							[varchar](128)					NULL	,

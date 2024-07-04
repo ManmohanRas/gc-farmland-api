@@ -15,7 +15,6 @@ GO
 CREATE TABLE [Farm].[FarmTermAppSiteCharacteristics](
 	[Id]							[integer] 		IDENTITY(1,1)	NOT NULL,
 	[ApplicationId]					[integer]						NOT NULL,
-	--[SADCId]						[integer]						NULL,
 	[Area]							[varchar](128)					NULL,
 	[LandUse]						[Nvarchar]						NULL,
 	[CropLand]						[decimal]						NULL,
@@ -23,10 +22,10 @@ CREATE TABLE [Farm].[FarmTermAppSiteCharacteristics](
 	[Pasture]						[decimal]						NULL,
 	[Orchard]						[decimal]						NULL,
 	[Other]							[decimal]						NULL,
-	[EasementOrRightOfway]			[bit]							NULL,
-	[NoteEasementRightOfway]		[nvarchar]						NULL,
-	[MortgareLiens]				    [bit]							NULL,
-	[NoteMortgareLiens]			    [varchar](128)					NULL,
+	[EasementRightOfway]			[varchar](50)					NULL,
+	[NoteEasementRightOfway]		[Nvarchar]						NULL,
+	[MortgageLiens]					[varchar](50)					NULL,
+	[NoteMortgageLiens]				[Nvarchar]						NULL,
 	[LastUpdatedBy]					[varchar](128)					NULL,
 	[LastUpdatedOn]					[datetime]						NULL,
 CONSTRAINT [PK_FarmTermAppSiteCharacteristics_Id] PRIMARY KEY CLUSTERED 
