@@ -16,7 +16,6 @@ GO
 CREATE TABLE [Farm].[FarmApplicationFeedback](
 	[Id]									[integer] 		IDENTITY(1,1)	NOT NULL,
 	[ApplicationId]							[integer]						NOT NULL,
-	[ApplicationTypeId]                     [smallint]                      NOT NULL,
 	[SectionId]								[smallint]						NOT NULL,
 	[Feedback]								[varchar](4000)					NOT NULL,
 	[RequestForCorrection]					[bit]							NOT NULL,
