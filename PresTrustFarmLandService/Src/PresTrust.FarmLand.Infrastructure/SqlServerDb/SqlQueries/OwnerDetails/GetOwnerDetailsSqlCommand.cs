@@ -12,12 +12,12 @@ public class GetOwnerDetailsSqlCommand
                         ,[MailingAddress1]                       
                         ,[MailingAddress2]                     
                         ,[PhoneNumber]                                      
-                        ,[city]                                     
-                        ,[state]                                  
+                        ,[City]                                     
+                        ,[State]                                  
                         ,[ZipCode]                                   
                         ,[LastUpdatedBy]                                           
                         ,[LastUpdatedOn]
-            FROM [Farm].[FarmTermAppOwnerDetails]";
+            FROM [Farm].[FarmTermAppOwnerDetails] WHERE ApplicationId = @p_ApplicationId";
 
      public GetOwnerDetailsSqlCommand()
     {

@@ -15,7 +15,7 @@ public enum ApplicationStatusEnum
     /// <summary>
     /// Application Status Type for Submitted
     /// </summary>
-    SUBMITTED = 4,
+    REQUESTED = 4,
 
     /// <summary>
     /// Application Status Type for In Review

@@ -3,15 +3,21 @@
 public interface IOwnerDetailsRepository
 {
     /// <summary>
-    /// Get Tech.
+    /// Get Owner Details.
     /// </summary>
     /// <param name="applicationId"></param>
     /// <returns></returns>
     Task<IEnumerable<OwnerDetailsEntity>> GetOwnerDetailsAsync(int applicationId);
     /// <summary>
-    /// Save Tech.
+    /// Save Owner Details.
     /// </summary>
     /// <param name="FarmOwner"></param>
     /// <returns></returns>
     Task<OwnerDetailsEntity> SaveOwnerDetailsAsync(OwnerDetailsEntity FarmOwner);
+    /// <summary>
+    /// Delete Owner Details.
+    /// </summary>
+    /// <param name="FarmOwner"></param>
+    /// <returns></returns>
+    Task DeleteOwnerDetailsAsync(int applicationId, int id);
 }

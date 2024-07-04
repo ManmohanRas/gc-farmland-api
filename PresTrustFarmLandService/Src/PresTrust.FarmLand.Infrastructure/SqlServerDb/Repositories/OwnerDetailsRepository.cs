@@ -82,8 +82,8 @@ public class OwnerDetailsRepository : IOwnerDetailsRepository
                 @p_MailingAddress1 = farmOwnerDetails.MailingAddress1,
                 @p_MailingAddress2 = farmOwnerDetails.MailingAddress2,
                 @p_PhoneNumber = farmOwnerDetails.PhoneNumber,
-                @p_City = farmOwnerDetails.city,
-                @p_State = farmOwnerDetails.state,
+                @p_City = farmOwnerDetails.City,
+                @p_State = farmOwnerDetails.State,
                 @p_ZipCode = farmOwnerDetails.ZipCode,
                 @p_LastUpdatedBy = farmOwnerDetails.LastUpdatedBy,
 
@@ -116,8 +116,8 @@ public class OwnerDetailsRepository : IOwnerDetailsRepository
                 @p_MailingAddress1 = farmOwnerDetails.MailingAddress1,
                 @p_MailingAddress2 = farmOwnerDetails.MailingAddress2,
                 @p_PhoneNumber = farmOwnerDetails.PhoneNumber,
-                @p_city = farmOwnerDetails.city,
-                @p_state = farmOwnerDetails.state,
+                @p_City = farmOwnerDetails.City,
+                @p_State = farmOwnerDetails.State,
                 @p_ZipCode = farmOwnerDetails.ZipCode,
                 @p_LastUpdatedBy = farmOwnerDetails.LastUpdatedBy,
                 @p_LastUpdatedOn = DateTime.Now
@@ -126,5 +126,18 @@ public class OwnerDetailsRepository : IOwnerDetailsRepository
         return farmOwnerDetails;
     }
 
+    public async Task DeleteOwnerDetailsAsync(int applicationId, int id)
+    {
+        using var conn = context.CreateConnection();
+        var sqlCommand = new DeleteOwnerDetailsSqlCommand();
+        await conn.ExecuteAsync(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+            param: new
+            {
+                @p_Id = id,
+                @p_ApplicationId = applicationId
+            });
 
+    }
 }

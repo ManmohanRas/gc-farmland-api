@@ -1,6 +1,4 @@
-﻿using PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
-
-namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.Repositories;
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.Repositories;
 
 public class ApplicationRepository : IApplicationRepository
 {
@@ -121,4 +119,25 @@ public class ApplicationRepository : IApplicationRepository
 
         return application;
     }
+
+    public async Task<FarmApplicationEntity> SaveApplicationWorkflowStatusAsync(FarmApplicationEntity application)
+    {
+        int id = default;
+
+        using var conn = context.CreateConnection();
+        var sqlCommand = new UpdateApplicationWorkflowStatusSqlCommand();
+        id = await conn.ExecuteAsync(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+        param: new
+        {
+            @p_ApplicationId = application.Id,
+            @p_StatusId = application.StatusId,
+            @p_LastUpdatedBy = application.LastUpdatedBy
+        });
+
+        return application;
+    }
+
 }
+

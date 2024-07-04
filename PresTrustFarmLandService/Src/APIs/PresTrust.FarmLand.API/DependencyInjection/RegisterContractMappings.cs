@@ -14,7 +14,9 @@
             services.AddTransient<IOwnerDetailsRepository, OwnerDetailsRepository>();
             services.AddTransient<ITermCommentsRepository, TermCommentsRepository>();
             services.AddTransient <ISiteCharacteristicsRepository, SiteCharacteristicsRepository >();
-
+            services.AddTransient<ITermBrokenRuleRepository, TermBrokenRuleRepository>();
+            services.AddTransient<ITermOtherDocumentsRepository, TermOtherDocumentsRepository>();
+            services.AddTransient<IApplicationSignatoryRepository, ApplicationSignatoryRepository>();
         }
     }
 }

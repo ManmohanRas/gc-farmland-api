@@ -10,9 +10,9 @@ public class OwnerDetailsEntity
     public string Municipality { get; set; }
     public string MailingAddress1 { get; set; }
     public string MailingAddress2 { get; set; }
-    public int PhoneNumber { get; set; }
-    public string city { get; set; }
-    public string state { get; set; }
+    public string PhoneNumber { get; set; }
+    public string City { get; set; }
+    public string State { get; set; }
     public int ZipCode { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime? LastUpdatedOn { get; set; }
