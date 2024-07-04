@@ -25,7 +25,7 @@ public class FarmRolesRepository : IFarmRolesRepository
         List<FarmRolesEntity>? results = default;
 
         using var conn = context.CreateConnection();
-        var sqlCommand = new GetRoleSqlCommand();
+        var sqlCommand = new GetRolesSqlCommand();
         results = (await conn.QueryAsync<FarmRolesEntity>(sqlCommand.ToString(),
                     commandType: CommandType.Text,
                     commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
@@ -63,5 +63,24 @@ public class FarmRolesRepository : IFarmRolesRepository
                     @p_LastUpdatedBy = user.LastUpdatedBy
                 });
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="applicationId"></param>
+    /// <returns></returns>
+    public async Task DeleteRolesAsync(int applicationId)
+    {
+        using var conn = context.CreateConnection();
+        var sqlCommand = new DeleteRolesSqlCommand();
+        await conn.ExecuteAsync(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+            param:
+            new
+            {
+                @p_ApplicationId = applicationId
+            });
     }
 }

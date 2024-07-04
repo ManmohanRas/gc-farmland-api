@@ -42,8 +42,7 @@
             ErrorDetailsEntity details = new ErrorDetailsEntity()
             {
                 Title = "An error occurred while processing your request.",
-                DeveloperMessage = env.IsDevelopment() ? context.Exception.Message : null
-                //DeveloperMessage = context.Exception.Message
+                DeveloperMessage = context.Exception.Message
             };
 
             context.Result = new ObjectResult(details)

@@ -15,4 +15,11 @@ public interface IFarmRolesRepository
     /// <param name="applicationUsers"></param>
     /// <returns></returns>
     Task SaveAsync(List<FarmRolesEntity> applicationUsers);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="applicationId"></param>
+    /// <returns></returns>
+    Task DeleteRolesAsync(int applicationId);
 }

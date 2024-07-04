@@ -30,7 +30,7 @@ public class AssignRolesCommandHandler : BaseHandler, IRequestHandler<AssignRole
 
         var reqApplicationUsers = mapper.Map<IEnumerable<FarmRolesViewModel>, IEnumerable<FarmRolesEntity>>(request.ApplicationUsers).ToList();
 
-        List<FarmRolesEntity> users = reqApplicationUsers.Where(au => (au.IsPrimaryContact) || (au.IsAlternateContact)).ToList();
+       // List<FarmRolesEntity> users = reqApplicationUsers.Where(au => (au.IsPrimaryContact) || (au.IsAlternateContact)).ToList();
 
         foreach (var applicationUser in reqApplicationUsers)
         {
@@ -38,11 +38,21 @@ public class AssignRolesCommandHandler : BaseHandler, IRequestHandler<AssignRole
             applicationUser.ApplicationId = request.ApplicationId;
         }
 
-        //using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
-        //{
+        // returns broken rules  
+        //var brokenRules = ReturnBrokenRulesIfAny(application, reqApplicationUsers);
+
+        using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
+        {
+            await repoApplicationUser.DeleteRolesAsync(request.ApplicationId);
+            List<FarmRolesEntity> users = reqApplicationUsers.Where(au => (au.IsPrimaryContact) || (au.IsAlternateContact)).ToList();
+
             await repoApplicationUser.SaveAsync(users);
 
-        //}
+            //if (brokenRules.Count() > 0)
+            //    await repoBrokenRules.SaveBrokenRules(brokenRules);
+
+            scope.Complete();
+        }
         return Unit.Value;
     }
 }

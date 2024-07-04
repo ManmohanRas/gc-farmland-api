@@ -89,7 +89,7 @@ public class ResponseToRequestForApplicationCorrectionCommandHandler : BaseHandl
     /// <summary>
     /// Ensure that a user has the relevant authorizations to perform an action
     /// </summary>
-    //private void AuthorizationCheck(FloodApplicationEntity application)
+    //private void AuthorizationCheck()
     //{
     //    // security
     //    userContext.DeriveRole(application.AgencyId);
