@@ -16,7 +16,7 @@
             services.AddTransient <ISiteCharacteristicsRepository, SiteCharacteristicsRepository >();
             services.AddTransient<ITermBrokenRuleRepository, TermBrokenRuleRepository>();
             services.AddTransient<ITermOtherDocumentsRepository, TermOtherDocumentsRepository>();
-            services.AddTransient<IApplicationSignatoryRepository, ApplicationSignatoryRepository>();
+            services.AddTransient<ITermAppSignatoryRepository, TermAppSignatoryRepository>();
         }
     }
 }

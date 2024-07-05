@@ -1,5 +1,5 @@
 ﻿namespace PresTrust.FarmLand.Application.Queries;
-public class GetApplicationSignatoryQueryViewModel
+public class GetTermAppSignatoryQueryViewModel
 {
     public int Id { get; set; } = 0;
     public int ApplicationId { get; set; } = 0;

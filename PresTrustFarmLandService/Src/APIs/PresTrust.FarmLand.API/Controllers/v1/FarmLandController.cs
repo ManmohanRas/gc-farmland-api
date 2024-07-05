@@ -300,16 +300,16 @@ public class FarmLandController : ApiBaseController
     
         //Application Signatory 
 
-        [HttpPost("getApplicationSignatoryDetails")]
-        [ProducesResponseType(typeof(GetApplicationSignatoryQueryViewModel), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<GetApplicationSignatoryQueryViewModel>> GetApplicationSignatoryDetails([FromBody] GetApplicationSignatoryQuery query)
+        [HttpPost("getTermAppSignatoryDetails")]
+        [ProducesResponseType(typeof(GetTermAppSignatoryQueryViewModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetTermAppSignatoryQueryViewModel>> GetTermAppSignatoryDetails([FromBody] GetTermAppSignatoryQuery query)
         {
             return Single(await QueryAsync(query));
         }
 
-        [HttpPost("saveApplicationSignatoryDetails")]
+        [HttpPost("saveTermAppSignatoryDetails")]
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<int>> SaveApplicationSignatoryDetails([FromBody] SaveApplicationSignatoryCommand command)
+        public async Task<ActionResult<int>> SaveTermAppSignatoryDetails([FromBody] SaveTermAppSignatoryCommand command)
         {
             return Single(await CommandAsync(command));
         }

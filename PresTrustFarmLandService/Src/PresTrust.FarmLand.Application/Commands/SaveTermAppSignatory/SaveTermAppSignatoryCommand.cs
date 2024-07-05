@@ -1,5 +1,5 @@
 ﻿namespace PresTrust.FarmLand.Application.Commands;
-public class SaveApplicationSignatoryCommand : IRequest<int>
+public class SaveTermAppSignatoryCommand : IRequest<int>
 {
     public int Id { get; set; }
     public int ApplicationId { get; set; }

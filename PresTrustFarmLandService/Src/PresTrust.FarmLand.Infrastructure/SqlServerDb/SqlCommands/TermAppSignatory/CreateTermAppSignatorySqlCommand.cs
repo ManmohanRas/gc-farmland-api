@@ -1,14 +1,13 @@
 ﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
-public class CreateApplicationSignatorySqlCommand
+public class CreateTermAppSignatorySqlCommand
 {
     private readonly string _sqlCommand =
-                 @"INSERT INTO [Farm].[FarmApplicationSignatory]
+                 @"INSERT INTO [Farm].[FarmTermAppSignature]
 						(
 							 ApplicationId
 							,Designation
 							,Title	
 							,SignedOn
-							,SignatoryType
 							,LastUpdatedBy  
 							,LastUpdatedOn	
 						)
@@ -19,7 +18,6 @@ public class CreateApplicationSignatorySqlCommand
 							,@p_Designation
 							,@p_Title	
 							,@p_SignedOn
-							,1
 							,@p_LastUpdatedBy  
 							,GETDATE()	
 						);
@@ -27,7 +25,7 @@ public class CreateApplicationSignatorySqlCommand
 				  SELECT CAST( SCOPE_IDENTITY() AS INT);";
 
 
-    public CreateApplicationSignatorySqlCommand()
+    public CreateTermAppSignatorySqlCommand()
     {
     }
 
