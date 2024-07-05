@@ -45,13 +45,20 @@ public class FarmLandController : ApiBaseController
             return Single(await QueryAsync(query));
         }
 
+        [HttpPost("getSiteCharacteristics")]
+        [ProducesResponseType(typeof(GetSiteCharacteristicsQueryViewModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetSiteCharacteristicsQueryViewModel>> GetSiteCharacteristics([FromBody] GetSiteCharacteristicsQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
 
-        /// <summary>
-        /// Assign Application Users like Primary Contact, Applicant Contractor
-        /// </summary>
-        /// <param name="command"></param>
-        /// <returns></returns>
-        [HttpPost("saveRoles")]
+
+    /// <summary>
+    /// Assign Application Users like Primary Contact, Applicant Contractor
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    [HttpPost("saveRoles")]
         [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Unit>> AssignApplicationUsers([FromBody] AssignRolesCommand command)
         {
@@ -255,6 +262,12 @@ public class FarmLandController : ApiBaseController
 
     }
 
+    [HttpPost("saveSiteCharacteristics")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveSiteCharacteristics([FromBody] SaveSiteCharacteristicsCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
 
     [HttpPost("requestApplication")]
     [ProducesResponseType(typeof(RequestApplicationCommandViewModel), (int)HttpStatusCode.OK)]
@@ -278,15 +291,13 @@ public class FarmLandController : ApiBaseController
         return Single(await CommandAsync(command));
     }
 
-
     [HttpPost("deleteTermDocument")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<bool>> DeleteTermDocument([FromBody] DeleteTermAppDocumentCommand command)
     {
         return Single(await CommandAsync(command));
     }
-
-
+    
         //Application Signatory 
 
         [HttpPost("getApplicationSignatoryDetails")]
@@ -302,5 +313,13 @@ public class FarmLandController : ApiBaseController
         {
             return Single(await CommandAsync(command));
         }
+
+
+    [HttpPost("getBrokenRules")]
+    [ProducesResponseType(typeof(IEnumerable<GetTermBrokenRulesQueryViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<GetTermBrokenRulesQueryViewModel>>> GetTermBrokenRules([FromBody] GetTermBrokenRulesQuery query)
+    {
+        return Single(await QueryAsync(query));
     }
+}
 
