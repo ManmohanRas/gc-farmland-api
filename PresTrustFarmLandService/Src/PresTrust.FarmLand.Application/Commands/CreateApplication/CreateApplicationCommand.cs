@@ -8,6 +8,6 @@ public class CreateApplicationCommand: IRequest<CreateApplicationCommandViewMode
     public string Title { get; set; }
     public int AgencyId { get; set; }
     public string ApplicationType { get; set; }
-    public bool IsMunicipallyApproved { get; set; }
+    public bool IsApprovedByMunicipality { get; set; }
     public int FarmListId { get; set; }  
 }

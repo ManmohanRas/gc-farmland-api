@@ -37,7 +37,7 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
         reqApplication.CreatedByProgramUser = userContext.Role == UserRoleEnum.PROGRAM_ADMIN;
         reqApplication.LastUpdatedBy = userContext.Email;
         reqApplication.CreatedBy = userContext.Email;
-       
+        reqApplication.IsApprovedByMunicipality = request.IsApprovedByMunicipality;
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
