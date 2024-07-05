@@ -26,6 +26,8 @@ CREATE TABLE [Farm].[FarmTermAppSiteCharacteristics](
 	[NoteEasementRightOfway]		[Nvarchar]						NULL,
 	[MortgageLiens]				    [varchar](50)					NULL,
 	[NoteMortgageLiens]			    [varchar](128)					NULL,
+	[MortgageLiens]					[varchar](50)					NULL,
+	[NoteMortgageLiens]				[Nvarchar]						NULL,
 	[LastUpdatedBy]					[varchar](128)					NULL,
 	[LastUpdatedOn]					[datetime]						NULL,
 CONSTRAINT [PK_FarmTermAppSiteCharacteristics_Id] PRIMARY KEY CLUSTERED 
