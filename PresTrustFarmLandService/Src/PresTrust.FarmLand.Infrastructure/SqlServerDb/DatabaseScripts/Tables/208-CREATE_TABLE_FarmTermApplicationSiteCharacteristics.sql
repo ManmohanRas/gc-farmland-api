@@ -24,6 +24,8 @@ CREATE TABLE [Farm].[FarmTermAppSiteCharacteristics](
 	[Other]							[decimal]						NULL,
 	[EasementRightOfway]			[varchar](50)					NULL,
 	[NoteEasementRightOfway]		[Nvarchar]						NULL,
+	[MortgageLiens]				    [varchar](50)					NULL,
+	[NoteMortgageLiens]			    [varchar](128)					NULL,
 	[MortgageLiens]					[varchar](50)					NULL,
 	[NoteMortgageLiens]				[Nvarchar]						NULL,
 	[LastUpdatedBy]					[varchar](128)					NULL,
