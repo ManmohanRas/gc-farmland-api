@@ -14,13 +14,14 @@ public class GetSiteCharacteristicsSqlCommand
                  [Pasture],
                  [Orchard],
                  [Other],
-                 [EasementOrRightOfway],
-                 [NoteEasementOrRightOfway],
+                 [EasementRightOfway],
+                 [NoteEasementRightOfway],
                  [MortgageLiens],
-                 [NoteMortgageLiens] 
-FROM [Farm].[FarmTermAppSiteCharacteristics];
-
-         ";
+                 [NoteMortgageLiens],
+                 [LastUpdatedBy],
+                 [LastUpdatedOn]
+           FROM [Farm].[FarmTermAppSiteCharacteristics]
+            WHERE ApplicationId = @p_ApplicationId;";
 
 
     public GetSiteCharacteristicsSqlCommand() { }

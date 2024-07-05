@@ -266,7 +266,7 @@ public class FarmLandController : ApiBaseController
     [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<int>> SaveSiteCharacteristics([FromBody] SaveSiteCharacteristicsCommand command)
     {
-        return Single(await CommandAsync(query));
+        return Single(await CommandAsync(command));
     }
 
     [HttpPost("requestApplication")]
@@ -313,5 +313,13 @@ public class FarmLandController : ApiBaseController
         {
             return Single(await CommandAsync(command));
         }
+
+
+    [HttpPost("getBrokenRules")]
+    [ProducesResponseType(typeof(IEnumerable<GetTermBrokenRulesQueryViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<GetTermBrokenRulesQueryViewModel>>> GetTermBrokenRules([FromBody] GetTermBrokenRulesQuery query)
+    {
+        return Single(await QueryAsync(query));
     }
+}
 

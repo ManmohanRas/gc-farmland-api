@@ -1,24 +1,22 @@
 ﻿
-
-
 namespace PresTrust.FarmLand.Application.Commands;
 
 public class SaveSiteCharacteristicsCommandHandler : BaseHandler, IRequestHandler<SaveSiteCharacteristicsCommand, int>
 {
-
     private readonly IMapper mapper;
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
     private ISiteCharacteristicsRepository repoSiteCharacteristics;
-
+    private ITermBrokenRuleRepository repoBrokenRules;
 
     public SaveSiteCharacteristicsCommandHandler(
         IMapper mapper,
         IPresTrustUserContext userContext,
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
-        ISiteCharacteristicsRepository repoSiteCharacteristics
+        ISiteCharacteristicsRepository repoSiteCharacteristics,
+        ITermBrokenRuleRepository repoBrokenRules
 
         ):base(repoApplication:repoApplication)
     {
@@ -27,6 +25,7 @@ public class SaveSiteCharacteristicsCommandHandler : BaseHandler, IRequestHandle
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;      
         this.repoSiteCharacteristics = repoSiteCharacteristics;
+        this.repoBrokenRules = repoBrokenRules;
     }
 
     /// <summary>
@@ -43,11 +42,58 @@ public class SaveSiteCharacteristicsCommandHandler : BaseHandler, IRequestHandle
 
         var reqSiteCharacteristics = mapper.Map<SaveSiteCharacteristicsCommand, SiteCharacteristicsEntity>(request);
 
-        
+        var brokenRules = ReturnBrokenRulesIfAny(application, reqSiteCharacteristics);
+
+        using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
+        {
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.SITE_CHARACTERISTICS);
+            await repoBrokenRules.SaveBrokenRules(brokenRules);
             reqSiteCharacteristics = await repoSiteCharacteristics.SaveSiteCharacteristicsAsync(reqSiteCharacteristics);
+            reqSiteCharacteristics.LastUpdatedBy = userContext.Email;
+            scope.Complete();
 
-
+        }
         return reqSiteCharacteristics.Id;
 
     }
+
+    private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SiteCharacteristicsEntity reqSiteCharacteristics)
+    {
+        int sectionId = (int)ApplicationSectionEnum.SITE_CHARACTERISTICS;
+        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
+     //   var appplicationStatuses = new List<ApplicationStatusEnum>()
+     //   {
+     //       ApplicationStatusEnum.PETITION_DRAFT
+       // };
+     //   if (!appplicationStatuses.Contains(application.Status))
+     //   {}
+
+            if(string.IsNullOrEmpty( reqSiteCharacteristics.Area))
+            {
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Area  required field on Site Characteristics Tab have not been filled.",
+                    IsApplicantFlow = false
+
+                });
+            }
+            if(string.IsNullOrEmpty(reqSiteCharacteristics.EasementRightOfway))
+            {
+
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Easement Right Of Way  required field on Site Characteristics Tab have not been filled.",
+                    IsApplicantFlow = false
+                });
+
+            }
+        
+        return brokenRules;
+    }
+
+
 }

@@ -11,7 +11,7 @@ public class SiteCharacteristicsRepository : ISiteCharacteristicsRepository
     private readonly SystemParameterConfiguration systemParameterConfiguration;
     #endregion
 
-    #region "...ctor....."
+    #region "...ctor"
     /// <summary>
     /// 
     /// </summary>
@@ -38,7 +38,7 @@ public class SiteCharacteristicsRepository : ISiteCharacteristicsRepository
         var results = await conn.QueryAsync<SiteCharacteristicsEntity>(sqlCommand.ToString(),
                                commandType: CommandType.Text,
                                commandTimeout: systemParameterConfiguration.SQLCommandTimeoutInSeconds,
-                               param: new { @p_Id = applicationId });
+                               param: new { @p_ApplicationId = applicationId });
         result = results.FirstOrDefault();
 
         return result ?? new();
@@ -55,10 +55,10 @@ public class SiteCharacteristicsRepository : ISiteCharacteristicsRepository
     {
         if (siteCharcteristics.Id > 0)
         {
-            return await updateAsync(siteCharcteristics);
+            return await UpdateAsync(siteCharcteristics);
         }
         else {
-            return await saveAsync(siteCharcteristics);
+            return await SaveAsync(siteCharcteristics);
         }
         
     }
@@ -72,27 +72,28 @@ public class SiteCharacteristicsRepository : ISiteCharacteristicsRepository
 
  
 
-    public async Task<SiteCharacteristicsEntity> saveAsync(SiteCharacteristicsEntity siteCharacteristics) {
+    public async Task<SiteCharacteristicsEntity> SaveAsync(SiteCharacteristicsEntity siteCharacteristics) {
 
         using var conn = context.CreateConnection();
         var sqlCommand = new CreateSiteCharacteristicsSqlCommand();
-         var id   =  await conn.ExecuteScalarAsync<int>(sqlCommand.ToString(), commandType: CommandType.Text,
-             commandTimeout:systemParameterConfiguration.SQLCommandTimeoutInSeconds,
-             param: new{
-                 @p_Id = siteCharacteristics.Id,
-                 @p_ApplicationId = siteCharacteristics.ApplicationId,
-                 @p_Area = siteCharacteristics.Area,
-                 @p_LandUse = siteCharacteristics.LandUse,
-                 @p_Cropland = siteCharacteristics.Cropland,
-                 @p_Woodland = siteCharacteristics.Woodland,
-                 @p_Pasture = siteCharacteristics.Pasture,
-                 @p_Orchard = siteCharacteristics.Orchard,
-                 @p_Other   =siteCharacteristics.Other,
-                 @p_EasementOrRightOfway = siteCharacteristics.EasementOrRightOfway,
-                 @p_NoteEasementOrRightOfway = siteCharacteristics.EasementOrRightOfway,
-                 @p_MortgageLiens = siteCharacteristics.MortgageLiens,
-                 @p_NoteMortgageLiens = siteCharacteristics.NoteMortgageLiens,
-             });
+        var id = await conn.ExecuteScalarAsync<int>(sqlCommand.ToString(), 
+            commandType: CommandType.Text,
+            commandTimeout: systemParameterConfiguration.SQLCommandTimeoutInSeconds,
+            param: new {
+                @p_ApplicationId = siteCharacteristics.ApplicationId,
+                @p_Area = siteCharacteristics.Area,
+                @p_LandUse = siteCharacteristics.LandUse,
+                @p_Cropland = siteCharacteristics.CropLand,
+                @p_Woodland = siteCharacteristics.WoodLand,
+                @p_Pasture = siteCharacteristics.Pasture,
+                @p_Orchard = siteCharacteristics.Orchard,
+                @p_Other = siteCharacteristics.Other,
+                @p_EasementRightOfway = siteCharacteristics.EasementRightOfway,
+                @p_NoteEasementRightOfway = siteCharacteristics.NoteEasementRightOfway,
+                @p_MortgageLiens = siteCharacteristics.MortgageLiens,
+                @p_NoteMortgageLiens = siteCharacteristics.NoteMortgageLiens,
+                @p_LastUpdatedBy = siteCharacteristics.LastUpdatedBy,
+            });
         siteCharacteristics.Id = id;
 
     return siteCharacteristics;
@@ -102,7 +103,7 @@ public class SiteCharacteristicsRepository : ISiteCharacteristicsRepository
     /// </summary>
     /// <param name="siteCharcteristics"></param>
     /// <returns></returns> CreateSiteCharacteristicsSqlCommand
-    public async Task<SiteCharacteristicsEntity> updateAsync(SiteCharacteristicsEntity siteCharacteristics)
+    public async Task<SiteCharacteristicsEntity> UpdateAsync(SiteCharacteristicsEntity siteCharacteristics)
     {
 
         using var conn = context.CreateConnection();
@@ -116,14 +117,17 @@ public class SiteCharacteristicsRepository : ISiteCharacteristicsRepository
             @p_ApplicationId = siteCharacteristics.ApplicationId,
             @p_Area = siteCharacteristics.Area,
             @p_LandUse = siteCharacteristics.LandUse,
-            @p_Cropland = siteCharacteristics.Cropland,
-            @p_Woodland = siteCharacteristics.Woodland,
+            @p_Cropland = siteCharacteristics.CropLand,
+            @p_Woodland = siteCharacteristics.WoodLand,
             @p_Pasture = siteCharacteristics.Pasture,
             @p_Orchard = siteCharacteristics.Orchard,
-            @p_EasementOrRightOfway = siteCharacteristics.EasementOrRightOfway,
-            @p_NoteEasementOrRightOfway = siteCharacteristics.EasementOrRightOfway,
+            @p_Other = siteCharacteristics.Other,
+            @p_EasementRightOfway = siteCharacteristics.EasementRightOfway,
+            @p_NoteEasementRightOfway = siteCharacteristics.NoteEasementRightOfway,
             @p_MortgageLiens = siteCharacteristics.MortgageLiens,
             @p_NoteMortgageLiens = siteCharacteristics.NoteMortgageLiens,
+            @p_LastUpdatedBy = siteCharacteristics.LastUpdatedBy,
+            @p_LastUpdatedOn = DateTime.Now,
 
 
         });

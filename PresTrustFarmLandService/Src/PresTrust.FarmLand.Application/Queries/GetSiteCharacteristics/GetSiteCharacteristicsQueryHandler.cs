@@ -1,7 +1,4 @@
-﻿
-
-
-namespace PresTrust.FarmLand.Application.Queries;
+﻿namespace PresTrust.FarmLand.Application.Queries;
 
 public class GetSiteCharacteristicsQueryHandler : IRequestHandler<GetSiteCharacteristicsQuery, GetSiteCharacteristicsQueryViewModel>
 {
@@ -13,7 +10,6 @@ public class GetSiteCharacteristicsQueryHandler : IRequestHandler<GetSiteCharact
 
     public GetSiteCharacteristicsQueryHandler(IMapper mapper, ISiteCharacteristicsRepository repoSiteCharacteristics, IApplicationRepository applicationRepository)
     {
-
         this.mapper = mapper;
         this.repoSiteCharacteristics = repoSiteCharacteristics;
         this.applicationRepository = applicationRepository;
@@ -22,17 +18,12 @@ public class GetSiteCharacteristicsQueryHandler : IRequestHandler<GetSiteCharact
     public async Task<GetSiteCharacteristicsQueryViewModel> Handle(GetSiteCharacteristicsQuery request, CancellationToken cancellationToken)
     {   
 
-
-
     var siteCharacteristics = await repoSiteCharacteristics.GetSiteCharacteristicsAsync(request.ApplicationId);
         var results = mapper.Map<SiteCharacteristicsEntity, GetSiteCharacteristicsQueryViewModel>(siteCharacteristics);
 
-        
-
-
         return results;
-
     }
 }
+
 
 //public int ApplicationId { get; set; }

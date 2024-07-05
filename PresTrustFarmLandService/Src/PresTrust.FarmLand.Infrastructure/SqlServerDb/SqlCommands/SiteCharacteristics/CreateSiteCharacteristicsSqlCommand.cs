@@ -8,7 +8,6 @@ public class CreateSiteCharacteristicsSqlCommand
         @"
            INSERT INTO [Farm].[FarmTermAppSiteCharacteristics]
          (
-                 [Id] ,
                  [ApplicationId],
                  [Area],
                  [LandUse],
@@ -17,25 +16,30 @@ public class CreateSiteCharacteristicsSqlCommand
                  [Pasture],
                  [Orchard],
                  [Other],
-                 [EasementOrRightOfway],
-                 [NoteEasementOrRightOfway],
+                 [EasementRightOfway],
+                 [NoteEasementRightOfway],
                  [MortgageLiens],
-                 [NoteMortgageLiens] 
+                 [NoteMortgageLiens],
+                 [LastUpdatedBy],
+                 [LastUpdatedOn]
+                 
          )
          VALUES
-                       (@p_Id
-                       ,@p_ApplicationId
-                       ,@p_Area
-                       ,@p_LandUse
-                       ,@p_Cropland
-                       ,@p_Woodland
-                       ,@p_Pasture
-                       ,@p_Orchard 
-                       ,@p_Other
-                       ,@p_EasementOrRightOfway
-                       ,@p_NoteEasementOrRightOfway
-                       ,@p_NoteMortgageLiens
-                       )
+                       (@p_ApplicationId,
+                       @p_Area,
+                       @p_LandUse,
+                       @p_CropLand,
+                       @p_WoodLand,
+                       @p_Pasture,
+                       @p_Orchard ,
+                       @p_Other,
+                       @p_EasementRightOfway,
+                       @p_NoteEasementRightOfway,
+                       @p_MortgageLiens,
+                       @p_NoteMortgageLiens,
+                       @p_LastUpdatedBy,
+                        GETDATE()
+                       );
                     SELECT CAST( SCOPE_IDENTITY() AS INT);
 
 
