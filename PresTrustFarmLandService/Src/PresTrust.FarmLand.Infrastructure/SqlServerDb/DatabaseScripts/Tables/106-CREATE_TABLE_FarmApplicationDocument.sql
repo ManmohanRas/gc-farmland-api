@@ -11,7 +11,6 @@ BEGIN
 	
 	ALTER TABLE [Farm].[FarmApplicationDocument] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmApplicationDocument];
 
-	ALTER TABLE [Farm].[FarmApplicationDocument] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationDocument]; 
 END;
 GO
 
@@ -23,7 +22,6 @@ GO
 CREATE TABLE [Farm].[FarmApplicationDocument](
 	[Id]						[integer] 		IDENTITY(1,1)	NOT NULL,
 	[ApplicationId]				[integer]						NOT NULL,
-	[ApplicationTypeId]			[smallint]						NOT NULL,-- removethis column
 	[DocumentTypeId]			[smallint]						NOT NULL,
 	[FileName]					[varchar](128)					NOT NULL,
 	[Title]						[varchar](128)					NOT NULL,
@@ -58,9 +56,5 @@ GO
 
 ALTER TABLE [Farm].[FarmApplicationDocument] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmApplicationDocument]  DEFAULT (GETDATE()) FOR [LastUpdatedOn]
 GO  
-
-ALTER TABLE [Farm].[FarmApplicationDocument] ADD CONSTRAINT [FK_ApplicationTypeId_FarmApplicationDocument]  FOREIGN KEY (ApplicationTypeId) REFERENCES [Farm].FarmApplicationType(Id);
-GO
-  
 
  

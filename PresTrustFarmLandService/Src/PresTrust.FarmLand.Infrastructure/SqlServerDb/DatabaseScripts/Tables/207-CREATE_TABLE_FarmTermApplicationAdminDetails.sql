@@ -18,13 +18,13 @@ CREATE TABLE [Farm].[FarmTermAppAdminDetails](
 	[SADCId]						[integer]						NULL,
 	[MaxGrant]						[decimal]						NULL,
 	[PermanentlyPreserved]			[bit]							NULL,
-	[MunicipallyApproved]			[bit]							NULL,-- need to verify
+	[MunicipallyApproved]			[bit]							NULL,
 	[EnrollmentDate]				[dateTime]						NULL,
 	[RenewalDate]					[dateTime]						NULL,
 	[ExpirationDate]				[dateTime]						NULL,
 	[RenewalExpirationDate]			[dateTime]						NULL,
 	[LastUpdatedBy]					[varchar](128)					NULL,
-	[LastUpdatedOn]					[integer]						NULL,
+	[LastUpdatedOn]					[datetime]						NULL,
 CONSTRAINT [PK_FarmTermAppAdminDetails_Id] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
