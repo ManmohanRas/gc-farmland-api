@@ -3,7 +3,7 @@
 /// <summary>
 /// This class represents api's query input model and returns the response object
 /// </summary>
-public class GetApplicationSignatoryQuery : IRequest<GetApplicationSignatoryQueryViewModel>
+public class GetTermAppSignatoryQuery : IRequest<GetTermAppSignatoryQueryViewModel>
 {
     public int ApplicationId { get; set; }
 

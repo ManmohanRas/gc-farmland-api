@@ -3,16 +3,16 @@
 /// <summary>
 /// This class handles the query to fetch data and build response
 /// </summary>
-public class GetApplicationSignatoryQueryHandler : BaseHandler, IRequestHandler<GetApplicationSignatoryQuery, GetApplicationSignatoryQueryViewModel>
+public class GetTermAppSignatoryQueryHandler : BaseHandler, IRequestHandler<GetTermAppSignatoryQuery, GetTermAppSignatoryQueryViewModel>
 {
     private IMapper mapper;
     private readonly IApplicationRepository repoApplication;
-    private IApplicationSignatoryRepository repoSignatory;
+    private ITermAppSignatoryRepository repoSignatory;
 
-    public GetApplicationSignatoryQueryHandler(
+    public GetTermAppSignatoryQueryHandler(
         IMapper mapper,
         IApplicationRepository repoApplication,
-        IApplicationSignatoryRepository repoSignatory
+        ITermAppSignatoryRepository repoSignatory
         ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
@@ -20,14 +20,14 @@ public class GetApplicationSignatoryQueryHandler : BaseHandler, IRequestHandler<
         this.repoSignatory = repoSignatory;
     }
 
-    public async Task<GetApplicationSignatoryQueryViewModel> Handle(GetApplicationSignatoryQuery request, CancellationToken cancellationToken)
+    public async Task<GetTermAppSignatoryQueryViewModel> Handle(GetTermAppSignatoryQuery request, CancellationToken cancellationToken)
     {
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 
         // get signatory details
         var signatory = await this.repoSignatory.GetSignatoryAsync(request.ApplicationId);
-        var result = mapper.Map<FarmApplicationSignatoryEntity, GetApplicationSignatoryQueryViewModel>(signatory);
+        var result = mapper.Map<FarmTermAppSignatoryEntity, GetTermAppSignatoryQueryViewModel>(signatory);
 
         return result;
     }

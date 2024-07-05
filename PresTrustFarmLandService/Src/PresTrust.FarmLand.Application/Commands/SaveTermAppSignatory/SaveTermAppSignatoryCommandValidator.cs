@@ -1,7 +1,7 @@
 ﻿namespace PresTrust.FarmLand.Application.Commands;
-public class SaveApplicationSignatoryCommandValidator : AbstractValidator<SaveApplicationSignatoryCommand>
+public class SaveTermAppSignatoryCommandValidator : AbstractValidator<SaveTermAppSignatoryCommand>
 {
-    public SaveApplicationSignatoryCommandValidator()
+    public SaveTermAppSignatoryCommandValidator()
     {
         RuleFor(query => query.ApplicationId)
                 .GreaterThan(0)

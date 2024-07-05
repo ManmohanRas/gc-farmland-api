@@ -1,5 +1,5 @@
 ﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries;
-public class GetApplicationSignatorySqlCommand
+public class GetTermAppSignatorySqlCommand
 {
     private readonly string _sqlCommand =
         @"  SELECT   [Id]
@@ -9,11 +9,11 @@ public class GetApplicationSignatorySqlCommand
                     ,[SignedOn]
                     ,[LastUpdatedBy]
                     ,[LastUpdatedOn]
-            FROM [Farm].[FarmApplicationSignatory]
+            FROM [Farm].[FarmTermAppSignature]
             WHERE ApplicationId = @p_ApplicationId";
 
 
-    public GetApplicationSignatorySqlCommand()
+    public GetTermAppSignatorySqlCommand()
     {
     }
 

@@ -1,22 +1,22 @@
 ﻿namespace PresTrust.FarmLand.Application.Commands;
-public class SaveApplicationSignatoryCommandHandler : BaseHandler, IRequestHandler<SaveApplicationSignatoryCommand, int>
+public class SaveTermAppSignatoryCommandHandler : BaseHandler, IRequestHandler<SaveTermAppSignatoryCommand, int>
 {
     private readonly IMapper mapper;
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
     //private readonly IApplicationFeedbackRepository repoFeedback;
-    private IApplicationSignatoryRepository repoSignatory;
+    private ITermAppSignatoryRepository repoSignatory;
     //private readonly IBrokenRuleRepository repoBrokenRules;
 
 
-    public SaveApplicationSignatoryCommandHandler
+    public SaveTermAppSignatoryCommandHandler
     (
         IMapper mapper,
         IPresTrustUserContext userContext,
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
-        IApplicationSignatoryRepository repoSignatory
+        ITermAppSignatoryRepository repoSignatory
         //IApplicationFeedbackRepository repoFeedback,
         //IBrokenRuleRepository repoBrokenRules
     ) : base(repoApplication: repoApplication)
@@ -36,15 +36,15 @@ public class SaveApplicationSignatoryCommandHandler : BaseHandler, IRequestHandl
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<int> Handle(SaveApplicationSignatoryCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(SaveTermAppSignatoryCommand request, CancellationToken cancellationToken)
     {
         int signatoryId = 0;
 
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 
-        // map command object to the FarmApplicationSignatoryEntity
-        var reqSignatory = mapper.Map<SaveApplicationSignatoryCommand, FarmApplicationSignatoryEntity>(request);
+        // map command object to the FarmTermAppSignatoryEntity
+        var reqSignatory = mapper.Map<SaveTermAppSignatoryCommand, FarmTermAppSignatoryEntity>(request);
 
         // Check Broken Rules
         //var brokenRules = ReturnBrokenRulesIfAny(reqSignatory);
@@ -69,7 +69,7 @@ public class SaveApplicationSignatoryCommandHandler : BaseHandler, IRequestHandl
         return signatoryId;
     }
 
-    //private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationSignatoryEntity reqSignatory)
+    //private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmTermAppSignatoryEntity reqSignatory)
     //{
     //    int sectionId = (int)ApplicationSectionEnum.SIGNATORY;
     //    List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
