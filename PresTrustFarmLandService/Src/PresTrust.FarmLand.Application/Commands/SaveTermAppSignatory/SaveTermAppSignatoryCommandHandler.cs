@@ -5,9 +5,8 @@ public class SaveTermAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
-    //private readonly IApplicationFeedbackRepository repoFeedback;
     private ITermAppSignatoryRepository repoSignatory;
-    //private readonly IBrokenRuleRepository repoBrokenRules;
+    private readonly ITermBrokenRuleRepository repoBrokenRules;
 
 
     public SaveTermAppSignatoryCommandHandler
@@ -16,9 +15,8 @@ public class SaveTermAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         IPresTrustUserContext userContext,
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
-        ITermAppSignatoryRepository repoSignatory
-        //IApplicationFeedbackRepository repoFeedback,
-        //IBrokenRuleRepository repoBrokenRules
+        ITermAppSignatoryRepository repoSignatory,
+        ITermBrokenRuleRepository repoBrokenRules
     ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
@@ -26,8 +24,7 @@ public class SaveTermAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;
         this.repoSignatory = repoSignatory;
-        //this.repoFeedback = repoFeedback;
-        //this.repoBrokenRules = repoBrokenRules;
+        this.repoBrokenRules = repoBrokenRules;
     }
 
     /// <summary>
@@ -47,14 +44,14 @@ public class SaveTermAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         var reqSignatory = mapper.Map<SaveTermAppSignatoryCommand, FarmTermAppSignatoryEntity>(request);
 
         // Check Broken Rules
-        //var brokenRules = ReturnBrokenRulesIfAny(reqSignatory);
+        var brokenRules = ReturnBrokenRulesIfAny(reqSignatory);
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             // Delete old Broken Rules, if any
-            //await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.SIGNATORY);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.SIGNATORY);
             // Save current Broken Rules, if any
-            //await repoBrokenRules.SaveBrokenRules(brokenRules);
+            await repoBrokenRules.SaveBrokenRules(brokenRules);
 
             var signatory = await repoSignatory.SaveAsync(reqSignatory);
             if (signatory != null)
@@ -69,40 +66,40 @@ public class SaveTermAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         return signatoryId;
     }
 
-    //private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmTermAppSignatoryEntity reqSignatory)
-    //{
-    //    int sectionId = (int)ApplicationSectionEnum.SIGNATORY;
-    //    List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
+    private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmTermAppSignatoryEntity reqSignatory)
+    {
+        int sectionId = (int)ApplicationSectionEnum.SIGNATORY;
+        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
 
-    //    // add based on the empty check conditions
-    //    if (string.IsNullOrEmpty(reqSignatory.Designation))
-    //        brokenRules.Add(new FarmBrokenRuleEntity()
-    //        {
-    //            ApplicationId = reqSignatory.ApplicationId,
-    //            SectionId = sectionId,
-    //            Message = "Designation required field on Signatory tab have not been filled.",
-    //            IsApplicantFlow = true
-    //        });
+        // add based on the empty check conditions
+        if (string.IsNullOrEmpty(reqSignatory.Designation))
+            brokenRules.Add(new TermBrokenRuleEntity()
+            {
+                ApplicationId = reqSignatory.ApplicationId,
+                SectionId = sectionId,
+                Message = "Designation required field on Signatory tab have not been filled.",
+                IsApplicantFlow = true
+            });
 
-    //    if (string.IsNullOrEmpty(reqSignatory.Title))
-    //        brokenRules.Add(new FarmBrokenRuleEntity()
-    //        {
-    //            ApplicationId = reqSignatory.ApplicationId,
-    //            SectionId = sectionId,
-    //            Message = "Title required field on Signatory tab have not been filled.",
-    //            IsApplicantFlow = true
-    //        });
+        if (string.IsNullOrEmpty(reqSignatory.Title))
+            brokenRules.Add(new TermBrokenRuleEntity()
+            {
+                ApplicationId = reqSignatory.ApplicationId,
+                SectionId = sectionId,
+                Message = "Title required field on Signatory tab have not been filled.",
+                IsApplicantFlow = true
+            });
 
-    //    if (reqSignatory.SignedOn == null)
-    //        brokenRules.Add(new FarmBrokenRuleEntity()
-    //        {
-    //            ApplicationId = reqSignatory.ApplicationId,
-    //            SectionId = sectionId,
-    //            Message = "Date required field on Signatory tab have not been filled.",
-    //            IsApplicantFlow = true
-    //        });
+        if (reqSignatory.SignedOn == null)
+            brokenRules.Add(new TermBrokenRuleEntity()
+            {
+                ApplicationId = reqSignatory.ApplicationId,
+                SectionId = sectionId,
+                Message = "Date required field on Signatory tab have not been filled.",
+                IsApplicantFlow = true
+            });
 
-    //    return brokenRules;
-    //}
+        return brokenRules;
+    }
 }
 
