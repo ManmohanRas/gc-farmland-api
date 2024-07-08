@@ -1,8 +1,6 @@
-﻿using PresTrust.FarmLand.Domain;
+﻿namespace PresTrust.FarmLand.Application.Commands;
 
-namespace PresTrust.FarmLand.Application.Commands;
-
-public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<RequestApplicationCommand, RequestApplicationCommandViewModel>
+public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<ApproveApplicationCommand, ApproveApplicationCommandViewModel>
 {
     private readonly IMapper mapper;
     private readonly IPresTrustUserContext userContext;
@@ -11,7 +9,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
     private readonly ITermBrokenRuleRepository repoBrokenRules;
     private readonly ITermOtherDocumentsRepository repoOtherDocs;
 
-    public RequestApplicationCommandHandler
+    public ApproveApplicationCommandHandler
     (
         IMapper mapper,
         IPresTrustUserContext userContext,
@@ -27,6 +25,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         this.repoApplication = repoApplication;
         this.repoBrokenRules = repoBrokenRules;
         this.repoOtherDocs = repoOtherDocs;
+
     }
 
     /// <summary>
@@ -35,9 +34,9 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<RequestApplicationCommandViewModel> Handle(RequestApplicationCommand request, CancellationToken cancellationToken)
+    public async Task<ApproveApplicationCommandViewModel> Handle(ApproveApplicationCommand request, CancellationToken cancellationToken)
     {
-        RequestApplicationCommandViewModel result = new();
+        ApproveApplicationCommandViewModel result = new();
 
         // check if application exists
         var application = await GetIfApplicationExists(request.ApplicationId);
@@ -45,24 +44,12 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         //update application
         if (application != null)
         {
-            application.StatusId = (int)ApplicationStatusEnum.REQUESTED;
+            application.StatusId = (int)ApplicationStatusEnum.APPROVED;
             application.LastUpdatedBy = userContext.Email;
         }
 
         // check if any broken rules exists, if yes then return
         var brokenRules = (await repoBrokenRules.GetBrokenRulesAsync(application.Id))?.ToList();
-
-        if (brokenRules != null && brokenRules.Any())
-        {
-            result.BrokenRules = mapper.Map<IEnumerable<TermBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
-            return result;
-        }
-
-        var otherdocRules = await CheckApplicationOtherDocs(application.Id, application.Status, (int)ApplicationSectionEnum.OTHER_DOCUMENTS);
-        if (otherdocRules.Count > 0)
-        {
-            brokenRules.AddRange(otherdocRules);
-        }
 
         if (brokenRules != null && brokenRules.Any())
         {
@@ -95,44 +82,6 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         return result;
     }
 
-    private async Task<List<TermBrokenRuleEntity>> CheckApplicationOtherDocs(int applicationId, ApplicationStatusEnum applicationStatus, int sectionId)
-    {
-        var documents = await repoOtherDocs.GetTermDocumentsAsync(applicationId, sectionId);
-
-        List<TermBrokenRuleEntity> otherdocRules = new List<TermBrokenRuleEntity>();
-        if (applicationStatus == ApplicationStatusEnum.REQUESTED)
-        {
-            if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.CADB_PETITION).Count() == 0)
-            {
-                otherdocRules.Add(new TermBrokenRuleEntity()
-                {
-                    ApplicationId = applicationId,
-                    SectionId = (int)ApplicationSectionEnum.OTHER_DOCUMENTS,
-                    Message = "CADB_PETITION document is not uploaded in OtherDocuments Tab"
-                });
-            }
-            if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.DEED).Count() == 0)
-            {
-                otherdocRules.Add(new TermBrokenRuleEntity()
-                {
-                    ApplicationId = applicationId,
-                    SectionId = (int)ApplicationSectionEnum.OTHER_DOCUMENTS,
-                    Message = "DEED document is not uploaded in OtherDocuments Tab"
-                });
-            }
-            if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.TAX_MAP).Count() == 0)
-            {
-                otherdocRules.Add(new TermBrokenRuleEntity()
-                {
-                    ApplicationId = applicationId,
-                    SectionId = (int)ApplicationSectionEnum.OTHER_DOCUMENTS,
-                    Message = "TAX_MAP document is not uploaded in OtherDocuments Tab"
-                });
-            }
-        }
-        return otherdocRules;
-    }
-
     /// <summary>
     /// Return broken rules in case of any business rule failure
     /// </summary>
@@ -147,23 +96,16 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         statusChangeRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.LOCATION,
-            Message = "All required fields on LOCATION tab have not been filled.",
-            
+            SectionId = (int)ApplicationSectionEnum.ADMIN_DETAILS,
+            Message = "All required fields on ADMIN_DETAILS tab have not been filled.",
+
         });
 
         statusChangeRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.OWNER_DETAILS,
-            Message = "All required fields on OWNER_DETAILS tab have not been filled.",
-        });
-
-        statusChangeRules.Add(new TermBrokenRuleEntity()
-        {
-            ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.SIGNATORY,
-            Message = "All required fields on OWNER_DETAILS tab have not been filled.",
+            SectionId = (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS,
+            Message = "All required fields on ADMIN_DEED_DETAILS tab have not been filled.",
         });
 
         return statusChangeRules;
