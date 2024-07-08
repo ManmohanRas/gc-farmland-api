@@ -81,5 +81,10 @@
     /// </summary>
     COPY_OF_OWNER_OF_LAST_RECORD_SEARCH = 14,
 
+    /// <summary>
+    /// DocumentType Type for LANDOWNERS_SIGNATURES-TERM OTHER DOCUMENTS TAB
+    /// </summary>
+    LANDOWNER_SIGNATURE = 15,
+
 
 }
