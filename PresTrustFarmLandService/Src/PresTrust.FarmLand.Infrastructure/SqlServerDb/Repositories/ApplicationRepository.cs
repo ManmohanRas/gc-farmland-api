@@ -139,5 +139,30 @@ public class ApplicationRepository : IApplicationRepository
         return application;
     }
 
+
+    /// <summary>
+    /// update application status
+    /// </summary>
+    /// <param name="application"></param>
+    /// <param name="enumStatus"></param>
+    /// <returns></returns>
+    public async Task<bool> UpdateApplicationStatusAsync(FarmApplicationEntity application, ApplicationStatusEnum enumStatus)
+    {
+        using var conn = context.CreateConnection();
+        var sqlCommand = new UpdateApplicationWorkflowStatusSqlCommand();
+        await conn.ExecuteAsync(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+            param: new
+            {
+                @p_Id = application.Id,
+                @p_StatusId = enumStatus,
+                @p_PrevStatusId = application.StatusId,
+                @p_LastUpdatedBy = application.LastUpdatedBy
+            });
+
+        return true;
+    }
+
 }
 

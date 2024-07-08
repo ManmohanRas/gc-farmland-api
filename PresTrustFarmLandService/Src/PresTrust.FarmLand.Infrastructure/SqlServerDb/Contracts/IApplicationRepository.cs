@@ -35,7 +35,13 @@
         /// <param name="application"></param>
         /// <returns></returns>
         Task<FarmApplicationEntity> SaveApplicationWorkflowStatusAsync(FarmApplicationEntity application);
-
+        /// <summary>
+        /// update application status
+        /// </summary>
+        /// <param name="application"></param>
+        /// <param name="enumStatus"></param>
+        /// <returns></returns>
+        Task<bool> UpdateApplicationStatusAsync(FarmApplicationEntity application, ApplicationStatusEnum enumStatus);
 
     }
 }
