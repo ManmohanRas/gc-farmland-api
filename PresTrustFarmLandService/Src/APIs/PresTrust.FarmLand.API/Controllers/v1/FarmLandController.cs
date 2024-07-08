@@ -241,6 +241,14 @@ public class FarmLandController : ApiBaseController
         return Single(await CommandAsync(command));
     }
 
+    [HttpPost("saveApplicationDocumentChecklist")]
+    [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<Unit>> SaveApplicationDocumentChecklist([FromBody] SaveTermAppDocumentChecklistCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
     [HttpPost("deleteTermComment")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     
@@ -268,6 +276,13 @@ public class FarmLandController : ApiBaseController
     [HttpPost("getTermDocuments")]
     [ProducesResponseType(typeof(IEnumerable<TermDocumentTypeViewModel>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<TermDocumentTypeViewModel>>> GetTermDocuments([FromBody] GetTermDocumentsBySectionQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("getApplicationDocumentChecklist")]
+    [ProducesResponseType(typeof(IEnumerable<TermDocumentChecklistViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<TermDocumentChecklistViewModel>>> getApplicationDocumentChecklist([FromBody] GetTermDocumentChecklistQuery query)
     {
         return Single(await QueryAsync(query));
     }
