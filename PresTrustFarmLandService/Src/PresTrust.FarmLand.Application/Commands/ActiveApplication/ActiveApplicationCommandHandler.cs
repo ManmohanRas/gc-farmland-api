@@ -46,7 +46,7 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             // save broken rules
-            await repoApplication.SaveApplicationWorkflowStatusAsync(application);
+            await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.ACTIVE);
             FarmApplicationStatusLogEntity appStatusLog = new()
             {
                 ApplicationId = application.Id,
