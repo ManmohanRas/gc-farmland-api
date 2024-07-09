@@ -8,7 +8,7 @@ public class GetOwnerDetailsSqlCommand
                        ,[FirstName]
                        ,[LastName]                      
                         ,[PropertyLocation]                            
-                        ,[Municipality]           
+                        ,[MunicipalityId]           
                         ,[MailingAddress1]                       
                         ,[MailingAddress2]                     
                         ,[PhoneNumber]                                      
