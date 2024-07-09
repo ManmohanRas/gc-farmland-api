@@ -9,6 +9,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
+    private readonly ITermOtherDocumentsRepository repoOtherDocs;
 
     public RequestApplicationCommandHandler
     (
@@ -16,7 +17,8 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         IPresTrustUserContext userContext,
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
-        ITermBrokenRuleRepository repoBrokenRules
+        ITermBrokenRuleRepository repoBrokenRules,
+        ITermOtherDocumentsRepository repoOtherDocs
     ) : base(repoApplication)
     {
         this.mapper = mapper;
@@ -24,6 +26,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;
         this.repoBrokenRules = repoBrokenRules;
+        this.repoOtherDocs = repoOtherDocs;
     }
 
     /// <summary>
@@ -55,11 +58,18 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
             return result;
         }
 
-        //var otherdocRules = await CheckApplicationOtherDocs(application.Id, application.ApplicationTypeId, (int)ApplicationSectionEnum.OTHER_DOCUMENTS);
-        //if (otherdocRules.Count > 0)
-        //{
-        //    brokenRules.AddRange(otherdocRules);
-        //}
+        var otherdocRules = await CheckApplicationOtherDocs(application.Id, application.Status, (int)ApplicationSectionEnum.OTHER_DOCUMENTS);
+        if (otherdocRules.Count > 0)
+        {
+            brokenRules.AddRange(otherdocRules);
+        }
+
+        if (brokenRules != null && brokenRules.Any())
+        {
+            result.BrokenRules = mapper.Map<IEnumerable<TermBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
+            return result;
+        }
+
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
@@ -67,7 +77,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
             var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
             // save broken rules
             await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
-            await repoApplication.SaveApplicationWorkflowStatusAsync(application);
+            await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.REQUESTED);
             FarmApplicationStatusLogEntity appStatusLog = new()
             {
                 ApplicationId = application.Id,
@@ -85,51 +95,51 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         return result;
     }
 
-    //private async Task<List<TermBrokenRuleEntity>> CheckApplicationOtherDocs(int applicationId, int sectionId)
-    //{
-    //    var documents = await repoApplicationDocument.GetApplicationDocumentsAsync(applicationId, sectionId);
+    private async Task<List<TermBrokenRuleEntity>> CheckApplicationOtherDocs(int applicationId, ApplicationStatusEnum applicationStatus, int sectionId)
+    {
+        var documents = await repoOtherDocs.GetTermDocumentsAsync(applicationId, sectionId);
 
-    //    List<TermBrokenRuleEntity> otherdocRules = new List<TermBrokenRuleEntity>();
-    //    if (applcation.Status == ApplicationStatusEnum.REQUESTED)
-    //    {
-    //        if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.CADB_PETITION).Count() == 0)
-    //        {
-    //            otherdocRules.Add(new TermBrokenRuleEntity()
-    //            {
-    //                ApplicationId = applicationId,
-    //                SectionId = (int)ApplicationSectionEnum.OTHER_DOCUMENTS,
-    //                Message = "APPLICATION_CHECKLIST document is not uploaded in OtherDocuments Tab"
-    //            });
-    //        }
-    //        if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.DEED).Count() == 0)
-    //        {
-    //            otherdocRules.Add(new TermBrokenRuleEntity()
-    //            {
-    //                ApplicationId = applicationId,
-    //                SectionId = (int)ApplicationSectionEnum.OTHER_DOCUMENTS,
-    //                Message = "PUBLIC_HEARING_CERTIFICATE document is not uploaded in OtherDocuments Tab"
-    //            });
-    //        }
-    //        if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.TAX_MAP).Count() == 0)
-    //        {
-    //            otherdocRules.Add(new TermBrokenRuleEntity()
-    //            {
-    //                ApplicationId = applicationId,
-    //                SectionId = (int)ApplicationSectionEnum.OTHER_DOCUMENTS,
-    //                Message = "MINUTES_FROM_PUBLIC_HEARING document is not uploaded in OtherDocuments Tab"
-    //            });
-    //        }
-    //    }
-    //    return otherdocRules;
-    //}
+        List<TermBrokenRuleEntity> otherdocRules = new List<TermBrokenRuleEntity>();
+        if (applicationStatus == ApplicationStatusEnum.REQUESTED)
+        {
+            if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.CADB_PETITION).Count() == 0)
+            {
+                otherdocRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = applicationId,
+                    SectionId = (int)ApplicationSectionEnum.OTHER_DOCUMENTS,
+                    Message = "CADB_PETITION document is not uploaded in OtherDocuments Tab"
+                });
+            }
+            if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.DEED).Count() == 0)
+            {
+                otherdocRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = applicationId,
+                    SectionId = (int)ApplicationSectionEnum.OTHER_DOCUMENTS,
+                    Message = "DEED document is not uploaded in OtherDocuments Tab"
+                });
+            }
+            if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.TAX_MAP).Count() == 0)
+            {
+                otherdocRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = applicationId,
+                    SectionId = (int)ApplicationSectionEnum.OTHER_DOCUMENTS,
+                    Message = "TAX_MAP document is not uploaded in OtherDocuments Tab"
+                });
+            }
+        }
+        return otherdocRules;
+    }
 
-        /// <summary>
-        /// Return broken rules in case of any business rule failure
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="application"></param>
-        /// <returns></returns>
-        private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    /// <summary>
+    /// Return broken rules in case of any business rule failure
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="application"></param>
+    /// <returns></returns>
+    private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
     {
         List<TermBrokenRuleEntity> statusChangeRules = new List<TermBrokenRuleEntity>();
 

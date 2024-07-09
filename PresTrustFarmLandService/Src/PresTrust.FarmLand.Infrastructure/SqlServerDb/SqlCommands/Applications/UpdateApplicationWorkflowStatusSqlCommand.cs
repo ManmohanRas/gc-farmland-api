@@ -8,7 +8,7 @@ public class UpdateApplicationWorkflowStatusSqlCommand
                         [StatusId] = @p_StatusId,
                         [LastUpdatedBy] = @p_LastUpdatedBy,
                         [LastUpdatedOn] = GetDate()
-               WHERE    [Id] = @p_ApplicationId;";
+               WHERE    [Id] = @p_Id;";
 
     public UpdateApplicationWorkflowStatusSqlCommand() { }
 

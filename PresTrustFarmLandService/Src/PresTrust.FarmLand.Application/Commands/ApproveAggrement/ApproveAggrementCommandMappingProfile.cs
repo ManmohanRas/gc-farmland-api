@@ -1,8 +1,8 @@
 ﻿namespace PresTrust.FarmLand.Application.Commands;
 
-public class RequestApplicationCommandMappingProfile : Profile
+public class ApproveAggrementCommandMappingProfile : Profile
 {
-    public RequestApplicationCommandMappingProfile()
+    public ApproveAggrementCommandMappingProfile()
     {
         CreateMap<TermBrokenRuleEntity, TermBrokenRuleViewModel>();
     }
