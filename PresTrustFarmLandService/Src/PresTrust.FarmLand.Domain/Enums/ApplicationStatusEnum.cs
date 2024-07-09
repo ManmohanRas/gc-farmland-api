@@ -15,30 +15,35 @@ public enum ApplicationStatusEnum
     /// <summary>
     /// Application Status Type for Submitted
     /// </summary>
-    REQUESTED = 4,
+    REQUESTED = 2,
 
     /// <summary>
     /// Application Status Type for In Review
     /// </summary>
-    IN_REVIEW = 5,
+    APPROVED = 3,
+
+    /// <summary>
+    /// Application Status Type for In Review
+    /// </summary>
+    AGREEMENT_APPROVED = 4,
 
     /// <summary>
     /// Application Status Type for Active
     /// </summary>
-    ACTIVE = 6,
+    ACTIVE = 5,
 
     /// <summary>
     /// Application Status Type for Closed
     /// </summary>
-    CLOSED = 7,
+    EXPIRED = 6,
 
     /// <summary>
     /// Application Status Type for Rejected
     /// </summary>
-    REJECTED = 8,
+    REJECTED = 7,
 
     /// <summary>
     /// Application Status Type for Withdrawn
     /// </summary>
-    WITHDRAWN = 9
+    WITHDRAWN = 8
 }
