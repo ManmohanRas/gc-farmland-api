@@ -17,15 +17,15 @@ CREATE TABLE [Farm].[FarmTermAppOwnerDetails](
 	[ApplicationId]					[integer]						NOT NULL,
 	[FirstName]						[varchar](128)					NULL	,
 	[LastName]						[varchar](128)					NULL	, 
-	[PropertyLocation]				[varchar](128)					NULL	, 
-	[Municipality]					[varchar](128)					NOT NULL,
+	[PropertyLocation]				[varchar](128)					NULL	, --data type discuss and combination
+	[MunicipalityId]			    [integer]					    NOT NULL,
 	[MailingAddress1]				[varchar](128)					NOT NULL,
 	[MailingAddress2]				[varchar](128)					NOT NULL,
 	[PhoneNumber]					[varchar](15)					NOT NULL,
 	[City]							[varchar](128)					NOT NULL,
 	[State]							[varchar](128)					NOT NULL,
 	[ZipCode]						[varchar](20)					NOT NULL,
-	[IsPrimaryOwner]				[bit]							NOT NULL,
+	[IsPrimaryOwner]				[bit]							NOT NULL,--remove from this table
 	[LastUpdatedBy]					[varchar](128)					NULL	, 
 	[LastUpdatedOn]					[datetime]						NOT NULL, 
 CONSTRAINT [PK_FarmTermAppOwnerDetails_Id] PRIMARY KEY CLUSTERED 

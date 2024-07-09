@@ -18,8 +18,7 @@ CREATE TABLE [Farm].[FarmTermAppSignature](
 	[Designation]					[varchar](128)					NULL	,
 	[Title]							[varchar](128)					NULL	, 
 	[SignedOn]						[DateTime]						NULL	, 
-	[SignatureType]					[varchar](128)					NOT NULL,
-	[LastUpdatedBy]					[varchar](128)					NULL	, 
+	[LastUpdatedBy]					[varchar](128)					NULL	,--SignatoryType 
 	[LastUpdatedOn]					[DateTime]						NOT NULL, 
 CONSTRAINT [PK_FarmTermAppSignature_Id] PRIMARY KEY CLUSTERED 
 (

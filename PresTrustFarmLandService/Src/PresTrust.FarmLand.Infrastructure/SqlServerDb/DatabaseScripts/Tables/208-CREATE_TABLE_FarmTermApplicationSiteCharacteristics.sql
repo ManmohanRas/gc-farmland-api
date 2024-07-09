@@ -15,16 +15,16 @@ GO
 CREATE TABLE [Farm].[FarmTermAppSiteCharacteristics](
 	[Id]							[integer] 		IDENTITY(1,1)	NOT NULL,
 	[ApplicationId]					[integer]						NOT NULL,
-	[Area]							[varchar](128)					NULL,
+	[Area]							[varchar](128)					NULL,--ProjectRegion or ProjectGeneralLocation or FarmLocation legacy
 	[LandUse]						[varchar](4000)				    NULL,
 	[CropLand]						[decimal]						NULL,
 	[WoodLand]						[decimal]						NULL,
 	[Pasture]						[decimal]						NULL,
 	[Orchard]						[decimal]						NULL,
-	[Other]							[decimal]						NULL,
-	[EasementRightOfway]			[varchar](50)					NULL,
+	[Other]							[decimal]						NULL,--like this OrchardAcres, OtherAcres
+	[EasementRightOfway]			[varchar](50)					NULL,--column purpose?
 	[NoteEasementRightOfway]		[varchar](4000)					NULL,
-	[MortgageLiens]					[varchar](50)					NULL,
+	[MortgageLiens]					[varchar](50)					NULL,--column purpose?
 	[NoteMortgageLiens]				[varchar](4000)				    NULL,
 	[LastUpdatedBy]					[varchar](128)					NULL,
 	[LastUpdatedOn]					[datetime]						NULL,

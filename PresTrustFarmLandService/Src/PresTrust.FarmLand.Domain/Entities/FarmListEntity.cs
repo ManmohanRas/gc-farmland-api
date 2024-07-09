@@ -1,32 +1,33 @@
-﻿namespace PresTrust.FarmLand.Domain.Entities
+﻿namespace PresTrust.FarmLand.Domain.Entities;
+public class FarmListEntity
 {
-    public class FarmListEntity
-    {
-        public int FarmListId { get; set; }
-        public int AgencyId { get; set; }
-        public int MunicipalID { get; set; }
-        public string Municipality {  get; set; }
-        public string AgencyName { get; set; }
-        public string FarmNumber { get; set; }
-        public string FarmName { get; set; }
-        public string OriginalLandowner { get; set; }
-        public string OwnerFirst {  get; set; }
-        public string OwnerLast {  get; set; }
-        public string Street1 { get; set; }
-        public string Street2 { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string ZipCode { get; set; }
+    public int FarmListID { get; set; }
+    public string OriginProgram {  get; set; }
+    public int ProjectID { get; set; }
+    public string FarmNumber { get; set; }
+    public int TermID { get; set; }
+    public string FarmName { get; set; }
+    public string ProjectName { get; set; }
+    public string Status { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string OriginalLandowner { get; set; }
+    public string Address1 { get; set; }
+    public string Address2 { get; set; }
+    public int MunicipalID { get; set; }
+    public string Block { get; set; }
+    public string Lots { get; set; }
+    public string BlocksAddl { get; set; }
+    public string LotsAddl {  get; set; }
+    public int AgencyID { get; set; }
 
-        public string Address
+    public string Address
+    {
+        get
         {
-            get
-            {
-                string result = string.Empty;
-                result = (this.Street1 ?? string.Empty) + " " + (this.Street2 ?? string.Empty);
-                result += " " + (this.City ?? string.Empty) + " " + (this.State ?? string.Empty) + " " + (this.ZipCode ?? string.Empty);
-                return result;
-            }
+            string result = string.Empty;
+            result = (this.Address1 ?? string.Empty) + " " + (this.Address2 ?? string.Empty);
+            return result;
         }
     }
 }

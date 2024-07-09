@@ -41,3 +41,6 @@ GO
 
 INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (14, 'COPY_OF_OWNER_OF_LAST_RECORD_SEARCH', 'COPY OF OWNER OF LAST RECORD SEARCH document', 9 , 1);
 GO
+
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (15, 'LANDOWNER_SIGNATURE', 'Land Owner Signature', 6 , 1);
+GO
