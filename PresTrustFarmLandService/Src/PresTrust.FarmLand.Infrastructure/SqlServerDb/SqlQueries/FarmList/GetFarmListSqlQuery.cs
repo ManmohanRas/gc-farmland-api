@@ -4,21 +4,26 @@
     {
         private readonly string _sqlCommand =
             @" SELECT 
-               ProjectID AS FarmListId,
-               AgencyId,
-               MunicipalID,
-               Municipality,
-               FarmNumber,
-               FarmName,
-               OriginalLandowner,
-               OwnerFirst,
-               OwnerLast,
-               Street1,
-               Street2,
-               City,
-               State,
-               ZipCode
-               FROM [Farm].[OwnerPropertyLEGACY_Rev01]
+               [FarmListID]
+              ,[OriginProgram]
+              ,[ProjectID]
+              ,[FarmNumber]
+              ,[TermID]
+              ,[FarmName]
+              ,[ProjectName]
+              ,[Status]
+              ,[LastName]
+              ,[FirstName]
+              ,[OriginalLandowner]
+              ,[Address1]
+              ,[Address2]
+              ,[MunicipalID]
+              ,[Block]
+              ,[Lots]
+              ,[BlocksAddl]
+              ,[LotsAddl]
+              ,[AgencyID]
+              FROM [PresTrust_RAS].[Farm].[FarmList]
                WHERE FarmName IS NOT NULL;";
 
         public override string ToString()
