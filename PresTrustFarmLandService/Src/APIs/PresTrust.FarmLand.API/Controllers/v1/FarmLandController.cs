@@ -52,12 +52,17 @@ public class FarmLandController : ApiBaseController
             return Single(await QueryAsync(query));
         }
 
+        [HttpPost("getTermAppAdminDetails")]
+        public async Task<ActionResult<GetTermAdminDetailsQueryViewModel>> GetTermAppAdminDetails([FromBody] GetTermAdminDetailsQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
 
-    /// <summary>
-    /// Assign Application Users like Primary Contact, Applicant Contractor
-    /// </summary>
-    /// <param name="command"></param>
-    /// <returns></returns>
+        /// <summary>
+        /// Assign Application Users like Primary Contact, Applicant Contractor
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost("saveRoles")]
         [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Unit>> AssignApplicationUsers([FromBody] AssignRolesCommand command)
@@ -116,130 +121,130 @@ public class FarmLandController : ApiBaseController
             return Single(await CommandAsync(command));
         }
 
-    /// <summary>
-    /// Get County Users 
-    /// </summary>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    [HttpPost("getCountyUsers")]
-    [ProducesResponseType(typeof(IEnumerable<PresTrustUserEntity>), (int)HttpStatusCode.OK)]
+        /// <summary>
+        /// Get County Users 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [HttpPost("getCountyUsers")]
+        [ProducesResponseType(typeof(IEnumerable<PresTrustUserEntity>), (int)HttpStatusCode.OK)]
 
-    public async Task<ActionResult<IEnumerable<PresTrustUserEntity>>> GetCountyUsers([FromBody] GetCountyUsersQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
-    /// <summary>
-    /// Delete County User Role.
-    /// </summary>
-    /// <param name="command"> Query Command.</param>
-    /// <returns></returns>
-    /// 
-    [HttpPost("deleteCountyUserRole")]
-    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<PresTrustUserEntity>>> GetCountyUsers([FromBody] GetCountyUsersQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
+        /// <summary>
+        /// Delete County User Role.
+        /// </summary>
+        /// <param name="command"> Query Command.</param>
+        /// <returns></returns>
+        /// 
+        [HttpPost("deleteCountyUserRole")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
 
-    public async Task<ActionResult<bool>> DeleteCountyUserRole([FromBody] DeleteCountyUserRoleCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-    /// <summary>
-    /// County User Role Change Request.
-    /// </summary>
-    /// <param name="command"> Query Command.</param>
-    /// <returns></returns>
-    /// 
-    [HttpPost("countyUserRoleChangeRequest")]
-    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<bool>> DeleteCountyUserRole([FromBody] DeleteCountyUserRoleCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
+        /// <summary>
+        /// County User Role Change Request.
+        /// </summary>
+        /// <param name="command"> Query Command.</param>
+        /// <returns></returns>
+        /// 
+        [HttpPost("countyUserRoleChangeRequest")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
 
-    public async Task<ActionResult<bool>> CountyUserRoleChangeRequest([FromBody] CountyUserRoleChangeRequestCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
+        public async Task<ActionResult<bool>> CountyUserRoleChangeRequest([FromBody] CountyUserRoleChangeRequestCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
 
-    /// <summary>
-    /// Get Municipal Users 
-    /// </summary>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    [HttpPost("getMunicipalUsers")]
-    [ProducesResponseType(typeof(IEnumerable<PresTrustUserEntity>), (int)HttpStatusCode.OK)]
+        /// <summary>
+        /// Get Municipal Users 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [HttpPost("getMunicipalUsers")]
+        [ProducesResponseType(typeof(IEnumerable<PresTrustUserEntity>), (int)HttpStatusCode.OK)]
 
-    public async Task<ActionResult<IEnumerable<PresTrustUserEntity>>> GetMunicipalUsers([FromBody] GetMunicipalUsersQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
+        public async Task<ActionResult<IEnumerable<PresTrustUserEntity>>> GetMunicipalUsers([FromBody] GetMunicipalUsersQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
 
-    [HttpPost("getApplicationDetails")]
-    [ProducesResponseType(typeof(GetApplicationDetailsQueryViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetApplicationDetailsQueryViewModel>> GetApplicationDetails([FromBody] GetApplicationDetailsQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
+        [HttpPost("getApplicationDetails")]
+        [ProducesResponseType(typeof(GetApplicationDetailsQueryViewModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetApplicationDetailsQueryViewModel>> GetApplications([FromBody] GetApplicationDetailsQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
 
-    /// <summary>
-    /// Save Municipal TrustFund Permitted Uses
-    /// </summary>
-    /// <param name="command"></param>
-    /// <returns></returns>
-    [HttpPost("saveMunicipalTrustFundPermittedUses")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> SaveMunicipalTrustFundPermittedUses([FromBody] SaveMunicipalTrustFundPermittedUsesCommand query)
-    {
-        return Single(await CommandAsync(query));
-    }
+        /// <summary>
+        /// Save Municipal TrustFund Permitted Uses
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost("saveMunicipalTrustFundPermittedUses")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<int>> SaveMunicipalTrustFundPermittedUses([FromBody] SaveMunicipalTrustFundPermittedUsesCommand query)
+        {
+            return Single(await CommandAsync(query));
+        }
 
-    /// <summary>
-    /// Save Municipal Finance
-    /// </summary>
-    /// <param name="command"></param>
-    /// <returns></returns>
-    [HttpPost("saveMunicipalFinance")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> SaveMunicipalFinance([FromBody] SaveMunicipalFinanceCommand query)
-    {
-        return Single(await CommandAsync(query));
-    }
+        /// <summary>
+        /// Save Municipal Finance
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost("saveMunicipalFinance")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<int>> SaveMunicipalFinance([FromBody] SaveMunicipalFinanceCommand query)
+        {
+            return Single(await CommandAsync(query));
+        }
 
-    [HttpPost("getTermComments")]
-    [ProducesResponseType(typeof(IEnumerable<GetTermCommentsQueryViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<GetTermCommentsQueryViewModel>>> getTermComments([FromBody] GetTermCommentsQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
+        [HttpPost("getTermComments")]
+        [ProducesResponseType(typeof(IEnumerable<GetTermCommentsQueryViewModel>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<GetTermCommentsQueryViewModel>>> getTermComments([FromBody] GetTermCommentsQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
 
-    /// <summary>
-    /// Delete Municipal User Role.
-    /// </summary>
-    /// <param name="command"> Query Command.</param>
-    /// <returns></returns>
-    /// 
-    [HttpPost("deleteMunicipalUserRole")]
-    [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<bool>> DeleteMunicipalUserRole([FromBody] DeleteMunicipalUserRoleCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-    
+        /// <summary>
+        /// Delete Municipal User Role.
+        /// </summary>
+        /// <param name="command"> Query Command.</param>
+        /// <returns></returns>
+        /// 
+        [HttpPost("deleteMunicipalUserRole")]
+        [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<bool>> DeleteMunicipalUserRole([FromBody] DeleteMunicipalUserRoleCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
+        
 
-    /// <summary>
-    /// Municipal User Role Change Request.
-    /// </summary>
-    /// <param name="command"> Query Command.</param>
-    /// <returns></returns>
-    /// 
-    [HttpPost("MunicipalUserRoleChangeRequest")]
-    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<bool>> MunicipalUserRoleChangeRequest([FromBody] MunicipalUserRoleChangeRequestCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
+        /// <summary>
+        /// Municipal User Role Change Request.
+        /// </summary>
+        /// <param name="command"> Query Command.</param>
+        /// <returns></returns>
+        /// 
+        [HttpPost("MunicipalUserRoleChangeRequest")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<bool>> MunicipalUserRoleChangeRequest([FromBody] MunicipalUserRoleChangeRequestCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
 
-    [HttpPost("saveTermComment")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    
-    public async Task<ActionResult<int>> saveTermComment([FromBody] SaveTermCommentCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
+        [HttpPost("saveTermComment")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        
+        public async Task<ActionResult<int>> saveTermComment([FromBody] SaveTermCommentCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
 
     [HttpPost("saveApplicationDocumentChecklist")]
     [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
@@ -256,29 +261,29 @@ public class FarmLandController : ApiBaseController
     {
         return Single(await CommandAsync(command));
 
-    }
+        }
 
-    [HttpPost("saveSiteCharacteristics")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> SaveSiteCharacteristics([FromBody] SaveSiteCharacteristicsCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
+        [HttpPost("saveSiteCharacteristics")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<int>> SaveSiteCharacteristics([FromBody] SaveSiteCharacteristicsCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
 
-    [HttpPost("requestApplication")]
-    [ProducesResponseType(typeof(RequestApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<RequestApplicationCommandViewModel>> RequestApplication([FromBody] RequestApplicationCommand query)
-    {
-        return Single(await CommandAsync(query));
-    }
+        [HttpPost("requestApplication")]
+        [ProducesResponseType(typeof(RequestApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<RequestApplicationCommandViewModel>> RequestApplication([FromBody] RequestApplicationCommand query)
+        {
+            return Single(await CommandAsync(query));
+        }
 
 
-    [HttpPost("getTermDocuments")]
-    [ProducesResponseType(typeof(IEnumerable<TermDocumentTypeViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<TermDocumentTypeViewModel>>> GetTermDocuments([FromBody] GetTermDocumentsBySectionQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
+        [HttpPost("getTermDocuments")]
+        [ProducesResponseType(typeof(IEnumerable<TermDocumentTypeViewModel>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<TermDocumentTypeViewModel>>> GetTermDocuments([FromBody] GetTermDocumentsBySectionQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
 
     [HttpPost("getApplicationDocumentChecklist")]
     [ProducesResponseType(typeof(IEnumerable<TermDocumentChecklistViewModel>), (int)HttpStatusCode.OK)]
@@ -294,12 +299,12 @@ public class FarmLandController : ApiBaseController
         return Single(await CommandAsync(command));
     }
 
-    [HttpPost("deleteTermDocument")]
-    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<bool>> DeleteTermDocument([FromBody] DeleteTermAppDocumentCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
+        [HttpPost("deleteTermDocument")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<bool>> DeleteTermDocument([FromBody] DeleteTermAppDocumentCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
     
         //Application Signatory 
 

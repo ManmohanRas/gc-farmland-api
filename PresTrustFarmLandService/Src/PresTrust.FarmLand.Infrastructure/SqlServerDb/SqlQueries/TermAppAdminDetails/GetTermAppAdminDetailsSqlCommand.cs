@@ -1,0 +1,29 @@
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries;
+
+public class GetTermAppAdminDetailsSqlCommand
+{
+    private readonly string _sqlCommand =
+  @"  SELECT   [Id]							 
+                  ,[ApplicationId]					 
+                  ,[SADCId]						 
+                  ,[MaxGrant]						 
+                  ,[PermanentlyPreserved]			 
+                  ,[MunicipallyApproved]			 
+                  ,[EnrollmentDate]				 
+                  ,[RenewalDate]					 
+                  ,[ExpirationDate]				 
+                  ,[RenewalExpirationDate]			 
+                  ,[LastUpdatedBy]					 
+                   [LastUpdatedOn]					 
+            FROM [Farm].[FarmTermAppAdminDetails]
+            WHERE ApplicationId = @p_ApplicationId";
+
+    public GetTermAppAdminDetailsSqlCommand()
+    {
+    }
+
+    public override string ToString()
+    {
+        return _sqlCommand;
+    }
+}
