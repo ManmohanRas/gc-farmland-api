@@ -39,7 +39,7 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
         var viewmodelDocuments = request.Documents.Where(doc => string.Compare(doc.RowStatus, "U", ignoreCase: true) == 0).ToList();
 
         // map command object to the HistDocumentEntity
-        var entityDocuments = mapper.Map<IEnumerable<TermDocumentsViewModel>, IEnumerable<TermOtherDocumentsEntity>>(viewmodelDocuments
+        var entityDocuments = mapper.Map<IEnumerable<TermDocumentsViewModel>, IEnumerable<TermOtherDocumentsEntity>>(viewmodelDocuments);
 
 
         // save application documents, property documents (review/checklist items)
@@ -49,6 +49,8 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
             {
                 await repoDocument.SaveTermDocumentChecklistAsync(doc);
             }
+            //await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.ADMIN_DOCUMENT_CHECKLIST);
+            //await repoBrokenRules.SaveBrokenRules(await brokenRules);
 
             scope.Complete();
         };

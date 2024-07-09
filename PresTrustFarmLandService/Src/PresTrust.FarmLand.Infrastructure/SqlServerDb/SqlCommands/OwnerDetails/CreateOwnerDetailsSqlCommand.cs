@@ -9,7 +9,7 @@ public class CreateOwnerDetailsSqlCommand
                        ,[FirstName]
                        ,[LastName]                      
                         ,[PropertyLocation]                            
-                        ,[Municipality]           
+                        ,[MunicipalityId]           
                         ,[MailingAddress1]                       
                         ,[MailingAddress2]                     
                         ,[PhoneNumber]                                      
@@ -26,7 +26,7 @@ public class CreateOwnerDetailsSqlCommand
                       @p_FirstName,
                       @p_LastName,                      
                        @p_PropertyLocation,                        
-                       @p_Municipality,   
+                       @p_MunicipalityId,   
                        @p_MailingAddress1,
                        @p_MailingAddress2,
                        @p_PhoneNumber,

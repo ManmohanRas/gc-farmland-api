@@ -136,6 +136,9 @@ public class ApplicationDocumentTreeBuilder
             case ApplicationSectionEnum.ADMIN_DETAILS:
                 title = "Admin Details";
                 break;
+            case ApplicationSectionEnum.ADMIN_DEED_DETAILS:
+                title = "Deed Details";
+                break;
         }
         return title;
     }

@@ -5,7 +5,7 @@
         public int FarmListId { get; set; }
         public int AgencyId { get; set; }
         public int MunicipalID { get; set; }
-        public string Municipality {  get; set; }
+        public string MunicipalityId {  get; set; }
         public string AgencyName { get; set; }
         public string FarmNumber { get; set; }
         public string FarmName { get; set; }
