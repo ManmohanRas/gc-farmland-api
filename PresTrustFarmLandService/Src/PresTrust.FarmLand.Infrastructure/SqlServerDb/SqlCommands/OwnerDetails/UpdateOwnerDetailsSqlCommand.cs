@@ -9,7 +9,7 @@ public class UpdateOwnerDetailsSqlCommand
                        [FirstName]           = @p_FirstName,
                        [LastName]            = @p_LastName,         
                         [PropertyLocation]    = @p_PropertyLocation,                     
-                        [Municipality]        = @p_Municipality,
+                        [MunicipalityId]      = @p_MunicipalityId,
                         [MailingAddress1]     = @p_MailingAddress1,                   
                         [MailingAddress2]     = @p_MailingAddress2,                  
                         [PhoneNumber]         = @p_PhoneNumber,                            

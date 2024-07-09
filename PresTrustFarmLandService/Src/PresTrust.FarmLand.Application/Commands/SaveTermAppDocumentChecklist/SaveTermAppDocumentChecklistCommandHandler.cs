@@ -49,6 +49,8 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
             {
                 await repoDocument.SaveTermDocumentChecklistAsync(doc);
             }
+            //await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.ADMIN_DOCUMENT_CHECKLIST);
+            //await repoBrokenRules.SaveBrokenRules(await brokenRules);
 
             scope.Complete();
         };
