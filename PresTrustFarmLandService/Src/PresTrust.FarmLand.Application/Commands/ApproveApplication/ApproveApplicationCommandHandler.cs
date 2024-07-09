@@ -64,7 +64,7 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
             var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
             // save broken rules
             await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
-            await repoApplication.SaveApplicationWorkflowStatusAsync(application);
+            await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.APPROVED);
             FarmApplicationStatusLogEntity appStatusLog = new()
             {
                 ApplicationId = application.Id,
