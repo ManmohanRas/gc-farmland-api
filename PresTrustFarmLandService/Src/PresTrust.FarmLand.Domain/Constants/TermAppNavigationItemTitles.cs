@@ -46,7 +46,12 @@
             /// <summary>
             /// Constant to hold title for Deed Details
             /// </summary>
-            public const string DEED_DETAILS = "Deed Details";
+            public const string ADMIN_DEED_DETAILS = "Deed Details";
+
+            /// <summary>
+            /// Constant to hold title for Contacts
+            /// </summary>
+            public const string ADMIN_CONTACTS = "Contacts";
         }
     }
 }
