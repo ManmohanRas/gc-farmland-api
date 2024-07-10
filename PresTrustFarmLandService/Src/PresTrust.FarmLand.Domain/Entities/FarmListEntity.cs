@@ -15,10 +15,6 @@ public class FarmListEntity
     public string Address1 { get; set; }
     public string Address2 { get; set; }
     public int MunicipalID { get; set; }
-    public string Block { get; set; }
-    public string Lots { get; set; }
-    public string BlocksAddl { get; set; }
-    public string LotsAddl {  get; set; }
     public int AgencyID { get; set; }
 
     public string Address
