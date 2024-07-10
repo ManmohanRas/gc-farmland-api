@@ -10,13 +10,13 @@ public class GetApplicationsSqlQuery
 			    A.[ApplicationTypeId],
                 A.[StatusId],
                 A.[CreatedOn],
+                A.[FarmListId],
 				FL.[FarmName],
 				FL.[MunicipalID],
 				FL.[Municipality],
-                FL.[OriginalLandowner],
-                FL.[ProjectID] AS FarmListId
+                FL.[OriginalLandowner]
                FROM [Farm].[FarmApplication] AS A
-               JOIN [Farm].[OwnerPropertyLEGACY_Rev01] AS FL ON (A.AgencyId = FL.AgencyId AND A.FarmListId = FL.ProjectID)
+               LEFT JOIN [Farm].[OwnerPropertyLEGACY_Rev01] AS FL ON (A.AgencyId = FL.AgencyId AND A.FarmListId = FL.FarmListID)
                WHERE A.IsActive = 1;";
 
     public override string ToString()

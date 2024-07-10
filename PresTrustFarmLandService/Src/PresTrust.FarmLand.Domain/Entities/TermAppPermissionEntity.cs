@@ -21,6 +21,21 @@
         public bool CanEditOtherDocsSection { get; set; } = false;
 
         //---------------------------------------------------------------------//
+        //  Application Admin Action Section Permissions
+        //---------------------------------------------------------------------//
+
+        public bool CanViewAdminDocChkListSection { get; set; } = false;
+        public bool CanEditAdminDocChkListSection { get; set; } = false;
+
+        public bool CanViewAdminDetailsSection { get; set; } = false;
+        public bool CanEditAdminDetailsSection { get; set; } = false;
+
+        public bool CanViewAdminDeedDetailsSection { get; set; } = false;
+        public bool CanEditAdminDeedDetailsSection { get; set; } = false;
+
+
+        public bool CanViewAdminContactsSection { get; set; } = false;
+        public bool CanEditAdminContactsSection { get; set; } = false;
 
         public bool CanSubmitApplication { get; set; } = false;
         public bool CanReviewApplication { get; set; } = false;
