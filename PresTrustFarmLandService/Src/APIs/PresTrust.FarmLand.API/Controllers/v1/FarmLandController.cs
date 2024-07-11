@@ -392,5 +392,12 @@ public class FarmLandController : ApiBaseController
        {
            return Single(await CommandAsync(command));
        }
+
+        [HttpPost("saveFarmList")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<int>> SaveFarmList([FromBody] SaveFarmListCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
 }
 
