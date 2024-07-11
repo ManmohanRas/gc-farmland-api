@@ -12,5 +12,6 @@ public class SaveTermAppAdminDetailsCommand : IRequest<int>
     public DateTime? RenewalDate { get; set; }
     public DateTime? ExpirationDate { get; set; }
     public DateTime? RenewalExpirationDate { get; set; }
+    public string Comment { get; set; }
    
 }

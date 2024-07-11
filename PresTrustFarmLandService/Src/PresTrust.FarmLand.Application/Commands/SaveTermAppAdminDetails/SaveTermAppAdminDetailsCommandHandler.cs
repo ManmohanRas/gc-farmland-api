@@ -4,14 +4,14 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
 {
     private readonly IMapper mapper;
     private readonly IPresTrustUserContext userContext;
-    //private readonly IOptions<SystemParameterConfiguration> systemParamOptions;
+    private readonly IOptions<SystemParameterConfiguration> systemParamOptions;
     private readonly IApplicationRepository repoApplication;
     private ITermAppAdminDetailsRepository repoTermAppAdminDetails;
 
     public SaveTermAppAdminDetailsCommandHandler(
         IMapper mapper,
         IPresTrustUserContext userContext,
-        //IOptions<SystemParameterConfiguration> systemParamOptions,
+        IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
         ITermAppAdminDetailsRepository repoTermAppAdminDetails
         ) : base(repoApplication: repoApplication)

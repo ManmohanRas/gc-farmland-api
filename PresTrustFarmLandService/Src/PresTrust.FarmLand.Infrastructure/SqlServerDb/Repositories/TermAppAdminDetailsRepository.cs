@@ -1,14 +1,26 @@
-﻿using PresTrust.FarmLand.Domain.Configurations;
-using System;
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb;
 
-namespace PresTrust.FarmLand.Infrastructure.SqlServerDb;
-
-public class TermAppAdminDetails : ITermAppAdminDetailsRepository
+public class TermAppAdminDetailsRepository : ITermAppAdminDetailsRepository
 {
     #region " Members ... "
 
     private readonly PresTrustSqlDbContext context;
     private readonly SystemParameterConfiguration systemParameterConfiguration;
+
+    #endregion
+
+    #region " ctor ... "
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="systemParamConfigOptions"></param>
+    public TermAppAdminDetailsRepository(PresTrustSqlDbContext context, IOptions<SystemParameterConfiguration> systemParamConfigOptions)
+    {
+        this.context = context;
+        systemParameterConfiguration = systemParamConfigOptions.Value;
+    }
 
     #endregion
     public async Task<FarmTermAppAdminDetailsEntity> GetTermAppAdminDetailsAsync(int applicationId)
@@ -39,15 +51,15 @@ public class TermAppAdminDetails : ITermAppAdminDetailsRepository
             param: new
             {
                 @p_ApplicationId = farmTermAppAdminDetails.ApplicationId,
-
-                @p_SADCId = farmTermAppAdminDetails.SADCId ,
-                @p_MaxGrant = farmTermAppAdminDetails.MaxGrant ,
-                @p_PermanentlyPreserved = farmTermAppAdminDetails.PermanentlyPreserved ,
-                @p_MunicipallyApproved = farmTermAppAdminDetails.MunicipallyApproved ,
-                @p_EnrollmentDate = farmTermAppAdminDetails.EnrollmentDate ,
-                @p_RenewalDate = farmTermAppAdminDetails.RenewalDate ,
-                @p_ExpirationDate = farmTermAppAdminDetails.ExpirationDate ,
-                @p_RenewalExpirationDate = farmTermAppAdminDetails.RenewalExpirationDate ,
+                @p_SADCId = farmTermAppAdminDetails.SADCId,
+                @p_MaxGrant = farmTermAppAdminDetails.MaxGrant,
+                @p_PermanentlyPreserved = farmTermAppAdminDetails.PermanentlyPreserved,
+                @p_MunicipallyApproved = farmTermAppAdminDetails.MunicipallyApproved,
+                @p_EnrollmentDate = farmTermAppAdminDetails.EnrollmentDate,
+                @p_RenewalDate = farmTermAppAdminDetails.RenewalDate,
+                @p_ExpirationDate = farmTermAppAdminDetails.ExpirationDate,
+                @p_RenewalExpirationDate = farmTermAppAdminDetails.RenewalExpirationDate,
+                @p_Comment  = farmTermAppAdminDetails.Comment,
                 @p_LastUpdatedBy = farmTermAppAdminDetails.LastUpdatedBy
 
             });
@@ -76,7 +88,8 @@ public class TermAppAdminDetails : ITermAppAdminDetailsRepository
             @p_RenewalDate= farmTermAppAdminDetails.RenewalDate,
             @p_ExpirationDate= farmTermAppAdminDetails.ExpirationDate,
             @p_RenewalExpirationDate= farmTermAppAdminDetails.RenewalExpirationDate,
-            @p_LastUpdatedBy= farmTermAppAdminDetails.LastUpdatedBy,
+            @p_Comment = farmTermAppAdminDetails.Comment,
+            @p_LastUpdatedBy = farmTermAppAdminDetails.LastUpdatedBy,
             @p_LastUpdatedOn = DateTime.Now,
         });
         return farmTermAppAdminDetails;

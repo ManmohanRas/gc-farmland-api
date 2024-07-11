@@ -13,7 +13,8 @@
 							,EnrollmentDate				
 							,RenewalDate					
 							,ExpirationDate				
-							,RenewalExpirationDate			
+							,RenewalExpirationDate
+							,Comment
 							,LastUpdatedBy  
 							,LastUpdatedOn	
 						)
@@ -28,7 +29,8 @@
 							,@p_EnrollmentDate				
 							,@p_RenewalDate					
 							,@p_ExpirationDate				
-							,@p_RenewalExpirationDate			
+							,@p_RenewalExpirationDate
+							,@p_Comment
 							,@p_LastUpdatedBy  
 							,GETDATE()	
 						);

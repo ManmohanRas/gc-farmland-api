@@ -1,10 +1,9 @@
-﻿namespace PresTrust.FarmLand.Application.Queries
+﻿namespace PresTrust.FarmLand.Application.Queries;
+
+public class GetTermAdminDetailsQueryMappingProfile : Profile
 {
-    public class GetTermAdminDetailsQueryMappingProfile : Profile
+    public GetTermAdminDetailsQueryMappingProfile() 
     {
-        public GetTermAdminDetailsQueryMappingProfile() 
-        {
-         CreateMap<FarmTermAppAdminDetailsEntity, GetTermAdminDetailsQueryMappingProfile> ();
-        }
+     CreateMap<FarmTermAppAdminDetailsEntity, GetTermAdminDetailsQueryViewModel> ();
     }
 }

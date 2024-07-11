@@ -53,9 +53,16 @@ public class FarmLandController : ApiBaseController
         }
 
         [HttpPost("getTermAppAdminDetails")]
+        [ProducesResponseType(typeof(GetTermAdminDetailsQueryViewModel), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetTermAdminDetailsQueryViewModel>> GetTermAppAdminDetails([FromBody] GetTermAdminDetailsQuery query)
         {
-            return Single(await QueryAsync(query));
+        return Single(await QueryAsync(query));
+        }
+        [HttpPost("saveTermAppAdminDetails")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<int>> SaveTermAppAdminDetails([FromBody] SaveTermAppAdminDetailsCommand command)
+        {
+            return Single(await CommandAsync(command));
         }
 
         /// <summary>
@@ -246,19 +253,19 @@ public class FarmLandController : ApiBaseController
             return Single(await CommandAsync(command));
         }
 
-    [HttpPost("saveApplicationDocumentChecklist")]
-    [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
+        [HttpPost("saveApplicationDocumentChecklist")]
+        [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
 
-    public async Task<ActionResult<Unit>> SaveApplicationDocumentChecklist([FromBody] SaveTermAppDocumentChecklistCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
+        public async Task<ActionResult<Unit>> SaveApplicationDocumentChecklist([FromBody] SaveTermAppDocumentChecklistCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
 
-    [HttpPost("deleteTermComment")]
-    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    
-    public async Task<ActionResult<bool>> deleteTermComment([FromBody] DeleteTermCommentCommand command)
-    {
+        [HttpPost("deleteTermComment")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        
+        public async Task<ActionResult<bool>> deleteTermComment([FromBody] DeleteTermCommentCommand command)
+        {
         return Single(await CommandAsync(command));
 
         }
@@ -285,19 +292,19 @@ public class FarmLandController : ApiBaseController
             return Single(await QueryAsync(query));
         }
 
-    [HttpPost("getApplicationDocumentChecklist")]
-    [ProducesResponseType(typeof(IEnumerable<TermDocumentChecklistViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<TermDocumentChecklistViewModel>>> getApplicationDocumentChecklist([FromBody] GetTermDocumentChecklistQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
+        [HttpPost("getApplicationDocumentChecklist")]
+        [ProducesResponseType(typeof(IEnumerable<TermDocumentChecklistViewModel>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<TermDocumentChecklistViewModel>>> getApplicationDocumentChecklist([FromBody] GetTermDocumentChecklistQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
 
-    [HttpPost("saveTermDocument")]
-    [ProducesResponseType(typeof(SaveTermAppDocumentCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<SaveTermAppDocumentCommandViewModel>> SaveTermDocument([FromBody] SaveTermAppDocumentCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
+        [HttpPost("saveTermDocument")]
+        [ProducesResponseType(typeof(SaveTermAppDocumentCommandViewModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<SaveTermAppDocumentCommandViewModel>> SaveTermDocument([FromBody] SaveTermAppDocumentCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
 
         [HttpPost("deleteTermDocument")]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]

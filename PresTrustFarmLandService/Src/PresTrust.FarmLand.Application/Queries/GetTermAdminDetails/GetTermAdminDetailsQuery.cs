@@ -1,7 +1,6 @@
-﻿namespace PresTrust.FarmLand.Application.Queries
+﻿namespace PresTrust.FarmLand.Application.Queries;
+
+public class GetTermAdminDetailsQuery : IRequest<GetTermAdminDetailsQueryViewModel>
 {
-    public class GetTermAdminDetailsQuery : IRequest<GetTermAdminDetailsQueryViewModel>
-    {
-        public int ApplicationId { get; set; }
-    }
+    public int ApplicationId { get; set; }
 }
