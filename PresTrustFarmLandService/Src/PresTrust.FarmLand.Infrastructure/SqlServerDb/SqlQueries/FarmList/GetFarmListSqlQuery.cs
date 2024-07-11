@@ -4,18 +4,20 @@
     {
         private readonly string _sqlCommand =
             @" SELECT
-               [FarmListID]
-              ,[FarmNumber]
-              ,[TermID]
-              ,[FarmName]
-              ,[ProjectName]
-              ,[Status]
-              ,[AgencyID]
-              ,[OriginalLandowner]
-              ,[Address1]
-              ,[Address2]
-              ,[MunicipalID]
-              FROM [PresTrust_RAS].[Farm].[FarmList]
+               FL.[FarmListID]
+              ,FL.[FarmNumber]
+              ,FL.[TermID]
+              ,FL.[FarmName]
+              ,FL.[ProjectName]
+              ,FL.[Status]
+              ,FL.[AgencyID]
+              ,FL.[OriginalLandowner]
+              ,FL.[Address1]
+              ,FL.[Address2]
+              ,FL.[MunicipalID]
+              ,AgencyEntity.[AgencyLabel] AS PresentOwner
+              FROM [Farm].[FarmList] FL
+              LEFT JOIN [Core].[View_AgencyEntities_FARM] AgencyEntity ON (FL.AgencyId = AgencyEntity.AgencyId)
                WHERE FarmName IS NOT NULL;";
 
         public override string ToString()

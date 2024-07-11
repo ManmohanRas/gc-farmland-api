@@ -13,6 +13,8 @@ public class FarmListEntity
     public string Address2 { get; set; }
     public int MunicipalID { get; set; }
     public int AgencyID { get; set; }
+    public string PresentOwner { get; set; }
+
 
     public string Address
     {
