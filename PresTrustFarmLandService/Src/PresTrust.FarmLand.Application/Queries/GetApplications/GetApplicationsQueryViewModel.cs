@@ -13,7 +13,7 @@
         public bool IsApprovedByMunicipality { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
-        public int MunicipalID { get; set; }
+        public string Municipality { get; set; }
         public string FarmName { get; set; }
         public string MunicipalityId { get; set; }
         public string OriginalLandowner { get; set; }

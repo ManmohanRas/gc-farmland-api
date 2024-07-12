@@ -53,7 +53,10 @@ public class TermBrokenRuleEntity
                     val = TermApplicationRouterLinks.ADMIN_DETAILS_EDIT;
                     break;
                 case ApplicationSectionEnum.ADMIN_DEED_DETAILS:
-                    val = TermApplicationRouterLinks.DEED_DETAILS_EDIT;
+                    val = TermApplicationRouterLinks.ADMIN_DEED_DETAILS_EDIT;
+                    break;
+                case ApplicationSectionEnum.ADMIN_CONTACTS:
+                    val = TermApplicationRouterLinks.ADMIN_CONTACTS_EDIT;
                     break;
                 default:
                     break;

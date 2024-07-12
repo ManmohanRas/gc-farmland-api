@@ -79,11 +79,20 @@
          /// <summary>
         /// Constant to hold router link for DEED Details View screen
         /// </summary>
-        public const string DEED_DETAILS_VIEW = "appadmin/deeddetails/view";
+        public const string ADMIN_DEED_DETAILS_VIEW = "appadmin/deeddetails/view";
         /// <summary>
         /// Constant to hold router link for DEED Details Edit screen
         /// </summary>
-        public const string DEED_DETAILS_EDIT = "appadmin/deeddetails/edit";
+        public const string ADMIN_DEED_DETAILS_EDIT = "appadmin/deeddetails/edit";
+
+             /// <summary>
+        /// Constant to hold router link for CONTACTS Details View screen
+        /// </summary>
+        public const string ADMIN_CONTACTS_VIEW = "appadmin/contacts/view";
+            /// <summary>
+            /// Constant to hold router link for CONTACTS Details Edit screen
+            /// </summary>
+       public const string ADMIN_CONTACTS_EDIT = "appadmin/contacts/edit";
     }
     }
 }
