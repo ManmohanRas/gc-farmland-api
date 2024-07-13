@@ -6,6 +6,6 @@ public class GetTermAppAdminContactsQueryMappingProfile:Profile
 {
     public GetTermAppAdminContactsQueryMappingProfile()
     {
-        CreateMap<TermAppAdminContactsEntity, TermAppAdminContactsEntity>();
+        CreateMap<TermAppAdminContactsEntity, GetTermAppAdminContactsQueryViewModel>();
     }
 }

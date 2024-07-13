@@ -5,7 +5,7 @@ public class DeleteTermAppAdminContactsSqlCommand
 {
     private readonly string _sqlCommand =
    @" DELETE 
-              FROM [Farm].[FarmTermAppAdminContacts]
+              FROM [Farm].[FarmTermAppAdminContact]
               WHERE Id = @p_Id AND ApplicationId = @p_ApplicationId;";
 
  public DeleteTermAppAdminContactsSqlCommand() { }

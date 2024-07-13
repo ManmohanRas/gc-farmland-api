@@ -3,7 +3,7 @@ namespace PresTrust.FarmLand.Application.Queries;
 
 public class GetTermAppAdminContactsQueryHandler : IRequestHandler<GetTermAppAdminContactsQuery, IEnumerable<GetTermAppAdminContactsQueryViewModel>>
 {
-    private IMapper mapper;
+    private readonly IMapper mapper;
     private readonly ITermAppAdminContactsRepository repoContacts;
     public GetTermAppAdminContactsQueryHandler(IMapper mapper, ITermAppAdminContactsRepository repoContacts)
     {
