@@ -17,6 +17,8 @@
             services.AddTransient<ITermBrokenRuleRepository, TermBrokenRuleRepository>();
             services.AddTransient<ITermOtherDocumentsRepository, TermOtherDocumentsRepository>();
             services.AddTransient<ITermAppSignatoryRepository, TermAppSignatoryRepository>();
+            services.AddTransient<ITermAppAdminContactsRepository, TermAppAdminContactsRepository>();
+
         }
     }
 }

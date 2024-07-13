@@ -1,18 +1,18 @@
 IF OBJECT_ID('[Farm].[FarmTermAppAdminContacts]') IS NOT NULL
 BEGIN
 
-	ALTER TABLE [Farm].[FarmTermAppAdminContacts] DROP CONSTRAINT IF EXISTS [FK_ApplicationId_FarmTermAppAdminContacts];
+	ALTER TABLE [Farm].[FarmTermAppAdminContact] DROP CONSTRAINT IF EXISTS [FK_ApplicationId_FarmTermAppAdminContacts];
 
-	ALTER TABLE [Farm].[FarmTermAppAdminContacts] DROP CONSTRAINT IF EXISTS [DF_LastUpdatedOn_FarmTermAppAdminContacts];
+	ALTER TABLE [Farm].[FarmTermAppAdminContact] DROP CONSTRAINT IF EXISTS [DF_LastUpdatedOn_FarmTermAppAdminContacts];
 
 	
 END;
 GO
 
-DROP TABLE IF EXISTS [Farm].[FarmTermAppAdminContacts]
+DROP TABLE IF EXISTS [Farm].[FarmTermAppAdminContact]
 GO
 
-CREATE TABLE [Farm].[FarmTermAppAdminContacts](
+CREATE TABLE [Farm].[FarmTermAppAdminContact](
 	[Id]					[integer]			IDENTITY(1,1)	NOT NULL,
 	[ApplicationId]			[integer]							NOT NULL,
 	[ContactName]			[varchar](76)						NULL,
