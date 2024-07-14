@@ -5,6 +5,9 @@ BEGIN
 	
 	ALTER TABLE [Farm].[FarmApplicationFeedback] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmApplicationFeedback];
 
+	ALTER TABLE [Farm].[FarmApplicationFeedback] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationFeedback]; 
+
+
 END;
 GO
   
@@ -23,6 +26,7 @@ CREATE TABLE [Farm].[FarmApplicationFeedback](
 	[MarkRead]								[bit]							NOT NULL, 
 	[LastUpdatedBy]							[varchar](128)					NULL	,
 	[LastUpdatedOn]							[datetime]						NOT NULL,
+	[ApplicationTypeId]                     [smallint]	                    NOT NULL,--NEED TO REMOVE
 
 CONSTRAINT [PK_FarmApplicationFeedback_Id] PRIMARY KEY CLUSTERED 
 (
@@ -38,3 +42,6 @@ GO
 
 ALTER TABLE [Farm].[FarmApplicationFeedback] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmApplicationFeedback]  DEFAULT (GETDATE()) FOR [LastUpdatedOn]
 GO  
+
+ALTER TABLE [Farm].[FarmApplicationFeedback] ADD CONSTRAINT [FK_ApplicationTypeId_FarmApplicationFeedback]  FOREIGN KEY (ApplicationTypeId) REFERENCES [Farm].FarmApplicationType(Id);
+GO
