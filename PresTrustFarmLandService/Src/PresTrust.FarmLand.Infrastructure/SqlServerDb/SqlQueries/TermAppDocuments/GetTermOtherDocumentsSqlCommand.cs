@@ -14,7 +14,6 @@ public class GetTermOtherDocumentsSqlCommand
 		                ,D.[DocumentTypeId]		    AS	DocumentTypeId	
                         ,DT.[SectionId]			    AS  SectionId
 		                ,D.[ApplicationId]		    AS  ApplicationId
-                        ,D.[ApplicationTypeId]      AS  ApplicationTypeId
                         ,D.[ShowCommittee]          AS  ShowCommittee
             FROM		[Farm].[FarmApplicationDocument] D
             INNER JOIN	[Farm].[FarmApplicationDocumentType] DT

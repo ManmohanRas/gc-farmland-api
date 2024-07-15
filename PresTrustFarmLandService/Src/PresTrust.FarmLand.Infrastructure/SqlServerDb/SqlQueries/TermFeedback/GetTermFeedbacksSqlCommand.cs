@@ -5,7 +5,6 @@ public class GetTermFeedbacksSqlCommand
     private readonly string _sqlCommand =
        @"  SELECT		   [Id]
 							  ,[ApplicationId]
-							  ,[ApplicationTypeId]
 							  ,[SectionId]
 							  ,[Feedback]
 							  ,[RequestForCorrection]

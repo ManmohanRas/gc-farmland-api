@@ -11,9 +11,9 @@ namespace PresTrust.FarmLand.API.DependencyInjection
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Farm Mitigation API",
+                    Title = "Farm Land API",
                     Version = "v1",
-                    Description = "Farm Mitigation API"
+                    Description = "Farm Land API"
                 });
 
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

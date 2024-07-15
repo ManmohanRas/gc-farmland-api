@@ -11,8 +11,6 @@ BEGIN
 	
 	ALTER TABLE [Farm].[FarmApplicationDocument] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmApplicationDocument];
 
-	ALTER TABLE [Farm].[FarmApplicationDocument] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationDocument]; 
-
 
 END;
 GO
@@ -36,7 +34,6 @@ CREATE TABLE [Farm].[FarmApplicationDocument](
 	[ReviewComment]				[varchar](2000)					NULL,
 	[LastUpdatedBy]				[varchar](128)					NULL,
 	[LastUpdatedOn]				[datetime]						NOT NULL,
-	[ApplicationTypeId]         [smallint]	                    NOT NULL,--NEED TO REMOVE
 
 CONSTRAINT [PK_FarmApplicationDocument_Id] PRIMARY KEY CLUSTERED 
 (
@@ -62,7 +59,5 @@ GO
 ALTER TABLE [Farm].[FarmApplicationDocument] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmApplicationDocument]  DEFAULT (GETDATE()) FOR [LastUpdatedOn]
 GO  
 
-ALTER TABLE [Farm].[FarmApplicationDocument] ADD CONSTRAINT [FK_ApplicationTypeId_FarmApplicationDocument]  FOREIGN KEY (ApplicationTypeId) REFERENCES [Farm].FarmApplicationType(Id);
-GO
 
  

@@ -23,7 +23,6 @@ CREATE TABLE [Farm].[FarmApplicationComment](
 	[CommentTypeId]							[smallint]						NOT NULL,
 	[LastUpdatedBy]							[varchar](128)					NULL	,
 	[LastUpdatedOn]							[datetime]			   			NOT NULL,
-	[ApplicationTypeId]                     [smallint]	                    NOT NULL,--NEED TO REMOVE
 
 CONSTRAINT [PK_FarmApplicationComment_Id] PRIMARY KEY CLUSTERED 
 (
