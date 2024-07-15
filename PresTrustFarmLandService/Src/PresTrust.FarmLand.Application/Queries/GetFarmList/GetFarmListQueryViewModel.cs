@@ -15,6 +15,7 @@
         public string Address { get; set; }
         public int MunicipalID { get; set; }
         public int AgencyID { get; set; }
+        public string PresentOwner { get; set; }
 
     }
 }

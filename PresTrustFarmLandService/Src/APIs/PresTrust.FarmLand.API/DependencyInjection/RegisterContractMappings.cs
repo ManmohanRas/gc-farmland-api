@@ -18,6 +18,8 @@
             services.AddTransient<ITermOtherDocumentsRepository, TermOtherDocumentsRepository>();
             services.AddTransient<ITermAppSignatoryRepository, TermAppSignatoryRepository>();
             services.AddTransient<ITermAppAdminDetailsRepository, TermAppAdminDetailsRepository>();
+            services.AddTransient<ITermAppAdminContactsRepository, TermAppAdminContactsRepository>();
+
         }
     }
 }

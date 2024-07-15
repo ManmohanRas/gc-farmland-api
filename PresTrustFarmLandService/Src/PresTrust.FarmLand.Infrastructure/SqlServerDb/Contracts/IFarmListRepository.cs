@@ -7,5 +7,7 @@
         /// </summary>
         /// <returns></returns>
         public Task<IEnumerable<FarmListEntity>> GetFarmListAsync();
+
+        public Task<FarmListEntity> SaveFarmListAsync(FarmListEntity farmList);
     }
 }
