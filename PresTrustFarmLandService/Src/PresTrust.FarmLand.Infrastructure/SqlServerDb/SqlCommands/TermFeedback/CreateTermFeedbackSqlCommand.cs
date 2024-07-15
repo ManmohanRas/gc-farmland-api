@@ -6,7 +6,6 @@ public class CreateTermFeedbackSqlCommand
     private readonly string _sqlCommand =
        @"INSERT INTO [Farm].[FarmApplicationFeedback]
                    ([ApplicationId]
-                   ,[ApplicationTypeId]
                    ,[SectionId]
                    ,[Feedback]
                    ,[RequestForCorrection]
@@ -16,7 +15,6 @@ public class CreateTermFeedbackSqlCommand
                    ,[LastUpdatedOn])
              VALUES
                    (@p_ApplicationId
-                   ,@p_ApplicationTypeId
                    ,@p_SectionId
                    ,@p_Feedback
                    ,@p_RequestForCorrection

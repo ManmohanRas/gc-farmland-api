@@ -8,7 +8,6 @@ public class CreateTermCommentSqlCommand
                  Comment
                 ,CommentTypeId
                 ,ApplicationId
-                ,ApplicationTypeId
                 ,LastUpdatedBy
                 ,LastUpdatedOn
               )
@@ -16,7 +15,6 @@ public class CreateTermCommentSqlCommand
                 @p_Comment
                ,@p_CommentTypeId
                ,@p_ApplicationId
-               ,@p_ApplicationTypeId
                ,@p_LastUpdatedBy
                ,GetDate());
 

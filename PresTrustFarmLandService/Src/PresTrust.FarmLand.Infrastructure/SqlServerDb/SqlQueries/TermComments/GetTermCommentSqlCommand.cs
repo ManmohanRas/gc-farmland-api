@@ -7,7 +7,6 @@ public class GetTermCommentSqlCommand
                       ,[Comment]
                       ,[CommentTypeId]
                       ,[ApplicationId]
-                      ,[ApplicationTypeId]
                       ,[LastUpdatedOn]
                       ,[LastUpdatedBy]
                 FROM [Farm].[FarmApplicationComment] 

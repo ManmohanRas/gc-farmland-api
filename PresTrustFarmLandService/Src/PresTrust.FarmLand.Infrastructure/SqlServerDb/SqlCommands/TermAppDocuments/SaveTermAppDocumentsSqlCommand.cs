@@ -13,7 +13,6 @@ public class SaveTermAppDocumentsSqlCommand
 					       ,[ReviewComment]	
                            ,[DocumentTypeId]
                            ,[ApplicationId]
-                           ,[ApplicationTypeId]
                            ,[ShowCommittee])
                      VALUES
                            (@p_FileName
@@ -24,7 +23,6 @@ public class SaveTermAppDocumentsSqlCommand
                            ,@p_ReviewComment
                            ,@p_DocumentTypeId 
                            ,@p_ApplicationId
-                           ,@p_ApplicationTypeId
                            ,@p_ShowCommittee 
                 );
 
