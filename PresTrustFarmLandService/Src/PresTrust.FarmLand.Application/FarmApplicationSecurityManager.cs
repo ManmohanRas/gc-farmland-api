@@ -84,6 +84,10 @@ public class FarmApplicationSecurityManager
             case UserRoleEnum.SYSTEM_ADMIN:
             case UserRoleEnum.PROGRAM_ADMIN:
             case UserRoleEnum.PROGRAM_EDITOR:
+                if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
+                {
+                    permission.CanSubmitApplication = true;
+                }
 
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
@@ -164,8 +168,9 @@ public class FarmApplicationSecurityManager
                 permission.CanDeleteComments = true;
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
+                permission.CanRejectApplication = true;
 
- 
+
                 Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
