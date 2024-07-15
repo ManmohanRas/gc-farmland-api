@@ -9,7 +9,6 @@ public class GetTermAppDocumentChecklistSqlCommand
         _sqlCommand =
         @"  SELECT			 ISNULL(D.[Id],0)		                AS	Id
 				                    ,D.[ApplicationId]		        AS  ApplicationId
-                                    ,D.[ApplicationTypeId]          AS  ApplicationTypeId
 		                            ,D.[FileName]			        AS	'FileName'
 		                            ,D.[Title]				        AS  Title
                                     ,D.[Description]		        AS  'Description'

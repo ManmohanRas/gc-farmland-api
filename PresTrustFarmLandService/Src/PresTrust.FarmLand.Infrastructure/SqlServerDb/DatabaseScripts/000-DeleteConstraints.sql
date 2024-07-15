@@ -74,19 +74,27 @@ BEGIN TRY
 	
 	ALTER TABLE [Farm].[FarmTermAppSiteCharacteristics] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmTermAppSiteCharacteristics];
 	
-	ALTER TABLE [Flood].[FarmTermAppDeedDetails] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmTermAppDeedDetails];
+	ALTER TABLE [Farm].[FarmTermAppDeedDetails] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmTermAppDeedDetails];
 	
-	ALTER TABLE [Flood].[FarmTermAppDeedDetails] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmTermAppDeedDetails];
+	ALTER TABLE [Farm].[FarmTermAppDeedDetails] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmTermAppDeedDetails];
 
 	ALTER TABLE [Farm].[FarmTermAppSignature] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmTermAppSignature];
 		
 	ALTER TABLE [Farm].[FarmTermAppSignature] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmTermAppSignature];
 
-	ALTER TABLE [Farm].[FarmTermAppAdminContacts] DROP CONSTRAINT IF EXISTS [FK_ApplicationId_FarmTermAppAdminContacts];
+	ALTER TABLE [Farm].[FarmTermAppAdminContact] DROP CONSTRAINT IF EXISTS [FK_ApplicationId_FarmTermAppAdminContact];
 
-	ALTER TABLE [Farm].[FarmTermAppAdminContacts] DROP CONSTRAINT IF EXISTS [DF_LastUpdatedOn_FarmTermAppAdminContacts];
+	ALTER TABLE [Farm].[FarmTermAppAdminContact] DROP CONSTRAINT IF EXISTS [DF_LastUpdatedOn_FarmTermAppAdminContact];
 
-	
+	--temp need to remove
+
+	ALTER TABLE [Farm].[FarmApplicationDocument] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationDocument]; 
+
+	ALTER TABLE [Farm].[FarmApplicationComment] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationComment]; 
+
+	ALTER TABLE [Farm].[FarmApplicationFeedback] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationFeedback]; 
+
+
 	--==============================================================================================================--
 	--SELECT 1/0;
 	COMMIT;
