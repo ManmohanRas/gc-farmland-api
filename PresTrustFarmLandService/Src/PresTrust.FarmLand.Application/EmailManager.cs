@@ -2,10 +2,8 @@
 
 public interface IEmailManager
 {
-    Task SendMail(string subject, string htmlBody, int applicationId, string applicationName, string ownerName = default, string site = default, string fundingYear = default, DateTime fundingRoundClosingDate = default,
-    DateTime? dateAnnualReportDue = default, string structure = null, decimal finalTotalProjectCost = default, DateTime? consultantQnADuedate = default, DateTime? recommendedDate = default, DateTime? commissionerMeetingDate = default,
-    int agencyId = default, string agencyName = default, decimal finalGrantAmount = default, decimal grantAmount = default, DateTime? applicationDeadline = default, DateTime? grantExpirationDate = default, int? totalPayments = default, 
-    int? balanceOfGrant = default, string? emailTemplateCode = default);
+    Task SendMail(string subject, string htmlBody, int applicationId, string applicationName, string? emailTemplateCode = default, int agencyId = default, string? owner = default, string? location = default, string? deedDetails = default);
+
 }
 
 public class EmailManager : IEmailManager
@@ -81,27 +79,30 @@ public class EmailManager : IEmailManager
     /// <param name="htmlBody"></param>
     /// <param name="flagTestEmail"></param>
     /// <returns></returns>
-    public async Task SendMail(string subject, string htmlBody, int applicationId, string applicationName, string ownerName, string site, string fundingYear = default, DateTime fundingRoundClosingDate = default, DateTime? dateAnnualReportDue = default, string structure = null, decimal finalTotalProjectCost = default, DateTime? consultantQnADuedate = default, DateTime? recommendedDate = default, DateTime? commissionerMeetingDate = default, int agencyId = default, string agencyName = default, decimal finalGrantAmount = default, decimal grantAmount = default, DateTime? applicationDeadline = default, DateTime? grantExpirationDate = default, int? totalPayments = default, int? balanceOfGrant = default, string? emailTemplateCode = default)
+    public async Task SendMail(string subject, string htmlBody, int applicationId,  string applicationName, string? emailTemplateCode = default, int agencyId = default, string? owner = default, string? location = default, string? deedDetails = default)
     {
         var primaryContact = await GetPrimaryContact(applicationId, agencyId);
 
 
-        var endPoint = $"{systemParamOptions.IdentityApiSubDomain}/UserAdmin/users/pres-trust/farm";
-        var countyUsers = await identityApiConnect.GetDataAsync<List<IdentityApiUser>>(endPoint);
-        var programAdminName = countyUsers.Where(o => o.UserRole == "farm_program_admin").Select(o => string.Concat(o.FirstName, ' ', o.LastName)).FirstOrDefault();
-        var programAdminEmail = countyUsers.Where(o => o.UserRole == "farm_program_admin").Select(o => o.Email).FirstOrDefault();
         var toEmails = String.Empty;
 
-        htmlBody = htmlBody.Replace("{{ProgramAdmin}}", userContext.IsExternalUser ? string.Format("{0} {1}", systemParamOptions.ProgramAdminName.Split('-')[0], systemParamOptions.ProgramAdminName.Split('-')[1]) : programAdminName ?? "");
-        htmlBody = htmlBody.Replace("{{ProgramAdminEmail}}", userContext.Email ?? "");
+        htmlBody = htmlBody.Replace("{{ProgramAdmin}}", systemParamOptions.ProgramAdminName);
+        htmlBody = htmlBody.Replace("{{ProgramAdminEmail}}", systemParamOptions.ProgramAdminEmail ?? "");
         htmlBody = htmlBody.Replace("{{AgencyAdmin}}", userContext.Name ?? "");
-       
-
-
+        htmlBody = htmlBody.Replace("{{PrimaryContactName}}", string.Join(",", primaryContact.Item1));
+        //htmlBody = htmlBody.Replace("{{FirstName}}", owner ?? "");
+        //htmlBody = htmlBody.Replace("{{LastName}}", owner ?? "");
+        //htmlBody = htmlBody.Replace("{{Municipality}}", location ?? "");
+        //htmlBody = htmlBody.Replace("{{Block}}", location ?? "");
+        //htmlBody = htmlBody.Replace("{{Lot}}", location ?? "");
+        //htmlBody = htmlBody.Replace("{{DeedBook}}", deedDetails  ?? "");
+        //htmlBody = htmlBody.Replace("{{DeedPage}}", deedDetails ?? "");
+        // htmlBody = htmlBody.Replace("{{SADCContact}}",  ?? "");
+        // htmlBody = htmlBody.Replace("{{FarmName}}",  ?? 
         subject = subject.Replace("{{ApplicationName}}", applicationName ?? "");
-        subject = subject.Replace("{{PropertyName}}", site ?? "");
       
-       toEmails = systemParamOptions.IsDevelopment == false ? string.Join(",", primaryContact.Item2) : systemParamOptions.TestEmailIds;        
+      //oEmails = systemParamOptions.IsDevelopment == false ? string.Join(",", primaryContact.Item2) : systemParamOptions.TestEmailIds;
+        toEmails = systemParamOptions.TestEmailIds;
 
         var senderName = systemParamOptions.IsDevelopment == false ? userContext.Name : systemParamOptions.TestEmailFromUserName;
         var senderEmail = systemParamOptions.IsDevelopment == false ? userContext.Email : "mcgis@co.morris.nj.us";

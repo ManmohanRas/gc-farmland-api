@@ -45,5 +45,11 @@ public enum ApplicationStatusEnum
     /// <summary>
     /// Application Status Type for Withdrawn
     /// </summary>
-    WITHDRAWN = 8
+    WITHDRAWN = 8,
+
+    /// <summary>
+    /// Application Status Type for ENABLE_SADC
+    /// </summary>
+    ENABLE_SADC = 8
+
 }

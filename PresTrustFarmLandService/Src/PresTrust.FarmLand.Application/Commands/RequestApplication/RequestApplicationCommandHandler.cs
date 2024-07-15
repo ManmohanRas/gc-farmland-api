@@ -1,6 +1,4 @@
-﻿using PresTrust.FarmLand.Domain;
-
-namespace PresTrust.FarmLand.Application.Commands;
+﻿namespace PresTrust.FarmLand.Application.Commands;
 
 public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<RequestApplicationCommand, RequestApplicationCommandViewModel>
 {
@@ -10,6 +8,8 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
     private readonly IApplicationRepository repoApplication;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
     private readonly ITermOtherDocumentsRepository repoOtherDocs;
+    private readonly IEmailTemplateRepository repoEmailTemplate;
+    private readonly IEmailManager repoEmailManager;
 
     public RequestApplicationCommandHandler
     (
@@ -18,7 +18,9 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
         ITermBrokenRuleRepository repoBrokenRules,
-        ITermOtherDocumentsRepository repoOtherDocs
+        ITermOtherDocumentsRepository repoOtherDocs,
+        IEmailTemplateRepository repoEmailTemplate,
+        IEmailManager repoEmailManager
     ) : base(repoApplication)
     {
         this.mapper = mapper;
@@ -27,6 +29,8 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         this.repoApplication = repoApplication;
         this.repoBrokenRules = repoBrokenRules;
         this.repoOtherDocs = repoOtherDocs;
+        this.repoEmailTemplate = repoEmailTemplate;
+        this.repoEmailManager = repoEmailManager;
     }
 
     /// <summary>
@@ -88,6 +92,10 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
             };
             await repoApplication.SaveStatusLogAsync(appStatusLog);
 
+            //Send Email 
+            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_DRAFT_TO_REQUESTED.ToString());
+            if (template != null)
+                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
             scope.Complete();
             result.IsSuccess = true;
         }

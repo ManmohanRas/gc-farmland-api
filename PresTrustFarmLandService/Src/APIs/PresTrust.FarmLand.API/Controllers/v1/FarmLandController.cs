@@ -393,32 +393,39 @@ public class FarmLandController : ApiBaseController
            return Single(await CommandAsync(command));
        }
 
-    [HttpPost("getContacts")]
-    [ProducesResponseType(typeof(IEnumerable<GetTermAppAdminContactsQueryViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<GetTermAppAdminContactsQueryViewModel>>> GetContacts([FromBody] GetTermAppAdminContactsQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
+       [HttpPost("enableSADC")]
+       [ProducesResponseType(typeof(EnableSadcCommandViewModel), (int)HttpStatusCode.OK)]
+       public async Task<ActionResult<Unit>> EnableSADC([FromBody] EnableSadcCommand command)
+       {
+           return Single(await CommandAsync(command));
+       }
 
-    [HttpPost("saveContacts")]
-    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<bool>> SaveContacts([FromBody] SaveTermAppAdminContactsCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
+       [HttpPost("getContacts")]
+       [ProducesResponseType(typeof(IEnumerable<GetTermAppAdminContactsQueryViewModel>), (int)HttpStatusCode.OK)]
+       public async Task<ActionResult<IEnumerable<GetTermAppAdminContactsQueryViewModel>>> GetContacts([FromBody] GetTermAppAdminContactsQuery query)
+       {
+           return Single(await QueryAsync(query));
+       }
 
-    [HttpPost("deleteContact")]
-    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<bool>> DeleteContact([FromBody] DeleteTermAppAdminContactsCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
+       [HttpPost("saveContacts")]
+       [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+       public async Task<ActionResult<bool>> SaveContacts([FromBody] SaveTermAppAdminContactsCommand command)
+       {
+           return Single(await CommandAsync(command));
+       }
 
-        [HttpPost("saveFarmList")]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<int>> SaveFarmList([FromBody] SaveFarmListCommand command)
-        {
-            return Single(await CommandAsync(command));
-        }
+       [HttpPost("deleteContact")]
+       [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+       public async Task<ActionResult<bool>> DeleteContact([FromBody] DeleteTermAppAdminContactsCommand command)
+       {
+           return Single(await CommandAsync(command));
+       }
+
+       [HttpPost("saveFarmList")]
+       [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+       public async Task<ActionResult<int>> SaveFarmList([FromBody] SaveFarmListCommand command)
+       {
+           return Single(await CommandAsync(command));
+       }
 }
 
