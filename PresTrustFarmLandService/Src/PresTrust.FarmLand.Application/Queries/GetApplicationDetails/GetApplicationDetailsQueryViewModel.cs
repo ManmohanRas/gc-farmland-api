@@ -10,6 +10,8 @@ public class GetApplicationDetailsQueryViewModel
     public string Status { get; set; }
     public bool IsApprovedByMunicipality { get; set; }
     public FarmAgencyEntity Agency { get; set; }
+    public int MunicipalID { get; set; }
+    public string Municipality { get; set; }
     public IEnumerable<TermCommentsEntity> Comments { get; set; }
     public IEnumerable<TermFeedbacksEntity> Feedbacks { get; set; }
     public TermAppPermissionEntity Permission { get; set; } = new TermAppPermissionEntity();
