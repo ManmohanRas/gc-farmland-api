@@ -8,6 +8,8 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
     private readonly IApplicationRepository repoApplication;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
     private readonly ITermOtherDocumentsRepository repoOtherDocs;
+    private readonly IEmailTemplateRepository repoEmailTemplate;
+    private readonly IEmailManager repoEmailManager;
 
     public ApproveApplicationCommandHandler
     (
@@ -16,7 +18,9 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
         ITermBrokenRuleRepository repoBrokenRules,
-        ITermOtherDocumentsRepository repoOtherDocs
+        ITermOtherDocumentsRepository repoOtherDocs,
+        IEmailTemplateRepository repoEmailTemplate,
+        IEmailManager repoEmailManager
     ) : base(repoApplication)
     {
         this.mapper = mapper;
@@ -25,7 +29,8 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
         this.repoApplication = repoApplication;
         this.repoBrokenRules = repoBrokenRules;
         this.repoOtherDocs = repoOtherDocs;
-
+        this.repoEmailTemplate = repoEmailTemplate;
+        this.repoEmailManager = repoEmailManager;
     }
 
     /// <summary>
@@ -74,6 +79,10 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
                 LastUpdatedBy = application.LastUpdatedBy
             };
             await repoApplication.SaveStatusLogAsync(appStatusLog);
+            //Send Email 
+            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_REQUESTED_TO_APPROVED.ToString());
+            if (template != null)
+                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
 
             scope.Complete();
             result.IsSuccess = true;

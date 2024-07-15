@@ -7,12 +7,16 @@ public class SaveBrokenRuleSqlCommand
 				([ApplicationId]
 				,[SectionId]
 				,[Message]
-				,[IsApplicantFlow])
+				,[IsApplicantFlow]
+				,[LastUpdatedOn]
+				)
 			VALUES
 				(@p_ApplicationId
 				,@p_SectionId 
 				,@p_Message
-				,@p_IsApplicantFlow)
+				,@p_IsApplicantFlow
+				,GETDATE()
+				);
 
 			SELECT CAST( SCOPE_IDENTITY() AS INT);";
 
