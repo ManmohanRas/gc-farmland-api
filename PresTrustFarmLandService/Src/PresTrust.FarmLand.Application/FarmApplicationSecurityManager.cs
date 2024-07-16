@@ -65,7 +65,7 @@ public class FarmApplicationSecurityManager
                 DeriveRequestedStatePermissions();
                 break;
             case ApplicationStatusEnum.ACTIVE:
-                DeriveRequestedStatePermissions();
+                DeriveActiveStatePermissions();
                 break;
             case ApplicationStatusEnum.WITHDRAWN:
                 DeriveWithdrawnStatePermissions();
@@ -321,6 +321,226 @@ public class FarmApplicationSecurityManager
         }
     }
 
+    private void DeriveActiveStatePermissions()
+    {
+        TermFeedbacksEntity correction = default;
+        switch (userRole)
+        {
+            case UserRoleEnum.SYSTEM_ADMIN:
+            case UserRoleEnum.PROGRAM_ADMIN:
+                permission.CanCloseApplication = true;
+                permission.CanWithdrawApplication = true;
+                permission.CanRequestForAnApplicationCorrection = true;
+                permission.CanRespondToTheRequestForAnApplicationCorrection = true;
+                permission.CanEditFeedback = true;
+                permission.CanDeleteFeedback = true;
+                permission.CanViewFeedback = true;
+                permission.CanViewComments = true;
+                permission.CanEditComments = true;
+                permission.CanDeleteComments = true;
+                permission.CanSaveDocument = true;
+                permission.CanDeleteDocument = true;
+                // LOCATION
+                Location();
+                //Owner Details
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OWNER_DETAILS).FirstOrDefault();
+                if (correction == null)
+                    OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                else
+                    OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Roles
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.ROLES).FirstOrDefault();
+                if (correction == null)
+                    Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                else
+                    Roles(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //SiteCharacteristics
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SITE_CHARACTERISTICS).FirstOrDefault();
+                if (correction == null)
+                    SiteCharacteristics(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                else
+                    SiteCharacteristics(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Other Documents
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
+                if (correction == null)
+                    OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                else
+                    OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Signatory
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SIGNATORY).FirstOrDefault();
+                if (correction == null)
+                    Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                else
+                    Signatory(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Admin Document Checklist
+                AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Admin Details
+                AdminDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Admin Release of Funds
+                AdminDeedDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Admin Contacts
+                AdminContacts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                // Default Navigation Item
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = TermAppNavigationItemTitles.SIGNATORY,
+                    RouterLink = TermApplicationRouterLinks.SIGNATORY_EDIT,
+                    SortOrder = 6
+                };
+                break;
+            case UserRoleEnum.PROGRAM_EDITOR:
+                permission.CanViewFeedback = true;
+                permission.CanViewComments = true;
+                permission.CanEditComments = true;
+                permission.CanDeleteComments = true;
+                permission.CanSaveDocument = true;
+                permission.CanDeleteDocument = true;
+                // Location
+                Location();
+                //Owner Details
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OWNER_DETAILS).FirstOrDefault();
+                if (correction == null)
+                    OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                else
+                    OwnerDetails(correction: true);
+                //Roles
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.ROLES).FirstOrDefault();
+                if (correction == null)
+                    Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                else
+                    Roles(correction: true);
+                //Site Characteristics
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SITE_CHARACTERISTICS).FirstOrDefault();
+                if (correction == null)
+                    SiteCharacteristics(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                else
+                    SiteCharacteristics(correction: true);
+                //Other Documents
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
+                if (correction == null)
+                    OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                else
+                    OtherDocuments(correction: true);
+                //Signatory
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SIGNATORY).FirstOrDefault();
+                if (correction == null)
+                {
+                    Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    // Default Navigation Item
+                    this.defaultNavigationItem = new NavigationItemEntity()
+                    {
+                        Title = TermAppNavigationItemTitles.SIGNATORY,
+                        RouterLink = TermApplicationRouterLinks.SIGNATORY_EDIT,
+                        SortOrder = 7
+                    };
+                }
+                else
+                {
+                    Signatory(correction: true);
+                    // Default Navigation Item
+                    this.defaultNavigationItem = new NavigationItemEntity()
+                    {
+                        Title = TermAppNavigationItemTitles.SIGNATORY,
+                        RouterLink = TermApplicationRouterLinks.SIGNATORY_VIEW,
+                        SortOrder = 6
+                    };
+                }
+                //Admin Document Checklist
+                AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Admin Details
+                AdminDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Admin Deed Details
+                AdminDeedDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Admin Contacts
+                AdminContacts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                break;
+            case UserRoleEnum.AGENCY_ADMIN:
+            case UserRoleEnum.AGENCY_EDITOR:
+                if (userRole == UserRoleEnum.AGENCY_ADMIN)
+                {
+                    permission.CanRespondToTheRequestForAnApplicationCorrection = true;
+                }
+                permission.CanViewFeedback = true;
+                permission.CanSaveDocument = true;
+                permission.CanDeleteDocument = true;
+                // Location
+                Location();
+                //OwnerDetails
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OWNER_DETAILS).FirstOrDefault();
+                if (correction == null)
+                    OwnerDetails();
+                else
+                    OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Roles
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.ROLES).FirstOrDefault();
+                if (correction == null)
+                    Roles();
+                else
+                    Roles(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Site Characteristics
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SITE_CHARACTERISTICS).FirstOrDefault();
+                if (correction == null)
+                    SiteCharacteristics();
+                else
+                    SiteCharacteristics(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Other Documents
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
+                if (correction == null)
+                    OtherDocuments();
+                else
+                    OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Signatory
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SIGNATORY).FirstOrDefault();
+                if (correction == null)
+                {
+                    Signatory();
+                    this.defaultNavigationItem = new NavigationItemEntity()
+                    {
+                        Title = TermAppNavigationItemTitles.SIGNATORY,
+                        RouterLink = TermApplicationRouterLinks.SIGNATORY_VIEW,
+                        SortOrder = 6
+                    };
+                }
+                else
+                {
+                    Signatory(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    // Default Navigation Item
+                    this.defaultNavigationItem = new NavigationItemEntity()
+                    {
+                        Title = TermAppNavigationItemTitles.SIGNATORY,
+                        RouterLink = TermApplicationRouterLinks.SIGNATORY_EDIT,
+                        SortOrder = 6
+                    };
+                }
+                break;
+            default:
+                if (userRole != UserRoleEnum.AGENCY_READONLY)
+                {
+                    permission.CanViewFeedback = true;
+                }
+                // Location
+                Location();
+                //Owner Details
+                OwnerDetails();
+                //Roles
+                Roles();
+                //Site Characteristics
+                SiteCharacteristics();
+                //Other Documents
+                OtherDocuments();
+                //Signatory
+                Signatory();
+                // Default Navigation Item
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = TermAppNavigationItemTitles.SIGNATORY,
+                    RouterLink = TermApplicationRouterLinks.SIGNATORY_VIEW,
+                    SortOrder = 6
+                };
+                break;
+        }
+    }
+
     //Easement Program
     public void ConfigureEasementPermissions()
     {
@@ -486,7 +706,7 @@ public class FarmApplicationSecurityManager
         {
             case ApplicationTabEditOrViewEnum.VIEW:
                 permission.CanViewAdminDeedDetailsSection = true;
-                adminNavigationItems.Add(new NavigationItemEntity() { Title = TermAppNavigationItemTitles.ADMIN_CONTACTS, RouterLink = TermApplicationRouterLinks.ADMIN_CONTACTS_EDIT, SortOrder = 10, Icon = (correction == true ? "report_problem" : "") });
+                adminNavigationItems.Add(new NavigationItemEntity() { Title = TermAppNavigationItemTitles.ADMIN_CONTACTS, RouterLink = TermApplicationRouterLinks.ADMIN_CONTACTS_VIEW, SortOrder = 10, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
                 permission.CanEditAdminDeedDetailsSection = true;
