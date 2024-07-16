@@ -23,6 +23,7 @@ CREATE TABLE [Farm].[FarmTermAppAdminDetails](
 	[RenewalDate]					[dateTime]						NULL,
 	[ExpirationDate]				[dateTime]						NULL,
 	[RenewalExpirationDate]			[dateTime]						NULL,
+	[Comment]						[varchar]						Null,
 	[LastUpdatedBy]					[varchar](128)					NULL,
 	[LastUpdatedOn]					[datetime]						NULL,
 CONSTRAINT [PK_FarmTermAppAdminDetails_Id] PRIMARY KEY CLUSTERED 
