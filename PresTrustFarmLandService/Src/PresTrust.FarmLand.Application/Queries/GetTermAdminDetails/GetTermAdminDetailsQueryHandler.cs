@@ -7,6 +7,7 @@ public class GetTermAdminDetailsQueryHandler : BaseHandler, IRequestHandler<GetT
     private readonly IApplicationRepository repoApplication;
     private ITermAppAdminDetailsRepository repoTermAppAdminDetailsRepository;
     private ITermOtherDocumentsRepository repoTermOtherDocumentsRepository;
+   
 
     public GetTermAdminDetailsQueryHandler
         (
@@ -14,6 +15,7 @@ public class GetTermAdminDetailsQueryHandler : BaseHandler, IRequestHandler<GetT
         IApplicationRepository repoApplication,
         ITermOtherDocumentsRepository repoTermOtherDocumentsRepository,
         ITermAppAdminDetailsRepository repoTermAppAdminDetailsRepository
+        
         ) : base(repoApplication: repoApplication)
     {
 
@@ -21,6 +23,8 @@ public class GetTermAdminDetailsQueryHandler : BaseHandler, IRequestHandler<GetT
         this.repoApplication = repoApplication;
         this.repoTermOtherDocumentsRepository = repoTermOtherDocumentsRepository;
         this.repoTermAppAdminDetailsRepository = repoTermAppAdminDetailsRepository;
+      
+       
     }
 
     
