@@ -7,6 +7,8 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
     private readonly ITermOtherDocumentsRepository repoDocument;
+    private readonly ITermBrokenRuleRepository repoBrokenRules;
+    
 
     public SaveTermAppDocumentChecklistCommandHandler
        (
@@ -14,7 +16,8 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
            IPresTrustUserContext userContext,
            IOptions<SystemParameterConfiguration> systemParamOptions,
            IApplicationRepository repoApplication,
-           ITermOtherDocumentsRepository repoDocument
+           ITermOtherDocumentsRepository repoDocument,
+           ITermBrokenRuleRepository repoBrokenRules
        ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
@@ -22,6 +25,7 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;
         this.repoDocument = repoDocument;
+        this.repoBrokenRules = repoBrokenRules;
     }
 
     /// <summary>
@@ -41,6 +45,9 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
         // map command object to the HistDocumentEntity
         var entityDocuments = mapper.Map<IEnumerable<TermDocumentsViewModel>, IEnumerable<TermOtherDocumentsEntity>>(viewmodelDocuments);
 
+        // returns broken rules  
+        var brokenRules = ReturnBrokenRulesIfAny(application, request);
+
 
         // save application documents, property documents (review/checklist items)
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
@@ -49,8 +56,8 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
             {
                 await repoDocument.SaveTermDocumentChecklistAsync(doc);
             }
-            //await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.ADMIN_DOCUMENT_CHECKLIST);
-            //await repoBrokenRules.SaveBrokenRules(await brokenRules);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.ADMIN_DOCUMENT_CHECKLIST);
+            await repoBrokenRules.SaveBrokenRules(await brokenRules);
 
             scope.Complete();
         };
@@ -58,4 +65,47 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
         return Unit.Value;
     }
 
+    /// <summary>
+    /// Return broken rules in case of any business rule failure
+    /// </summary>
+    /// <param name="application"></param>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    private async Task<List<TermBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SaveTermAppDocumentChecklistCommand request)
+    {
+
+        int sectionId = (int)ApplicationSectionEnum.ADMIN_DOCUMENT_CHECKLIST;
+        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
+        // map command object to the FloodDocumentEntity
+        var documents = mapper.Map<IEnumerable<TermDocumentsViewModel>, IEnumerable<TermOtherDocumentsEntity>>(request.Documents);
+
+        var unapprovedDocs = documents.Where(doc => doc.Approved == false).ToList();
+
+        if (documents == null || documents.Count() == 0)
+        {
+            brokenRules.Add(new TermBrokenRuleEntity()
+            {
+                ApplicationId = application.Id,
+                SectionId = sectionId,
+                Message = "All required documents (Admin-Document-Checklist) are not yet uploaded for committee review.",
+                IsApplicantFlow = false
+            });
+        }
+
+        if (unapprovedDocs != null && unapprovedDocs.Count() > 0)
+        {
+            brokenRules.Add(new TermBrokenRuleEntity()
+            {
+                ApplicationId = application.Id,
+                SectionId = sectionId,
+                Message = "All required documents (Admin-Document-Checklist) are not yet approved for committee review.",
+                IsApplicantFlow = false
+            });
+        }
+
+        return brokenRules;
+    }
+
 }
+
+
