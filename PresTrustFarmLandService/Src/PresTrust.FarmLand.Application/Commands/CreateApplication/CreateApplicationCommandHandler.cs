@@ -73,6 +73,7 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
 
         result.Comments = comments;
         result.Feedbacks = feedbacks;
+        result.Agency = application.Agency;
         result.Permission = securityMgr.Permission;
         result.NavigationItems = securityMgr.NavigationItems;
         result.AdminNavigationItems = securityMgr.AdminNavigationItems;

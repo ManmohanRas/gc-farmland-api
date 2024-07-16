@@ -19,7 +19,8 @@
             services.AddTransient<ITermAppSignatoryRepository, TermAppSignatoryRepository>();
             services.AddTransient<ITermAppAdminDetailsRepository, TermAppAdminDetailsRepository>();
             services.AddTransient<ITermAppAdminContactsRepository, TermAppAdminContactsRepository>();
-
+            services.AddTransient<IEmailManager, EmailManager>();
+            services.AddTransient<IEmailTemplateRepository, EmailTemplateRepository>();
         }
     }
 }

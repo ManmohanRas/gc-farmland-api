@@ -21,5 +21,10 @@ public enum EmailTemplateCodeTypeEnum
     /// Email Template Code Type for CHANGE_STATUS_FROM_AGREEMENT_APPROVED_TO_ACTIVE
     /// </summary>
     CHANGE_STATUS_FROM_AGREEMENT_APPROVED_TO_ACTIVE,
-    
+
+    /// <summary>
+    /// Email Template Code Type for CHANGE_STATUS_FROM_AGREEMENT_APPROVED_TO_ACTIVE
+    /// </summary>
+    TRIGER_THE_EMAIL_WHEN_SADC_IS_ENABLED
+
 }
