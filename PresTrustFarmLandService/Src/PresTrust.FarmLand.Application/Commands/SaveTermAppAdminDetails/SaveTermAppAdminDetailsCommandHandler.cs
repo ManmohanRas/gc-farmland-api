@@ -199,6 +199,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                 });
             if (docsNotificationOfTermination == null)
                 brokenRules.Add(new TermBrokenRuleEntity()
+                { 
                     ApplicationId = application.Id,
                     SectionId = sectionId,
                     Message = "Notification Of Termination Letter required document on AdminDetails tab have not been filled.",
