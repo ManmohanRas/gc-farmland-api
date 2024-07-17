@@ -8,6 +8,8 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
     private readonly IApplicationRepository repoApplication;
     private readonly IEmailTemplateRepository repoEmailTemplate;
     private readonly IEmailManager repoEmailManager;
+    private readonly ITermAppAdminDetailsRepository repoTermAppAdminDetailsRepository;
+    private readonly ITermBrokenRuleRepository repoBrokenRules;
 
     public ActiveApplicationCommandHandler
     (
@@ -16,7 +18,9 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
         IEmailTemplateRepository repoEmailTemplate,
-        IEmailManager repoEmailManager
+        IEmailManager repoEmailManager,
+        ITermAppAdminDetailsRepository repoTermAppAdminDetailsRepository,
+        ITermBrokenRuleRepository repoBrokenRules
     ) : base(repoApplication)
     {
         this.mapper = mapper;
@@ -25,6 +29,8 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
         this.repoApplication = repoApplication;
         this.repoEmailTemplate = repoEmailTemplate;
         this.repoEmailManager = repoEmailManager;
+        this.repoTermAppAdminDetailsRepository = repoTermAppAdminDetailsRepository;
+        this.repoBrokenRules = repoBrokenRules;
     }
 
     /// <summary>
@@ -47,8 +53,20 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
             application.LastUpdatedBy = userContext.Email;
         }
 
+        // check if any broken rules exists, if yes then return
+        var brokenRules = (await repoBrokenRules.GetBrokenRulesAsync(application.Id))?.ToList();
+
+        if (brokenRules != null && brokenRules.Any())
+        {
+            result.BrokenRules = mapper.Map<IEnumerable<TermBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
+            return result;
+        }
+
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
+            var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
+            await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
+
             // save broken rules
             await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.ACTIVE);
             FarmApplicationStatusLogEntity appStatusLog = new()
@@ -61,6 +79,9 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
             };
             await repoApplication.SaveStatusLogAsync(appStatusLog);
 
+            var admindetails = await this.repoTermAppAdminDetailsRepository.GetTermAppAdminDetailsAsync(request.ApplicationId);
+
+
 
             //Send Email 
             var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_AGREEMENT_APPROVED_TO_ACTIVE.ToString());
@@ -72,5 +93,24 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// Return broken rules in case of any business rule failure
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="application"></param>
+    /// <returns></returns>
+    private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    {
+        List<TermBrokenRuleEntity> statusChangeRules = new List<TermBrokenRuleEntity>();
+
+        statusChangeRules.Add(new TermBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)ApplicationSectionEnum.ADMIN_DETAILS,
+            Message = "All required fields on ADMIN DETAILS tab have not been filled.",
+        });
+        return statusChangeRules;
     }
 }
