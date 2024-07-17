@@ -441,15 +441,15 @@ public class FarmLandController : ApiBaseController
        }
 
        [HttpPost("getTermAdminDeedDetails")]
-       [ProducesResponseType(typeof(IEnumerable<GetTermAppAdminDeedDetailsQueryViewModel>), (int)HttpStatusCode.OK)]
-       public async Task<ActionResult<GetTermAppAdminDeedDetailsQueryViewModel>> getTermAdminDeedDetails([FromBody] GetTermAppAdminDeedDetailsQuery query)
+       [ProducesResponseType(typeof(GetTermAppAdminDeedDetailsQueryViewModel), (int)HttpStatusCode.OK)]
+       public async Task<ActionResult<GetTermAppAdminDeedDetailsQueryViewModel>> GetTermAdminDeedDetails([FromBody] GetTermAppAdminDeedDetailsQuery query)
        {
            return Single(await QueryAsync(query));
        }
 
         [HttpPost("saveTermAppAdminDeedDetails")]
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<int>> saveTermAppAdminDeedDetails([FromBody] SaveTermAppAdminDeedDetailsCommand command)
+        public async Task<ActionResult<int>> SaveTermAppAdminDeedDetails([FromBody] SaveTermAppAdminDeedDetailsCommand command)
         {
             return Single(await CommandAsync(command));
         }
