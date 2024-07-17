@@ -171,7 +171,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         {
             ApplicationId = application.Id,
             SectionId = (int)ApplicationSectionEnum.SIGNATORY,
-            Message = "All required fields on OWNER_DETAILS tab have not been filled.",
+            Message = "All required fields on SIGNATORY tab have not been filled.",
         });
 
         return statusChangeRules;

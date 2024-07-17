@@ -39,11 +39,15 @@
 
         public bool CanSubmitApplication { get; set; } = false;
         public bool CanReviewApplication { get; set; } = false;
+        public bool CanApproveApplication { get; set; } = false;
         public bool CanActivateApplication { get; set; } = false;
         public bool CanCloseApplication { get; set; } = false;
         public bool CanRejectApplication { get; set; } = false;
         public bool CanWithdrawApplication { get; set; } = false;
+        public bool CanAgreementApproveApplication { get; set; } = false;
         public bool CanReinitiateApplication { get; set; } = false;
+        public bool CanSwitchSADC { get; set; } = false;
+
 
         //---------------------------------------------------------------------//
         //  Application Details Permissions
