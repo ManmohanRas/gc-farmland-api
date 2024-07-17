@@ -1,5 +1,5 @@
 ﻿namespace PresTrust.FarmLand.Application.Commands;
 
-public class SaveSiteCharacteristicsViewModel
+public class SaveTermAppAdminDetailsCommandViewModel
 {
 }

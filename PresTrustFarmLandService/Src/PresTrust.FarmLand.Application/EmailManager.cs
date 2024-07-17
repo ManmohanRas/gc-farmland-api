@@ -86,20 +86,28 @@ public class EmailManager : IEmailManager
 
         var toEmails = String.Empty;
 
+        DateTime today = DateTime.Today;
+        DateTime nextMonth = today.AddMonths(1);
+        DateTime fifthNextMonth = new DateTime(nextMonth.Year, nextMonth.Month, 5);
+
         htmlBody = htmlBody.Replace("{{ProgramAdmin}}", systemParamOptions.ProgramAdminName);
         htmlBody = htmlBody.Replace("{{ProgramAdminEmail}}", systemParamOptions.ProgramAdminEmail ?? "");
         htmlBody = htmlBody.Replace("{{AgencyAdmin}}", userContext.Name ?? "");
         htmlBody = htmlBody.Replace("{{PrimaryContactName}}", string.Join(",", primaryContact.Item1));
-        //htmlBody = htmlBody.Replace("{{FirstName}}", owner ?? "");
-        //htmlBody = htmlBody.Replace("{{LastName}}", owner ?? "");
-        //htmlBody = htmlBody.Replace("{{Municipality}}", location ?? "");
-        //htmlBody = htmlBody.Replace("{{Block}}", location ?? "");
-        //htmlBody = htmlBody.Replace("{{Lot}}", location ?? "");
-        //htmlBody = htmlBody.Replace("{{DeedBook}}", deedDetails  ?? "");
-        //htmlBody = htmlBody.Replace("{{DeedPage}}", deedDetails ?? "");
-        // htmlBody = htmlBody.Replace("{{SADCContact}}",  ?? "");
-        // htmlBody = htmlBody.Replace("{{FarmName}}",  ?? 
-        subject = subject.Replace("{{ApplicationName}}", applicationName ?? "");
+        htmlBody = htmlBody.Replace("{{FarmName}}", applicationName ?? "");
+        htmlBody = htmlBody.Replace("{{NextMeetingDate}}", fifthNextMonth.ToString("dddd, MMMM dd, yyyy"));
+
+
+            //htmlBody = htmlBody.Replace("{{FirstName}}", owner ?? "");
+            //htmlBody = htmlBody.Replace("{{LastName}}", owner ?? "");
+            //htmlBody = htmlBody.Replace("{{Municipality}}", location ?? "");
+            //htmlBody = htmlBody.Replace("{{Block}}", location ?? "");
+            //htmlBody = htmlBody.Replace("{{Lot}}", location ?? "");
+            //htmlBody = htmlBody.Replace("{{DeedBook}}", deedDetails  ?? "");
+            //htmlBody = htmlBody.Replace("{{DeedPage}}", deedDetails ?? "");
+            // htmlBody = htmlBody.Replace("{{SADCContact}}",  ?? "");
+            // htmlBody = htmlBody.Replace("{{FarmName}}",  ?? 
+            subject = subject.Replace("{{FarmName}}", applicationName ?? "");
       
       //oEmails = systemParamOptions.IsDevelopment == false ? string.Join(",", primaryContact.Item2) : systemParamOptions.TestEmailIds;
         toEmails = systemParamOptions.TestEmailIds;
