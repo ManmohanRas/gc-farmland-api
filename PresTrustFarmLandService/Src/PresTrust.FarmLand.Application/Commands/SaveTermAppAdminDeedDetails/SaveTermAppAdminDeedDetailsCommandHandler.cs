@@ -5,22 +5,19 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
 {
     private readonly IMapper mapper;
     private readonly IPresTrustUserContext userContext;
-    private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
-    readonly         ITermAppAdminDeedDetailsRepository repotermAppAdminDeedDetails;
+    private readonly ITermAppAdminDeedDetailsRepository repotermAppAdminDeedDetails;
 
     public SaveTermAppAdminDeedDetailsCommandHandler
     (
         IMapper mapper,
         IPresTrustUserContext userContext,
-        SystemParameterConfiguration systemParamOptions,
         IApplicationRepository repoApplication,
         ITermAppAdminDeedDetailsRepository repotermAppAdminDeedDetails
-    ) : base ( repoApplication:repoApplication)
+    ) : base(repoApplication:repoApplication)
     { 
         this.mapper = mapper;
         this.userContext = userContext;
-        this.systemParamOptions = systemParamOptions;
         this.repoApplication = repoApplication;
         this.repotermAppAdminDeedDetails = repotermAppAdminDeedDetails;
     }
