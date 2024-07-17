@@ -20,6 +20,7 @@
             services.AddTransient<ITermAppAdminContactsRepository, TermAppAdminContactsRepository>();
             services.AddTransient<IEmailManager, EmailManager>();
             services.AddTransient<IEmailTemplateRepository, EmailTemplateRepository>();
+            services.AddTransient<ITermAppAdminDeedDetailsRepository, TermAppAdminDeedDetailsRepository>();
         }
     }
 }
