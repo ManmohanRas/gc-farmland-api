@@ -1,0 +1,53 @@
+﻿
+namespace PresTrust.FarmLand.Application.Queries;
+
+public class GetTermAppAdminDeedDetailsQueryHandler :BaseHandler, IRequestHandler<GetTermAppAdminDeedDetailsQuery, GetTermAppAdminDeedDetailsQueryViewModel>
+{
+
+    private readonly IMapper mapper;
+    private readonly ITermAppAdminDeedDetailsRepository repoDeedDetails;
+    private ITermOtherDocumentsRepository repoOtherDocument;
+    private IApplicationRepository repoApplication;
+
+    public GetTermAppAdminDeedDetailsQueryHandler
+    (
+        IMapper mapper,
+        ITermAppAdminDeedDetailsRepository repoDeedDetails,
+        ITermOtherDocumentsRepository repoOtherDocument,
+        IApplicationRepository repoApplication
+    ) :base(repoApplication:repoApplication)
+    {
+        this.mapper = mapper;
+        this.repoDeedDetails = repoDeedDetails;
+        this.repoOtherDocument = repoOtherDocument;
+    }
+    public async Task<GetTermAppAdminDeedDetailsQueryViewModel> Handle(GetTermAppAdminDeedDetailsQuery request, CancellationToken cancellationToken)
+    {
+        var application = await GetIfApplicationExists(request.ApplicationId);  
+        
+        var result = new GetTermAppAdminDeedDetailsQueryViewModel();
+
+        var deeddetails = await this.repoDeedDetails.GetTermAppAdminDeedDetails(request.ApplicationId);
+        result.DeedDetails = mapper.Map<IEnumerable<TermAppAdminDeedDetailsEntity>, IEnumerable<TermAppAdminDeedDetailsViewModel>>(deeddetails);
+
+        var documents = await GetDocuments(request.ApplicationId);
+        result.DocumentsTree = documents ?? new List<TermDocumentTypeViewModel>();
+
+        return result;
+    }
+
+    private async Task<List<TermDocumentTypeViewModel>> GetDocuments(int applicationId)
+    {
+        var documents = await repoOtherDocument.GetTermDocumentsAsync(applicationId, (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS);
+
+        List<TermDocumentTypeViewModel> documentsTree = new List<TermDocumentTypeViewModel>();
+        if (documents != null)
+        {
+            var docBuilder = new ApplicationDocumentTreeBuilder(documents);
+            documentsTree = docBuilder.DocumentsTree;
+        }
+        return documentsTree;
+    }
+
+}
+
