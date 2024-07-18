@@ -159,14 +159,19 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
             Message = "All required fields on LOCATION tab have not been filled.",
             
         });
-
         statusChangeRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
             SectionId = (int)ApplicationSectionEnum.OWNER_DETAILS,
             Message = "All required fields on OWNER_DETAILS tab have not been filled.",
         });
+        statusChangeRules.Add(new TermBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)ApplicationSectionEnum.SITE_CHARACTERISTICS,
+            Message = "All required fields on SITE_CHARACTERISTICS tab have not been filled.",
 
+        });
         statusChangeRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,

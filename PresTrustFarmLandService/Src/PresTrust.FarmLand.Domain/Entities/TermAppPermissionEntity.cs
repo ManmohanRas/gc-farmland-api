@@ -45,7 +45,6 @@
         public bool CanRejectApplication { get; set; } = false;
         public bool CanWithdrawApplication { get; set; } = false;
         public bool CanAgreementApproveApplication { get; set; } = false;
-        public bool CanReinitiateApplication { get; set; } = false;
         public bool CanSwitchSADC { get; set; } = false;
 
 
