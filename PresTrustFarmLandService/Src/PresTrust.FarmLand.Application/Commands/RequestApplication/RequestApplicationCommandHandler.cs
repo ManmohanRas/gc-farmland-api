@@ -162,34 +162,33 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
     {
         List<TermBrokenRuleEntity> statusChangeRules = new List<TermBrokenRuleEntity>();
 
+        // add default broken rule while initiating application flow
+        // statusChangeRules.Add(new TermBrokenRuleEntity()
+        // {
+        //     ApplicationId = application.Id,
+        //     SectionId = (int)ApplicationSectionEnum.LOCATION,
+        //     Message = "All required fields on LOCATION tab have not been filled.",
+            
+        // });
+        // statusChangeRules.Add(new TermBrokenRuleEntity()
+        // {
+        //     ApplicationId = application.Id,
+        //     SectionId = (int)ApplicationSectionEnum.OWNER_DETAILS,
+        //     Message = "All required fields on OWNER DETAILS tab have not been filled.",
+        // });
+        statusChangeRules.Add(new TermBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)ApplicationSectionEnum.SITE_CHARACTERISTICS,
+            Message = "All required fields on SITE CHARACTERISTICS tab have not been filled.",
 
-  
-            // add default broken rule while initiating application flow
-            statusChangeRules.Add(new TermBrokenRuleEntity()
-            {
-                ApplicationId = application.Id,
-                SectionId = (int)ApplicationSectionEnum.LOCATION,
-                Message = "All required fields on LOCATION tab have not been filled.",
-                IsApplicantFlow = true
-
-            });
-
-            statusChangeRules.Add(new TermBrokenRuleEntity()
-            {
-                ApplicationId = application.Id,
-                SectionId = (int)ApplicationSectionEnum.OWNER_DETAILS,
-                Message = "All required fields on OWNER DETAILS tab have not been filled.",
-                IsApplicantFlow = true
-            });
-
-            statusChangeRules.Add(new TermBrokenRuleEntity()
-            {
-                ApplicationId = application.Id,
-                SectionId = (int)ApplicationSectionEnum.SIGNATORY,
-                Message = "All required fields on SIGNATORY tab have not been filled.",
-                IsApplicantFlow = true
-            });
-        
+        });
+        statusChangeRules.Add(new TermBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)ApplicationSectionEnum.SIGNATORY,
+            Message = "All required fields on SIGNATORY tab have not been filled.",
+        });
 
             return statusChangeRules;
         

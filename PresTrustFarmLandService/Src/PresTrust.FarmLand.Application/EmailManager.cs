@@ -2,7 +2,7 @@
 
 public interface IEmailManager
 {
-    Task SendMail(string subject, string htmlBody, int applicationId, string applicationName, string? emailTemplateCode = default, int agencyId = default, string? owner = default, string? location = default, string? deedDetails = default);
+    Task SendMail(string subject, string htmlBody, int applicationId, string applicationName, string? emailTemplateCode = default, int agencyId = default, OwnerDetailsEntity? owner = default, TermAppAdminDeedDetailsEntity? deed = default);
 
 }
 
@@ -79,7 +79,7 @@ public class EmailManager : IEmailManager
     /// <param name="htmlBody"></param>
     /// <param name="flagTestEmail"></param>
     /// <returns></returns>
-    public async Task SendMail(string subject, string htmlBody, int applicationId,  string applicationName, string? emailTemplateCode = default, int agencyId = default, string? owner = default, string? location = default, string? deedDetails = default)
+    public async Task SendMail(string subject, string htmlBody, int applicationId,  string applicationName, string? emailTemplateCode = default, int agencyId = default, OwnerDetailsEntity? owner = default, TermAppAdminDeedDetailsEntity? deed = default)
     {
         var primaryContact = await GetPrimaryContact(applicationId, agencyId);
 
@@ -96,18 +96,38 @@ public class EmailManager : IEmailManager
         htmlBody = htmlBody.Replace("{{PrimaryContactName}}", string.Join(",", primaryContact.Item1));
         htmlBody = htmlBody.Replace("{{FarmName}}", applicationName ?? "");
         htmlBody = htmlBody.Replace("{{NextMeetingDate}}", fifthNextMonth.ToString("dddd, MMMM dd, yyyy"));
+       // htmlBody = htmlBody.Replace("{{OwnerFirst}}", owner.FirstName ?? "");
+       // htmlBody = htmlBody.Replace("{{OwnerLast}}", owner.LastName ?? "");
+       // htmlBody = htmlBody.Replace("{{DeedBook}}", deed.OriginalBook ?? "");
+       // htmlBody = htmlBody.Replace("{{DeedPage}}", deed.OriginalPage ?? "");
+        if (owner != null)
+        {
+            htmlBody = htmlBody.Replace("{{OwnerFirst}}", owner.FirstName ?? "");
+            htmlBody = htmlBody.Replace("{{OwnerLast}}", owner.LastName ?? "");
+        }
+        else
+        {
+            htmlBody = htmlBody.Replace("{{OwnerFirst}}", "");
+            htmlBody = htmlBody.Replace("{{OwnerLast}}", "");
+        }
 
+        if (deed != null)
+        {
+            htmlBody = htmlBody.Replace("{{DeedBook}}", deed.OriginalBook ?? "");
+            htmlBody = htmlBody.Replace("{{DeedPage}}", deed.OriginalPage ?? "");
+        }
+        else
+        {
+            htmlBody = htmlBody.Replace("{{DeedBook}}", "");
+            htmlBody = htmlBody.Replace("{{DeedPage}}", "");
+        }
 
-            //htmlBody = htmlBody.Replace("{{FirstName}}", owner ?? "");
-            //htmlBody = htmlBody.Replace("{{LastName}}", owner ?? "");
-            //htmlBody = htmlBody.Replace("{{Municipality}}", location ?? "");
-            //htmlBody = htmlBody.Replace("{{Block}}", location ?? "");
-            //htmlBody = htmlBody.Replace("{{Lot}}", location ?? "");
-            //htmlBody = htmlBody.Replace("{{DeedBook}}", deedDetails  ?? "");
-            //htmlBody = htmlBody.Replace("{{DeedPage}}", deedDetails ?? "");
-            // htmlBody = htmlBody.Replace("{{SADCContact}}",  ?? "");
-            // htmlBody = htmlBody.Replace("{{FarmName}}",  ?? 
-            subject = subject.Replace("{{FarmName}}", applicationName ?? "");
+        //htmlBody = htmlBody.Replace("{{Municipality}}", location ?? "");
+        //htmlBody = htmlBody.Replace("{{Block}}", location ?? "");
+        //htmlBody = htmlBody.Replace("{{Lot}}", location ?? "");
+        // htmlBody = htmlBody.Replace("{{SADCContact}}",  ?? "");
+        // htmlBody = htmlBody.Replace("{{FarmName}}",  ?? 
+        subject = subject.Replace("{{FarmName}}", applicationName ?? "");
       
       //oEmails = systemParamOptions.IsDevelopment == false ? string.Join(",", primaryContact.Item2) : systemParamOptions.TestEmailIds;
         toEmails = systemParamOptions.TestEmailIds;

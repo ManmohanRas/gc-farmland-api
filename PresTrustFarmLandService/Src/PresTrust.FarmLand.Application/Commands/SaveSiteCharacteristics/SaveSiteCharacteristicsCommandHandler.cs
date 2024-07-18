@@ -61,12 +61,6 @@ public class SaveSiteCharacteristicsCommandHandler : BaseHandler, IRequestHandle
     {
         int sectionId = (int)ApplicationSectionEnum.SITE_CHARACTERISTICS;
         List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
-     //   var appplicationStatuses = new List<ApplicationStatusEnum>()
-     //   {
-     //       ApplicationStatusEnum.PETITION_DRAFT
-       // };
-     //   if (!appplicationStatuses.Contains(application.Status))
-     //   {}
 
             if(string.IsNullOrEmpty( reqSiteCharacteristics.Area))
             {
