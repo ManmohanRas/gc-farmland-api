@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.Application.Commands;
+﻿using static System.Net.Mime.MediaTypeNames;
+
+namespace PresTrust.FarmLand.Application.Commands;
 
 public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<RequestApplicationCommand, RequestApplicationCommandViewModel>
 {
@@ -45,6 +47,8 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
 
         // check if application exists
         var application = await GetIfApplicationExists(request.ApplicationId);
+        AuthorizationCheck(application);
+
 
         //update application
         if (application != null)
@@ -54,7 +58,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         }
 
         // check if any broken rules exists, if yes then return
-        var brokenRules = (await repoBrokenRules.GetBrokenRulesAsync(application.Id))?.ToList();
+        var brokenRules = (await repoBrokenRules.GetBrokenRulesAsync(application.Id));
 
         if (brokenRules != null && brokenRules.Any())
         {
@@ -102,9 +106,15 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
 
         return result;
     }
-
+    private void AuthorizationCheck(FarmApplicationEntity application)
+    {
+        // security
+        userContext.DeriveRole(application.AgencyId);
+        IsAuthorizedOperation(userRole: userContext.Role, application: application, operation: UserPermissionEnum.SUBMIT_APPLICATION);
+    }
     private async Task<List<TermBrokenRuleEntity>> CheckApplicationOtherDocs(int applicationId, ApplicationStatusEnum applicationStatus, int sectionId)
     {
+
         var documents = await repoOtherDocs.GetTermDocumentsAsync(applicationId, sectionId);
 
         List<TermBrokenRuleEntity> otherdocRules = new List<TermBrokenRuleEntity>();
@@ -137,6 +147,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
                     Message = "TAX_MAP document is not uploaded in OtherDocuments Tab"
                 });
             }
+
         }
         return otherdocRules;
     }
@@ -152,24 +163,24 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         List<TermBrokenRuleEntity> statusChangeRules = new List<TermBrokenRuleEntity>();
 
         // add default broken rule while initiating application flow
-        statusChangeRules.Add(new TermBrokenRuleEntity()
-        {
-            ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.LOCATION,
-            Message = "All required fields on LOCATION tab have not been filled.",
+        // statusChangeRules.Add(new TermBrokenRuleEntity()
+        // {
+        //     ApplicationId = application.Id,
+        //     SectionId = (int)ApplicationSectionEnum.LOCATION,
+        //     Message = "All required fields on LOCATION tab have not been filled.",
             
-        });
-        statusChangeRules.Add(new TermBrokenRuleEntity()
-        {
-            ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.OWNER_DETAILS,
-            Message = "All required fields on OWNER_DETAILS tab have not been filled.",
-        });
+        // });
+        // statusChangeRules.Add(new TermBrokenRuleEntity()
+        // {
+        //     ApplicationId = application.Id,
+        //     SectionId = (int)ApplicationSectionEnum.OWNER_DETAILS,
+        //     Message = "All required fields on OWNER DETAILS tab have not been filled.",
+        // });
         statusChangeRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
             SectionId = (int)ApplicationSectionEnum.SITE_CHARACTERISTICS,
-            Message = "All required fields on SITE_CHARACTERISTICS tab have not been filled.",
+            Message = "All required fields on SITE CHARACTERISTICS tab have not been filled.",
 
         });
         statusChangeRules.Add(new TermBrokenRuleEntity()
@@ -179,7 +190,8 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
             Message = "All required fields on SIGNATORY tab have not been filled.",
         });
 
-        return statusChangeRules;
+            return statusChangeRules;
+        
     }
 
 }
