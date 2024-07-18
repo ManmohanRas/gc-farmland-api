@@ -15,5 +15,5 @@ public class SaveOwnerDetailsCommand : IRequest<int>
     public string PhoneNumber { get; set; }
     public string City { get; set; }
     public string State { get; set; }
-    public int ZipCode { get; set; }
+    public string ZipCode { get; set; }
 }
