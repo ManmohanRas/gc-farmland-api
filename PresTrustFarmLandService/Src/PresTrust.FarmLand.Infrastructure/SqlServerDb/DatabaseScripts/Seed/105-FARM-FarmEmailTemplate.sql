@@ -2,9 +2,9 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 	 1, 
  'CHANGE_STATUS_FROM_AGREEMENT_APPROVED_TO_ACTIVE', 
  'Change status from Agreement Approved to Active', 
- 'Morris County Farm Mitigation Program – Agreement Approved to Active', 
+ 'Term Program - {{FarmName}}', 
 
-    '<p>Dear {{PrimaryContactName}},</p>
+'<p>Dear {{PrimaryContactName}},</p>
 <p>Please take notice that the following property has been enrolled in a Farmland Preservation Program for a period of sixteen years:</p>
  <p>LandOwner: {{OwnerFirst}}, {{OwnerLast}} </p>
  <p>Municipality: {{Municipality}}</p>
@@ -23,26 +23,28 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
  <br>
 Sincerely,</p>
 <p>{{ProgramAdmin}}<br>
+
+<p>Director</p>
 Morris County Agriculture Development Board<br>
 Morris County Office of Planning & Preservation<br>
 P.O. Box 900<br>
 Morristown, NJ 07963-0900<br>
-(973) 326-9025 (O)<br>
+Phone: (973) 829-8120
+Fax: (973) 326-9025<br>
 E-Mail: kcoyle@co.morris.nj.us<br>
 Website: https://www.morriscountynj.gov/agriculture </p>', 
     1);
 GO
 
 INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
-   2, 'TRIGER_THE_EMAIL_WHEN__SADC_BUTTON_IS_ENABLED',
-		'Triger The Email When SADC Button is Eanbled',
-		'Morris County Farm Lands Program – SADC Button is Eanbled', 
+   2, 'TRIGER_THE_EMAIL_WHEN_SADC_IS_ENABLED',
+		'Triger The Email When SADC is Eanbled',
+		' Term Program - {{Block}}, {{Lot}}, {{Municipality}}', 
 
 		'<P>Dear {{SADCContact}},</P>
 		<P>Pursuant to N.J.A.C. 2:76-3.6, the Morris County Agriculture Development Board (Morris CADB) 
 		hereby submits a request for Certification of a Farmland Preservation Program (Term-Year Program) 
 		for the above referenced property.</P>
-		<P>The following are enclosed for your review:</p>
 		<p>Petition;</p>
 		<p>Signed original copy of the Agreement;</p>
 		<p>Morris CADB resolution;</p>
@@ -51,11 +53,14 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 		<br>
 		Sincerely,</p>
 		<p>{{ProgramAdmin}}<br>
+
+		<p>Director</p>
 		Morris County Agriculture Development Board<br>
 		Morris County Office of Planning & Preservation<br>
 		P.O. Box 900<br>
 		Morristown, NJ 07963-0900<br>
-		(973) 326-9025 (O)<br>
+		Phone: (973) 829-8120
+		Fax: (973) 326-9025<br>
 		E-Mail: kcoyle@co.morris.nj.us<br>
 		Website: https://www.morriscountynj.gov/agriculture </p>', 
 
@@ -65,22 +70,24 @@ GO
 INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
    3,	'CHANGE_STATUS_FROM_REQUESTED_TO_APPROVED', 
 		'Change status from Requested to Approved', 
-		'Morris County Farm Mitigation Program – Requested to Approved', 
+		'Term Program - {{FarmName}}', 
 
 		'<P>Dear {{PrimaryContactName}},</P>
 		<P>I am pleased to forward to you the Term Farmland Preservation Program Agreement for your property.</p> 
 		<p>Please sign the document before a witness (notary public) and have the witness attest the signature. Once signed, please return the document to me</p>
 		<p>I will then present the document for signature to the Morris County Agriculture Development Board (CADB) and to the State Agriculture Development Committee (SADC) for certification. Lastly, the County will record the document in the Hall of Records.</p>
-		<P>The following are enclosed for your review:</p>
 		<p>If you have any questions or require additional information, please contact me.</p>
 		<br>
 		Sincerely,</p>
 		<p>{{ProgramAdmin}}<br>
+
+		<p>Director</p>
 		Morris County Agriculture Development Board<br>
 		Morris County Office of Planning & Preservation<br>
 		P.O. Box 900<br>
 		Morristown, NJ 07963-0900<br>
-		(973) 326-9025 (O)<br>
+		Phone: (973) 829-8120
+		Fax: (973) 326-9025<br>
 		E-Mail: kcoyle@co.morris.nj.us<br>
 		Website: https://www.morriscountynj.gov/agriculture </p>', 
 
@@ -90,7 +97,7 @@ GO
 INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
    4,	'CHANGE_STATUS_FROM_DRAFT_TO_REQUESTED', 
 		'Change status from Draft to Requested', 
-		'Morris County Farm Mitigation Program – Draft to Requested', 
+		'Term Program - {{FarmName}}', 
 
 		'<P>Dear {{PrimaryContactName}},</P>
 		<P>I am in receipt of your Petition document and have added this item to the Morris CADB’s {{NextMeetingDate}} meeting agenda. The board will discuss the matter and if found acceptable, will direct staff to prepare a resolution approving the Petition.</p> 
@@ -100,11 +107,14 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 		<br>
 		Sincerely,</p>
 		<p>{{ProgramAdmin}}<br>
+
+		<p>Director</p>
 		Morris County Agriculture Development Board<br>
 		Morris County Office of Planning & Preservation<br>
 		P.O. Box 900<br>
 		Morristown, NJ 07963-0900<br>
-		(973) 326-9025 (O)<br>
+		Phone: (973) 829-8120
+		Fax: (973) 326-9025<br>
 		E-Mail: kcoyle@co.morris.nj.us<br>
 		Website: https://www.morriscountynj.gov/agriculture </p>', 
 

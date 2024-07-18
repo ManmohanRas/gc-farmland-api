@@ -21,6 +21,7 @@
             services.AddTransient<ITermAppAdminContactsRepository, TermAppAdminContactsRepository>();
             services.AddTransient<IEmailManager, EmailManager>();
             services.AddTransient<IEmailTemplateRepository, EmailTemplateRepository>();
+            services.AddTransient<IFarmBlockLotRepository, FarmBlockLotRepository>();
         }
     }
 }

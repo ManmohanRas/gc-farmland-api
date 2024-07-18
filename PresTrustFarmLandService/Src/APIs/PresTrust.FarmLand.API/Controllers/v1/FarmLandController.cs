@@ -439,5 +439,19 @@ public class FarmLandController : ApiBaseController
        {
            return Single(await CommandAsync(command));
        }
+
+        [HttpPost("getFarmBlockLots")]
+        [ProducesResponseType(typeof(IEnumerable<GetFarmBlockLotQueryViewModel>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<GetFarmBlockLotQueryViewModel>>> GetFarmBlockLots([FromBody] GetFarmBlockLotQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
+
+        [HttpPost("saveFarmBlockLot")]
+        [ProducesResponseType(typeof(SaveFarmBlockLotCommandViewModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<SaveFarmBlockLotCommandViewModel>> SaveFarmBlockLot([FromBody] SaveFarmBlockLotCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
 }
 
