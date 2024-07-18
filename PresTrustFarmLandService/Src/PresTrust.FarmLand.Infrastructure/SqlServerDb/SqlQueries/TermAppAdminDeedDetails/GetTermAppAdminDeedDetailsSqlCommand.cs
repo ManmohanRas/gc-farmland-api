@@ -11,13 +11,17 @@ public class GetTermAppAdminDeedDetailsSqlCommand
                     ,[OriginalLot]
                     ,[OriginalBook]
                     ,[OriginalPage]
-                    ,[NOTBook]
-                    ,[NOTPage]
-                    ,[RDBook]
-                    ,[RDPage]
+                    ,[NOTBlock]						
+                    ,[NOTLot]						
+                    ,[NOTBook]						
+                    ,[NOTPage]						
+                    ,[RDBlock]						
+                    ,[RDLot]							
+                    ,[RDBook]						
+                    ,[RDPage]						                    
                     ,[LastUpdatedBy]
                     ,[LastUpdatedOn]
-                FROM [Farm].[[Farm].[FarmTermAppDeedDetails] 
+                FROM [Farm].[FarmTermAppDeedDetails] 
                 WHERE [ApplicationId] = @p_ApplicationId;"
        ;
    

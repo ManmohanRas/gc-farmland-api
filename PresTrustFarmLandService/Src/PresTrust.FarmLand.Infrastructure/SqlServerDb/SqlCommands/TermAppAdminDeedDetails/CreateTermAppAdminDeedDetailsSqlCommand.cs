@@ -10,10 +10,14 @@ public class CreateTermAppAdminDeedDetailsSqlCommand
 	            ,OriginalLot					
 	            ,OriginalBook				
 	            ,OriginalPage					
-	            ,NOTBook						
-	            ,NOTPage						
-	            ,RDBook						
-	            ,RDPage						
+                ,NOTBlock						
+                ,NOTLot						
+                ,NOTBook						
+                ,NOTPage						
+                ,RDBlock						
+                ,RDLot							
+                ,RDBook						
+                ,RDPage							            
                 ,LastUpdatedBy
                 ,LastUpdatedOn
               )
@@ -23,10 +27,14 @@ public class CreateTermAppAdminDeedDetailsSqlCommand
                ,@p_OriginalLot					
                ,@p_OriginalBook				
                ,@p_OriginalPage					
+               ,@p_NOTBlock						
+               ,@p_NOTLot						
                ,@p_NOTBook						
-               ,@p_NOTPage		
+               ,@p_NOTPage						
+               ,@p_RDBlock						
+               ,@p_RDLot							
                ,@p_RDBook						
-               ,@p_RDPage						
+               ,@p_RDPage							                           
                ,@p_LastUpdatedBy
                ,GetDate());
 
