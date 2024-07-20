@@ -11,8 +11,9 @@ public class GetApplicationDetailsSqlCommand
                 A.[StatusId],
                 A.[CreatedOn],
 				A.[IsApprovedByMunicipality],
+				A.[FarmListID],
 				[AgencyJSON],
-				PropertyLEGACY.[MunIcipality],
+				PropertyLEGACY.[Municipality],
 				PropertyLEGACY.[MunicipalID]
                FROM [Farm].[FarmApplication] AS A
 			JOIN

@@ -23,6 +23,11 @@ public class CreateFarmBlockLotSqlCommand
                        ,[ChangeDate]
                        ,[ReasonForChange]
                        ,[IsActive]
+                       ,[PropertyClassCode]
+                       ,[DeedBook]
+                       ,[DeedPage]
+                       ,[CreatedByProgramUser]
+                       ,[IsWarning]
                        ,[LastUpdatedOn]
                        ,[LastUpdatedBy])
                  VALUES
@@ -45,6 +50,11 @@ public class CreateFarmBlockLotSqlCommand
                        ,@p_ChangeDate
                        ,@p_ReasonForChange
                        ,@p_IsActive
+                       ,@p_PropertyClassCode
+                       ,@p_DeedBook
+                       ,@p_DeedPage
+                       ,@p_CreatedByProgramUser
+                       ,@p_IsWarning
                        ,@p_LastUpdatedBy
                        ,@p_LastUpdatedOn);
 
