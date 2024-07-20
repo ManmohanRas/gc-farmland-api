@@ -468,5 +468,19 @@ public class FarmLandController : ApiBaseController
             return Single(await CommandAsync(command));
         }
 
+        [HttpPost("getTermLocationDetails")]
+        [ProducesResponseType(typeof(GetLocationDetailsQueryViewModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetLocationDetailsQueryViewModel>> GetTermLocationDetails([FromBody] GetLocationDetailsQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
+
+        [HttpPost("saveLocationDetails")]
+        [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Unit>> SaveLocationDetails([FromBody] SaveLocationDetailsCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
+
 }
 

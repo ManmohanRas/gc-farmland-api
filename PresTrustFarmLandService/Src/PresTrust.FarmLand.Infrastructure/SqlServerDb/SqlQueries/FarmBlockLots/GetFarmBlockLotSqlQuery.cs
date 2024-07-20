@@ -13,14 +13,19 @@ public  class GetFarmBlockLotSqlQuery
 			  ,MBL.IsActive
 			  ,MBL.InterestType
 			  ,MBL.Section
-														   ,MBL.Acres
-														   ,MBL.AcresToBeAcquired
-														   ,MBL.Partial
-														   ,MBL.ExceptionArea
-														   ,MBL.EasementId
-														   ,MBL.ChangeType
-														   ,MBL.ChangeDate
-														   ,MBL.ReasonForChange
+			  ,MBL.PamsPin
+			  ,MBL.Acres
+			  ,MBL.AcresToBeAcquired
+		      ,MBL.Partial
+			  ,MBL.ExceptionArea
+			  ,MBL.EasementId
+			  ,MBL.ChangeType
+			  ,MBL.ChangeDate
+			  ,MBL.ReasonForChange
+			  ,MBL.PropertyClassCode
+			  ,MBL.DeedBook
+			  ,MBL.DeedPage
+			  ,MBL.IsWarning
               FROM [Farm].[FarmMunicipalityBlockLotParcel] MBL;";
 
     public override string ToString()

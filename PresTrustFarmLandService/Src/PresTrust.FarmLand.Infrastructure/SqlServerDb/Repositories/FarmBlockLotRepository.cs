@@ -82,6 +82,11 @@ public class FarmBlockLotRepository: IFarmBlockLotRepository
                 @p_ChangeDate = parcel.ChangeDate,
                 @p_ReasonForChange = parcel.ReasonForChange,
                 @p_IsActive = parcel.IsActive,
+                @p_PropertyClassCode = parcel.PropertyClassCode,
+                @p_DeedBook = parcel.DeedBook,
+                @p_DeedPage = parcel.DeedPage,
+                @p_CreatedByProgramUser = parcel.CreatedByProgramUser,
+                @p_IsWarning = parcel.IsWarning,
                 @p_LastUpdatedBy = parcel.LastUpdatedBy,
                 @p_LastUpdatedOn = DateTime.Now
             });
@@ -118,6 +123,11 @@ public class FarmBlockLotRepository: IFarmBlockLotRepository
                 @p_ChangeDate = parcel.ChangeDate,
                 @p_ReasonForChange = parcel.ReasonForChange,
                 @p_IsActive = parcel.IsActive,
+                @p_PropertyClassCode = parcel.PropertyClassCode,
+                @p_DeedBook = parcel.DeedBook,
+                @p_DeedPage = parcel.DeedPage,
+                @p_CreatedByProgramUser = parcel.CreatedByProgramUser,
+                @p_IsWarning = parcel.IsWarning,
                 @p_LastUpdatedBy = parcel.LastUpdatedBy,
                 @p_LastUpdatedOn = DateTime.Now
             });

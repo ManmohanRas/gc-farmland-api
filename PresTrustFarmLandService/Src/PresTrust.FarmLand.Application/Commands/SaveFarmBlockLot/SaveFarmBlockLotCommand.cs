@@ -31,6 +31,4 @@ public class SaveFarmBlockLotCommand: IRequest<SaveFarmBlockLotCommandViewModel>
     public string Status { get; set; } = "";
     public bool IsWarning { get; set; }
     public bool CreatedByProgramUser { get; set; }
-    public string RowStatus { get; set; } = "";
-
 }

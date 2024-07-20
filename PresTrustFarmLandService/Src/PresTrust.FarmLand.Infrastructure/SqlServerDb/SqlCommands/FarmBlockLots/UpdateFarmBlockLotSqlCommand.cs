@@ -22,6 +22,11 @@ public class UpdateFarmBlockLotSqlCommand
                           ,[ChangeDate] = @p_ChangeDate
                           ,[ReasonForChange] = @p_ReasonForChange
                           ,[IsActive] = @p_IsActive
+                          ,[PropertyClassCode] = @p_PropertyClassCode
+                          ,[DeedBook] = @p_DeedBook
+                          ,[DeedPage] = @p_DeedPage
+                          ,[CreatedByProgramUser] = @p_CreatedByProgramUser
+                          ,[IsWarning] = @p_IsWarning
                           ,[LastUpdatedOn] = @p_LastUpdatedBy
                           ,[LastUpdatedBy] = @p_LastUpdatedOn
                      WHERE Id = @p_Id and FarmListID = @p_FarmListID;";

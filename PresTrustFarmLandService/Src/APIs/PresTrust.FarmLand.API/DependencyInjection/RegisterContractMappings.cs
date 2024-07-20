@@ -23,6 +23,8 @@
             services.AddTransient<IEmailTemplateRepository, EmailTemplateRepository>();
             services.AddTransient<IFarmBlockLotRepository, FarmBlockLotRepository>();
             services.AddTransient<ITermAppAdminDeedDetailsRepository, TermAppAdminDeedDetailsRepository>();
+            services.AddTransient<ITermAppLocationRepository, TermAppLocationRepository>();
+
         }
     }
 }
