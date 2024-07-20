@@ -7,14 +7,15 @@ public class SaveOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<SaveO
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
     private IOwnerDetailsRepository repoOwner;
-
+    private readonly ITermBrokenRuleRepository repoBrokenRules;
     public SaveOwnerDetailsCommandHandler
     (
       IMapper mapper,
       IPresTrustUserContext userContext,
       IOptions<SystemParameterConfiguration> systemParamOptions,
       IApplicationRepository repoApplication,
-      IOwnerDetailsRepository repoOwner
+      IOwnerDetailsRepository repoOwner,
+      ITermBrokenRuleRepository repoBrokenRules
     ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
@@ -22,6 +23,7 @@ public class SaveOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<SaveO
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;
         this.repoOwner = repoOwner;
+        this.repoBrokenRules = repoBrokenRules;
     }
 
     /// <summary>
@@ -37,9 +39,45 @@ public class SaveOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<SaveO
 
         var reqOwner = mapper.Map<SaveOwnerDetailsCommand, OwnerDetailsEntity>(request);
 
-        reqOwner = await repoOwner.SaveOwnerDetailsAsync(reqOwner);
+        var brokenRules = ReturnBrokenRulesIfAny(application);
 
-        return reqOwner.Id;
+
+        using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
+        {
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.OWNER_DETAILS);
+            await repoBrokenRules.SaveBrokenRules(await brokenRules);
+            reqOwner = await repoOwner.SaveOwnerDetailsAsync(reqOwner);
+            reqOwner.LastUpdatedBy = userContext.Email;
+
+            scope.Complete();
+
+        }
+            return reqOwner.Id;
+    }
+
+
+    private async Task<List<TermBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    {
+        int sectionId = (int)ApplicationSectionEnum.OWNER_DETAILS;
+        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
+
+        var getDetails = await repoOwner.GetOwnerDetailsAsync(application.Id);
+
+
+        if (getDetails.Count() == 0) {
+         brokenRules.Add(new TermBrokenRuleEntity() { 
+             ApplicationId = application.Id,
+             SectionId = sectionId,
+             Message = "At least One Record Should be filled in OwnerDetails Tab.",
+             IsApplicantFlow = false,
+            
+         
+         });
+        
+        }
+
+        return  brokenRules;
+
     }
 }
 

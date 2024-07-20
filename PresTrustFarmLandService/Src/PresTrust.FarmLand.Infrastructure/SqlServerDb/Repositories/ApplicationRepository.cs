@@ -164,5 +164,27 @@ public class ApplicationRepository : IApplicationRepository
         return true;
     }
 
+    /// <summary>
+    /// update application status
+    /// </summary>
+    /// <param name="application"></param>
+    /// <param name="enumStatus"></param>
+    /// <returns></returns>
+    public async Task<bool> UpdateSadcAsync(FarmApplicationEntity application)
+    {
+        using var conn = context.CreateConnection();
+        var sqlCommand = new UpdateSadcSqlCommand();
+        await conn.ExecuteAsync(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+            param: new
+            {
+                @p_Id = application.Id,
+                @p_IsSadc = application.IsSadc,
+            });
+
+        return true;
+    }
+
 }
 

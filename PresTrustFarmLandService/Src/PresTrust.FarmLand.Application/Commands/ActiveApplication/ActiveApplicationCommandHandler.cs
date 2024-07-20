@@ -10,6 +10,8 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
     private readonly IEmailManager repoEmailManager;
     private readonly ITermAppAdminDetailsRepository repoTermAppAdminDetailsRepository;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
+    private readonly IOwnerDetailsRepository repoOwner;
+    private readonly ITermAppAdminDeedDetailsRepository repoDeedDetails;
 
     public ActiveApplicationCommandHandler
     (
@@ -20,7 +22,9 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
         IEmailTemplateRepository repoEmailTemplate,
         IEmailManager repoEmailManager,
         ITermAppAdminDetailsRepository repoTermAppAdminDetailsRepository,
-        ITermBrokenRuleRepository repoBrokenRules
+        ITermBrokenRuleRepository repoBrokenRules,
+        IOwnerDetailsRepository repoOwner,
+        ITermAppAdminDeedDetailsRepository repoDeedDetails
     ) : base(repoApplication)
     {
         this.mapper = mapper;
@@ -31,6 +35,8 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
         this.repoEmailManager = repoEmailManager;
         this.repoTermAppAdminDetailsRepository = repoTermAppAdminDetailsRepository;
         this.repoBrokenRules = repoBrokenRules;
+        this.repoOwner = repoOwner;
+        this.repoDeedDetails = repoDeedDetails;
     }
 
     /// <summary>
@@ -42,9 +48,19 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
     public async Task<ActiveApplicationCommandViewModel> Handle(ActiveApplicationCommand request, CancellationToken cancellationToken)
     {
         ActiveApplicationCommandViewModel result = new();
+        IEnumerable<OwnerDetailsEntity> ownerDetails;
+        IEnumerable<TermAppAdminDeedDetailsEntity> deeddetails;
+
 
         // check if application exists
         var application = await GetIfApplicationExists(request.ApplicationId);
+
+        // get Owner Details
+        ownerDetails = await repoOwner.GetOwnerDetailsAsync(request.ApplicationId);
+
+
+        // get Deed Details
+        deeddetails = await repoDeedDetails.GetTermAppAdminDeedDetails(request.ApplicationId);
 
         //update application
         if (application != null)
@@ -86,7 +102,7 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
             //Send Email 
             var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_AGREEMENT_APPROVED_TO_ACTIVE.ToString());
             if (template != null)
-                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
+                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, owner: ownerDetails.FirstOrDefault(), deed: deeddetails.FirstOrDefault() );
 
             scope.Complete();
             result.IsSuccess = true;
