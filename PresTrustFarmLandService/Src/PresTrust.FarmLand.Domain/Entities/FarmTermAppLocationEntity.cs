@@ -7,6 +7,7 @@ public class FarmTermAppLocationEntity
     public int FarmListID { get; set; }
     public string PamsPin { get; set; }
     public bool IsChecked { get; set; }
+    public string RowStatus { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
 }

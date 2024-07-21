@@ -41,11 +41,10 @@ public class TermAppLocationRepository: ITermAppLocationRepository
         return results ?? new();
     }
 
-    public async Task<bool> CheckLocationParcel(int applicationId,List<FarmTermAppLocationEntity> parcels)
+    public async Task<bool> CheckLocationParcel(int applicationId,FarmTermAppLocationEntity parcel)
     {
         using var conn = context.CreateConnection();
-        foreach (var parcel in parcels)
-        {
+       
             var sqlCommand = new CreateTermAppLocationSqlCommand();
             await conn.ExecuteAsync(sqlCommand.ToString(),
                 commandType: CommandType.Text,
@@ -58,9 +57,28 @@ public class TermAppLocationRepository: ITermAppLocationRepository
                                     @p_PamsPin = parcel.PamsPin,
                                     @p_IsChecked = parcel.IsChecked
                                 });
-        }
+        
         return true;
     }
+
+    public async Task<bool> DeleteTermAppLocationBlockLot(int applicationId, int parcelId)
+    {
+        using var conn = context.CreateConnection();
+       
+            var sqlCommand = new DeleteTermAppLocationBlockLotSqlCommand();
+            await conn.ExecuteAsync(sqlCommand.ToString(),
+                commandType: CommandType.Text,
+                commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+                                param: new
+                                {
+                                    @p_ApplicationId = applicationId,
+                                    @p_ParcelId = parcelId
+                                });
+        
+        return true;
+    }
+
+
 
 
 }

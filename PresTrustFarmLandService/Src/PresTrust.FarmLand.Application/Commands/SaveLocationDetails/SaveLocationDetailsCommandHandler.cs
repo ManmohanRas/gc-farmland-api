@@ -40,7 +40,18 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
         {
             await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.LOCATION);
             await repoBrokenRules.SaveBrokenRules(await brokenRules);
-            var checkLocationParcel = await repoLocation.CheckLocationParcel(request.ApplicationId, parcels);
+            foreach(var parcel in parcels)
+            {
+                if ( parcel.RowStatus == "I")
+                {
+                    parcel.FarmListID = application.FarmListId;
+                    await repoLocation.CheckLocationParcel(request.ApplicationId, parcel);
+                }else if (parcel.RowStatus == "D")
+                {
+                     await repoLocation.DeleteTermAppLocationBlockLot(request.ApplicationId, parcel.ParcelId);
+
+                }
+            }
 
             scope.Complete();
 

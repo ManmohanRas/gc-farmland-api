@@ -17,6 +17,8 @@ public class CreateApplicationCommandViewModel
     public FarmAgencyEntity Agency { get; set; }
     public int MunicipalID { get; set; }
     public string Municipality { get; set; }
+    public int FarmListId { get; set; }
+    public string FarmName { get; set; }
     public IEnumerable<TermCommentsEntity> Comments { get; set; }
     public IEnumerable<TermFeedbacksEntity> Feedbacks { get; set; }
     public TermAppPermissionEntity Permission { get; set; } = new TermAppPermissionEntity();
