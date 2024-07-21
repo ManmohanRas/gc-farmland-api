@@ -14,5 +14,5 @@ public class SaveBlockLot
     public int FarmListID { get; set; }
     public string PamsPin { get; set; }
     public bool IsChecked { get; set; }
-    public bool RowStatus {  get; set; }
+    public string RowStatus {  get; set; }
 }

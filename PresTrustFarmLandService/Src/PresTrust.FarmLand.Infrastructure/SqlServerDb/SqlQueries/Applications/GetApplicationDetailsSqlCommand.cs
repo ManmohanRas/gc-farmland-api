@@ -34,7 +34,8 @@ public class GetApplicationDetailsSqlCommand
 												[AddressLine3],
 												[City],
 												[State],
-												[ZipCode]
+												[ZipCode],
+												[PrimaryTelephone]
 									FOR JSON PATH,
 									WITHOUT_ARRAY_WRAPPER) AS [AgencyJSON]
 					FROM		[Core].[View_AgencyEntities_FARM]
