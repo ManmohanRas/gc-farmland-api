@@ -210,44 +210,40 @@ public class FarmApplicationSecurityManager
                 //LOCATION
                 correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
-                    Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    Location();
                 else
                     Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
                 //Owner Details
                 correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OWNER_DETAILS).FirstOrDefault();
                 if (correction == null)
-                    OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    OwnerDetails();
                 else
                     OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Roles
                 correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.ROLES).FirstOrDefault();
                 if (correction == null)
-                    Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    Roles();
                 else
                     Roles(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //SiteCharacteristics
                 correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SITE_CHARACTERISTICS).FirstOrDefault();
                 if (correction == null)
-                    SiteCharacteristics(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SiteCharacteristics();
                 else
                     SiteCharacteristics(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Other Documents
                 correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
                 if (correction == null)
-                    OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    OtherDocuments();
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Signatory
                 correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SIGNATORY).FirstOrDefault();
                 if (correction == null)
-                    Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    Signatory();
                 else
                     Signatory(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                //AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                //AdminDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                //AdminDeedDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                //AdminContacts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {

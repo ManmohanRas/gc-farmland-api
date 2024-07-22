@@ -39,13 +39,13 @@ public class SaveOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<SaveO
 
         var reqOwner = mapper.Map<SaveOwnerDetailsCommand, OwnerDetailsEntity>(request);
 
-        var brokenRules = ReturnBrokenRulesIfAny(application);
+       // var brokenRules = ReturnBrokenRulesIfAny(application);
 
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.OWNER_DETAILS);
-            await repoBrokenRules.SaveBrokenRules(await brokenRules);
+            //await repoBrokenRules.SaveBrokenRules(await brokenRules);
             reqOwner = await repoOwner.SaveOwnerDetailsAsync(reqOwner);
             reqOwner.LastUpdatedBy = userContext.Email;
 
@@ -64,20 +64,18 @@ public class SaveOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<SaveO
         var getDetails = await repoOwner.GetOwnerDetailsAsync(application.Id);
 
 
-        if (getDetails.Count() == 0) {
-         brokenRules.Add(new TermBrokenRuleEntity() { 
-             ApplicationId = application.Id,
-             SectionId = sectionId,
-             Message = "At least One Record Should be filled in OwnerDetails Tab.",
-             IsApplicantFlow = false,
-            
-         
-         });
-        
+        if (getDetails.Count() == 0)
+        {
+            brokenRules.Add(new TermBrokenRuleEntity()
+            {
+                ApplicationId = application.Id,
+                SectionId = sectionId,
+                Message = "At least One Record Should be filled in OwnerDetails Tab.",
+                IsApplicantFlow = false,
+            });
         }
+        return brokenRules;
 
-        return  brokenRules;
-
+        }
     }
-}
 
