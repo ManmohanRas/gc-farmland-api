@@ -1,0 +1,38 @@
+﻿
+namespace PresTrust.FarmLand.Application.Queries;
+
+public class GetLocationDetailsQueryHandler: BaseHandler, IRequestHandler<GetLocationDetailsQuery, GetLocationDetailsQueryViewModel>
+{
+    private IMapper mapper;
+    private readonly IApplicationRepository repoApplication;
+    private ITermAppLocationRepository repoLocation;
+
+    public GetLocationDetailsQueryHandler
+        (
+        IMapper mapper,
+        IApplicationRepository repoApplication,
+        ITermAppLocationRepository repoLocation
+        ) : base(repoApplication: repoApplication)
+    {
+        this.mapper = mapper;
+        this.repoApplication = repoApplication;
+        this.repoLocation = repoLocation;
+    }
+
+    public async Task<GetLocationDetailsQueryViewModel> Handle(GetLocationDetailsQuery request, CancellationToken cancellationToken)
+    {
+        var application = await GetIfApplicationExists(request.ApplicationId);
+
+        GetLocationDetailsQueryViewModel result; 
+        var reqParcels = await repoLocation.GetParcelsByFarmID(application.Id, request.FarmListID);
+        var parcels = mapper.Map<List<FarmBlockLotEntity>, List<GetFarmParcelViewModel>>(reqParcels);
+
+        result = new GetLocationDetailsQueryViewModel()
+        {
+            ApplicationId = request.ApplicationId,
+            Parcels = parcels
+            
+        };      
+        return result;
+    }
+}

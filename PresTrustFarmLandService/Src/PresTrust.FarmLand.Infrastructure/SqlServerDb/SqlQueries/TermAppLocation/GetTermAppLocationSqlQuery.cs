@@ -1,0 +1,30 @@
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries;
+
+public class GetTermAppLocationSqlQuery
+{
+    private readonly string _sqlCommand =
+        @"  SELECT 
+            P.Id AS ParcelId,
+            P.Block, 
+            P.Lot,
+            P.PamsPin,
+            P.[FarmListID],
+            P.[Block],
+            P.[Lot],
+            P.[DeedBook],
+            P.[DeedPage],
+			P.[QualificationCode],     
+            L.IsChecked,
+            L.ApplicationId
+            FROM [Farm].[FarmMunicipalityBlockLotParcel] AS P
+           LEFT JOIN [Farm].[FarmTermAppLocation] AS L ON (P.FarmListID = L.FarmListID and P.Id = L.ParcelId AND L.applicationId = @p_ApplicationId)
+           WHERE P.FarmListID = @p_FarmListID;";
+    public GetTermAppLocationSqlQuery()
+    {
+    }
+
+    public override string ToString()
+    {
+        return _sqlCommand;
+    }
+}

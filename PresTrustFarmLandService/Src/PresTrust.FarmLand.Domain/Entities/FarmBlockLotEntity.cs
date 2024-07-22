@@ -3,10 +3,10 @@
 public class FarmBlockLotEntity
 {
     public int Id { get; set; }
+    public int ParcelId { get; set; }
     public int ApplicationId { get; set; }
     public int MunicipalityId { get; set; }
     public int FarmListID { get; set; }
-    public string PropertyClassCode { get; set; }
     public string Block { get; set; }
     public string Lot { get; set; }
     public string QualificationCode { get; set; }
@@ -23,6 +23,7 @@ public class FarmBlockLotEntity
     public string ChangeType { get; set; }
     public DateTime? ChangeDate { get; set; }
     public string ReasonForChange { get; set; }
+    public string PropertyClassCode { get; set; }
     public string DeedBook { get; set; }
     public string DeedPage { get; set; }
     public DateTime? DeedDate { get; set; }
@@ -31,6 +32,7 @@ public class FarmBlockLotEntity
     public string Status { get; set; } = "";
     public bool IsWarning { get; set; }
     public bool CreatedByProgramUser { get; set; }
+    public bool IsChecked { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
 }

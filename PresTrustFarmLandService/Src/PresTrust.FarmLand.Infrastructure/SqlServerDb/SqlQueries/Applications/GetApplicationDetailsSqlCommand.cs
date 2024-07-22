@@ -11,8 +11,9 @@ public class GetApplicationDetailsSqlCommand
                 A.[StatusId],
                 A.[CreatedOn],
 				A.[IsApprovedByMunicipality],
+				A.[FarmListID],
 				[AgencyJSON],
-				PropertyLEGACY.[MunIcipality],
+				PropertyLEGACY.[Municipality],
 				PropertyLEGACY.[MunicipalID]
                FROM [Farm].[FarmApplication] AS A
 			JOIN
@@ -33,7 +34,8 @@ public class GetApplicationDetailsSqlCommand
 												[AddressLine3],
 												[City],
 												[State],
-												[ZipCode]
+												[ZipCode],
+												[PrimaryTelephone]
 									FOR JSON PATH,
 									WITHOUT_ARRAY_WRAPPER) AS [AgencyJSON]
 					FROM		[Core].[View_AgencyEntities_FARM]
