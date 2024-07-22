@@ -135,4 +135,21 @@ public class FarmBlockLotRepository: IFarmBlockLotRepository
         return parcel;
     }
 
+    public async Task<bool> ResolveParcelWarning(int parcelId)
+    {
+        using var conn = context.CreateConnection();
+        var sqlCommand = new UpdateParcelWarningSqlCommand();
+        await conn.ExecuteAsync(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+            param: new
+            {
+                @p_Id = parcelId,
+
+            });
+
+        return true;
+
+    }
+
 }

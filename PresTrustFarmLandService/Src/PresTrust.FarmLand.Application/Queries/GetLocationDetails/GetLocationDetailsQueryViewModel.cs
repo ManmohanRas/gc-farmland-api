@@ -20,4 +20,6 @@ public class GetFarmParcelViewModel
     public string DeedBook { get; set; }
     public string DeedPage { get; set; }
     public bool IsChecked { get; set; }
+    public bool IsWarning { get; set; }
+    public bool CreatedByProgramUser { get; set; }
 }

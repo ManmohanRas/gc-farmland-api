@@ -26,6 +26,8 @@ public  class GetFarmBlockLotSqlQuery
 			  ,MBL.DeedBook
 			  ,MBL.DeedPage
 			  ,MBL.IsWarning
+			  ,MBL.[Notes]
+			  ,MBL.[CreatedByProgramUser]
               FROM [Farm].[FarmMunicipalityBlockLotParcel] MBL;";
 
     public override string ToString()

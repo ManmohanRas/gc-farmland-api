@@ -13,7 +13,9 @@ public class GetTermAppLocationSqlQuery
             P.[Lot],
             P.[DeedBook],
             P.[DeedPage],
-			P.[QualificationCode],     
+			P.[QualificationCode], 
+            P.[IsWarning],
+            P.[CreatedByProgramUser],
             L.IsChecked,
             L.ApplicationId
             FROM [Farm].[FarmMunicipalityBlockLotParcel] AS P
