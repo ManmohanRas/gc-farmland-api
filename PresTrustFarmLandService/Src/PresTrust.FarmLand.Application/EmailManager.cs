@@ -15,6 +15,7 @@ public class EmailManager : IEmailManager
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IPresTrustUserContext userContext;
     private readonly IIdentityApiConnect identityApiConnect;
+    private readonly ITermAppAdminContactsRepository repoContact;
 
     public EmailManager(
         IMapper mapper,
@@ -22,7 +23,8 @@ public class EmailManager : IEmailManager
         IFarmRolesRepository repoApplicationRole,
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IPresTrustUserContext userContext,
-        IIdentityApiConnect identityApiConnect
+        IIdentityApiConnect identityApiConnect,
+        ITermAppAdminContactsRepository repoContact
     )
     {
         this.emailApiConnect = emailApiConnect;
@@ -30,6 +32,7 @@ public class EmailManager : IEmailManager
         this.systemParamOptions = systemParamOptions.Value;
         this.userContext = userContext;
         this.identityApiConnect = identityApiConnect;
+        this.repoContact = repoContact;
     }
 
 
@@ -42,10 +45,10 @@ public class EmailManager : IEmailManager
         var agencyUsers = await identityApiConnect.GetDataAsync<List<IdentityApiUser>>(endPoint);
 
         var primaryContacts = await repoApplicationRole.GetRolesAsync(applicationId);
+        var primaryAgencyUsers = agencyUsers.Where(o => primaryContacts.Select(x => x.Email?.Trim()).Contains(o.Email?.Trim()));
 
         if (primaryContacts.Count() > 0)
         {
-            var primaryAgencyUsers = agencyUsers.Where(o => primaryContacts.Select(x => x.Email?.Trim()).Contains(o.Email?.Trim()));
             //primaryContacts.Select(i => string.Concat(i.FirstName, ' ', i.LastName)).ToList();
             primaryContactEmails = primaryContacts.Select(i => i.Email).ToList();
             if (primaryAgencyUsers.Count() > 0)
@@ -82,7 +85,12 @@ public class EmailManager : IEmailManager
     public async Task SendMail(string subject, string htmlBody, int applicationId,  string applicationName, string? emailTemplateCode = default, int agencyId = default, OwnerDetailsEntity? owner = default, TermAppAdminDeedDetailsEntity? deed = default)
     {
         var primaryContact = await GetPrimaryContact(applicationId, agencyId);
+        string contactEmails = default;
+        string contactName = default;
 
+        var contacts = await repoContact.GetAllContactsAsync(applicationId);
+        contactEmails = contacts.Where(o => o.SelectContact).Select(x => x.Email).FirstOrDefault();
+        contactName = contacts.Select(x => x.ContactName).FirstOrDefault();
 
         var toEmails = String.Empty;
 
@@ -95,6 +103,8 @@ public class EmailManager : IEmailManager
         htmlBody = htmlBody.Replace("{{AgencyAdmin}}", userContext.Name ?? "");
         htmlBody = htmlBody.Replace("{{PrimaryContactName}}", string.Join(",", primaryContact.Item1));
         htmlBody = htmlBody.Replace("{{FarmName}}", applicationName ?? "");
+        htmlBody = htmlBody.Replace("{{SADCContact}}", contactName  ?? "");
+
         htmlBody = htmlBody.Replace("{{NextMeetingDate}}", fifthNextMonth.ToString("dddd, MMMM dd, yyyy"));
        // htmlBody = htmlBody.Replace("{{OwnerFirst}}", owner.FirstName ?? "");
        // htmlBody = htmlBody.Replace("{{OwnerLast}}", owner.LastName ?? "");
