@@ -34,12 +34,10 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
 
         var parcels =  mapper.Map<List<SaveBlockLot>, List<FarmTermAppLocationEntity>>(request.Parcels);
 
-        var brokenRules = ReturnBrokenRulesIfAny(application);
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.LOCATION);
-            await repoBrokenRules.SaveBrokenRules(await brokenRules);
+           
             foreach(var parcel in parcels)
             {
                 if ( parcel.RowStatus == "I")
@@ -52,7 +50,9 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
 
                 }
             }
-
+            var brokenRules = ReturnBrokenRulesIfAny(application);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.LOCATION);
+            await repoBrokenRules.SaveBrokenRules(await brokenRules);
             scope.Complete();
 
         }
