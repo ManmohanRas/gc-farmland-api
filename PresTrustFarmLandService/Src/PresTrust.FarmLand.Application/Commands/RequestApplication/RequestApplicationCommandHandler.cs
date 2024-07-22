@@ -60,11 +60,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         // check if any broken rules exists, if yes then return
         var brokenRules = (await repoBrokenRules.GetBrokenRulesAsync(application.Id));
 
-        if (brokenRules != null && brokenRules.Any())
-        {
-            result.BrokenRules = mapper.Map<IEnumerable<TermBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
-            return result;
-        }
+     
 
         var otherdocRules = await CheckApplicationOtherDocs(application.Id, application.Status, (int)ApplicationSectionEnum.OTHER_DOCUMENTS);
         if (otherdocRules.Count > 0)
@@ -151,8 +147,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         }
         return otherdocRules;
     }
-
-    /// <summary>
+    // <summary>
     /// Return broken rules in case of any business rule failure
     /// </summary>
     /// <param name="request"></param>
@@ -163,35 +158,21 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         List<TermBrokenRuleEntity> statusChangeRules = new List<TermBrokenRuleEntity>();
 
         // add default broken rule while initiating application flow
-        // statusChangeRules.Add(new TermBrokenRuleEntity()
-        // {
-        //     ApplicationId = application.Id,
-        //     SectionId = (int)ApplicationSectionEnum.LOCATION,
-        //     Message = "All required fields on LOCATION tab have not been filled.",
-            
-        // });
-        // statusChangeRules.Add(new TermBrokenRuleEntity()
-        // {
-        //     ApplicationId = application.Id,
-        //     SectionId = (int)ApplicationSectionEnum.OWNER_DETAILS,
-        //     Message = "All required fields on OWNER DETAILS tab have not been filled.",
-        // });
         statusChangeRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.SITE_CHARACTERISTICS,
-            Message = "All required fields on SITE CHARACTERISTICS tab have not been filled.",
+            SectionId = (int)ApplicationSectionEnum.ADMIN_DETAILS,
+            Message = "All required fields on ADMIN_DETAILS tab have not been filled.",
 
         });
+
         statusChangeRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.SIGNATORY,
-            Message = "All required fields on SIGNATORY tab have not been filled.",
+            SectionId = (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS,
+            Message = "All required fields on ADMIN_DEED_DETAILS tab have not been filled.",
         });
 
-            return statusChangeRules;
-        
+        return statusChangeRules;
     }
-
 }
