@@ -27,4 +27,6 @@ public class GetFarmBlockLotQueryViewModel
     public bool IsActive { get; set; }
     public string PamsPin { get; set; }
     public bool IsValidPamsPin { get; set; }
+    public bool IsWarning { get; set; }
+    public bool CreatedByProgramUser { get; set; }
 }

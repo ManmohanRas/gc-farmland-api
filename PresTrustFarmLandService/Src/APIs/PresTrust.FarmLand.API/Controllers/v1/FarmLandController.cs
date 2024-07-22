@@ -482,5 +482,12 @@ public class FarmLandController : ApiBaseController
             return Single(await CommandAsync(command));
         }
 
+        [HttpPost("resolveParcelWarning")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<bool>> ResolveParcelWarning([FromBody] ResolveParcelWarningCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
+
 }
 

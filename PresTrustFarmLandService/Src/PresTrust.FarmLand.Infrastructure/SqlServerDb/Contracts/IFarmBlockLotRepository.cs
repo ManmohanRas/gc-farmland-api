@@ -5,4 +5,6 @@ public interface IFarmBlockLotRepository
 
     Task<FarmBlockLotEntity> SaveAsync(FarmBlockLotEntity parcel);
 
+    Task<bool> ResolveParcelWarning(int ParcelId);
+
 }
