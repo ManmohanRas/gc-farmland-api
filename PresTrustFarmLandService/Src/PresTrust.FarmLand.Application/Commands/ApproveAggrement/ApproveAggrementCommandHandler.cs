@@ -58,9 +58,9 @@ public class ApproveAggrementCommandHandler : BaseHandler, IRequestHandler<Appro
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             // returns broken rules  
-            var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
+           // var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
             // save broken rules
-            await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
+            //await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
             await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.AGREEMENT_APPROVED);
             FarmApplicationStatusLogEntity appStatusLog = new()
             {
@@ -78,34 +78,4 @@ public class ApproveAggrementCommandHandler : BaseHandler, IRequestHandler<Appro
 
         return result;
     }
-
-    /// <summary>
-    /// Return broken rules in case of any business rule failure
-    /// </summary>
-    /// <param name="request"></param>
-    /// <param name="application"></param>
-    /// <returns></returns>
-    private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
-    {
-        List<TermBrokenRuleEntity> statusChangeRules = new List<TermBrokenRuleEntity>();
-
-        // add default broken rule while initiating application flow
-        statusChangeRules.Add(new TermBrokenRuleEntity()
-        {
-            ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.ADMIN_DETAILS,
-            Message = "All required fields on ADMIN_DETAILS tab have not been filled.",
-
-        });
-
-        statusChangeRules.Add(new TermBrokenRuleEntity()
-        {
-            ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS,
-            Message = "All required fields on ADMIN_DEED_DETAILS tab have not been filled.",
-        });
-
-        return statusChangeRules;
-    }
-
 }
