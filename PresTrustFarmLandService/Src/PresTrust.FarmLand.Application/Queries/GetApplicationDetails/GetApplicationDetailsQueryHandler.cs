@@ -31,16 +31,31 @@ public class GetApplicationDetailsQueryHandler : BaseHandler, IRequestHandler<Ge
     {
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
+        var comments = await repoComment.GetAllCommentsAsync(request.ApplicationId);
+        var feedbacks = await repoFeedback.GetFeedbacksAsync(request.ApplicationId);
 
         var result = mapper.Map<FarmApplicationEntity, GetApplicationDetailsQueryViewModel>(application);
 
         FarmApplicationSecurityManager securityMgr = default;
         userContext.DeriveRole(application.AgencyId);
 
-        securityMgr = new FarmApplicationSecurityManager(userContext.Role,application.Status, application.ApplicationType);
+        switch (application.Status)
+        {
+            case ApplicationStatusEnum. REQUESTED:
+            case ApplicationStatusEnum.APPROVED:
+            case ApplicationStatusEnum.AGREEMENT_APPROVED:
+            case ApplicationStatusEnum.EXPIRED:
+            case ApplicationStatusEnum.REJECTED:
+            case ApplicationStatusEnum.ACTIVE:
+                var feedbacksReqForCorrections = feedbacks.Where(f => f.RequestForCorrection == true && string.Compare(f.CorrectionStatus, ApplicationCorrectionStatusEnum.REQUEST_SENT.ToString(), true) == 0).ToList();
+                securityMgr = new FarmApplicationSecurityManager(userContext.Role, application.Status, application.ApplicationType, feedbacksReqForCorrections);
+                break;
+            default:
+                securityMgr = new FarmApplicationSecurityManager(userContext.Role, application.Status, application.ApplicationType );
+                break;
+        }
 
-        var comments = await repoComment.GetAllCommentsAsync(request.ApplicationId);
-        var feedbacks = await repoFeedback.GetFeedbacksAsync(request.ApplicationId);
+        
 
         result.Comments = comments;
         result.Feedbacks = feedbacks;
