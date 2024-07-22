@@ -5,6 +5,7 @@ BEGIN
 	
 	ALTER TABLE [Farm].[FarmApplicationFeedback] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmApplicationFeedback];
 
+
 END;
 GO
   

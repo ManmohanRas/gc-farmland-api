@@ -3,7 +3,7 @@
 public class UpdateTermFeedbackSqlCommand
 {
     private readonly string _sqlCommand =
-     @"UPDATE		       [Farm].[FarmTermFeedback]
+     @"UPDATE		       [Farm].[FarmApplicationFeedback]
              SET			   [Feedback] = @p_Feedback
 			                  ,[RequestForCorrection] = @p_RequestForCorrection
 			                  ,[LastUpdatedBy] = @p_LastUpdatedBy

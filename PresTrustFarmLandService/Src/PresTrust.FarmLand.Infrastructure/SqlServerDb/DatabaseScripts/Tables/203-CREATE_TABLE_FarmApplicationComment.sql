@@ -4,10 +4,6 @@ BEGIN
 	ALTER TABLE [Farm].[FarmApplicationComment] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmApplicationComment];
 	
 	ALTER TABLE [Farm].[FarmApplicationComment] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmApplicationComment];
-
-	ALTER TABLE [Farm].[FarmApplicationComment] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationComment]; 
-
-
 END;
 GO
   
@@ -39,5 +35,4 @@ GO
 ALTER TABLE [Farm].[FarmApplicationComment] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmApplicationComment]  DEFAULT (GETDATE()) FOR [LastUpdatedOn]
 GO  
 
-ALTER TABLE [Farm].[FarmApplicationComment] ADD CONSTRAINT [FK_ApplicationTypeId_FarmApplicationComment]  FOREIGN KEY (ApplicationTypeId) REFERENCES [Farm].FarmApplicationType(Id);
-GO
+

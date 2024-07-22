@@ -88,11 +88,7 @@ BEGIN TRY
 
 	--temp need to remove
 
-	ALTER TABLE [Farm].[FarmApplicationDocument] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationDocument]; 
 
-	ALTER TABLE [Farm].[FarmApplicationComment] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationComment]; 
-
-	ALTER TABLE [Farm].[FarmApplicationFeedback] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationFeedback]; 
 
 
 	--==============================================================================================================--

@@ -359,6 +359,7 @@ public class FarmApplicationSecurityManager
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
                 permission.CanViewFeedback = true;
+                permission.CanEditFeedback = true;
 
                 //LOCATION
                 correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.LOCATION).FirstOrDefault();
@@ -506,6 +507,7 @@ public class FarmApplicationSecurityManager
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
                 permission.CanViewFeedback = true;
+                permission.CanEditFeedback = true;
 
                 //LOCATION
                 correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.LOCATION).FirstOrDefault();
@@ -642,6 +644,7 @@ public class FarmApplicationSecurityManager
                 break;
             case UserRoleEnum.PROGRAM_EDITOR:
                 permission.CanViewFeedback = true;
+                permission.CanEditFeedback = true;
                 permission.CanViewComments = true;
                 permission.CanEditComments = true;
                 permission.CanDeleteComments = true;
@@ -715,6 +718,7 @@ public class FarmApplicationSecurityManager
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
                 permission.CanViewFeedback = true;
+                permission.CanEditFeedback = true;
                 // Location
                 Location();
                 //OwnerDetails

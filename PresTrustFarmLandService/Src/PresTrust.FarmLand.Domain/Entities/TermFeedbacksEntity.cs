@@ -3,8 +3,7 @@
 public class TermFeedbacksEntity
 {
     public int Id { get; set; }
-    public int ApplicationId { get; set; }
-    public int ApplicationTypeId { get; set; }
+    public int ApplicationId { get; set; } 
     public int SectionId { get; set; }
     public string Feedback { get; set; }
     public bool RequestForCorrection { get; set; }

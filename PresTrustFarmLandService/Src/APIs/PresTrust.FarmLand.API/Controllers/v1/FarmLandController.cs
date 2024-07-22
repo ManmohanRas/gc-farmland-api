@@ -33,7 +33,7 @@ public class FarmLandController : ApiBaseController
         }
         [HttpPost("getTermFeedbacks")]
         [ProducesResponseType(typeof(IEnumerable<GetTermFeedbacksQueryViewModel>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<GetTermFeedbacksQueryViewModel>>> GetApplicationFeedbacks([FromBody] GetTermFeedbacksQuery query)
+        public async Task<ActionResult<IEnumerable<GetTermFeedbacksQueryViewModel>>> getTermFeedbacks([FromBody] GetTermFeedbacksQuery query)
         {
             return Single(await QueryAsync(query));
         }

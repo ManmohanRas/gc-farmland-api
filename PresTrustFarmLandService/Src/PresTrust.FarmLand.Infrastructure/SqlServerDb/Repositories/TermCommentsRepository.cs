@@ -45,7 +45,6 @@ public class TermCommentsRepository : ITermCommentsRepository
             {
                 @p_Id = comment.Id,
                 @p_ApplicationId = comment.ApplicationId,
-                @p_ApplicationTypeId = comment.ApplicationTypeId,
                 @p_Comment = comment.Comment,
                 @p_CommentTypeId = comment.CommentTypeId,
                 @p_LastUpdatedBy = comment.LastUpdatedBy,
@@ -69,7 +68,6 @@ public class TermCommentsRepository : ITermCommentsRepository
                 @p_Comment = comment.Comment,
                 @p_CommentTypeId = comment.CommentTypeId,
                 @p_ApplicationId = comment.ApplicationId,
-                @p_ApplicationTypeId = comment.ApplicationTypeId,
                 @p_LastUpdatedBy = comment.LastUpdatedBy,
                
             });
@@ -90,7 +88,6 @@ public class TermCommentsRepository : ITermCommentsRepository
             {
                 @p_Id = comment.Id,
                 @p_ApplicationId = comment.ApplicationId,
-                @p_ApplicationTypeId = comment.ApplicationTypeId
             });
     }
 }
