@@ -54,7 +54,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
     }
 
 
-    private async   Task<List<TermBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SaveTermAppAdminDetailsCommand request)
+    private async Task<List<TermBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SaveTermAppAdminDetailsCommand request)
     {
 
 
@@ -78,12 +78,22 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
             docsSadcApprovalLetter = documents.Where(d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.SADC_APPROVAL_LETTER).FirstOrDefault();
             docsReceiptOfCertification = documents.Where(d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.RECEIPT_OF_CERTIFICATION).FirstOrDefault();
             docsNotificationOfTermination = documents.Where (d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.NOTIFICATION_OF_TERMINATION).FirstOrDefault();
-
         }
 
-
-            if (application.Status == ApplicationStatusEnum.REQUESTED)
+        if(application.Status == ApplicationStatusEnum.REQUESTED)
+        { 
+        if (docsMafppAgreement == null)
+            brokenRules.Add(new TermBrokenRuleEntity()
             {
+                ApplicationId = application.Id,
+                SectionId = sectionId,
+                Message = "Mafpp Agreement required document on AdminDetails tab have not been filled.",
+                IsApplicantFlow = false
+            });
+        }
+
+        if (application.Status == ApplicationStatusEnum.APPROVED)
+        {
             if (request?.SADCId == null)
                 brokenRules.Add(new TermBrokenRuleEntity()
                 {
@@ -99,7 +109,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                     ApplicationId = application.Id,
                     SectionId = sectionId,
                     Message = "MaxGrant ID required field on AdminDetails tab have not been filled.",
-                     IsApplicantFlow = false,
+                    IsApplicantFlow = false,
                 });
 
             if (request?.PermanentlyPreserved == false)
@@ -107,7 +117,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
-                    Message = "PermanentlyPreserved ID required field on AdminDetails tab have not been filled.",
+                    Message = "Permanently Preserved required field on AdminDetails tab have not been filled.",
                     IsApplicantFlow = false,
                 });
             if (request?.MunicipallyApproved == false)
@@ -115,7 +125,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
-                    Message = "Municipally Approved ID required field on AdminDetails tab have not been filled.",
+                    Message = "Municipally Approved required field on AdminDetails tab have not been filled.",
                     IsApplicantFlow = false,
                 });
             if (request.EnrollmentDate == null)
@@ -123,7 +133,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
-                    Message = "EnrollmentDate ID required field on AdminDetails tab have not been filled.",
+                    Message = "Enrollment Date required field on AdminDetails tab have not been filled.",
                     IsApplicantFlow = false,
                 });
             if (request.RenewalDate == null)
@@ -131,87 +141,77 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
-                    Message = "RenewalDate ID required field on AdminDetails tab have not been filled.",
+                    Message = "Renewal Date required field on AdminDetails tab have not been filled.",
                     IsApplicantFlow = false,
                 });
-        
-           if (request.ExpirationDate == null)
-            brokenRules.Add(new TermBrokenRuleEntity()
-            {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "ExpirationDate ID required field on AdminDetails tab have not been filled.",
-                IsApplicantFlow = false,
-            });
+
+            if (request.ExpirationDate == null)
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Expiration Date required field on AdminDetails tab have not been filled.",
+                    IsApplicantFlow = false,
+                });
 
             if (request.RenewalExpirationDate == null)
                 brokenRules.Add(new TermBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
-                    Message = "RenewalExpirationDate ID required field on AdminDetails tab have not been filled.",
+                    Message = "Renewal Expiration Date required field on AdminDetails tab have not been filled.",
                     IsApplicantFlow = false,
                 });
-
-            if (docsMunicipalOrdinance == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "Municipal Ordinance required document on AdminDetails tab have not been filled.",
-                    IsApplicantFlow = false
-                });
-
-            if (docsMafppAgreement == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "Mafpp Agreement required document on AdminDetails tab have not been filled.",
-                    IsApplicantFlow = false
-                });
-
-            if (docsCountyResolution == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "County Resolution required document on AdminDetails tab have not been filled.",
-                    IsApplicantFlow = false
-                });
-
-            if (docsSadcApprovalLetter == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "Sadc Approval Letter required document on AdminDetails tab have not been filled.",
-                    IsApplicantFlow = false
-                });
-
-            if (docsReceiptOfCertification == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "Receipt Of Certification Letter required document on AdminDetails tab have not been filled.",
-                    IsApplicantFlow = false
-                });
-            if (docsNotificationOfTermination == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
-                { 
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "Notification Of Termination Letter required document on AdminDetails tab have not been filled.",
-                    IsApplicantFlow = false
-                });
-
         }
 
+
+
+
+
+        //if (docsMunicipalOrdinance == null)
+        //    brokenRules.Add(new TermBrokenRuleEntity()
+        //    {
+        //        ApplicationId = application.Id,
+        //        SectionId = sectionId,
+        //        Message = "Municipal Ordinance required document on AdminDetails tab have not been filled.",
+        //        IsApplicantFlow = false
+        //    });
+
+        //if (docsCountyResolution == null)
+        //    brokenRules.Add(new TermBrokenRuleEntity()
+        //    {
+        //        ApplicationId = application.Id,
+        //        SectionId = sectionId,
+        //        Message = "County Resolution required document on AdminDetails tab have not been filled.",
+        //        IsApplicantFlow = false
+        //    });
+
+        //if (docsSadcApprovalLetter == null)
+        //    brokenRules.Add(new TermBrokenRuleEntity()
+        //    {
+        //        ApplicationId = application.Id,
+        //        SectionId = sectionId,
+        //        Message = "Sadc Approval Letter required document on AdminDetails tab have not been filled.",
+        //        IsApplicantFlow = false
+        //    });
+
+        //if (docsReceiptOfCertification == null)
+        //    brokenRules.Add(new TermBrokenRuleEntity()
+        //    {
+        //        ApplicationId = application.Id,
+        //        SectionId = sectionId,
+        //        Message = "Receipt Of Certification Letter required document on AdminDetails tab have not been filled.",
+        //        IsApplicantFlow = false
+        //    });
+        //if (docsNotificationOfTermination == null)
+        //    brokenRules.Add(new TermBrokenRuleEntity()
+        //    { 
+        //        ApplicationId = application.Id,
+        //        SectionId = sectionId,
+        //        Message = "Notification Of Termination Letter required document on AdminDetails tab have not been filled.",
+        //        IsApplicantFlow = false
+        //    });
         return brokenRules;
     
     }
-
-
-
 }

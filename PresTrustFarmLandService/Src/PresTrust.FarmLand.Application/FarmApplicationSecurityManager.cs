@@ -288,10 +288,6 @@ public class FarmApplicationSecurityManager
                     Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
                     Signatory(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                //AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                //AdminDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                //AdminDeedDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                //AdminContacts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
@@ -674,9 +670,9 @@ public class FarmApplicationSecurityManager
                 // Default Navigation Item
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
-                    Title = TermAppNavigationItemTitles.SIGNATORY,
-                    RouterLink = TermApplicationRouterLinks.SIGNATORY_EDIT,
-                    SortOrder = 6
+                    Title = TermAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
+                    SortOrder = 1
                 };
                 break;
             case UserRoleEnum.PROGRAM_EDITOR:
@@ -721,9 +717,9 @@ public class FarmApplicationSecurityManager
                     // Default Navigation Item
                     this.defaultNavigationItem = new NavigationItemEntity()
                     {
-                        Title = TermAppNavigationItemTitles.SIGNATORY,
-                        RouterLink = TermApplicationRouterLinks.SIGNATORY_EDIT,
-                        SortOrder = 7
+                        Title = TermAppNavigationItemTitles.LOCATION,
+                        RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
+                        SortOrder = 1
                     };
                 }
                 else
@@ -732,9 +728,9 @@ public class FarmApplicationSecurityManager
                     // Default Navigation Item
                     this.defaultNavigationItem = new NavigationItemEntity()
                     {
-                        Title = TermAppNavigationItemTitles.SIGNATORY,
-                        RouterLink = TermApplicationRouterLinks.SIGNATORY_VIEW,
-                        SortOrder = 6
+                        Title = TermAppNavigationItemTitles.LOCATION,
+                        RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                        SortOrder = 1
                     };
                 }
                 //Admin Document Checklist
@@ -789,9 +785,9 @@ public class FarmApplicationSecurityManager
                     Signatory();
                     this.defaultNavigationItem = new NavigationItemEntity()
                     {
-                        Title = TermAppNavigationItemTitles.SIGNATORY,
-                        RouterLink = TermApplicationRouterLinks.SIGNATORY_VIEW,
-                        SortOrder = 6
+                        Title = TermAppNavigationItemTitles.LOCATION,
+                        RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                        SortOrder = 1
                     };
                 }
                 else
@@ -800,9 +796,9 @@ public class FarmApplicationSecurityManager
                     // Default Navigation Item
                     this.defaultNavigationItem = new NavigationItemEntity()
                     {
-                        Title = TermAppNavigationItemTitles.SIGNATORY,
-                        RouterLink = TermApplicationRouterLinks.SIGNATORY_EDIT,
-                        SortOrder = 6
+                        Title = TermAppNavigationItemTitles.LOCATION,
+                        RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
+                        SortOrder = 1
                     };
                 }
                 break;
@@ -826,9 +822,9 @@ public class FarmApplicationSecurityManager
                 // Default Navigation Item
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
-                    Title = TermAppNavigationItemTitles.SIGNATORY,
-                    RouterLink = TermApplicationRouterLinks.SIGNATORY_VIEW,
-                    SortOrder = 6
+                    Title = TermAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                    SortOrder = 1
                 };
                 break;
         }
@@ -891,7 +887,7 @@ public class FarmApplicationSecurityManager
                 {
                     Title = TermAppNavigationItemTitles.LOCATION,
                     RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
-                    SortOrder = 7
+                    SortOrder = 1
                 };
                 break;
             default:

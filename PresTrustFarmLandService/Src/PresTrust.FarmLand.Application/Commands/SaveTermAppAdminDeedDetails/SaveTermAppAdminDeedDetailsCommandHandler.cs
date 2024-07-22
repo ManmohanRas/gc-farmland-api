@@ -9,6 +9,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
     private readonly ITermAppAdminDeedDetailsRepository repotermAppAdminDeedDetails;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
     private readonly SystemParameterConfiguration systemParamOptions;
+    private readonly ITermOtherDocumentsRepository repoDocuments;
 
 
     public SaveTermAppAdminDeedDetailsCommandHandler
@@ -18,7 +19,8 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
         ITermAppAdminDeedDetailsRepository repotermAppAdminDeedDetails,
-        ITermBrokenRuleRepository repoBrokenRules
+        ITermBrokenRuleRepository repoBrokenRules,
+        ITermOtherDocumentsRepository repoDocuments
     ) : base(repoApplication:repoApplication)
     { 
         this.mapper = mapper;
@@ -27,17 +29,18 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
         this.repoApplication = repoApplication;
         this.repotermAppAdminDeedDetails = repotermAppAdminDeedDetails;
         this.repoBrokenRules = repoBrokenRules;
+        this.repoDocuments = repoDocuments;
     }
 
     public async Task<int> Handle(SaveTermAppAdminDeedDetailsCommand request, CancellationToken cancellationToken)
     {
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
-
+        
         var reqDeedDetails = mapper.Map<SaveTermAppAdminDeedDetailsCommand, TermAppAdminDeedDetailsEntity>(request);
 
 
-        var brokenRules = ReturnBrokenRulesIfAny(application, reqDeedDetails);
+        var brokenRules = await ReturnBrokenRulesIfAny(application, reqDeedDetails);
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
@@ -52,154 +55,190 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
         return reqDeedDetails.Id;
     }
 
-    private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application, TermAppAdminDeedDetailsEntity reqDeedDetails)
+    private async Task <List<TermBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application, TermAppAdminDeedDetailsEntity reqDeedDetails)
     {
         int sectionId = (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS;
         List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
 
-        if (string.IsNullOrEmpty(reqDeedDetails.OriginalBlock))
+        var documents = await repoDocuments.GetTermDocumentsAsync(application.Id, sectionId);
+        TermOtherDocumentsEntity docsCopyOfDeed = default;
+        TermOtherDocumentsEntity docsCopyOfOwner = default;
+
+        if (documents != null && documents.Count() > 0)
         {
-            brokenRules.Add(new TermBrokenRuleEntity()
-            {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "Original Block  required field on Deed Details Tab have not been filled.",
-                IsApplicantFlow = false
-
-            });
+            docsCopyOfDeed = documents.Where(d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.TRUE_COPY_OF_DEED).FirstOrDefault();
+            docsCopyOfOwner = documents.Where(d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.COPY_OF_OWNER_OF_LAST_RECORD_SEARCH).FirstOrDefault();
         }
-        if (string.IsNullOrEmpty(reqDeedDetails.OriginalLot))
+
+        if (application.Status == ApplicationStatusEnum.REQUESTED)
         {
+            if (docsCopyOfDeed == null)
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "True Copy Of Deed required document on Deed Details tab have not been Uploaded.",
+                    IsApplicantFlow = false
+                });
 
-            brokenRules.Add(new TermBrokenRuleEntity()
-            {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "Original Lot required field on Deed Details Tab have not been filled.",
-                IsApplicantFlow = false
-            });
-
+            if (docsCopyOfOwner == null)
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Copy Of Owner required document on Deed Details tab have not been Uploaded.",
+                    IsApplicantFlow = false
+                });
         }
-        if (string.IsNullOrEmpty(reqDeedDetails.OriginalBook))
+
+        if (application.Status == ApplicationStatusEnum.APPROVED)
         {
-
-            brokenRules.Add(new TermBrokenRuleEntity()
+            if (string.IsNullOrEmpty(reqDeedDetails.NOTBlock))
             {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "Original Book required field on Deed Details Tab have not been filled.",
-                IsApplicantFlow = false
-            });
 
-        }
-        if (string.IsNullOrEmpty(reqDeedDetails.OriginalPage))
-        {
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Notice Of Termination Block required field on Deed Details Tab have not been filled.",
+                    IsApplicantFlow = false
+                });
 
-            brokenRules.Add(new TermBrokenRuleEntity()
+            }
+            if (string.IsNullOrEmpty(reqDeedDetails.NOTLot))
             {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "Original Page required field on Deed Details Tab have not been filled.",
-                IsApplicantFlow = false
-            });
 
-        }
-        if (string.IsNullOrEmpty(reqDeedDetails.NOTBlock))
-        {
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Notice Of Termination Lot required field on Deed Details Tab have not been filled.",
+                    IsApplicantFlow = false
+                });
 
-            brokenRules.Add(new TermBrokenRuleEntity()
+            }
+            if (string.IsNullOrEmpty(reqDeedDetails.NOTBook))
             {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "Notice Of Termination Block required field on Deed Details Tab have not been filled.",
-                IsApplicantFlow = false
-            });
 
-        }
-        if (string.IsNullOrEmpty(reqDeedDetails.NOTLot))
-        {
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Notice Of Termination Book required field on Deed Details Tab have not been filled.",
+                    IsApplicantFlow = false
+                });
 
-            brokenRules.Add(new TermBrokenRuleEntity()
+            }
+            if (string.IsNullOrEmpty(reqDeedDetails.NOTPage))
             {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "Notice Of Termination Lot required field on Deed Details Tab have not been filled.",
-                IsApplicantFlow = false
-            });
 
-        }
-        if (string.IsNullOrEmpty(reqDeedDetails.NOTBook))
-        {
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Notice Of Termination Page required field on Deed Details Tab have not been filled.",
+                    IsApplicantFlow = false
+                });
 
-            brokenRules.Add(new TermBrokenRuleEntity()
+            }
+            if (string.IsNullOrEmpty(reqDeedDetails.RDBlock))
             {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "Notice Of Termination Book required field on Deed Details Tab have not been filled.",
-                IsApplicantFlow = false
-            });
 
-        }
-        if (string.IsNullOrEmpty(reqDeedDetails.NOTPage))
-        {
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Renewal Deed Block required field on Deed Details Tab have not been filled.",
+                    IsApplicantFlow = false
+                });
 
-            brokenRules.Add(new TermBrokenRuleEntity()
+            }
+            if (string.IsNullOrEmpty(reqDeedDetails.RDLot))
             {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "Notice Of Termination Page required field on Deed Details Tab have not been filled.",
-                IsApplicantFlow = false
-            });
 
-        }
-        if (string.IsNullOrEmpty(reqDeedDetails.RDBlock))
-        {
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Renewal Deed Lot required field on Deed Details Tab have not been filled.",
+                    IsApplicantFlow = false
+                });
 
-            brokenRules.Add(new TermBrokenRuleEntity()
+            }
+            if (string.IsNullOrEmpty(reqDeedDetails.RDBook))
             {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "Renewal Deed Block required field on Deed Details Tab have not been filled.",
-                IsApplicantFlow = false
-            });
 
-        }
-        if (string.IsNullOrEmpty(reqDeedDetails.RDLot))
-        {
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Renewal Deed Book  required field on Deed Details Tab have not been filled.",
+                    IsApplicantFlow = false
+                });
 
-            brokenRules.Add(new TermBrokenRuleEntity()
+            }
+            if (string.IsNullOrEmpty(reqDeedDetails.RDPage))
             {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "Renewal Deed Lot required field on Deed Details Tab have not been filled.",
-                IsApplicantFlow = false
-            });
 
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Renewal Deed Page required field on Deed Details Tab have not been filled.",
+                    IsApplicantFlow = false
+                });
+
+            }
         }
-        if (string.IsNullOrEmpty(reqDeedDetails.RDBook))
-        {
 
-            brokenRules.Add(new TermBrokenRuleEntity()
-            {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "Renewal Deed Book  required field on Deed Details Tab have not been filled.",
-                IsApplicantFlow = false
-            });
+        //if (string.IsNullOrEmpty(reqDeedDetails.OriginalBlock))
+        //{
+        //    brokenRules.Add(new TermBrokenRuleEntity()
+        //    {
+        //        ApplicationId = application.Id,
+        //        SectionId = sectionId,
+        //        Message = "Original Block  required field on Deed Details Tab have not been filled.",
+        //        IsApplicantFlow = false
 
-        }
-        if (string.IsNullOrEmpty(reqDeedDetails.RDPage))
-        {
+        //    });
+        //}
+        //if (string.IsNullOrEmpty(reqDeedDetails.OriginalLot))
+        //{
 
-            brokenRules.Add(new TermBrokenRuleEntity()
-            {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "Renewal Deed Page required field on Deed Details Tab have not been filled.",
-                IsApplicantFlow = false
-            });
+        //    brokenRules.Add(new TermBrokenRuleEntity()
+        //    {
+        //        ApplicationId = application.Id,
+        //        SectionId = sectionId,
+        //        Message = "Original Lot required field on Deed Details Tab have not been filled.",
+        //        IsApplicantFlow = false
+        //    });
 
-        }
+        //}
+        //if (string.IsNullOrEmpty(reqDeedDetails.OriginalBook))
+        //{
+
+        //    brokenRules.Add(new TermBrokenRuleEntity()
+        //    {
+        //        ApplicationId = application.Id,
+        //        SectionId = sectionId,
+        //        Message = "Original Book required field on Deed Details Tab have not been filled.",
+        //        IsApplicantFlow = false
+        //    });
+
+        //}
+        //if (string.IsNullOrEmpty(reqDeedDetails.OriginalPage))
+        //{
+
+        //    brokenRules.Add(new TermBrokenRuleEntity()
+        //    {
+        //        ApplicationId = application.Id,
+        //        SectionId = sectionId,
+        //        Message = "Original Page required field on Deed Details Tab have not been filled.",
+        //        IsApplicantFlow = false
+        //    });
+
+        //}
+       
 
         return brokenRules;
     }
