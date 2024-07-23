@@ -88,6 +88,7 @@ BEGIN TRY
 
 	--temp need to remove
 
+	ALTER TABLE [Farm].[FarmParcelHistory] DROP CONSTRAINT IF EXISTS  [FK_ParcelId_FarmParcelHistory];
 
 
 

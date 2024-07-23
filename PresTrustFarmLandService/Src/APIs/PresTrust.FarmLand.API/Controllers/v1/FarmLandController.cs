@@ -489,5 +489,12 @@ public class FarmLandController : ApiBaseController
             return Single(await CommandAsync(command));
         }
 
+        [HttpPost("getParcelHistory")]
+        [ProducesResponseType(typeof(List<GetParcelHistoryQueryViewModel>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<GetParcelHistoryQueryViewModel>>> GetParcelHistory([FromBody] GetParcelHistoryQuery query)
+        {
+            return Single(await QueryAsync(query));
+        }
+
 }
 
