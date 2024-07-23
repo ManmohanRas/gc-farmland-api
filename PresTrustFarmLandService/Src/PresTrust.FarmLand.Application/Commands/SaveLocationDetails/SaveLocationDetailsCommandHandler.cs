@@ -1,6 +1,4 @@
 ﻿
-using static System.Collections.Specialized.BitVector32;
-
 namespace PresTrust.FarmLand.Application.Commands;
 
 public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<SaveLocationDetailsCommand, Unit>
@@ -36,8 +34,8 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
 
         var parcels =  mapper.Map<List<SaveBlockLot>, List<FarmTermAppLocationEntity>>(request.Parcels);
 
-        int sectionId = (int)ApplicationSectionEnum.LOCATION;
-        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
+        var brokenRules = ReturnBrokenRulesIfAny(application);
+
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
@@ -55,21 +53,8 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
                 }
             }
 
-            var getLocationBlockLots = await repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId);
-
-            if (getLocationBlockLots.Where(x => x.IsChecked).Count() == 0)
-            {
-                brokenRules.Add(new TermBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "At least One Record Should be selected in Location tab.",
-                    IsApplicantFlow = false
-                });
-
-            }
             await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.LOCATION);
-            await repoBrokenRules.SaveBrokenRules(brokenRules);
+            await repoBrokenRules.SaveBrokenRules(await brokenRules);
             scope.Complete();
 
         }
@@ -77,4 +62,27 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
         return Unit.Value;
     }
 
+    private async Task<List<TermBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    {
+        int sectionId = (int)ApplicationSectionEnum.LOCATION;
+        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
+
+        var getLocationBlockLots = await repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId);
+
+
+        if (getLocationBlockLots.Where(x => x.IsChecked).Count() == 0)
+        {
+            brokenRules.Add(new TermBrokenRuleEntity()
+            {
+                ApplicationId = application.Id,
+                SectionId = sectionId,
+                Message = "At least One Record Should be selected in Location tab.",
+                IsApplicantFlow = false
+            });
+
+        }
+
+        return brokenRules;
+
+    }
 }

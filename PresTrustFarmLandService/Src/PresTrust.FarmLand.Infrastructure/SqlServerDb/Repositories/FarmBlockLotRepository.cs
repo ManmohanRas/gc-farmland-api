@@ -40,6 +40,20 @@ public class FarmBlockLotRepository: IFarmBlockLotRepository
         return results;
     }
 
+    public async Task<FarmBlockLotEntity> GetFarmBlockLotByIdAsync(int id)
+    {
+        FarmBlockLotEntity result = default;
+
+        using var conn = context.CreateConnection();
+        var sqlCommand = new GetFarmBlockLotSqlQuery();
+        var results = await conn.QueryAsync<FarmBlockLotEntity>(sqlCommand.ToString(),
+                    commandType: CommandType.Text,
+                    commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+                    param: new { @p_Id = id });
+
+        return results.FirstOrDefault();
+    }
+
     /// <summary>
     /// 
     /// </summary>
