@@ -15,12 +15,14 @@ public enum ApplicationStatusEnum
     /// <summary>
     /// Application Status Type for Submitted
     /// </summary>
-    REQUESTED = 2,
+    PETITION_REQUEST = 2,
+
+    // PETITION_REQUEST
 
     /// <summary>
     /// Application Status Type for In Review
     /// </summary>
-    APPROVED = 3,
+    PETITION_APPROVED = 3,
 
     /// <summary>
     /// Application Status Type for In Review
@@ -50,6 +52,6 @@ public enum ApplicationStatusEnum
     /// <summary>
     /// Application Status Type for ENABLE_SADC
     /// </summary>
-    ENABLE_SADC = 8
+    ENABLE_SADC = 9
 
 }

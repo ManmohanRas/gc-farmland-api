@@ -41,8 +41,8 @@ public class GetApplicationDetailsQueryHandler : BaseHandler, IRequestHandler<Ge
 
         switch (application.Status)
         {
-            case ApplicationStatusEnum. REQUESTED:
-            case ApplicationStatusEnum.APPROVED:
+            case ApplicationStatusEnum. PETITION_REQUEST:
+            case ApplicationStatusEnum.PETITION_APPROVED:
             case ApplicationStatusEnum.AGREEMENT_APPROVED:
             case ApplicationStatusEnum.EXPIRED:
             case ApplicationStatusEnum.REJECTED:
