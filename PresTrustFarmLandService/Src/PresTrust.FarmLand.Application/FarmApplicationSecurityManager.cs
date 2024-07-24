@@ -61,10 +61,10 @@ public class FarmApplicationSecurityManager
             case ApplicationStatusEnum.PETITION_DRAFT:
                 DeriveDraftStatePermissions();
                 break;
-            case ApplicationStatusEnum.REQUESTED:
+            case ApplicationStatusEnum.PETITION_REQUEST:
                 DeriveRequestedStatePermissions();
                 break;
-            case ApplicationStatusEnum.APPROVED:
+            case ApplicationStatusEnum.PETITION_APPROVED:
                 DeriveApprovedStatePermissions();
                 break;
             case ApplicationStatusEnum.AGREEMENT_APPROVED:

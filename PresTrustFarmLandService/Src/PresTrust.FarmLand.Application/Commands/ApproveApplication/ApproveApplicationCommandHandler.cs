@@ -49,7 +49,7 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
         //update application
         if (application != null)
         {
-            application.StatusId = (int)ApplicationStatusEnum.APPROVED;
+            application.StatusId = (int)ApplicationStatusEnum.PETITION_APPROVED;
             application.LastUpdatedBy = userContext.Email;
         }
 
@@ -69,7 +69,7 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
             var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
             // save broken rules
             await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
-            await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.APPROVED);
+            await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.PETITION_APPROVED);
             FarmApplicationStatusLogEntity appStatusLog = new()
             {
                 ApplicationId = application.Id,

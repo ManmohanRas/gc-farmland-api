@@ -53,7 +53,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         //update application
         if (application != null)
         {
-            application.StatusId = (int)ApplicationStatusEnum.REQUESTED;
+            application.StatusId = (int)ApplicationStatusEnum.PETITION_REQUEST;
             application.LastUpdatedBy = userContext.Email;
         }
 
@@ -81,7 +81,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
             var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
             // save broken rules
             await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
-            await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.REQUESTED);
+            await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.PETITION_REQUEST);
             FarmApplicationStatusLogEntity appStatusLog = new()
             {
                 ApplicationId = application.Id,
@@ -114,7 +114,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         var documents = await repoOtherDocs.GetTermDocumentsAsync(applicationId, sectionId);
 
         List<TermBrokenRuleEntity> otherdocRules = new List<TermBrokenRuleEntity>();
-        if (applicationStatus == ApplicationStatusEnum.REQUESTED)
+        if (applicationStatus == ApplicationStatusEnum.PETITION_REQUEST)
         {
             if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.CADB_PETITION).Count() == 0)
             {
