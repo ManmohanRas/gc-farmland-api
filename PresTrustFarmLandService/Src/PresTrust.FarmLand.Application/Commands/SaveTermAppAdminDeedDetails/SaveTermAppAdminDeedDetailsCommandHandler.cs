@@ -70,7 +70,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
             docsCopyOfOwner = documents.Where(d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.COPY_OF_OWNER_OF_LAST_RECORD_SEARCH).FirstOrDefault();
         }
 
-        if (application.Status == ApplicationStatusEnum.REQUESTED)
+        if (application.Status == ApplicationStatusEnum.PETITION_REQUEST)
         {
             if (docsCopyOfDeed == null)
                 brokenRules.Add(new TermBrokenRuleEntity()
@@ -91,7 +91,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
                 });
         }
 
-        if (application.Status == ApplicationStatusEnum.APPROVED)
+        if (application.Status == ApplicationStatusEnum.PETITION_APPROVED)
         {
             if (string.IsNullOrEmpty(reqDeedDetails.NOTBlock))
             {
@@ -189,56 +189,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
                 });
 
             }
-        }
-
-        //if (string.IsNullOrEmpty(reqDeedDetails.OriginalBlock))
-        //{
-        //    brokenRules.Add(new TermBrokenRuleEntity()
-        //    {
-        //        ApplicationId = application.Id,
-        //        SectionId = sectionId,
-        //        Message = "Original Block  required field on Deed Details Tab have not been filled.",
-        //        IsApplicantFlow = false
-
-        //    });
-        //}
-        //if (string.IsNullOrEmpty(reqDeedDetails.OriginalLot))
-        //{
-
-        //    brokenRules.Add(new TermBrokenRuleEntity()
-        //    {
-        //        ApplicationId = application.Id,
-        //        SectionId = sectionId,
-        //        Message = "Original Lot required field on Deed Details Tab have not been filled.",
-        //        IsApplicantFlow = false
-        //    });
-
-        //}
-        //if (string.IsNullOrEmpty(reqDeedDetails.OriginalBook))
-        //{
-
-        //    brokenRules.Add(new TermBrokenRuleEntity()
-        //    {
-        //        ApplicationId = application.Id,
-        //        SectionId = sectionId,
-        //        Message = "Original Book required field on Deed Details Tab have not been filled.",
-        //        IsApplicantFlow = false
-        //    });
-
-        //}
-        //if (string.IsNullOrEmpty(reqDeedDetails.OriginalPage))
-        //{
-
-        //    brokenRules.Add(new TermBrokenRuleEntity()
-        //    {
-        //        ApplicationId = application.Id,
-        //        SectionId = sectionId,
-        //        Message = "Original Page required field on Deed Details Tab have not been filled.",
-        //        IsApplicantFlow = false
-        //    });
-
-        //}
-       
+        }      
 
         return brokenRules;
     }
