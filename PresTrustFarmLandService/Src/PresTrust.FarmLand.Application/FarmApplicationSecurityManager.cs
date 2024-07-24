@@ -303,6 +303,7 @@ public class FarmApplicationSecurityManager
                 if (userRole == UserRoleEnum.AGENCY_ADMIN)
                 {
                     permission.CanRespondToTheRequestForAnApplicationCorrection = true;
+                    permission.CanViewOtherDocsSection = true;
                 }
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
