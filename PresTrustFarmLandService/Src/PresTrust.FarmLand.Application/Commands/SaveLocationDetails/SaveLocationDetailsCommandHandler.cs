@@ -34,7 +34,6 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
 
         var parcels =  mapper.Map<List<SaveBlockLot>, List<FarmTermAppLocationEntity>>(request.Parcels);
 
-        var brokenRules = ReturnBrokenRulesIfAny(application);
 
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
@@ -53,8 +52,11 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
                 }
             }
 
+            var brokenRules = await ReturnBrokenRulesIfAny(application);
+
+
             await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.LOCATION);
-            await repoBrokenRules.SaveBrokenRules(await brokenRules);
+            await repoBrokenRules.SaveBrokenRules(brokenRules);
             scope.Complete();
 
         }
@@ -77,6 +79,19 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
                 ApplicationId = application.Id,
                 SectionId = sectionId,
                 Message = "At least One Record Should be selected in Location tab.",
+                IsApplicantFlow = false
+            });
+
+        }
+
+
+        if (getLocationBlockLots.Where(x => x.IsWarning).Count() > 0)
+        {
+            brokenRules.Add(new TermBrokenRuleEntity()
+            {
+                ApplicationId = application.Id,
+                SectionId = sectionId,
+                Message = "Gray warnings in Location tab must be resolved.",
                 IsApplicantFlow = false
             });
 

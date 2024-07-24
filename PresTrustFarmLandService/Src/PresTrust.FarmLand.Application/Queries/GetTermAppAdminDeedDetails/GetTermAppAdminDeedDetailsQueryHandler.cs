@@ -8,18 +8,21 @@ public class GetTermAppAdminDeedDetailsQueryHandler :BaseHandler, IRequestHandle
     private readonly ITermAppAdminDeedDetailsRepository repoDeedDetails;
     private ITermOtherDocumentsRepository repoOtherDocument;
     private IApplicationRepository repoApplication;
+    private ITermAppLocationRepository repoLocation;
 
     public GetTermAppAdminDeedDetailsQueryHandler
     (
         IMapper mapper,
         ITermAppAdminDeedDetailsRepository repoDeedDetails,
         ITermOtherDocumentsRepository repoOtherDocument,
-        IApplicationRepository repoApplication
+        IApplicationRepository repoApplication,
+        ITermAppLocationRepository repoLocation
     ) :base(repoApplication:repoApplication)
     {
         this.mapper = mapper;
         this.repoDeedDetails = repoDeedDetails;
         this.repoOtherDocument = repoOtherDocument;
+        this.repoLocation  = repoLocation;
     }
     public async Task<GetTermAppAdminDeedDetailsQueryViewModel> Handle(GetTermAppAdminDeedDetailsQuery request, CancellationToken cancellationToken)
     {
@@ -28,6 +31,23 @@ public class GetTermAppAdminDeedDetailsQueryHandler :BaseHandler, IRequestHandle
         var result = new GetTermAppAdminDeedDetailsQueryViewModel();
 
         var deeddetails = await this.repoDeedDetails.GetTermAppAdminDeedDetails(request.ApplicationId);
+        var locationDetails = await repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId);
+        if (deeddetails.Count() == 0)
+        {
+            foreach (var item in locationDetails)
+            {
+                if (item.IsChecked)
+                {
+                    deeddetails.Add(new TermAppAdminDeedDetailsEntity()
+                    {
+                        OriginalBlock = item.Block,
+                        OriginalLot = item.Lot,
+                        OriginalBook = item.DeedBook,
+                        OriginalPage = item.DeedPage
+                    });
+                }   
+            }
+        }
         result.DeedDetails = mapper.Map<IEnumerable<TermAppAdminDeedDetailsEntity>, IEnumerable<TermAppAdminDeedDetailsViewModel>>(deeddetails);
 
         var documents = await GetDocuments(request.ApplicationId);

@@ -45,7 +45,7 @@ public class FarmBlockLotRepository: IFarmBlockLotRepository
         FarmBlockLotEntity result = default;
 
         using var conn = context.CreateConnection();
-        var sqlCommand = new GetFarmBlockLotSqlQuery();
+        var sqlCommand = new GetFarmBlockLotByIdSqlQuery();
         var results = await conn.QueryAsync<FarmBlockLotEntity>(sqlCommand.ToString(),
                     commandType: CommandType.Text,
                     commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,

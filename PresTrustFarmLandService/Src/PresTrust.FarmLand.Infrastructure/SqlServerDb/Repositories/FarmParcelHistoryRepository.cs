@@ -54,6 +54,7 @@ public class FarmParcelHistoryRepository: IFarmParcelHistoryRepository
                 @p_CurrentPamsPin = parcel.CurrentPamsPin,
                 @p_PreviousPamsPin = parcel.PreviousPamsPin,
                 @p_ReasonForChange = parcel.ReasonForChange,
+                @p_ChangeType = parcel.ChangeType,
                 @p_LastUpdatedBy = parcel.LastUpdatedBy
             });
 
