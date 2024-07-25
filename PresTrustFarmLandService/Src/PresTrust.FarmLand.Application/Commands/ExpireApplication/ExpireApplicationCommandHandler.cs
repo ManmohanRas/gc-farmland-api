@@ -30,6 +30,7 @@ public class ExpireApplicationCommandHandler : BaseHandler, IRequestHandler<Expi
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.EXPIRED);
+            scope.Complete();
         };
 
         return Unit.Value;

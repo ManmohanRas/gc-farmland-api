@@ -474,7 +474,7 @@ public class FarmApplicationSecurityManager
             case UserRoleEnum.AGENCY_EDITOR:
                 if (userRole == UserRoleEnum.AGENCY_ADMIN)
                 {
-                    permission.CanSubmitApplication = true;
+                   // permission.CanSubmitApplication = true;
                     permission.CanRespondToTheRequestForAnApplicationCorrection = true;
                 }
                 permission.CanSaveDocument = true;
