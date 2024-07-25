@@ -14,7 +14,8 @@ public class GetApplicationDetailsSqlCommand
 				A.[FarmListID],
 				[AgencyJSON],
 				PropertyLEGACY.[Municipality],
-				PropertyLEGACY.[MunicipalID]
+				PropertyLEGACY.[MunicipalID],
+				FL.[FarmName]
                FROM [Farm].[FarmApplication] AS A
 			JOIN
 				(
@@ -41,6 +42,7 @@ public class GetApplicationDetailsSqlCommand
 					FROM		[Core].[View_AgencyEntities_FARM]
 			) FARM_AGENCY ON A.[AgencyId] = FARM_AGENCY.[AgencyId]
 			LEFT JOIN [Farm].[OwnerPropertyLEGACY_Rev01] AS PropertyLEGACY ON (A.[AgencyId] = PropertyLEGACY.[AgencyId] AND A.[FarmListID] = PropertyLEGACY.[FarmListID])
+			LEFT JOIN [Farm].[FarmList] FL ON (A.FarmListID = FL.FarmListID)
                WHERE A.Id = @p_Id;";
 
     public override string ToString()
