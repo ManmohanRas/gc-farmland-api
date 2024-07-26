@@ -139,6 +139,21 @@ public class FarmApplicationSecurityManager
                     SortOrder = 1
                 };
                 break;
+            case UserRoleEnum.PROGRAM_COMMITTEE:
+            case UserRoleEnum.PROGRAM_READONLY:
+            case UserRoleEnum.AGENCY_SIGNATORY:
+            case UserRoleEnum.AGENCY_READONLY:
+                if (userRole == UserRoleEnum.AGENCY_SIGNATORY)
+                {
+                    Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                Location();
+                OwnerDetails();
+                Roles();
+                SiteCharacteristics();
+                OtherDocuments();
+                break;
+
             default:
                 Location();
                 OwnerDetails();
@@ -901,7 +916,29 @@ public class FarmApplicationSecurityManager
                 permission.CanDeleteDocument = true;
                 permission.CanViewFeedback = true;
                 // Location
-                Location();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.LOCATION).FirstOrDefault();
+                if (correction == null)
+                {
+                    Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
+
+                    this.defaultNavigationItem = new NavigationItemEntity()
+                    {
+                        Title = TermAppNavigationItemTitles.LOCATION,
+                        RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                        SortOrder = 1
+                    };
+                }
+                else
+                {
+                    Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                    this.defaultNavigationItem = new NavigationItemEntity()
+                    {
+                        Title = TermAppNavigationItemTitles.LOCATION,
+                        RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
+                        SortOrder = 1
+                    };
+                }
                 //OwnerDetails
                 correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OWNER_DETAILS).FirstOrDefault();
                 if (correction == null)
@@ -931,23 +968,12 @@ public class FarmApplicationSecurityManager
                 if (correction == null)
                 {
                     Signatory();
-                    this.defaultNavigationItem = new NavigationItemEntity()
-                    {
-                        Title = TermAppNavigationItemTitles.LOCATION,
-                        RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
-                        SortOrder = 1
-                    };
+                    
                 }
                 else
                 {
                     Signatory(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                    // Default Navigation Item
-                    this.defaultNavigationItem = new NavigationItemEntity()
-                    {
-                        Title = TermAppNavigationItemTitles.LOCATION,
-                        RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
-                        SortOrder = 1
-                    };
+                   
                 }
                 break;
             default:
