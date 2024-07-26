@@ -41,15 +41,17 @@ public class ApplicationRepository : IApplicationRepository
         return result ?? new();
     }
 
-    public async Task<List<FarmApplicationEntity>> GetApplicationsAsync()
+    public async Task<List<FarmApplicationEntity>> GetApplicationsAsync(List<int> agencyIds, bool isExternalUser)
     {
         List<FarmApplicationEntity> results = default;
         using var conn = context.CreateConnection();
-        var sqlCommand = new GetApplicationsSqlQuery();
+        var sqlCommand = new GetApplicationsSqlQuery(isExternalUser);
         results = (await conn.QueryAsync<FarmApplicationEntity>(sqlCommand.ToString(),
                             commandType: CommandType.Text,
-                            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
-                            param: new { }
+                            commandTimeout:systemParamConfig.SQLCommandTimeoutInSeconds,
+                            param: new { 
+                                @p_agencyIds = agencyIds
+                            }
                             )).ToList();
 
         return results ?? new();

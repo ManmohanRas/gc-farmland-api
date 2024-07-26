@@ -14,7 +14,7 @@
         /// 
         /// </summary>
         /// <returns></returns>
-        public Task<List<FarmApplicationEntity>> GetApplicationsAsync();
+        public Task<List<FarmApplicationEntity>> GetApplicationsAsync(List<int> agencyIds, bool isExternalUser);
 
         /// <summary>
         /// 

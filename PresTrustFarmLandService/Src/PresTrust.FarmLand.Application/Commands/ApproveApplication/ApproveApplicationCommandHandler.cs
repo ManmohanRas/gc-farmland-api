@@ -82,7 +82,7 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
             //Send Email 
             var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_REQUESTED_TO_APPROVED.ToString());
             if (template != null)
-                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
+                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, municapality: application.Municipality);
 
             scope.Complete();
             result.IsSuccess = true;
