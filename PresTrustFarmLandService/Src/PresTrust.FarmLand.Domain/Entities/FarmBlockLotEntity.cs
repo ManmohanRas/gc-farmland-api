@@ -6,6 +6,7 @@ public class FarmBlockLotEntity
     public int ParcelId { get; set; }
     public int ApplicationId { get; set; }
     public int MunicipalityId { get; set; }
+    public string Municipality { get; set; }
     public int FarmListID { get; set; }
     public string Block { get; set; }
     public string Lot { get; set; }

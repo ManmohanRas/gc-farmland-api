@@ -64,6 +64,7 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
 
         var application = await GetIfApplicationExists(reqApplication.Id);
         var result = mapper.Map<FarmApplicationEntity, CreateApplicationCommandViewModel>(reqApplication);
+        result.FarmName = application.FarmName;
 
         // apply security
         FarmApplicationSecurityManager securityMgr = default;

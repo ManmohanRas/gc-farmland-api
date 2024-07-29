@@ -8,10 +8,10 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
     private readonly IApplicationRepository repoApplication;
     private readonly IEmailTemplateRepository repoEmailTemplate;
     private readonly IEmailManager repoEmailManager;
-    private readonly ITermAppAdminDetailsRepository repoTermAppAdminDetailsRepository;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
     private readonly IOwnerDetailsRepository repoOwner;
     private readonly ITermAppAdminDeedDetailsRepository repoDeedDetails;
+    private readonly ITermAppLocationRepository repoLocation;
 
     public ActiveApplicationCommandHandler
     (
@@ -21,10 +21,10 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
         IApplicationRepository repoApplication,
         IEmailTemplateRepository repoEmailTemplate,
         IEmailManager repoEmailManager,
-        ITermAppAdminDetailsRepository repoTermAppAdminDetailsRepository,
         ITermBrokenRuleRepository repoBrokenRules,
         IOwnerDetailsRepository repoOwner,
-        ITermAppAdminDeedDetailsRepository repoDeedDetails
+        ITermAppAdminDeedDetailsRepository repoDeedDetails,
+        ITermAppLocationRepository repoLocation
     ) : base(repoApplication)
     {
         this.mapper = mapper;
@@ -33,10 +33,10 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
         this.repoApplication = repoApplication;
         this.repoEmailTemplate = repoEmailTemplate;
         this.repoEmailManager = repoEmailManager;
-        this.repoTermAppAdminDetailsRepository = repoTermAppAdminDetailsRepository;
         this.repoBrokenRules = repoBrokenRules;
         this.repoOwner = repoOwner;
         this.repoDeedDetails = repoDeedDetails;
+        this.repoLocation  = repoLocation;
     }
 
     /// <summary>
@@ -50,6 +50,7 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
         ActiveApplicationCommandViewModel result = new();
         IEnumerable<OwnerDetailsEntity> ownerDetails;
         IEnumerable<TermAppAdminDeedDetailsEntity> deeddetails;
+        FarmBlockLotEntity blockLot = new FarmBlockLotEntity();
 
 
         // check if application exists
@@ -58,6 +59,8 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
         // get Owner Details
         ownerDetails = await repoOwner.GetOwnerDetailsAsync(request.ApplicationId);
 
+        var locationDetails = await repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId);
+        blockLot = locationDetails.Where(x => x.IsChecked).FirstOrDefault();
 
         // get Deed Details
         deeddetails = await repoDeedDetails.GetTermAppAdminDeedDetails(request.ApplicationId);
@@ -95,14 +98,14 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
             };
             await repoApplication.SaveStatusLogAsync(appStatusLog);
 
-            var admindetails = await this.repoTermAppAdminDetailsRepository.GetTermAppAdminDetailsAsync(request.ApplicationId);
+            //var admindetails = await this.repoTermAppAdminDetailsRepository.GetTermAppAdminDetailsAsync(request.ApplicationId);
 
 
 
             //Send Email 
             var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_AGREEMENT_APPROVED_TO_ACTIVE.ToString());
             if (template != null)
-                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, owner: ownerDetails.FirstOrDefault(), deed: deeddetails.FirstOrDefault() );
+                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, owner: ownerDetails.FirstOrDefault(), blockLot: blockLot);
 
             scope.Complete();
             result.IsSuccess = true;

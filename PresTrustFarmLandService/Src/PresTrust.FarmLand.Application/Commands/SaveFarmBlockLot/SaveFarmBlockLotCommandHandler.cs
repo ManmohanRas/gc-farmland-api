@@ -31,20 +31,22 @@ public class SaveFarmBlockLotCommandHandler: IRequestHandler<SaveFarmBlockLotCom
 
         var currentParcel = await repoBlockLot.GetFarmBlockLotByIdAsync(request.Id);
 
-        FarmParcelHistoryEntity reqHistory = new FarmParcelHistoryEntity()
-        {
-
-            ParcelId = request.Id,
-            CurrentPamsPin = reqBlockLot.PamsPin,
-            PreviousPamsPin = currentParcel.PamsPin,
-            ReasonForChange = currentParcel.ReasonForChange,
-            ChangeType  = currentParcel.ChangeType,
-            LastUpdatedBy = userContext.Email
-        };
+        
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             if (request.Id > 0 && currentParcel.PamsPin != reqBlockLot.PamsPin)
             {
+                FarmParcelHistoryEntity reqHistory = new FarmParcelHistoryEntity()
+                {
+
+                    ParcelId = request.Id,
+                    CurrentPamsPin = reqBlockLot.PamsPin,
+                    PreviousPamsPin = currentParcel.PamsPin,
+                    ReasonForChange = currentParcel.ReasonForChange,
+                    ChangeType = currentParcel.ChangeType,
+                    LastUpdatedBy = userContext.Email
+                };
+
                 var parcelHistory = await repoParcelHistory.SaveParcelHistoryItemAsync(reqHistory);
 
             }

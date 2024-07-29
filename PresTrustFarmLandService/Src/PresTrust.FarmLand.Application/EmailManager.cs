@@ -2,7 +2,7 @@
 
 public interface IEmailManager
 {
-    Task SendMail(string subject, string htmlBody, int applicationId, string applicationName, string? emailTemplateCode = default, int agencyId = default, OwnerDetailsEntity? owner = default, TermAppAdminDeedDetailsEntity? deed = default);
+    Task SendMail(string subject, string htmlBody, int applicationId, string applicationName, string? emailTemplateCode = default, int agencyId = default, OwnerDetailsEntity? owner = default, FarmBlockLotEntity? blockLot = default, string municapality = default);
 
 }
 
@@ -52,13 +52,13 @@ public class EmailManager : IEmailManager
             //primaryContacts.Select(i => string.Concat(i.FirstName, ' ', i.LastName)).ToList();
             primaryContactEmails = primaryContacts.Select(i => i.Email).ToList();
             if (primaryAgencyUsers.Count() > 0)
-            {
-                primaryContactNames = primaryAgencyUsers.Select(o => string.Format("{0} {1}", o.FirstName, o.LastName)).ToList();
-            }
-            else
-            {
-                primaryContactNames = primaryContacts.Select(o => string.Format("{0} {1}", o.FirstName, o.LastName)).ToList();
-            }
+            //{
+            //    primaryContactNames = primaryAgencyUsers.Where(x => x.IsEnabled).Select(o => string.Format("{0} {1}", o.FirstName, o.LastName)).ToList();
+            //}
+            //else
+            //{
+                primaryContactNames = primaryContacts.Where(x => x.IsPrimaryContact == true).Select(o => o.UserName).ToList();
+            //}
 
         }
         else
@@ -82,7 +82,7 @@ public class EmailManager : IEmailManager
     /// <param name="htmlBody"></param>
     /// <param name="flagTestEmail"></param>
     /// <returns></returns>
-    public async Task SendMail(string subject, string htmlBody, int applicationId,  string applicationName, string? emailTemplateCode = default, int agencyId = default, OwnerDetailsEntity? owner = default, TermAppAdminDeedDetailsEntity? deed = default)
+    public async Task SendMail(string subject, string htmlBody, int applicationId,  string applicationName, string? emailTemplateCode = default, int agencyId = default, OwnerDetailsEntity? owner = default, FarmBlockLotEntity? blockLot = default, string municapality = default)
     {
         var primaryContact = await GetPrimaryContact(applicationId, agencyId);
         string contactEmails = default;
@@ -104,13 +104,8 @@ public class EmailManager : IEmailManager
         htmlBody = htmlBody.Replace("{{PrimaryContactName}}", string.Join(",", primaryContact.Item1));
         htmlBody = htmlBody.Replace("{{FarmName}}", applicationName ?? "");
         htmlBody = htmlBody.Replace("{{SADCContact}}", contactName  ?? "");
-
         htmlBody = htmlBody.Replace("{{NextMeetingDate}}", fifthNextMonth.ToString("dddd, MMMM dd, yyyy"));
-       // htmlBody = htmlBody.Replace("{{OwnerFirst}}", owner.FirstName ?? "");
-       // htmlBody = htmlBody.Replace("{{OwnerLast}}", owner.LastName ?? "");
-       // htmlBody = htmlBody.Replace("{{DeedBook}}", deed.OriginalBook ?? "");
-       // htmlBody = htmlBody.Replace("{{DeedPage}}", deed.OriginalPage ?? "");
-        if (owner != null)
+        if (owner!=null)
         {
             htmlBody = htmlBody.Replace("{{OwnerFirst}}", owner.FirstName ?? "");
             htmlBody = htmlBody.Replace("{{OwnerLast}}", owner.LastName ?? "");
@@ -118,25 +113,36 @@ public class EmailManager : IEmailManager
         else
         {
             htmlBody = htmlBody.Replace("{{OwnerFirst}}", "");
-            htmlBody = htmlBody.Replace("{{OwnerLast}}", "");
+            htmlBody = htmlBody.Replace("{{OwnerLast}}",  "");
         }
 
-        if (deed != null)
+        if (blockLot!=null)
         {
-            htmlBody = htmlBody.Replace("{{DeedBook}}", deed.OriginalBook ?? "");
-            htmlBody = htmlBody.Replace("{{DeedPage}}", deed.OriginalPage ?? "");
-        }
-        else
-        {
-            htmlBody = htmlBody.Replace("{{DeedBook}}", "");
-            htmlBody = htmlBody.Replace("{{DeedPage}}", "");
-        }
+            htmlBody = htmlBody.Replace("{{DeedBook}}", blockLot.DeedBook ?? "");
+            htmlBody = htmlBody.Replace("{{DeedPage}}", blockLot.DeedPage ?? "");
+            htmlBody = htmlBody.Replace("{{Block}}", blockLot.Block ?? "");
+            htmlBody = htmlBody.Replace("{{Lot}}", blockLot.Lot ?? "");
+            htmlBody = htmlBody.Replace("{{Municipality}}", blockLot.Municipality ?? "");
 
-        //htmlBody = htmlBody.Replace("{{Municipality}}", location ?? "");
-        //htmlBody = htmlBody.Replace("{{Block}}", location ?? "");
-        //htmlBody = htmlBody.Replace("{{Lot}}", location ?? "");
-        // htmlBody = htmlBody.Replace("{{SADCContact}}",  ?? "");
-        // htmlBody = htmlBody.Replace("{{FarmName}}",  ?? 
+            subject = subject.Replace("{{Block}}", blockLot.Block ?? "");
+            subject = subject.Replace("{{Lot}}", blockLot.Lot ?? "");
+            subject = subject.Replace("{{Municipality}}", blockLot.Municipality ?? "");
+        }else
+        {
+            htmlBody = htmlBody.Replace("{{DeedBook}}",  "");
+            htmlBody = htmlBody.Replace("{{DeedPage}}",  "");
+            htmlBody = htmlBody.Replace("{{Block}}", "");
+            htmlBody = htmlBody.Replace("{{Lot}}","");
+            htmlBody = htmlBody.Replace("{{Municipality}}",  "");
+
+            subject = subject.Replace("{{Block}}","");
+            subject = subject.Replace("{{Lot}}", "");
+            subject = subject.Replace("{{Municipality}}",  "");
+        }
+       
+
+
+       
         subject = subject.Replace("{{FarmName}}", applicationName ?? "");
       
       //oEmails = systemParamOptions.IsDevelopment == false ? string.Join(",", primaryContact.Item2) : systemParamOptions.TestEmailIds;

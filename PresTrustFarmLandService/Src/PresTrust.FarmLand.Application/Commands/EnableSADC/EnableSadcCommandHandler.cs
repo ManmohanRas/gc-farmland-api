@@ -8,6 +8,7 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
     private readonly IApplicationRepository repoApplication;
     private readonly IEmailTemplateRepository repoEmailTemplate;
     private readonly IEmailManager repoEmailManager;
+    private readonly ITermAppLocationRepository repoLocation;
 
     public EnableSadcCommandHandler
         (
@@ -17,7 +18,9 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
         IEmailTemplateRepository repoEmailTemplate,
-        IEmailManager repoEmailManager
+        IEmailManager repoEmailManager,
+        ITermAppLocationRepository repoLocation
+
         ) : base (repoApplication)
     {
         this.mapper = mapper;
@@ -26,6 +29,7 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
         this.repoApplication = repoApplication;
         this.repoEmailTemplate = repoEmailTemplate;
         this.repoEmailManager = repoEmailManager;
+        this.repoLocation = repoLocation;
     }
 
 
@@ -37,14 +41,18 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
     /// <returns></returns>
     public async Task<Unit> Handle(EnableSadcCommand request, CancellationToken cancellationToken)
     {
+        FarmBlockLotEntity blockLot = new FarmBlockLotEntity();
 
         // check if application exists
         var application = await GetIfApplicationExists(request.ApplicationId);
 
+        var locationDetails = await repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId);
+        blockLot = locationDetails.Where(x => x.IsChecked).FirstOrDefault();
+
         //Send Email 
         var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.TRIGER_THE_EMAIL_WHEN_SADC_IS_ENABLED.ToString());
             if (template != null)
-                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
+                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, blockLot: blockLot);
 
         return Unit.Value;
     }
