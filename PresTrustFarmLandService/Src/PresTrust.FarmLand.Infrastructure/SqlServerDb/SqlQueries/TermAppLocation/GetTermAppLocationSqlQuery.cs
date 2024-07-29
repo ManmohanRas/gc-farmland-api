@@ -17,9 +17,12 @@ public class GetTermAppLocationSqlQuery
             P.[IsWarning],
             P.[CreatedByProgramUser],
             L.IsChecked,
-            L.ApplicationId
+            L.ApplicationId,
+            CM.[Municipality] AS Municipality
             FROM [Farm].[FarmMunicipalityBlockLotParcel] AS P
            LEFT JOIN [Farm].[FarmTermAppLocation] AS L ON (P.FarmListID = L.FarmListID and P.Id = L.ParcelId AND L.applicationId = @p_ApplicationId)
+           LEFT JOIN [Core].[View_AgencyEntities_FARM] ViewAgency ON (P.MunicipalityId = ViewAgency.AgencyId)
+           LEFT JOIN [Core].[Municipality] CM ON (P.MunicipalityId = CM.MunicipalId AND CM.InCounty = 1)
            WHERE P.FarmListID = @p_FarmListID;";
     public GetTermAppLocationSqlQuery()
     {

@@ -5,7 +5,8 @@ public class GetApplicationDetailsQueryViewModel
     public int Id { get; set; }
     public int AgencyId { get; set; }
     public string Title { get; set; }
-    public int FarmListID { get; set; }
+    public int FarmListId { get; set; }
+    public string FarmName { get; set; }
     public int ApplicationTypeId { get; set; }
     public string ApplicationType { get; set; }
     public string Status { get; set; }
