@@ -1,15 +1,15 @@
 -- Drop Constraints
-IF OBJECT_ID('[Farm].[FarmApplicationCommentType]') IS NOT NULL
+IF OBJECT_ID('[Farm].[FarmAppCommentType]') IS NOT NULL
 BEGIN
-	ALTER TABLE [Farm].[FarmApplicationCommentType] DROP CONSTRAINT IF EXISTS  [DF_FarmApplicationCommentType_Description];
+	ALTER TABLE [Farm].[FarmAppCommentType] DROP CONSTRAINT IF EXISTS  [DF_FarmAppCommentType_Description];
 	
-	ALTER TABLE [Farm].[FarmApplicationCommentType] DROP CONSTRAINT IF EXISTS  [DF_FarmApplicationCommentType_IsActive];
+	ALTER TABLE [Farm].[FarmAppCommentType] DROP CONSTRAINT IF EXISTS  [DF_FarmAppCommentType_IsActive];
 	
 END;
 GO
 
 -- Drop Table
-DROP TABLE IF EXISTS [Farm].[FarmApplicationCommentType];
+DROP TABLE IF EXISTS [Farm].[FarmAppCommentType];
 GO
 
 -- Create Table
@@ -18,7 +18,7 @@ CREATE TABLE [Farm].[FarmAppCommentType](
 	[Title]				[varchar](128)		NOT NULL,
 	[Description]		[varchar](512)		NULL,		
 	[IsActive]			[bit]				NULL,
-CONSTRAINT [PK_FarmApplicationCommentType_Id] PRIMARY KEY CLUSTERED 
+CONSTRAINT [PK_FarmAppCommentType_Id] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]

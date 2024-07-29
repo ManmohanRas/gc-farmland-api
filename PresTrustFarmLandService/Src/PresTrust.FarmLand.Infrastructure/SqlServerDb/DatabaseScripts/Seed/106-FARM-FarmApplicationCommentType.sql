@@ -1,9 +1,9 @@
-DELETE FROM  [Farm].[FarmApplicationCommentType];
+DELETE FROM  [Farm].[FarmAppCommentType];
 
-INSERT INTO [Farm].[FarmApplicationCommentType]([Id], [Title], [ApplicationTypeId]) VALUES (1, 'General Comment', 1);
+INSERT INTO [Farm].[FarmAppCommentType]([Id], [Title]) VALUES (1, 'General Comment');
 GO
 
-INSERT INTO [Farm].[FarmApplicationCommentType]([Id], [Title],  [ApplicationTypeId]) VALUES (2, 'Staff Comment', 1);
+INSERT INTO [Farm].[FarmAppCommentType]([Id], [Title]) VALUES (2, 'Staff Comment');
 GO
 
-INSERT INTO [Farm].[FarmApplicationCommentType]([Id], [Title], [ApplicationTypeId]) VALUES (3, 'Application Comment', 1);
+INSERT INTO [Farm].[FarmAppCommentType]([Id], [Title]) VALUES (3, 'Application Comment');

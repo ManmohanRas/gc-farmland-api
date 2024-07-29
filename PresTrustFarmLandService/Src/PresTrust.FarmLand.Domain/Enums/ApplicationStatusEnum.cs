@@ -7,7 +7,7 @@ public enum ApplicationStatusEnum
     /// </summary>
     NONE = 0,
 
-    /// <summary>
+     /// <summary>
     /// Application Status Type for Draft
     /// </summary>
     PETITION_DRAFT = 1,
@@ -16,8 +16,6 @@ public enum ApplicationStatusEnum
     /// Application Status Type for Submitted
     /// </summary>
     PETITION_REQUEST = 2,
-
-    // PETITION_REQUEST
 
     /// <summary>
     /// Application Status Type for In Review

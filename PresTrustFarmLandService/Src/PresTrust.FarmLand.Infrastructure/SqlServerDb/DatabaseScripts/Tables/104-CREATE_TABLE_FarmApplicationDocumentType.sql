@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS [Farm].[FarmApplicationDocumentType];
 GO
 
 -- Create Table
-CREATE TABLE [Farm].[FarmAppDocumentType](
+CREATE TABLE [Farm].[FarmApplicationDocumentType](
 	[Id]				[smallint] 			NOT NULL,
 	[Title]				[varchar](128)		NOT NULL,
 	[Description]		[varchar](512)		NULL	,
