@@ -6,6 +6,7 @@ public class UpdateTermFeedbackSqlCommand
      @"UPDATE		       [Farm].[FarmApplicationFeedback]
              SET			   [Feedback] = @p_Feedback
 			                  ,[RequestForCorrection] = @p_RequestForCorrection
+                              ,[SectionId] = @p_SectionId
 			                  ,[LastUpdatedBy] = @p_LastUpdatedBy
 			                  ,[LastUpdatedOn] = GETDATE()
              WHERE		       Id = @p_Id AND ApplicationId = @p_ApplicationId;";
