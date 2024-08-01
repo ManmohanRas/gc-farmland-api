@@ -166,4 +166,16 @@ public class FarmBlockLotRepository: IFarmBlockLotRepository
 
     }
 
+    public async Task<bool> DeleteFarmBlockLotById(int id)
+    {
+        using var conn = context.CreateConnection();
+        var sqlCommand = new DeleteFarmBlockLotSqlCommand();
+        await conn.ExecuteAsync(sqlCommand.ToString(),
+                    commandType: CommandType.Text,
+                    commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+                    param: new { @p_Id = id });
+
+        return true;
+    }
+
 }

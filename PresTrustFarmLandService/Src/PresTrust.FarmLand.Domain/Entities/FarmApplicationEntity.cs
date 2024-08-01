@@ -19,6 +19,7 @@ public class FarmApplicationEntity
     public string FarmName { get; set; }
     public string Municipality { get; set; }
     public string OriginalLandowner { get; set; }
+    public string PresentOwner { get; set; }
     public string AgencyJSON { get; set; }
     public string CommentsJSON { get; set; }
     public string FeedbacksJSON { get; set; }

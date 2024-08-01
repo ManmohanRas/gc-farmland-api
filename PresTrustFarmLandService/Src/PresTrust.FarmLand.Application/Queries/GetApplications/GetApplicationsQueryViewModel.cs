@@ -17,6 +17,7 @@
         public string FarmName { get; set; }
         public string MunicipalityId { get; set; }
         public string OriginalLandowner { get; set; }
+        public string PresentOwner { get; set; }
 
     }
 }
