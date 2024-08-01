@@ -9,4 +9,7 @@ public interface IFarmBlockLotRepository
 
     Task<bool> ResolveParcelWarning(int ParcelId);
 
+    public Task<bool> DeleteFarmBlockLotById(int id);
+
+
 }

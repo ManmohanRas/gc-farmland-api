@@ -496,5 +496,12 @@ public class FarmLandController : ApiBaseController
             return Single(await QueryAsync(query));
         }
 
+        [HttpPost("deleteBlockLot")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<bool>> DeleteBlockLot([FromBody] DeleteBlockLotCommand command)
+        {
+            return Single(await CommandAsync(command));
+        }
+
 }
 
