@@ -18,6 +18,8 @@
         public string MunicipalityId { get; set; }
         public string OriginalLandowner { get; set; }
         public string PresentOwner { get; set; }
+        public DateTime? EnrollmentDate { get; set; }
+        public double Acres { get; set; }
 
     }
 }

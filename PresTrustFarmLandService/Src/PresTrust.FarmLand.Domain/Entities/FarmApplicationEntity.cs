@@ -24,6 +24,9 @@ public class FarmApplicationEntity
     public string CommentsJSON { get; set; }
     public string FeedbacksJSON { get; set; }
     public bool IsSadc {  get; set; }
+    public DateTime? EnrollmentDate { get; set; }
+    public double Acres { get; set; }
+
     public ApplicationTypeEnum ApplicationType
     {
         get
