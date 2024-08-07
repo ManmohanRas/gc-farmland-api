@@ -1115,31 +1115,98 @@ public class FarmApplicationSecurityManager
             case ApplicationStatusEnum.NONE:
                 break;
             case ApplicationStatusEnum.PETITION_DRAFT:
-                DeriveDraftStatePermissions();
+                DeriveEasementDraftStatePermissions();
                 break;
-            case ApplicationStatusEnum.PETITION_REQUEST:
-                DeriveRequestedStatePermissions();
-                break;
-            case ApplicationStatusEnum.PETITION_APPROVED:
-                DeriveApprovedStatePermissions();
-                break;
-            case ApplicationStatusEnum.AGREEMENT_APPROVED:
-                DeriveAgreementApprovedStatePermissions();
-                break;
-            case ApplicationStatusEnum.ACTIVE:
-                DeriveActiveStatePermissions();
-                break;
-            case ApplicationStatusEnum.WITHDRAWN:
-                DeriveWithdrawnStatePermissions();
-                break;
-            case ApplicationStatusEnum.REJECTED:
-                DeriveWithdrawnStatePermissions();
-                break;
-            case ApplicationStatusEnum.EXPIRED:
-                DeriveWithdrawnStatePermissions();
+            default:
                 break;
         }
 
+    }
+
+    private void DeriveEasementDraftStatePermissions()
+    {
+        switch (userRole)
+        {
+            case UserRoleEnum.SYSTEM_ADMIN:
+            case UserRoleEnum.PROGRAM_ADMIN:
+            case UserRoleEnum.PROGRAM_EDITOR:
+                if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
+                {
+                    permission.CanSubmitApplication = true;
+                }
+
+                permission.CanSaveDocument = true;
+                permission.CanDeleteDocument = true;
+
+                Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+              
+
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = TermAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
+                    SortOrder = 1
+                };
+                break;
+            case UserRoleEnum.AGENCY_ADMIN:
+            case UserRoleEnum.AGENCY_EDITOR:
+                if (userRole == UserRoleEnum.AGENCY_ADMIN)
+                {
+                    permission.CanSubmitApplication = true;
+                }
+                permission.CanSaveDocument = true;
+                permission.CanDeleteDocument = true;
+
+                Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = TermAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
+                    SortOrder = 1
+                };
+                break;
+            case UserRoleEnum.PROGRAM_COMMITTEE:
+            case UserRoleEnum.PROGRAM_READONLY:
+            case UserRoleEnum.AGENCY_SIGNATORY:
+            case UserRoleEnum.AGENCY_READONLY:
+
+                Location();
+                OwnerDetails();
+                Roles();
+
+                if (userRole == UserRoleEnum.AGENCY_SIGNATORY)
+                {
+                    Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Signatory();
+
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = TermAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                    SortOrder = 1
+                };
+                break;
+
+            default:
+                Location();
+                OwnerDetails();
+                Roles();
+
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = TermAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                    SortOrder = 1
+                };
+                break;
+        }
     }
 
     private void Location(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
