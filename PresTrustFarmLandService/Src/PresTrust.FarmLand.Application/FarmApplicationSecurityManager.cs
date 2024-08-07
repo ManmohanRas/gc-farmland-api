@@ -143,15 +143,24 @@ public class FarmApplicationSecurityManager
             case UserRoleEnum.PROGRAM_READONLY:
             case UserRoleEnum.AGENCY_SIGNATORY:
             case UserRoleEnum.AGENCY_READONLY:
-                if (userRole == UserRoleEnum.AGENCY_SIGNATORY)
-                {
-                    Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                }
+
                 Location();
                 OwnerDetails();
                 Roles();
                 SiteCharacteristics();
                 OtherDocuments();
+                if (userRole == UserRoleEnum.AGENCY_SIGNATORY)
+                {
+                    Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }else
+                Signatory();
+
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = TermAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                    SortOrder = 1
+                };
                 break;
 
             default:
