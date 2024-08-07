@@ -1091,6 +1091,45 @@ public class FarmApplicationSecurityManager
     //Easement Program
     public void ConfigureEasementPermissions()
     {
+        permission = new TermAppPermissionEntity();
+        navigationItems = new List<NavigationItemEntity>();
+        adminNavigationItems = new List<NavigationItemEntity>();
+        postApprovedNavigationItems = new List<NavigationItemEntity>();
+
+        if (userRole == UserRoleEnum.AGENCY_ADMIN || userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN || userRole == UserRoleEnum.PROGRAM_EDITOR)
+        {
+            permission.CanCreateApplication = true;
+        }
+
+        switch (applicationStatus)
+        {
+            case ApplicationStatusEnum.NONE:
+                break;
+            case ApplicationStatusEnum.PETITION_DRAFT:
+                DeriveDraftStatePermissions();
+                break;
+            case ApplicationStatusEnum.PETITION_REQUEST:
+                DeriveRequestedStatePermissions();
+                break;
+            case ApplicationStatusEnum.PETITION_APPROVED:
+                DeriveApprovedStatePermissions();
+                break;
+            case ApplicationStatusEnum.AGREEMENT_APPROVED:
+                DeriveAgreementApprovedStatePermissions();
+                break;
+            case ApplicationStatusEnum.ACTIVE:
+                DeriveActiveStatePermissions();
+                break;
+            case ApplicationStatusEnum.WITHDRAWN:
+                DeriveWithdrawnStatePermissions();
+                break;
+            case ApplicationStatusEnum.REJECTED:
+                DeriveWithdrawnStatePermissions();
+                break;
+            case ApplicationStatusEnum.EXPIRED:
+                DeriveWithdrawnStatePermissions();
+                break;
+        }
 
     }
 

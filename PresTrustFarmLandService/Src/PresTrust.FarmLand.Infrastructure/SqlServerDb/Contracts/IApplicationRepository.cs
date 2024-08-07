@@ -43,5 +43,12 @@
         /// <returns></returns>
         Task<bool> UpdateApplicationStatusAsync(FarmApplicationEntity application, ApplicationStatusEnum enumStatus);
 
+        /// update application status
+        /// </summary>
+        /// <param name="application"></param>
+        /// <param name="enumStatus"></param>
+        /// <returns></returns>
+        Task<bool> UpdateSadcAsync(int applicationId);
+
     }
 }

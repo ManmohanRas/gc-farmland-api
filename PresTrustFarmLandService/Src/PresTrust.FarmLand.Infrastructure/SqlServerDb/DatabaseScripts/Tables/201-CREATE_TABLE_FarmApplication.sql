@@ -10,6 +10,8 @@ BEGIN
 	ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_IsActive_FarmApplication];
 
 	ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_IsApprovedByMunicipality_FarmApplication];
+
+	ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_IsSADC_FarmApplication];
 END;
 GO
  
@@ -32,7 +34,8 @@ CREATE TABLE [Farm].[FarmApplication](
 	[CreatedBy]					[varchar](128)					NULL	,
 	[LastUpdatedBy]				[varchar](128)					NULL	,
 	[LastUpdatedOn]				[datetime]						NOT NULL,
-	[IsActive]					[bit]							NULL,	
+	[IsActive]					[bit]							NULL    ,
+	[IsSADC]					[bit]                           NULL    , 
 CONSTRAINT [PK_FarmApplication_Id] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -55,4 +58,7 @@ ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_IsActive_F
 GO
 
 ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_IsApprovedByMunicipality_FarmApplication]  DEFAULT (0) FOR [IsApprovedByMunicipality]
+GO
+
+ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_IsSADC_FarmApplication]  DEFAULT (0) FOR [IsSADC]
 GO

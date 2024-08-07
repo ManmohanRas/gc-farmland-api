@@ -3,7 +3,7 @@
 public class GetTermAppLocationSqlQuery
 {
     private readonly string _sqlCommand =
-        @"  SELECT 
+        @"  SELECT Distinct
                MBL.Id AS ParcelId,
                MBL.[Id],
                MBL.[FarmListID]

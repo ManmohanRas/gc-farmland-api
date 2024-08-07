@@ -14,6 +14,7 @@ public class GetApplicationDetailsQueryViewModel
     public FarmAgencyEntity Agency { get; set; }
     public int MunicipalID { get; set; }
     public string Municipality { get; set; }
+    public bool IsSADC { get; set; }
     public IEnumerable<TermCommentsEntity> Comments { get; set; }
     public IEnumerable<TermFeedbacksEntity> Feedbacks { get; set; }
     public TermAppPermissionEntity Permission { get; set; } = new TermAppPermissionEntity();
