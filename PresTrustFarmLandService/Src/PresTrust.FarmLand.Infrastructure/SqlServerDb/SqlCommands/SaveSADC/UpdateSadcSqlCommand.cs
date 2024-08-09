@@ -4,8 +4,7 @@ public class UpdateSadcSqlCommand
 {
     private readonly string _sqlCommand =
           @" UPDATE [Farm].[FarmApplication]
-               SET
-                        [IsSadc] = 1,
+                    SET [IsSADC] = 1
                WHERE    [Id] = @p_Id;";
 
     public UpdateSadcSqlCommand() { }

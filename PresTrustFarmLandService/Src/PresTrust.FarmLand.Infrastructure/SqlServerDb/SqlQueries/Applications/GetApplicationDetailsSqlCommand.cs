@@ -12,6 +12,7 @@ public class GetApplicationDetailsSqlCommand
                 A.[CreatedOn],
 				A.[IsApprovedByMunicipality],
 				A.[FarmListID],
+				A.[IsSADC],
 				[AgencyJSON],
 				PropertyLEGACY.[Municipality],
 				PropertyLEGACY.[MunicipalID],
