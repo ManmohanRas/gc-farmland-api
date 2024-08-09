@@ -324,11 +324,8 @@ public class FarmApplicationSecurityManager
                 break;
             case UserRoleEnum.AGENCY_ADMIN:
             case UserRoleEnum.AGENCY_EDITOR:
-                if (userRole == UserRoleEnum.AGENCY_ADMIN)
-                {
-                    permission.CanRespondToTheRequestForAnApplicationCorrection = true;
-                    permission.CanViewOtherDocsSection = true;
-                }
+                permission.CanRespondToTheRequestForAnApplicationCorrection = true;
+                permission.CanViewOtherDocsSection = true;
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
                 permission.CanViewFeedback = true;
@@ -496,11 +493,8 @@ public class FarmApplicationSecurityManager
                 break;
             case UserRoleEnum.AGENCY_ADMIN:
             case UserRoleEnum.AGENCY_EDITOR:
-                if (userRole == UserRoleEnum.AGENCY_ADMIN)
-                {
                    // permission.CanSubmitApplication = true;
                     permission.CanRespondToTheRequestForAnApplicationCorrection = true;
-                }
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
                 permission.CanViewFeedback = true;
@@ -675,11 +669,8 @@ public class FarmApplicationSecurityManager
                 break;
             case UserRoleEnum.AGENCY_ADMIN:
             case UserRoleEnum.AGENCY_EDITOR:
-                if (userRole == UserRoleEnum.AGENCY_ADMIN)
-                {
                     permission.CanSubmitApplication = true;
                     permission.CanRespondToTheRequestForAnApplicationCorrection = true;
-                }
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
                 permission.CanViewFeedback = true;
@@ -917,10 +908,7 @@ public class FarmApplicationSecurityManager
                 break;
             case UserRoleEnum.AGENCY_ADMIN:
             case UserRoleEnum.AGENCY_EDITOR:
-                if (userRole == UserRoleEnum.AGENCY_ADMIN)
-                {
-                    permission.CanRespondToTheRequestForAnApplicationCorrection = true;
-                }
+                permission.CanRespondToTheRequestForAnApplicationCorrection = true;
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
                 permission.CanViewFeedback = true;
