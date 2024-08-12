@@ -27,6 +27,8 @@ public class FarmApplicationSecurityManager
         }
         else if (applicationType == ApplicationTypeEnum.EASEMENT)
         {
+            //var securityMgr = new FarmEsmtAppSecurityManager(this.userRole, this.applicationStatus, this.corrections);
+            //securityMgr.ConfigurePermissions();
             ConfigureEasementPermissions();
         }
     }
@@ -1083,7 +1085,7 @@ public class FarmApplicationSecurityManager
         }
     }
 
-    
+
 
     //Easement Program
     public void ConfigureEasementPermissions()
@@ -1108,7 +1110,6 @@ public class FarmApplicationSecurityManager
             default:
                 break;
         }
-
     }
 
     private void DeriveEasementDraftStatePermissions()
@@ -1129,7 +1130,13 @@ public class FarmApplicationSecurityManager
                 Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-              
+                Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Exceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Structures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Liens(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+
 
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
@@ -1150,6 +1157,13 @@ public class FarmApplicationSecurityManager
                 Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Exceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Structures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Liens(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+
 
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
@@ -1366,4 +1380,69 @@ public class FarmApplicationSecurityManager
                 break;
         }
     }
+
+
+    //temp easement
+    private void Exceptions(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXCEPTIONS, RouterLink = EsmtAppRouterLinks.EXCEPTIONS_VIEW, SortOrder = 5, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXCEPTIONS, RouterLink = EsmtAppRouterLinks.EXCEPTIONS_EDIT, SortOrder = 5, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void Structures(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.RESI_NON_RESI_STRUCTURES, RouterLink = EsmtAppRouterLinks.RESI_NON_RESI_STRUCTURES_VIEW, SortOrder = 6, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.RESI_NON_RESI_STRUCTURES, RouterLink = EsmtAppRouterLinks.RESI_NON_RESI_STRUCTURES_EDIT, SortOrder = 6, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void Liens(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.LIENS_EASEMENT_ROW, RouterLink = EsmtAppRouterLinks.LIENS_EASEMENT_ROW_VIEW, SortOrder = 7, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.LIENS_EASEMENT_ROW, RouterLink = EsmtAppRouterLinks.LIENS_EASEMENT_ROW_EDIT, SortOrder = 7, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void ExistingUses(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXIS_NON_AGRI_USES, RouterLink = EsmtAppRouterLinks.EXIS_NON_AGRI_USES_VIEW, SortOrder = 8, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXIS_NON_AGRI_USES, RouterLink = EsmtAppRouterLinks.EXIS_NON_AGRI_USES_EDIT, SortOrder = 8, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+    //temp easement
+
+
 }
