@@ -25,6 +25,7 @@
             services.AddTransient<ITermAppAdminDeedDetailsRepository, TermAppAdminDeedDetailsRepository>();
             services.AddTransient<ITermAppLocationRepository, TermAppLocationRepository>();
             services.AddTransient<IFarmParcelHistoryRepository, FarmParcelHistoryRepository>();
+            services.AddTransient<IEsmtAppStructureRepository, EsmtAppStructureRepository>();
 
         }
     }
