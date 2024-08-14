@@ -757,7 +757,6 @@ public class FarmApplicationSecurityManager
             case UserRoleEnum.PROGRAM_ADMIN:
             case UserRoleEnum.PROGRAM_EDITOR:
                 permission.CanRequestForAnApplicationCorrection = true;
-                permission.CanRespondToTheRequestForAnApplicationCorrection = true;
                 permission.CanEditFeedback = true;
                 permission.CanDeleteFeedback = true;
                 permission.CanViewFeedback = true;
