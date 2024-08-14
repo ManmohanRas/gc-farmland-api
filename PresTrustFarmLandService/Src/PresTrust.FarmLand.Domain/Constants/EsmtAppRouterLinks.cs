@@ -31,14 +31,6 @@ public partial class FarmLandDomainConstants
         /// </summary>
         public const string ROLES_EDIT = "app/roles/edit";
 
-        /// <summary>
-        /// Constant to hold router link for Signatory View screen
-        /// </summary>
-        public const string SIGNATORY_VIEW = "app/signatory/view";
-        /// <summary>
-        /// Constant to hold router link for Signatory Edit screen
-        /// </summary>
-        public const string SIGNATORY_EDIT = "app/signatory/edit";
 
         /// <summary>
         /// Constant to hold router link for Exceptions View screen
@@ -75,6 +67,33 @@ public partial class FarmLandDomainConstants
         /// Constant to hold router link for ExistUses Edit screen
         /// </summary>
         public const string EXIS_NON_AGRI_USES_EDIT = "app/existuses/edit";
+
+        // <summary>
+        /// Constant to hold router link for Equine View screen
+        /// </summary>
+        public const string EQUINE_USES_VIEW = "app/equineuses/view";
+        /// <summary>
+        /// Constant to hold router link for Equine Edit screen
+        /// </summary>
+        public const string EQUINE_USES_EDIT = "app/equineuses/edit";
+
+        /// <summary>
+        /// Constant to hold router link for Signatory View screen
+        /// </summary>
+        public const string SIGNATORY_VIEW = "app/signatory/view";
+        /// <summary>
+        /// Constant to hold router link for Signatory Edit screen
+        /// </summary>
+        public const string SIGNATORY_EDIT = "app/signatory/edit";
+
+        /// <summary>
+        /// Constant to hold router link for Other Documents View screen
+        /// </summary>
+        public const string OTHER_DOCUMENTS_VIEW = "app/otherdocs/view";
+        /// <summary>
+        /// Constant to hold router link for Other Documents Edit screen
+        /// </summary>
+        public const string OTHER_DOCUMENTS_EDIT = "app/otherdocs/edit";
 
     }
 }
