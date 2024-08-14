@@ -1101,11 +1101,13 @@ public class FarmApplicationSecurityManager
                 Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Exceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Structures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Liens(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                EquineUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
 
 
@@ -1128,12 +1130,13 @@ public class FarmApplicationSecurityManager
                 Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Exceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Structures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Liens(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-
+                EquineUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
 
                 this.defaultNavigationItem = new NavigationItemEntity()
@@ -1359,10 +1362,10 @@ public class FarmApplicationSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
-                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXCEPTIONS, RouterLink = EsmtAppRouterLinks.EXCEPTIONS_VIEW, SortOrder = 5, Icon = (correction == true ? "report_problem" : "") });
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXCEPTIONS, RouterLink = EsmtAppRouterLinks.EXCEPTIONS_VIEW, SortOrder = 11, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
-                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXCEPTIONS, RouterLink = EsmtAppRouterLinks.EXCEPTIONS_EDIT, SortOrder = 5, Icon = (correction == true ? "report_problem" : "") });
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXCEPTIONS, RouterLink = EsmtAppRouterLinks.EXCEPTIONS_EDIT, SortOrder = 11, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
                 break;
@@ -1374,10 +1377,10 @@ public class FarmApplicationSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
-                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.RESI_NON_RESI_STRUCTURES, RouterLink = EsmtAppRouterLinks.RESI_NON_RESI_STRUCTURES_VIEW, SortOrder = 6, Icon = (correction == true ? "report_problem" : "") });
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.RESI_NON_RESI_STRUCTURES, RouterLink = EsmtAppRouterLinks.RESI_NON_RESI_STRUCTURES_VIEW, SortOrder = 12, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
-                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.RESI_NON_RESI_STRUCTURES, RouterLink = EsmtAppRouterLinks.RESI_NON_RESI_STRUCTURES_EDIT, SortOrder = 6, Icon = (correction == true ? "report_problem" : "") });
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.RESI_NON_RESI_STRUCTURES, RouterLink = EsmtAppRouterLinks.RESI_NON_RESI_STRUCTURES_EDIT, SortOrder = 12, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
                 break;
@@ -1389,10 +1392,10 @@ public class FarmApplicationSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
-                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.LIENS_EASEMENT_ROW, RouterLink = EsmtAppRouterLinks.LIENS_EASEMENT_ROW_VIEW, SortOrder = 7, Icon = (correction == true ? "report_problem" : "") });
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.LIENS_EASEMENT_ROW, RouterLink = EsmtAppRouterLinks.LIENS_EASEMENT_ROW_VIEW, SortOrder = 13, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
-                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.LIENS_EASEMENT_ROW, RouterLink = EsmtAppRouterLinks.LIENS_EASEMENT_ROW_EDIT, SortOrder = 7, Icon = (correction == true ? "report_problem" : "") });
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.LIENS_EASEMENT_ROW, RouterLink = EsmtAppRouterLinks.LIENS_EASEMENT_ROW_EDIT, SortOrder = 13, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
                 break;
@@ -1404,10 +1407,25 @@ public class FarmApplicationSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
-                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXIS_NON_AGRI_USES, RouterLink = EsmtAppRouterLinks.EXIS_NON_AGRI_USES_VIEW, SortOrder = 8, Icon = (correction == true ? "report_problem" : "") });
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXIS_NON_AGRI_USES, RouterLink = EsmtAppRouterLinks.EXIS_NON_AGRI_USES_VIEW, SortOrder = 14, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
-                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXIS_NON_AGRI_USES, RouterLink = EsmtAppRouterLinks.EXIS_NON_AGRI_USES_EDIT, SortOrder = 8, Icon = (correction == true ? "report_problem" : "") });
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXIS_NON_AGRI_USES, RouterLink = EsmtAppRouterLinks.EXIS_NON_AGRI_USES_EDIT, SortOrder = 14, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void EquineUses(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EQUINE_USES, RouterLink = EsmtAppRouterLinks.EQUINE_USES_VIEW, SortOrder = 8, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EQUINE_USES, RouterLink = EsmtAppRouterLinks.EQUINE_USES_EDIT, SortOrder = 8, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
                 break;
