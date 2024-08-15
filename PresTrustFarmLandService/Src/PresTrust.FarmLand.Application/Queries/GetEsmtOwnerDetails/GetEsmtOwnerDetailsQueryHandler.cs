@@ -24,7 +24,7 @@ public class GetEsmtOwnerDetailsQueryHandler : BaseHandler, IRequestHandler<GetE
 
         var results = await this.repoOwner.GetOwnerDetailsAsync(request.ApplicationId);
 
-        var owner = mapper.Map <EsmtOwnerDetailsEntity, GetEsmtOwnerDetailsQueryViewModel>(results);
+        var owner = mapper.Map<EsmtOwnerDetailsEntity, GetEsmtOwnerDetailsQueryViewModel>(results);
 
        
         return owner;

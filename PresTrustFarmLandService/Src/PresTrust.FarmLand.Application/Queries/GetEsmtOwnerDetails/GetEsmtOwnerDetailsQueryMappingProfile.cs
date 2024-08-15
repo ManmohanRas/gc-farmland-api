@@ -4,6 +4,6 @@ public class GetEsmtOwnerDetailsQueryMappingProfile : Profile
 {
     public GetEsmtOwnerDetailsQueryMappingProfile()
     {
-        CreateMap<EsmtOwnerDetailsEntity, OwnerDetails>();
+        CreateMap<EsmtOwnerDetailsEntity, GetEsmtOwnerDetailsQueryViewModel>();
     }
 }
