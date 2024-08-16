@@ -535,5 +535,30 @@ public class FarmLandController : ApiBaseController
         return Single(await CommandAsync(command));
     }
 
+    [HttpPost("getFarmEsmtExceptions")]
+    [ProducesResponseType(typeof(GetFarmEsmtExceptionsQueryViewModel), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<GetFarmEsmtExceptionsQueryViewModel>> getFarmEsmtExceptions([FromBody] GetFarmEsmtExceptionsQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveFarmEsmtExceptions")]
+    [ProducesResponseType(typeof (int), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<int>> saveFarmEsmtExceptions([FromBody] SaveFarmEsmtExceptionsCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+
+    [HttpPost("getApplicationStatusLog")]
+    [ProducesResponseType(typeof(IEnumerable<GetApplicationStatusLogQueryViewModel>), (int)HttpStatusCode.OK)]
+  
+    public async Task<ActionResult<IEnumerable<GetApplicationStatusLogQueryViewModel>>> GetApplicationStatusLog([FromBody] GetApplicationStatusLogQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
 }
 

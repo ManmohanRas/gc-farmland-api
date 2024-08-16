@@ -50,5 +50,12 @@
         /// <returns></returns>
         Task<bool> UpdateSadcAsync(int applicationId);
 
+        /// <summary>
+        /// Get Status Log
+        /// </summary>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
+        Task<List<FarmApplicationStatusLogEntity>> GetApplicationStatusLogAsync(int applicationId);
+
     }
 }

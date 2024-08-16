@@ -85,17 +85,17 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
         }
 
 
-        if (getLocationBlockLots.Where(x => x.IsWarning).Count() > 0)
-        {
-            brokenRules.Add(new TermBrokenRuleEntity()
-            {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "Gray warnings in Location tab must be resolved.",
-                IsApplicantFlow = false
-            });
+        //if (getLocationBlockLots.Where(x => x.IsWarning).Count() > 0)
+        //{
+        //    brokenRules.Add(new TermBrokenRuleEntity()
+        //    {
+        //        ApplicationId = application.Id,
+        //        SectionId = sectionId,
+        //        Message = "Gray warnings in Location tab must be resolved.",
+        //        IsApplicantFlow = false
+        //    });
 
-        }
+        //}
 
         return brokenRules;
 

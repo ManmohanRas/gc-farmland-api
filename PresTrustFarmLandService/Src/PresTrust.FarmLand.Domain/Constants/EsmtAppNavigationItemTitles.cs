@@ -18,11 +18,6 @@ public partial class FarmLandDomainConstants
         public const string ROLES = "Roles";
 
         /// <summary>
-        /// Constant to hold title for Signatory 
-        /// </summary>
-        public const string SIGNATORY = "Signatory";
-
-        /// <summary>
         /// Constant to hold title for Exceptions 
         /// </summary>
         public const string EXCEPTIONS = "Exceptions";
@@ -41,5 +36,20 @@ public partial class FarmLandDomainConstants
         /// Constant to hold title for Exis Non Agri Uses
         /// </summary>
         public const string EXIS_NON_AGRI_USES = "Exis Non Agri Uses";
+
+        /// <summary>
+        /// Constant to hold title for Equine Uses
+        /// </summary>
+        public const string EQUINE_USES = "Equine Uses";
+
+        /// <summary>
+        /// Constant to hold title for Signatory 
+        /// </summary>
+        public const string SIGNATORY = "Signatory";
+
+        /// <summary>
+        /// Constant to hold title for Other Documents 
+        /// </summary>
+        public const string OTHER_DOCUMENTS = "Other Documents";
     }
 }

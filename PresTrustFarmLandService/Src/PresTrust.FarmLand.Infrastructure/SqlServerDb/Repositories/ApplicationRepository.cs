@@ -115,6 +115,23 @@ public class ApplicationRepository : IApplicationRepository
         return result;
     }
 
+    public async Task<List<FarmApplicationStatusLogEntity>> GetApplicationStatusLogAsync(int applicationId)
+    {
+        List<FarmApplicationStatusLogEntity> results = default;
+
+        using var conn = context.CreateConnection();
+        var sqlCommand = new GetApplicationStatusLogSqlQuery();
+        results = (await conn.QueryAsync<FarmApplicationStatusLogEntity>(sqlCommand.ToString(),
+                    commandType: CommandType.Text,
+                    commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+                    param: new
+                    {
+                        @p_ApplicationId = applicationId
+                    })).ToList();
+
+        return results ?? new();
+    }
+
     private async Task<FarmApplicationEntity> UpdateAsync(FarmApplicationEntity application)
     {
         int id = default;
