@@ -3,7 +3,7 @@
 public class GetEsmtOwnerDetailsSql
 {
     private readonly string _sqlCommand =
-  @"  SELECT         [Id]                                                        
+  @"  SELECT            [Id]                                                        
                         ,[ApplicationId]
                        ,[SoleProprietor]
                        ,[ProprirtorPartnership]                      
@@ -23,8 +23,9 @@ public class GetEsmtOwnerDetailsSql
  					   ,[OwnedContinuesly]                                  
                         ,[SubjectProperty]  
                         ,[LastUpdatedBy]                                           
-                        ,[LastUpdatedOn]
-            FROM [Farm].[FarmEsmtAppOwnerDetails] WHERE ApplicationId = @p_ApplicationId";
+                        [LastUpdatedOn]
+            FROM [Farm].[FarmEsmtAppOwnerDetails] 
+            WHERE ApplicationId = @p_ApplicationId";
 
     public GetEsmtOwnerDetailsSql()
     {

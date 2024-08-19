@@ -1,6 +1,4 @@
-﻿using PresTrust.FarmLand.Domain.Configurations;
-
-namespace PresTrust.FarmLand.Infrastructure.SqlServerDb;
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb;
 
 public class EsmtOwnerDetailsRepository : IEsmtOwnerDetailsRepository
 {
@@ -36,7 +34,7 @@ public class EsmtOwnerDetailsRepository : IEsmtOwnerDetailsRepository
         using var conn = context.CreateConnection();
         var sqlCommand = new GetEsmtOwnerDetailsSql();
         var results = await conn.QueryAsync<EsmtOwnerDetailsEntity>(sqlCommand.ToString(),
-        commandType: CommandType.Text,
+                            commandType: CommandType.Text,
                             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
                             param: new
                             {
@@ -49,19 +47,7 @@ public class EsmtOwnerDetailsRepository : IEsmtOwnerDetailsRepository
 
     }
 
-    /// <summary>
-    /// Save .
-    /// </summary>
-    /// <param name="esmtOwnerDetails"></param>
-    /// <returns></returns>
-    public async Task<EsmtOwnerDetailsEntity> SaveOwnerDetailsAsync(EsmtOwnerDetailsEntity esmtOwnerDetails)
-    {
-        if (esmtOwnerDetails.Id > 0)
-            return await UpdateAsync(esmtOwnerDetails);
-        else
-            return await SaveAsync(esmtOwnerDetails);
-    }
-
+    
     /// <summary>
     ///
     /// </summary>
@@ -76,30 +62,25 @@ public class EsmtOwnerDetailsRepository : IEsmtOwnerDetailsRepository
             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
             param: new
             {
-
-                @p_ApplicationId = esmtOwnerDetails.ApplicationId,
-                @p_SoleProprietor = esmtOwnerDetails.SoleProprietor,
-                @p_ContractPurchaser = esmtOwnerDetails.ContractPurchaser,
-                @p_PartnerofPartnership = esmtOwnerDetails.PartnerofPartnership,
-                @p_ContractPurchaserEasement = esmtOwnerDetails.ContractPurchaserEasement,
-                @p_MultiProprietor = esmtOwnerDetails.MultiProprietor,
-                @p_Municipality = esmtOwnerDetails.Municipality,
-                @p_ExecutorofanEstate = esmtOwnerDetails.ExecutorofanEstate,
-                @p_ConservationOrganization = esmtOwnerDetails.ConservationOrganization,
-                @p_CorporateOfficer = esmtOwnerDetails.CorporateOfficer,
-                @p_Institution = esmtOwnerDetails.Institution,
-                @p_TrusteeofaTrust = esmtOwnerDetails.TrusteeofaTrust,
-                @p_FarmName = esmtOwnerDetails.FarmName,
-                @p_ResidentName = esmtOwnerDetails.ResidentName,
-                @p_ResidentPhoneNumber = esmtOwnerDetails.ResidentPhoneNumber,
-                @p_ListOfAddress = esmtOwnerDetails.ListOfAddress,
-                @p_Name = esmtOwnerDetails.Name,
-                @p_FirmName = esmtOwnerDetails.FirmName,
-                @p_MailingAddress = esmtOwnerDetails.MailingAddress,
-                @p_OwnedContinuesly = esmtOwnerDetails.OwnedContinuesly,
-                @p_SubjectProperty  = esmtOwnerDetails.SubjectProperty,
-                @p_LastUpdatedBy = esmtOwnerDetails.LastUpdatedBy,
-
+                @p_ApplicationId         = esmtOwnerDetails.ApplicationId         ,
+                @p_SoleProprietor        = esmtOwnerDetails.SoleProprietor        ,
+                @p_ProprirtorPartnership = esmtOwnerDetails.ProprirtorPartnership ,
+                @p_MultiProprietor       = esmtOwnerDetails.MultiProprietor       ,
+                @p_ExecutorEstate        = esmtOwnerDetails.ExecutorEstate        ,
+                @p_CPFeeSimple           = esmtOwnerDetails.CPFeeSimple           ,
+                @p_CPEasement            = esmtOwnerDetails.CPEasement            ,
+                @p_MunicipalityCurrentEO = esmtOwnerDetails.MunicipalityCurrentEO ,
+                @p_ConservationOrg       = esmtOwnerDetails.ConservationOrg       ,
+                @p_FarmName              = esmtOwnerDetails.FarmName              ,
+                @p_ResidentName          = esmtOwnerDetails.ResidentName          ,
+                @p_AttarneyName          = esmtOwnerDetails.AttarneyName          ,
+                @p_AtMailingAddress      = esmtOwnerDetails.AtMailingAddress      ,
+                @p_ATFirmName            = esmtOwnerDetails.ATFirmName            ,
+                @p_ResiPhoneNumber       = esmtOwnerDetails.ResiPhoneNumber       ,
+                @p_PdStreetAddress       = esmtOwnerDetails.PdStreetAddress       ,
+                @p_OwnedContinuesly      = esmtOwnerDetails.OwnedContinuesly      ,
+                @p_SubjectProperty       = esmtOwnerDetails.SubjectProperty       ,
+                @p_LastUpdatedBy = esmtOwnerDetails.LastUpdatedBy
 
             });
 
@@ -121,31 +102,42 @@ public class EsmtOwnerDetailsRepository : IEsmtOwnerDetailsRepository
             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
             param: new
             {
+                @p_Id = esmtOwnerDetails.Id,
                 @p_ApplicationId = esmtOwnerDetails.ApplicationId,
                 @p_SoleProprietor = esmtOwnerDetails.SoleProprietor,
-                @p_ContractPurchaser = esmtOwnerDetails.ContractPurchaser,
-                @p_PartnerofPartnership = esmtOwnerDetails.PartnerofPartnership,
-                @p_ContractPurchaserEasement = esmtOwnerDetails.ContractPurchaserEasement,
+                @p_ProprirtorPartnership = esmtOwnerDetails.ProprirtorPartnership,
                 @p_MultiProprietor = esmtOwnerDetails.MultiProprietor,
-                @p_Municipality = esmtOwnerDetails.Municipality,
-                @p_ExecutorofanEstate = esmtOwnerDetails.ExecutorofanEstate,
-                @p_ConservationOrganization = esmtOwnerDetails.ConservationOrganization,
-                @p_CorporateOfficer = esmtOwnerDetails.CorporateOfficer,
-                @p_Institution = esmtOwnerDetails.Institution,
-                @p_TrusteeofaTrust = esmtOwnerDetails.TrusteeofaTrust,
+                @p_ExecutorEstate = esmtOwnerDetails.ExecutorEstate,
+                @p_CPFeeSimple = esmtOwnerDetails.CPFeeSimple,
+                @p_CPEasement = esmtOwnerDetails.CPEasement,
+                @p_MunicipalityCurrentEO = esmtOwnerDetails.MunicipalityCurrentEO,
+                @p_ConservationOrg = esmtOwnerDetails.ConservationOrg,
                 @p_FarmName = esmtOwnerDetails.FarmName,
                 @p_ResidentName = esmtOwnerDetails.ResidentName,
-                @p_ResidentPhoneNumber = esmtOwnerDetails.ResidentPhoneNumber,
-                @p_ListOfAddress = esmtOwnerDetails.ListOfAddress,
-                @p_Name = esmtOwnerDetails.Name,
-                @p_FirmName = esmtOwnerDetails.FirmName,
-                @p_MailingAddress = esmtOwnerDetails.MailingAddress,
+                @p_AttarneyName = esmtOwnerDetails.AttarneyName,
+                @p_AtMailingAddress = esmtOwnerDetails.AtMailingAddress,
+                @p_ATFirmName = esmtOwnerDetails.ATFirmName,
+                @p_ResiPhoneNumber = esmtOwnerDetails.ResiPhoneNumber,
+                @p_PdStreetAddress = esmtOwnerDetails.PdStreetAddress,
                 @p_OwnedContinuesly = esmtOwnerDetails.OwnedContinuesly,
                 @p_SubjectProperty = esmtOwnerDetails.SubjectProperty,
                 @p_LastUpdatedBy = esmtOwnerDetails.LastUpdatedBy,
-                @p_LastUpdatedOn = DateTime.Now
+                @p_LastUpdatedOn = DateTime.Now,             
             });
 
         return esmtOwnerDetails;
+    }
+    /// <summary>
+    /// Save .
+    /// </summary>
+    /// <param name="esmtOwnerDetails"></param>
+    /// <returns></returns>
+
+    public async Task<EsmtOwnerDetailsEntity> SaveOwnerDetailsAsync(EsmtOwnerDetailsEntity esmtOwnerDetails)
+    {
+        if (esmtOwnerDetails.Id > 0)
+            return await UpdateAsync(esmtOwnerDetails);
+        else
+            return await SaveAsync(esmtOwnerDetails);
     }
 }
