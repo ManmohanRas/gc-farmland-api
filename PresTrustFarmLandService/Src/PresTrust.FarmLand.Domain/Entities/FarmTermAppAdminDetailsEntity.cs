@@ -12,7 +12,7 @@ public DateTime?	EnrollmentDate				{get; set;}
 public DateTime?	RenewalDate				    {get; set;}
 public DateTime?	ExpirationDate				{get; set;}
 public DateTime?	RenewalExpirationDate		{get; set;}
-public String       Comment                     {get; set;} 
+public string       Comment                     {get; set;} 
 public string       LastUpdatedBy				{get; set;}
 public DateTime?    LastUpdatedOn               {get; set;}
 
