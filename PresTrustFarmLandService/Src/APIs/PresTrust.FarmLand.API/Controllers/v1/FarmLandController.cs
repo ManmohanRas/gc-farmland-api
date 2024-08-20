@@ -521,6 +521,20 @@ public class FarmLandController : ApiBaseController
         return Single(await CommandAsync(command));
     }
 
+    [HttpPost("getEsmtOwnerDetails")]
+    [ProducesResponseType(typeof(GetEsmtOwnerDetailsQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetEsmtOwnerDetailsQueryViewModel>> GetEsmtOwnerDetails([FromBody] GetEsmtOwnerDetailsQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("SaveEsmtOwnerDetails")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveEsmtOwnerDetails([FromBody] SaveEsmtOwnerDetailsCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
     [HttpPost("getFarmEsmtExceptions")]
     [ProducesResponseType(typeof(GetFarmEsmtExceptionsQueryViewModel), (int)HttpStatusCode.OK)]
 
@@ -545,7 +559,6 @@ public class FarmLandController : ApiBaseController
     {
         return Single(await QueryAsync(query));
     }
-
 
 }
 
