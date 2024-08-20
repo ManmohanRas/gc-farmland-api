@@ -2,6 +2,7 @@
 
 public class GetEsmtOwnerDetailsQueryViewModel
 {
+    public int Id { get; set; }
     public int ApplicationId { get; set; }
     public bool SoleProprietor { get; set; }
     public bool ProprirtorPartnership { get; set; }
