@@ -7,5 +7,4 @@ public class SaveTermAppDocumentCommand : IRequest<SaveTermAppDocumentCommandVie
     public string Description { get; set; }
     public string FileName { get; set; }
     public string DocumentType { get; set; }
-  //  public int? OtherFundingSourceId { get; set; }
 }

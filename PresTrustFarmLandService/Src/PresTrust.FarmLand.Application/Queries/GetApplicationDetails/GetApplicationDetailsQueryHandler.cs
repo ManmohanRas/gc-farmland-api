@@ -41,7 +41,7 @@ public class GetApplicationDetailsQueryHandler : BaseHandler, IRequestHandler<Ge
 
         switch (application.Status)
         {
-            case ApplicationStatusEnum. PETITION_REQUEST:
+            case ApplicationStatusEnum.PETITION_REQUEST:
             case ApplicationStatusEnum.PETITION_APPROVED:
             case ApplicationStatusEnum.AGREEMENT_APPROVED:
             case ApplicationStatusEnum.EXPIRED:
@@ -51,7 +51,7 @@ public class GetApplicationDetailsQueryHandler : BaseHandler, IRequestHandler<Ge
                 securityMgr = new FarmApplicationSecurityManager(userContext.Role, application.Status, application.ApplicationType, feedbacksReqForCorrections);
                 break;
             default:
-                securityMgr = new FarmApplicationSecurityManager(userContext.Role, application.Status, application.ApplicationType );
+                securityMgr = new FarmApplicationSecurityManager(userContext.Role, application.Status, application.ApplicationType);
                 break;
         }
 

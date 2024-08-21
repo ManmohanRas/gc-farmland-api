@@ -4,10 +4,12 @@ INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (36
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (36, 2);
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (36, 3);
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (36, 4);
-INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (36, 6);
+INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (36, 5);
+
 
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (37, 1);
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (37, 2);
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (37, 3);
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (37, 4);
-INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (37, 6);
+INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (37, 5);
+

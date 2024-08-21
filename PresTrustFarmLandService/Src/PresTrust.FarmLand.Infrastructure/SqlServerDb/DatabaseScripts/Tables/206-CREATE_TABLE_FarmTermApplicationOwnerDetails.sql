@@ -20,7 +20,7 @@ CREATE TABLE [Farm].[FarmTermAppOwnerDetails](
 	[PropertyLocation]				[varchar](128)					NULL	, 
 	[MunicipalityId]			    [integer]					    NOT NULL,
 	[MailingAddress1]				[varchar](128)					NOT NULL,
-	[MailingAddress2]				[varchar](128)					NOT NULL,
+	[MailingAddress2]				[varchar](128)					    NULL,
 	[PhoneNumber]					[varchar](15)					NOT NULL,
 	[City]							[varchar](128)					NOT NULL,
 	[State]							[varchar](128)					NOT NULL,

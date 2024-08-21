@@ -49,10 +49,18 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
         var locationDetails = await repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId);
         blockLot = locationDetails.Where(x => x.IsChecked).FirstOrDefault();
 
-        //Send Email 
-        var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.TRIGER_THE_EMAIL_WHEN_SADC_IS_ENABLED.ToString());
+        using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
+        {
+            await repoApplication.UpdateSadcAsync(request.ApplicationId);
+            //Send Email 
+            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.TRIGER_THE_EMAIL_WHEN_SADC_IS_ENABLED.ToString());
             if (template != null)
                 await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, blockLot: blockLot);
+
+            scope.Complete();
+        }
+
+           
 
         return Unit.Value;
     }
