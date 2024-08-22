@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.Application.Commands;
+﻿using static System.Collections.Specialized.BitVector32;
+
+namespace PresTrust.FarmLand.Application.Commands;
 
 public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<ApproveApplicationCommand, ApproveApplicationCommandViewModel>
 {
@@ -62,6 +64,17 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
             return result;
         }
 
+        // check if any broken rules exists, if yes then return
+        var hasDeedDetailsDocuments = await TermAppAdminDeedDetailsDocs(application);
+        if (hasDeedDetailsDocuments.Count > 0)
+        {
+            brokenRules.Add(new TermBrokenRuleEntity()
+            {
+                ApplicationId = application.Id,
+                SectionId = (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS,
+                Message = "Required Documents are not uploaded in ADMIN_DEED_DETAILS Tab",
+            });
+        }
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
@@ -119,5 +132,42 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
 
         return statusChangeRules;
     }
+
+    private async Task<List<TermBrokenRuleEntity>> TermAppAdminDeedDetailsDocs(FarmApplicationEntity application)
+    {
+        int sectionId = (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS;
+        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
+        var documents = await repoOtherDocs.GetTermDocumentsAsync(application.Id,sectionId);
+        TermOtherDocumentsEntity docsCopyOfDeed = default;
+        TermOtherDocumentsEntity docsCopyOfOwner = default;
+
+        if (documents != null && documents.Count() > 0)
+        {
+            docsCopyOfDeed = documents.Where(d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.TRUE_COPY_OF_DEED).FirstOrDefault();
+            docsCopyOfOwner = documents.Where(d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.COPY_OF_OWNER_OF_LAST_RECORD_SEARCH).FirstOrDefault();
+        }
+        if (application.Status == ApplicationStatusEnum.PETITION_REQUEST)
+        {
+            if (docsCopyOfDeed == null)
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "True Copy Of Deed required document on Deed Details tab have not been Uploaded.",
+                    IsApplicantFlow = false
+                });
+
+            if (docsCopyOfOwner == null)
+                brokenRules.Add(new TermBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Copy Of Owner required document on Deed Details tab have not been Uploaded.",
+                    IsApplicantFlow = false
+                });
+        }
+        return brokenRules;
+    }
+
 
 }

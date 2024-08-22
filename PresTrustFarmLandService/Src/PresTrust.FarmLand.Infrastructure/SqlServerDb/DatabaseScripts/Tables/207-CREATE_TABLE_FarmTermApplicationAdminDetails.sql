@@ -15,17 +15,17 @@ GO
 CREATE TABLE [Farm].[FarmTermAppAdminDetails](
 	[Id]							[integer] 		IDENTITY(1,1)	NOT NULL,
 	[ApplicationId]					[integer]						NOT NULL,
-	[SADCId]						[integer]						NULL,
-	[MaxGrant]						[decimal]						NULL,
-	[PermanentlyPreserved]			[bit]							NULL,
-	[MunicipallyApproved]			[bit]							NULL,
-	[EnrollmentDate]				[dateTime]						NULL,
-	[RenewalDate]					[dateTime]						NULL,
-	[ExpirationDate]				[dateTime]						NULL,
-	[RenewalExpirationDate]			[dateTime]						NULL,
-	[Comment]						[varchar]						Null,
-	[LastUpdatedBy]					[varchar](128)					NULL,
-	[LastUpdatedOn]					[datetime]						NULL,
+	[SADCId]						[integer]							NULL,
+	[MaxGrant]						[decimal](18,2)						NULL,
+	[PermanentlyPreserved]			[bit]								NULL,
+	[MunicipallyApproved]			[bit]								NULL,
+	[EnrollmentDate]				[dateTime]							NULL,
+	[RenewalDate]					[dateTime]							NULL,
+	[ExpirationDate]				[dateTime]							NULL,
+	[RenewalExpirationDate]			[dateTime]							NULL,
+	[Comment]						[varchar](128)						Null,
+	[LastUpdatedBy]					[varchar](128)						NULL,
+	[LastUpdatedOn]					[datetime]							NULL,
 CONSTRAINT [PK_FarmTermAppAdminDetails_Id] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
