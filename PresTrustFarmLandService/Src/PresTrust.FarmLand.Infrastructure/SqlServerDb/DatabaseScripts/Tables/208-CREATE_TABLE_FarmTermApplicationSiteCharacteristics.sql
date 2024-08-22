@@ -15,19 +15,19 @@ GO
 CREATE TABLE [Farm].[FarmTermAppSiteCharacteristics](
 	[Id]							[integer] 		IDENTITY(1,1)	NOT NULL,
 	[ApplicationId]					[integer]						NOT NULL,
-	[Area]							[varchar](128)					NULL,--ProjectRegion or ProjectGeneralLocation or FarmLocation legacy
-	[LandUse]						[varchar](4000)				    NULL,
-	[CropLand]						[decimal]						NULL,
-	[WoodLand]						[decimal]						NULL,
-	[Pasture]						[decimal]						NULL,
-	[Orchard]						[decimal]						NULL,
-	[Other]							[decimal]						NULL,--like this OrchardAcres, OtherAcres
-	[EasementRightOfway]			[varchar](50)					NULL,--column purpose?
-	[NoteEasementRightOfway]		[varchar](4000)					NULL,
-	[MortgageLiens]					[varchar](50)					NULL,--column purpose?
-	[NoteMortgageLiens]				[varchar](4000)				    NULL,
-	[LastUpdatedBy]					[varchar](128)					NULL,
-	[LastUpdatedOn]					[datetime]						NULL,
+	[Area]							[decimal]							NULL,--ProjectRegion or ProjectGeneralLocation or FarmLocation legacy
+	[LandUse]						[varchar](4000)						NULL,
+	[CropLand]						[decimal](18,2)						NULL,
+	[WoodLand]						[decimal](18,2)						NULL,
+	[Pasture]						[decimal](18,2)						NULL,
+	[Orchard]						[decimal](18,2)						NULL,
+	[Other]							[decimal](18,2)						NULL,--like this OrchardAcres, OtherAcres
+	[EasementRightOfway]			[varchar](50)						NULL,
+	[NoteEasementRightOfway]		[varchar](4000)						NULL,
+	[MortgageLiens]					[varchar](50)						NULL,
+	[NoteMortgageLiens]				[varchar](4000)						NULL,
+	[LastUpdatedBy]					[varchar](128)						NULL,
+	[LastUpdatedOn]					[datetime]						NOT NULL,
 CONSTRAINT [PK_FarmTermAppSiteCharacteristics_Id] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
