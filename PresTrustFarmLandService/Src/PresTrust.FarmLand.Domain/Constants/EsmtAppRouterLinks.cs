@@ -23,6 +23,15 @@ public partial class FarmLandDomainConstants
         public const string OWNER_DETAILS_EDIT = "app/ownerdetails/edit";
 
         /// <summary>
+        /// Constant to hold router link for Exceptions View screen
+        /// </summary>
+        public const string EXCEPTIONS_VIEW = "app/exceptions/view";
+        /// <summary>
+        /// Constant to hold router link for Exceptions Edit screen
+        /// </summary>
+        public const string EXCEPTIONS_EDIT = "app/exceptions/edit";
+
+        /// <summary>
         /// Constant to hold router link for Roles View screen
         /// </summary>
         public const string ROLES_VIEW = "app/roles/view";
@@ -32,14 +41,6 @@ public partial class FarmLandDomainConstants
         public const string ROLES_EDIT = "app/roles/edit";
 
 
-        /// <summary>
-        /// Constant to hold router link for Exceptions View screen
-        /// </summary>
-        public const string EXCEPTIONS_VIEW = "app/exceptions/view";
-        /// <summary>
-        /// Constant to hold router link for Exceptions Edit screen
-        /// </summary>
-        public const string EXCEPTIONS_EDIT = "app/exceptions/edit";
 
         /// <summary>
         /// Constant to hold router link for Structures View screen
