@@ -9,6 +9,7 @@ public class SaveFarmParcelHistorySqlCommand
 							CurrentPamsPin,
 							PreviousPamsPin,
 							ReasonForChange,
+							ChangeType,
 							LastUpdatedBy,
 							LastUpdatedOn
 						)
@@ -18,6 +19,7 @@ public class SaveFarmParcelHistorySqlCommand
 							@p_CurrentPamsPin,
 							@p_PreviousPamsPin,
 							@p_ReasonForChange,
+							@p_ChangeType,
 							@p_LastUpdatedBy,
 							GetDate()
 						)

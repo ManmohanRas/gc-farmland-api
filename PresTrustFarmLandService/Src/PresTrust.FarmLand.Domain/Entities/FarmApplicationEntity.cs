@@ -19,10 +19,14 @@ public class FarmApplicationEntity
     public string FarmName { get; set; }
     public string Municipality { get; set; }
     public string OriginalLandowner { get; set; }
+    public string PresentOwner { get; set; }
     public string AgencyJSON { get; set; }
     public string CommentsJSON { get; set; }
     public string FeedbacksJSON { get; set; }
-    public bool IsSadc {  get; set; }
+    public bool IsSADC {  get; set; }
+    public DateTime? EnrollmentDate { get; set; }
+    public double Acres { get; set; }
+
     public ApplicationTypeEnum ApplicationType
     {
         get

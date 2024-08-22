@@ -115,6 +115,23 @@ public class ApplicationRepository : IApplicationRepository
         return result;
     }
 
+    public async Task<List<FarmApplicationStatusLogEntity>> GetApplicationStatusLogAsync(int applicationId)
+    {
+        List<FarmApplicationStatusLogEntity> results = default;
+
+        using var conn = context.CreateConnection();
+        var sqlCommand = new GetApplicationStatusLogSqlQuery();
+        results = (await conn.QueryAsync<FarmApplicationStatusLogEntity>(sqlCommand.ToString(),
+                    commandType: CommandType.Text,
+                    commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+                    param: new
+                    {
+                        @p_ApplicationId = applicationId
+                    })).ToList();
+
+        return results ?? new();
+    }
+
     private async Task<FarmApplicationEntity> UpdateAsync(FarmApplicationEntity application)
     {
         int id = default;
@@ -172,7 +189,7 @@ public class ApplicationRepository : IApplicationRepository
     /// <param name="application"></param>
     /// <param name="enumStatus"></param>
     /// <returns></returns>
-    public async Task<bool> UpdateSadcAsync(FarmApplicationEntity application)
+    public async Task<bool> UpdateSadcAsync(int applicationId)
     {
         using var conn = context.CreateConnection();
         var sqlCommand = new UpdateSadcSqlCommand();
@@ -181,8 +198,7 @@ public class ApplicationRepository : IApplicationRepository
             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
             param: new
             {
-                @p_Id = application.Id,
-                @p_IsSadc = application.IsSadc,
+                @p_Id = applicationId,
             });
 
         return true;
