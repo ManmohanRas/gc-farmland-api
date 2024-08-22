@@ -39,7 +39,6 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
         
         var reqDeedDetails = mapper.Map<SaveTermAppAdminDeedDetailsCommand, TermAppAdminDeedDetailsEntity>(request);
 
-
         var brokenRules = await ReturnBrokenRulesIfAny(application, reqDeedDetails);
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
@@ -59,38 +58,6 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
     {
         int sectionId = (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS;
         List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
-
-        var documents = await repoDocuments.GetTermDocumentsAsync(application.Id, sectionId);
-        TermOtherDocumentsEntity docsCopyOfDeed = default;
-        TermOtherDocumentsEntity docsCopyOfOwner = default;
-
-        if (documents != null && documents.Count() > 0)
-        {
-            docsCopyOfDeed = documents.Where(d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.TRUE_COPY_OF_DEED).FirstOrDefault();
-            docsCopyOfOwner = documents.Where(d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.COPY_OF_OWNER_OF_LAST_RECORD_SEARCH).FirstOrDefault();
-        }
-
-        if (application.Status == ApplicationStatusEnum.PETITION_REQUEST)
-        {
-            if (docsCopyOfDeed == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "True Copy Of Deed required document on Deed Details tab have not been Uploaded.",
-                    IsApplicantFlow = false
-                });
-
-            if (docsCopyOfOwner == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "Copy Of Owner required document on Deed Details tab have not been Uploaded.",
-                    IsApplicantFlow = false
-                });
-        }
-
         if (application.Status == ApplicationStatusEnum.PETITION_APPROVED)
         {
             if (string.IsNullOrEmpty(reqDeedDetails.NOTBlock))
