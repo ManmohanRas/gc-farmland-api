@@ -1100,8 +1100,8 @@ public class FarmApplicationSecurityManager
 
                 Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                Exceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Exceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Structures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Liens(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -1129,8 +1129,8 @@ public class FarmApplicationSecurityManager
 
                 Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                Exceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Exceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Structures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Liens(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -1173,8 +1173,8 @@ public class FarmApplicationSecurityManager
             default:
                 Location();
                 OwnerDetails();
-                Exceptions();
                 Roles();
+                Exceptions();
 
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
