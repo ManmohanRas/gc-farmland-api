@@ -1,3 +1,4 @@
+using PresTrust.FarmLand.Application.Queries.GetEsmtLiens;
 using PresTrust.FarmLand.Domain.CommonViewModels;
 
 namespace PresTrust.FarmLand.API.Controllers.v1;
@@ -558,6 +559,20 @@ public class FarmLandController : ApiBaseController
     public async Task<ActionResult<IEnumerable<GetApplicationStatusLogQueryViewModel>>> GetApplicationStatusLog([FromBody] GetApplicationStatusLogQuery query)
     {
         return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("getEsmtLiens")]
+    [ProducesResponseType(typeof(GetEsmtLiensQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetEsmtLiensQueryViewModel>> GetEsmtLiens([FromBody] GetEsmtLiensQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("SaveEsmtLiens")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveEsmtLiens([FromBody] SaveEsmtLiensCommand command)
+    {
+        return Single(await CommandAsync(command));
     }
 
 }
