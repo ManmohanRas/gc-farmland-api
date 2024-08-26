@@ -8,21 +8,21 @@ namespace PresTrust.FarmLand.Application.Commands
         private readonly IPresTrustUserContext userContext;
         private readonly SystemParameterConfiguration systemParamOptions;
         private readonly IApplicationRepository repoApplication;
-        private IEsmtOwnerDetailsRepository repoOwner;
+        private IEsmtLiensReposioty repoLiens;
         public SaveEsmtLiensCommandHandler
        (
        IMapper mapper,
        IPresTrustUserContext userContext,
        IOptions<SystemParameterConfiguration> systemParamOptions,
        IApplicationRepository repoApplication,
-       IEsmtOwnerDetailsRepository repoOwner
+       IEsmtLiensReposioty repoLiens
         ) : base(repoApplication: repoApplication)
         {
             this.mapper = mapper;
             this.userContext = userContext;
             this.systemParamOptions = systemParamOptions.Value;
             this.repoApplication = repoApplication;
-            this.repoOwner = repoOwner;
+            this.repoLiens = repoLiens;
         }
 
         public async Task<int> Handle(SaveEsmtLiensCommand request, CancellationToken cancellationToken)
@@ -30,11 +30,11 @@ namespace PresTrust.FarmLand.Application.Commands
 
             var application = await GetIfApplicationExists(request.ApplicationId);
 
-            var reqEsmtOwner = mapper.Map<SaveEsmtLiensCommand, EsmtOwnerDetailsEntity>(request);
+            var reqEsmtLiens = mapper.Map<SaveEsmtLiensCommand, EsmtLiensEntity>(request);
 
-            reqEsmtOwner = await repoOwner.SaveOwnerDetailsAsync(reqEsmtOwner);
+            reqEsmtLiens = await repoLiens.SaveLiensAsync(reqEsmtLiens);
 
-            return reqEsmtOwner.Id;
+            return reqEsmtLiens.Id;
 
         }
     }
