@@ -1,15 +1,11 @@
-using PresTrust.FarmLand.Application.Queries.GetEsmtLiens;
-using PresTrust.FarmLand.Domain.CommonViewModels;
-
 namespace PresTrust.FarmLand.API.Controllers.v1;
 
 [Authorize()]
-[Route("api/v1/farm")]
+//[Route("api/v1/farm")]
 [ApiController]
-public class FarmLandController : ApiBaseController
+public class FarmController : ApiBaseController
 {
-    public FarmLandController(IMediator mediator) : base(mediator) { }
-
+    public FarmController(IMediator mediator) : base(mediator) { }
 
 
     [HttpPost("getApplications")]
@@ -19,11 +15,45 @@ public class FarmLandController : ApiBaseController
         return Single(await QueryAsync(query));
     }
 
+    [HttpPost("getApplicationDetails")]
+    [ProducesResponseType(typeof(GetApplicationDetailsQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetApplicationDetailsQueryViewModel>> GetApplications([FromBody] GetApplicationDetailsQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("getApplicationStatusLog")]
+    [ProducesResponseType(typeof(IEnumerable<GetApplicationStatusLogQueryViewModel>), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<IEnumerable<GetApplicationStatusLogQueryViewModel>>> GetApplicationStatusLog([FromBody] GetApplicationStatusLogQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("createApplication")]
+    [ProducesResponseType(typeof(CreateApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<CreateApplicationCommandViewModel>> CreateApplication([FromBody] CreateApplicationCommand query)
+    {
+        return Single(await CommandAsync(query));
+    }
+
     [HttpPost("getRoles")]
     [ProducesResponseType(typeof(IEnumerable<FarmRolesViewModel>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<FarmRolesViewModel>>> GetRoles([FromBody] GetRolesQuery query)
     {
         return Single(await QueryAsync(query));
+    }
+
+    /// <summary>
+    /// Assign Application Users like Primary Contact, Applicant Contractor
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    [HttpPost("saveRoles")]
+    [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Unit>> AssignApplicationUsers([FromBody] AssignRolesCommand command)
+    {
+        return Single(await CommandAsync(command));
     }
 
     [HttpPost("getFarmList")]
@@ -46,43 +76,18 @@ public class FarmLandController : ApiBaseController
         return Single(await QueryAsync(query));
     }
 
-    [HttpPost("getSiteCharacteristics")]
-    [ProducesResponseType(typeof(GetSiteCharacteristicsQueryViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetSiteCharacteristicsQueryViewModel>> GetSiteCharacteristics([FromBody] GetSiteCharacteristicsQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
-
-    [HttpPost("getTermAppAdminDetails")]
-    [ProducesResponseType(typeof(GetTermAdminDetailsQueryViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetTermAdminDetailsQueryViewModel>> GetTermAppAdminDetails([FromBody] GetTermAdminDetailsQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
-    [HttpPost("saveTermAppAdminDetails")]
+    [HttpPost("SaveOwnerDetails")]
     [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> SaveTermAppAdminDetails([FromBody] SaveTermAppAdminDetailsCommand command)
+    public async Task<ActionResult<int>> SaveOwnerDetails([FromBody] SaveOwnerDetailsCommand command)
     {
         return Single(await CommandAsync(command));
     }
 
-    /// <summary>
-    /// Assign Application Users like Primary Contact, Applicant Contractor
-    /// </summary>
-    /// <param name="command"></param>
-    /// <returns></returns>
-    [HttpPost("saveRoles")]
-    [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<Unit>> AssignApplicationUsers([FromBody] AssignRolesCommand command)
+    [HttpPost("deleteOwnerDetails")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<bool>> DeleteOwnerDetails([FromBody] DeleteOwnerDetailsCommand command)
     {
         return Single(await CommandAsync(command));
-    }
-
-    [HttpPost("createApplication")]
-    [ProducesResponseType(typeof(CreateApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CreateApplicationCommandViewModel>> CreateApplication([FromBody] CreateApplicationCommand query)
-    {
-        return Single(await CommandAsync(query));
     }
 
     [HttpPost("saveTermFeedback")]
@@ -110,21 +115,6 @@ public class FarmLandController : ApiBaseController
     [HttpPost("responseToRequestForApplicationCorrectionTerm")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<bool>> ResponseToRequestForApplicationCorrectionCommand([FromBody] ResponseToRequestForApplicationCorrectionCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
-
-    [HttpPost("SaveOwnerDetails")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> SaveOwnerDetails([FromBody] SaveOwnerDetailsCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
-    [HttpPost("deleteOwnerDetails")]
-    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<bool>> DeleteOwnerDetails([FromBody] DeleteOwnerDetailsCommand command)
     {
         return Single(await CommandAsync(command));
     }
@@ -177,13 +167,6 @@ public class FarmLandController : ApiBaseController
     [ProducesResponseType(typeof(IEnumerable<PresTrustUserEntity>), (int)HttpStatusCode.OK)]
 
     public async Task<ActionResult<IEnumerable<PresTrustUserEntity>>> GetMunicipalUsers([FromBody] GetMunicipalUsersQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
-
-    [HttpPost("getApplicationDetails")]
-    [ProducesResponseType(typeof(GetApplicationDetailsQueryViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetApplicationDetailsQueryViewModel>> GetApplications([FromBody] GetApplicationDetailsQuery query)
     {
         return Single(await QueryAsync(query));
     }
@@ -271,12 +254,7 @@ public class FarmLandController : ApiBaseController
 
     }
 
-    [HttpPost("saveSiteCharacteristics")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> SaveSiteCharacteristics([FromBody] SaveSiteCharacteristicsCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
+    
 
     [HttpPost("requestApplication")]
     [ProducesResponseType(typeof(RequestApplicationCommandViewModel), (int)HttpStatusCode.OK)]
@@ -315,22 +293,6 @@ public class FarmLandController : ApiBaseController
     }
 
     //Application Signatory 
-
-    [HttpPost("getTermAppSignatoryDetails")]
-    [ProducesResponseType(typeof(GetTermAppSignatoryQueryViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetTermAppSignatoryQueryViewModel>> GetTermAppSignatoryDetails([FromBody] GetTermAppSignatoryQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
-
-
-
-    [HttpPost("saveTermAppSignatoryDetails")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> SaveTermAppSignatoryDetails([FromBody] SaveTermAppSignatoryCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
 
 
     [HttpPost("getBrokenRules")]
@@ -500,77 +462,6 @@ public class FarmLandController : ApiBaseController
     [HttpPost("deleteBlockLot")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<bool>> DeleteBlockLot([FromBody] DeleteBlockLotCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
-    [HttpPost("getEsmtAppStructure")]
-    [ProducesResponseType(typeof(GetEsmtAppStructureQueryViewModel), (int)HttpStatusCode.OK)]
-
-    public async Task<ActionResult<GetEsmtAppStructureQueryViewModel>> GetEsmtAppStructure([FromBody] GetEsmtAppStructureQuery query)
-    {
-        return Single(await QueryAsync(query));
-
-
-    }
-
-    [HttpPost("saveEsmtAppStructure")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-
-    public async Task<ActionResult<int>> SaveEsmtAppStructure([FromBody] SaveEsmtAppStructureCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
-    [HttpPost("getEsmtOwnerDetails")]
-    [ProducesResponseType(typeof(GetEsmtOwnerDetailsQueryViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetEsmtOwnerDetailsQueryViewModel>> GetEsmtOwnerDetails([FromBody] GetEsmtOwnerDetailsQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
-
-    [HttpPost("SaveEsmtOwnerDetails")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> SaveEsmtOwnerDetails([FromBody] SaveEsmtOwnerDetailsCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
-    [HttpPost("getFarmEsmtExceptions")]
-    [ProducesResponseType(typeof(GetFarmEsmtExceptionsQueryViewModel), (int)HttpStatusCode.OK)]
-
-    public async Task<ActionResult<GetFarmEsmtExceptionsQueryViewModel>> getFarmEsmtExceptions([FromBody] GetFarmEsmtExceptionsQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
-
-    [HttpPost("saveFarmEsmtExceptions")]
-    [ProducesResponseType(typeof (int), (int)HttpStatusCode.OK)]
-
-    public async Task<ActionResult<int>> saveFarmEsmtExceptions([FromBody] SaveFarmEsmtExceptionsCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
-
-    [HttpPost("getApplicationStatusLog")]
-    [ProducesResponseType(typeof(IEnumerable<GetApplicationStatusLogQueryViewModel>), (int)HttpStatusCode.OK)]
-  
-    public async Task<ActionResult<IEnumerable<GetApplicationStatusLogQueryViewModel>>> GetApplicationStatusLog([FromBody] GetApplicationStatusLogQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
-
-    [HttpPost("getEsmtLiens")]
-    [ProducesResponseType(typeof(GetEsmtLiensQueryViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetEsmtLiensQueryViewModel>> GetEsmtLiens([FromBody] GetEsmtLiensQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
-
-    [HttpPost("SaveEsmtLiens")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> SaveEsmtLiens([FromBody] SaveEsmtLiensCommand command)
     {
         return Single(await CommandAsync(command));
     }

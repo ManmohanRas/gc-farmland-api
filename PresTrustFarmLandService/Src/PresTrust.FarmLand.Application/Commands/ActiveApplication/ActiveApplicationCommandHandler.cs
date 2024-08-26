@@ -127,7 +127,7 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
         statusChangeRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.ADMIN_DETAILS,
+            SectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DETAILS,
             Message = "All required fields on ADMIN DETAILS tab have not been filled.",
         });
         return statusChangeRules;

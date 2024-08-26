@@ -56,7 +56,7 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
             {
                 await repoDocument.SaveTermDocumentChecklistAsync(doc);
             }
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.ADMIN_DOCUMENT_CHECKLIST);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.TERM_ADMIN_DOCUMENT_CHECKLIST);
             await repoBrokenRules.SaveBrokenRules(await brokenRules);
 
             scope.Complete();
@@ -74,7 +74,7 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
     private async Task<List<TermBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SaveTermAppDocumentChecklistCommand request)
     {
 
-        int sectionId = (int)ApplicationSectionEnum.ADMIN_DOCUMENT_CHECKLIST;
+        int sectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DOCUMENT_CHECKLIST;
         List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
         // map command object to the FloodDocumentEntity
         var documents = mapper.Map<IEnumerable<TermDocumentsViewModel>, IEnumerable<TermOtherDocumentsEntity>>(request.Documents);

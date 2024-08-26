@@ -6,7 +6,7 @@ public class FarmParcelHistoryEntity
     public int ParcelId { get; set; }
     public string CurrentPamsPin { get; set; }
     public string PreviousPamsPin { get; set; }
-    public string? Section { get; set; }
+    public string Section { get; set; }
     public decimal? Acres { get; set; }
     public decimal? AcresToBeAcquired { get; set; }
     public bool? Partial { get; set; }

@@ -44,7 +44,7 @@ public class SaveOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<SaveO
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.OWNER_DETAILS);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.TERM_OWNER_DETAILS);
             //await repoBrokenRules.SaveBrokenRules(await brokenRules);
             reqOwner = await repoOwner.SaveOwnerDetailsAsync(reqOwner);
             reqOwner.LastUpdatedBy = userContext.Email;
@@ -58,7 +58,7 @@ public class SaveOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<SaveO
 
     private async Task<List<TermBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
     {
-        int sectionId = (int)ApplicationSectionEnum.OWNER_DETAILS;
+        int sectionId = (int)ApplicationSectionEnum.TERM_OWNER_DETAILS;
         List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
 
         var getDetails = await repoOwner.GetOwnerDetailsAsync(application.Id);

@@ -13,15 +13,14 @@ public partial class FarmLandDomainConstants
         public const string OWNER_DETAILS = "Owner Details";
 
         /// <summary>
-        /// Constant to hold title for Exceptions 
-        /// </summary>
-        public const string EXCEPTIONS = "Exceptions";
-
-        /// <summary>
         /// Constant to hold title for Roles 
         /// </summary>
         public const string ROLES = "Roles";
 
+        /// <summary>
+        /// Constant to hold title for Exceptions 
+        /// </summary>
+        public const string EXCEPTIONS = "Exceptions";
 
         /// <summary>
         /// Constant to hold title for Resi & Non Resi Structures 

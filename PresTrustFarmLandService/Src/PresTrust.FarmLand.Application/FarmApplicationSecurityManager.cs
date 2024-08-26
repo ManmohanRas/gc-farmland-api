@@ -205,7 +205,7 @@ public class FarmApplicationSecurityManager
                 permission.CanDeleteDocument = true;
                 permission.CanApproveApplication = true;
                 //Location
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.LOCATION).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_LOCATION).FirstOrDefault();
                 if (correction == null)
                 {
                     Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -213,35 +213,35 @@ public class FarmApplicationSecurityManager
                 else
                     Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Owner Details
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OWNER_DETAILS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OWNER_DETAILS).FirstOrDefault();
                 if(correction == null)
                 {
                     OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 }else
                 OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Roles
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.ROLES).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_ROLES).FirstOrDefault();
                 if(correction == null)
                 {
                     Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 } else
                 Roles(correction: true,enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //SiteCharacteristics
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SITE_CHARACTERISTICS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS).FirstOrDefault();
                 if(correction == null)
                 {
                     SiteCharacteristics(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 } else
                 SiteCharacteristics(correction: true,enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Other Documents
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OTHER_DOCUMENTS).FirstOrDefault();
                 if(correction == null)
                 {
                     OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 } else
                 OtherDocuments(correction: true,enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Signatory
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SIGNATORY).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SIGNATORY).FirstOrDefault();
                 if (correction == null)
                 {
                     Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -276,7 +276,7 @@ public class FarmApplicationSecurityManager
 
 
                 //LOCATION
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.LOCATION).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_LOCATION).FirstOrDefault();
                 if (correction == null)
                 {
                     Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
@@ -298,31 +298,31 @@ public class FarmApplicationSecurityManager
                     };
                 }
                 //Owner Details
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OWNER_DETAILS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OWNER_DETAILS).FirstOrDefault();
                 if (correction == null)
                     OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
                     OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Roles
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.ROLES).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_ROLES).FirstOrDefault();
                 if (correction == null)
                     Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
                     Roles(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //SiteCharacteristics
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SITE_CHARACTERISTICS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS).FirstOrDefault();
                 if (correction == null)
                     SiteCharacteristics(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
                     SiteCharacteristics(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Other Documents
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OTHER_DOCUMENTS).FirstOrDefault();
                 if (correction == null)
                     OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Signatory
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SIGNATORY).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SIGNATORY).FirstOrDefault();
                 if (correction == null)
                     Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
@@ -411,38 +411,38 @@ public class FarmApplicationSecurityManager
                 permission.CanSwitchSADC = true;
                 
                 //LOCATION
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.LOCATION).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_LOCATION).FirstOrDefault();
                 if (correction == null)
                     Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
                 //Owner Details
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OWNER_DETAILS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OWNER_DETAILS).FirstOrDefault();
                 if (correction == null)
                     OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Roles
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.ROLES).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_ROLES).FirstOrDefault();
                 if (correction == null)
                     Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     Roles(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //SiteCharacteristics
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SITE_CHARACTERISTICS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS).FirstOrDefault();
                 if (correction == null)
                     SiteCharacteristics(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     SiteCharacteristics(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Other Documents
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OTHER_DOCUMENTS).FirstOrDefault();
                 if (correction == null)
                     OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Signatory
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SIGNATORY).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SIGNATORY).FirstOrDefault();
                 if (correction == null)
                     Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
@@ -472,7 +472,7 @@ public class FarmApplicationSecurityManager
                 permission.CanViewFeedback = true;
 
                 //LOCATION
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.LOCATION).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_LOCATION).FirstOrDefault();
                 if (correction == null)
                 {
                     Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
@@ -497,31 +497,31 @@ public class FarmApplicationSecurityManager
                 }
 
                 //Owner Details
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OWNER_DETAILS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OWNER_DETAILS).FirstOrDefault();
                 if (correction == null)
                     OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
                     OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Roles
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.ROLES).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_ROLES).FirstOrDefault();
                 if (correction == null)
                     Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
                     Roles(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //SiteCharacteristics
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SITE_CHARACTERISTICS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS).FirstOrDefault();
                 if (correction == null)
                     SiteCharacteristics(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
                     SiteCharacteristics(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Other Documents
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OTHER_DOCUMENTS).FirstOrDefault();
                 if (correction == null)
                     OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Signatory
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SIGNATORY).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SIGNATORY).FirstOrDefault();
                 if (correction == null)
                     Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
@@ -591,38 +591,38 @@ public class FarmApplicationSecurityManager
                 permission.CanActivateApplication = true;
 
                 //LOCATION
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.LOCATION).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_LOCATION).FirstOrDefault();
                 if (correction == null)
                     Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
                 //Owner Details
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OWNER_DETAILS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OWNER_DETAILS).FirstOrDefault();
                 if (correction == null)
                     OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Roles
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.ROLES).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_ROLES).FirstOrDefault();
                 if (correction == null)
                     Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     Roles(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //SiteCharacteristics
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SITE_CHARACTERISTICS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS).FirstOrDefault();
                 if (correction == null)
                     SiteCharacteristics(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     SiteCharacteristics(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Other Documents
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OTHER_DOCUMENTS).FirstOrDefault();
                 if (correction == null)
                     OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Signatory
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SIGNATORY).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SIGNATORY).FirstOrDefault();
                 if (correction == null)
                     Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
@@ -653,7 +653,7 @@ public class FarmApplicationSecurityManager
                 permission.CanViewFeedback = true;
 
                 //LOCATION
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.LOCATION).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_LOCATION).FirstOrDefault();
                 if (correction == null)
                 {
                     Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
@@ -674,31 +674,31 @@ public class FarmApplicationSecurityManager
                     };
 
                 //Owner Details
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OWNER_DETAILS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OWNER_DETAILS).FirstOrDefault();
                 if (correction == null)
                     OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
                     OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Roles
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.ROLES).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_ROLES).FirstOrDefault();
                 if (correction == null)
                     Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
                     Roles(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //SiteCharacteristics
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SITE_CHARACTERISTICS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS).FirstOrDefault();
                 if (correction == null)
                     SiteCharacteristics(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
                     SiteCharacteristics(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Other Documents
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OTHER_DOCUMENTS).FirstOrDefault();
                 if (correction == null)
                     OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Signatory
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SIGNATORY).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SIGNATORY).FirstOrDefault();
                 if (correction == null)
                     Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                 else
@@ -766,37 +766,37 @@ public class FarmApplicationSecurityManager
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
                 //LOCATION
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.LOCATION).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_LOCATION).FirstOrDefault();
                 if (correction == null)
                     Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Owner Details
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OWNER_DETAILS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OWNER_DETAILS).FirstOrDefault();
                 if (correction == null)
                     OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Roles
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.ROLES).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_ROLES).FirstOrDefault();
                 if (correction == null)
                     Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     Roles(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //SiteCharacteristics
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SITE_CHARACTERISTICS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS).FirstOrDefault();
                 if (correction == null)
                     SiteCharacteristics(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     SiteCharacteristics(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Other Documents
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OTHER_DOCUMENTS).FirstOrDefault();
                 if (correction == null)
                     OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Signatory
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SIGNATORY).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SIGNATORY).FirstOrDefault();
                 if (correction == null)
                     Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 else
@@ -828,7 +828,7 @@ public class FarmApplicationSecurityManager
                 permission.CanDeleteDocument = true;
                 permission.CanViewFeedback = true;
                 // Location
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.LOCATION).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_LOCATION).FirstOrDefault();
                 if (correction == null)
                 {
                     Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
@@ -852,31 +852,31 @@ public class FarmApplicationSecurityManager
                     };
                 }
                 //OwnerDetails
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OWNER_DETAILS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OWNER_DETAILS).FirstOrDefault();
                 if (correction == null)
                     OwnerDetails();
                 else
                     OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Roles
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.ROLES).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_ROLES).FirstOrDefault();
                 if (correction == null)
                     Roles();
                 else
                     Roles(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Site Characteristics
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SITE_CHARACTERISTICS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS).FirstOrDefault();
                 if (correction == null)
                     SiteCharacteristics();
                 else
                     SiteCharacteristics(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Other Documents
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_OTHER_DOCUMENTS).FirstOrDefault();
                 if (correction == null)
                     OtherDocuments();
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 //Signatory
-                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.SIGNATORY).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == ApplicationSectionEnum.TERM_SIGNATORY).FirstOrDefault();
                 if (correction == null)
                 {
                     Signatory();

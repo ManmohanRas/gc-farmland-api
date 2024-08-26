@@ -43,7 +43,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.ADMIN_DEED_DETAILS);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.TERM_ADMIN_DEED_DETAILS);
             await repoBrokenRules.SaveBrokenRules(brokenRules);
             reqDeedDetails = await repotermAppAdminDeedDetails.SaveAsync(reqDeedDetails);
             reqDeedDetails.LastUpdatedBy = userContext.Email;
@@ -56,7 +56,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
 
     private async Task <List<TermBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application, TermAppAdminDeedDetailsEntity reqDeedDetails)
     {
-        int sectionId = (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS;
+        int sectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DEED_DETAILS;
         List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
         if (application.Status == ApplicationStatusEnum.PETITION_APPROVED)
         {

@@ -113,7 +113,7 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
         brokenRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.LOCATION,
+            SectionId = (int)ApplicationSectionEnum.TERM_LOCATION,
             Message = "All required fields on Location tab have not been filled.",
             IsApplicantFlow = true
         });
@@ -121,7 +121,7 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
         brokenRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.OWNER_DETAILS,
+            SectionId = (int)ApplicationSectionEnum.TERM_OWNER_DETAILS,
             Message = "All required fields on Owner Details tab have not been filled.",
             IsApplicantFlow = true
         });
@@ -129,14 +129,14 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
         brokenRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.SITE_CHARACTERISTICS,
+            SectionId = (int)ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS,
             Message = "All required fields on Site Charecteristics tab have not been filled.",
             IsApplicantFlow = true
         });
         brokenRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.SIGNATORY,
+            SectionId = (int)ApplicationSectionEnum.TERM_SIGNATORY,
             Message = "All required fields on Signatory tab have not been filled.",
             IsApplicantFlow = true
         });

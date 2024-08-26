@@ -1,6 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-
-namespace PresTrust.FarmLand.Application.Commands;
+﻿namespace PresTrust.FarmLand.Application.Commands;
 
 public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<RequestApplicationCommand, RequestApplicationCommandViewModel>
 {
@@ -62,7 +60,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
 
      
 
-        var otherdocRules = await CheckApplicationOtherDocs(application.Id, application.Status, (int)ApplicationSectionEnum.OTHER_DOCUMENTS);
+        var otherdocRules = await CheckApplicationOtherDocs(application.Id, application.Status, (int)ApplicationSectionEnum.TERM_OTHER_DOCUMENTS);
         if (otherdocRules.Count > 0)
         {
             brokenRules.AddRange(otherdocRules);
@@ -121,7 +119,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
                 otherdocRules.Add(new TermBrokenRuleEntity()
                 {
                     ApplicationId = applicationId,
-                    SectionId = (int)ApplicationSectionEnum.OTHER_DOCUMENTS,
+                    SectionId = (int)ApplicationSectionEnum.TERM_OTHER_DOCUMENTS,
                     Message = "CADB_PETITION document is not uploaded in OtherDocuments Tab"
                 });
             }
@@ -130,7 +128,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
                 otherdocRules.Add(new TermBrokenRuleEntity()
                 {
                     ApplicationId = applicationId,
-                    SectionId = (int)ApplicationSectionEnum.OTHER_DOCUMENTS,
+                    SectionId = (int)ApplicationSectionEnum.TERM_OTHER_DOCUMENTS,
                     Message = "DEED document is not uploaded in OtherDocuments Tab"
                 });
             }
@@ -139,7 +137,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
                 otherdocRules.Add(new TermBrokenRuleEntity()
                 {
                     ApplicationId = applicationId,
-                    SectionId = (int)ApplicationSectionEnum.OTHER_DOCUMENTS,
+                    SectionId = (int)ApplicationSectionEnum.TERM_OTHER_DOCUMENTS,
                     Message = "TAX_MAP document is not uploaded in OtherDocuments Tab"
                 });
             }
@@ -161,7 +159,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         statusChangeRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.ADMIN_DETAILS,
+            SectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DETAILS,
             Message = "All required fields on ADMIN_DETAILS tab have not been filled.",
 
         });

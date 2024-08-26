@@ -46,7 +46,7 @@ public class SaveSiteCharacteristicsCommandHandler : BaseHandler, IRequestHandle
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.SITE_CHARACTERISTICS);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS);
             await repoBrokenRules.SaveBrokenRules(brokenRules);
             reqSiteCharacteristics = await repoSiteCharacteristics.SaveSiteCharacteristicsAsync(reqSiteCharacteristics);
             reqSiteCharacteristics.LastUpdatedBy = userContext.Email;
@@ -59,7 +59,7 @@ public class SaveSiteCharacteristicsCommandHandler : BaseHandler, IRequestHandle
 
     private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SiteCharacteristicsEntity reqSiteCharacteristics)
     {
-        int sectionId = (int)ApplicationSectionEnum.SITE_CHARACTERISTICS;
+        int sectionId = (int)ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS;
         List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
 
             if(string.IsNullOrEmpty( reqSiteCharacteristics.Area))

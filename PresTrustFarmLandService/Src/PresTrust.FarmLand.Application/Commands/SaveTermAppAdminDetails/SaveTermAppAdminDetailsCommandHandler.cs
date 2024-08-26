@@ -43,7 +43,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             appDetails = await repoTermAppAdminDetails.SaveTermAppAdminDetailsAsync(reqTermAppAdminDetails);
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.ADMIN_DETAILS);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.TERM_ADMIN_DETAILS);
             await repoBrokenRules.SaveBrokenRules(brokenRules);
 
             scope.Complete();
@@ -58,7 +58,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
     {
 
 
-        int sectionId =  (int)ApplicationSectionEnum.ADMIN_DETAILS;
+        int sectionId =  (int)ApplicationSectionEnum.TERM_ADMIN_DETAILS;
         List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
 
 

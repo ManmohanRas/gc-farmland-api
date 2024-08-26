@@ -115,28 +115,28 @@ public class ApplicationDocumentTreeBuilder
         string title = string.Empty;
         switch (enumSection)
         {
-            case ApplicationSectionEnum.LOCATION:
+            case ApplicationSectionEnum.TERM_LOCATION:
                 title = "Location";
                 break;
-            case ApplicationSectionEnum.ROLES:
+            case ApplicationSectionEnum.TERM_ROLES:
                 title = "Roles";
                 break;
-            case ApplicationSectionEnum.OWNER_DETAILS:
+            case ApplicationSectionEnum.TERM_OWNER_DETAILS:
                 title = "Owner Details";
                 break;
-            case ApplicationSectionEnum.SITE_CHARACTERISTICS:
+            case ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS:
                 title = "Site Characteristics";
                 break;
-            case ApplicationSectionEnum.SIGNATORY:
+            case ApplicationSectionEnum.TERM_SIGNATORY:
                 title = "Signatory";
                 break;
-            case ApplicationSectionEnum.OTHER_DOCUMENTS:
+            case ApplicationSectionEnum.TERM_OTHER_DOCUMENTS:
                 title = "Other Documents";
                 break;
-            case ApplicationSectionEnum.ADMIN_DETAILS:
+            case ApplicationSectionEnum.TERM_ADMIN_DETAILS:
                 title = "Admin Details";
                 break;
-            case ApplicationSectionEnum.ADMIN_DEED_DETAILS:
+            case ApplicationSectionEnum.TERM_ADMIN_DEED_DETAILS:
                 title = "Deed Details";
                 break;
         }

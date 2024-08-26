@@ -71,7 +71,7 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
             brokenRules.Add(new TermBrokenRuleEntity()
             {
                 ApplicationId = application.Id,
-                SectionId = (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS,
+                SectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DEED_DETAILS,
                 Message = "Required Documents are not uploaded in ADMIN_DEED_DETAILS Tab",
             });
         }
@@ -118,7 +118,7 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
         statusChangeRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.ADMIN_DETAILS,
+            SectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DETAILS,
             Message = "All required fields on ADMIN_DETAILS tab have not been filled.",
 
         });
@@ -126,7 +126,7 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
         statusChangeRules.Add(new TermBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS,
+            SectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DEED_DETAILS,
             Message = "All required fields on ADMIN_DEED_DETAILS tab have not been filled.",
         });
 
@@ -135,7 +135,7 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
 
     private async Task<List<TermBrokenRuleEntity>> TermAppAdminDeedDetailsDocs(FarmApplicationEntity application)
     {
-        int sectionId = (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS;
+        int sectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DEED_DETAILS;
         List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
         var documents = await repoOtherDocs.GetTermDocumentsAsync(application.Id,sectionId);
         TermOtherDocumentsEntity docsCopyOfDeed = default;

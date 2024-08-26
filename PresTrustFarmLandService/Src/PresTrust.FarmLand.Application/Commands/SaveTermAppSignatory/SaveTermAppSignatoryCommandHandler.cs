@@ -49,7 +49,7 @@ public class SaveTermAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             // Delete old Broken Rules, if any
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.SIGNATORY);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.TERM_SIGNATORY);
             // Save current Broken Rules, if any
             await repoBrokenRules.SaveBrokenRules(brokenRules);
 
@@ -68,7 +68,7 @@ public class SaveTermAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
 
     private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmTermAppSignatoryEntity reqSignatory)
     {
-        int sectionId = (int)ApplicationSectionEnum.SIGNATORY;
+        int sectionId = (int)ApplicationSectionEnum.TERM_SIGNATORY;
         List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
 
         // add based on the empty check conditions
