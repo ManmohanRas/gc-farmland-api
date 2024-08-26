@@ -28,6 +28,7 @@ public class CreateFarmBlockLotSqlCommand
                        ,[DeedPage]
                        ,[CreatedByProgramUser]
                        ,[IsWarning]
+                       ,[ExceptionAreaAcres]
                        ,[LastUpdatedOn]
                        ,[LastUpdatedBy])
                  VALUES
@@ -56,6 +57,7 @@ public class CreateFarmBlockLotSqlCommand
                        ,@p_CreatedByProgramUser
                        ,@p_IsWarning
                        ,@p_LastUpdatedBy
+                       ,@p_ExceptionAreaAcres
                        ,@p_LastUpdatedOn);
 
                 SELECT CAST( SCOPE_IDENTITY() AS INT);";
