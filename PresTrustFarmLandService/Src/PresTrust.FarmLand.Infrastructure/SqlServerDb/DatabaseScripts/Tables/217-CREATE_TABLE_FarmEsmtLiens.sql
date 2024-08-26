@@ -25,7 +25,7 @@ CREATE TABLE [Farm].[FarmEsmtLiens](
 	[TelephoneLines]				[bit]								NULL,
 	[GasLines]						[bit]								NULL,
 	[Other]							[bit]								NULL,
-	[AvvessEasement]				[bit]								NULL,
+	[AccessEasement]				[bit]								NULL,
 	[AccessDescribe]				[varchar](4000)						NULL,
 	[ConservationEasement]			[bit]								NULL,
 	[ConservationDescribe]			[varchar](4000)						NULL,

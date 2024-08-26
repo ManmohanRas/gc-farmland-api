@@ -14,7 +14,7 @@
         public bool TelephoneLines { get; set; }
         public bool GasLines { get; set; }
         public bool Other { get; set; }
-        public bool AvvessEasement { get; set; }
+        public bool AccessEasement { get; set; }
         public string AccessDescribe { get; set; }
         public bool ConservationEasement { get; set; }
         public string ConservationDescribe { get; set; }
