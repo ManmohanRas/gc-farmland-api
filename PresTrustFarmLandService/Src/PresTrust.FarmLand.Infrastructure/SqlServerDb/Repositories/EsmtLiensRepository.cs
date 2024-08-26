@@ -73,7 +73,7 @@ public class EsmtLiensRepository :IEsmtLiensReposioty
                 ,@p_TelephoneLines			= esmtLiens.TelephoneLines			   
                 ,@p_GasLines				= esmtLiens.GasLines				   
                 ,@p_Other					= esmtLiens.Other					   
-                ,@p_AvvessEasement			= esmtLiens.AvvessEasement			   
+                ,@p_AccessEasement			= esmtLiens.AccessEasement			   
                 ,@p_AccessDescribe			= esmtLiens.AccessDescribe			   
                 ,@p_ConservationEasement	= esmtLiens.ConservationEasement	   
                 ,@p_ConservationDescribe	= esmtLiens.ConservationDescribe	   
@@ -120,7 +120,7 @@ public class EsmtLiensRepository :IEsmtLiensReposioty
                 ,@p_TelephoneLines = esmtLiens.TelephoneLines
                 ,@p_GasLines = esmtLiens.GasLines
                 ,@p_Other = esmtLiens.Other
-                ,@p_AvvessEasement = esmtLiens.AvvessEasement
+                ,@p_AccessEasement = esmtLiens.AccessEasement
                 ,@p_AccessDescribe = esmtLiens.AccessDescribe
                 ,@p_ConservationEasement = esmtLiens.ConservationEasement
                 ,@p_ConservationDescribe = esmtLiens.ConservationDescribe

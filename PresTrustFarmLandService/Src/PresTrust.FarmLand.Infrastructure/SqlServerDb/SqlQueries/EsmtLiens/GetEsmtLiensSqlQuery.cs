@@ -15,7 +15,7 @@ public class GetEsmtLiensSqlQuery
                        ,[TelephoneLines]				
                        ,[GasLines]						
                        ,[Other]							
-                       ,[AvvessEasement]				
+                       ,[AccessEasement]				
                        ,[AccessDescribe]				
                        ,[ConservationEasement]			
                        ,[ConservationDescribe]			
