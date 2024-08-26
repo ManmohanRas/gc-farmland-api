@@ -29,6 +29,7 @@ CREATE TABLE [Farm].[FarmMunicipalityBlockLotParcel](
 	[Partial] [bit] NULL,
 	[Acres] [numeric](10, 3) NULL,
 	[AcresToBeAcquired] [numeric](10, 3) NULL,
+	[ExceptionAreaAcres] [numeric](10, 3) NULL,
 	[ExceptionArea] [bit] NULL,
 	[Notes] [varchar](max) NULL,
 	[PamsPin] [varchar](100) NULL,

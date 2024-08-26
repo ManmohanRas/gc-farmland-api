@@ -16,6 +16,7 @@ public  class GetFarmBlockLotSqlQuery
 			  ,MBL.PamsPin
 			  ,MBL.Acres
 			  ,MBL.AcresToBeAcquired
+			  ,MBL.ExceptionAreaAcres
 		      ,MBL.Partial
 			  ,MBL.ExceptionArea
 			  ,MBL.EasementId
