@@ -16,7 +16,7 @@ public class UpdateEsmtLiensSqlCommand
                         ,TelephoneLines			=   @p_TelephoneLines					
                         ,GasLines				=   @p_GasLines							
                         ,Other					=   @p_Other								
-                        ,AvvessEasement			=   @p_AvvessEasement					
+                        ,AccessEasement			=   @p_AccessEasement					
                         ,AccessDescribe			=   @p_AccessDescribe					
                         ,ConservationEasement	=   @p_ConservationEasement				
                         ,ConservationDescribe	=   @p_ConservationDescribe				
@@ -27,7 +27,8 @@ public class UpdateEsmtLiensSqlCommand
                         ,DateInstallation		=   @p_DateInstallation					
                         ,PropertySale			=   @p_PropertySale						
                         ,EstateSituation		=   @p_EstateSituation					
-                        ,Bankruptcy				=   @p_Bankruptcy						
+                        ,Bankruptcy				=   @p_Bankruptcy	
+                        ,ForeClosure            =   @p_ForeClosure
                         ,LastUpdatedBy            =   @p_LastUpdatedBy                                
                         ,LastUpdatedOn           =   @p_LastUpdatedOn                  
                       WHERE Id = @p_Id AND ApplicationId = @p_ApplicationId";

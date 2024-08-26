@@ -16,7 +16,7 @@ public class CreateEsmtLiensSqlCommand
                         ,TelephoneLines				
                         ,GasLines						
                         ,Other							
-                        ,AvvessEasement				
+                        ,AccessEasement				
                         ,AccessDescribe				
                         ,ConservationEasement			
                         ,ConservationDescribe			
@@ -46,7 +46,7 @@ public class CreateEsmtLiensSqlCommand
                     ,@p_TelephoneLines				
                     ,@p_GasLines						
                     ,@p_Other							
-                    ,@p_AvvessEasement				
+                    ,@p_AccessEasement				
                     ,@p_AccessDescribe				
                     ,@p_ConservationEasement			
                     ,@p_ConservationDescribe			
