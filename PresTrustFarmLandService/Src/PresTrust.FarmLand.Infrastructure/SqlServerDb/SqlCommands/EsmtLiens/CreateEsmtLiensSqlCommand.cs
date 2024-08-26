@@ -1,20 +1,13 @@
-﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
 
-namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands
+public class CreateEsmtLiensSqlCommand
 {
-    public class CreateEsmtLiensSqlCommand
-    {
-        private readonly string _sqlCommand =
-    @"INSERT INTO  [Farm].[FarmEsmtLiens]
+    private readonly string _sqlCommand =
+@"INSERT INTO  [Farm].[FarmEsmtLiens]
               (
                          ApplicationId
                         ,PremisePreserved				
-                        ,BankruptcyJedgement			
+                        ,BankruptcyJudgment			
                         ,PowerLines					
                         ,WaterLines					
                         ,Sewer							
@@ -34,7 +27,8 @@ namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands
                         ,DateInstallation				
                         ,PropertySale					
                         ,EstateSituation				
-                        ,Bankruptcy					
+                        ,Bankruptcy	
+                        ,ForeClosure
                         ,LastUpdatedBy
                         ,LastUpdatedOn
               )
@@ -43,7 +37,7 @@ namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands
 			  (  
                      @p_ApplicationId
                     ,@p_PremisePreserved				
-                    ,@p_BankruptcyJedgement			
+                    ,@p_BankruptcyJudgment			
                     ,@p_PowerLines					
                     ,@p_WaterLines					
                     ,@p_Sewer							
@@ -63,19 +57,19 @@ namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands
                     ,@p_DateInstallation				
                     ,@p_PropertySale					
                     ,@p_EstateSituation				
-                    ,@p_Bankruptcy					
-                   ,@p_LastUpdatedBy
+                    ,@p_Bankruptcy	
+                    ,@p_ForeClosure
+                    ,@p_LastUpdatedBy
                      ,GETDATE()
                                 );
 				  SELECT CAST( SCOPE_IDENTITY() AS INT);";
 
-        public CreateEsmtLiensSqlCommand()
-        {
-        }
+    public CreateEsmtLiensSqlCommand()
+    {
+    }
 
-        public override string ToString()
-        {
-            return _sqlCommand;
-        }
+    public override string ToString()
+    {
+        return _sqlCommand;
     }
 }

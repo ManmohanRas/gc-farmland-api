@@ -1,13 +1,13 @@
-﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
+
+public class UpdateEsmtLiensSqlCommand
 {
-    public class UpdateEsmtLiensSqlCommand
-    {
-        private readonly string _sqlCommand =
-            @" UPDATE  [Farm].[FarmEsmtLiens]
+    private readonly string _sqlCommand =
+        @" UPDATE  [Farm].[FarmEsmtLiens]
                  SET
                          ApplicationId           =   @p_ApplicationId
                         ,PremisePreserved		=   @p_PremisePreserved					
-                        ,BankruptcyJedgement	=   @p_BankruptcyJedgement				
+                        ,BankruptcyJudgment	    =   @p_BankruptcyJudgment				
                         ,PowerLines				=   @p_PowerLines						
                         ,WaterLines				=   @p_WaterLines						
                         ,Sewer					=   @p_Sewer								
@@ -34,14 +34,13 @@
 
 
 
-        public UpdateEsmtLiensSqlCommand()
-        {
-        }
-
-        public override string ToString()
-        {
-            return _sqlCommand;
-        }
-
+    public UpdateEsmtLiensSqlCommand()
+    {
     }
+
+    public override string ToString()
+    {
+        return _sqlCommand;
+    }
+
 }
