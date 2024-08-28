@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries;
 
-namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries
+public class GetEsmtLiensSqlQuery
 {
-    public class GetEsmtLiensSqlQuery
-    {
-        private readonly string _sqlCommand =
-          @"  SELECT    [Id]                                                        
+    private readonly string _sqlCommand =
+      @"  SELECT    [Id]                                                        
                         ,[ApplicationId]
                        ,[PremisePreserved]				
-                       ,[BankruptcyJedgement]			
+                       ,[BankruptcyJudgment]			
                        ,[PowerLines]					
                        ,[WaterLines]					
                        ,[Sewer]							
@@ -21,7 +15,7 @@ namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries
                        ,[TelephoneLines]				
                        ,[GasLines]						
                        ,[Other]							
-                       ,[AvvessEasement]				
+                       ,[AccessEasement]				
                        ,[AccessDescribe]				
                        ,[ConservationEasement]			
                        ,[ConservationDescribe]			
@@ -32,19 +26,19 @@ namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries
                        ,[DateInstallation]				
                        ,[PropertySale]					
                        ,[EstateSituation]				
-                       ,[Bankruptcy]					
+                       ,[Bankruptcy]	
+                       ,[ForeClosure]
                         ,[LastUpdatedBy]                                           
-                        [LastUpdatedOn]
+                         [LastUpdatedOn]
             FROM [Farm].[FarmEsmtLiens] 
             WHERE ApplicationId = @p_ApplicationId";
 
-        public GetEsmtLiensSqlQuery()
-        {
-        }
+    public GetEsmtLiensSqlQuery()
+    {
+    }
 
-        public override string ToString()
-        {
-            return _sqlCommand;
-        }
+    public override string ToString()
+    {
+        return _sqlCommand;
     }
 }

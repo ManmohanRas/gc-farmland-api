@@ -14,6 +14,7 @@ public class FarmBlockLotEntity
     public string Section { get; set; }
     public double Acres { get; set; }
     public double AcresToBeAcquired { get; set; }
+    public double ExceptionAreaAcres { get; set; }
     public bool Partial { get; set; }
     public string InterestType { get; set; }
     public bool ExceptionArea { get; set; }

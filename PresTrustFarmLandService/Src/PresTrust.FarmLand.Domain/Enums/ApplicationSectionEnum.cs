@@ -95,17 +95,23 @@ public enum ApplicationSectionEnum
     ESMT_EXIS_NON_AGRI_USES = 207,
 
     /// <summary>
+    /// Section Type for  Agri Uses Production
+    /// </summary>
+    ESMT_AGRI_USES_PRODUCTION = 208,
+
+
+    /// <summary>
     /// Section Type for Equine Uses
     /// </summary>
-    ESMT_EQUINE_USES = 208,
+    ESMT_EQUINE_USES = 209,
 
     /// <summary>
     /// Section Type for Signatory
     /// </summary>
-    ESMT_SIGNATORY = 209,
+    ESMT_SIGNATORY = 210,
 
     /// <summary>
-    /// Section Type for Signatory
+    /// Section Type for Other Documents
     /// </summary>
-    ESMT_OTHER_DOCUMENTS = 210,
+    ESMT_OTHER_DOCUMENTS = 211
 }

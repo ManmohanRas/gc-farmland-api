@@ -12,6 +12,7 @@ public class UpdateFarmBlockLotSqlCommand
                           ,[Section] = @p_Section
                           ,[Acres] = @p_Acres
                           ,[AcresToBeAcquired] = @p_AcresToBeAcquired
+                          ,[ExceptionAreaAcres] = @p_ExceptionAreaAcres
                           ,[ExceptionArea] = @p_ExceptionArea
                           ,[Notes] = @p_Notes
                           ,[PamsPin] = @p_PamsPin

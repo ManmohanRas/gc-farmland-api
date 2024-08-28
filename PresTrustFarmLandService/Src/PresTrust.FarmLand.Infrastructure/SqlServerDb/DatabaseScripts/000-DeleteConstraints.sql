@@ -103,7 +103,9 @@ BEGIN TRY
 		
 	ALTER TABLE [Farm].[FarmEsmtAppExceptions] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmEsmtAppExceptions];
 
-
+	ALTER TABLE [Farm].[FarmEsmtLiens] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmEsmtLiens];
+		
+	ALTER TABLE [Farm].[FarmEsmtLiens] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmEsmtLiens];
 	--==============================================================================================================--
 	--SELECT 1/0;
 	COMMIT;

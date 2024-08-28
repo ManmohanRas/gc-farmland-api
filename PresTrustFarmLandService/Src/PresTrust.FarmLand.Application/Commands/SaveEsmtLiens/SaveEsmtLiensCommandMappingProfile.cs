@@ -4,7 +4,7 @@
     {
         public SaveEsmtLiensCommandMappingProfile()
         {
-            CreateMap<SaveEsmtLiensCommand, EsmtOwnerDetailsEntity>();
+            CreateMap<SaveEsmtLiensCommand, EsmtLiensEntity>();
         }
     }
 }

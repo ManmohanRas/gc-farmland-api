@@ -15,6 +15,8 @@ public class FarmAgencyEntity
     public string State { get; set; }
     public string ZipCode { get; set; }
     public string PrimaryTelephone { get; set; }
+    public string AgencyEmail { get; set; }
+
     public string Address
     {
         get

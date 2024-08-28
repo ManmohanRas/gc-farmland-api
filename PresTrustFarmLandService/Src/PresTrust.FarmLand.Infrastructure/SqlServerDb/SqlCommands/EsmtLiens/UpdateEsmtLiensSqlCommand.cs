@@ -1,13 +1,13 @@
-﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
+
+public class UpdateEsmtLiensSqlCommand
 {
-    public class UpdateEsmtLiensSqlCommand
-    {
-        private readonly string _sqlCommand =
-            @" UPDATE  [Farm].[FarmEsmtLiens]
+    private readonly string _sqlCommand =
+        @" UPDATE  [Farm].[FarmEsmtLiens]
                  SET
                          ApplicationId           =   @p_ApplicationId
                         ,PremisePreserved		=   @p_PremisePreserved					
-                        ,BankruptcyJedgement	=   @p_BankruptcyJedgement				
+                        ,BankruptcyJudgment	    =   @p_BankruptcyJudgment				
                         ,PowerLines				=   @p_PowerLines						
                         ,WaterLines				=   @p_WaterLines						
                         ,Sewer					=   @p_Sewer								
@@ -16,7 +16,7 @@
                         ,TelephoneLines			=   @p_TelephoneLines					
                         ,GasLines				=   @p_GasLines							
                         ,Other					=   @p_Other								
-                        ,AvvessEasement			=   @p_AvvessEasement					
+                        ,AccessEasement			=   @p_AccessEasement					
                         ,AccessDescribe			=   @p_AccessDescribe					
                         ,ConservationEasement	=   @p_ConservationEasement				
                         ,ConservationDescribe	=   @p_ConservationDescribe				
@@ -27,21 +27,21 @@
                         ,DateInstallation		=   @p_DateInstallation					
                         ,PropertySale			=   @p_PropertySale						
                         ,EstateSituation		=   @p_EstateSituation					
-                        ,Bankruptcy				=   @p_Bankruptcy						
+                        ,Bankruptcy				=   @p_Bankruptcy	
+                        ,ForeClosure            =   @p_ForeClosure
                         ,LastUpdatedBy            =   @p_LastUpdatedBy                                
                         ,LastUpdatedOn           =   @p_LastUpdatedOn                  
                       WHERE Id = @p_Id AND ApplicationId = @p_ApplicationId";
 
 
 
-        public UpdateEsmtLiensSqlCommand()
-        {
-        }
-
-        public override string ToString()
-        {
-            return _sqlCommand;
-        }
-
+    public UpdateEsmtLiensSqlCommand()
+    {
     }
+
+    public override string ToString()
+    {
+        return _sqlCommand;
+    }
+
 }

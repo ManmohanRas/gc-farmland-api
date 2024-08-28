@@ -64,7 +64,7 @@ public class EsmtLiensRepository :IEsmtLiensReposioty
             {
                 @p_ApplicationId = esmtLiens.ApplicationId
                 ,@p_PremisePreserved		= esmtLiens.PremisePreserved		   
-                ,@p_BankruptcyJedgement	= esmtLiens.BankruptcyJedgement	   
+                ,@p_BankruptcyJudgment	    = esmtLiens.BankruptcyJudgment	   
                 ,@p_PowerLines				= esmtLiens.PowerLines				   
                 ,@p_WaterLines				= esmtLiens.WaterLines				   
                 ,@p_Sewer					= esmtLiens.Sewer					   
@@ -73,19 +73,20 @@ public class EsmtLiensRepository :IEsmtLiensReposioty
                 ,@p_TelephoneLines			= esmtLiens.TelephoneLines			   
                 ,@p_GasLines				= esmtLiens.GasLines				   
                 ,@p_Other					= esmtLiens.Other					   
-                ,@p_AvvessEasement			= esmtLiens.AvvessEasement			   
+                ,@p_AccessEasement			= esmtLiens.AccessEasement			   
                 ,@p_AccessDescribe			= esmtLiens.AccessDescribe			   
                 ,@p_ConservationEasement	= esmtLiens.ConservationEasement	   
                 ,@p_ConservationDescribe	= esmtLiens.ConservationDescribe	   
                 ,@p_FederalProgram			= esmtLiens.FederalProgram			   
-                ,@p_FederalDescribe		= esmtLiens.FederalDescribe		   
+                ,@p_FederalDescribe		    = esmtLiens.FederalDescribe		   
                 ,@p_SolarWindBiomass		= esmtLiens.SolarWindBiomass		   
-                ,@p_BiomassDescribe		= esmtLiens.BiomassDescribe		   
+                ,@p_BiomassDescribe		    = esmtLiens.BiomassDescribe		   
                 ,@p_DateInstallation		= esmtLiens.DateInstallation		   
                 ,@p_PropertySale			= esmtLiens.PropertySale			   
-                ,@p_EstateSituation		= esmtLiens.EstateSituation		   
+                ,@p_EstateSituation		    = esmtLiens.EstateSituation		   
                 ,@p_Bankruptcy				= esmtLiens.Bankruptcy
-                ,@p_LastUpdatedBy = esmtLiens.LastUpdatedBy
+                ,@p_Foreclosure             = esmtLiens.ForeClosure
+                ,@p_LastUpdatedBy           = esmtLiens.LastUpdatedBy
 
             });
 
@@ -110,7 +111,7 @@ public class EsmtLiensRepository :IEsmtLiensReposioty
                 @p_Id = esmtLiens.Id
                 ,@p_ApplicationId = esmtLiens.ApplicationId
                 ,@p_PremisePreserved = esmtLiens.PremisePreserved
-                ,@p_BankruptcyJedgement = esmtLiens.BankruptcyJedgement
+                ,@p_BankruptcyJudgment = esmtLiens.BankruptcyJudgment
                 ,@p_PowerLines = esmtLiens.PowerLines
                 ,@p_WaterLines = esmtLiens.WaterLines
                 ,@p_Sewer = esmtLiens.Sewer
@@ -119,7 +120,7 @@ public class EsmtLiensRepository :IEsmtLiensReposioty
                 ,@p_TelephoneLines = esmtLiens.TelephoneLines
                 ,@p_GasLines = esmtLiens.GasLines
                 ,@p_Other = esmtLiens.Other
-                ,@p_AvvessEasement = esmtLiens.AvvessEasement
+                ,@p_AccessEasement = esmtLiens.AccessEasement
                 ,@p_AccessDescribe = esmtLiens.AccessDescribe
                 ,@p_ConservationEasement = esmtLiens.ConservationEasement
                 ,@p_ConservationDescribe = esmtLiens.ConservationDescribe
@@ -131,6 +132,7 @@ public class EsmtLiensRepository :IEsmtLiensReposioty
                 ,@p_PropertySale = esmtLiens.PropertySale
                 ,@p_EstateSituation = esmtLiens.EstateSituation
                 ,@p_Bankruptcy = esmtLiens.Bankruptcy
+                ,@p_Foreclosure = esmtLiens.ForeClosure
                 ,@p_LastUpdatedBy = esmtLiens.LastUpdatedBy
                 ,@p_LastUpdatedOn = DateTime.Now,
             });
