@@ -50,7 +50,7 @@ public class GetTermAdminDetailsQueryHandler : BaseHandler, IRequestHandler<GetT
     /// <returns></returns>
     private async Task<List<TermDocumentTypeViewModel>> GetDocuments(int applicationId)
     {
-        var documents = await repoTermOtherDocumentsRepository.GetTermDocumentsAsync(applicationId, (int)ApplicationSectionEnum.TERM_ADMIN_DETAILS);
+        var documents = await repoTermOtherDocumentsRepository.GetTermDocumentsAsync(applicationId, (int)TermAppSectionEnum.ADMIN_DETAILS);
 
         List<TermDocumentTypeViewModel> documentsTree = new List<TermDocumentTypeViewModel>();
         if (documents != null)

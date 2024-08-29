@@ -8,18 +8,18 @@ public interface ITermBrokenRuleRepository
     /// </summary>
     /// <param name="applicationId"></param>
     /// <returns></returns>
-    Task<List<TermBrokenRuleEntity>> GetBrokenRulesAsync(int applicationId);
+    Task<List<FarmBrokenRuleEntity>> GetBrokenRulesAsync(int applicationId);
     /// <summary>
     /// save broken rules
     /// </summary>
     /// <param name="brokenRules"></param>
     /// <returns></returns>
-    Task SaveBrokenRules(List<TermBrokenRuleEntity> brokenRules);
+    Task SaveBrokenRules(List<FarmBrokenRuleEntity> brokenRules);
     /// <summary>
     /// Delete broken rules 
     /// </summary>
     /// <param name="applicationId"></param>
     /// <param name="section"></param>
     /// <returns></returns>
-    Task DeleteBrokenRulesAsync(int applicationId, ApplicationSectionEnum section);
+    Task DeleteBrokenRulesAsync(int applicationId, TermAppSectionEnum section);
 }

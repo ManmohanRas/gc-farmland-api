@@ -56,7 +56,7 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
             {
                 await repoDocument.SaveTermDocumentChecklistAsync(doc);
             }
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.TERM_ADMIN_DOCUMENT_CHECKLIST);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, TermAppSectionEnum.ADMIN_DOCUMENT_CHECKLIST);
             await repoBrokenRules.SaveBrokenRules(await brokenRules);
 
             scope.Complete();
@@ -71,11 +71,11 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
     /// <param name="application"></param>
     /// <param name="request"></param>
     /// <returns></returns>
-    private async Task<List<TermBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SaveTermAppDocumentChecklistCommand request)
+    private async Task<List<FarmBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SaveTermAppDocumentChecklistCommand request)
     {
 
-        int sectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DOCUMENT_CHECKLIST;
-        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
+        int sectionId = (int)TermAppSectionEnum.ADMIN_DOCUMENT_CHECKLIST;
+        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
         // map command object to the FloodDocumentEntity
         var documents = mapper.Map<IEnumerable<TermDocumentsViewModel>, IEnumerable<TermOtherDocumentsEntity>>(request.Documents);
 
@@ -83,7 +83,7 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
 
         if (documents == null || documents.Count() == 0)
         {
-            brokenRules.Add(new TermBrokenRuleEntity()
+            brokenRules.Add(new FarmBrokenRuleEntity()
             {
                 ApplicationId = application.Id,
                 SectionId = sectionId,
@@ -94,7 +94,7 @@ public class SaveTermAppDocumentChecklistCommandHandler : BaseHandler , IRequest
 
         if (unapprovedDocs != null && unapprovedDocs.Count() > 0)
         {
-            brokenRules.Add(new TermBrokenRuleEntity()
+            brokenRules.Add(new FarmBrokenRuleEntity()
             {
                 ApplicationId = application.Id,
                 SectionId = sectionId,

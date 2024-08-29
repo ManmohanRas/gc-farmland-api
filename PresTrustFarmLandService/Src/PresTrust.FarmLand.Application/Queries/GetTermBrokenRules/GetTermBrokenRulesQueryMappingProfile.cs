@@ -4,6 +4,6 @@ public class GetTermBrokenRulesQueryMappingProfile: Profile
 {
     public GetTermBrokenRulesQueryMappingProfile() 
     {
-        CreateMap<TermBrokenRuleEntity, GetTermBrokenRulesQueryViewModel>();
+        CreateMap<FarmBrokenRuleEntity, GetTermBrokenRulesQueryViewModel>();
     }
 }

@@ -41,7 +41,7 @@ public class ApproveAggrementCommandHandler : BaseHandler, IRequestHandler<Appro
         //update application
         if (application != null)
         {
-            application.StatusId = (int)ApplicationStatusEnum.AGREEMENT_APPROVED;
+            application.StatusId = (int)TermAppStatusEnum.AGREEMENT_APPROVED;
             application.LastUpdatedBy = userContext.Email;
         }
 
@@ -50,7 +50,7 @@ public class ApproveAggrementCommandHandler : BaseHandler, IRequestHandler<Appro
 
         if (brokenRules != null && brokenRules.Any())
         {
-            result.BrokenRules = mapper.Map<IEnumerable<TermBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
+            result.BrokenRules = mapper.Map<IEnumerable<FarmBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
             return result;
         }
 
@@ -61,7 +61,7 @@ public class ApproveAggrementCommandHandler : BaseHandler, IRequestHandler<Appro
            // var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
             // save broken rules
             //await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
-            await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.AGREEMENT_APPROVED);
+            await repoApplication.UpdateApplicationStatusAsync(application, TermAppStatusEnum.AGREEMENT_APPROVED);
             FarmApplicationStatusLogEntity appStatusLog = new()
             {
                 ApplicationId = application.Id,

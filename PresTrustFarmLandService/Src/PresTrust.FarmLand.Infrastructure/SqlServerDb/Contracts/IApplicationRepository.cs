@@ -41,7 +41,7 @@
         /// <param name="application"></param>
         /// <param name="enumStatus"></param>
         /// <returns></returns>
-        Task<bool> UpdateApplicationStatusAsync(FarmApplicationEntity application, ApplicationStatusEnum enumStatus);
+        Task<bool> UpdateApplicationStatusAsync(FarmApplicationEntity application, TermAppStatusEnum enumStatus);
 
         /// update application status
         /// </summary>

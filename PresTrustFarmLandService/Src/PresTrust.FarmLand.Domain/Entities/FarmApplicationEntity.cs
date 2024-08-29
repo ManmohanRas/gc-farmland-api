@@ -39,11 +39,16 @@ public class FarmApplicationEntity
         }
     }
 
-    public ApplicationStatusEnum Status
+    public dynamic Status
     {
         get
         {
-            return (ApplicationStatusEnum)StatusId;
+            if (this.StatusId > 199)
+            {
+                return (EsmtAppStatusEnum)StatusId;
+            }
+            else
+            return (TermAppStatusEnum)StatusId;
         }
         set
         {
@@ -59,19 +64,19 @@ public class FarmApplicationEntity
         }
     }
 
-    public IEnumerable<TermCommentsEntity> Comments
+    public IEnumerable<FarmCommentsEntity> Comments
     {
         get
         {
-            return this.CommentsJSON == null ? new List<TermCommentsEntity>() : JsonSerializer.Deserialize<IEnumerable<TermCommentsEntity>>(this.CommentsJSON);
+            return this.CommentsJSON == null ? new List<FarmCommentsEntity>() : JsonSerializer.Deserialize<IEnumerable<FarmCommentsEntity>>(this.CommentsJSON);
         }
     }
 
-    public IEnumerable<TermFeedbacksEntity> Feedbacks
+    public IEnumerable<FarmFeedbacksEntity> Feedbacks
     {
         get
         {
-            return this.FeedbacksJSON == null ? new List<TermFeedbacksEntity>() : JsonSerializer.Deserialize<IEnumerable<TermFeedbacksEntity>>(this.FeedbacksJSON);
+            return this.FeedbacksJSON == null ? new List<FarmFeedbacksEntity>() : JsonSerializer.Deserialize<IEnumerable<FarmFeedbacksEntity>>(this.FeedbacksJSON);
         }
     }
 

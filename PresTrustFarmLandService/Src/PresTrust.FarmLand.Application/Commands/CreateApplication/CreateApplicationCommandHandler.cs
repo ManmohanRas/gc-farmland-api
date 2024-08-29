@@ -36,7 +36,7 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
     public async Task<CreateApplicationCommandViewModel> Handle(CreateApplicationCommand request, CancellationToken cancellationToken)
     {
         var reqApplication = mapper.Map<CreateApplicationCommand, FarmApplicationEntity>(request);
-        reqApplication.Status = ApplicationStatusEnum.PETITION_DRAFT;
+        reqApplication.Status = TermAppStatusEnum.PETITION_DRAFT;
         reqApplication.CreatedByProgramUser = userContext.Role == UserRoleEnum.PROGRAM_ADMIN;
         reqApplication.LastUpdatedBy = userContext.Email;
         reqApplication.CreatedBy = userContext.Email;
@@ -96,7 +96,7 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
     {
         // security
         userContext.DeriveRole(application.AgencyId);
-        IsAuthorizedOperation(userRole: userContext.Role, application: application, operation: UserPermissionEnum.CREATE_APPLICATION);
+        IsAuthorizedOperation(userRole: userContext.Role, application: application, operation: TermUserPermissionEnum.CREATE_APPLICATION);
     }
 
     /// <summary>vere intiki
@@ -105,38 +105,38 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
     /// <param name="request"></param>
     /// <param name="application"></param>
     /// <returns></returns>
-    private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(CreateApplicationCommand request, FarmApplicationEntity application)
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(CreateApplicationCommand request, FarmApplicationEntity application)
     {
-        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
+        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 
         // add default broken rule while creating an application
-        brokenRules.Add(new TermBrokenRuleEntity()
+        brokenRules.Add(new FarmBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.TERM_LOCATION,
+            SectionId = (int)TermAppSectionEnum.LOCATION,
             Message = "All required fields on Location tab have not been filled.",
             IsApplicantFlow = true
         });
 
-        brokenRules.Add(new TermBrokenRuleEntity()
+        brokenRules.Add(new FarmBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.TERM_OWNER_DETAILS,
+            SectionId = (int)TermAppSectionEnum.OWNER_DETAILS,
             Message = "All required fields on Owner Details tab have not been filled.",
             IsApplicantFlow = true
         });
 
-        brokenRules.Add(new TermBrokenRuleEntity()
+        brokenRules.Add(new FarmBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS,
+            SectionId = (int)TermAppSectionEnum.SITE_CHARACTERISTICS,
             Message = "All required fields on Site Charecteristics tab have not been filled.",
             IsApplicantFlow = true
         });
-        brokenRules.Add(new TermBrokenRuleEntity()
+        brokenRules.Add(new FarmBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.TERM_SIGNATORY,
+            SectionId = (int)TermAppSectionEnum.SIGNATORY,
             Message = "All required fields on Signatory tab have not been filled.",
             IsApplicantFlow = true
         });

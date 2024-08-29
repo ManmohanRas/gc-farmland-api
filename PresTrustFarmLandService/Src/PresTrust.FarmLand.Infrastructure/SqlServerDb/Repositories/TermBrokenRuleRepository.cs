@@ -30,13 +30,13 @@ public class TermBrokenRuleRepository : ITermBrokenRuleRepository
     /// </summary>
     /// <param name="applicationId"></param>
     /// <returns></returns>
-    public async Task<List<TermBrokenRuleEntity>> GetBrokenRulesAsync(int applicationId)
+    public async Task<List<FarmBrokenRuleEntity>> GetBrokenRulesAsync(int applicationId)
     {
-        List<TermBrokenRuleEntity> results = default;
+        List<FarmBrokenRuleEntity> results = default;
 
         using var conn = context.CreateConnection();
         var sqlCommand = new GetBrokenRulesSqlCommand();
-        results = (await conn.QueryAsync<TermBrokenRuleEntity>(sqlCommand.ToString(),
+        results = (await conn.QueryAsync<FarmBrokenRuleEntity>(sqlCommand.ToString(),
                     commandType: CommandType.Text,
                     commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
                     param: new { @p_ApplicationId = applicationId })).ToList();
@@ -49,7 +49,7 @@ public class TermBrokenRuleRepository : ITermBrokenRuleRepository
     /// </summary>
     /// <param name="brokenRule"></param>
     /// <returns></returns>
-    public async Task SaveBrokenRules(List<TermBrokenRuleEntity> brokenRules)
+    public async Task SaveBrokenRules(List<FarmBrokenRuleEntity> brokenRules)
     {
         using var conn = context.CreateConnection();
         var sqlCommand = new SaveBrokenRuleSqlCommand();
@@ -76,7 +76,7 @@ public class TermBrokenRuleRepository : ITermBrokenRuleRepository
     /// <param name="applicationId"></param>
     /// <param name="section"></param>
     /// <returns></returns>
-    public async Task DeleteBrokenRulesAsync(int applicationId, ApplicationSectionEnum section)
+    public async Task DeleteBrokenRulesAsync(int applicationId, TermAppSectionEnum section)
     {
         using var conn = context.CreateConnection();
         var sqlCommand = new DeleteBrokenRulesSqlCommand();

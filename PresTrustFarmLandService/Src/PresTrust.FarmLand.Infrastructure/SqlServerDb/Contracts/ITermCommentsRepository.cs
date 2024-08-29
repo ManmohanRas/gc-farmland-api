@@ -8,19 +8,19 @@ public interface ITermCommentsRepository
     /// </summary>
     /// <param name="applicationId"> Application Id.</param>
     /// <returns> Returns Comments.</returns>
-    Task<List<TermCommentsEntity>> GetAllCommentsAsync(int applicationId);
+    Task<List<FarmCommentsEntity>> GetAllCommentsAsync(int applicationId);
 
     /// <summary>
     /// Save Comment.
     /// </summary>
     /// <param name="comment"></param>
     /// <returns></returns>
-    Task<TermCommentsEntity> SaveAsync(TermCommentsEntity comment);
+    Task<FarmCommentsEntity> SaveAsync(FarmCommentsEntity comment);
 
     /// <summary>
     /// Delete Comment.
     /// </summary>
     /// <returns></returns>
-    Task DeleteCommentAsync(TermCommentsEntity comment);
+    Task DeleteCommentAsync(FarmCommentsEntity comment);
 
 }

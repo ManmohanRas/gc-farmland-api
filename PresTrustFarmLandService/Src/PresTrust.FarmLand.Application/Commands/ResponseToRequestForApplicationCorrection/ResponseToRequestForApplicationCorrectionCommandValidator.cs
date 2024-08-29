@@ -36,7 +36,7 @@ public class ResponseToRequestForApplicationCorrectionCommandValidator : Abstrac
     public bool ValidSectionType(string section)
     {
         bool result = false;
-        ApplicationSectionEnum enumSectionType;
+        TermAppSectionEnum enumSectionType;
         Enum.TryParse(section, ignoreCase: true, out enumSectionType);
         if (enumSectionType > 0)
             result = true;

@@ -22,7 +22,7 @@ public class GetTermDocumentsBySectionQueryHandler : BaseHandler,IRequestHandler
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 
-        Enum.TryParse(value: request.SectionName, ignoreCase: true, out ApplicationSectionEnum applicationSection);
+        Enum.TryParse(value: request.SectionName, ignoreCase: true, out TermAppSectionEnum applicationSection);
         var documents = await repoDocument.GetTermDocumentsAsync(application.Id, (int)applicationSection);
 
         List<TermDocumentTypeViewModel>? documentsTree = default;

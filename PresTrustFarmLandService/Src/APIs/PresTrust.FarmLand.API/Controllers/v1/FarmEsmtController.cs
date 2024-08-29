@@ -8,14 +8,6 @@ public class FarmEsmtController : FarmController
     {
     }
 
-    [HttpPost("saveEsmtAppStructure")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-
-    public async Task<ActionResult<int>> SaveEsmtAppStructure([FromBody] SaveEsmtAppStructureCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
     [HttpPost("getEsmtOwnerDetails")]
     [ProducesResponseType(typeof(GetEsmtOwnerDetailsQueryViewModel), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<GetEsmtOwnerDetailsQueryViewModel>> GetEsmtOwnerDetails([FromBody] GetEsmtOwnerDetailsQuery query)
@@ -68,5 +60,13 @@ public class FarmEsmtController : FarmController
         return Single(await QueryAsync(query));
 
 
+    }
+
+    [HttpPost("saveEsmtAppStructure")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<int>> SaveEsmtAppStructure([FromBody] SaveEsmtAppStructureCommand command)
+    {
+        return Single(await CommandAsync(command));
     }
 }

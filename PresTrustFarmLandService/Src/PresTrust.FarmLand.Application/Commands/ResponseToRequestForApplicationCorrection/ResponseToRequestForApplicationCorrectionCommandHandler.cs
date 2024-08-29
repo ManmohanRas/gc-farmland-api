@@ -57,20 +57,20 @@ public class ResponseToRequestForApplicationCorrectionCommandHandler : BaseHandl
         {
             foreach (var section in request.Sections)
             {
-                Enum.TryParse(value: section, ignoreCase: true, out ApplicationSectionEnum enumSection);
+                Enum.TryParse(value: section, ignoreCase: true, out TermAppSectionEnum enumSection);
                 await repoFeedback.ResponseToRequestForApplicationCorrectionAsync(application.Id, (int)enumSection);
             }
 
             // If reponse's description/feedback is not empty
             if (!string.IsNullOrEmpty(request.Feedback))
             {
-                var feedback = new TermFeedbacksEntity()
+                var feedback = new FarmFeedbacksEntity()
                 {
                     Id = 0,
                     ApplicationId = application.Id,
                     CorrectionStatus = ApplicationCorrectionStatusEnum.NONE.ToString(),
                     Feedback = request.Feedback,
-                    Section = ApplicationSectionEnum.NONE,
+                    Section = TermAppSectionEnum.NONE,
                     RequestForCorrection = false,
                     LastUpdatedBy = userContext.Name
                 };

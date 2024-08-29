@@ -40,7 +40,7 @@ public class RejectApplicationCommandHandler : BaseHandler, IRequestHandler<Reje
         // update application status
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-            await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.REJECTED);
+            await repoApplication.UpdateApplicationStatusAsync(application, TermAppStatusEnum.REJECTED);
 
             scope.Complete();
         };

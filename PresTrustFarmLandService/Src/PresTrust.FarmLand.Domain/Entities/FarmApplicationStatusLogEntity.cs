@@ -8,11 +8,16 @@ public class FarmApplicationStatusLogEntity
     public string Notes { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
-    public ApplicationStatusEnum Status
+    public dynamic Status
     {
         get
         {
-            return (ApplicationStatusEnum)StatusId;
+            if (this.StatusId > 199)
+            {
+                return (EsmtAppStatusEnum)StatusId;
+            }
+            else
+                return (TermAppStatusEnum)StatusId;
         }
         set
         {

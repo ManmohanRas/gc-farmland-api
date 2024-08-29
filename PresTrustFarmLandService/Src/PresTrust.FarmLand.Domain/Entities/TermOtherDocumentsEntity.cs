@@ -29,11 +29,11 @@ public class TermOtherDocumentsEntity
             this.DocumentTypeId = (int)value;
         }
     }
-    public ApplicationSectionEnum Section
+    public TermAppSectionEnum Section
     {
         get
         {
-            return (ApplicationSectionEnum)SectionId;
+            return (TermAppSectionEnum)SectionId;
         }
         set
         {

@@ -43,7 +43,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             appDetails = await repoTermAppAdminDetails.SaveTermAppAdminDetailsAsync(reqTermAppAdminDetails);
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.TERM_ADMIN_DETAILS);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, TermAppSectionEnum.ADMIN_DETAILS);
             await repoBrokenRules.SaveBrokenRules(brokenRules);
 
             scope.Complete();
@@ -54,12 +54,12 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
     }
 
 
-    private async Task<List<TermBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SaveTermAppAdminDetailsCommand request)
+    private async Task<List<FarmBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SaveTermAppAdminDetailsCommand request)
     {
 
 
-        int sectionId =  (int)ApplicationSectionEnum.TERM_ADMIN_DETAILS;
-        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
+        int sectionId =  (int)TermAppSectionEnum.ADMIN_DETAILS;
+        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 
 
         var documents  =  await repoDocument.GetTermDocumentsAsync(application.Id,sectionId);
@@ -80,10 +80,10 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
             docsNotificationOfTermination = documents.Where (d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.NOTIFICATION_OF_TERMINATION).FirstOrDefault();
         }
 
-        if(application.Status == ApplicationStatusEnum.PETITION_REQUEST)
+        if(application.Status == TermAppStatusEnum.PETITION_REQUEST)
         { 
         if (docsMafppAgreement == null)
-            brokenRules.Add(new TermBrokenRuleEntity()
+            brokenRules.Add(new FarmBrokenRuleEntity()
             {
                 ApplicationId = application.Id,
                 SectionId = sectionId,
@@ -92,7 +92,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
             });
 
             if (docsMunicipalOrdinance == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -101,7 +101,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                 });
 
             if (docsCountyResolution == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -110,7 +110,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                 });
 
             if (docsSadcApprovalLetter == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -120,10 +120,10 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
 
         }
 
-        if (application.Status == ApplicationStatusEnum.WITHDRAWN)
+        if (application.Status == TermAppStatusEnum.WITHDRAWN)
         {
             if (docsNotificationOfTermination == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -132,10 +132,10 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                 });
         }
 
-        if (application.Status == ApplicationStatusEnum.PETITION_APPROVED)
+        if (application.Status == TermAppStatusEnum.PETITION_APPROVED)
         {
             if (request?.SADCId == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -144,7 +144,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                 });
 
             if (request?.MaxGrant == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -153,7 +153,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                 });
 
             if (request?.PermanentlyPreserved == false)
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -161,7 +161,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                     IsApplicantFlow = false,
                 });
             if (request?.MunicipallyApproved == false)
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -169,7 +169,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                     IsApplicantFlow = false,
                 });
             if (request.EnrollmentDate == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -177,7 +177,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                     IsApplicantFlow = false,
                 });
             if (request.RenewalDate == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -186,7 +186,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                 });
 
             if (request.ExpirationDate == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -195,7 +195,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                 });
 
             if (request.RenewalExpirationDate == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -204,7 +204,7 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                 });
 
             if (docsReceiptOfCertification == null)
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,

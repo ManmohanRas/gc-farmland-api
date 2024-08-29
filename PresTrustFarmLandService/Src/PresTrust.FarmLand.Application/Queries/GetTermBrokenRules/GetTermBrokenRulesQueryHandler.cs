@@ -40,10 +40,10 @@ public class GetTermBrokenRulesQueryHandler : BaseHandler, IRequestHandler<GetTe
         var brokenRules = await repoBrokenRule.GetBrokenRulesAsync(request.ApplicationId);
         if (isApplicantFlow)
         {
-            brokenRules = (List<TermBrokenRuleEntity>)brokenRules.Where(o => o.IsApplicantFlow).ToList();
+            brokenRules = (List<FarmBrokenRuleEntity>)brokenRules.Where(o => o.IsApplicantFlow).ToList();
         }
 
-        var result = mapper.Map<IEnumerable<TermBrokenRuleEntity>, IEnumerable<GetTermBrokenRulesQueryViewModel>>(brokenRules);
+        var result = mapper.Map<IEnumerable<FarmBrokenRuleEntity>, IEnumerable<GetTermBrokenRulesQueryViewModel>>(brokenRules);
 
         return result;
     }

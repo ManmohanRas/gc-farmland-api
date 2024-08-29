@@ -49,7 +49,7 @@ public class SaveTermAppDocumentChecklistCommandValidator : AbstractValidator<Sa
     public bool ValidApplicationSection(string section)
     {
         bool result = false;
-        Enum.TryParse(value: section, ignoreCase: true, out ApplicationSectionEnum enumSection);
+        Enum.TryParse(value: section, ignoreCase: true, out TermAppSectionEnum enumSection);
 
         if (enumSection > 0)
             result = true;

@@ -27,11 +27,11 @@ public class SaveTermCommentCommandHandler : IRequestHandler<SaveTermCommentComm
     public async Task<int> Handle(SaveTermCommentCommand request, CancellationToken cancellationToken)
     {
 
-        var reqComment = mapper.Map<SaveTermCommentCommand, TermCommentsEntity>(request);
+        var reqComment = mapper.Map<SaveTermCommentCommand, FarmCommentsEntity>(request);
 
 
         // save comment
-        TermCommentsEntity comment = default;
+        FarmCommentsEntity comment = default;
         comment = await this.repoComment.SaveAsync(reqComment);
 
         return comment.Id;

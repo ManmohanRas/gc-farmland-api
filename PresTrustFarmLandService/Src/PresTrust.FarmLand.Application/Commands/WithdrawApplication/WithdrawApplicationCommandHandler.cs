@@ -44,7 +44,7 @@ public class WithdrawApplicationCommandHandler : BaseHandler, IRequestHandler<Wi
         // update application status
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-            await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.WITHDRAWN);
+            await repoApplication.UpdateApplicationStatusAsync(application, TermAppStatusEnum.WITHDRAWN);
 
             scope.Complete();
         };

@@ -4,6 +4,6 @@ public class ApproveAggrementCommandMappingProfile : Profile
 {
     public ApproveAggrementCommandMappingProfile()
     {
-        CreateMap<TermBrokenRuleEntity, TermBrokenRuleViewModel>();
+        CreateMap<FarmBrokenRuleEntity, TermBrokenRuleViewModel>();
     }
 }

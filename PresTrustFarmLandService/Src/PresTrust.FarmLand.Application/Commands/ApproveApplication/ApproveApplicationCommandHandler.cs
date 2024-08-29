@@ -1,6 +1,4 @@
-﻿using static System.Collections.Specialized.BitVector32;
-
-namespace PresTrust.FarmLand.Application.Commands;
+﻿namespace PresTrust.FarmLand.Application.Commands;
 
 public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<ApproveApplicationCommand, ApproveApplicationCommandViewModel>
 {
@@ -51,14 +49,14 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
         //update application
         if (application != null)
         {
-            application.StatusId = (int)ApplicationStatusEnum.PETITION_APPROVED;
+            application.StatusId = (int)TermAppStatusEnum.PETITION_APPROVED;
             application.LastUpdatedBy = userContext.Email;
         }
 
         // check if any broken rules exists, if yes then return
         var brokenRules = (await repoBrokenRules.GetBrokenRulesAsync(application.Id))?.ToList();
 
-        var docBrokenrules = await TermAppAdminDeedDetailsDocs(application.Id, application.Status, (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS);
+        var docBrokenrules = await TermAppAdminDeedDetailsDocs(application.Id, application.Status, (int)TermAppSectionEnum.ADMIN_DEED_DETAILS);
         if (docBrokenrules.Count > 0)
         {
             brokenRules.AddRange(docBrokenrules);
@@ -66,22 +64,9 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
 
         if (brokenRules != null && brokenRules.Any())
         {
-            result.BrokenRules = mapper.Map<IEnumerable<TermBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
+            result.BrokenRules = mapper.Map<IEnumerable<FarmBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
             return result;
         }
-
-        // check if any broken rules exists, if yes then return
-        var hasDeedDetailsDocuments = await TermAppAdminDeedDetailsDocs(application);
-        if (hasDeedDetailsDocuments.Count > 0)
-        {
-            brokenRules.Add(new TermBrokenRuleEntity()
-            {
-                ApplicationId = application.Id,
-                SectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DEED_DETAILS,
-                Message = "Required Documents are not uploaded in ADMIN_DEED_DETAILS Tab",
-            });
-        }
-
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
@@ -89,7 +74,7 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
             var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
             // save broken rules
             await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
-            await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.PETITION_APPROVED);
+            await repoApplication.UpdateApplicationStatusAsync(application, TermAppStatusEnum.PETITION_APPROVED);
             FarmApplicationStatusLogEntity appStatusLog = new()
             {
                 ApplicationId = application.Id,
@@ -117,56 +102,51 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
     /// <param name="request"></param>
     /// <param name="application"></param>
     /// <returns></returns>
-    private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
     {
-        List<TermBrokenRuleEntity> statusChangeRules = new List<TermBrokenRuleEntity>();
+        List<FarmBrokenRuleEntity> statusChangeRules = new List<FarmBrokenRuleEntity>();
 
         // add default broken rule while initiating application flow
-        statusChangeRules.Add(new TermBrokenRuleEntity()
+        statusChangeRules.Add(new FarmBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DETAILS,
+            SectionId = (int)TermAppSectionEnum.ADMIN_DETAILS,
             Message = "All required fields on ADMIN_DETAILS tab have not been filled.",
 
         });
 
-        statusChangeRules.Add(new TermBrokenRuleEntity()
+        statusChangeRules.Add(new FarmBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DEED_DETAILS,
+            SectionId = (int)TermAppSectionEnum.ADMIN_DEED_DETAILS,
             Message = "All required fields on ADMIN_DEED_DETAILS tab have not been filled.",
         });
 
         return statusChangeRules;
     }
-    private async Task<List<TermBrokenRuleEntity>> TermAppAdminDeedDetailsDocs(int applicationId, ApplicationStatusEnum applicationStatus, int sectionId)
+    private async Task<List<FarmBrokenRuleEntity>> TermAppAdminDeedDetailsDocs(int applicationId, TermAppStatusEnum applicationStatus, int sectionId)
     {
-        int sectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DEED_DETAILS;
-        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
-        var documents = await repoOtherDocs.GetTermDocumentsAsync(application.Id,sectionId);
-        TermOtherDocumentsEntity docsCopyOfDeed = default;
-        TermOtherDocumentsEntity docsCopyOfOwner = default;
 
         var documents = await repoOtherDocs.GetTermDocumentsAsync(applicationId, sectionId);
 
-        List<TermBrokenRuleEntity> docBrokenrules = new List<TermBrokenRuleEntity>();
-        if (applicationStatus == ApplicationStatusEnum.PETITION_APPROVED)
+        List<FarmBrokenRuleEntity> docBrokenrules = new List<FarmBrokenRuleEntity>();
+        if (applicationStatus == TermAppStatusEnum.PETITION_APPROVED)
         {
             if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.TRUE_COPY_OF_DEED).Count() == 0)
             {
-                docBrokenrules.Add(new TermBrokenRuleEntity()
+                docBrokenrules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = applicationId,
-                    SectionId = (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS,
+                    SectionId = (int)TermAppSectionEnum.ADMIN_DEED_DETAILS,
                     Message = "True Copy Of Deed required document on Deed Details tab have not been Uploaded."
                 });
             }
             if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.COPY_OF_OWNER_OF_LAST_RECORD_SEARCH).Count() == 0)
             {
-                docBrokenrules.Add(new TermBrokenRuleEntity()
+                docBrokenrules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = applicationId,
-                    SectionId = (int)ApplicationSectionEnum.OTHER_DOCUMENTS,
+                    SectionId = (int)TermAppSectionEnum.OTHER_DOCUMENTS,
                     Message = "Copy Of Owner required document on Deed Details tab have not been Uploaded.",
                 });
             }

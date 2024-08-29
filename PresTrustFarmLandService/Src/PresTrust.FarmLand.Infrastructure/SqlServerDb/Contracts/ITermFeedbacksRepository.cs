@@ -8,13 +8,13 @@ public interface ITermFeedbacksRepository
     /// <param name="applicationId"></param>
     /// <param name="correctionStatus"></param>
     /// <returns></returns>
-    Task<List<TermFeedbacksEntity>> GetFeedbacksAsync(int applicationId, string correctionStatus = "");
+    Task<List<FarmFeedbacksEntity>> GetFeedbacksAsync(int applicationId, string correctionStatus = "");
     // <summary>
     /// Save Feedback.
     /// </summary>
     /// <param name="feedback"></param>
     /// <returns>Returns Feedback.</returns>
-    Task<TermFeedbacksEntity> SaveAsync(TermFeedbacksEntity feedback);
+    Task<FarmFeedbacksEntity> SaveAsync(FarmFeedbacksEntity feedback);
 
     /// <summary
     // Mark Feedbacks As Read

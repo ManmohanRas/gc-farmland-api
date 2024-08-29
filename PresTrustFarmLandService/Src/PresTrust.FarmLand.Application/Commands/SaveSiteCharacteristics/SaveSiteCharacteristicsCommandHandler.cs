@@ -46,7 +46,7 @@ public class SaveSiteCharacteristicsCommandHandler : BaseHandler, IRequestHandle
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, TermAppSectionEnum.SITE_CHARACTERISTICS);
             await repoBrokenRules.SaveBrokenRules(brokenRules);
             reqSiteCharacteristics = await repoSiteCharacteristics.SaveSiteCharacteristicsAsync(reqSiteCharacteristics);
             reqSiteCharacteristics.LastUpdatedBy = userContext.Email;
@@ -57,14 +57,14 @@ public class SaveSiteCharacteristicsCommandHandler : BaseHandler, IRequestHandle
 
     }
 
-    private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SiteCharacteristicsEntity reqSiteCharacteristics)
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SiteCharacteristicsEntity reqSiteCharacteristics)
     {
-        int sectionId = (int)ApplicationSectionEnum.TERM_SITE_CHARACTERISTICS;
-        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
+        int sectionId = (int)TermAppSectionEnum.SITE_CHARACTERISTICS;
+        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 
             if(string.IsNullOrEmpty( reqSiteCharacteristics.Area))
             {
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -76,7 +76,7 @@ public class SaveSiteCharacteristicsCommandHandler : BaseHandler, IRequestHandle
             if(string.IsNullOrEmpty(reqSiteCharacteristics.EasementRightOfway))
             {
 
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,

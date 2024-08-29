@@ -21,7 +21,7 @@ public class DeleteTermCommentCommandHandler : IRequestHandler<DeleteTermComment
     /// <returns></returns>
     public async Task<bool> Handle(DeleteTermCommentCommand request, CancellationToken cancellationToken)
     {
-        var reqComment = mapper.Map<DeleteTermCommentCommand, TermCommentsEntity>(request);
+        var reqComment = mapper.Map<DeleteTermCommentCommand, FarmCommentsEntity>(request);
         await repoComment.DeleteCommentAsync(reqComment);
         return true;
     }

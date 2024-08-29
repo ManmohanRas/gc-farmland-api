@@ -49,7 +49,7 @@ public class SaveTermAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             // Delete old Broken Rules, if any
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.TERM_SIGNATORY);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, TermAppSectionEnum.SIGNATORY);
             // Save current Broken Rules, if any
             await repoBrokenRules.SaveBrokenRules(brokenRules);
 
@@ -66,14 +66,14 @@ public class SaveTermAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         return signatoryId;
     }
 
-    private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmTermAppSignatoryEntity reqSignatory)
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmTermAppSignatoryEntity reqSignatory)
     {
-        int sectionId = (int)ApplicationSectionEnum.TERM_SIGNATORY;
-        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
+        int sectionId = (int)TermAppSectionEnum.SIGNATORY;
+        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 
         // add based on the empty check conditions
         if (string.IsNullOrEmpty(reqSignatory.Designation))
-            brokenRules.Add(new TermBrokenRuleEntity()
+            brokenRules.Add(new FarmBrokenRuleEntity()
             {
                 ApplicationId = reqSignatory.ApplicationId,
                 SectionId = sectionId,
@@ -82,7 +82,7 @@ public class SaveTermAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
             });
 
         if (string.IsNullOrEmpty(reqSignatory.Title))
-            brokenRules.Add(new TermBrokenRuleEntity()
+            brokenRules.Add(new FarmBrokenRuleEntity()
             {
                 ApplicationId = reqSignatory.ApplicationId,
                 SectionId = sectionId,
@@ -91,7 +91,7 @@ public class SaveTermAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
             });
 
         if (reqSignatory.SignedOn == null)
-            brokenRules.Add(new TermBrokenRuleEntity()
+            brokenRules.Add(new FarmBrokenRuleEntity()
             {
                 ApplicationId = reqSignatory.ApplicationId,
                 SectionId = sectionId,

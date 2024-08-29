@@ -14,19 +14,19 @@ public class TermCommentsRepository : ITermCommentsRepository
         this.systemParamConfig = systemParamConfigOptions.Value;
     }
 
-    public async Task<List<TermCommentsEntity>> GetAllCommentsAsync(int applicationId)
+    public async Task<List<FarmCommentsEntity>> GetAllCommentsAsync(int applicationId)
     {
-        List<TermCommentsEntity> results;
+        List<FarmCommentsEntity> results;
         using var conn = context.CreateConnection();
         var sqlCommand = new GetTermCommentSqlCommand();
-        results = (await conn.QueryAsync<TermCommentsEntity>(sqlCommand.ToString(),
+        results = (await conn.QueryAsync<FarmCommentsEntity>(sqlCommand.ToString(),
             commandType: CommandType.Text,
             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
                             param: new { @p_ApplicationId = applicationId })).ToList();
         return results ?? new();
     }
 
-    public async Task<TermCommentsEntity> SaveAsync(TermCommentsEntity comment)
+    public async Task<FarmCommentsEntity> SaveAsync(FarmCommentsEntity comment)
     {
         if (comment.Id > 0)
             return await UpdateAsync(comment);
@@ -34,7 +34,7 @@ public class TermCommentsRepository : ITermCommentsRepository
             return await CreateAsync(comment);
     }
 
-    private async Task<TermCommentsEntity> UpdateAsync(TermCommentsEntity comment)
+    private async Task<FarmCommentsEntity> UpdateAsync(FarmCommentsEntity comment)
     {
         using var conn = context.CreateConnection();
         var sqlCommand = new UpdateTermCommentSqlCommand();
@@ -54,7 +54,7 @@ public class TermCommentsRepository : ITermCommentsRepository
         return comment;
     }
 
-    private async Task<TermCommentsEntity> CreateAsync(TermCommentsEntity comment)
+    private async Task<FarmCommentsEntity> CreateAsync(FarmCommentsEntity comment)
     {
         int id = default;
 
@@ -77,7 +77,7 @@ public class TermCommentsRepository : ITermCommentsRepository
         return comment;
     }
 
-    public async Task DeleteCommentAsync(TermCommentsEntity comment)
+    public async Task DeleteCommentAsync(FarmCommentsEntity comment)
     {
         using var conn = context.CreateConnection();
         var sqlCommand = new DeleteTermCommentSqlCommand();

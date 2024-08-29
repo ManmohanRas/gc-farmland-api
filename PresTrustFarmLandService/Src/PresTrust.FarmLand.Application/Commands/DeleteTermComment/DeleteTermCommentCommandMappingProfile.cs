@@ -4,7 +4,7 @@ public class DeleteTermCommentCommandMappingProfile : Profile
 {
     public DeleteTermCommentCommandMappingProfile()
     {
-        CreateMap<DeleteTermCommentCommand, TermCommentsEntity>();
+        CreateMap<DeleteTermCommentCommand, FarmCommentsEntity>();
     
     }
 }

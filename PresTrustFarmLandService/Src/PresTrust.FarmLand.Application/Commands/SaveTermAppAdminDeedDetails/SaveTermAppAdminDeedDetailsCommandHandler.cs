@@ -43,7 +43,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.TERM_ADMIN_DEED_DETAILS);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, TermAppSectionEnum.ADMIN_DEED_DETAILS);
             await repoBrokenRules.SaveBrokenRules(brokenRules);
             reqDeedDetails = await repotermAppAdminDeedDetails.SaveAsync(reqDeedDetails);
             reqDeedDetails.LastUpdatedBy = userContext.Email;
@@ -54,16 +54,16 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
         return reqDeedDetails.Id;
     }
 
-    private async Task <List<TermBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application, TermAppAdminDeedDetailsEntity reqDeedDetails)
+    private async Task <List<FarmBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application, TermAppAdminDeedDetailsEntity reqDeedDetails)
     {
-        int sectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DEED_DETAILS;
-        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
-        if (application.Status == ApplicationStatusEnum.PETITION_APPROVED)
+        int sectionId = (int)TermAppSectionEnum.ADMIN_DEED_DETAILS;
+        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
+        if (application.Status == TermAppStatusEnum.PETITION_APPROVED)
         {
             if (string.IsNullOrEmpty(reqDeedDetails.NOTBlock))
             {
 
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -75,7 +75,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
             if (string.IsNullOrEmpty(reqDeedDetails.NOTLot))
             {
 
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -87,7 +87,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
             if (string.IsNullOrEmpty(reqDeedDetails.NOTBook))
             {
 
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -99,7 +99,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
             if (string.IsNullOrEmpty(reqDeedDetails.NOTPage))
             {
 
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -111,7 +111,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
             if (string.IsNullOrEmpty(reqDeedDetails.RDBlock))
             {
 
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -123,7 +123,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
             if (string.IsNullOrEmpty(reqDeedDetails.RDLot))
             {
 
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -135,7 +135,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
             if (string.IsNullOrEmpty(reqDeedDetails.RDBook))
             {
 
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
@@ -147,7 +147,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
             if (string.IsNullOrEmpty(reqDeedDetails.RDPage))
             {
 
-                brokenRules.Add(new TermBrokenRuleEntity()
+                brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,

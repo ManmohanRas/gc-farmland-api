@@ -1,7 +1,7 @@
 namespace PresTrust.FarmLand.API.Controllers.v1;
 
 [Authorize()]
-//[Route("api/v1/farm")]
+[Route("api/v1/farm")]
 [ApiController]
 public class FarmController : ApiBaseController
 {
@@ -16,8 +16,8 @@ public class FarmController : ApiBaseController
     }
 
     [HttpPost("getApplicationDetails")]
-    [ProducesResponseType(typeof(GetApplicationDetailsQueryViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetApplicationDetailsQueryViewModel>> GetApplications([FromBody] GetApplicationDetailsQuery query)
+    [ProducesResponseType(typeof(GetTermApplicationDetailsQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetTermApplicationDetailsQueryViewModel>> GetApplications([FromBody] GetTermApplicationDetailsQuery query)
     {
         return Single(await QueryAsync(query));
     }
@@ -56,18 +56,6 @@ public class FarmController : ApiBaseController
         return Single(await CommandAsync(command));
     }
 
-    [HttpPost("getFarmList")]
-    [ProducesResponseType(typeof(IEnumerable<GetFarmListQueryViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<GetFarmListQueryViewModel>>> GetFarmList([FromBody] GetFarmListQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
-    [HttpPost("getTermFeedbacks")]
-    [ProducesResponseType(typeof(IEnumerable<GetTermFeedbacksQueryViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<GetTermFeedbacksQueryViewModel>>> getTermFeedbacks([FromBody] GetTermFeedbacksQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
 
     [HttpPost("getOwnerDetails")]
     [ProducesResponseType(typeof(GetOwnerDetailsQueryViewModel), (int)HttpStatusCode.OK)]
@@ -90,16 +78,23 @@ public class FarmController : ApiBaseController
         return Single(await CommandAsync(command));
     }
 
-    [HttpPost("saveTermFeedback")]
+    [HttpPost("getFeedbacks")]
+    [ProducesResponseType(typeof(IEnumerable<GetFeedbacksQueryViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<GetFeedbacksQueryViewModel>>> getFeedbacks([FromBody] GetFeedbacksQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveFeedback")]
     [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> SaveApplicationFeedback([FromBody] SaveTermFeedbackCommand command)
+    public async Task<ActionResult<int>> SaveApplicationFeedback([FromBody] SaveFeedbackCommand command)
     {
         return Single(await CommandAsync(command));
     }
 
-    [HttpPost("markTermFeedbacksAsRead")]
+    [HttpPost("markFeedbacksAsRead")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<bool>> MarkApplicationFeedbacksAsRead([FromBody] MarkTermFeedbacksAsReadCommand command)
+    public async Task<ActionResult<bool>> MarkApplicationFeedbacksAsRead([FromBody] MarkFeedbacksAsReadCommand command)
     {
         return Single(await CommandAsync(command));
     }
@@ -195,11 +190,28 @@ public class FarmController : ApiBaseController
         return Single(await CommandAsync(query));
     }
 
-    [HttpPost("getTermComments")]
-    [ProducesResponseType(typeof(IEnumerable<GetTermCommentsQueryViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<GetTermCommentsQueryViewModel>>> getTermComments([FromBody] GetTermCommentsQuery query)
+    [HttpPost("getComments")]
+    [ProducesResponseType(typeof(IEnumerable<GetCommentsQueryViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<GetCommentsQueryViewModel>>> getComments([FromBody] GetCommentsQuery query)
     {
         return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveComment")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<int>> saveComment([FromBody] SaveTermCommentCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("deleteComment")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<bool>> deleteComment([FromBody] DeleteTermCommentCommand command)
+    {
+        return Single(await CommandAsync(command));
+
     }
 
     /// <summary>
@@ -229,13 +241,7 @@ public class FarmController : ApiBaseController
         return Single(await CommandAsync(command));
     }
 
-    [HttpPost("saveTermComment")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-
-    public async Task<ActionResult<int>> saveTermComment([FromBody] SaveTermCommentCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
+    
 
     [HttpPost("saveApplicationDocumentChecklist")]
     [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
@@ -243,24 +249,6 @@ public class FarmController : ApiBaseController
     public async Task<ActionResult<Unit>> SaveApplicationDocumentChecklist([FromBody] SaveTermAppDocumentChecklistCommand command)
     {
         return Single(await CommandAsync(command));
-    }
-
-    [HttpPost("deleteTermComment")]
-    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-
-    public async Task<ActionResult<bool>> deleteTermComment([FromBody] DeleteTermCommentCommand command)
-    {
-        return Single(await CommandAsync(command));
-
-    }
-
-    
-
-    [HttpPost("requestApplication")]
-    [ProducesResponseType(typeof(RequestApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<RequestApplicationCommandViewModel>> RequestApplication([FromBody] RequestApplicationCommand query)
-    {
-        return Single(await CommandAsync(query));
     }
 
 
@@ -311,42 +299,6 @@ public class FarmController : ApiBaseController
         return Single(await QueryAsync(query));
     }
 
-    [HttpPost("approveApplication")]
-    [ProducesResponseType(typeof(ApproveApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<ApproveApplicationCommandViewModel>> ApproveApplication([FromBody] ApproveApplicationCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
-
-    [HttpPost("rejectApplication")]
-    [ProducesResponseType(typeof(RejectApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<Unit>> rejectApplication([FromBody] RejectApplicationCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
-    [HttpPost("withdrawApplication")]
-    [ProducesResponseType(typeof(WithdrawApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<Unit>> WithdrawApplication([FromBody] WithdrawApplicationCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
-    [HttpPost("approveAggrement")]
-    [ProducesResponseType(typeof(ApproveAggrementCommandViewmodel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<ApproveAggrementCommandViewmodel>> ApproveAggrement([FromBody] ApproveAggrementCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
-    [HttpPost("activeApplication")]
-    [ProducesResponseType(typeof(ActiveApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<ActiveApplicationCommandViewModel>> ActiveApplication([FromBody] ActiveApplicationCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
     [HttpPost("getApplicationSignatoryDetails")]
     [ProducesResponseType(typeof(GetTermAppSignatoryQueryViewModel), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<GetTermAppSignatoryQueryViewModel>> GetApplicationSignatoryDetails([FromBody] GetTermAppSignatoryQuery query)
@@ -357,20 +309,6 @@ public class FarmController : ApiBaseController
     [HttpPost("saveApplicationSignatoryDetails")]
     [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<int>> SaveApplicationSignatoryDetails([FromBody] SaveTermAppSignatoryCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
-    [HttpPost("expireApplication")]
-    [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<Unit>> expireApplication([FromBody] ExpireApplicationCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
-    [HttpPost("enableSADC")]
-    [ProducesResponseType(typeof(EnableSadcCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<Unit>> EnableSADC([FromBody] EnableSadcCommand command)
     {
         return Single(await CommandAsync(command));
     }
@@ -394,6 +332,13 @@ public class FarmController : ApiBaseController
     public async Task<ActionResult<bool>> DeleteContact([FromBody] DeleteTermAppAdminContactsCommand command)
     {
         return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("getFarmList")]
+    [ProducesResponseType(typeof(IEnumerable<GetFarmListQueryViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<GetFarmListQueryViewModel>>> GetFarmList([FromBody] GetFarmListQuery query)
+    {
+        return Single(await QueryAsync(query));
     }
 
     [HttpPost("saveFarmList")]
@@ -462,6 +407,65 @@ public class FarmController : ApiBaseController
     [HttpPost("deleteBlockLot")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<bool>> DeleteBlockLot([FromBody] DeleteBlockLotCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    //TERM WORK FLOWS
+
+    [HttpPost("requestApplication")]
+    [ProducesResponseType(typeof(RequestApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<RequestApplicationCommandViewModel>> RequestApplication([FromBody] RequestApplicationCommand query)
+    {
+        return Single(await CommandAsync(query));
+    }
+
+    [HttpPost("approveApplication")]
+    [ProducesResponseType(typeof(ApproveApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<ApproveApplicationCommandViewModel>> ApproveApplication([FromBody] ApproveApplicationCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+
+    [HttpPost("rejectApplication")]
+    [ProducesResponseType(typeof(RejectApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Unit>> rejectApplication([FromBody] RejectApplicationCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("withdrawApplication")]
+    [ProducesResponseType(typeof(WithdrawApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Unit>> WithdrawApplication([FromBody] WithdrawApplicationCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("approveAggrement")]
+    [ProducesResponseType(typeof(ApproveAggrementCommandViewmodel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<ApproveAggrementCommandViewmodel>> ApproveAggrement([FromBody] ApproveAggrementCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("activeApplication")]
+    [ProducesResponseType(typeof(ActiveApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<ActiveApplicationCommandViewModel>> ActiveApplication([FromBody] ActiveApplicationCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("expireApplication")]
+    [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Unit>> expireApplication([FromBody] ExpireApplicationCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("enableSADC")]
+    [ProducesResponseType(typeof(EnableSadcCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Unit>> EnableSADC([FromBody] EnableSadcCommand command)
     {
         return Single(await CommandAsync(command));
     }

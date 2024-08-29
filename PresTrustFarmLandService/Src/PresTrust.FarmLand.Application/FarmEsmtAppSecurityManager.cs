@@ -3,28 +3,35 @@
 public class FarmEsmtAppSecurityManager
 {
     private UserRoleEnum userRole = default;
-    private ApplicationStatusEnum applicationStatus = default;
+    private EsmtAppStatusEnum applicationStatus = default;
     private ApplicationTypeEnum applicationTypeEnum = default;
-    private TermAppPermissionEntity permission = default;
+    private EsmtAppPermissionEntity permission = default;
     private List<NavigationItemEntity> navigationItems = default;
     private List<NavigationItemEntity> adminNavigationItems = default;
     private List<NavigationItemEntity> postApprovedNavigationItems = default;
     private NavigationItemEntity defaultNavigationItem = default;
-    private List<TermFeedbacksEntity> corrections = new List<TermFeedbacksEntity>();
-    public FarmEsmtAppSecurityManager(UserRoleEnum userRole, ApplicationStatusEnum applicationStatus, List<TermFeedbacksEntity> corrections = null)
+    private List<FarmFeedbacksEntity> corrections = new List<FarmFeedbacksEntity>();
+    public FarmEsmtAppSecurityManager(UserRoleEnum userRole, EsmtAppStatusEnum applicationStatus, List<FarmFeedbacksEntity> corrections = null)
     {
         this.userRole = userRole;
         this.applicationStatus = applicationStatus;
-        this.corrections = corrections ?? new List<TermFeedbacksEntity>();
+        this.corrections = corrections ?? new List<FarmFeedbacksEntity>();
 
         ConfigurePermissions();
     }
 
+    public EsmtAppPermissionEntity Permission { get { return permission; } }
+    public List<NavigationItemEntity> NavigationItems { get => navigationItems; }
+    public List<NavigationItemEntity> AdminNavigationItems { get => adminNavigationItems; }
+    public List<NavigationItemEntity> PostApprovedNavigationItems { get => postApprovedNavigationItems; }
+    public NavigationItemEntity DefaultNavigationItem { get => defaultNavigationItem; }
+
     public void ConfigurePermissions()
     {
+        this.DeriveDraftStatePermissions();
     }
 
-    private void DeriveEasementDraftStatePermissions()
+    private void DeriveDraftStatePermissions()
     {
         switch (userRole)
         {

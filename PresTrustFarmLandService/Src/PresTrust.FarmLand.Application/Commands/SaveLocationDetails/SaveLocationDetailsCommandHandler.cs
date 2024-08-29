@@ -55,7 +55,7 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
             var brokenRules = await ReturnBrokenRulesIfAny(application);
 
 
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, ApplicationSectionEnum.TERM_LOCATION);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, TermAppSectionEnum.LOCATION);
             await repoBrokenRules.SaveBrokenRules(brokenRules);
             scope.Complete();
 
@@ -64,17 +64,17 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
         return Unit.Value;
     }
 
-    private async Task<List<TermBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    private async Task<List<FarmBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
     {
-        int sectionId = (int)ApplicationSectionEnum.TERM_LOCATION;
-        List<TermBrokenRuleEntity> brokenRules = new List<TermBrokenRuleEntity>();
+        int sectionId = (int)TermAppSectionEnum.LOCATION;
+        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 
         var getLocationBlockLots = await repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId);
 
 
         if (getLocationBlockLots.Where(x => x.IsChecked).Count() == 0)
         {
-            brokenRules.Add(new TermBrokenRuleEntity()
+            brokenRules.Add(new FarmBrokenRuleEntity()
             {
                 ApplicationId = application.Id,
                 SectionId = sectionId,

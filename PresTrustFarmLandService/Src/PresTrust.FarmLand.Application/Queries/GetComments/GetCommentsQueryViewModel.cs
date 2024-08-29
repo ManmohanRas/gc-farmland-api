@@ -1,0 +1,10 @@
+﻿namespace PresTrust.FarmLand.Application.Queries;
+
+public class GetCommentsQueryViewModel
+{
+    public int Id { get; set; } = 0;
+    public int ApplicationId { get; set; } = 0;
+    public string Comment { get; set; } = "";
+    public int CommentTypeId { get; set; } = 0;
+    public bool MarkRead { get; set; } = false;
+}

@@ -24,7 +24,7 @@ public class BaseHandler
         return application;
     }
 
-    public void IsAuthorizedOperation(UserRoleEnum userRole, FarmApplicationEntity application, UserPermissionEnum operation, List<TermFeedbacksEntity> corrections = null)
+    public void IsAuthorizedOperation(UserRoleEnum userRole, FarmApplicationEntity application, TermUserPermissionEnum operation, List<FarmFeedbacksEntity> corrections = null)
     {
         var securityMgr = new FarmApplicationSecurityManager(userRole, application.Status, application.ApplicationType);
         permission = securityMgr.Permission;
@@ -33,58 +33,58 @@ public class BaseHandler
         VerifyIfOperationIsValidToPerform(operation, application.Status);
     }
 
-    private void VerifyUserAuthorization(UserPermissionEnum enumPermission, UserRoleEnum userRole)
+    private void VerifyUserAuthorization(TermUserPermissionEnum enumPermission, UserRoleEnum userRole)
     {
         bool authorized = default;
 
         switch (enumPermission)
         {
-            case UserPermissionEnum.CREATE_APPLICATION:
+            case TermUserPermissionEnum.CREATE_APPLICATION:
                 authorized = permission.CanCreateApplication;
                 break;
         }
     }
 
-    private void VerifyIfOperationIsValidToPerform(UserPermissionEnum enumPermission, ApplicationStatusEnum applicationStatus)
+    private void VerifyIfOperationIsValidToPerform(TermUserPermissionEnum enumPermission, TermAppStatusEnum applicationStatus)
     {
         bool isValidOperation = false;
 
         switch (applicationStatus)
         {
-            case ApplicationStatusEnum.NONE:
-                if (enumPermission == UserPermissionEnum.CREATE_APPLICATION)
+            case TermAppStatusEnum.NONE:
+                if (enumPermission == TermUserPermissionEnum.CREATE_APPLICATION)
                     isValidOperation = true;
                 break;
-            case ApplicationStatusEnum.PETITION_DRAFT:
+            case TermAppStatusEnum.PETITION_DRAFT:
                 isValidOperation = DraftStatePermission(enumPermission);
                 break;
         }
         }
 
-    private bool DraftStatePermission(UserPermissionEnum enumPermission)
+    private bool DraftStatePermission(TermUserPermissionEnum enumPermission)
     {
         bool flag = false;
 
         switch (enumPermission)
         {
-            case UserPermissionEnum.EDIT_LOCATION_SECTION:
-            case UserPermissionEnum.EDIT_ROLES_SECTION:
-            case UserPermissionEnum.EDIT_OWNER_DETAILS_SECTION:
-            case UserPermissionEnum.EDIT_SITE_CHARACTERISTICS_SECTION:
-            case UserPermissionEnum.EDIT_SIGNATORY_SECTION:
-            case UserPermissionEnum.EDIT_OTHER_DOCS_SECTION:
+            case TermUserPermissionEnum.EDIT_LOCATION_SECTION:
+            case TermUserPermissionEnum.EDIT_ROLES_SECTION:
+            case TermUserPermissionEnum.EDIT_OWNER_DETAILS_SECTION:
+            case TermUserPermissionEnum.EDIT_SITE_CHARACTERISTICS_SECTION:
+            case TermUserPermissionEnum.EDIT_SIGNATORY_SECTION:
+            case TermUserPermissionEnum.EDIT_OTHER_DOCS_SECTION:
 
-            case UserPermissionEnum.SUBMIT_APPLICATION:
-            case UserPermissionEnum.WITHDRAW_APPLICATION:
+            case TermUserPermissionEnum.SUBMIT_APPLICATION:
+            case TermUserPermissionEnum.WITHDRAW_APPLICATION:
 
-            case UserPermissionEnum.EDIT_COMMENTS:
-            case UserPermissionEnum.DELETE_COMMENTS:
-            case UserPermissionEnum.EDIT_FEEDBACK:
-            case UserPermissionEnum.DELETE_FEEDBACKS:
-            case UserPermissionEnum.REQUEST_FOR_AN_APPLICATION_CORRECTION:
-            case UserPermissionEnum.RESPOND_TO_THE_REQUEST_FOR_AN_APPLICATION_CORRECTION:
-            case UserPermissionEnum.SAVE_DOCUMENT:
-            case UserPermissionEnum.DELETE_DOCUMENT:
+            case TermUserPermissionEnum.EDIT_COMMENTS:
+            case TermUserPermissionEnum.DELETE_COMMENTS:
+            case TermUserPermissionEnum.EDIT_FEEDBACK:
+            case TermUserPermissionEnum.DELETE_FEEDBACKS:
+            case TermUserPermissionEnum.REQUEST_FOR_AN_APPLICATION_CORRECTION:
+            case TermUserPermissionEnum.RESPOND_TO_THE_REQUEST_FOR_AN_APPLICATION_CORRECTION:
+            case TermUserPermissionEnum.SAVE_DOCUMENT:
+            case TermUserPermissionEnum.DELETE_DOCUMENT:
                 flag = true;
                 break;
             default:

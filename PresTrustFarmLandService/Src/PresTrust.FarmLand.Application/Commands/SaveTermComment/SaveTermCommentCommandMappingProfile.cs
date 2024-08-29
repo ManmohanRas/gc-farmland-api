@@ -4,6 +4,6 @@ public class SaveTermCommentCommandMappingProfile : Profile
 {
     public SaveTermCommentCommandMappingProfile() 
     {
-        CreateMap<SaveTermCommentCommand, TermCommentsEntity>();
+        CreateMap<SaveTermCommentCommand, FarmCommentsEntity>();
     }
 }

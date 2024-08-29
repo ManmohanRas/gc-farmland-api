@@ -30,12 +30,12 @@ public class TermFeedbacksRepository : ITermFeedbacksRepository
     /// <param name="applicationId"></param>
     /// <param name="correctionStatus"></param>
     /// <returns></returns>
-    public async Task<List<TermFeedbacksEntity>> GetFeedbacksAsync(int applicationId, string correctionStatus = "")
+    public async Task<List<FarmFeedbacksEntity>> GetFeedbacksAsync(int applicationId, string correctionStatus = "")
     {
-        List<TermFeedbacksEntity> results = default;
+        List<FarmFeedbacksEntity> results = default;
         using var conn = context.CreateConnection();
         var sqlCommand = new GetTermFeedbacksSqlCommand();
-        results = (await conn.QueryAsync<TermFeedbacksEntity>(sqlCommand.ToString(),
+        results = (await conn.QueryAsync<FarmFeedbacksEntity>(sqlCommand.ToString(),
                             commandType: CommandType.Text,
                             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
                             param: new { @p_ApplicationId = applicationId, @p_CorrectionStatus = correctionStatus })).ToList();
@@ -48,7 +48,7 @@ public class TermFeedbacksRepository : ITermFeedbacksRepository
     /// </summary>
     /// <param name="feedback"></param>
     /// <returns></returns>
-    public async Task<TermFeedbacksEntity> SaveAsync(TermFeedbacksEntity feedback)
+    public async Task<FarmFeedbacksEntity> SaveAsync(FarmFeedbacksEntity feedback)
     {
         if (feedback.Id > 0)
             return await UpdateAsync(feedback);
@@ -61,7 +61,7 @@ public class TermFeedbacksRepository : ITermFeedbacksRepository
     /// </summary>
     /// <param name="feedback"></param>
     /// <returns></returns>
-    private async Task<TermFeedbacksEntity> CreateAsync(TermFeedbacksEntity feedback)
+    private async Task<FarmFeedbacksEntity> CreateAsync(FarmFeedbacksEntity feedback)
     {
         int id = default;
 
@@ -91,7 +91,7 @@ public class TermFeedbacksRepository : ITermFeedbacksRepository
     /// </summary>
     /// <param name="feedback"></param>
     /// <returns></returns>
-    private async Task<TermFeedbacksEntity> UpdateAsync(TermFeedbacksEntity feedback)
+    private async Task<FarmFeedbacksEntity> UpdateAsync(FarmFeedbacksEntity feedback)
     {
         using var conn = context.CreateConnection();
         var sqlCommand = new UpdateTermFeedbackSqlCommand();

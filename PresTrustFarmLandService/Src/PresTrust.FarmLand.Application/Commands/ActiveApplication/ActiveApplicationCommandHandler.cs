@@ -68,7 +68,7 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
         //update application
         if (application != null)
         {
-            application.StatusId = (int)ApplicationStatusEnum.ACTIVE;
+            application.StatusId = (int)TermAppStatusEnum.ACTIVE;
             application.LastUpdatedBy = userContext.Email;
         }
 
@@ -77,7 +77,7 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
 
         if (brokenRules != null && brokenRules.Any())
         {
-            result.BrokenRules = mapper.Map<IEnumerable<TermBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
+            result.BrokenRules = mapper.Map<IEnumerable<FarmBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
             return result;
         }
 
@@ -87,7 +87,7 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
             await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
 
             // save broken rules
-            await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.ACTIVE);
+            await repoApplication.UpdateApplicationStatusAsync(application, TermAppStatusEnum.ACTIVE);
             FarmApplicationStatusLogEntity appStatusLog = new()
             {
                 ApplicationId = application.Id,
@@ -120,14 +120,14 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
     /// <param name="request"></param>
     /// <param name="application"></param>
     /// <returns></returns>
-    private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
     {
-        List<TermBrokenRuleEntity> statusChangeRules = new List<TermBrokenRuleEntity>();
+        List<FarmBrokenRuleEntity> statusChangeRules = new List<FarmBrokenRuleEntity>();
 
-        statusChangeRules.Add(new TermBrokenRuleEntity()
+        statusChangeRules.Add(new FarmBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DETAILS,
+            SectionId = (int)TermAppSectionEnum.ADMIN_DETAILS,
             Message = "All required fields on ADMIN DETAILS tab have not been filled.",
         });
         return statusChangeRules;

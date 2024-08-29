@@ -19,8 +19,8 @@ public class CreateApplicationCommandViewModel
     public string Municipality { get; set; }
     public int FarmListId { get; set; }
     public string FarmName { get; set; }
-    public IEnumerable<TermCommentsEntity> Comments { get; set; }
-    public IEnumerable<TermFeedbacksEntity> Feedbacks { get; set; }
+    public IEnumerable<FarmCommentsEntity> Comments { get; set; }
+    public IEnumerable<FarmFeedbacksEntity> Feedbacks { get; set; }
     public TermAppPermissionEntity Permission { get; set; } = new TermAppPermissionEntity();
     public IEnumerable<NavigationItemEntity> NavigationItems { get; set; } = new List<NavigationItemEntity>();
     public IEnumerable<NavigationItemEntity> AdminNavigationItems { get; set; } = new List<NavigationItemEntity>();

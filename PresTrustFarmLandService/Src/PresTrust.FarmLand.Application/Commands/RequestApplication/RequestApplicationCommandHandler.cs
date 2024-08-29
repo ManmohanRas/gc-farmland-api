@@ -51,7 +51,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
         //update application
         if (application != null)
         {
-            application.StatusId = (int)ApplicationStatusEnum.PETITION_REQUEST;
+            application.StatusId = (int)TermAppStatusEnum.PETITION_REQUEST;
             application.LastUpdatedBy = userContext.Email;
         }
 
@@ -60,7 +60,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
 
      
 
-        var otherdocRules = await CheckApplicationOtherDocs(application.Id, application.Status, (int)ApplicationSectionEnum.TERM_OTHER_DOCUMENTS);
+        var otherdocRules = await CheckApplicationOtherDocs(application.Id, application.Status, (int)TermAppSectionEnum.OTHER_DOCUMENTS);
         if (otherdocRules.Count > 0)
         {
             brokenRules.AddRange(otherdocRules);
@@ -68,7 +68,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
 
         if (brokenRules != null && brokenRules.Any())
         {
-            result.BrokenRules = mapper.Map<IEnumerable<TermBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
+            result.BrokenRules = mapper.Map<IEnumerable<FarmBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
             return result;
         }
 
@@ -79,7 +79,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
             var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
             // save broken rules
             await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
-            await repoApplication.UpdateApplicationStatusAsync(application, ApplicationStatusEnum.PETITION_REQUEST);
+            await repoApplication.UpdateApplicationStatusAsync(application, TermAppStatusEnum.PETITION_REQUEST);
             FarmApplicationStatusLogEntity appStatusLog = new()
             {
                 ApplicationId = application.Id,
@@ -104,40 +104,40 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
     {
         // security
         userContext.DeriveRole(application.AgencyId);
-        IsAuthorizedOperation(userRole: userContext.Role, application: application, operation: UserPermissionEnum.SUBMIT_APPLICATION);
+        IsAuthorizedOperation(userRole: userContext.Role, application: application, operation: TermUserPermissionEnum.SUBMIT_APPLICATION);
     }
-    private async Task<List<TermBrokenRuleEntity>> CheckApplicationOtherDocs(int applicationId, ApplicationStatusEnum applicationStatus, int sectionId)
+    private async Task<List<FarmBrokenRuleEntity>> CheckApplicationOtherDocs(int applicationId, TermAppStatusEnum applicationStatus, int sectionId)
     {
 
         var documents = await repoOtherDocs.GetTermDocumentsAsync(applicationId, sectionId);
 
-        List<TermBrokenRuleEntity> otherdocRules = new List<TermBrokenRuleEntity>();
-        if (applicationStatus == ApplicationStatusEnum.PETITION_REQUEST)
+        List<FarmBrokenRuleEntity> otherdocRules = new List<FarmBrokenRuleEntity>();
+        if (applicationStatus == TermAppStatusEnum.PETITION_REQUEST)
         {
             if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.CADB_PETITION).Count() == 0)
             {
-                otherdocRules.Add(new TermBrokenRuleEntity()
+                otherdocRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = applicationId,
-                    SectionId = (int)ApplicationSectionEnum.TERM_OTHER_DOCUMENTS,
+                    SectionId = (int)TermAppSectionEnum.OTHER_DOCUMENTS,
                     Message = "CADB_PETITION document is not uploaded in OtherDocuments Tab"
                 });
             }
             if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.DEED).Count() == 0)
             {
-                otherdocRules.Add(new TermBrokenRuleEntity()
+                otherdocRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = applicationId,
-                    SectionId = (int)ApplicationSectionEnum.TERM_OTHER_DOCUMENTS,
+                    SectionId = (int)TermAppSectionEnum.OTHER_DOCUMENTS,
                     Message = "DEED document is not uploaded in OtherDocuments Tab"
                 });
             }
             if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.TAX_MAP).Count() == 0)
             {
-                otherdocRules.Add(new TermBrokenRuleEntity()
+                otherdocRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = applicationId,
-                    SectionId = (int)ApplicationSectionEnum.TERM_OTHER_DOCUMENTS,
+                    SectionId = (int)TermAppSectionEnum.OTHER_DOCUMENTS,
                     Message = "TAX_MAP document is not uploaded in OtherDocuments Tab"
                 });
             }
@@ -151,15 +151,15 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
     /// <param name="request"></param>
     /// <param name="application"></param>
     /// <returns></returns>
-    private List<TermBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
     {
-        List<TermBrokenRuleEntity> statusChangeRules = new List<TermBrokenRuleEntity>();
+        List<FarmBrokenRuleEntity> statusChangeRules = new List<FarmBrokenRuleEntity>();
 
         // add default broken rule while initiating application flow
-        statusChangeRules.Add(new TermBrokenRuleEntity()
+        statusChangeRules.Add(new FarmBrokenRuleEntity()
         {
             ApplicationId = application.Id,
-            SectionId = (int)ApplicationSectionEnum.TERM_ADMIN_DETAILS,
+            SectionId = (int)TermAppSectionEnum.ADMIN_DETAILS,
             Message = "All required fields on ADMIN_DETAILS tab have not been filled.",
 
         });
