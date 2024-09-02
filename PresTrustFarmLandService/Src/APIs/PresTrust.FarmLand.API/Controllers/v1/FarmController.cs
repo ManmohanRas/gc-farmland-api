@@ -15,12 +15,6 @@ public class FarmController : ApiBaseController
         return Single(await QueryAsync(query));
     }
 
-    [HttpPost("getApplicationDetails")]
-    [ProducesResponseType(typeof(GetTermApplicationDetailsQueryViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetTermApplicationDetailsQueryViewModel>> GetApplications([FromBody] GetTermApplicationDetailsQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
 
     [HttpPost("getApplicationStatusLog")]
     [ProducesResponseType(typeof(IEnumerable<GetApplicationStatusLogQueryViewModel>), (int)HttpStatusCode.OK)]
@@ -100,14 +94,14 @@ public class FarmController : ApiBaseController
     }
 
 
-    [HttpPost("requestForApplicationCorrectionTerm")]
+    [HttpPost("requestForApplicationCorrection")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<bool>> RequestForApplicationCorrectionCommand([FromBody] RequestForApplicationCorrectionCommand command)
     {
         return Single(await CommandAsync(command));
     }
 
-    [HttpPost("responseToRequestForApplicationCorrectionTerm")]
+    [HttpPost("responseToRequestForApplicationCorrection")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<bool>> ResponseToRequestForApplicationCorrectionCommand([FromBody] ResponseToRequestForApplicationCorrectionCommand command)
     {
@@ -200,7 +194,7 @@ public class FarmController : ApiBaseController
     [HttpPost("saveComment")]
     [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
 
-    public async Task<ActionResult<int>> saveComment([FromBody] SaveTermCommentCommand command)
+    public async Task<ActionResult<int>> saveComment([FromBody] SaveCommentCommand command)
     {
         return Single(await CommandAsync(command));
     }
@@ -208,7 +202,7 @@ public class FarmController : ApiBaseController
     [HttpPost("deleteComment")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
 
-    public async Task<ActionResult<bool>> deleteComment([FromBody] DeleteTermCommentCommand command)
+    public async Task<ActionResult<bool>> deleteComment([FromBody] DeleteCommentCommand command)
     {
         return Single(await CommandAsync(command));
 
@@ -246,36 +240,36 @@ public class FarmController : ApiBaseController
     [HttpPost("saveApplicationDocumentChecklist")]
     [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
 
-    public async Task<ActionResult<Unit>> SaveApplicationDocumentChecklist([FromBody] SaveTermAppDocumentChecklistCommand command)
+    public async Task<ActionResult<Unit>> SaveApplicationDocumentChecklist([FromBody] SaveAppDocumentChecklistCommand command)
     {
         return Single(await CommandAsync(command));
     }
 
 
-    [HttpPost("getTermDocuments")]
-    [ProducesResponseType(typeof(IEnumerable<TermDocumentTypeViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<TermDocumentTypeViewModel>>> GetTermDocuments([FromBody] GetTermDocumentsBySectionQuery query)
+    [HttpPost("getDocuments")]
+    [ProducesResponseType(typeof(IEnumerable<DocumentTypeViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<DocumentTypeViewModel>>> GetDocuments([FromBody] GetDocumentsBySectionQuery query)
     {
         return Single(await QueryAsync(query));
     }
 
     [HttpPost("getApplicationDocumentChecklist")]
-    [ProducesResponseType(typeof(IEnumerable<TermDocumentChecklistViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<TermDocumentChecklistViewModel>>> getApplicationDocumentChecklist([FromBody] GetTermDocumentChecklistQuery query)
+    [ProducesResponseType(typeof(IEnumerable<DocumentChecklistViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<DocumentChecklistViewModel>>> getApplicationDocumentChecklist([FromBody] GetDocumentChecklistQuery query)
     {
         return Single(await QueryAsync(query));
     }
 
-    [HttpPost("saveTermDocument")]
-    [ProducesResponseType(typeof(SaveTermAppDocumentCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<SaveTermAppDocumentCommandViewModel>> SaveTermDocument([FromBody] SaveTermAppDocumentCommand command)
+    [HttpPost("saveDocument")]
+    [ProducesResponseType(typeof(SaveAppDocumentCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<SaveAppDocumentCommandViewModel>> SaveDocument([FromBody] SaveAppDocumentCommand command)
     {
         return Single(await CommandAsync(command));
     }
 
-    [HttpPost("deleteTermDocument")]
+    [HttpPost("deleteDocument")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<bool>> DeleteTermDocument([FromBody] DeleteTermAppDocumentCommand command)
+    public async Task<ActionResult<bool>> DeleteDocument([FromBody] DeleteAppDocumentCommand command)
     {
         return Single(await CommandAsync(command));
     }
@@ -284,8 +278,8 @@ public class FarmController : ApiBaseController
 
 
     [HttpPost("getBrokenRules")]
-    [ProducesResponseType(typeof(IEnumerable<GetTermBrokenRulesQueryViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<GetTermBrokenRulesQueryViewModel>>> GetTermBrokenRules([FromBody] GetTermBrokenRulesQuery query)
+    [ProducesResponseType(typeof(IEnumerable<GetBrokenRulesQueryViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<GetBrokenRulesQueryViewModel>>> GetBrokenRules([FromBody] GetBrokenRulesQuery query)
     {
         return Single(await QueryAsync(query));
     }
@@ -299,30 +293,16 @@ public class FarmController : ApiBaseController
         return Single(await QueryAsync(query));
     }
 
-    [HttpPost("getApplicationSignatoryDetails")]
-    [ProducesResponseType(typeof(GetTermAppSignatoryQueryViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetTermAppSignatoryQueryViewModel>> GetApplicationSignatoryDetails([FromBody] GetTermAppSignatoryQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
-
-    [HttpPost("saveApplicationSignatoryDetails")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> SaveApplicationSignatoryDetails([FromBody] SaveTermAppSignatoryCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
     [HttpPost("getContacts")]
-    [ProducesResponseType(typeof(IEnumerable<GetTermAppAdminContactsQueryViewModel>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<GetTermAppAdminContactsQueryViewModel>>> GetContacts([FromBody] GetTermAppAdminContactsQuery query)
+    [ProducesResponseType(typeof(IEnumerable<GetAppAdminContactsQueryViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<GetAppAdminContactsQueryViewModel>>> GetContacts([FromBody] GetAppAdminContactsQuery query)
     {
         return Single(await QueryAsync(query));
     }
 
     [HttpPost("saveContacts")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<bool>> SaveContacts([FromBody] SaveTermAppAdminContactsCommand command)
+    public async Task<ActionResult<bool>> SaveContacts([FromBody] SaveAppAdminContactsCommand command)
     {
         return Single(await CommandAsync(command));
     }
@@ -362,23 +342,10 @@ public class FarmController : ApiBaseController
         return Single(await CommandAsync(command));
     }
 
-    [HttpPost("getTermAdminDeedDetails")]
-    [ProducesResponseType(typeof(GetTermAppAdminDeedDetailsQueryViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetTermAppAdminDeedDetailsQueryViewModel>> GetTermAdminDeedDetails([FromBody] GetTermAppAdminDeedDetailsQuery query)
-    {
-        return Single(await QueryAsync(query));
-    }
 
-    [HttpPost("saveTermAppAdminDeedDetails")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> SaveTermAppAdminDeedDetails([FromBody] SaveTermAppAdminDeedDetailsCommand command)
-    {
-        return Single(await CommandAsync(command));
-    }
-
-    [HttpPost("getTermLocationDetails")]
+    [HttpPost("getLocationDetails")]
     [ProducesResponseType(typeof(GetLocationDetailsQueryViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetLocationDetailsQueryViewModel>> GetTermLocationDetails([FromBody] GetLocationDetailsQuery query)
+    public async Task<ActionResult<GetLocationDetailsQueryViewModel>> GetLocationDetails([FromBody] GetLocationDetailsQuery query)
     {
         return Single(await QueryAsync(query));
     }

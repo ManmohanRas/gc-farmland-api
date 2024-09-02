@@ -15,5 +15,5 @@ public class GetTermAdminDetailsQueryViewModel
     public string   Comment                 { get; set; }
     public string    LastUpdatedBy          { get; set; }
     public DateTime? LastUpdatedOn          { get; set; }
-    public List<TermDocumentTypeViewModel> DocumentsTree { get; set; } = new List<TermDocumentTypeViewModel>();
+    public List<DocumentTypeViewModel> DocumentsTree { get; set; } = new List<DocumentTypeViewModel>();
 }               

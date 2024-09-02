@@ -4,7 +4,7 @@ public class GetTermAppAdminDeedDetailsQueryViewModel
 {
 
     public int ApplicationId { get; set; }
-    public List<TermDocumentTypeViewModel> DocumentsTree { get; set; } = new List<TermDocumentTypeViewModel>();
+    public List<DocumentTypeViewModel> DocumentsTree { get; set; } = new List<DocumentTypeViewModel>();
     public IEnumerable<TermAppAdminDeedDetailsViewModel> DeedDetails { get; set; }
 }
 public class TermAppAdminDeedDetailsViewModel

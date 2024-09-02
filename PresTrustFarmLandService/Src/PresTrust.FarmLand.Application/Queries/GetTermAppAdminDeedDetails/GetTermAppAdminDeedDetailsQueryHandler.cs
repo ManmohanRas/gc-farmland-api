@@ -51,16 +51,16 @@ public class GetTermAppAdminDeedDetailsQueryHandler :BaseHandler, IRequestHandle
         result.DeedDetails = mapper.Map<IEnumerable<TermAppAdminDeedDetailsEntity>, IEnumerable<TermAppAdminDeedDetailsViewModel>>(deeddetails);
 
         var documents = await GetDocuments(request.ApplicationId);
-        result.DocumentsTree = documents ?? new List<TermDocumentTypeViewModel>();
+        result.DocumentsTree = documents ?? new List<DocumentTypeViewModel>();
 
         return result;
     }
 
-    private async Task<List<TermDocumentTypeViewModel>> GetDocuments(int applicationId)
+    private async Task<List<DocumentTypeViewModel>> GetDocuments(int applicationId)
     {
         var documents = await repoOtherDocument.GetTermDocumentsAsync(applicationId, (int)TermAppSectionEnum.ADMIN_DEED_DETAILS);
 
-        List<TermDocumentTypeViewModel> documentsTree = new List<TermDocumentTypeViewModel>();
+        List<DocumentTypeViewModel> documentsTree = new List<DocumentTypeViewModel>();
         if (documents != null)
         {
             var docBuilder = new ApplicationDocumentTreeBuilder(documents);

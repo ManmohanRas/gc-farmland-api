@@ -7,11 +7,11 @@ public class ApplicationDocumentTreeBuilder
 {
     #region " Members ... "
 
-    private List<TermDocumentTypeViewModel> documentsTree = default;
+    private List<DocumentTypeViewModel> documentsTree = default;
     private IEnumerable<TermOtherDocumentsEntity> documents = default;
     private MapperConfiguration _autoMapperConfig;
 
-    public List<TermDocumentChecklistViewModel> documentChecklistItems = new();
+    public List<DocumentChecklistViewModel> documentChecklistItems = new();
 
     #endregion
 
@@ -25,7 +25,7 @@ public class ApplicationDocumentTreeBuilder
         this.documents = documents ?? Enumerable.Empty<TermOtherDocumentsEntity>();
         _autoMapperConfig = new MapperConfiguration(cfg =>
        {
-           cfg.CreateMap<TermOtherDocumentsEntity, TermDocumentsViewModel>()
+           cfg.CreateMap<TermOtherDocumentsEntity, DocumentsViewModel>()
             .ForMember(dest => dest.DocumentType, opt => opt.MapFrom(src => src.DocumentType.ToString()));
        });
 
@@ -42,7 +42,7 @@ public class ApplicationDocumentTreeBuilder
 
     #region " Public Properties ..."
 
-    public List<TermDocumentTypeViewModel> DocumentsTree { get => documentsTree; }
+    public List<DocumentTypeViewModel> DocumentsTree { get => documentsTree; }
 
     #endregion
 
@@ -51,7 +51,7 @@ public class ApplicationDocumentTreeBuilder
         if (!documents.Any())
             return;
 
-        documentsTree = new List<TermDocumentTypeViewModel>();
+        documentsTree = new List<DocumentTypeViewModel>();
         var mapper = _autoMapperConfig.CreateMapper();
 
         // Group the document types using DocumentType as the key value 
@@ -62,14 +62,14 @@ public class ApplicationDocumentTreeBuilder
         // Iterate over each IGrouping in the collection.
         foreach (IGrouping<string, TermOtherDocumentsEntity> docGroup in query)
         {
-            List<TermDocumentsViewModel> docs = new List<TermDocumentsViewModel>();
+            List<DocumentsViewModel> docs = new List<DocumentsViewModel>();
             foreach (var doc in docGroup)
             {
-                var vm = mapper.Map<TermOtherDocumentsEntity, TermDocumentsViewModel>(doc);
+                var vm = mapper.Map<TermOtherDocumentsEntity, DocumentsViewModel>(doc);
                 if (doc.Id > 0) docs.Add(vm);
             }
 
-            var vmDocType = new TermDocumentTypeViewModel()
+            var vmDocType = new DocumentTypeViewModel()
             {
                 DocumentType = docGroup.Key,
                 Documents = docs
@@ -85,13 +85,13 @@ public class ApplicationDocumentTreeBuilder
             return;
 
         var mapper = _autoMapperConfig.CreateMapper();
-        documentChecklistItems = documents.OrderBy(s => s.SectionId).GroupBy(s => s.Section).Select(s => new TermDocumentChecklistViewModel()
+        documentChecklistItems = documents.OrderBy(s => s.SectionId).GroupBy(s => s.Section).Select(s => new DocumentChecklistViewModel()
         {
             Section = SetSectionTitle(s.Key),
             DocumentChecklistDocTypeItems = s.GroupBy(d => d.DocumentType).Select(d =>
             {
                 var item = d.FirstOrDefault();
-                return new TermDocumentChecklistDocTypeViewModel()
+                return new DocumentChecklistDocTypeViewModel()
                 {
                     Id = item.Id,
                     ApplicationId = item.ApplicationId,
@@ -99,11 +99,11 @@ public class ApplicationDocumentTreeBuilder
                     DocumentType = item.DocumentType.ToString(),
                     Documents = d.Select(o =>
                     {
-                        return mapper.Map<TermOtherDocumentsEntity, TermDocumentsViewModel>(o);
-                    }).Where(o => o.Id > 0).ToList() ?? new List<TermDocumentsViewModel>()
+                        return mapper.Map<TermOtherDocumentsEntity, DocumentsViewModel>(o);
+                    }).Where(o => o.Id > 0).ToList() ?? new List<DocumentsViewModel>()
                 };
-            }).ToList() ?? new List<TermDocumentChecklistDocTypeViewModel>()
-        }).ToList() ?? new List<TermDocumentChecklistViewModel>();
+            }).ToList() ?? new List<DocumentChecklistDocTypeViewModel>()
+        }).ToList() ?? new List<DocumentChecklistViewModel>();
         if (documentChecklistItems.Count > 0)
             documentChecklistItems = documentChecklistItems.Where(o => !string.IsNullOrWhiteSpace(o.Section)).ToList();
 

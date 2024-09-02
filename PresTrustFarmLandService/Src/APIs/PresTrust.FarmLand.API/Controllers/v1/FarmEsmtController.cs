@@ -8,6 +8,13 @@ public class FarmEsmtController : FarmController
     {
     }
 
+    [HttpPost("getEsmtAppDetails")]
+    [ProducesResponseType(typeof(GetEsmtApplicationDetailsQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetEsmtApplicationDetailsQueryViewModel>> getTermAppDetails([FromBody] GetEsmtApplicationDetailsQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
     [HttpPost("getEsmtOwnerDetails")]
     [ProducesResponseType(typeof(GetEsmtOwnerDetailsQueryViewModel), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<GetEsmtOwnerDetailsQueryViewModel>> GetEsmtOwnerDetails([FromBody] GetEsmtOwnerDetailsQuery query)
@@ -22,18 +29,18 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
-    [HttpPost("getFarmEsmtExceptions")]
+    [HttpPost("getEsmtExceptions")]
     [ProducesResponseType(typeof(GetFarmEsmtExceptionsQueryViewModel), (int)HttpStatusCode.OK)]
 
-    public async Task<ActionResult<GetFarmEsmtExceptionsQueryViewModel>> getFarmEsmtExceptions([FromBody] GetFarmEsmtExceptionsQuery query)
+    public async Task<ActionResult<GetFarmEsmtExceptionsQueryViewModel>> getEsmtExceptions([FromBody] GetFarmEsmtExceptionsQuery query)
     {
         return Single(await QueryAsync(query));
     }
 
-    [HttpPost("saveFarmEsmtExceptions")]
+    [HttpPost("saveEsmtExceptions")]
     [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
 
-    public async Task<ActionResult<int>> saveFarmEsmtExceptions([FromBody] SaveFarmEsmtExceptionsCommand command)
+    public async Task<ActionResult<int>> saveEsmtExceptions([FromBody] SaveFarmEsmtExceptionsCommand command)
     {
         return Single(await CommandAsync(command));
     }

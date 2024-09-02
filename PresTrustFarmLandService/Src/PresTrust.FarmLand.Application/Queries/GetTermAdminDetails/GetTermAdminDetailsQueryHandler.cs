@@ -37,7 +37,7 @@ public class GetTermAdminDetailsQueryHandler : BaseHandler, IRequestHandler<GetT
         //get Admin details
         var admindetails = await this.repoTermAppAdminDetailsRepository.GetTermAppAdminDetailsAsync(request.ApplicationId);
         var result = mapper.Map<FarmTermAppAdminDetailsEntity, GetTermAdminDetailsQueryViewModel>(admindetails);
-        result.DocumentsTree = documents?? new List<TermDocumentTypeViewModel>() ;
+        result.DocumentsTree = documents?? new List<DocumentTypeViewModel>() ;
         
         return result;
 
@@ -48,11 +48,11 @@ public class GetTermAdminDetailsQueryHandler : BaseHandler, IRequestHandler<GetT
     /// </summary>
     /// <param name="applicationId"></param>
     /// <returns></returns>
-    private async Task<List<TermDocumentTypeViewModel>> GetDocuments(int applicationId)
+    private async Task<List<DocumentTypeViewModel>> GetDocuments(int applicationId)
     {
         var documents = await repoTermOtherDocumentsRepository.GetTermDocumentsAsync(applicationId, (int)TermAppSectionEnum.ADMIN_DETAILS);
 
-        List<TermDocumentTypeViewModel> documentsTree = new List<TermDocumentTypeViewModel>();
+        List<DocumentTypeViewModel> documentsTree = new List<DocumentTypeViewModel>();
         if (documents != null)
         {
             var docBuilder = new ApplicationDocumentTreeBuilder(documents);
