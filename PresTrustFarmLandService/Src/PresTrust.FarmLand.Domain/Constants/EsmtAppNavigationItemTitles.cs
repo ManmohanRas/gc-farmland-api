@@ -38,6 +38,11 @@ public partial class FarmLandDomainConstants
         public const string EXIS_NON_AGRI_USES = "Exis Non Agri Uses";
 
         /// <summary>
+        /// Constant to hold title for Agricultural use Production
+        /// </summary>
+        public const string AGRICULTURAL_USE_PRODUCTION = "Agricultural Use and Production";
+
+        /// <summary>
         /// Constant to hold title for Equine Uses
         /// </summary>
         public const string EQUINE_USES = "Equine Uses";

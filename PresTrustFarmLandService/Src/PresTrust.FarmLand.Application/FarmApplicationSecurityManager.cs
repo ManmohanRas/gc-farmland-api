@@ -1105,6 +1105,7 @@ public class FarmApplicationSecurityManager
                 Structures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Liens(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AgriculturalUseProduction(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 EquineUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -1134,6 +1135,7 @@ public class FarmApplicationSecurityManager
                 Structures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Liens(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AgriculturalUseProduction(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 EquineUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -1414,6 +1416,21 @@ public class FarmApplicationSecurityManager
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXIS_NON_AGRI_USES, RouterLink = EsmtAppRouterLinks.EXIS_NON_AGRI_USES_EDIT, SortOrder = 14, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void AgriculturalUseProduction(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.AGRICULTURAL_USE_PRODUCTION, RouterLink = EsmtAppRouterLinks.AGRICULTURAL_USE_PRODUCTION_VIEW, SortOrder = 15, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.AGRICULTURAL_USE_PRODUCTION, RouterLink = EsmtAppRouterLinks.AGRICULTURAL_USE_PRODUCTION_EDIT, SortOrder = 15, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
                 break;

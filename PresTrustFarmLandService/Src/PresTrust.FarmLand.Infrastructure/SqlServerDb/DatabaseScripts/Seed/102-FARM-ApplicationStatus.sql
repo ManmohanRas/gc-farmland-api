@@ -1,25 +1,39 @@
 DELETE FROM [Farm].[FarmApplicationStatus];
 
-INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (1,'PETITION_DRAFT',1);
+--TERM STATUS
+
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (101,'PETITION_DRAFT',1);
 GO
 
-INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (2,'PETITION_REQUEST',1);
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (102,'PETITION_REQUEST',1);
 GO
 
-INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (3,'PETITION_APPROVED',1);
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (103,'PETITION_APPROVED',1);
 GO
 
-INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (4,'AGREEMENT_APPROVED',1);
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (104,'AGREEMENT_APPROVED',1);
 GO
 
-INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (5,'ACTIVE',1);
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (105,'ACTIVE',1);
 GO
 
-INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (6,'EXPIRED',1);
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (106,'EXPIRED',1);
 GO
 
-INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (7,'REJECTED',1);
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (107,'REJECTED',1);
 GO
 
-INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (8,'WITHDRAWN',1);
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (108,'WITHDRAWN',1);
+GO
+
+
+--ESMT STATUS
+
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (201,'DRAFT_APPLICATION',2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (202,'APPLICATION_SUBMITTED',2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (203,'IN_REVIEW',2);
 GO

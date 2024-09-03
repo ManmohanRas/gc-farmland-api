@@ -36,7 +36,13 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
     public async Task<CreateApplicationCommandViewModel> Handle(CreateApplicationCommand request, CancellationToken cancellationToken)
     {
         var reqApplication = mapper.Map<CreateApplicationCommand, FarmApplicationEntity>(request);
-        reqApplication.Status = TermAppStatusEnum.PETITION_DRAFT;
+        if (request.ApplicationType == ApplicationTypeEnum.TERM.ToString())
+        {
+            reqApplication.Status = TermAppStatusEnum.PETITION_DRAFT;
+        }else
+        {
+            reqApplication.Status = EsmtAppStatusEnum.DRAFT_APPLICATION;
+        }
         reqApplication.CreatedByProgramUser = userContext.Role == UserRoleEnum.PROGRAM_ADMIN;
         reqApplication.LastUpdatedBy = userContext.Email;
         reqApplication.CreatedBy = userContext.Email;

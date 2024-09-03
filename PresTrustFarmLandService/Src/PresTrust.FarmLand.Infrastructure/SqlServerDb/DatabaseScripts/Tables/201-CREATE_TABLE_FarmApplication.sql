@@ -32,10 +32,10 @@ CREATE TABLE [Farm].[FarmApplication](
 	[IsApprovedByMunicipality]	[bit]							NOT NULL,
 	[CreatedOn]					[datetime]						NOT NULL,
 	[CreatedBy]					[varchar](128)					NULL	,
-	[LastUpdatedBy]				[varchar](128)					NULL	,
-	[LastUpdatedOn]				[datetime]						NOT NULL,
 	[IsActive]					[bit]							NULL    ,
 	[IsSADC]					[bit]                           NULL    , 
+	[LastUpdatedBy]				[varchar](128)					NULL	,
+	[LastUpdatedOn]				[datetime]						NOT NULL,
 CONSTRAINT [PK_FarmApplication_Id] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
