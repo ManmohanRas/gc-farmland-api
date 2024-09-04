@@ -1071,16 +1071,18 @@ public class FarmApplicationSecurityManager
             permission.CanCreateApplication = true;
         }
 
-        switch (applicationStatus)
-        {
-            case TermAppStatusEnum.NONE:
-                break;
-            case TermAppStatusEnum.PETITION_DRAFT:
-                DeriveEasementDraftStatePermissions();
-                break;
-            default:
-                break;
-        }
+        DeriveEasementDraftStatePermissions();
+
+
+        //switch (applicationStatus)
+        //{
+        //    case TermAppStatusEnum.NONE:
+        //        break;
+        //    case TermAppStatusEnum.PETITION_DRAFT:
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 
     private void DeriveEasementDraftStatePermissions()

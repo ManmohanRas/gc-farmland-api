@@ -4,7 +4,7 @@ public class ExpireApplicationCommandMappingProfile : Profile
 {
     public ExpireApplicationCommandMappingProfile()
     {
-        CreateMap<FarmBrokenRuleEntity, TermBrokenRuleViewModel>()
-               .ForMember(dest => dest.Section, opt => opt.MapFrom(src => src.Section.ToString()));
+        CreateMap<FarmBrokenRuleEntity, BrokenRuleViewModel>()
+               .ForMember(dest => dest.Section, opt => opt.MapFrom(src => src.Section));
     }
 }

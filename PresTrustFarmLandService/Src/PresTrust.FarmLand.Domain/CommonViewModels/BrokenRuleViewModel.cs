@@ -1,6 +1,6 @@
 ﻿namespace PresTrust.FarmLand.Domain;
 
-public class TermBrokenRuleViewModel
+public class BrokenRuleViewModel
 {
     public int ApplicationId { get; set; }
     public string Section { get; set; }

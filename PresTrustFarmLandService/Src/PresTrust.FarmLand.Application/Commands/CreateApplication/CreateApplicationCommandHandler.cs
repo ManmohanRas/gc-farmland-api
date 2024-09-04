@@ -120,7 +120,7 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
         {
             ApplicationId = application.Id,
             SectionId = (int)TermAppSectionEnum.LOCATION,
-            Message = "All required fields on Location tab have not been filled.",
+            Message = "At least One Record Should be selected in Location tab.",
             IsApplicantFlow = true
         });
 

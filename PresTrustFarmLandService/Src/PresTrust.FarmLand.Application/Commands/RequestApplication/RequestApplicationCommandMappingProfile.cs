@@ -4,6 +4,6 @@ public class RequestApplicationCommandMappingProfile : Profile
 {
     public RequestApplicationCommandMappingProfile()
     {
-        CreateMap<FarmBrokenRuleEntity, TermBrokenRuleViewModel>();
+        CreateMap<FarmBrokenRuleEntity, BrokenRuleViewModel>();
     }
 }

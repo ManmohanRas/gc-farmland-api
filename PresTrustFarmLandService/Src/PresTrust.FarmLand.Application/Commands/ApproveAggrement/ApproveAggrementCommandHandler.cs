@@ -50,7 +50,7 @@ public class ApproveAggrementCommandHandler : BaseHandler, IRequestHandler<Appro
 
         if (brokenRules != null && brokenRules.Any())
         {
-            result.BrokenRules = mapper.Map<IEnumerable<FarmBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
+            result.BrokenRules = mapper.Map<IEnumerable<FarmBrokenRuleEntity>, IEnumerable<BrokenRuleViewModel>>(brokenRules);
             return result;
         }
 

@@ -4,6 +4,6 @@ public class ApproveApplicationCommandMappingProfile : Profile
 {
     public ApproveApplicationCommandMappingProfile() 
     {
-        CreateMap<FarmBrokenRuleEntity, TermBrokenRuleViewModel>();
+        CreateMap<FarmBrokenRuleEntity, BrokenRuleViewModel>();
     }
 }

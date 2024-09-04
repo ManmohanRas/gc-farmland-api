@@ -41,12 +41,7 @@ public class GetEsmtApplicationDetailsQueryHandler : BaseHandler, IRequestHandle
 
         switch (application.Status)
         {
-            case TermAppStatusEnum.PETITION_REQUEST:
-            case TermAppStatusEnum.PETITION_APPROVED:
-            case TermAppStatusEnum.AGREEMENT_APPROVED:
-            case TermAppStatusEnum.EXPIRED:
-            case TermAppStatusEnum.REJECTED:
-            case TermAppStatusEnum.ACTIVE:
+            case EsmtAppStatusEnum.DRAFT_APPLICATION:
                 var feedbacksReqForCorrections = feedbacks.Where(f => f.RequestForCorrection == true && string.Compare(f.CorrectionStatus, ApplicationCorrectionStatusEnum.REQUEST_SENT.ToString(), true) == 0).ToList();
                 securityMgr = new FarmEsmtAppSecurityManager(userContext.Role, application.Status, feedbacksReqForCorrections);
                 break;

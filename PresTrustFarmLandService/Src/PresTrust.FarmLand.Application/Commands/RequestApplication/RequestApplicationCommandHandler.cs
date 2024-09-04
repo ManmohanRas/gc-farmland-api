@@ -68,7 +68,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
 
         if (brokenRules != null && brokenRules.Any())
         {
-            result.BrokenRules = mapper.Map<IEnumerable<FarmBrokenRuleEntity>, IEnumerable<TermBrokenRuleViewModel>>(brokenRules);
+            result.BrokenRules = mapper.Map<IEnumerable<FarmBrokenRuleEntity>, IEnumerable<BrokenRuleViewModel>>(brokenRules);
             return result;
         }
 
