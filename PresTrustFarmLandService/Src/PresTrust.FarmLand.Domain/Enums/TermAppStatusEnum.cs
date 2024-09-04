@@ -48,25 +48,7 @@ public enum TermAppStatusEnum
     WITHDRAWN = 108,
 
     /// <summary>
-    /// Application Status Type for ENABLE_SADC
+    /// Application Status Type for Enable SADC
     /// </summary>
-    ENABLE_SADC = 109,
-
-    //EASEMENT
-
-    /// <summary>
-    /// Application Status Type for Draft
-    /// </summary>
-    DRAFT_APPLICATION = 201,
-
-    /// <summary>
-    /// Application Status Type for Draft
-    /// </summary>
-    APPLICATION_SUBMITTED = 202,
-
-    /// <summary>
-    /// Application Status Type for In Review
-    /// </summary>
-    IN_REVIEW = 203,
-
+    ENABLE_SADC = 109
 }

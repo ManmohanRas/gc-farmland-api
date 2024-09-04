@@ -27,4 +27,34 @@ public enum EsmtAppStatusEnum
     /// </summary>
     PENDING = 204,
 
+    /// <summary>
+    /// Application Status Type for Active
+    /// </summary>
+    ACTIVE = 205,
+
+    /// <summary>
+    /// Application Status Type for Preserved
+    /// </summary>
+    PRESERVED = 206,
+
+    /// <summary>
+    /// Application Status Type for Rejected
+    /// </summary>
+    REJECTED = 207,
+
+    /// <summary>
+    /// Application Status Type for Withdrawn
+    /// </summary>
+    WITHDRAWN = 208,
+
+    /// <summary>
+    /// Application Status Type for Closing
+    /// </summary>
+    CLOSING = 209,
+
+    /// <summary>
+    /// Application Status Type for Post Closing
+    /// </summary>
+    POST_CLOSING = 210,
+
 }

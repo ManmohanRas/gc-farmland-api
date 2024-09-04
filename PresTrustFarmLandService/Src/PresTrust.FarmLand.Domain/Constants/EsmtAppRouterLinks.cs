@@ -72,11 +72,11 @@ public partial class FarmLandDomainConstants
         // <summary>
         /// Constant to hold router link for Agricultural use and Production View screen
         /// </summary>
-        public const string AGRICULTURAL_USE_PRODUCTION_VIEW = "app/existuses/view";
+        public const string AGRICULTURAL_USE_PRODUCTION_VIEW = "app/agriprod/view";
         /// <summary>
         /// Constant to hold router link for  Agricultural use and Production Edit screen
         /// </summary>
-        public const string AGRICULTURAL_USE_PRODUCTION_EDIT = "app/existuses/edit";
+        public const string AGRICULTURAL_USE_PRODUCTION_EDIT = "app/agriprod/edit";
 
         // <summary>
         /// Constant to hold router link for Equine View screen
