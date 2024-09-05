@@ -76,4 +76,18 @@ public class FarmEsmtController : FarmController
     {
         return Single(await CommandAsync(command));
     }
+
+    [HttpPost("saveEsmtAppSignatoryDetails")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveEsmtAppSignatoryDetails([FromBody] SaveEsmtAppSignatoryCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("getEsmtAppSignatoryDetails")]
+    [ProducesResponseType(typeof(GetEsmtAppSignatoryQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetEsmtAppSignatoryQueryViewModel>> GetEsmtAppSignatoryDetails([FromBody] GetEsmtAppSignatoryQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
 }
