@@ -29,6 +29,8 @@
             services.AddTransient<IEsmtOwnerDetailsRepository, EsmtOwnerDetailsRepository>();
             services.AddTransient<IFarmEsmtExceptionsRepository, FarmEsmtExceptionsRepository>();
             services.AddTransient<IEsmtLiensReposioty, EsmtLiensRepository>();
+            services.AddTransient<IEsmtAppSignatoryRepository, EsmtAppSignatoryRepository>();
+
         }
     }
 }
