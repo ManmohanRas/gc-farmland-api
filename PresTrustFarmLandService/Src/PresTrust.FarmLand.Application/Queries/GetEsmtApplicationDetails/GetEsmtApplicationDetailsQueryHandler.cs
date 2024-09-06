@@ -6,8 +6,8 @@ public class GetEsmtApplicationDetailsQueryHandler : BaseHandler, IRequestHandle
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
-    private readonly ITermCommentsRepository repoComment;
-    private readonly ITermFeedbacksRepository repoFeedback;
+    private readonly IApplicationCommentRepository repoComment;
+    private readonly IApplicationFeedbackRepository repoFeedback;
 
     public GetEsmtApplicationDetailsQueryHandler
         (
@@ -15,8 +15,8 @@ public class GetEsmtApplicationDetailsQueryHandler : BaseHandler, IRequestHandle
         IPresTrustUserContext userContext,
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
-        ITermCommentsRepository repoComment,
-        ITermFeedbacksRepository repoFeedback
+        IApplicationCommentRepository repoComment,
+        IApplicationFeedbackRepository repoFeedback
         ) : base (repoApplication: repoApplication)
     {
         this.mapper = mapper;

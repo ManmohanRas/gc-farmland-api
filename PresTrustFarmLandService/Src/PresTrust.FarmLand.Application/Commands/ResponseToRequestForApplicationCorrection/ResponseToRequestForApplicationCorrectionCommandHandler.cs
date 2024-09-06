@@ -9,7 +9,7 @@ public class ResponseToRequestForApplicationCorrectionCommandHandler : BaseHandl
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
-    private readonly ITermFeedbacksRepository repoFeedback;
+    private readonly IApplicationFeedbackRepository repoFeedback;
     //private readonly IEmailManager repoEmailManager;
 
 
@@ -27,7 +27,7 @@ public class ResponseToRequestForApplicationCorrectionCommandHandler : BaseHandl
         IPresTrustUserContext userContext,
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
-        ITermFeedbacksRepository repoFeedback
+        IApplicationFeedbackRepository repoFeedback
      //   IEmailManager repoEmailManager
     ) : base(repoApplication: repoApplication)
     {

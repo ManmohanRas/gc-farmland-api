@@ -2,7 +2,7 @@
 
 namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.Repositories;
 
-public class TermAppLocationRepository: ITermAppLocationRepository
+public class ApplicationLocationRepository: IApplicationLocationRepository
 {
     #region " Members ... "
 
@@ -18,7 +18,7 @@ public class TermAppLocationRepository: ITermAppLocationRepository
     /// </summary>
     /// <param name="context"></param>
     /// <param name="systemParamConfigOptions"></param>
-    public TermAppLocationRepository(PresTrustSqlDbContext context, IOptions<SystemParameterConfiguration> systemParamConfigOptions)
+    public ApplicationLocationRepository(PresTrustSqlDbContext context, IOptions<SystemParameterConfiguration> systemParamConfigOptions)
     {
         this.context = context;
         systemParamConfig = systemParamConfigOptions.Value;

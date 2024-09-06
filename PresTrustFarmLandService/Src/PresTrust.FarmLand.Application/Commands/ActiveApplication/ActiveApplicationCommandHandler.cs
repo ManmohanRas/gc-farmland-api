@@ -11,7 +11,7 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
     private readonly ITermBrokenRuleRepository repoBrokenRules;
     private readonly IOwnerDetailsRepository repoOwner;
     private readonly ITermAppAdminDeedDetailsRepository repoDeedDetails;
-    private readonly ITermAppLocationRepository repoLocation;
+    private readonly IApplicationLocationRepository repoLocation;
 
     public ActiveApplicationCommandHandler
     (
@@ -24,7 +24,7 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
         ITermBrokenRuleRepository repoBrokenRules,
         IOwnerDetailsRepository repoOwner,
         ITermAppAdminDeedDetailsRepository repoDeedDetails,
-        ITermAppLocationRepository repoLocation
+        IApplicationLocationRepository repoLocation
     ) : base(repoApplication)
     {
         this.mapper = mapper;

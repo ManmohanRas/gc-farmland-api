@@ -4,11 +4,11 @@ public class MarkFeedbacksAsReadCommandHandler : IRequestHandler<MarkFeedbacksAs
 {
     private IMapper mapper;
     private readonly IPresTrustUserContext userContext;
-    private readonly ITermFeedbacksRepository repoFeedback;
+    private readonly IApplicationFeedbackRepository repoFeedback;
 
     public MarkFeedbacksAsReadCommandHandler(IMapper mapper,
         IPresTrustUserContext userContext,
-        ITermFeedbacksRepository repoFeedback
+        IApplicationFeedbackRepository repoFeedback
         )
     {
         this.mapper = mapper;

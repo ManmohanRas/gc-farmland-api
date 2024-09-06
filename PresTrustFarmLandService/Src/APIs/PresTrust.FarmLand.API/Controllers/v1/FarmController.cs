@@ -24,9 +24,16 @@ public class FarmController : ApiBaseController
         return Single(await QueryAsync(query));
     }
 
-    [HttpPost("createApplication")]
-    [ProducesResponseType(typeof(CreateApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CreateApplicationCommandViewModel>> CreateApplication([FromBody] CreateApplicationCommand query)
+    [HttpPost("createTermApplication")]
+    [ProducesResponseType(typeof(CreateTermApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<CreateTermApplicationCommandViewModel>> CreateTermApplication([FromBody] CreateTermApplicationCommand query)
+    {
+        return Single(await CommandAsync(query));
+    }
+
+    [HttpPost("createEsmtApplication")]
+    [ProducesResponseType(typeof(CreateEsmtApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<CreateEsmtApplicationCommandViewModel>> CreateEsmtApplication([FromBody] CreateEsmtApplicationCommand query)
     {
         return Single(await CommandAsync(query));
     }

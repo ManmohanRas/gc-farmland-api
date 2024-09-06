@@ -5,7 +5,7 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
 {
     private IMapper mapper;
     private readonly IApplicationRepository repoApplication;
-    private ITermAppLocationRepository repoLocation;
+    private IApplicationLocationRepository repoLocation;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
@@ -15,7 +15,7 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
         (
             IMapper mapper,
             IApplicationRepository repoApplication,
-            ITermAppLocationRepository repoLocation,
+            IApplicationLocationRepository repoLocation,
             ITermBrokenRuleRepository repoBrokenRules,
             IPresTrustUserContext userContext,
             IOptions<SystemParameterConfiguration> systemParamOptions

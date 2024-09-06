@@ -1,7 +1,9 @@
 ﻿namespace PresTrust.FarmLand.Application;
 public class BaseHandler
 {
-    private TermAppPermissionEntity permission = default;
+    private TermAppPermissionEntity termPermission = default;
+    private EsmtAppPermissionEntity esmtPermission = default;
+
     private readonly IApplicationRepository repoApplication;
     public BaseHandler(IApplicationRepository repoApplication = null) 
     {
@@ -26,8 +28,18 @@ public class BaseHandler
 
     public void IsAuthorizedOperation(UserRoleEnum userRole, FarmApplicationEntity application, TermUserPermissionEnum operation, List<FarmFeedbacksEntity> corrections = null)
     {
-        var securityMgr = new FarmApplicationSecurityManager(userRole, application.Status, application.ApplicationType);
-        permission = securityMgr.Permission;
+        dynamic securityMgr = default;
+
+        if (application.ApplicationType == ApplicationTypeEnum.TERM)
+        {
+            securityMgr = new FarmApplicationSecurityManager(userRole, application.Status, application.ApplicationType);
+            termPermission = securityMgr.Permission;
+        }
+        else
+        {
+            securityMgr = new FarmEsmtAppSecurityManager(userRole, application.Status);
+            esmtPermission = securityMgr.Permission;
+        }
 
         VerifyUserAuthorization(operation, userRole);
         VerifyIfOperationIsValidToPerform(operation, application.Status);
@@ -40,7 +52,7 @@ public class BaseHandler
         switch (enumPermission)
         {
             case TermUserPermissionEnum.CREATE_APPLICATION:
-                authorized = permission.CanCreateApplication;
+                authorized = termPermission.CanCreateApplication;
                 break;
         }
     }

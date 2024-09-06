@@ -10,9 +10,9 @@
             services.AddTransient<IFarmListRepository, FarmListRepository>();
             services.AddTransient<IMunicipalFinanceRepository, MunicipalFinanceRepository>();
             services.AddTransient<IMunicipalTrustFundPermittedUsesRepository, MunicipalTrustFundPermittedUsesRepository>();
-            services.AddTransient<ITermFeedbacksRepository, TermFeedbacksRepository>();
+            services.AddTransient<IApplicationFeedbackRepository, ApplicationFeedbackRepository>();
             services.AddTransient<IOwnerDetailsRepository, OwnerDetailsRepository>();
-            services.AddTransient<ITermCommentsRepository, TermCommentsRepository>();
+            services.AddTransient<IApplicationCommentRepository, ApplicationCommentRepository>();
             services.AddTransient <ISiteCharacteristicsRepository, SiteCharacteristicsRepository >();
             services.AddTransient<ITermBrokenRuleRepository, TermBrokenRuleRepository>();
             services.AddTransient<ITermOtherDocumentsRepository, TermOtherDocumentsRepository>();
@@ -23,7 +23,7 @@
             services.AddTransient<IEmailTemplateRepository, EmailTemplateRepository>();
             services.AddTransient<IFarmBlockLotRepository, FarmBlockLotRepository>();
             services.AddTransient<ITermAppAdminDeedDetailsRepository, TermAppAdminDeedDetailsRepository>();
-            services.AddTransient<ITermAppLocationRepository, TermAppLocationRepository>();
+            services.AddTransient<IApplicationLocationRepository, ApplicationLocationRepository>();
             services.AddTransient<IFarmParcelHistoryRepository, FarmParcelHistoryRepository>();
             services.AddTransient<IEsmtAppStructureRepository, EsmtAppStructureRepository>();
             services.AddTransient<IEsmtOwnerDetailsRepository, EsmtOwnerDetailsRepository>();

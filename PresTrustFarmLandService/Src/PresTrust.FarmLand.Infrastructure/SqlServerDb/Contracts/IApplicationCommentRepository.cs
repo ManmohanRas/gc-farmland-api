@@ -1,6 +1,6 @@
 ﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.Contracts;
 
-public interface ITermCommentsRepository
+public interface IApplicationCommentRepository
 {
 
     /// <summary>

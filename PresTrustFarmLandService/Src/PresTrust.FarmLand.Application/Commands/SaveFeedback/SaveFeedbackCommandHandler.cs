@@ -6,7 +6,7 @@ public class SaveFeedbackCommandHandler : IRequestHandler<SaveFeedbackCommand, i
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
-    private readonly ITermFeedbacksRepository repoFeedback;
+    private readonly IApplicationFeedbackRepository repoFeedback;
 
     /// <summary>
     /// 
@@ -22,7 +22,7 @@ public class SaveFeedbackCommandHandler : IRequestHandler<SaveFeedbackCommand, i
         IPresTrustUserContext userContext,
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
-        ITermFeedbacksRepository repoFeedback
+        IApplicationFeedbackRepository repoFeedback
     )
     {
         this.mapper = mapper;

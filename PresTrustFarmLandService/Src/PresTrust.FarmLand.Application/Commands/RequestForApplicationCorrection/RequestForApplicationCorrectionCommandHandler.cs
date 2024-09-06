@@ -6,7 +6,7 @@ public class RequestForApplicationCorrectionCommandHandler : BaseHandler, IReque
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
-    private readonly ITermFeedbacksRepository repoFeedback;
+    private readonly IApplicationFeedbackRepository repoFeedback;
    // private readonly IEmailManager repoEmailManager;
 
     /// <summary>
@@ -24,7 +24,7 @@ public class RequestForApplicationCorrectionCommandHandler : BaseHandler, IReque
          IPresTrustUserContext userContext,
          IOptions<SystemParameterConfiguration> systemParamOptions,
          IApplicationRepository repoApplication,
-         ITermFeedbacksRepository repoFeedback
+         IApplicationFeedbackRepository repoFeedback
      ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;

@@ -8,7 +8,7 @@ public class GetTermAppAdminDeedDetailsQueryHandler :BaseHandler, IRequestHandle
     private readonly ITermAppAdminDeedDetailsRepository repoDeedDetails;
     private ITermOtherDocumentsRepository repoOtherDocument;
     private IApplicationRepository repoApplication;
-    private ITermAppLocationRepository repoLocation;
+    private IApplicationLocationRepository repoLocation;
 
     public GetTermAppAdminDeedDetailsQueryHandler
     (
@@ -16,7 +16,7 @@ public class GetTermAppAdminDeedDetailsQueryHandler :BaseHandler, IRequestHandle
         ITermAppAdminDeedDetailsRepository repoDeedDetails,
         ITermOtherDocumentsRepository repoOtherDocument,
         IApplicationRepository repoApplication,
-        ITermAppLocationRepository repoLocation
+        IApplicationLocationRepository repoLocation
     ) :base(repoApplication:repoApplication)
     {
         this.mapper = mapper;

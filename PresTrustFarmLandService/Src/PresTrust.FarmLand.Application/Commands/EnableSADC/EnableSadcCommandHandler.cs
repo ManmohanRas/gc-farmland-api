@@ -8,7 +8,7 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
     private readonly IApplicationRepository repoApplication;
     private readonly IEmailTemplateRepository repoEmailTemplate;
     private readonly IEmailManager repoEmailManager;
-    private readonly ITermAppLocationRepository repoLocation;
+    private readonly IApplicationLocationRepository repoLocation;
 
     public EnableSadcCommandHandler
         (
@@ -19,7 +19,7 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
         IApplicationRepository repoApplication,
         IEmailTemplateRepository repoEmailTemplate,
         IEmailManager repoEmailManager,
-        ITermAppLocationRepository repoLocation
+        IApplicationLocationRepository repoLocation
 
         ) : base (repoApplication)
     {

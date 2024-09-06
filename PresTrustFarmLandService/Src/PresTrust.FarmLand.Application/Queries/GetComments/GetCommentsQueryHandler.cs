@@ -4,11 +4,11 @@ public class GetCommentsQueryHandler : IRequestHandler<GetCommentsQuery , IEnume
 {
 
     private readonly IMapper mapper;
-    private readonly ITermCommentsRepository repoComment;
+    private readonly IApplicationCommentRepository repoComment;
 
     public GetCommentsQueryHandler (
             IMapper mapper,
-            ITermCommentsRepository repoComment)
+            IApplicationCommentRepository repoComment)
     {
         this.mapper = mapper;
         this.repoComment = repoComment;
