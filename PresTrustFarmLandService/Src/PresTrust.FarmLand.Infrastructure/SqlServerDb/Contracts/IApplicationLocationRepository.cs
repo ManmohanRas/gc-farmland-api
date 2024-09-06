@@ -1,6 +1,6 @@
 ﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.Contracts;
 
-public interface ITermAppLocationRepository
+public interface IApplicationLocationRepository
 {
     Task<List<FarmBlockLotEntity>> GetParcelsByFarmID(int applicationId, int farmListID);
 

@@ -1,6 +1,6 @@
 ﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.Repositories;
 
-public class TermFeedbacksRepository : ITermFeedbacksRepository
+public class ApplicationFeedbackRepository : IApplicationFeedbackRepository
 {
     #region " Members ... "
     private readonly PresTrustSqlDbContext context;
@@ -14,7 +14,7 @@ public class TermFeedbacksRepository : ITermFeedbacksRepository
     /// </summary>
     /// <param name="context"></param>
     /// <param name="systemParamConfigOptions"></param>
-    public TermFeedbacksRepository(PresTrustSqlDbContext context, IOptions<SystemParameterConfiguration> systemParamConfigOptions)
+    public ApplicationFeedbackRepository(PresTrustSqlDbContext context, IOptions<SystemParameterConfiguration> systemParamConfigOptions)
     {
         this.context = context;
         systemParamConfig = systemParamConfigOptions.Value;

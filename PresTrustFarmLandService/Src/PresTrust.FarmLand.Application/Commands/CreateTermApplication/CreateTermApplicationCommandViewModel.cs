@@ -1,6 +1,6 @@
 ﻿namespace PresTrust.FarmLand.Application.Commands;
 
-public class CreateApplicationCommandViewModel
+public class CreateTermApplicationCommandViewModel
 {
     public int Id { get; set; }
     public int AgencyId { get; set; }

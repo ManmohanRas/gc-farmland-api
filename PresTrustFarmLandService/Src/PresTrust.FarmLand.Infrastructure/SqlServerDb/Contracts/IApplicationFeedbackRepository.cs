@@ -1,6 +1,6 @@
 ﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb;
 
-public interface ITermFeedbacksRepository
+public interface IApplicationFeedbackRepository
 {
     /// <summary>
     /// Procedure to fetch application's feedback for a given application status or all

@@ -6,7 +6,7 @@ public class SaveCommentCommandHandler : IRequestHandler<SaveCommentCommand, int
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
-    private readonly ITermCommentsRepository repoComment;
+    private readonly IApplicationCommentRepository repoComment;
 
     public SaveCommentCommandHandler
         (
@@ -14,7 +14,7 @@ public class SaveCommentCommandHandler : IRequestHandler<SaveCommentCommand, int
           IPresTrustUserContext userContext,
           IOptions<SystemParameterConfiguration> systemParamOptions,
           IApplicationRepository repoApplication,
-          ITermCommentsRepository repoComment
+          IApplicationCommentRepository repoComment
         )
     {
         this.mapper = mapper;

@@ -1,11 +1,11 @@
 ﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.Repositories;
 
-public class TermCommentsRepository : ITermCommentsRepository
+public class ApplicationCommentRepository : IApplicationCommentRepository
 {
     private readonly PresTrustSqlDbContext context;
     protected readonly SystemParameterConfiguration systemParamConfig;
 
-    public TermCommentsRepository(
+    public ApplicationCommentRepository(
          PresTrustSqlDbContext context,
         IOptions<SystemParameterConfiguration> systemParamConfigOptions
         )

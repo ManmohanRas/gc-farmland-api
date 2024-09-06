@@ -3,25 +3,25 @@
 /// <summary>
 /// This class handles the command to update data and build response
 /// </summary>
-public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<CreateApplicationCommand, CreateApplicationCommandViewModel>
+public class CreateTermApplicationCommandHandler : BaseHandler, IRequestHandler<CreateTermApplicationCommand, CreateTermApplicationCommandViewModel>
 {
     private readonly IMapper mapper;
     private readonly IApplicationRepository repoApplication;
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
-    private readonly ITermCommentsRepository repoComment;
-    private readonly ITermFeedbacksRepository repoFeedback;
+    private readonly IApplicationCommentRepository repoComment;
+    private readonly IApplicationFeedbackRepository repoFeedback;
     private readonly ITermBrokenRuleRepository repoBrokenRule;
 
 
-    public CreateApplicationCommandHandler
+    public CreateTermApplicationCommandHandler
         (
         IMapper mapper,
         IApplicationRepository repoApplication,
         IPresTrustUserContext userContext,
         IOptions<SystemParameterConfiguration> systemParamOptions,
-        ITermCommentsRepository repoComment,
-        ITermFeedbacksRepository repoFeedback,
+        IApplicationCommentRepository repoComment,
+        IApplicationFeedbackRepository repoFeedback,
         ITermBrokenRuleRepository  repoBrokenRule
         ) : base(repoApplication: repoApplication)
     {
@@ -33,9 +33,9 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
         this.repoFeedback = repoFeedback;
         this.repoBrokenRule = repoBrokenRule;
     }
-    public async Task<CreateApplicationCommandViewModel> Handle(CreateApplicationCommand request, CancellationToken cancellationToken)
+    public async Task<CreateTermApplicationCommandViewModel> Handle(CreateTermApplicationCommand request, CancellationToken cancellationToken)
     {
-        var reqApplication = mapper.Map<CreateApplicationCommand, FarmApplicationEntity>(request);
+        var reqApplication = mapper.Map<CreateTermApplicationCommand, FarmApplicationEntity>(request);
         if (request.ApplicationType == ApplicationTypeEnum.TERM.ToString())
         {
             reqApplication.Status = TermAppStatusEnum.PETITION_DRAFT;
@@ -69,7 +69,7 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
         }
 
         var application = await GetIfApplicationExists(reqApplication.Id);
-        var result = mapper.Map<FarmApplicationEntity, CreateApplicationCommandViewModel>(reqApplication);
+        var result = mapper.Map<FarmApplicationEntity, CreateTermApplicationCommandViewModel>(reqApplication);
         result.FarmName = application.FarmName;
 
         // apply security
@@ -111,7 +111,7 @@ public class CreateApplicationCommandHandler : BaseHandler, IRequestHandler<Crea
     /// <param name="request"></param>
     /// <param name="application"></param>
     /// <returns></returns>
-    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(CreateApplicationCommand request, FarmApplicationEntity application)
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(CreateTermApplicationCommand request, FarmApplicationEntity application)
     {
         List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 

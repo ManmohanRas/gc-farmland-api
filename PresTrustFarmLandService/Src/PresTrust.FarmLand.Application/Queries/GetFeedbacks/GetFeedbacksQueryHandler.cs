@@ -3,7 +3,7 @@
 public class GetFeedbacksQueryHandler : IRequestHandler<GetFeedbacksQuery, IEnumerable<GetFeedbacksQueryViewModel>>
 {
     private readonly IMapper mapper;
-    private readonly ITermFeedbacksRepository repoFeedback;
+    private readonly IApplicationFeedbackRepository repoFeedback;
 
     /// </summary>
     /// <param name="mapper"></param>
@@ -15,7 +15,7 @@ public class GetFeedbacksQueryHandler : IRequestHandler<GetFeedbacksQuery, IEnum
     (
         IMapper mapper,
         IPresTrustUserContext userContext,
-        ITermFeedbacksRepository repoFeedback
+        IApplicationFeedbackRepository repoFeedback
     )
     {
         this.mapper = mapper;

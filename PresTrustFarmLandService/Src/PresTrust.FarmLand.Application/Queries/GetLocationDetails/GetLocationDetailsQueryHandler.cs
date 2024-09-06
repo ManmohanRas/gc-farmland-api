@@ -5,13 +5,13 @@ public class GetLocationDetailsQueryHandler: BaseHandler, IRequestHandler<GetLoc
 {
     private IMapper mapper;
     private readonly IApplicationRepository repoApplication;
-    private ITermAppLocationRepository repoLocation;
+    private IApplicationLocationRepository repoLocation;
 
     public GetLocationDetailsQueryHandler
         (
         IMapper mapper,
         IApplicationRepository repoApplication,
-        ITermAppLocationRepository repoLocation
+        IApplicationLocationRepository repoLocation
         ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
