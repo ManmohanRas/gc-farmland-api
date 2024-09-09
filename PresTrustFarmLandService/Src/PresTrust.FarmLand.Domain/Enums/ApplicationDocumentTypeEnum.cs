@@ -84,13 +84,140 @@
     /// <summary>
     /// DocumentType Type for COPY_OF_OWNER_OF_LAST_RECORD_SEARCH  -TERM  ADMIN DEED DETAILS TAB
     /// </summary>
-
     COPY_OF_OWNER_OF_LAST_RECORD_SEARCH = 15,
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    COUNTY_APPLICATION = 16,
+    /// <summary>
+    /// 
+    /// </summary>
+    ESMT_DEED = 17,
+    /// <summary>
+    /// 
+    /// </summary>
+    ESMT_TAX_MAP =18,
+    /// <summary>
+    /// 
+    /// </summary>
+    EXCEPTION_AREA_DOCUMENT_ATTACHMENT_B = 19,
+    /// <summary>
+    /// 
+    /// </summary>
+    POLICY_B =  20,
+    /// <summary>
+    /// 
+    /// </summary>
+    ADOPTED_PRELIMINARY_RESOLUTION = 21,
+    /// <summary>
+    /// 
+    /// </summary>
+    NOTICE_PROCEED_WITHDRAW = 22,
+    /// <summary>
+    /// 
+    /// </summary>
+    REQUEST_APPLICATION_FEE = 23, 
+    /// <summary>
+    /// 
+    /// </summary>
+    APPLICATION_FRAMLAND_PRESERVATION_SADC = 24,
+    /// <summary>
+    /// 
+    /// </summary>
+    CONTRACT = 25,
+    /// <summary>
+    /// 
+    /// </summary>
+    COUNTY_COMMISSIONER_RESOLUTION= 26,
+    /// <summary>
+    /// 
+    /// </summary>
+    TITLE_COMMITMENT = 27,
+    /// <summary>
+    /// 
+    /// </summary>
+    FINAL_SURVEY = 28,
+    /// <summary>
+    /// 
+    /// </summary>
+    DEED_WITHOUT_EXCEPTIONS = 29,
+    /// <summary>
+    /// 
+    /// </summary>
+    DEED_EXCEPTIONS = 30,
+    /// <summary>
+    /// 
+    /// </summary>
+    FINAL_CADB_APPROVAL = 31,
+    /// <summary>
+    /// 
+    /// </summary>
+    PRELIMINARY_APPROVAL = 32, 
+    /// <summary>
+    /// 
+    /// </summary>
+    ORDER_CHECKLIST = 33,
+    /// <summary>
+    /// 
+    /// </summary>
+    DEED_EXCEPTION_SADC = 34,
+    /// <summary>
+    /// 
+    /// </summary>
+    DEED_WITHOUT_EXCEPTION_SADC = 35,
+    /// <summary>
+    /// 
+    /// </summary>
+    FINAL_APPROVAL_WITH_SADC = 36,
+    /// <summary>
+    /// 
+    /// </summary>
+    ESMT_OTHER_DOCUMENTS = 37,
+    /// <summary>
+    /// 
+    /// </summary>
+    DEED_SIGNED_PARTIES = 38,
+    /// <summary>
+    /// 
+    /// </summary>
+    ESMT_DEED_RECORDED = 39,
+    /// <summary>
+    /// 
+    /// </summary>
+    ESMT_DEED_PRESERVED = 40,
+    /// <summary>
+    /// 
+    /// </summary>
+    ESMT_TITLE_POLICY =  41,
+    /// <summary>
+    /// 
+    /// </summary>
+    ESMT_PRESERVED_SURVEY = 42,
+    /// <summary>
+    /// 
+    /// </summary>
+    ESMT_LANDOWNER_SIGNATURE= 43,
+    /// <summary>
+    /// 
+    /// </summary>
+    ATTACHMENT_F = 44,
+    /// <summary>
+    /// 
+    /// </summary>
+    ATTACHMENT_G = 45,
+    /// <summary>
+    /// 
+    /// </summary>
+    ATTACHMENT_H = 46,
+    /// <summary>
+    /// 
+    /// </summary>
+    CONTRACTREQUEST = 47,
 
     /// <summary>
     /// DocumentType Type for SPECIAL_PREMISES EXIST USES  TAB
     /// </summary>
 
-    SPECIAL_PREMISES = 16,
+    SPECIAL_PREMISES = 48,
 }
