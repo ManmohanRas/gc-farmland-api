@@ -40,6 +40,7 @@ public class GetTermAppAdminDeedDetailsQueryHandler :BaseHandler, IRequestHandle
                 {
                     deeddetails.Add(new TermAppAdminDeedDetailsEntity()
                     {
+                        ApplicationId = application.Id,
                         OriginalBlock = item.Block,
                         OriginalLot = item.Lot,
                         OriginalBook = item.DeedBook,

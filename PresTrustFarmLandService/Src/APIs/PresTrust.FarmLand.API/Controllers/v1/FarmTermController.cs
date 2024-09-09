@@ -63,8 +63,8 @@ public class FarmTermController : FarmController
     }
 
     [HttpPost("saveTermAppAdminDeedDetails")]
-    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<int>> SaveTermAppAdminDeedDetails([FromBody] SaveTermAppAdminDeedDetailsCommand command)
+    [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Unit>> SaveTermAppAdminDeedDetails([FromBody] SaveTermAppAdminDeedDetailsCommand command)
     {
         return Single(await CommandAsync(command));
     }
