@@ -84,5 +84,13 @@
     /// <summary>
     /// DocumentType Type for COPY_OF_OWNER_OF_LAST_RECORD_SEARCH  -TERM  ADMIN DEED DETAILS TAB
     /// </summary>
-    COPY_OF_OWNER_OF_LAST_RECORD_SEARCH = 15
+
+    COPY_OF_OWNER_OF_LAST_RECORD_SEARCH = 15,
+
+
+    /// <summary>
+    /// DocumentType Type for SPECIAL_PREMISES EXIST USES  TAB
+    /// </summary>
+
+    SPECIAL_PREMISES = 16,
 }
