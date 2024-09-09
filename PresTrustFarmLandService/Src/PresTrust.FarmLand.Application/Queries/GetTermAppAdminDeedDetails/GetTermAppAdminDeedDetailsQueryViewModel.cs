@@ -10,6 +10,7 @@ public class GetTermAppAdminDeedDetailsQueryViewModel
 public class TermAppAdminDeedDetailsViewModel
 {
     public int Id { get; set; }
+    public int ApplicationId { get; set; }
     public string OriginalBlock { get; set; }
     public string OriginalLot { get; set; }
     public string OriginalBook { get; set; }
