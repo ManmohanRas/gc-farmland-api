@@ -1,7 +1,13 @@
 ﻿
 namespace PresTrust.FarmLand.Application.Commands;
 
-public class SaveTermAppAdminDeedDetailsCommand : IRequest<int>
+public class SaveTermAppAdminDeedDetailsCommand : IRequest<Unit>
+{
+    public int ApplicationId { get; set; }
+    public List<SaveTermAppAdminDeedListCommand> DeedDetails { get; set; } = new List<SaveTermAppAdminDeedListCommand>();
+}
+
+public class SaveTermAppAdminDeedListCommand
 {
     public int Id { get; set; }
     public int ApplicationId { get; set; }
@@ -17,6 +23,7 @@ public class SaveTermAppAdminDeedDetailsCommand : IRequest<int>
     public string RDLot { get; set; }
     public string RDBook { get; set; }
     public string RDPage { get; set; }
+    public string RowStatus { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
 }

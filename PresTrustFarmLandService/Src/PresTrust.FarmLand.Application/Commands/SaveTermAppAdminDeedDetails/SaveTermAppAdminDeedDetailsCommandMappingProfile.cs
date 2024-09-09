@@ -4,7 +4,7 @@ public class SaveTermAppAdminDeedDetailsCommandMappingProfile : Profile
 {
     public SaveTermAppAdminDeedDetailsCommandMappingProfile()
     {
-        CreateMap<SaveTermAppAdminDeedDetailsCommand, TermAppAdminDeedDetailsEntity>();
+        CreateMap<SaveTermAppAdminDeedListCommand, TermAppAdminDeedDetailsEntity>();
 
     }
 }
