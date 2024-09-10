@@ -90,4 +90,22 @@ public class FarmEsmtController : FarmController
     {
         return Single(await QueryAsync(query));
     }
+
+    [HttpPost("getEsmtAppExistNonAgreeUses")]
+    [ProducesResponseType(typeof(GetEsmtAppExistUsesQueryViewModel),(int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<GetEsmtAppExistUsesQueryViewModel>> getEsmtAppExistUses([FromBody] GetEsmtAppExistUsesQuery query)
+    {
+       
+        return Single(await QueryAsync(query));
+
+    }
+
+    [HttpPost("saveEsmtAppExistNonAgreeUses")]
+    [ProducesResponseType(typeof(int),(int)HttpStatusCode.OK)]
+    public async Task<ActionResult< int>> SaveEsmtAppExistUses([FromBody] SaveEsmtAppExistUsesCommand command)
+    {
+        return Single(await CommandAsync(command));
+
+    }
 }
