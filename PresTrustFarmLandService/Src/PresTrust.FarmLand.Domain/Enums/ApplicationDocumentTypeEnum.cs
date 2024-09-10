@@ -215,9 +215,7 @@
     /// </summary>
     CONTRACTREQUEST = 47,
 
-    /// <summary>
-    /// DocumentType Type for SPECIAL_PREMISES EXIST USES  TAB
-    /// </summary>
 
+    
     SPECIAL_PREMISES = 48,
 }
