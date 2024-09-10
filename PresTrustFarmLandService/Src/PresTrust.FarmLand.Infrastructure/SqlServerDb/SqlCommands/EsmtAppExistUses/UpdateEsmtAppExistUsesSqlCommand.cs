@@ -4,9 +4,9 @@ public class UpdateEsmtAppExistUsesSqlCommand
 {
 
     private readonly string _sqlCommand = @"
-      UPDATE [FARM].[FARMESMTEXISTNONAGRIUSES] 
+      UPDATE [Farm].[FarmEsmtExistNonAgriUses] 
        SET                         
-                IsSubdivisionApprovals      =      @p_IsSubdivisionApprovals,   
+                IsSubdivisionApproval      =      @p_IsSubdivisionApproval,   
                 InfoAboutPremises           =      @p_InfoAboutPremises,      
                 LastUpdatedBy		          =      @p_LastUpdatedBy,
                 LastUpdatedOn               =      @p_LastUpdatedOn

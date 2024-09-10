@@ -1,7 +1,7 @@
 ﻿
 namespace PresTrust.FarmLand.Application.Commands;
 
-public class SaveEsmtAppExistUsesCommandHandler :BaseHandler, IRequestHandler<SaveEsmtAppExistUsesCommand,int>
+public class SaveEsmtAppExistUsesCommandHandler : BaseHandler, IRequestHandler<SaveEsmtAppExistUsesCommand, int>
 {
     private readonly IMapper mapper;
     private readonly IPresTrustUserContext userContext;
@@ -29,4 +29,7 @@ public class SaveEsmtAppExistUsesCommandHandler :BaseHandler, IRequestHandler<Sa
 
         return reqExist.Id;
     }
+
+
+    
 }

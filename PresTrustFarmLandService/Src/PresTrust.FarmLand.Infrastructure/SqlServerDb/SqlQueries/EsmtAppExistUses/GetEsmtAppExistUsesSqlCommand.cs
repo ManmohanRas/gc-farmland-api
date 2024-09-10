@@ -6,13 +6,12 @@ public class GetEsmtAppExistUsesSqlCommand
        SELECT
                [ID],                            
                [ApplicationId],                  
-               [IsSubdivisionApprovals],         
+               [IsSubdivisionApproval],         
                [InfoAboutPremises],                
                [LastUpdatedBy],		   
                [LastUpdatedOn]
-
-          FROM  [FARM].[FARMESMTEXISTNONAGRIUSES]
-          WHERE  [ApplicationId]  =@p_ApplicationID; 
+          FROM  [Farm].[FarmEsmtExistNonAgriUses]
+          WHERE  ApplicationId  =@p_ApplicationID; 
      ";
 
 

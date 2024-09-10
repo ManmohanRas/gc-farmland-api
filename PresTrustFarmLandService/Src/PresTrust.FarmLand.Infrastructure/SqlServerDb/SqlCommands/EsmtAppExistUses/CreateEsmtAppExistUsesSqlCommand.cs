@@ -5,10 +5,10 @@ public class CreateEsmtAppExistUsesSqlCommand
 {
 
     private readonly string _sqlCommand = @"
-    INSERT INTO [FARM].[FARMESMTEXISTNONAGRIUSES]
+    INSERT INTO [Farm].[FarmEsmtExistNonAgriUses]
     (                              
    ApplicationID,                  
-   IsSubdivisionApprovals,         
+   IsSubdivisionApproval,         
    InfoAboutPremises,                
    LastUpdatedBy,		   
    LastUpdatedOn
@@ -16,7 +16,7 @@ public class CreateEsmtAppExistUsesSqlCommand
     VALUES(
       
       @p_ApplicationID,
-      @p_IsSubdivisionApprovals,
+      @p_IsSubdivisionApproval,
       @p_InfoAboutPremises,
       @p_LastUpdatedBy,
       GETDATE()

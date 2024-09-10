@@ -40,7 +40,7 @@ public class EsmtAppExistUsesRepository : IEsmtAppExistUsesRepository
     {
 
 
-        if (entity.ApplicationId > 0)
+        if (entity.Id > 0)
         {
             return await UpdateAsync(entity);
            
@@ -60,7 +60,7 @@ public class EsmtAppExistUsesRepository : IEsmtAppExistUsesRepository
             param : new
             {
                 @p_ApplicationId = existUses.ApplicationId,
-                @p_IsSubdivisionApprovals = existUses.IsSubdivisionApprovals,
+                @p_IsSubdivisionApproval = existUses.IsSubdivisionApproval,
                 @p_InfoAboutPremises = existUses.InfoAboutPremises,
                 @p_LastUpdatedBy = existUses.LastUpdatedBy
 
@@ -80,7 +80,7 @@ public class EsmtAppExistUsesRepository : IEsmtAppExistUsesRepository
             {
                 @p_Id = existUses.Id,
                 @p_ApplicationId = existUses.ApplicationId,
-                @p_IsSubdivisionApprovals = existUses.IsSubdivisionApprovals,
+                @p_IsSubdivisionApproval = existUses.IsSubdivisionApproval,
                 @p_InfoAboutPremises = existUses.InfoAboutPremises,
                 @p_LastUpdatedBy = existUses.LastUpdatedBy,
                 @p_LastUpdatedOn = DateTime.Now,
