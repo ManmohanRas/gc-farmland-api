@@ -87,7 +87,7 @@ public class ApplicationDocumentTreeBuilder
         var mapper = _autoMapperConfig.CreateMapper();
         documentChecklistItems = documents.OrderBy(s => s.SectionId).GroupBy(s => s.Section).Select(s => new DocumentChecklistViewModel()
         {
-            Section = SetSectionTitle(s.Key),
+            Section = SetTermSectionTitle(s.Key),
             DocumentChecklistDocTypeItems = s.GroupBy(d => d.DocumentType).Select(d =>
             {
                 var item = d.FirstOrDefault();
@@ -110,7 +110,7 @@ public class ApplicationDocumentTreeBuilder
 
     }
 
-    private string SetSectionTitle(TermAppSectionEnum enumSection)
+    private string SetTermSectionTitle(TermAppSectionEnum enumSection)
     {
         string title = string.Empty;
         switch (enumSection)
@@ -138,6 +138,27 @@ public class ApplicationDocumentTreeBuilder
                 break;
             case TermAppSectionEnum.ADMIN_DEED_DETAILS:
                 title = "Deed Details";
+                break;
+        }
+        return title;
+    }
+
+    private string SetEsmtSectionTitle(EsmtAppSectionEnum enumSection)
+    {
+        string title = string.Empty;
+        switch (enumSection)
+        {
+            case EsmtAppSectionEnum.LOCATION:
+                title = "Location";
+                break;
+            case EsmtAppSectionEnum.ROLES:
+                title = "Roles";
+                break;
+            case EsmtAppSectionEnum.OWNER_DETAILS:
+                title = "Owner Details";
+                break;
+            case EsmtAppSectionEnum.EXCEPTIONS:
+                title = "Exceptions";
                 break;
         }
         return title;
