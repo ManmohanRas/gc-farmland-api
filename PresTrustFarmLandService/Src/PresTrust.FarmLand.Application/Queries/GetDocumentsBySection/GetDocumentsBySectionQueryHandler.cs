@@ -22,8 +22,20 @@ public class GetDocumentsBySectionQueryHandler : BaseHandler,IRequestHandler<Get
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 
-        Enum.TryParse(value: request.SectionName, ignoreCase: true, out TermAppSectionEnum applicationSection);
-        var documents = await repoDocument.GetTermDocumentsAsync(application.Id, (int)applicationSection);
+        List<TermOtherDocumentsEntity>  documents = default;
+
+
+        if (application.ApplicationType == ApplicationTypeEnum.TERM)
+        {
+            Enum.TryParse(value: request.SectionName, ignoreCase: true, out TermAppSectionEnum applicationSection);
+            documents = await repoDocument.GetTermDocumentsAsync(application.Id, (int)applicationSection);
+
+        }else
+        {
+            Enum.TryParse(value: request.SectionName, ignoreCase: true, out EsmtAppSectionEnum applicationSectionEsmt);
+            documents = await repoDocument.GetTermDocumentsAsync(application.Id, (int)applicationSectionEsmt);
+
+        }
 
         List<DocumentTypeViewModel>? documentsTree = default;
 

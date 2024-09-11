@@ -214,4 +214,8 @@
     /// 
     /// </summary>
     CONTRACTREQUEST = 47,
+
+
+    
+    SPECIAL_PREMISES = 48,
 }

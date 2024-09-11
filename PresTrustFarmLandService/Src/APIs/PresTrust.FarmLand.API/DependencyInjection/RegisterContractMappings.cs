@@ -1,5 +1,5 @@
-﻿namespace PresTrust.FarmLand.API.DependencyInjection
-{
+﻿namespace PresTrust.FarmLand.API.DependencyInjection;
+
     public class RegisterContractMappings : IDependencyInjectionService
     {
         public void Register(IServiceCollection services, IConfiguration configuration)
@@ -31,6 +31,7 @@
             services.AddTransient<IEsmtLiensReposioty, EsmtLiensRepository>();
             services.AddTransient<IEsmtAppSignatoryRepository, EsmtAppSignatoryRepository>();
             services.AddTransient<IFarmEsmtAttachmentBRepository, FarmEsmtAttachmentBRepository>();
+            services.AddTransient<IEsmtAppExistUsesRepository, EsmtAppExistUsesRepository>();
         }
     }
-}
+
