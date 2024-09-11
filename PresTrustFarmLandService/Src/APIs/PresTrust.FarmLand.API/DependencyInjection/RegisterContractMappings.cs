@@ -30,7 +30,7 @@
             services.AddTransient<IFarmEsmtExceptionsRepository, FarmEsmtExceptionsRepository>();
             services.AddTransient<IEsmtLiensReposioty, EsmtLiensRepository>();
             services.AddTransient<IEsmtAppSignatoryRepository, EsmtAppSignatoryRepository>();
-
+            services.AddTransient<IFarmEsmtAttachmentBRepository, FarmEsmtAttachmentBRepository>();
         }
     }
 }
