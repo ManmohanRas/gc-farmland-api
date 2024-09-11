@@ -28,6 +28,7 @@ public class UpdateFarmBlockLotSqlCommand
                           ,[DeedPage] = @p_DeedPage
                           ,[CreatedByProgramUser] = @p_CreatedByProgramUser
                           ,[IsWarning] = @p_IsWarning
+                          ,[IsValidPamsPin] = @p_IsValidPamsPin
                           ,[LastUpdatedOn] = @p_LastUpdatedBy
                           ,[LastUpdatedBy] = @p_LastUpdatedOn
                      WHERE Id = @p_Id and FarmListID = @p_FarmListID;";

@@ -30,7 +30,7 @@ public class ApplicationLocationRepository: IApplicationLocationRepository
     {
         List<FarmBlockLotEntity> results;
         using var conn = context.CreateConnection();
-        var sqlCommand = new GetTermAppLocationSqlQuery();
+        var sqlCommand = new GetParcelsByFarmId();
         results = (await conn.QueryAsync<FarmBlockLotEntity>(sqlCommand.ToString(),
             commandType: CommandType.Text,
             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,

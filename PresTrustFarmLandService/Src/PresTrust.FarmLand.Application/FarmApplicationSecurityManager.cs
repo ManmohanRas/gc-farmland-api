@@ -766,11 +766,12 @@ public class FarmApplicationSecurityManager
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
                 //LOCATION
-                correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.LOCATION).FirstOrDefault();
-                if (correction == null)
-                    Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                else
-                    Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.LOCATION).FirstOrDefault();
+                //if (correction == null)
+                //    Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //else
+                //    Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Location();
                 //Owner Details
                 correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.OWNER_DETAILS).FirstOrDefault();
                 if (correction == null)
@@ -816,7 +817,7 @@ public class FarmApplicationSecurityManager
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
                     Title = TermAppNavigationItemTitles.LOCATION,
-                    RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
                     SortOrder = 1
                 };
                 break;
@@ -828,29 +829,30 @@ public class FarmApplicationSecurityManager
                 permission.CanDeleteDocument = true;
                 permission.CanViewFeedback = true;
                 // Location
-                correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.LOCATION).FirstOrDefault();
-                if (correction == null)
-                {
-                    Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
+                Location();
+                //correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.LOCATION).FirstOrDefault();
+                //if (correction == null)
+                //{
+                //    Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
 
-                    this.defaultNavigationItem = new NavigationItemEntity()
-                    {
-                        Title = TermAppNavigationItemTitles.LOCATION,
-                        RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
-                        SortOrder = 1
-                    };
-                }
-                else
-                {
-                    Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //    this.defaultNavigationItem = new NavigationItemEntity()
+                //    {
+                //        Title = TermAppNavigationItemTitles.LOCATION,
+                //        RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                //        SortOrder = 1
+                //    };
+                //}
+                //else
+                //{
+                //    Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
-                    this.defaultNavigationItem = new NavigationItemEntity()
-                    {
-                        Title = TermAppNavigationItemTitles.LOCATION,
-                        RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
-                        SortOrder = 1
-                    };
-                }
+                //    this.defaultNavigationItem = new NavigationItemEntity()
+                //    {
+                //        Title = TermAppNavigationItemTitles.LOCATION,
+                //        RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
+                //        SortOrder = 1
+                //    };
+                //}
                 //OwnerDetails
                 correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.OWNER_DETAILS).FirstOrDefault();
                 if (correction == null)
@@ -887,6 +889,12 @@ public class FarmApplicationSecurityManager
                     Signatory(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                    
                 }
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = TermAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                    SortOrder = 1
+                };
                 break;
             case UserRoleEnum.PROGRAM_COMMITTEE:
             case UserRoleEnum.PROGRAM_READONLY:
