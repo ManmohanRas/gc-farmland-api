@@ -29,6 +29,7 @@ public class GetFarmBlockLotByIdSqlQuery
 			  ,MBL.IsWarning
 			  ,MBL.[Notes]
 			  ,MBL.[CreatedByProgramUser]
+			  ,MBL.[IsValidPamsPin]
               FROM [Farm].[FarmMunicipalityBlockLotParcel] MBL
 			  WHERE  MBL.Id = @p_Id;";
 

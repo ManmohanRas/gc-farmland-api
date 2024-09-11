@@ -29,6 +29,7 @@ public  class GetFarmBlockLotSqlQuery
 			  ,MBL.IsWarning
 			  ,MBL.[Notes]
 			  ,MBL.[CreatedByProgramUser]
+		      ,MBL.[IsValidPamsPin]
               FROM [Farm].[FarmMunicipalityBlockLotParcel] MBL;";
 
     public override string ToString()
