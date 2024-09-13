@@ -6,6 +6,8 @@ public class RejectApplicationCommandHandler : BaseHandler, IRequestHandler<Reje
     private readonly IPresTrustUserContext userContext;
     private readonly IApplicationRepository repoApplication;
     private readonly SystemParameterConfiguration systemParamOptions;
+    private readonly ITermBrokenRuleRepository repoBrokenRules;
+
 
     /// <summary>
     /// 
@@ -17,13 +19,15 @@ public class RejectApplicationCommandHandler : BaseHandler, IRequestHandler<Reje
          IMapper mapper,
          IPresTrustUserContext userContext,
          IOptions<SystemParameterConfiguration> systemParamOptions,
-         IApplicationRepository repoApplication
+         IApplicationRepository repoApplication,
+         ITermBrokenRuleRepository repoBrokenRules
     ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
         this.userContext = userContext;
         this.repoApplication = repoApplication;
         this.systemParamOptions = systemParamOptions.Value;
+        this.repoBrokenRules = repoBrokenRules;
     }
 
     /// <summary>
@@ -40,7 +44,9 @@ public class RejectApplicationCommandHandler : BaseHandler, IRequestHandler<Reje
         // update application status
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
+
             await repoApplication.UpdateApplicationStatusAsync(application, TermAppStatusEnum.REJECTED);
+            await repoBrokenRules.DeleteAllBrokenRulesAsync(application.Id);
 
             scope.Complete();
         };

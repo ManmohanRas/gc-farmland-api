@@ -34,6 +34,7 @@ public class GetParcelsByFarmId
               L.IsChecked,
               L.ApplicationId,
             CM.[Municipality] AS Municipality,
+            CP.PropertyClassCode AS CorePropertyClassCode,
             CASE 
             WHEN CP.PropertyClassCode = '3B' AND MBL.PropertyClassCode <> CP.PropertyClassCode
             THEN 1
