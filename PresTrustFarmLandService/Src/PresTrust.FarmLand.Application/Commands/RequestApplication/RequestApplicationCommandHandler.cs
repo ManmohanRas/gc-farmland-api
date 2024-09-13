@@ -164,12 +164,12 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
 
         });
 
-        ////statusChangeRules.Add(new TermBrokenRuleEntity()
-        //// {
-        //    ApplicationId = application.Id,
-        //    SectionId = (int)ApplicationSectionEnum.ADMIN_DEED_DETAILS,
-        //    Message = "All required fields on ADMIN_DEED_DETAILS tab have not been filled.",
-        //});
+        statusChangeRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)TermAppSectionEnum.ADMIN_DEED_DETAILS,
+            Message = "All required fields on ADMIN_DEED_DETAILS tab have not been filled.",
+        });
 
         return statusChangeRules;
     }
