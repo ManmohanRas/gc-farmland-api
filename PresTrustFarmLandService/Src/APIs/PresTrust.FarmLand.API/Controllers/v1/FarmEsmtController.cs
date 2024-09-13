@@ -122,4 +122,20 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
 
     }
+
+
+
+    [HttpPost("saveAttachmentC")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveAttachmentC([FromBody] SaveEsmtAppAttachmentCCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("deleteAttachmentC")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<bool>> deleteAttachmentC([FromBody] DeleteEsmtAppAttachmentCCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
 }
