@@ -29,4 +29,6 @@ public class GetFarmBlockLotQueryViewModel
     public bool IsValidPamsPin { get; set; }
     public bool IsWarning { get; set; }
     public bool CreatedByProgramUser { get; set; }
+    public bool IsClassCodeWarning { get; set; }
+    public string CorePropertyClassCode { get; set; }
 }
