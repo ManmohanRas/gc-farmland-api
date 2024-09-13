@@ -5,7 +5,11 @@ public class GetEsmtAppExistUsesQueryValidator:AbstractValidator<GetEsmtAppExist
 
     public GetEsmtAppExistUsesQueryValidator()
     {
-       RuleFor(query => query.ApplicationId).GreaterThan(0).WithMessage("Not a valid Application Id");
+        RuleFor(query => query.ApplicationId)
+                 .Cascade(CascadeMode.Stop)
+                 .NotNull().NotEmpty().WithMessage("ApplicationId is required.")
+                 .GreaterThan(0)
+                 .WithMessage("ApplicationId must be greater than 0");
 
     }
 }

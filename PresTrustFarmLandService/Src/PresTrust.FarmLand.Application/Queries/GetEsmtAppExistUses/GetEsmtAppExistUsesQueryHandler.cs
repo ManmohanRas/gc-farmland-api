@@ -9,26 +9,35 @@ public class GetEsmtAppExistUsesQueryHandler : BaseHandler, IRequestHandler<GetE
     public IEsmtAppExistUsesRepository repoExistUses;
     private readonly IApplicationRepository repoApplication;
     private ITermOtherDocumentsRepository repoDocuments;
-    
+    private IEsmtAppAttachmentCRepository repoAttachmentC;
+
+
     public GetEsmtAppExistUsesQueryHandler(
           IMapper mapper,
          IApplicationRepository repoApplication,
          IEsmtAppExistUsesRepository repoExistUses,
-          ITermOtherDocumentsRepository repoDocuments
+          ITermOtherDocumentsRepository repoDocuments,
+          IEsmtAppAttachmentCRepository repoAttachmentC
         ) :base(repoApplication : repoApplication)
     {
         this.mapper = mapper;
         this.repoExistUses = repoExistUses;
         this.repoApplication = repoApplication;
         this.repoDocuments = repoDocuments;
+        this.repoAttachmentC = repoAttachmentC;
 
     }
     public async Task<GetEsmtAppExistUsesQueryViewModel> Handle(GetEsmtAppExistUsesQuery request, CancellationToken cancellationToken)
     {
         var application = await repoApplication.GetApplicationAsync(request.ApplicationId);
-        var existUses = await repoExistUses.GetEsmtAppExistUses(application.Id);
+        var reqexistUses = await repoExistUses.GetEsmtAppExistUses(application.Id);
         var documents = await GetDocuments(request.ApplicationId);
-        var result = mapper.Map<EsmtAppExistUsesEntity, GetEsmtAppExistUsesQueryViewModel>(existUses);   
+        var attachmentC = await repoAttachmentC.GetEsmtAppAttachmentCAsync(request.ApplicationId);
+
+        var result = mapper.Map<EsmtAppExistUsesEntity, GetEsmtAppExistUsesQueryViewModel>(reqexistUses);
+        
+        result.attachmentCs = mapper.Map<IEnumerable<EsmtAppAttachmentCEntity>, IEnumerable<GetEsmtAppAttachmentCQueryViewModel>>(attachmentC);
+
         result.DocumentsTree = documents ?? new List<DocumentTypeViewModel>();
         return result;
     }
