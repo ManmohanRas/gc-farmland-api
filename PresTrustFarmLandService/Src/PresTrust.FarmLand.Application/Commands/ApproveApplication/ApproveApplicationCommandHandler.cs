@@ -56,12 +56,6 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
         // check if any broken rules exists, if yes then return
         var brokenRules = (await repoBrokenRules.GetBrokenRulesAsync(application.Id))?.ToList();
 
-        var docBrokenrules = await TermAppAdminDeedDetailsDocs(application.Id, application.Status, (int)TermAppSectionEnum.ADMIN_DEED_DETAILS);
-        if (docBrokenrules.Count > 0)
-        {
-            brokenRules.AddRange(docBrokenrules);
-        }
-
         if (brokenRules != null && brokenRules.Any())
         {
             result.BrokenRules = mapper.Map<IEnumerable<FarmBrokenRuleEntity>, IEnumerable<BrokenRuleViewModel>>(brokenRules);
@@ -123,36 +117,6 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
         });
 
         return statusChangeRules;
-    }
-    private async Task<List<FarmBrokenRuleEntity>> TermAppAdminDeedDetailsDocs(int applicationId, TermAppStatusEnum applicationStatus, int sectionId)
-    {
-
-        var documents = await repoOtherDocs.GetTermDocumentsAsync(applicationId, sectionId);
-
-        List<FarmBrokenRuleEntity> docBrokenrules = new List<FarmBrokenRuleEntity>();
-        if (applicationStatus == TermAppStatusEnum.PETITION_APPROVED)
-        {
-            //if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.TRUE_COPY_OF_DEED).Count() == 0)
-            //{
-            //    docBrokenrules.Add(new FarmBrokenRuleEntity()
-            //    {
-            //        ApplicationId = applicationId,
-            //        SectionId = (int)TermAppSectionEnum.ADMIN_DEED_DETAILS,
-            //        Message = "True Copy Of Deed required document on Deed Details tab have not been Uploaded."
-            //    });
-            //}
-            //if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.COPY_OF_OWNER_OF_LAST_RECORD_SEARCH).Count() == 0)
-            //{
-            //    docBrokenrules.Add(new FarmBrokenRuleEntity()
-            //    {
-            //        ApplicationId = applicationId,
-            //        SectionId = (int)TermAppSectionEnum.OTHER_DOCUMENTS,
-            //        Message = "Copy Of Owner required document on Deed Details tab have not been Uploaded.",
-            //    });
-            //}
-
-        }
-        return docBrokenrules;
     }
 
 }

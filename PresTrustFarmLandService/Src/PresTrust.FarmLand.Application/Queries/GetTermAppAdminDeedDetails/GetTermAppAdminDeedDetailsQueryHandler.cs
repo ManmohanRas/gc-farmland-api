@@ -50,6 +50,7 @@ public class GetTermAppAdminDeedDetailsQueryHandler :BaseHandler, IRequestHandle
             }
         }
         result.DeedDetails = mapper.Map<IEnumerable<TermAppAdminDeedDetailsEntity>, IEnumerable<TermAppAdminDeedDetailsViewModel>>(deeddetails);
+        result.ApplicationId = application.Id;
 
         var documents = await GetDocuments(request.ApplicationId);
         result.DocumentsTree = documents ?? new List<DocumentTypeViewModel>();

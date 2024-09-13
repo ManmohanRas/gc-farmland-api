@@ -57,10 +57,36 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
         return Unit.Value;
     }
 
-    private async Task <List<FarmBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application,  List<TermAppAdminDeedDetailsEntity> reqDeedDetails)
+    private async Task<List<FarmBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application,  List<TermAppAdminDeedDetailsEntity> reqDeedDetails)
     {
         int sectionId = (int)TermAppSectionEnum.ADMIN_DEED_DETAILS;
         List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
+
+        var documents = await repoDocuments.GetTermDocumentsAsync(application.Id, sectionId);
+      
+        if (application.Status == TermAppStatusEnum.PETITION_REQUEST)
+        {
+            if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.TRUE_COPY_OF_DEED).Count() == 0)
+            {
+                brokenRules.Add(new FarmBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = (int)TermAppSectionEnum.ADMIN_DEED_DETAILS,
+                    Message = "True Copy Of Deed required document on Deed Details tab have not been Uploaded."
+                });
+            }
+            if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.COPY_OF_OWNER_OF_LAST_RECORD_SEARCH).Count() == 0)
+            {
+                brokenRules.Add(new FarmBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = (int)TermAppSectionEnum.ADMIN_DEED_DETAILS,
+                    Message = "Copy Of Owner required document on Deed Details tab have not been Uploaded.",
+                });
+            }
+
+        }
+
         if (application.Status == TermAppStatusEnum.PETITION_APPROVED)
         {
             foreach (var deed in reqDeedDetails) 
@@ -164,6 +190,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
             }
             
         }      
+
 
         return brokenRules;
     }
