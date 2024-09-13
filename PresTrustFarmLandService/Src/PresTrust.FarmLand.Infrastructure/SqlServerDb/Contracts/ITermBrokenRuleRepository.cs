@@ -22,4 +22,11 @@ public interface ITermBrokenRuleRepository
     /// <param name="section"></param>
     /// <returns></returns>
     Task DeleteBrokenRulesAsync(int applicationId, TermAppSectionEnum section);
+
+    /// <summary>
+    /// Delete broken rules 
+    /// </summary>
+    /// <param name="applicationId"></param>
+    /// <returns></returns>
+    Task DeleteAllBrokenRulesAsync(int applicationId);
 }

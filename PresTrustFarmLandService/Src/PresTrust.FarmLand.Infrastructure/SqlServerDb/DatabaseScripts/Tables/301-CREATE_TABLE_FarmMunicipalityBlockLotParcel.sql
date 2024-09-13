@@ -1,11 +1,12 @@
 USE Prestrust_ras
 IF OBJECT_ID('[Farm].[FarmMunicipalityBlockLotParcel]') IS NOT NULL
---BEGIN
---	-- Drop Constraints
-	
+BEGIN
+	-- Drop Constraints
+		ALTER TABLE [Farm].[FarmMunicipalityBlockLotParcel] DROP CONSTRAINT IF EXISTS  [DF_InterestType_FarmMunicipalityBlockLotParcel];
 
---END;
---GO
+
+END;
+GO
 
 
 -- Drop Table
@@ -53,4 +54,7 @@ CONSTRAINT [PK_FarmMunicipalityBlockLotParcel_Id] PRIMARY KEY CLUSTERED
 )ON [PRIMARY]
 
 GO
+
+ALTER TABLE [Farm].[FarmMunicipalityBlockLotParcel] WITH NOCHECK ADD  CONSTRAINT [DF_InterestType_FarmMunicipalityBlockLotParcel]  DEFAULT('Easement') FOR [InterestType]
+GO  
 

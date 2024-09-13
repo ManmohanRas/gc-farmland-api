@@ -89,4 +89,17 @@ public class TermBrokenRuleRepository : ITermBrokenRuleRepository
                 @p_ApplicationId = applicationId
             });
     }
+
+    public async Task DeleteAllBrokenRulesAsync(int applicationId)
+    {
+        using var conn = context.CreateConnection();
+        var sqlCommand = new DeleteAllBrokenRulesSqlCommand();
+        await conn.ExecuteAsync(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+            param: new
+            {
+                @p_ApplicationId = applicationId
+            });
+    }
 }

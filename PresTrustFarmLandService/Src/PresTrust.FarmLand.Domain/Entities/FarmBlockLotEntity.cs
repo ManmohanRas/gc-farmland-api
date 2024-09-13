@@ -36,6 +36,7 @@ public class FarmBlockLotEntity
     public bool CreatedByProgramUser { get; set; }
     public bool IsChecked { get; set; }
     public bool IsClassCodeWarning {  get; set; }
+    public string CorePropertyClassCode { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
 }

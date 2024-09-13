@@ -30,7 +30,14 @@ public  class GetFarmBlockLotSqlQuery
 			  ,MBL.[Notes]
 			  ,MBL.[CreatedByProgramUser]
 		      ,MBL.[IsValidPamsPin]
-              FROM [Farm].[FarmMunicipalityBlockLotParcel] MBL;";
+			  ,CP.PropertyClassCode AS CorePropertyClassCode
+			  ,CASE 
+				WHEN CP.PropertyClassCode = '3B' AND MBL.PropertyClassCode <> CP.PropertyClassCode
+				THEN 1
+				ELSE 0 
+				END AS IsClassCodeWarning
+              FROM [Farm].[FarmMunicipalityBlockLotParcel] MBL
+			  LEFT JOIN CORE.Parcels CP ON (CP.PAMS_PIN = MBL.PamsPin);";
 
     public override string ToString()
     {
