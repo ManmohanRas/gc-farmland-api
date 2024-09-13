@@ -102,6 +102,7 @@ public class FarmBlockLotRepository: IFarmBlockLotRepository
                 @p_DeedPage = parcel.DeedPage,
                 @p_CreatedByProgramUser = parcel.CreatedByProgramUser,
                 @p_IsWarning = parcel.IsWarning,
+                @p_IsValidPamsPin = parcel.IsValidPamsPin,
                 @p_LastUpdatedBy = parcel.LastUpdatedBy,
                 @p_LastUpdatedOn = DateTime.Now
             });
@@ -144,6 +145,7 @@ public class FarmBlockLotRepository: IFarmBlockLotRepository
                 @p_DeedPage = parcel.DeedPage,
                 @p_CreatedByProgramUser = parcel.CreatedByProgramUser,
                 @p_IsWarning = parcel.IsWarning,
+                @p_IsValidPamsPin  =  parcel.IsValidPamsPin,
                 @p_LastUpdatedBy = parcel.LastUpdatedBy,
                 @p_LastUpdatedOn = DateTime.Now
             });

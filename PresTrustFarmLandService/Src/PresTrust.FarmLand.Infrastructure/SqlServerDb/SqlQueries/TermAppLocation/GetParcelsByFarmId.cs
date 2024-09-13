@@ -1,6 +1,6 @@
 ﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries;
 
-public class GetTermAppLocationSqlQuery
+public class GetParcelsByFarmId
 {
     private readonly string _sqlCommand =
         @"  SELECT Distinct
@@ -29,16 +29,23 @@ public class GetTermAppLocationSqlQuery
 			  ,MBL.DeedPage
 			  ,MBL.IsWarning
 			  ,MBL.[Notes]
-			  ,MBL.[CreatedByProgramUser],
-            L.IsChecked,
-            L.ApplicationId,
-            CM.[Municipality] AS Municipality
+			  ,MBL.[CreatedByProgramUser]
+              ,MBL.[IsValidPamsPin],
+              L.IsChecked,
+              L.ApplicationId,
+            CM.[Municipality] AS Municipality,
+            CASE 
+            WHEN CP.PropertyClassCode = '3B' AND MBL.PropertyClassCode <> CP.PropertyClassCode
+            THEN 1
+            ELSE 0 
+            END AS IsClassCodeWarning
             FROM [Farm].[FarmMunicipalityBlockLotParcel] AS MBL
            LEFT JOIN [Farm].[FarmTermAppLocation] AS L ON (MBL.FarmListID = L.FarmListID and MBL.Id = L.ParcelId AND L.applicationId = @p_ApplicationId)
            LEFT JOIN [Core].[View_AgencyEntities_FARM] ViewAgency ON (MBL.MunicipalityId = ViewAgency.AgencyId)
            LEFT JOIN [Core].[Municipality] CM ON (MBL.MunicipalityId = CM.MunicipalId AND CM.InCounty = 1)
+           LEFT JOIN CORE.Parcels CP ON (CP.PAMS_PIN = MBL.PamsPin)
            WHERE MBL.FarmListID = @p_FarmListID;";
-    public GetTermAppLocationSqlQuery()
+    public GetParcelsByFarmId()
     {
     }
 

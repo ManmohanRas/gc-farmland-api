@@ -29,6 +29,7 @@ public class CreateFarmBlockLotSqlCommand
                        ,[CreatedByProgramUser]
                        ,[IsWarning]
                        ,[ExceptionAreaAcres]
+                       ,[IsValidPamsPin]
                        ,[LastUpdatedOn]
                        ,[LastUpdatedBy])
                  VALUES
@@ -58,6 +59,7 @@ public class CreateFarmBlockLotSqlCommand
                        ,@p_IsWarning
                        ,@p_LastUpdatedBy
                        ,@p_ExceptionAreaAcres
+                       ,@p_IsValidPamsPin
                        ,@p_LastUpdatedOn);
 
                 SELECT CAST( SCOPE_IDENTITY() AS INT);";

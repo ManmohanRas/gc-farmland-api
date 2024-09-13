@@ -5,5 +5,6 @@ public class GetFarmEsmtExceptionsQueryMappingProfile : Profile
     public GetFarmEsmtExceptionsQueryMappingProfile()
     {
         CreateMap<FarmEsmtExceptionsEntity, GetFarmEsmtExceptionsQueryViewModel>();
+        CreateMap<FarmEsmtAttachmentBEntity, FarmEsmtAttachmentBViewModel>();
     }
 }

@@ -60,8 +60,8 @@ public class FarmEsmtAppSecurityManager
                 ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AgriculturalUseProduction(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 EquineUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
 
                 this.defaultNavigationItem = new NavigationItemEntity()
@@ -89,8 +89,8 @@ public class FarmEsmtAppSecurityManager
                 ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AgriculturalUseProduction(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 EquineUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
 
                 this.defaultNavigationItem = new NavigationItemEntity()
@@ -281,38 +281,40 @@ public class FarmEsmtAppSecurityManager
         }
     }
 
-    private void OtherDocuments(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
-    {
-        switch (enumViewOrEdit)
-        {
-            case ApplicationTabEditOrViewEnum.VIEW:
-                permission.CanViewOtherDocsSection = true;
-                navigationItems.Add(new NavigationItemEntity() { Title = TermAppNavigationItemTitles.OTHER_DOCUMENTS, RouterLink = TermApplicationRouterLinks.OTHER_DOCUMENTS_VIEW, SortOrder = 10, Icon = (correction == true ? "report_problem" : "") });
-                break;
-            case ApplicationTabEditOrViewEnum.EDIT:
-                permission.CanEditOtherDocsSection = true;
-                navigationItems.Add(new NavigationItemEntity() { Title = TermAppNavigationItemTitles.OTHER_DOCUMENTS, RouterLink = TermApplicationRouterLinks.OTHER_DOCUMENTS_EDIT, SortOrder = 10, Icon = (correction == true ? "report_problem" : "") });
-                break;
-            default:
-                break;
-        }
-    }
-
     private void Signatory(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
     {
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
                 permission.CanViewSignatorySection = true;
-                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SIGNATORY, RouterLink = EsmtAppRouterLinks.SIGNATORY_VIEW, SortOrder = 11, Icon = (correction == true ? "report_problem" : "") });
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SIGNATORY, RouterLink = EsmtAppRouterLinks.SIGNATORY_VIEW, SortOrder = 10, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
                 permission.CanEditSignatorySection = true;
-                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SIGNATORY, RouterLink = EsmtAppRouterLinks.SIGNATORY_EDIT, SortOrder = 11, Icon = (correction == true ? "report_problem" : "") });
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SIGNATORY, RouterLink = EsmtAppRouterLinks.SIGNATORY_EDIT, SortOrder = 10, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
                 break;
         }
     }
+
+    private void OtherDocuments(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                permission.CanViewOtherDocsSection = true;
+                navigationItems.Add(new NavigationItemEntity() { Title = TermAppNavigationItemTitles.OTHER_DOCUMENTS, RouterLink = TermApplicationRouterLinks.OTHER_DOCUMENTS_VIEW, SortOrder = 11, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                permission.CanEditOtherDocsSection = true;
+                navigationItems.Add(new NavigationItemEntity() { Title = TermAppNavigationItemTitles.OTHER_DOCUMENTS, RouterLink = TermApplicationRouterLinks.OTHER_DOCUMENTS_EDIT, SortOrder = 11, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+
+   
 }
 

@@ -91,6 +91,20 @@ public class FarmEsmtController : FarmController
         return Single(await QueryAsync(query));
     }
 
+    [HttpPost("saveAttachmentB")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveAttachmentB([FromBody] SaveFarmEsmtAttachmentBCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("deleteAttachmentB")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<bool>> deleteAttachmentB([FromBody] DeleteFarmEsmtAttachmentBCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
     [HttpPost("getEsmtAppExistNonAgreeUses")]
     [ProducesResponseType(typeof(GetEsmtAppExistUsesQueryViewModel),(int)HttpStatusCode.OK)]
 
