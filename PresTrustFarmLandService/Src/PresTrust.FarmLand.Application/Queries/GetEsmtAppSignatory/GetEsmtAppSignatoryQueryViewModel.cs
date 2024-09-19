@@ -20,7 +20,7 @@ public class FarmEsmtAttachmentAViewModel
     public int ApplicationId { get; set; }
     public bool IsOfferPriceIndicated { get; set; }
     public string OfferPriceOpinion { get; set; }
-    public int AvaragePerAcre { get; set; }
+    public int AveragePerAcre { get; set; }
     public string OfferPriceComments { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime? LastUpdatedOn { get; set; }

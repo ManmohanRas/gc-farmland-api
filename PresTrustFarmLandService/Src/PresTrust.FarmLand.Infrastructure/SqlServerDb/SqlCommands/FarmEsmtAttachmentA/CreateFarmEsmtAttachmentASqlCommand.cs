@@ -8,7 +8,7 @@ public class CreateFarmEsmtAttachmentASqlCommand
                              ApplicationId
                             ,IsOfferPriceIndicated
                             ,OfferPriceOpinion
-                            ,AvaragePerAcre
+                            ,AveragePerAcre
                             ,OfferPriceComments
                             ,LastUpdatedBy  
 			                ,LastUpdatedOn
@@ -18,7 +18,7 @@ public class CreateFarmEsmtAttachmentASqlCommand
                              @p_ApplicationId
                             ,@p_IsOfferPriceIndicated
                             ,@p_OfferPriceOpinion
-                            ,@p_AvaragePerAcre
+                            ,@p_AveragePerAcre
                             ,@p_OfferPriceComments
                             ,@p_LastUpdatedBy  
 			                ,GetDate()

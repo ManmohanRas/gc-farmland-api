@@ -73,7 +73,7 @@ public class FarmEsmtAttachmentARepository : IFarmEsmtAttachmentARepository
                             ,@p_ApplicationId                           =   AttachmentADetails.ApplicationId
                             ,@p_IsOfferPriceIndicated                   =   AttachmentADetails.IsOfferPriceIndicated
                             ,@p_OfferPriceOpinion                       =   AttachmentADetails.OfferPriceOpinion
-                            ,@p_AvaragePerAcre                          =   AttachmentADetails.AvaragePerAcre
+                            ,@p_AveragePerAcre                          =   AttachmentADetails.AveragePerAcre
                             ,@p_OfferPriceComments                      =   AttachmentADetails.OfferPriceComments
                             ,@p_LastUpdatedBy                           =   AttachmentADetails.LastUpdatedBy  
 			                ,@p_LastUpdatedOn                           =   DateTime.Now
@@ -99,7 +99,7 @@ public class FarmEsmtAttachmentARepository : IFarmEsmtAttachmentARepository
                ,@p_ApplicationId           =   AttachmentADetails.ApplicationId
                ,@p_IsOfferPriceIndicated   =   AttachmentADetails.IsOfferPriceIndicated
                ,@p_OfferPriceOpinion       =   AttachmentADetails.OfferPriceOpinion
-               ,@p_AvaragePerAcre          =   AttachmentADetails.AvaragePerAcre
+               ,@p_AveragePerAcre          =   AttachmentADetails.AveragePerAcre
                ,@p_OfferPriceComments      =   AttachmentADetails.OfferPriceComments
                ,@p_LastUpdatedBy           =   AttachmentADetails.LastUpdatedBy  
                ,@p_LastUpdatedOn           =   DateTime.Now

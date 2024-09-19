@@ -7,7 +7,7 @@ public class UpdateFarmEsmtAttachmentASqlCommand
             SET              ApplicationId                  =   @p_ApplicationId
                             ,IsOfferPriceIndicated          =   @p_IsOfferPriceIndicated
                             ,OfferPriceOpinion              =   @p_OfferPriceOpinion
-                            ,AvaragePerAcre                 =   @p_AvaragePerAcre
+                            ,AveragePerAcre                 =   @p_AveragePerAcre
                             ,OfferPriceComments             =   @p_OfferPriceComments
                             ,ReasonForException             =   @p_ReasonForException
                             ,LastUpdatedBy                  =   @p_LastUpdatedBy  

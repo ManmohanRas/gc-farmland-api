@@ -7,7 +7,7 @@ public class GetFarmEsmtAttachmentASqlQuery
                             ,[ApplicationId]
                             ,[IsOfferPriceIndicated]
                             ,[OfferPriceOpinion]
-                            ,[AvaragePerAcre]
+                            ,[AveragePerAcre]
                             ,[OfferPriceComments]
                             ,[LastUpdatedBy]  
 			                ,[LastUpdatedOn]
