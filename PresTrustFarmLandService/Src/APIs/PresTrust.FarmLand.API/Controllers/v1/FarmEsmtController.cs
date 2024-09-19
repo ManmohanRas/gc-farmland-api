@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.API.Controllers.v1;
+﻿using PresTrust.FarmLand.Application.Commands.SaveFarmEsmtAttachmentA;
+
+namespace PresTrust.FarmLand.API.Controllers.v1;
 
 [Route("api/v1/farm-esmt")]
 [ApiController]
@@ -138,4 +140,19 @@ public class FarmEsmtController : FarmController
     {
         return Single(await CommandAsync(command));
     }
+
+    [HttpPost("saveAttachmentA")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveAttachmentA([FromBody] SaveFarmEsmtAttachmentACommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("deleteAttachmentA")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<bool>> deleteAttachmentA([FromBody] DeleteFarmEsmtAttachmentACommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
 }
