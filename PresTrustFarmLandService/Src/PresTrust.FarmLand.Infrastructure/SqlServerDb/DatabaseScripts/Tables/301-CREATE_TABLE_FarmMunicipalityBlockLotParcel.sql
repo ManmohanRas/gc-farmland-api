@@ -16,7 +16,6 @@ GO
 -- Create Table
 CREATE TABLE [Farm].[FarmMunicipalityBlockLotParcel](
 [Id] [int] IDENTITY(1,1) NOT NULL,
-	[ApplicationId] [int] NULL,
 	[MunicipalityId] [varchar](4) NOT NULL,
 	[FarmListID] [int] NOT NULL,
 	[PropertyClassCode]  [varchar](50) NULL,
