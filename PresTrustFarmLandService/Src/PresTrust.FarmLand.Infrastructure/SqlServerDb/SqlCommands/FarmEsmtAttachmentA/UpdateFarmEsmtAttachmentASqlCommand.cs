@@ -9,7 +9,6 @@ public class UpdateFarmEsmtAttachmentASqlCommand
                             ,OfferPriceOpinion              =   @p_OfferPriceOpinion
                             ,AveragePerAcre                 =   @p_AveragePerAcre
                             ,OfferPriceComments             =   @p_OfferPriceComments
-                            ,ReasonForException             =   @p_ReasonForException
                             ,LastUpdatedBy                  =   @p_LastUpdatedBy  
 			                ,LastUpdatedOn                  =   @p_LastUpdatedOn
 
