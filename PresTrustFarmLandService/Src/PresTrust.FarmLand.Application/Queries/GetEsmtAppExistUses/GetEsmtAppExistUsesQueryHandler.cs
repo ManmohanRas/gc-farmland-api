@@ -10,6 +10,7 @@ public class GetEsmtAppExistUsesQueryHandler : BaseHandler, IRequestHandler<GetE
     private readonly IApplicationRepository repoApplication;
     private ITermOtherDocumentsRepository repoDocuments;
     private IEsmtAppAttachmentCRepository repoAttachmentC;
+    private IEsmtAppAttachmentERepository repoAttachmentE;
 
 
     public GetEsmtAppExistUsesQueryHandler(
@@ -17,7 +18,8 @@ public class GetEsmtAppExistUsesQueryHandler : BaseHandler, IRequestHandler<GetE
          IApplicationRepository repoApplication,
          IEsmtAppExistUsesRepository repoExistUses,
           ITermOtherDocumentsRepository repoDocuments,
-          IEsmtAppAttachmentCRepository repoAttachmentC
+          IEsmtAppAttachmentCRepository repoAttachmentC,
+          IEsmtAppAttachmentERepository repoAttachmentE
         ) :base(repoApplication : repoApplication)
     {
         this.mapper = mapper;
@@ -25,6 +27,7 @@ public class GetEsmtAppExistUsesQueryHandler : BaseHandler, IRequestHandler<GetE
         this.repoApplication = repoApplication;
         this.repoDocuments = repoDocuments;
         this.repoAttachmentC = repoAttachmentC;
+        this.repoAttachmentE = repoAttachmentE;
 
     }
     public async Task<GetEsmtAppExistUsesQueryViewModel> Handle(GetEsmtAppExistUsesQuery request, CancellationToken cancellationToken)
@@ -33,10 +36,12 @@ public class GetEsmtAppExistUsesQueryHandler : BaseHandler, IRequestHandler<GetE
         var reqexistUses = await repoExistUses.GetEsmtAppExistUses(application.Id);
         var documents = await GetDocuments(request.ApplicationId);
         var attachmentC = await repoAttachmentC.GetEsmtAppAttachmentCAsync(request.ApplicationId);
+        var attachmentE = await repoAttachmentE.GetEsmtAppAttachmentEAsync(request.ApplicationId);
 
         var result = mapper.Map<EsmtAppExistUsesEntity, GetEsmtAppExistUsesQueryViewModel>(reqexistUses);
         
         result.attachmentCs = mapper.Map<IEnumerable<EsmtAppAttachmentCEntity>, IEnumerable<GetEsmtAppAttachmentCQueryViewModel>>(attachmentC);
+        result.attachmentEs = mapper.Map<IEnumerable<EsmtAppAttachmentEEntity>, IEnumerable<GetEsmtAppAttachmentEQueryViewModel>>(attachmentE);
 
         result.DocumentsTree = documents ?? new List<DocumentTypeViewModel>();
         return result;

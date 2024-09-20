@@ -6,6 +6,7 @@ public class SaveEsmtAppAttachmentCCommand:IRequest<int>
     public int ApplicationId { get; set; }
     public bool IsExceptionAreaPreserved { get; set; }
     public bool IsNonAgriPremisesPreserved { get; set; }
+    public bool IsLeaseWithAnotherParty { get; set; }
     public string DescNonAgriUses { get; set; }
     public string NonAgriAreaUtilization { get; set; }
     public string NonAgriLease { get; set; }
