@@ -6,8 +6,9 @@ public class CreateEsmtAppAttachmentCSqlCommand
                                  (                 
                                                    ApplicationId,                                         
                                                    IsExceptionAreaPreserved,                                
-                                                   IsNonAgriPremisesPreserved,                               
-                                                   DescNonAgriUses,				          
+                                                   IsNonAgriPremisesPreserved,
+                                                   IsLeaseWithAnotherParty,
+                                                   DescNonAgriUses,
                                                    NonAgriAreaUtilization,			 	           
                                                    NonAgriLease,				    
                                                    NonAgriUseAccessParcel,				             
@@ -18,8 +19,9 @@ public class CreateEsmtAppAttachmentCSqlCommand
                                                    
                                                    @p_ApplicationId,                                         
                                                    @p_IsExceptionAreaPreserved,                                
-                                                   @p_IsNonAgriPremisesPreserved,                               
-                                                   @p_DescNonAgriUses,				          
+                                                   @p_IsNonAgriPremisesPreserved,
+                                                   @p_IsLeaseWithAnotherParty,
+                                                   @p_DescNonAgriUses,
                                                    @p_NonAgriAreaUtilization,			 	           
                                                    @p_NonAgriLease,				    
                                                    @p_NonAgriUseAccessParcel,				             
