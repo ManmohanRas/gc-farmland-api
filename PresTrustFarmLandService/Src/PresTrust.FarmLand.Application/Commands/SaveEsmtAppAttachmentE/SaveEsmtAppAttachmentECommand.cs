@@ -7,8 +7,8 @@ public class SaveEsmtAppAttachmentECommand:IRequest<int>
     public int Id { get; set; }
     public int ApplicationId { get; set; }
     public string TypeOfDevelopment { get; set; }
-    public DateTime PreliminaryApprovalDate { get; set; }
-    public DateTime FinalApprovalDate { get; set; }
+    public DateTime? PreliminaryApprovalDate { get; set; }
+    public DateTime? FinalApprovalDate { get; set; }
     public string ScaleofSubdivision { get; set; }
     public string OtherPertinentInformation { get; set; }
     public bool IsOpenEnrollment { get; set; }
