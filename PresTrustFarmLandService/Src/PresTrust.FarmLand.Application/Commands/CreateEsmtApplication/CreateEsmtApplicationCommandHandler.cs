@@ -82,7 +82,7 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
         result.Comments = comments;
         result.Feedbacks = feedbacks;
         result.Agency = application.Agency;
-        result.Permission = securityMgr.Permission;
+        result.EsmtPermission = securityMgr.EsmtPermission;
         result.NavigationItems = securityMgr.NavigationItems;
         result.AdminNavigationItems = securityMgr.AdminNavigationItems;
         result.PostApprovedNavigationItems = securityMgr.PostApprovedNavigationItems;
