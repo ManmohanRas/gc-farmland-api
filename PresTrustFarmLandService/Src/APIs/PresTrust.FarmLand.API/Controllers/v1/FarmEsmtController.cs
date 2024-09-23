@@ -138,4 +138,25 @@ public class FarmEsmtController : FarmController
     {
         return Single(await CommandAsync(command));
     }
+
+    [HttpPost("getEsmtAttachmentD")]
+    [ProducesResponseType(typeof(GetAttachmentDQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetAttachmentDQueryViewModel>> GetEsmtAttachmentD([FromBody]  GetAttachmentDQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveEsmtAttachmentD")]
+    [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Unit>> SaveEsmtAttachmentD([FromBody] SaveEsmtAttachmentDCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("deleteAttachmentD")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<bool>> deleteAttachmentD([FromBody] DeleteAttachmentDCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
 }
