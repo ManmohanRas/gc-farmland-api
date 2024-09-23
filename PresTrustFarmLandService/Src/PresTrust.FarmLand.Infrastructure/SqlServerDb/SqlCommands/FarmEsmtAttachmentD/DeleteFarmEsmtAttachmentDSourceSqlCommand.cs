@@ -1,0 +1,19 @@
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
+    public class DeleteFarmEsmtAttachmentDSourceSqlCommand
+    {
+        private readonly string _sqlCommand =
+           @"  DELETE 
+                FROM	[Farm].[FarmEsmtAttachmentD]
+                WHERE   Id = @p_Id AND ApplicationId = @p_ApplicationId;";
+
+        public DeleteFarmEsmtAttachmentDSourceSqlCommand()
+        {
+        }
+
+        public override string ToString()
+        {
+            return _sqlCommand;
+        }
+
+    }
+
