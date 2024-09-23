@@ -24,6 +24,7 @@ CREATE TABLE [Farm].[FarmEsmtAttachmentC](
    [NonAgriAreaUtilization]		   [varchar](4000)		                      NULL, 
    [NonAgriLease]                  [varchar](4000)		                      NULL, 
    [NonAgriUseAccessParcel]		   [varchar](4000)		                      NULL,  
+   [IsLeaseWithAnotherParty]	   [bit]									  NULL,
    [LastUpdatedBy]				   [varchar](128)		                      NULL, 
    [LastUpdatedOn]				   [datetime]			                  NOT NULL
    CONSTRAINT [PK_FarmEsmtAttachmentC_Id] PRIMARY KEY CLUSTERED
