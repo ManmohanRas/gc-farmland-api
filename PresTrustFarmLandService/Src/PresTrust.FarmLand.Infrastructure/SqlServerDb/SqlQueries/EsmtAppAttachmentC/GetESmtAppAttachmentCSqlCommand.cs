@@ -9,6 +9,7 @@ public class GetESmtAppAttachmentCSqlCommand
                                                        ,[ApplicationId]
                                                        ,[IsExceptionAreaPreserved]
                                                        ,[IsNonAgriPremisesPreserved]
+                                                       ,[IsLeaseWithAnotherParty]
                                                        ,[DescNonAgriUses]
                                                        ,[NonAgriAreaUtilization]
                                                        ,[NonAgriLease]

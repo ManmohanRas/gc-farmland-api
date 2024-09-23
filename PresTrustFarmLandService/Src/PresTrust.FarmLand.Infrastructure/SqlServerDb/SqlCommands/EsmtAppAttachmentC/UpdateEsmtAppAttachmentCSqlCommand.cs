@@ -8,6 +8,7 @@ public class UpdateEsmtAppAttachmentCSqlCommand
                                  SET    ApplicationId                  =   @p_ApplicationId,
                                         IsExceptionAreaPreserved       =  @p_IsExceptionAreaPreserved,
                                         IsNonAgriPremisesPreserved     = @p_IsNonAgriPremisesPreserved,
+                                        IsLeaseWithAnotherParty        = @p_IsLeaseWithAnotherParty,
                                         DescNonAgriUses                = @p_DescNonAgriUses,
                                         NonAgriAreaUtilization         = @p_NonAgriAreaUtilization,
                                         NonAgriLease                   =  @p_NonAgriLease,

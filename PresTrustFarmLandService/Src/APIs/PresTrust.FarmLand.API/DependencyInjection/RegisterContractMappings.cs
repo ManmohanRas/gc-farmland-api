@@ -34,6 +34,9 @@
             services.AddTransient<IEsmtAppExistUsesRepository, EsmtAppExistUsesRepository>();
             services.AddTransient<IEsmtAppAttachmentCRepository, EsmtAppAttachmentCRepository>();
             services.AddTransient<IEsmtAppAttachmentDRepository, EsmtAppAttachmentDRepository>();
+           services.AddTransient<IEsmtAppAttachmentERepository, EsmtAppAttachmentERepository>();
+           services.AddTransient<IFarmEsmtAttachmentARepository, FarmEsmtAttachmentARepository>();
+
     }
 }
 

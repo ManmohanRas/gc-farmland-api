@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.API.Controllers.v1;
+﻿using PresTrust.FarmLand.Application.Commands.SaveFarmEsmtAttachmentA;
+
+namespace PresTrust.FarmLand.API.Controllers.v1;
 
 [Route("api/v1/farm-esmt")]
 [ApiController]
@@ -153,9 +155,37 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
+    [HttpPost("saveAttachmentE")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveAttachmentE([FromBody] SaveEsmtAppAttachmentECommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("saveAttachmentA")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveAttachmentA([FromBody] SaveFarmEsmtAttachmentACommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
     [HttpPost("deleteAttachmentD")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<bool>> deleteAttachmentD([FromBody] DeleteAttachmentDCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("deleteAttachmentE")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<bool>> deleteAttachmentE([FromBody] DeleteEsmtAppAttachmentECommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("deleteAttachmentA")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<bool>> deleteAttachmentA([FromBody] DeleteFarmEsmtAttachmentACommand command)
     {
         return Single(await CommandAsync(command));
     }

@@ -20,7 +20,7 @@ CREATE TABLE [Farm].[FarmEsmtExistNonAgriUses](
    [Id]							   [integer] 		IDENTITY(1,1)  NOT NULL,
    [ApplicationId]                  [integer]                       NOT NULL,
    [IsSubdivisionApproval]         [bit]                           NOT NULL,
-   [InfoAboutPremises]             [varchar](4000)                 NOT NULL,   
+   [InfoAboutPremises]             [varchar](4000)                     NULL,   
    [LastUpdatedBy]				   [varchar](128)		               NULL, 
    [LastUpdatedOn]				   [datetime]			           NOT NULL
    CONSTRAINT [PK_FarmEsmtExistNonAgriUses_ID] PRIMARY KEY CLUSTERED
