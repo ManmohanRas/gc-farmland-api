@@ -32,7 +32,8 @@
             services.AddTransient<IEsmtAppSignatoryRepository, EsmtAppSignatoryRepository>();
             services.AddTransient<IFarmEsmtAttachmentBRepository, FarmEsmtAttachmentBRepository>();
             services.AddTransient<IEsmtAppExistUsesRepository, EsmtAppExistUsesRepository>();
-           services.AddTransient<IEsmtAppAttachmentCRepository, EsmtAppAttachmentCRepository>();
+            services.AddTransient<IEsmtAppAttachmentCRepository, EsmtAppAttachmentCRepository>();
+            services.AddTransient<IFarmEsmtAgriculturalEnterpriseRepository, FarmEsmtAgriculturalEnterpriseRepository>();
 
     }
 }

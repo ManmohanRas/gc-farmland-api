@@ -138,4 +138,24 @@ public class FarmEsmtController : FarmController
     {
         return Single(await CommandAsync(command));
     }
+
+    [HttpPost("GetFarmEsmtAgriEnterprisDetails")]
+    [ProducesResponseType(typeof(GetFarmEsmtAgriEnterpriseQueryViewModel), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+    public async Task<ActionResult<GetFarmEsmtAgriEnterpriseQueryViewModel>> GetFarmEsmtAgriEnterprisDetails([FromBody] GetFarmEsmtAgriEnterpriseQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveFarmEsmtAgriEnterpriseDetails")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+    public async Task<ActionResult<int>> saveFarmEsmtAgriEnterpriseDetails([FromBody] SaveFarmEsmtAgriEnterpriseCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
 }
