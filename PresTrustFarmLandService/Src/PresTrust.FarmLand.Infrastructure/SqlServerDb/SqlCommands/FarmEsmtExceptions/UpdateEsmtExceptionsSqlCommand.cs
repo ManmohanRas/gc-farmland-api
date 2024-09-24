@@ -6,10 +6,10 @@ public class UpdateEsmtExceptionsSqlCommand
         @" UPDATE [FARM].[FARMESMTAPPEXCEPTIONS]
                 SET ApplicationId                 = @p_ApplicationId
                     ,ExpectedTaxLots              = @p_ExpectedTaxLots
-                    ,ExceptionNonServable         = @p_ExceptionNonServable
-                    ,ExceptionTotalNonServable    = @P_ExceptionTotalNonServable
-                    ,ExceptionServable            = @p_ExceptionServable
-                    ,ExceptionTotalServable       = @p_ExceptionTotalServable
+                    ,ExceptionNonSeverable        = @p_ExceptionNonSeverable
+                    ,ExceptionTotalNonSeverable   = @p_ExceptionTotalNonSeverable
+                    ,ExceptionSeverable           = @p_ExceptionSeverable
+                    ,ExceptionTotalSeverable      = @p_ExceptionTotalSeverable
                     ,Acres                        = @p_Acres
                     ,LastUpdatedBy                = @p_LastUpdatedBy
                     ,LastUpdatedOn                 = @p_LastUpdatedOn
