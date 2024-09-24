@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.Application.Commands;
+﻿using static System.Collections.Specialized.BitVector32;
+
+namespace PresTrust.FarmLand.Application.Commands;
 
 /// <summary>
 /// This class handles the command to update data and build response
@@ -147,6 +149,11 @@ public class CreateTermApplicationCommandHandler : BaseHandler, IRequestHandler<
             IsApplicantFlow = true
         });
 
+
+
+
         return brokenRules;
+
     }
+
 }

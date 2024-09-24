@@ -7,10 +7,10 @@ public class CreateEsmtExceptionsSqlCommand
             (
                ApplicationId
                ,ExpectedTaxLots
-               ,ExceptionNonServable
-               ,ExceptionTotalNonServable
-               ,ExceptionServable
-               ,ExceptionTotalServable
+               ,ExceptionNonSeverable
+               ,ExceptionTotalNonSeverable
+               ,ExceptionSeverable
+               ,ExceptionTotalSeverable
                ,Acres
                ,LastUpdatedBy  
 			   ,LastUpdatedOn
@@ -20,10 +20,10 @@ public class CreateEsmtExceptionsSqlCommand
                 (
                     @p_ApplicationId					
                     ,@p_ExpectedTaxLots				
-                    ,@p_ExceptionNonServable			
-                    ,@p_ExceptionTotalNonServable		
-                    ,@p_ExceptionServable				
-                    ,@p_ExceptionTotalServable		
+                    ,@p_ExceptionNonSeverable			
+                    ,@p_ExceptionTotalNonSeverable		
+                    ,@p_ExceptionSeverable				
+                    ,@p_ExceptionTotalSeverable		
                     ,@p_Acres						    
                     ,@p_LastUpdatedBy					
 					,GetDate()
