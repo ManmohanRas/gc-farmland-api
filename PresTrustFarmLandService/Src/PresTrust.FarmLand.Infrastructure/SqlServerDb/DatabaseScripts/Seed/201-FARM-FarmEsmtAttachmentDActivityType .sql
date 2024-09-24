@@ -14,7 +14,7 @@ GO
 INSERT INTO [Farm].[FarmEsmtAttachmentDActivityType] ([Id],[Title]) VALUES (4,'RIDING_AND_OR_DRIVING_LESSIONS');
 GO
 
-INSERT INTO [Farm].[FarmEsmtAttachmentDActivityType] ([Id],[Title]) VALUES (5,'REHABILITAION');
+INSERT INTO [Farm].[FarmEsmtAttachmentDActivityType] ([Id],[Title]) VALUES (5,'REHABILITATION');
 GO
 
 INSERT INTO [Farm].[FarmEsmtAttachmentDActivityType] ([Id],[Title]) VALUES (6,'CLINICS');
