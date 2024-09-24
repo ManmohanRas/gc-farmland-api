@@ -141,11 +141,25 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
+    [HttpPost("GetFarmEsmtAgriEnterprisDetails")]
+    [ProducesResponseType(typeof(GetFarmEsmtAgriEnterpriseQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetFarmEsmtAgriEnterpriseQueryViewModel>> GetFarmEsmtAgriEnterprisDetails([FromBody] GetFarmEsmtAgriEnterpriseQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
     [HttpPost("getEsmtAttachmentD")]
     [ProducesResponseType(typeof(GetAttachmentDQueryViewModel), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<GetAttachmentDQueryViewModel>> GetEsmtAttachmentD([FromBody]  GetAttachmentDQuery query)
     {
         return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveFarmEsmtAgriEnterpriseDetails")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveFarmEsmtAgriEnterpriseDetails([FromBody] SaveFarmEsmtAgriEnterpriseCommand command)
+    {
+        return Single(await CommandAsync(command));
     }
 
     [HttpPost("saveEsmtAttachmentD")]
