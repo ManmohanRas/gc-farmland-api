@@ -22,6 +22,7 @@ public class CreateEsmtApplicationCommandViewModel
     public IEnumerable<FarmCommentsEntity> Comments { get; set; }
     public IEnumerable<FarmFeedbacksEntity> Feedbacks { get; set; }
     public EsmtAppPermissionEntity Permission { get; set; } = new EsmtAppPermissionEntity();
+    public EsmtAppPermissionEntity EsmtPermission { get; set; } = new EsmtAppPermissionEntity();
     public IEnumerable<NavigationItemEntity> NavigationItems { get; set; } = new List<NavigationItemEntity>();
     public IEnumerable<NavigationItemEntity> AdminNavigationItems { get; set; } = new List<NavigationItemEntity>();
     public IEnumerable<NavigationItemEntity> PostApprovedNavigationItems { get; set; } = new List<NavigationItemEntity>();

@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.API.Controllers.v1;
+﻿using PresTrust.FarmLand.Application.Commands.SaveFarmEsmtAttachmentA;
+
+namespace PresTrust.FarmLand.API.Controllers.v1;
 
 [Route("api/v1/farm-esmt")]
 [ApiController]
@@ -141,20 +143,63 @@ public class FarmEsmtController : FarmController
 
     [HttpPost("GetFarmEsmtAgriEnterprisDetails")]
     [ProducesResponseType(typeof(GetFarmEsmtAgriEnterpriseQueryViewModel), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     public async Task<ActionResult<GetFarmEsmtAgriEnterpriseQueryViewModel>> GetFarmEsmtAgriEnterprisDetails([FromBody] GetFarmEsmtAgriEnterpriseQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("getEsmtAttachmentD")]
+    [ProducesResponseType(typeof(GetAttachmentDQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetAttachmentDQueryViewModel>> GetEsmtAttachmentD([FromBody]  GetAttachmentDQuery query)
     {
         return Single(await QueryAsync(query));
     }
 
     [HttpPost("saveFarmEsmtAgriEnterpriseDetails")]
     [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     public async Task<ActionResult<int>> saveFarmEsmtAgriEnterpriseDetails([FromBody] SaveFarmEsmtAgriEnterpriseCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("saveEsmtAttachmentD")]
+    [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Unit>> SaveEsmtAttachmentD([FromBody] SaveEsmtAttachmentDCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("saveAttachmentE")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveAttachmentE([FromBody] SaveEsmtAppAttachmentECommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("saveAttachmentA")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveAttachmentA([FromBody] SaveFarmEsmtAttachmentACommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("deleteAttachmentD")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<bool>> deleteAttachmentD([FromBody] DeleteAttachmentDCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("deleteAttachmentE")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<bool>> deleteAttachmentE([FromBody] DeleteEsmtAppAttachmentECommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("deleteAttachmentA")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<bool>> deleteAttachmentA([FromBody] DeleteFarmEsmtAttachmentACommand command)
     {
         return Single(await CommandAsync(command));
     }

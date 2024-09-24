@@ -6,6 +6,7 @@ public class GetEsmtAppExistUsesQueryMappingProfile:Profile
     {
         CreateMap<EsmtAppExistUsesEntity, GetEsmtAppExistUsesQueryViewModel>();
         CreateMap<EsmtAppAttachmentCEntity, GetEsmtAppAttachmentCQueryViewModel>();
+        CreateMap<EsmtAppAttachmentEEntity, GetEsmtAppAttachmentEQueryViewModel>();
 
     }
 }

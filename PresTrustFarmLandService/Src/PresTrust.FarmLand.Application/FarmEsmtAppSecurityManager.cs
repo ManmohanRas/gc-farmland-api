@@ -5,7 +5,7 @@ public class FarmEsmtAppSecurityManager
     private UserRoleEnum userRole = default;
     private EsmtAppStatusEnum applicationStatus = default;
     private ApplicationTypeEnum applicationTypeEnum = default;
-    private EsmtAppPermissionEntity permission = default;
+    private EsmtAppPermissionEntity esmtPermission = default;
     private List<NavigationItemEntity> navigationItems = default;
     private List<NavigationItemEntity> adminNavigationItems = default;
     private List<NavigationItemEntity> postApprovedNavigationItems = default;
@@ -20,7 +20,7 @@ public class FarmEsmtAppSecurityManager
         ConfigurePermissions();
     }
 
-    public EsmtAppPermissionEntity Permission { get { return permission; } }
+    public EsmtAppPermissionEntity EsmtPermission { get { return esmtPermission; } }
     public List<NavigationItemEntity> NavigationItems { get => navigationItems; }
     public List<NavigationItemEntity> AdminNavigationItems { get => adminNavigationItems; }
     public List<NavigationItemEntity> PostApprovedNavigationItems { get => postApprovedNavigationItems; }
@@ -28,7 +28,7 @@ public class FarmEsmtAppSecurityManager
 
     public void ConfigurePermissions()
     {
-        permission = new EsmtAppPermissionEntity();
+        esmtPermission = new EsmtAppPermissionEntity();
         navigationItems = new List<NavigationItemEntity>();
         adminNavigationItems = new List<NavigationItemEntity>();
         postApprovedNavigationItems = new List<NavigationItemEntity>();
@@ -45,11 +45,11 @@ public class FarmEsmtAppSecurityManager
             case UserRoleEnum.PROGRAM_EDITOR:
                 if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
                 {
-                    permission.CanSubmitApplication = true;
+                    esmtPermission.CanSubmitApplication = true;
                 }
 
-                permission.CanSaveDocument = true;
-                permission.CanDeleteDocument = true;
+                esmtPermission.CanSaveDocument = true;
+                esmtPermission.CanDeleteDocument = true;
 
                 Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -75,10 +75,10 @@ public class FarmEsmtAppSecurityManager
             case UserRoleEnum.AGENCY_EDITOR:
                 if (userRole == UserRoleEnum.AGENCY_ADMIN)
                 {
-                    permission.CanSubmitApplication = true;
+                    esmtPermission.CanSubmitApplication = true;
                 }
-                permission.CanSaveDocument = true;
-                permission.CanDeleteDocument = true;
+                esmtPermission.CanSaveDocument = true;
+                esmtPermission.CanDeleteDocument = true;
 
                 Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -145,11 +145,11 @@ public class FarmEsmtAppSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
-                permission.CanViewLocationSection = true;
+                esmtPermission.CanViewLocationSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.LOCATION, RouterLink = EsmtAppRouterLinks.LOCATION_VIEW, SortOrder = 1, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
-                permission.CanEditLocationSection = true;
+                esmtPermission.CanEditLocationSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.LOCATION, RouterLink = EsmtAppRouterLinks.LOCATION_EDIT, SortOrder = 1, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
@@ -162,11 +162,11 @@ public class FarmEsmtAppSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
-                permission.CanViewOwnerDetailsSection = true;
+                esmtPermission.CanViewOwnerDetailsSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.OWNER_DETAILS, RouterLink = EsmtAppRouterLinks.OWNER_DETAILS_VIEW, SortOrder = 2, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
-                permission.CanEditOwnerDetailsSection = true;
+                esmtPermission.CanEditOwnerDetailsSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.OWNER_DETAILS, RouterLink = EsmtAppRouterLinks.OWNER_DETAILS_EDIT, SortOrder = 2, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
@@ -179,11 +179,11 @@ public class FarmEsmtAppSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
-                permission.CanViewRolesSection = true;
+                esmtPermission.CanViewRolesSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.ROLES, RouterLink = EsmtAppRouterLinks.ROLES_VIEW, SortOrder = 3, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
-                permission.CanEditRolesSection = true;
+                esmtPermission.CanEditRolesSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.ROLES, RouterLink = EsmtAppRouterLinks.ROLES_EDIT, SortOrder = 3, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
@@ -286,11 +286,11 @@ public class FarmEsmtAppSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
-                permission.CanViewSignatorySection = true;
+                esmtPermission.CanViewSignatorySection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SIGNATORY, RouterLink = EsmtAppRouterLinks.SIGNATORY_VIEW, SortOrder = 10, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
-                permission.CanEditSignatorySection = true;
+                esmtPermission.CanEditSignatorySection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SIGNATORY, RouterLink = EsmtAppRouterLinks.SIGNATORY_EDIT, SortOrder = 10, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
@@ -303,11 +303,11 @@ public class FarmEsmtAppSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
-                permission.CanViewOtherDocsSection = true;
+                esmtPermission.CanViewOtherDocsSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = TermAppNavigationItemTitles.OTHER_DOCUMENTS, RouterLink = TermApplicationRouterLinks.OTHER_DOCUMENTS_VIEW, SortOrder = 11, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
-                permission.CanEditOtherDocsSection = true;
+                esmtPermission.CanEditOtherDocsSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = TermAppNavigationItemTitles.OTHER_DOCUMENTS, RouterLink = TermApplicationRouterLinks.OTHER_DOCUMENTS_EDIT, SortOrder = 11, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:

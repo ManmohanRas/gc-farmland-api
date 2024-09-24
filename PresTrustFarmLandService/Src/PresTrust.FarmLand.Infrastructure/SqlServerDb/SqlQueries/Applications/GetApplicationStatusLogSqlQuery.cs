@@ -6,7 +6,7 @@ public class GetApplicationStatusLogSqlQuery
        @"   SELECT	DISTINCT [StatusId],
 			            [StatusDate]
             FROM		[Farm].[FarmApplicationStatusLog]
-            WHERE		[ApplicationId] = @p_ApplicationId AND [StatusId] IN (2,3,4,5,6,7,8)
+            WHERE		[ApplicationId] = @p_ApplicationId AND [StatusId] IN (101,102,103,104,105,106,107,108)
             ORDER BY	[StatusDate] DESC;";
 
     public GetApplicationStatusLogSqlQuery() { }
