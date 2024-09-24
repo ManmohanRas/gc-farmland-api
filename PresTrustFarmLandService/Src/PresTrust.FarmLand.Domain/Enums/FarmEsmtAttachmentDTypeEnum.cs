@@ -10,7 +10,7 @@
         BOARDING = 2,
         TRAINING = 3,
         RIDING_AND_OR_DRIVING_LESSIONS = 4,
-        REHABILITAION = 5,
+        REHABILITATION = 5,
         CLINICS = 6,
         OPEN_HOUSES = 7,
         DEMONSTRATIONS = 8,

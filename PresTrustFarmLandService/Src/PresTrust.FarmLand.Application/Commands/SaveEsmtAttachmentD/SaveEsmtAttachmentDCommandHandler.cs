@@ -25,13 +25,17 @@
 
         public async Task<Unit> Handle(SaveEsmtAttachmentDCommand request, CancellationToken cancellationToken)
         {
+            //int attachmentId = 0;
+
             using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
             {
                 foreach (var attachment in request.AttachmentDetails)
                 {
                     var entity = mapper.Map<SaveEsmtAttachmentDViewModel, FarmEsmtAttachmentDSourseEntity>(attachment);
                     entity.ApplicationId = request.ApplicationId;
+                    entity.LastUpdatedBy = userContext.Name;
                     await this.repoEsmtAttachment.SaveAsync(entity);
+                 
                 }
                 scope.Complete();
             }
