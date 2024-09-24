@@ -211,6 +211,8 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                     Message = "Receipt Of Certification Letter required document on AdminDetails tab have not been filled.",
                     IsApplicantFlow = false
                 });
+
+           
         }
         return brokenRules;
     
