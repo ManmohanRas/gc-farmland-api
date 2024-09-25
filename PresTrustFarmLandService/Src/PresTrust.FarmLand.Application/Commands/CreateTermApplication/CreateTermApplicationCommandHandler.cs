@@ -150,6 +150,17 @@ public class CreateTermApplicationCommandHandler : BaseHandler, IRequestHandler<
         });
 
 
+        if (application.Status == TermAppStatusEnum.PETITION_APPROVED)
+        {
+            if (application.IsSADC == false)
+                brokenRules.Add(new FarmBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = (int)TermAppSectionEnum.ADMIN_DETAILS,
+                    Message = "SADC Funding Toggle should be enabled.",
+                    IsApplicantFlow = true,
+                });
+        }
 
 
         return brokenRules;
