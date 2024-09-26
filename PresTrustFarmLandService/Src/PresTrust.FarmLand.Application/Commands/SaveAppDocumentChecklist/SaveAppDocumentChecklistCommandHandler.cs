@@ -92,7 +92,7 @@ public class SaveAppDocumentChecklistCommandHandler : BaseHandler , IRequestHand
             });
         }
 
-        if (unapprovedDocs != null && unapprovedDocs.Count() > 0)
+        if (unapprovedDocs != null || unapprovedDocs.Count() > 0)
         {
             brokenRules.Add(new FarmBrokenRuleEntity()
             {
