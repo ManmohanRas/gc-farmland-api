@@ -646,8 +646,7 @@ public class FarmApplicationSecurityManager
                 break;
             case UserRoleEnum.AGENCY_ADMIN:
             case UserRoleEnum.AGENCY_EDITOR:
-                    permission.CanSubmitApplication = true;
-                    permission.CanRespondToTheRequestForAnApplicationCorrection = true;
+                permission.CanRespondToTheRequestForAnApplicationCorrection = true;
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
                 permission.CanViewFeedback = true;
