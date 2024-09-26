@@ -107,7 +107,7 @@ public class CreateTermApplicationCommandHandler : BaseHandler, IRequestHandler<
         IsAuthorizedOperation(userRole: userContext.Role, application: application, operation: TermUserPermissionEnum.CREATE_APPLICATION);
     }
 
-    /// <summary>vere intiki
+    /// <summary>
     /// Return broken rules in case of any business rule failure
     /// </summary>
     /// <param name="request"></param>
