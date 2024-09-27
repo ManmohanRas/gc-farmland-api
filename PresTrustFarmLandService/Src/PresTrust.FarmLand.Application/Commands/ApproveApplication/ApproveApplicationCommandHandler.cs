@@ -1,4 +1,6 @@
-﻿using System.Reflection.Metadata;
+﻿using Azure.Core;
+using System.Reflection.Metadata;
+using static System.Collections.Specialized.BitVector32;
 
 namespace PresTrust.FarmLand.Application.Commands;
 
@@ -92,6 +94,8 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
         return result;
     }
 
+
+
     /// <summary>
     /// Return broken rules in case of any business rule failure
     /// </summary>
@@ -116,13 +120,6 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
             ApplicationId = application.Id,
             SectionId = (int)TermAppSectionEnum.ADMIN_DEED_DETAILS,
             Message = "All required fields on ADMIN_DEED_DETAILS tab have not been filled.",
-        });
-
-        statusChangeRules.Add(new FarmBrokenRuleEntity()
-        {
-            ApplicationId = application.Id,
-            SectionId = (int)TermAppSectionEnum.ADMIN_DETAILS,
-            Message = "SADC Funding Toggle should be enabled.",
         });
 
         return statusChangeRules;
