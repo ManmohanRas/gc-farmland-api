@@ -212,14 +212,6 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                     IsApplicantFlow = false
                 });
 
-            if (application.IsSADC == false)
-                brokenRules.Add(new FarmBrokenRuleEntity() 
-                { 
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "SADC Funding Toggle should be enabled.",
-                    IsApplicantFlow= false,
-                });
         }
         return brokenRules;
     
