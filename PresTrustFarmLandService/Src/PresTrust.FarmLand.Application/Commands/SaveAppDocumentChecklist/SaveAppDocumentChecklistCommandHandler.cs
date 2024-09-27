@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.Application.Commands;
+﻿
+
+namespace PresTrust.FarmLand.Application.Commands;
 
 public class SaveAppDocumentChecklistCommandHandler : BaseHandler , IRequestHandler<SaveAppDocumentChecklistCommand, Unit>
 {
@@ -7,24 +9,27 @@ public class SaveAppDocumentChecklistCommandHandler : BaseHandler , IRequestHand
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
     private readonly ITermOtherDocumentsRepository repoDocument;
+    //private readonly ISiteRepository repoSite;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
-    
+
 
     public SaveAppDocumentChecklistCommandHandler
-       (
-           IMapper mapper,
-           IPresTrustUserContext userContext,
-           IOptions<SystemParameterConfiguration> systemParamOptions,
-           IApplicationRepository repoApplication,
-           ITermOtherDocumentsRepository repoDocument,
-           ITermBrokenRuleRepository repoBrokenRules
-       ) : base(repoApplication: repoApplication)
+    (
+        IMapper mapper,
+        IPresTrustUserContext userContext,
+        IOptions<SystemParameterConfiguration> systemParamOptions,
+        IApplicationRepository repoApplication,
+        ITermOtherDocumentsRepository repoDocument,
+        //ISiteRepository repoSite,
+        ITermBrokenRuleRepository repoBrokenRules
+    ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
         this.userContext = userContext;
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;
         this.repoDocument = repoDocument;
+        //this.repoSite = repoSite;
         this.repoBrokenRules = repoBrokenRules;
     }
 
@@ -65,15 +70,8 @@ public class SaveAppDocumentChecklistCommandHandler : BaseHandler , IRequestHand
         return Unit.Value;
     }
 
-    /// <summary>
-    /// Return broken rules in case of any business rule failure
-    /// </summary>
-    /// <param name="application"></param>
-    /// <param name="request"></param>
-    /// <returns></returns>
     private async Task<List<FarmBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SaveAppDocumentChecklistCommand request)
     {
-
         int sectionId = (int)TermAppSectionEnum.ADMIN_DOCUMENT_CHECKLIST;
         List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
         // map command object to the FloodDocumentEntity
@@ -92,20 +90,24 @@ public class SaveAppDocumentChecklistCommandHandler : BaseHandler , IRequestHand
             });
         }
 
-        if (unapprovedDocs != null || unapprovedDocs.Count() > 0)
+        if (unapprovedDocs != null && unapprovedDocs.Count() > 0)
         {
             brokenRules.Add(new FarmBrokenRuleEntity()
             {
                 ApplicationId = application.Id,
                 SectionId = sectionId,
-                Message = "All required documents (Admin-Document-Checklist) are not yet approved for committee review.",
+                Message = "All required documents (Admin-Document-Checklist) are not yet approved by committee review.",
                 IsApplicantFlow = false
             });
         }
 
         return brokenRules;
+
     }
 
 }
+  
+
+
 
 
