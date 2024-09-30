@@ -32,6 +32,9 @@ GO
 INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (109, 'DEED_DETAILS', 'Deed Details', 1);
 GO
 
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (110, 'CONTACTS', 'Contacts', 1);
+GO
+
 
 --EASEMENT SECTION
 INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (201, 'LOCATION', 'Location', 2);
