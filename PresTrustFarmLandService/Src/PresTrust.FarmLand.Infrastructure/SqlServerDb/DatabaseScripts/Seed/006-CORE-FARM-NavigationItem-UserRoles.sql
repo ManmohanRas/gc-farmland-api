@@ -16,6 +16,8 @@ INSERT INTO [Core].[NavigationItemUserRole]([NavigationItemId], [UserRoleId]) VA
 INSERT INTO [Core].[NavigationItemUserRole]([NavigationItemId], [UserRoleId]) VALUES (29, 3);
 INSERT INTO [Core].[NavigationItemUserRole]([NavigationItemId], [UserRoleId]) VALUES (29, 4);
 INSERT INTO [Core].[NavigationItemUserRole]([NavigationItemId], [UserRoleId]) VALUES (29, 7);
+INSERT INTO [Core].[NavigationItemUserRole]([NavigationItemId], [UserRoleId]) VALUES (29, 8);
+
 
 -- Manage Project Areas
 INSERT INTO [Core].[NavigationItemUserRole]([NavigationItemId], [UserRoleId]) VALUES (30, 1);
