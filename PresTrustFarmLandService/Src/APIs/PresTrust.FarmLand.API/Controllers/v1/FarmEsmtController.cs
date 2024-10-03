@@ -203,4 +203,20 @@ public class FarmEsmtController : FarmController
     {
         return Single(await CommandAsync(command));
     }
+
+    [HttpPost("getEsmtAppAdminSADC")]
+    [ProducesResponseType(typeof(GetEsmtAppAdminSADCQueryViewModel), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<GetEsmtAppAdminSADCQueryViewModel>> getEsmtAppAdminSADC([FromBody] GetEsmtAppAdminSADCQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveEsmtAppAdminSADC")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<int>> saveEsmtAppAdminSADC([FromBody] SaveEsmtAppAdminSADCCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
 }
