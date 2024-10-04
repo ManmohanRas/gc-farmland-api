@@ -24,7 +24,7 @@ CREATE TABLE [Farm].[FarmTermAppOwnerDetails](
 	[PhoneNumber]					[varchar](15)					NOT NULL,
 	[City]							[varchar](128)					NOT NULL,
 	[State]							[varchar](128)					NOT NULL,
-	[ZipCode]						[varchar](20)					NOT NULL,
+	[ZipCode]						[integer] 					    NOT NULL,
 	[LastUpdatedBy]					[varchar](128)					NULL	, 
 	[LastUpdatedOn]					[datetime]						NOT NULL, 
 CONSTRAINT [PK_FarmTermAppOwnerDetails_Id] PRIMARY KEY CLUSTERED 

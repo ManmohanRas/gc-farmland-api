@@ -60,4 +60,50 @@ public enum EsmtAppSectionEnum
     /// Section Type for Signatory
     /// </summary>
     SIGNATORY = 211,
+
+    /// <summary>
+    /// Section Type for Admin Document Checklist
+    /// </summary>
+    ADMIN_DOCUMENT_CHECK_LIST = 212,
+
+    /// <summary>
+    /// Section Type for Admin Cost Details
+    /// </summary>
+    ADMIN_COST_DETAILS = 213,
+
+    /// <summary>
+    /// Section Type for Admin Appraisal Reports
+    /// </summary>
+    ADMIN_APPRAISAL_REPORTS = 214,
+
+    /// <summary>
+    /// Section Type for Admin Offer Costs
+    /// </summary>
+    ADMIN_OFFER_COSTS = 215,
+
+    /// <summary>
+    /// Section Type for Admin Structures
+    /// </summary>
+    ADMIN_STRUCTURES = 216,
+
+    /// <summary>
+    /// Section Type for Admin Exceptions
+    /// </summary>
+    ADMIN_EXCEPTIONS = 217,
+
+    /// <summary>
+    /// Section Type for Admin SADC
+    /// </summary>
+    ADMIN_SADC = 218,
+
+    /// <summary>
+    /// Section Type for Admin Closing Docs
+    /// </summary>
+    ADMIN_CLOSING_DOCS = 219,
+
+    /// <summary>
+    /// Section Type for Admin Contacts
+    /// </summary>
+    ADMIN_CONTACTS = 220,
+
 }
