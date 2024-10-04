@@ -304,17 +304,51 @@ public class FarmEsmtAppSecurityManager
         {
             case ApplicationTabEditOrViewEnum.VIEW:
                 esmtPermission.CanViewOtherDocsSection = true;
-                navigationItems.Add(new NavigationItemEntity() { Title = TermAppNavigationItemTitles.OTHER_DOCUMENTS, RouterLink = TermApplicationRouterLinks.OTHER_DOCUMENTS_VIEW, SortOrder = 11, Icon = (correction == true ? "report_problem" : "") });
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.OTHER_DOCUMENTS, RouterLink = EsmtAppRouterLinks.OTHER_DOCUMENTS_VIEW, SortOrder = 11, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
                 esmtPermission.CanEditOtherDocsSection = true;
-                navigationItems.Add(new NavigationItemEntity() { Title = TermAppNavigationItemTitles.OTHER_DOCUMENTS, RouterLink = TermApplicationRouterLinks.OTHER_DOCUMENTS_EDIT, SortOrder = 11, Icon = (correction == true ? "report_problem" : "") });
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.OTHER_DOCUMENTS, RouterLink = EsmtAppRouterLinks.OTHER_DOCUMENTS_EDIT, SortOrder = 11, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
                 break;
         }
     }
 
-   
+    private void AdminDocumentChecklist(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                esmtPermission.CanViewOtherDocsSection = true;
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.ADMIN_DOCUMENT_CHECK_LIST, RouterLink = EsmtAppRouterLinks.ADMIN_DOCUMENT_CHECK_LIST_VIEW, SortOrder = 12, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                esmtPermission.CanEditOtherDocsSection = true;
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.ADMIN_DOCUMENT_CHECK_LIST, RouterLink = EsmtAppRouterLinks.ADMIN_DOCUMENT_CHECK_LIST_EDIT, SortOrder = 12, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void AdminCostDetails(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                esmtPermission.CanViewOtherDocsSection = true;
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.ADMIN_COST_DETAILS, RouterLink = EsmtAppRouterLinks.ADMIN_COST_DETAILS_VIEW, SortOrder = 13, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                esmtPermission.CanEditOtherDocsSection = true;
+                navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.ADMIN_COST_DETAILS, RouterLink = EsmtAppRouterLinks.ADMIN_COST_DETAILS_EDIT, SortOrder = 13, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }
 

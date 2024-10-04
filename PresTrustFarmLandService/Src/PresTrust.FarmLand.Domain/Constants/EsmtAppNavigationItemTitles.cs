@@ -56,5 +56,51 @@ public partial class FarmLandDomainConstants
         /// Constant to hold title for Other Documents 
         /// </summary>
         public const string OTHER_DOCUMENTS = "Other Documents";
+
+        /// <summary>
+        /// Constant to hold title for Admin Document Checklist 
+        /// </summary>
+        public const string ADMIN_DOCUMENT_CHECK_LIST = "Document Checklist";
+
+        /// <summary>
+        /// Constant to hold title for  Admin Cost Details
+        /// </summary>
+        public const string ADMIN_COST_DETAILS = "Cost Details";
+
+        /// <summary>
+        /// Constant to hold title for  Admin Appraisal Reports
+        /// </summary>
+        public const string ADMIN_APPRAISAL_REPORTS = "Appraisal Reports";
+
+        /// <summary>
+        /// Constant to hold title for  Admin Offer Costs
+        /// </summary>
+        public const string ADMIN_OFFER_COSTS = "Offer Costs";
+
+        /// <summary>
+        /// Constant to hold title for  Admin Structures
+        /// </summary>
+        public const string ADMIN_STRUCTURES = "Structures/Non Agri Uses/Wetlands";
+
+        /// <summary>
+        /// Constant to hold title for Admin Exceptions
+        /// </summary>
+        public const string ADMIN_EXCEPTIONS = "Exceptions/RDSO";
+
+        /// <summary>
+        /// Constant to hold title for Admin SADC
+        /// </summary>
+        public const string ADMIN_SADC = "SADC";
+
+        /// <summary>
+        /// Constant to hold title for Admin Closing Docs
+        /// </summary>
+        public const string ADMIN_CLOSING_DOCS = "Closing Docs/Status";
+
+        /// <summary>
+        /// Constant to hold title for Admin Contacts
+        /// </summary>
+        public const string ADMIN_CONTACTS = "Contacts";
+
     }
 }

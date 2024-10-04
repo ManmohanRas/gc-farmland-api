@@ -105,5 +105,86 @@ public partial class FarmLandDomainConstants
         /// </summary>
         public const string OTHER_DOCUMENTS_EDIT = "app/otherdocs/edit";
 
+        /// <summary>
+        /// Constant to hold router link for Admin Document Checklist View screen
+        /// </summary>
+        public const string ADMIN_DOCUMENT_CHECK_LIST_VIEW = "appadmin/docchecklist/view";
+        /// <summary>
+        /// Constant to hold router link for Admin Document Checklist Edit screen
+        /// </summary>
+        public const string ADMIN_DOCUMENT_CHECK_LIST_EDIT = "appadmin/docchecklist/edit";
+
+        /// <summary>
+        /// Constant to hold router link for Admin Cost Details View screen
+        /// </summary>
+        public const string ADMIN_COST_DETAILS_VIEW = "appadmin/costdetails/view";
+        /// <summary>
+        /// Constant to hold router link for Admin Cost Details Edit screen
+        /// </summary>
+        public const string ADMIN_COST_DETAILS_EDIT = "appadmin/costdetails/edit";
+
+        /// <summary>
+        /// Constant to hold router link for Admin Appraisal Reports View screen
+        /// </summary>
+        public const string ADMIN_APPRAISAL_REPORTS_VIEW = "appadmin/appraisalreport/view";
+        /// <summary>
+        /// Constant to hold router link for Admin Appraisal Reports Edit screen
+        /// </summary>
+        public const string ADMIN_APPRAISAL_REPORTS_EDIT = "appadmin/appraisalreport/edit";
+
+        /// <summary>
+        /// Constant to hold router link for Admin Offer Costs View screen
+        /// </summary>
+        public const string ADMIN_OFFER_COSTS_VIEW = "appadmin/offercosts/view";
+        /// <summary>
+        /// Constant to hold router link for Admin Offer Costs Edit screen
+        /// </summary>
+        public const string ADMIN_OFFER_COSTS_EDIT = "appadmin/offercosts/edit";
+
+        /// <summary>
+        /// Constant to hold router link for Admin Structures View screen
+        /// </summary>
+        public const string ADMIN_STRUCTURES_VIEW = "appadmin/structures/view";
+        /// <summary>
+        /// Constant to hold router link for Admin Structures Edit screen
+        /// </summary>
+        public const string ADMIN_STRUCTURES_EDIT = "appadmin/structures/edit";
+
+        /// <summary>
+        /// Constant to hold router link for Admin Exceptions View screen
+        /// </summary>
+        public const string ADMIN_EXCEPTIONS_VIEW = "appadmin/exceptions/view";
+        /// <summary>
+        /// Constant to hold router link for Admin Exceptions Edit screen
+        /// </summary>
+        public const string ADMIN_EXCEPTIONS_EDIT = "appadmin/exceptions/edit";
+
+        /// <summary>
+        /// Constant to hold router link for Admin SADC View screen
+        /// </summary>
+        public const string ADMIN_SADC_VIEW = "appadmin/sadc/view";
+        /// <summary>
+        /// Constant to hold router link for Admin SADC Edit screen
+        /// </summary>
+        public const string ADMIN_SADC_EDIT = "appadmin/sadc/edit";
+
+        /// <summary>
+        /// Constant to hold router link for Admin Closing Docs View screen
+        /// </summary>
+        public const string ADMIN_CLOSING_DOCS_VIEW = "appadmin/closingdocs/view";
+        /// <summary>
+        /// Constant to hold router link for Admin Closing Docs Edit screen
+        /// </summary>
+        public const string ADMIN_CLOSING_DOCS_EDIT = "appadmin/closingdocs/edit";
+
+        /// <summary>
+        /// Constant to hold router link for Admin Contacts View screen
+        /// </summary>
+        public const string ADMIN_CONTACTS_VIEW = "appadmin/contacts/view";
+        /// <summary>
+        /// Constant to hold router link for Admin Contacts Edit screen
+        /// </summary>
+        public const string ADMIN_CONTACTS_EDIT = "appadmin/contacts/edit";
+
     }
 }
