@@ -13,10 +13,33 @@ public interface ITermAppAdminDeedDetailsRepository
     Task<List<TermAppAdminDeedDetailsEntity>> GetTermAppAdminDeedDetails(int applicationId);
 
     /// <summary>
-    /// Save Contact.
+    /// Save deedDetails.
     /// </summary>
-    /// <param name="contact"></param>
+    /// <param name="deedDetails"></param>
     /// <returns></returns>
     /// 
     Task<TermAppAdminDeedDetailsEntity> SaveAsync(TermAppAdminDeedDetailsEntity deedDetails);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="applicationId"></param>
+    /// <param name="parcel"></param>
+    /// <param name="deed"></param>
+    /// <returns></returns>
+    Task<bool> CheckDeedLocationParcel(int applicationId, FarmTermAppDeedLocationEntity parcel);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="applicationId"></param>
+    /// <returns></returns>
+    Task<List<FarmTermAppDeedLocationEntity>> GetTermAppAdminDeedLocationDetails(int applicationId);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="applicationId"></param>
+    /// <param name="parcelId"></param>
+    /// <returns></returns>
+    Task<bool> UpdateTermAppDeedLocation(int applicationId, int parcelId, bool IsChecked);
 }
