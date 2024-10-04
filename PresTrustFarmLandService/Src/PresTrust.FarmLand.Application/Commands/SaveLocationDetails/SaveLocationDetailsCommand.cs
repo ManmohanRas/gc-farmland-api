@@ -16,3 +16,4 @@ public class SaveBlockLot
     public bool IsChecked { get; set; }
     public string RowStatus {  get; set; }
 }
+

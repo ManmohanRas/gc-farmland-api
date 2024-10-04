@@ -36,6 +36,7 @@ public class TermAppAdminDeedDetailsRepository : ITermAppAdminDeedDetailsReposit
             {
 
                 @p_ApplicationId = deedDetails.ApplicationId,
+                @p_ParcelId = deedDetails.ParcelId,
                 @p_OriginalBlock = deedDetails.OriginalBlock,
                 @p_OriginalLot = deedDetails.OriginalLot,
                 @p_OriginalBook = deedDetails.OriginalBook,
@@ -48,6 +49,7 @@ public class TermAppAdminDeedDetailsRepository : ITermAppAdminDeedDetailsReposit
                 @p_RDLot = deedDetails.RDLot,
                 @p_RDBook = deedDetails.RDBook,
                 @p_RDPage = deedDetails.RDPage,
+                @p_IsChecked = deedDetails.IsChecked,
                 @p_LastUpdatedBy = deedDetails.LastUpdatedBy
             });
 
@@ -74,6 +76,7 @@ public class TermAppAdminDeedDetailsRepository : ITermAppAdminDeedDetailsReposit
             {
                 @p_Id = deedDetails.Id,
                 @p_ApplicationId = deedDetails.ApplicationId,
+                @p_parcelId = deedDetails.ParcelId,
                 @p_OriginalBlock = deedDetails.OriginalBlock,
                 @p_OriginalLot = deedDetails.OriginalLot,
                 @p_OriginalBook = deedDetails.OriginalBook,
@@ -86,6 +89,7 @@ public class TermAppAdminDeedDetailsRepository : ITermAppAdminDeedDetailsReposit
                 @p_RDLot = deedDetails.RDLot,
                 @p_RDBook = deedDetails.RDBook,
                 @p_RDPage = deedDetails.RDPage,
+                @p_IsChecked = deedDetails.IsChecked,
                 @p_LastUpdatedBy = deedDetails.LastUpdatedBy,
                 @p_LastUpdatedOn = DateTime.Now
             });
@@ -94,7 +98,53 @@ public class TermAppAdminDeedDetailsRepository : ITermAppAdminDeedDetailsReposit
     }
 
 
+    public async Task<bool> CheckDeedLocationParcel(int applicationId, FarmTermAppDeedLocationEntity entity)
+    {
+        using var conn = context.CreateConnection();
 
+        var sqlCommand = new CreateTermAppDeedLocationSqlCommand();
+        await conn.ExecuteAsync(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+                            param: new
+                            {
+                                @p_ApplicationId = applicationId,
+                                @p_ParcelId = entity.ParcelId,
+                                @p_DeedId = entity.DeedId,
+                                @p_IsChecked = entity.IsChecked
+                            });
 
+        return true;
+    }
+
+    public async Task<List<FarmTermAppDeedLocationEntity>> GetTermAppAdminDeedLocationDetails(int applicationId)
+    {
+        List<FarmTermAppDeedLocationEntity> results;
+        using var conn = context.CreateConnection();
+        var sqlCommand = new GetTermAppAdminDeedLocationDetails();
+        results = (await conn.QueryAsync<FarmTermAppDeedLocationEntity>(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+                            param: new { @p_ApplicationId = applicationId })).ToList();
+        return results ?? new();
+    }
+
+    public async Task<bool> UpdateTermAppDeedLocation(int applicationId, int parcelId, bool IsChecked)
+    {
+        using var conn = context.CreateConnection();
+
+        var sqlCommand = new UpdateTermAppDeedLocationSqlCommand();
+        await conn.ExecuteAsync(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+                            param: new
+                            {
+                                @p_IsChecked = IsChecked,
+                                @p_ApplicationId = applicationId,
+                                @p_ParcelId = parcelId
+                            });
+
+        return true;
+    }
 
 }

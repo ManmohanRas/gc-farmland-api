@@ -11,6 +11,7 @@ public class SaveTermAppAdminDeedListCommand
 {
     public int Id { get; set; }
     public int ApplicationId { get; set; }
+    public int ParcelId { get; set; }
     public string OriginalBlock { get; set; }
     public string OriginalLot { get; set; }
     public string OriginalBook { get; set; }
@@ -24,6 +25,7 @@ public class SaveTermAppAdminDeedListCommand
     public string RDBook { get; set; }
     public string RDPage { get; set; }
     public string RowStatus { get; set; }
+    public bool IsChedcked { get;set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
 }
