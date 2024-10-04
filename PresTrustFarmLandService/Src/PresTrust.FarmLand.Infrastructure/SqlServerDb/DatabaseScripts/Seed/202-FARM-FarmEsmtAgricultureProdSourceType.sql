@@ -45,7 +45,7 @@ GO
 INSERT INTO [Farm].[FarmEsmtAgricultureProdSourceType] ([Id],[SicCode],[Title], [SortOrder], [ActivityTypeId]) VALUES (15,'0189','HORTICULTURE_SPECIALTIES', 15, 1);
 GO
 
-INSERT INTO [Farm].[FarmEsmtAgricultureProdSourceType] ([Id],[SicCode],[Title], [SortOrder], [ActivityTypeId]) VALUES (16,'0191A','ENERAL_FARMING_NEC', 16, 1);
+INSERT INTO [Farm].[FarmEsmtAgricultureProdSourceType] ([Id],[SicCode],[Title], [SortOrder], [ActivityTypeId]) VALUES (16,'0191A','GENERAL_FARMING_NEC', 16, 1);
 GO   
 
 INSERT INTO [Farm].[FarmEsmtAgricultureProdSourceType] ([Id],[SicCode],[Title], [SortOrder], [ActivityTypeId]) VALUES (17,'0211','BEEF_CATTLE_FEEDLOTS', 17, 2);
