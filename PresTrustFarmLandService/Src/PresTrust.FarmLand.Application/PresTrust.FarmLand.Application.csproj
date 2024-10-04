@@ -32,4 +32,8 @@
     <ProjectReference Include="..\PresTrust.FarmLand.Infrastructure\PresTrust.FarmLand.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\SaveTermAppDeedDetailsList\" />
+  </ItemGroup>
+
 </Project>

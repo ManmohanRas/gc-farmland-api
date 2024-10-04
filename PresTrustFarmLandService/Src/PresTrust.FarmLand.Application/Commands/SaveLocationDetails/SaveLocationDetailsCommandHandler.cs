@@ -9,6 +9,7 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
     private readonly ITermBrokenRuleRepository repoBrokenRules;
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
+    private readonly ITermAppAdminDeedDetailsRepository repoDeedDetails;
 
 
     public SaveLocationDetailsCommandHandler
@@ -18,7 +19,8 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
             IApplicationLocationRepository repoLocation,
             ITermBrokenRuleRepository repoBrokenRules,
             IPresTrustUserContext userContext,
-            IOptions<SystemParameterConfiguration> systemParamOptions
+            ITermAppAdminDeedDetailsRepository repoDeedDetails,
+    IOptions<SystemParameterConfiguration> systemParamOptions
         ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
@@ -27,30 +29,50 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
         this.repoBrokenRules = repoBrokenRules;
         this.userContext = userContext;
         this.systemParamOptions = systemParamOptions.Value;
+        this.repoDeedDetails = repoDeedDetails;
     }
     public async Task<Unit> Handle(SaveLocationDetailsCommand request, CancellationToken cancellationToken)
     {
+        List<FarmTermAppDeedLocationEntity> deedParcels = new List<FarmTermAppDeedLocationEntity>();
+        FarmTermAppDeedLocationEntity deed = new FarmTermAppDeedLocationEntity();
+
         var application = await GetIfApplicationExists(request.ApplicationId);
 
         var parcels =  mapper.Map<List<SaveBlockLot>, List<FarmTermAppLocationEntity>>(request.Parcels);
+       
 
-
+        deedParcels = await repoDeedDetails.GetTermAppAdminDeedLocationDetails(request.ApplicationId);
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-           
-            foreach(var parcel in parcels)
+
+            foreach (var parcel in parcels)
             {
                 if ( parcel.RowStatus == "I")
                 {
                     parcel.FarmListID = application.FarmListId;
                     await repoLocation.CheckLocationParcel(request.ApplicationId, parcel);
-                }else if (parcel.RowStatus == "D")
+                    deed.ApplicationId = application.Id;
+                    deed.ParcelId = parcel.ParcelId;
+                    deed.IsChecked  = parcel.IsChecked;
+                    if(deedParcels.Count() > 0)
+                    {
+                        deed.DeedId = deedParcels.Where(x => x.ParcelId == parcel.ParcelId).Select(x => x.DeedId).FirstOrDefault();
+                    }else
+                    {
+                        deed.DeedId = 0;
+                    }
+                    await repoDeedDetails.CheckDeedLocationParcel(request.ApplicationId, deed);
+
+                }
+                else if (parcel.RowStatus == "D")
                 {
                      await repoLocation.DeleteTermAppLocationBlockLot(request.ApplicationId, parcel.ParcelId);
+                     await repoDeedDetails.UpdateTermAppDeedLocation(request.ApplicationId, parcel.ParcelId, parcel.IsChecked);
 
                 }
             }
+            
 
             var brokenRules = await ReturnBrokenRulesIfAny(application);
 

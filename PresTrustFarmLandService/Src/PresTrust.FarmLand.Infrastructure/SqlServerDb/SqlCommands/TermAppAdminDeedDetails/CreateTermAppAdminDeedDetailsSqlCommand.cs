@@ -6,6 +6,7 @@ public class CreateTermAppAdminDeedDetailsSqlCommand
      @"INSERT INTO [Farm].[FarmTermAppDeedDetails]
               (
                  ApplicationId
+                ,ParcelId
 	            ,OriginalBlock				
 	            ,OriginalLot					
 	            ,OriginalBook				
@@ -17,12 +18,14 @@ public class CreateTermAppAdminDeedDetailsSqlCommand
                 ,RDBlock						
                 ,RDLot							
                 ,RDBook						
-                ,RDPage							            
+                ,RDPage	
+                ,IsChecked
                 ,LastUpdatedBy
                 ,LastUpdatedOn
               )
               VALUES(
                 @p_ApplicationId
+               ,@p_ParcelId
                ,@p_OriginalBlock				
                ,@p_OriginalLot					
                ,@p_OriginalBook				
@@ -34,10 +37,11 @@ public class CreateTermAppAdminDeedDetailsSqlCommand
                ,@p_RDBlock						
                ,@p_RDLot							
                ,@p_RDBook						
-               ,@p_RDPage							                           
+               ,@p_RDPage	
+               ,@p_IsChecked
                ,@p_LastUpdatedBy
                ,GetDate());
-
+            
 			SELECT CAST( SCOPE_IDENTITY() AS INT);";
 
     public CreateTermAppAdminDeedDetailsSqlCommand()

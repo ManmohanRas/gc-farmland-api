@@ -146,4 +146,14 @@ GO
 
 INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (48, 'SPECIAL_PREMISES', 'Special Premises', 207 , 2);
 GO
- 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Easement Admin Tabs Documents
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (49, 'CLOSING_DEED', 'Closing Deed', 207 , 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (50, 'CLOSING_TITLE_POLICY', 'Closing Title Policy', 207 , 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (51, 'CLOSING_SERVVEY', 'Closing Survey', 207 , 2);
+GO

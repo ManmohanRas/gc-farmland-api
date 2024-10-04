@@ -31,24 +31,6 @@ public class GetTermAppAdminDeedDetailsQueryHandler :BaseHandler, IRequestHandle
         var result = new GetTermAppAdminDeedDetailsQueryViewModel();
 
         var deeddetails = await this.repoDeedDetails.GetTermAppAdminDeedDetails(request.ApplicationId);
-        var locationDetails = await repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId);
-        if (deeddetails.Count() == 0)
-        {
-            foreach (var item in locationDetails)
-            {
-                if (item.IsChecked)
-                {
-                    deeddetails.Add(new TermAppAdminDeedDetailsEntity()
-                    {
-                        ApplicationId = application.Id,
-                        OriginalBlock = item.Block,
-                        OriginalLot = item.Lot,
-                        OriginalBook = item.DeedBook,
-                        OriginalPage = item.DeedPage
-                    });
-                }   
-            }
-        }
         result.DeedDetails = mapper.Map<IEnumerable<TermAppAdminDeedDetailsEntity>, IEnumerable<TermAppAdminDeedDetailsViewModel>>(deeddetails);
         result.ApplicationId = application.Id;
 

@@ -15,6 +15,7 @@ GO
 CREATE TABLE [Farm].[FarmTermAppDeedDetails](
 	[Id]							[integer] 		IDENTITY(1,1)	NOT NULL,
 	[ApplicationId]					[integer]						NOT NULL,
+	[ParcelId]						[integer]						NOT NULL,
 	[OriginalBlock]					[varchar](50)					NOT NULL,
 	[OriginalLot]					[varchar](50)					NOT NULL,
 	[OriginalBook]					[varchar](50)					NULL,
@@ -27,7 +28,8 @@ CREATE TABLE [Farm].[FarmTermAppDeedDetails](
 	[RDLot]							[varchar](50)					NULL,
 	[RDBook]						[varchar](50)					NULL,
 	[RDPage]						[varchar](50)					NULL,
-	[LastUpdatedBy]					[varchar](128)					NULL	, 
+	[IsChecked]						[bit]							NOT NULL,
+	[LastUpdatedBy]					[varchar](128)					NULL, 
 	[LastUpdatedOn]					[datetime]						NOT NULL, 
 CONSTRAINT [PK_FarmTermAppDeedDetails_Id] PRIMARY KEY CLUSTERED 
 (
