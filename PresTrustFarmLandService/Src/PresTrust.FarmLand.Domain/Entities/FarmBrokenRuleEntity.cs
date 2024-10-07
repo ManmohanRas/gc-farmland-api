@@ -120,7 +120,7 @@ public class FarmBrokenRuleEntity
 
     }
 
-    public FarmBrokenRuleEntity(int applicationId, int sectionId, string message, bool isApplicantFlow)
+    public FarmBrokenRuleEntity(int applicationId, int sectionId, string message, bool isApplicantFlow = false)
     {
         this.ApplicationId = applicationId;
         this.SectionId = sectionId;

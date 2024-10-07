@@ -219,4 +219,13 @@ public class FarmEsmtController : FarmController
     {
         return Single(await CommandAsync(command));
     }
+
+    //ESMT WORK FLOWS
+
+    [HttpPost("esmtSubmitteApplication")]
+    [ProducesResponseType(typeof(EsmtSubmitApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<EsmtSubmitApplicationCommandViewModel>> RequestApplication([FromBody] EsmtSubmitApplicationCommand query)
+    {
+        return Single(await CommandAsync(query));
+    }
 }
