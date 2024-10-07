@@ -111,6 +111,31 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
     private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(CreateEsmtApplicationCommand request, FarmApplicationEntity application)
     {
         List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
+        // add default broken rule while creating an application
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.LOCATION,
+            Message = "At least One Record Should be selected in Location tab.",
+            IsApplicantFlow = true
+        });
+
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.OWNER_DETAILS,
+            Message = "All fields on Owner Details tab have not been filled.",
+            IsApplicantFlow = true
+        });
+
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.SIGNATORY,
+            Message = "All required fields on Signatory tab have not been filled.",
+            IsApplicantFlow = true
+        });
+
 
         return brokenRules;
     }

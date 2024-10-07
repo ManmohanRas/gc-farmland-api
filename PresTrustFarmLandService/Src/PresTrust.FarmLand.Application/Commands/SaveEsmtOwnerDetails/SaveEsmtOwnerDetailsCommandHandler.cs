@@ -7,13 +7,16 @@ public class SaveEsmtOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<S
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
     private IEsmtOwnerDetailsRepository repoOwner;
+    private readonly ITermBrokenRuleRepository repoBrokenRules;
+
 
     public SaveEsmtOwnerDetailsCommandHandler(
        IMapper mapper,
        IPresTrustUserContext userContext,
        IOptions<SystemParameterConfiguration> systemParamOptions,
        IApplicationRepository repoApplication,
-       IEsmtOwnerDetailsRepository repoOwner
+       IEsmtOwnerDetailsRepository repoOwner,
+        ITermBrokenRuleRepository repoBrokenRules
       ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
@@ -21,6 +24,7 @@ public class SaveEsmtOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<S
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;
         this.repoOwner = repoOwner;
+        this.repoBrokenRules = repoBrokenRules;
     }
 
     public async Task<int> Handle(SaveEsmtOwnerDetailsCommand request, CancellationToken cancellationToken)
@@ -29,6 +33,9 @@ public class SaveEsmtOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<S
         var application = await GetIfApplicationExists(request.ApplicationId);
 
         var reqEsmtOwner = mapper.Map<SaveEsmtOwnerDetailsCommand, EsmtOwnerDetailsEntity>(request);
+
+        // Delete old Broken Rules, if any
+        await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, EsmtAppSectionEnum.OWNER_DETAILS);
 
         reqEsmtOwner = await repoOwner.SaveOwnerDetailsAsync(reqEsmtOwner);
 

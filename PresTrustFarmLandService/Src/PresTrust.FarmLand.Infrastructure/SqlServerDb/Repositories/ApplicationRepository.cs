@@ -165,7 +165,7 @@ public class ApplicationRepository : IApplicationRepository
     /// <param name="application"></param>
     /// <param name="enumStatus"></param>
     /// <returns></returns>
-    public async Task<bool> UpdateApplicationStatusAsync(FarmApplicationEntity application, TermAppStatusEnum enumStatus)
+    public async Task<bool> UpdateApplicationStatusAsync(FarmApplicationEntity application, dynamic enumStatus)
     {
         using var conn = context.CreateConnection();
         var sqlCommand = new UpdateApplicationWorkflowStatusSqlCommand();

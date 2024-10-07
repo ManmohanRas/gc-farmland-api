@@ -21,7 +21,7 @@ public interface ITermBrokenRuleRepository
     /// <param name="applicationId"></param>
     /// <param name="section"></param>
     /// <returns></returns>
-    Task DeleteBrokenRulesAsync(int applicationId, TermAppSectionEnum section);
+    Task DeleteBrokenRulesAsync(int applicationId, dynamic section);
 
     /// <summary>
     /// Delete broken rules 

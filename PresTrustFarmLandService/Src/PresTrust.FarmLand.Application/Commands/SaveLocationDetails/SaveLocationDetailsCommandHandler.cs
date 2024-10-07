@@ -76,8 +76,10 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
 
             var brokenRules = await ReturnBrokenRulesIfAny(application);
 
+            dynamic section = application.ApplicationTypeId == 1 ? TermAppSectionEnum.LOCATION : EsmtAppSectionEnum.LOCATION;
 
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, TermAppSectionEnum.LOCATION);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, section);
+
             await repoBrokenRules.SaveBrokenRules(brokenRules);
             scope.Complete();
 
@@ -105,19 +107,6 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
             });
 
         }
-
-
-        //if (getLocationBlockLots.Where(x => x.IsWarning).Count() > 0)
-        //{
-        //    brokenRules.Add(new TermBrokenRuleEntity()
-        //    {
-        //        ApplicationId = application.Id,
-        //        SectionId = sectionId,
-        //        Message = "Gray warnings in Location tab must be resolved.",
-        //        IsApplicantFlow = false
-        //    });
-
-        //}
 
         return brokenRules;
 
