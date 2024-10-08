@@ -7,7 +7,7 @@ public class SaveEsmtAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
     private IEsmtAppSignatoryRepository repoSignatory;
-    //private readonly ITermBrokenRuleRepository repoBrokenRules;
+    private readonly ITermBrokenRuleRepository repoBrokenRules;
 
 
     public SaveEsmtAppSignatoryCommandHandler
@@ -16,8 +16,8 @@ public class SaveEsmtAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         IPresTrustUserContext userContext,
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
-        IEsmtAppSignatoryRepository repoSignatory
-        //ITermBrokenRuleRepository repoBrokenRules
+        IEsmtAppSignatoryRepository repoSignatory,
+        ITermBrokenRuleRepository repoBrokenRules
     ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
@@ -25,7 +25,7 @@ public class SaveEsmtAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;
         this.repoSignatory = repoSignatory;
-        //this.repoBrokenRules = repoBrokenRules;
+        this.repoBrokenRules = repoBrokenRules;
     }
 
     /// <summary>
@@ -50,9 +50,10 @@ public class SaveEsmtAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             // Delete old Broken Rules, if any
-            //await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, EsmtAppSectionEnum.SIGNATORY);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, EsmtAppSectionEnum.SIGNATORY);
+
             // Save current Broken Rules, if any
-            //await repoBrokenRules.SaveBrokenRules(brokenRules);
+            await repoBrokenRules.SaveBrokenRules(brokenRules);
 
             var signatory = await repoSignatory.SaveAsync(reqSignatory);
             if (signatory != null)

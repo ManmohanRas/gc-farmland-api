@@ -76,7 +76,7 @@ public class TermBrokenRuleRepository : ITermBrokenRuleRepository
     /// <param name="applicationId"></param>
     /// <param name="section"></param>
     /// <returns></returns>
-    public async Task DeleteBrokenRulesAsync(int applicationId, TermAppSectionEnum section)
+    public async Task DeleteBrokenRulesAsync(int applicationId, dynamic section)
     {
         using var conn = context.CreateConnection();
         var sqlCommand = new DeleteBrokenRulesSqlCommand();

@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Commands\SaveTermAppDeedDetailsList\**" />
     <Compile Remove="Queries\NewFolder1\**" />
     <Compile Remove="Queries\NewFolder2\**" />
     <Compile Remove="Queries\NewFolder3\**" />
+    <EmbeddedResource Remove="Commands\SaveTermAppDeedDetailsList\**" />
     <EmbeddedResource Remove="Queries\NewFolder1\**" />
     <EmbeddedResource Remove="Queries\NewFolder2\**" />
     <EmbeddedResource Remove="Queries\NewFolder3\**" />
+    <None Remove="Commands\SaveTermAppDeedDetailsList\**" />
     <None Remove="Queries\NewFolder1\**" />
     <None Remove="Queries\NewFolder2\**" />
     <None Remove="Queries\NewFolder3\**" />
@@ -30,10 +33,6 @@
   <ItemGroup>
     <ProjectReference Include="..\PresTrust.FarmLand.Domain\PresTrust.FarmLand.Domain.csproj" />
     <ProjectReference Include="..\PresTrust.FarmLand.Infrastructure\PresTrust.FarmLand.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Commands\SaveTermAppDeedDetailsList\" />
   </ItemGroup>
 
 </Project>
