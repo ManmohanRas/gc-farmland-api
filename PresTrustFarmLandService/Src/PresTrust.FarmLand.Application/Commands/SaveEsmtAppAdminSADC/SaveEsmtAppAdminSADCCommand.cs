@@ -10,5 +10,7 @@ public class SaveEsmtAppAdminSADCCommand : IRequest<int>
     public int SADCPrelimRank { get; set; }
     public int SADCFinalRank { get; set; }
     public int SADCFinalScore { get; set; }
+    public string LastUpdatedBy { get; set; }
+    public DateTime? LastUpdatedOn { get; set; }
 
 }
