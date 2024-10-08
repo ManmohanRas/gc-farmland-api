@@ -34,7 +34,7 @@ public class GetDocumentChecklistQueryHandler : BaseHandler, IRequestHandler<Get
         var documents = await repoDocuments.GetTermDocumentChecklistAsync(request.ApplicationId);
 
         // build checklist view model
-        var docBuilder = new ApplicationDocumentTreeBuilder(documents, buildChecklist: true);
+        var docBuilder = new ApplicationDocumentTreeBuilder(documents, buildChecklist: true,application.ApplicationTypeId);
         return docBuilder.documentChecklistItems;
     }
 }
