@@ -11,11 +11,16 @@ public class FarmFeedbacksEntity
     public bool MarkRead { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime? LastUpdatedOn { get; set; }
-    public TermAppSectionEnum Section
+    public dynamic Section
     {
         get
         {
-            return (TermAppSectionEnum)SectionId;
+            if (this.SectionId > 199)
+            {
+                return (EsmtAppSectionEnum)SectionId;
+            }
+            else
+                return (TermAppSectionEnum)SectionId;
         }
         set
         {
