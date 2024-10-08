@@ -27,11 +27,26 @@ public class EsmtAppPermissionEntity
     public bool CanViewAdminDocChkListSection { get; set; } = false;
     public bool CanEditAdminDocChkListSection { get; set; } = false;
 
-    public bool CanViewAdminDetailsSection { get; set; } = false;
-    public bool CanEditAdminDetailsSection { get; set; } = false;
+    public bool CanViewAdminCostDetailsSection { get; set; } = false;
+    public bool CanEditAdminCostDetailsSection { get; set; } = false;
 
-    public bool CanViewAdminDeedDetailsSection { get; set; } = false;
-    public bool CanEditAdminDeedDetailsSection { get; set; } = false;
+    public bool CanViewAdminAppraisalReportSection { get; set; } = false;
+    public bool CanEditAdminAppraisalReportSection { get; set; } = false;
+
+    public bool CanViewAdminOfferCostsSection { get; set; } = false;
+    public bool CanEditAdminOfferCostsSection { get; set; } = false;
+
+    public bool CanViewAdminStructuresSection { get; set; } = false;
+    public bool CanEditAdminStructuresSection { get; set; } = false;
+
+    public bool CanViewAdminExceptionsSection { get; set; } = false;
+    public bool CanEditAdminExceptionsSection { get; set; } = false;
+
+    public bool CanViewAdminSADCSection { get; set; } = false;
+    public bool CanEditAdminSADCSection { get; set; } = false;
+
+    public bool CanViewAdminClosingDocsSection { get; set; } = false;
+    public bool CanEditAdminClosingDocsection { get; set; } = false;
 
 
     public bool CanViewAdminContactsSection { get; set; } = false;
