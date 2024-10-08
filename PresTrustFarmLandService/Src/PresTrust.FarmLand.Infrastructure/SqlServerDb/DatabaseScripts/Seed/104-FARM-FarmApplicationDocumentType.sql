@@ -149,11 +149,11 @@ GO
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --Easement Admin Tabs Documents
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (49, 'CLOSING_DEED', 'Closing Deed', 207 , 2);
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (49, 'CLOSING_DEED', 'Closing Deed', 212 , 2);
 GO
 
-INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (50, 'CLOSING_TITLE_POLICY', 'Closing Title Policy', 207 , 2);
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (50, 'CLOSING_TITLE_POLICY', 'Closing Title Policy', 212 , 2);
 GO
 
-INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (51, 'CLOSING_SERVVEY', 'Closing Survey', 207 , 2);
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (51, 'CLOSING_SERVVEY', 'Closing Survey', 212 , 2);
 GO

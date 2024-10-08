@@ -40,4 +40,15 @@ public class TermOtherDocumentsEntity
             this.SectionId = (int)value;
         }
     }
+    public EsmtAppSectionEnum EsmtSection
+    {
+        get
+        {
+            return (EsmtAppSectionEnum)SectionId;
+        }
+        set 
+        {
+            this.SectionId = (int)value;
+        }
+    }
 }
