@@ -19,7 +19,7 @@ public class ApplicationDocumentTreeBuilder
 
     #region " ctor ..."
 
-    public ApplicationDocumentTreeBuilder(IEnumerable<TermOtherDocumentsEntity> documents, bool buildChecklist = false)
+    public ApplicationDocumentTreeBuilder(IEnumerable<TermOtherDocumentsEntity> documents, bool buildChecklist = false, int applicationTypeId = 0)
     {
 
         this.documents = documents ?? Enumerable.Empty<TermOtherDocumentsEntity>();
@@ -29,9 +29,13 @@ public class ApplicationDocumentTreeBuilder
             .ForMember(dest => dest.DocumentType, opt => opt.MapFrom(src => src.DocumentType.ToString()));
        });
 
-        if (buildChecklist == true)
+        if (buildChecklist == true && applicationTypeId == (int)ApplicationTypeEnum.TERM)
         {
             BuildDocumentChecklistTree();
+        }
+        if (buildChecklist == true && applicationTypeId == (int)ApplicationTypeEnum.EASEMENT) 
+        {
+            BuildEsmtDocumentChecklistTree();
         }
         else
         {
@@ -109,7 +113,37 @@ public class ApplicationDocumentTreeBuilder
 
 
     }
+    private void BuildEsmtDocumentChecklistTree()
+    {
+        if (!documents.Any())
+            return;
 
+        var mapper = _autoMapperConfig.CreateMapper();
+        documentChecklistItems = documents.OrderBy(s => s.SectionId).GroupBy(s => s.EsmtSection).Select(s => new DocumentChecklistViewModel()
+        {
+            Section = SetEsmtSectionTitle(s.Key),
+            DocumentChecklistDocTypeItems = s.GroupBy(d => d.DocumentType).Select(d =>
+            {
+                var item = d.FirstOrDefault();
+                return new DocumentChecklistDocTypeViewModel()
+                {
+                    Id = item.Id,
+                    ApplicationId = item.ApplicationId,
+                    Section = item.EsmtSection.ToString(),
+                    DocumentType = item.DocumentType.ToString(),
+                    Documents = d.Select(o =>
+                    {
+                        return mapper.Map<TermOtherDocumentsEntity, DocumentsViewModel>(o);
+                    }).Where(o => o.Id > 0).ToList() ?? new List<DocumentsViewModel>()
+                };
+            }).ToList() ?? new List<DocumentChecklistDocTypeViewModel>()
+        }).ToList() ?? new List<DocumentChecklistViewModel>();
+        if (documentChecklistItems.Count > 0)
+            documentChecklistItems = documentChecklistItems.Where(o => !string.IsNullOrWhiteSpace(o.Section)).ToList();
+
+
+    }
+    
     private string SetTermSectionTitle(TermAppSectionEnum enumSection)
     {
         string title = string.Empty;
@@ -160,10 +194,19 @@ public class ApplicationDocumentTreeBuilder
             case EsmtAppSectionEnum.EXCEPTIONS:
                 title = "Exceptions";
                 break;
+            case EsmtAppSectionEnum.OTHER_DOCUMENTS:
+                title= "Other Documents";
+                break;
+            case EsmtAppSectionEnum.EXIS_NON_AGRI_USES:
+                title = "Exceptions";
+                break;
+            case EsmtAppSectionEnum.ADMIN_DOCUMENT_CHECK_LIST:
+                title = "Admin Document Checklist";
+                break;
         }
         return title;
     }
 
     #endregion
-
+    
 }
