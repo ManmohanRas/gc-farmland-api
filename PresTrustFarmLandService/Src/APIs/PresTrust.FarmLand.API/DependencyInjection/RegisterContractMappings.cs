@@ -35,9 +35,11 @@
             services.AddTransient<IEsmtAppAttachmentCRepository, EsmtAppAttachmentCRepository>();
             services.AddTransient<IFarmEsmtAgriculturalEnterpriseRepository, FarmEsmtAgriculturalEnterpriseRepository>();
             services.AddTransient<IEsmtAppAttachmentDRepository, EsmtAppAttachmentDRepository>();
-           services.AddTransient<IEsmtAppAttachmentERepository, EsmtAppAttachmentERepository>();
-           services.AddTransient<IFarmEsmtAttachmentARepository, FarmEsmtAttachmentARepository>();
-           services.AddTransient<IEsmtAppAdminSADCRepository, EsmtAppAdminSADCRepository>();
+            services.AddTransient<IEsmtAppAttachmentERepository, EsmtAppAttachmentERepository>();
+            services.AddTransient<IFarmEsmtAttachmentARepository, FarmEsmtAttachmentARepository>();
+            services.AddTransient<IEsmtAppAdminSADCRepository, EsmtAppAdminSADCRepository>();
+            services.AddTransient<IEsmtAppAdminOfferCostsRepository, EsmtAppAdminOfferCostsRepository>();
+          
     }
 }
 
