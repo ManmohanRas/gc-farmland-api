@@ -34,13 +34,43 @@ public class SaveEsmtOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<S
 
         var reqEsmtOwner = mapper.Map<SaveEsmtOwnerDetailsCommand, EsmtOwnerDetailsEntity>(request);
 
-        // Delete old Broken Rules, if any
-        await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, EsmtAppSectionEnum.OWNER_DETAILS);
+        // Check Broken Rules
+        var brokenRules = ReturnBrokenRulesIfAny(reqEsmtOwner);
 
-        reqEsmtOwner = await repoOwner.SaveOwnerDetailsAsync(reqEsmtOwner);
+        using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
+        {
+
+            // Delete old Broken Rules, if any
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, EsmtAppSectionEnum.OWNER_DETAILS);
+            
+            // Save current Broken Rules, if any
+            await repoBrokenRules.SaveBrokenRules(brokenRules);
+
+            reqEsmtOwner = await repoOwner.SaveOwnerDetailsAsync(reqEsmtOwner);
+            
+            scope.Complete();
+        }
 
         return reqEsmtOwner.Id;
 
     }
 
+    private  List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(EsmtOwnerDetailsEntity reqEsmtOwner)
+    {
+        int sectionId = (int)EsmtAppSectionEnum.OWNER_DETAILS;
+        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
+
+        // add based on the empty check conditions
+        if (string.IsNullOrEmpty(reqEsmtOwner.FarmName))
+            brokenRules.Add(new FarmBrokenRuleEntity()
+            {
+                ApplicationId = reqEsmtOwner.ApplicationId,
+                SectionId = sectionId,
+                Message = "Farm Name required field on Owner Details tab have not been filled.",
+                IsApplicantFlow = true
+            });
+
+        return brokenRules;
+
+    }
 }

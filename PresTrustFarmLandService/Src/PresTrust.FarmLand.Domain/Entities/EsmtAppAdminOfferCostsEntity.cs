@@ -13,7 +13,7 @@ public class EsmtAppAdminOfferCostsEntity
     public decimal? SADCCostSharePct { get; set; }
     public decimal? SADCCostShareTotal { get; set; }
     public decimal? OtherCostShareTotal { get; set; }
-    public decimal? OtherSource { get; set; }
+    public string? OtherSource { get; set; }
     public string? CostNote {  get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime? LastUpdatedOn { get; set; }
