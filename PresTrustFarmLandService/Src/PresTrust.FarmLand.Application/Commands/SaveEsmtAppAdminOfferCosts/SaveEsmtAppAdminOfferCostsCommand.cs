@@ -12,7 +12,7 @@ public class SaveEsmtAppAdminOfferCostsCommand:IRequest<int>
     public decimal SADCCostSharePct { get; set; }
     public decimal SADCCostShareTotal { get; set; }
     public decimal OtherCostShareTotal { get; set; }
-    public decimal OtherSource { get; set; }
+    public string? OtherSource { get; set; }
     public string CostNote { get; set; }
    
 }
