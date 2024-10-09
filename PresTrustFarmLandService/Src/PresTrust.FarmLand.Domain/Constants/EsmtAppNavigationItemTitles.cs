@@ -75,7 +75,7 @@ public partial class FarmLandDomainConstants
         /// <summary>
         /// Constant to hold title for  Admin Offer Costs
         /// </summary>
-        public const string ADMIN_OFFER_COSTS = "Offer Costs";
+        public const string ADMIN_OFFER_COSTS = "Offer & Cost";
 
         /// <summary>
         /// Constant to hold title for  Admin Structures
