@@ -50,6 +50,9 @@ public class FarmEsmtAppSecurityManager
             case EsmtAppStatusEnum.APPLICATION_SUBMITTED:
                 this.DeriveSubmittedStatePermissions();
                 break;
+            case EsmtAppStatusEnum.IN_REVIEW:
+                this.DeriveSubmittedStatePermissions();
+                break;
         }
 
     }
@@ -337,7 +340,7 @@ public class FarmEsmtAppSecurityManager
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.OWNER_DETAILS).FirstOrDefault();
                 if (correction == null)
                 {
-                    OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    OwnerDetails();
                 }
                 else
                     OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -345,7 +348,7 @@ public class FarmEsmtAppSecurityManager
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.ROLES).FirstOrDefault();
                 if (correction == null)
                 {
-                    Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    Roles();
                 }
                 else
                     Roles(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -353,7 +356,7 @@ public class FarmEsmtAppSecurityManager
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.EXCEPTIONS).FirstOrDefault();
                 if (correction == null)
                 {
-                    Exceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    Exceptions();
                 }
                 else
                     Exceptions(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -361,7 +364,7 @@ public class FarmEsmtAppSecurityManager
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.RESI_NON_RESI_STRUCTURES).FirstOrDefault();
                 if (correction == null)
                 {
-                    Structures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    Structures();
                 }
                 else
                     Structures(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -369,7 +372,7 @@ public class FarmEsmtAppSecurityManager
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LIENS_EASEMENT_ROW).FirstOrDefault();
                 if (correction == null)
                 {
-                    Liens(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    Liens();
                 }
                 else
                     Liens(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -377,7 +380,7 @@ public class FarmEsmtAppSecurityManager
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.EXIS_NON_AGRI_USES).FirstOrDefault();
                 if (correction == null)
                 {
-                    ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    ExistingUses();
                 }
                 else
                     ExistingUses(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -385,7 +388,7 @@ public class FarmEsmtAppSecurityManager
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.AGRICULTURAL_USE_PRODUCTION).FirstOrDefault();
                 if (correction == null)
                 {
-                    AgriculturalUseProduction(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    AgriculturalUseProduction();
                 }
                 else
                     AgriculturalUseProduction(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -394,7 +397,7 @@ public class FarmEsmtAppSecurityManager
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.EQUINE_USES).FirstOrDefault();
                 if (correction == null)
                 {
-                    EquineUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    EquineUses();
                 }
                 else
                     EquineUses(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -402,7 +405,7 @@ public class FarmEsmtAppSecurityManager
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.SIGNATORY).FirstOrDefault();
                 if (correction == null)
                 {
-                    Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    Signatory();
                 }
                 else
                     Signatory(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -411,7 +414,7 @@ public class FarmEsmtAppSecurityManager
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
                 if (correction == null)
                 {
-                    OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    OtherDocuments();
                 }
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
