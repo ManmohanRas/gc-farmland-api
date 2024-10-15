@@ -235,6 +235,7 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command)); 
     }
 
+
     //ESMT WORK FLOWS
 
     [HttpPost("esmtSubmitteApplication")]
@@ -242,6 +243,23 @@ public class FarmEsmtController : FarmController
     public async Task<ActionResult<EsmtSubmitApplicationCommandViewModel>> RequestApplication([FromBody] EsmtSubmitApplicationCommand query)
     {
         return Single(await CommandAsync(query));
+    }
+
+    [HttpPost("getEsmtAppAdminExceptionRDSO")]
+    [ProducesResponseType(typeof(GetEsmtAppAdminExceptionRDSOQueryViewModel), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<GetEsmtAppAdminExceptionRDSOQueryViewModel>> getEsmtAppAdminExceptionRDSO([FromBody] GetEsmtAppAdminExceptionRDSOQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveEsmtAppAdminExceptionRDSO")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<int>> saveEsmtAppAdminExceptionRDSO([FromBody] SaveEsmtAppAdminExceptionRDSOCommand command)
+    {
+        return Single(await CommandAsync(command));
+
     }
 
     [HttpPost("esmtInReviewApplication")]

@@ -141,6 +141,15 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
                     Message = "TAX_MAP document is not uploaded in OtherDocuments Tab"
                 });
             }
+            if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.LANDOWNER_SIGNATURE).Count() == 0)
+            {
+                otherdocRules.Add(new FarmBrokenRuleEntity()
+                {
+                    ApplicationId = applicationId,
+                    SectionId = (int)TermAppSectionEnum.OTHER_DOCUMENTS,
+                    Message = "LandOwner Signature document is not uploaded in OtherDocuments Tab"
+                });
+            }
 
         }
         return otherdocRules;
