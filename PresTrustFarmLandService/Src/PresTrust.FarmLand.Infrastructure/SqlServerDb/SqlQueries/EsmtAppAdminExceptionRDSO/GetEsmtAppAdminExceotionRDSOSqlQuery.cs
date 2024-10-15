@@ -22,7 +22,7 @@ public class GetEsmtAppAdminExceotionRDSOSqlQuery
 		    ,[X3IsSeverable]            
 		    ,[X3IsSubdividable]         
 		    ,[X3IsRTF]                  
-		    ,[RDSOsNum]		   
+		    ,[RDSOSNum]		   
 		    ,[RDSOExplan]               
 		    ,[IsRDSOExercised]          
 		    ,[LastUpdatedBy]            

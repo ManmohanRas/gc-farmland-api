@@ -22,7 +22,7 @@ public class CreateEsmtAppAdminExceptionRDSOSqlCommand
 		       ,X3IsSeverable            
 		       ,X3IsSubdividable         
 		       ,X3IsRTF                  
-		       ,RDSOsNum		   
+		       ,RDSOSNum		   
 		       ,RDSOExplan               
 		       ,IsRDSOExercised          
 		       ,LastUpdatedBy            
@@ -47,7 +47,7 @@ public class CreateEsmtAppAdminExceptionRDSOSqlCommand
 		       ,@p_X3IsSeverable            
 		       ,@p_X3IsSubdividable         
 		       ,@p_X3IsRTF                  
-		       ,@p_RDSOsNum		   
+		       ,@p_RDSOSNum		   
 		       ,@p_RDSOExplan               
 		       ,@p_IsRDSOExercised          
 		       ,@p_LastUpdatedBy            
