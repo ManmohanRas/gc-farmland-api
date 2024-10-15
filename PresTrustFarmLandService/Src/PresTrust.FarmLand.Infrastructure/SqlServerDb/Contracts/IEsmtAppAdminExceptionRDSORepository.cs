@@ -12,7 +12,7 @@ public interface IEsmtAppAdminExceptionRDSORepository
     /// <summary>
     /// Save SADC Details
     /// </summary>
-    /// <param name="SADCdetails"></param>
+    /// <param name="exceptionRDSOdetails"></param>
     /// <returns></returns>
     Task<EsmtAppAdminExceptionRDSOEntity> SaveExceptionRDSOdetailsAsync(EsmtAppAdminExceptionRDSOEntity exceptionRDSOdetails);
 
