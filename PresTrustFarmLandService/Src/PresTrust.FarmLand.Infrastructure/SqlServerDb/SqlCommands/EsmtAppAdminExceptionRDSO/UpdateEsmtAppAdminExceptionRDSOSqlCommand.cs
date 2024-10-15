@@ -22,7 +22,7 @@ public class UpdateEsmtAppAdminExceptionRDSOSqlCommand
 					,X3IsSeverable     =   @p_X3IsSeverable                   
 					,X3IsSubdividable  =   @p_X3IsSubdividable                
 					,X3IsRTF           =   @p_X3IsRTF                         
-					,RDSOsNum		   =   @p_RDSOsNum		   
+					,RDSOSNum		   =   @p_RDSOSNum		   
 					,RDSOExplan        =   @p_RDSOExplan                      
 					,IsRDSOExercised   =   @p_IsRDSOExercised                 
 					,LastUpdatedBy     =   @p_LastUpdatedBy                   

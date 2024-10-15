@@ -20,7 +20,7 @@ public class EsmtAppAdminExceptionRDSOEntity
 	public bool X3IsSeverable { get; set; }
 	public bool X3IsSubdividable { get; set; }
 	public bool X3IsRTF { get; set; }
-	public int RDSOsNum { get; set; }
+	public int RDSOSNum { get; set; }
 	public string RDSOExplan { get; set; }                           
 	public bool IsRDSOExercised { get; set; }
 	public string LastUpdatedBy { get; set; }		      
