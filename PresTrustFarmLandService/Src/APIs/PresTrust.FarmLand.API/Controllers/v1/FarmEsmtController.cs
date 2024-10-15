@@ -261,5 +261,12 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
 
     }
-   
+
+    [HttpPost("esmtInReviewApplication")]
+    [ProducesResponseType(typeof(EsmtInReviewApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<EsmtInReviewApplicationCommandViewModel>> RequestApplication([FromBody] EsmtInReviewApplicationCommand query)
+    {
+        return Single(await CommandAsync(query));
+    }
+
 }

@@ -105,7 +105,7 @@
     /// <summary>
     /// 
     /// </summary>
-    POLICY_B =  20,
+    POLICY_8 =  20,
     /// <summary>
     /// 
     /// </summary>
@@ -113,15 +113,15 @@
     /// <summary>
     /// 
     /// </summary>
-    NOTICE_PROCEED_WITHDRAW = 22,
+    NOTICE_TO_PROCEED_OR_WITHDRAW = 22,
     /// <summary>
     /// 
     /// </summary>
-    REQUEST_APPLICATION_FEE = 23, 
+    REQUEST_FOR_APPLICATION_FEE = 23, 
     /// <summary>
     /// 
     /// </summary>
-    APPLICATION_FRAMLAND_PRESERVATION_SADC = 24,
+    APPLICATION_FOR_FRAMLAND_PRESERVATION_SADC = 24,
     /// <summary>
     /// 
     /// </summary>
@@ -129,11 +129,11 @@
     /// <summary>
     /// 
     /// </summary>
-    COUNTY_COMMISSIONER_RESOLUTION= 26,
+    COUNTY_COMMISSIONER_RESOLUTION_APPROVING_CONTRACT= 26,
     /// <summary>
     /// 
     /// </summary>
-    TITLE_COMMITMENT = 27,
+    COPY_OF_TITLE_COMMITMENT = 27,
     /// <summary>
     /// 
     /// </summary>
@@ -145,7 +145,7 @@
     /// <summary>
     /// 
     /// </summary>
-    DEED_EXCEPTIONS = 30,
+    DEED_WITH_EXCEPTIONS = 30,
     /// <summary>
     /// 
     /// </summary>
@@ -161,7 +161,7 @@
     /// <summary>
     /// 
     /// </summary>
-    DEED_EXCEPTION_SADC = 34,
+    DEED_WITH_EXCEPTIONS_SADC = 34,
     /// <summary>
     /// 
     /// </summary>
@@ -177,7 +177,7 @@
     /// <summary>
     /// 
     /// </summary>
-    DEED_SIGNED_PARTIES = 38,
+    DEED_SIGNED_BY_ALL_PARTIES = 38,
     /// <summary>
     /// 
     /// </summary>
@@ -213,7 +213,7 @@
     /// <summary>
     /// 
     /// </summary>
-    CONTRACTREQUEST = 47,
+    CONTRACT_REQUEST = 47,
     /// <summary>
     /// 
     /// </summary>

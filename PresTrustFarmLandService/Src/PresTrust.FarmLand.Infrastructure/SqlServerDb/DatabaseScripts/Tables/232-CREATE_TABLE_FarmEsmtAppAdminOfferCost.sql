@@ -28,7 +28,7 @@ CREATE TABLE [Farm].[FarmEsmtAppAdminOfferCost](
    [SADCCostSharePct]                                      [decimal](10,2)                     NULL,   
    [SADCCostShareTotal]                                    [decimal](10,2)                     NULL,
    [OtherCostShareTotal]                                   [decimal](10,2)                     NULL,   
-   [OtherSource]                                           [decimal](10,2)                     NULL,   
+   [OtherSource]                                           [varchar](256)                      NULL,   
    [CostNote]                                              [varchar](4000)                     NULL,   
    [LastUpdatedBy]										   [varchar](128)		               NULL, 
    [LastUpdatedOn]										   [datetime]			           NOT NULL
