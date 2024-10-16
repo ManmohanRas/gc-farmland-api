@@ -182,27 +182,16 @@ public class ApplicationDocumentTreeBuilder
         string title = string.Empty;
         switch (enumSection)
         {
-            case EsmtAppSectionEnum.LOCATION:
-                title = "Location";
-                break;
-            case EsmtAppSectionEnum.ROLES:
-                title = "Roles";
-                break;
-            case EsmtAppSectionEnum.OWNER_DETAILS:
-                title = "Owner Details";
-                break;
-            case EsmtAppSectionEnum.EXCEPTIONS:
-                title = "Exceptions";
-                break;
             case EsmtAppSectionEnum.OTHER_DOCUMENTS:
                 title= "Other Documents";
-                break;
-            case EsmtAppSectionEnum.EXIS_NON_AGRI_USES:
-                title = "Exceptions";
                 break;
             case EsmtAppSectionEnum.ADMIN_DOCUMENT_CHECK_LIST:
                 title = "Admin Document Checklist";
                 break;
+            case EsmtAppSectionEnum.ADMIN_CLOSING_DOCS:
+                title = "Admin Closing Docs";
+                break;
+
         }
         return title;
     }

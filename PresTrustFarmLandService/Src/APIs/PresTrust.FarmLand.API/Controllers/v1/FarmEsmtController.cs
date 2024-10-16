@@ -269,4 +269,19 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(query));
     }
 
+    [HttpPost("getClosingDocs")]
+    [ProducesResponseType(typeof(GetFarmEsmtAppAdminClosingDocsQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetFarmEsmtAppAdminClosingDocsQueryViewModel>> GetClosingDocs([FromBody] GetFarmEsmtAppAdminClosingDocsQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("SaveClosingDocs")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveClosingDocs([FromBody] SaveEsmtAppAdminClosingDocsCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+
 }
