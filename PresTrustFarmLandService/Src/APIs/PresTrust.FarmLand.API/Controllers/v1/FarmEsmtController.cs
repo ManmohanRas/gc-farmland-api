@@ -245,6 +245,13 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(query));
     }
 
+    [HttpPost("esmtInReviewApplication")]
+    [ProducesResponseType(typeof(EsmtInReviewApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<EsmtInReviewApplicationCommandViewModel>> RequestApplication([FromBody] EsmtInReviewApplicationCommand query)
+    {
+        return Single(await CommandAsync(query));
+    }
+
     [HttpPost("getEsmtAppAdminExceptionRDSO")]
     [ProducesResponseType(typeof(GetEsmtAppAdminExceptionRDSOQueryViewModel), (int)HttpStatusCode.OK)]
 
@@ -262,9 +269,9 @@ public class FarmEsmtController : FarmController
 
     }
 
-    [HttpPost("esmtInReviewApplication")]
-    [ProducesResponseType(typeof(EsmtInReviewApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<EsmtInReviewApplicationCommandViewModel>> RequestApplication([FromBody] EsmtInReviewApplicationCommand query)
+    [HttpPost("esmtPendingApplication")]
+    [ProducesResponseType(typeof(EsmtPendingApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<EsmtPendingApplicationCommandViewModel>> RequestApplication([FromBody] EsmtPendingApplicationCommand query)
     {
         return Single(await CommandAsync(query));
     }
