@@ -458,7 +458,6 @@ public class FarmEsmtAppSecurityManager
             case UserRoleEnum.PROGRAM_ADMIN:
             case UserRoleEnum.PROGRAM_EDITOR:
 
-                esmtPermission.CanReviewApplication = true;
                 esmtPermission.CanRequestForAnApplicationCorrection = true;
                 esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
                 esmtPermission.CanEditFeedback = true;
