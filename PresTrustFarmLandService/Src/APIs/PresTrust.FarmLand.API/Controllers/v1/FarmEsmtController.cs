@@ -235,12 +235,33 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command)); 
     }
 
+    [HttpPost("getEsmtAppAdminCostDetails")]
+    [ProducesResponseType(typeof(GetEsmtAppAdminCostDetailsQueryViewModel), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<GetEsmtAppAdminCostDetailsQueryViewModel>> getEsmtAppAdminCostDetails([FromBody] GetEsmtAppAdminCostDetailsQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveEsmtAppAdminCostDetails")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveEsmtAppAdminCostDetails([FromBody] SaveEsmtAppAdminCostDetailsCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
 
     //ESMT WORK FLOWS
 
     [HttpPost("esmtSubmitteApplication")]
     [ProducesResponseType(typeof(EsmtSubmitApplicationCommandViewModel), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<EsmtSubmitApplicationCommandViewModel>> RequestApplication([FromBody] EsmtSubmitApplicationCommand query)
+    {
+        return Single(await CommandAsync(query));
+    }
+
+    [HttpPost("esmtInReviewApplication")]
+    [ProducesResponseType(typeof(EsmtInReviewApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<EsmtInReviewApplicationCommandViewModel>> RequestApplication([FromBody] EsmtInReviewApplicationCommand query)
     {
         return Single(await CommandAsync(query));
     }
@@ -262,9 +283,9 @@ public class FarmEsmtController : FarmController
 
     }
 
-    [HttpPost("esmtInReviewApplication")]
-    [ProducesResponseType(typeof(EsmtInReviewApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<EsmtInReviewApplicationCommandViewModel>> RequestApplication([FromBody] EsmtInReviewApplicationCommand query)
+    [HttpPost("esmtPendingApplication")]
+    [ProducesResponseType(typeof(EsmtPendingApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<EsmtPendingApplicationCommandViewModel>> RequestApplication([FromBody] EsmtPendingApplicationCommand query)
     {
         return Single(await CommandAsync(query));
     }
