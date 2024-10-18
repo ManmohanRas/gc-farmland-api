@@ -6,8 +6,8 @@
         public int Id { get; set; }
         public int ApplicationId { get; set; }
         public string ProjectStatus { get; set; }
-        public int EPDeedBook { get; set; }
-        public int EPDeedPage { get; set; }
+        public int? EPDeedBook { get; set; }
+        public int? EPDeedPage { get; set; }
         public DateTime? EPDeedFiled { get; set; }
         public string EPDeedClerkID { get; set; }
         public string CountyAttorney { get; set; }
