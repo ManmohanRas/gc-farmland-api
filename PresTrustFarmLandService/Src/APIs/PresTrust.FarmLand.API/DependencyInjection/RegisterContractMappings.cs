@@ -41,7 +41,9 @@
            services.AddTransient<IEsmtAppAdminExceptionRDSORepository, EsmtAppAdminExceptionRDSORepository>();
             services.AddTransient<IEsmtAppAdminOfferCostsRepository, EsmtAppAdminOfferCostsRepository>();
             services.AddTransient<IFarmEsmtAppAdminClosingDocsRepository, EsmtAppAdminClosingDocsRepository>();
-          
+            services.AddTransient<IFarmEsmtAppAdminCostDetailsRepository, FarmEsmtAppAdminCostDetailsRepository>();
+
+
+        }
     }
-}
 

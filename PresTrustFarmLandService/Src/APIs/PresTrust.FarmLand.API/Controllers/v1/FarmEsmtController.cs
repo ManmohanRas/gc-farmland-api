@@ -235,6 +235,20 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command)); 
     }
 
+    [HttpPost("getEsmtAppAdminCostDetails")]
+    [ProducesResponseType(typeof(GetEsmtAppAdminCostDetailsQueryViewModel), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<GetEsmtAppAdminCostDetailsQueryViewModel>> getEsmtAppAdminCostDetails([FromBody] GetEsmtAppAdminCostDetailsQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveEsmtAppAdminCostDetails")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveEsmtAppAdminCostDetails([FromBody] SaveEsmtAppAdminCostDetailsCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
 
     //ESMT WORK FLOWS
 
