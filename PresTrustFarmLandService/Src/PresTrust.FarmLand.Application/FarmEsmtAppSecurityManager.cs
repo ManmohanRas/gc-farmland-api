@@ -53,6 +53,9 @@ public class FarmEsmtAppSecurityManager
             case EsmtAppStatusEnum.IN_REVIEW:
                 this.DeriveInReviewStatePermissions();
                 break;
+            case EsmtAppStatusEnum.PENDING:
+                this.DeriveInReviewStatePermissions();
+                break;
         }
 
     }
