@@ -42,6 +42,7 @@
             services.AddTransient<IEsmtAppAdminOfferCostsRepository, EsmtAppAdminOfferCostsRepository>();
             services.AddTransient<IFarmEsmtAppAdminClosingDocsRepository, EsmtAppAdminClosingDocsRepository>();
             services.AddTransient<IFarmEsmtAppAdminCostDetailsRepository, FarmEsmtAppAdminCostDetailsRepository>();
+            services.AddTransient<IFarmEsmtAppAdminStructNonAgWetlandsRepository, FarmEsmtAppAdminStructNonAgWetlandsRepository>();
 
 
         }

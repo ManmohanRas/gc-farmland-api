@@ -304,5 +304,19 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
+    [HttpPost("getWetlands")]
+    [ProducesResponseType(typeof(GetFarmEsmtAppAdminStructNonAgWetlandsQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetFarmEsmtAppAdminStructNonAgWetlandsQueryViewModel>> GetWetlands([FromBody] GetFarmEsmtAppAdminStructNonAgWetlandsQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("SaveWetlands")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveWetlands([FromBody] SaveFarmEsmtAppAdminStructNonAgWetlandsCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
 
 }
