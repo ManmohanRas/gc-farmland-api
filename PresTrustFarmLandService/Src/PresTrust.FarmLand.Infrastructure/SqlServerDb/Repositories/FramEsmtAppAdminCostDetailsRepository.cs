@@ -35,7 +35,7 @@ public class FarmEsmtAppAdminCostDetailsRepository : IFarmEsmtAppAdminCostDetail
     {
         FarmEsmtAppAdminCostDetailsEntity result = default;
         using var conn = context.CreateConnection();
-        var sqlCommand = new GetFramEsmtAppAdminCostDetailsSqlQuery();
+        var sqlCommand = new GetFarmEsmtAppAdminCostDetailsSqlQuery();
         var results = await conn.QueryAsync<FarmEsmtAppAdminCostDetailsEntity>(sqlCommand.ToString(),
                             commandType: CommandType.Text,
                             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,

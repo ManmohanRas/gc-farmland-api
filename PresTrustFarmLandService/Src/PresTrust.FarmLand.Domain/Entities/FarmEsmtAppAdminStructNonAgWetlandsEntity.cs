@@ -11,8 +11,8 @@ public class FarmEsmtAppAdminStructNonAgWetlandsEntity
     public string ImprovAg { get; set; }
     public string WetlandsSurveyor { get; set; }
     public DateTime? DateofDelineation { get; set; }
-    public decimal AcresofWetlands { get; set; }
-    public decimal AcresofTransitionArea { get; set; }
+    public decimal? AcresofWetlands { get; set; }
+    public decimal? AcresofTransitionArea { get; set; }
     public string WetlandsClassification { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }

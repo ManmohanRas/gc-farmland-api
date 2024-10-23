@@ -1,6 +1,6 @@
 ﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries;
 
-public class GetFramEsmtAppAdminCostDetailsSqlQuery
+public class GetFarmEsmtAppAdminCostDetailsSqlQuery
 {
     private readonly string _sqlCommand =
       @"  SELECT     [Id]
@@ -31,7 +31,7 @@ public class GetFramEsmtAppAdminCostDetailsSqlQuery
                 FROM [Farm].[FarmEsmtAppAdminCostDetails] 
                 WHERE ApplicationId = @p_ApplicationId"
       ;
-    public GetFramEsmtAppAdminCostDetailsSqlQuery()
+    public GetFarmEsmtAppAdminCostDetailsSqlQuery()
     {
     }
 
