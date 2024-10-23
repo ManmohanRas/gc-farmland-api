@@ -15,6 +15,12 @@ public class SaveFeedbackCommandValidator : AbstractValidator<SaveFeedbackComman
 
         RuleFor(command => command.Section)
             .NotNull().NotEmpty().WithMessage("Application section must be provided")
-            .Must(appSection => EnumUtils.TryParseWithMemberName<TermAppSectionEnum>(appSection, out _)).WithMessage("Not a valid application section");
+            .Must(appSection => EnumUtils.TryParseWithMemberName<TermAppSectionEnum>(appSection, out _)).WithMessage("Not a valid application section")
+             .Unless(x => x.ApplicationTypeId != 2);
+
+        RuleFor(command => command.Section)
+           .NotNull().NotEmpty().WithMessage("Application section must be provided")
+           .Must(appSection => EnumUtils.TryParseWithMemberName<EsmtAppSectionEnum>(appSection, out _)).WithMessage("Not a valid application section")
+            .Unless(x => x.ApplicationTypeId != 1);
     }
 }
