@@ -132,13 +132,12 @@ public class FarmEsmtAppSecurityManager
                 Location();
                 OwnerDetails();
                 Roles();
-                Liens();
+                Exceptions();
                 Structures();
+                Liens();
                 ExistingUses();
                 AgriculturalUseProduction();
                 EquineUses();
-                OtherDocuments();
-                Exceptions();
 
                 if (userRole == UserRoleEnum.AGENCY_SIGNATORY)
                 {
@@ -146,6 +145,9 @@ public class FarmEsmtAppSecurityManager
                 }
                 else
                     Signatory();
+
+                OtherDocuments();
+
 
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
@@ -159,14 +161,15 @@ public class FarmEsmtAppSecurityManager
                 Location();
                 OwnerDetails();
                 Roles();
-                Liens();
+                Exceptions();
                 Structures();
+                Liens();
                 ExistingUses();
                 AgriculturalUseProduction();
                 EquineUses();
                 Signatory();
                 OtherDocuments();
-                Exceptions();
+                
 
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
@@ -429,6 +432,7 @@ public class FarmEsmtAppSecurityManager
             case UserRoleEnum.AGENCY_SIGNATORY:
 
                 esmtPermission.CanViewFeedback = true;
+                //esmtPermission.CanReviewApplication = true;
 
                 if (userRole == UserRoleEnum.PROGRAM_COMMITTEE || userRole == UserRoleEnum.PROGRAM_READONLY)
                 {
@@ -446,6 +450,13 @@ public class FarmEsmtAppSecurityManager
                 EquineUses();
                 Signatory();
                 OtherDocuments();
+
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = EsmtAppNavigationItemTitles.LOCATION,
+                    RouterLink = EsmtAppRouterLinks.LOCATION_VIEW,
+                    SortOrder = 1
+                };
                 break;
         }
 
@@ -718,6 +729,13 @@ public class FarmEsmtAppSecurityManager
                 EquineUses();
                 Signatory();
                 OtherDocuments();
+
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = EsmtAppNavigationItemTitles.LOCATION,
+                    RouterLink = EsmtAppRouterLinks.LOCATION_VIEW,
+                    SortOrder = 1
+                };
                 break;
         }
 
