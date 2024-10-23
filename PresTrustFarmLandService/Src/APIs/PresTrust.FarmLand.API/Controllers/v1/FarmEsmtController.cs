@@ -304,5 +304,18 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
+    [HttpPost("getAppraisalReport")]
+    [ProducesResponseType(typeof(GetEsmtAppAdminAppraisalReportQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetEsmtAppAdminAppraisalReportQueryViewModel>> GetAppraisalReport([FromBody] GetEsmtAppAdminAppraisalReportQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveAppraisalReport")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveAppraisalReport([FromBody] SaveEsmtAppAdminAppraisalReportCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
 
 }
