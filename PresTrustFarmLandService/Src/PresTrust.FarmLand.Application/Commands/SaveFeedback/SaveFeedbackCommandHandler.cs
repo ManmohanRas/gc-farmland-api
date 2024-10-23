@@ -1,6 +1,6 @@
 ﻿namespace PresTrust.FarmLand.Application.Commands;
 
-public class SaveFeedbackCommandHandler : IRequestHandler<SaveFeedbackCommand, int>
+public class SaveFeedbackCommandHandler : BaseHandler, IRequestHandler<SaveFeedbackCommand, int>
 {
     private readonly IMapper mapper;
     private readonly IPresTrustUserContext userContext;
@@ -23,7 +23,7 @@ public class SaveFeedbackCommandHandler : IRequestHandler<SaveFeedbackCommand, i
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
         IApplicationFeedbackRepository repoFeedback
-    )
+    ): base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
         this.userContext = userContext;
@@ -40,11 +40,17 @@ public class SaveFeedbackCommandHandler : IRequestHandler<SaveFeedbackCommand, i
     public async Task<int> Handle(SaveFeedbackCommand request, CancellationToken cancellationToken)
     {
         // get application details
-        //var application = await GetIfApplicationExists(request.ApplicationId);
+        var application = await GetIfApplicationExists(request.ApplicationId);
+
+        request.ApplicationTypeId = application.ApplicationTypeId;  
 
         var feedback = mapper.Map<SaveFeedbackCommand, FarmFeedbacksEntity>(request);
         feedback.LastUpdatedBy = userContext.Email;
+        if (application.ApplicationTypeId == 1)
         feedback.CorrectionStatus = feedback.Section == TermAppSectionEnum.NONE ? ApplicationCorrectionStatusEnum.NONE.ToString() : ApplicationCorrectionStatusEnum.PENDING.ToString();
+        else
+        feedback.CorrectionStatus = feedback.Section == EsmtAppSectionEnum.NONE ? ApplicationCorrectionStatusEnum.NONE.ToString() : ApplicationCorrectionStatusEnum.PENDING.ToString();
+
         feedback = await repoFeedback.SaveAsync(feedback);
         return feedback.Id;
     }
