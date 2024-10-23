@@ -1,6 +1,6 @@
 ﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries;
 
-public class GetFarnEsmtAppAdminStructNonAgWetlandsSqlQuires
+public class GetFarmEsmtAppAdminStructNonAgWetlandsSqlQuires
 {
     private readonly string _sqlCommand =
         @"  SELECT   [Id]
@@ -22,7 +22,7 @@ public class GetFarnEsmtAppAdminStructNonAgWetlandsSqlQuires
             WHERE ApplicationId = @p_ApplicationId";
 
 
-    public GetFarnEsmtAppAdminStructNonAgWetlandsSqlQuires()
+    public GetFarmEsmtAppAdminStructNonAgWetlandsSqlQuires()
     {
     }
 

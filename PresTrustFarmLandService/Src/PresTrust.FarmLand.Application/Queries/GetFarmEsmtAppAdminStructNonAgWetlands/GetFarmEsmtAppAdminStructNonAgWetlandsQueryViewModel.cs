@@ -12,7 +12,7 @@ public class GetFarmEsmtAppAdminStructNonAgWetlandsQueryViewModel
     public string ImprovAg { get; set; }
     public string WetlandsSurveyor { get; set; }
     public DateTime? DateofDelineation { get; set; }
-    public decimal AcresofWetlands { get; set; }
-    public decimal AcresofTransitionArea { get; set; }
+    public decimal? AcresofWetlands { get; set; }
+    public decimal? AcresofTransitionArea { get; set; }
     public string WetlandsClassification { get; set; }
 }

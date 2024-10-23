@@ -1,8 +1,8 @@
 ﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
-public class CreateFarnEsmtAppAdminStructNonAgWetlandsSqlCommand
+public class CreateFarmEsmtAppAdminStructNonAgWetlandsSqlCommand
 {
     private readonly string _sqlCommand =
-                @"ISERT INTO [Farm].[FarmEsmtAppAdminStructNonAgriWetlands]
+                @"INSERT INTO [Farm].[FarmEsmtAppAdminStructNonAgriWetlands]
                      (
                              ApplicationId
                             ,IsResidenceOnPresLand
@@ -39,7 +39,7 @@ public class CreateFarnEsmtAppAdminStructNonAgWetlandsSqlCommand
                      );
                  SELECT CAST( SCOPE_IDENTITY() AS INT);";
 
-    public CreateFarnEsmtAppAdminStructNonAgWetlandsSqlCommand()
+    public CreateFarmEsmtAppAdminStructNonAgWetlandsSqlCommand()
     {
 
     }
