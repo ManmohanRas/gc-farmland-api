@@ -35,14 +35,16 @@
             services.AddTransient<IEsmtAppAttachmentCRepository, EsmtAppAttachmentCRepository>();
             services.AddTransient<IFarmEsmtAgriculturalEnterpriseRepository, FarmEsmtAgriculturalEnterpriseRepository>();
             services.AddTransient<IEsmtAppAttachmentDRepository, EsmtAppAttachmentDRepository>();
-           services.AddTransient<IEsmtAppAttachmentERepository, EsmtAppAttachmentERepository>();
-           services.AddTransient<IFarmEsmtAttachmentARepository, FarmEsmtAttachmentARepository>();
-           services.AddTransient<IEsmtAppAdminSADCRepository, EsmtAppAdminSADCRepository>();
-           services.AddTransient<IEsmtAppAdminExceptionRDSORepository, EsmtAppAdminExceptionRDSORepository>();
+            services.AddTransient<IEsmtAppAttachmentERepository, EsmtAppAttachmentERepository>();
+            services.AddTransient<IFarmEsmtAttachmentARepository, FarmEsmtAttachmentARepository>();
+            services.AddTransient<IEsmtAppAdminSADCRepository, EsmtAppAdminSADCRepository>();
+            services.AddTransient<IEsmtAppAdminExceptionRDSORepository, EsmtAppAdminExceptionRDSORepository>();
             services.AddTransient<IEsmtAppAdminOfferCostsRepository, EsmtAppAdminOfferCostsRepository>();
             services.AddTransient<IFarmEsmtAppAdminClosingDocsRepository, EsmtAppAdminClosingDocsRepository>();
             services.AddTransient<IFarmEsmtAppAdminCostDetailsRepository, FarmEsmtAppAdminCostDetailsRepository>();
-              services.AddTransient<IFarmEsmtAppAdminAppraisalReportRepository, EsmtAppAdminAppraisalReportRepository>();
+            services.AddTransient<IFarmEsmtAppAdminAppraisalReportRepository, EsmtAppAdminAppraisalReportRepository>();
+            services.AddTransient<IFarmEsmtAppAdminStructNonAgWetlandsRepository, FarmEsmtAppAdminStructNonAgWetlandsRepository>();
+
 
         }
     }
