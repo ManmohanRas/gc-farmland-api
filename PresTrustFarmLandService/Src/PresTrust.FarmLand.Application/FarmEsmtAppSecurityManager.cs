@@ -56,6 +56,9 @@ public class FarmEsmtAppSecurityManager
             case EsmtAppStatusEnum.PENDING:
                 this.DeriveInReviewStatePermissions();
                 break;
+            case EsmtAppStatusEnum.REJECTED:
+                this.DeriveRejectedStatePermissions();
+                break;
         }
 
     }
@@ -739,6 +742,217 @@ public class FarmEsmtAppSecurityManager
                 break;
         }
 
+    }
+
+    private void DeriveRejectedStatePermissions()
+    {
+        FarmFeedbacksEntity correction = default;
+
+        switch (userRole)
+        {
+            case UserRoleEnum.SYSTEM_ADMIN:
+            case UserRoleEnum.PROGRAM_ADMIN:
+                esmtPermission.CanViewFeedback = true;
+                esmtPermission.CanViewComments = true;
+                esmtPermission.CanEditComments = true;
+                esmtPermission.CanDeleteComments = true;
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
+                if (correction == null)
+                {
+                    Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.OWNER_DETAILS).FirstOrDefault();
+                if (correction == null)
+                {
+                    OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.ROLES).FirstOrDefault();
+                if (correction == null)
+                {
+                    Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Roles(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.EXCEPTIONS).FirstOrDefault();
+                if (correction == null)
+                {
+                    Exceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Exceptions(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.RESI_NON_RESI_STRUCTURES).FirstOrDefault();
+                if (correction == null)
+                {
+                    Structures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Structures(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LIENS_EASEMENT_ROW).FirstOrDefault();
+                if (correction == null)
+                {
+                    Liens(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Liens(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.EXIS_NON_AGRI_USES).FirstOrDefault();
+                if (correction == null)
+                {
+                    ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    ExistingUses(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.AGRICULTURAL_USE_PRODUCTION).FirstOrDefault();
+                if (correction == null)
+                {
+                    AgriculturalUseProduction(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    AgriculturalUseProduction(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.EQUINE_USES).FirstOrDefault();
+                if (correction == null)
+                {
+                    EquineUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    EquineUses(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.SIGNATORY).FirstOrDefault();
+                if (correction == null)
+                {
+                    Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Signatory(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
+                if (correction == null)
+                {
+                    OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminCostDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminAppraisalReport(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminOfferCosts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminStructures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminExceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminSADC(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminClosingDocs(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminContacts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = EsmtAppNavigationItemTitles.LOCATION,
+                    RouterLink = EsmtAppRouterLinks.LOCATION_EDIT,
+                    SortOrder = 1
+                };
+                break;
+
+            
+            case UserRoleEnum.PROGRAM_COMMITTEE:
+            case UserRoleEnum.PROGRAM_READONLY:
+                if (userRole == UserRoleEnum.PROGRAM_COMMITTEE || userRole == UserRoleEnum.PROGRAM_READONLY)
+                {
+                    esmtPermission.CanViewComments = true;
+                    esmtPermission.CanSwitchSADC = false;
+                }
+                Location();
+                OwnerDetails();
+                Roles();
+                Exceptions();
+                Structures();
+                Liens();
+                ExistingUses();
+                AgriculturalUseProduction();
+                EquineUses();
+                Signatory();
+                OtherDocuments();
+                AdminDocumentChecklist();
+                AdminCostDetails();
+                AdminAppraisalReport();
+                AdminOfferCosts();
+                AdminStructures();
+                AdminExceptions();
+                AdminSADC();
+                AdminClosingDocs();
+                AdminContacts();
+                // Default Navigation Item
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = TermAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                    SortOrder = 1
+                };
+                break;
+
+            case UserRoleEnum.AGENCY_ADMIN:
+            case UserRoleEnum.AGENCY_EDITOR:
+            case UserRoleEnum.AGENCY_READONLY:
+            case UserRoleEnum.AGENCY_SIGNATORY:
+
+                if (userRole != UserRoleEnum.AGENCY_READONLY)
+                {
+                    esmtPermission.CanViewFeedback = true;
+                    esmtPermission.CanSwitchSADC = false;
+                }
+                Location();
+                OwnerDetails();
+                Roles();
+                Exceptions();
+                Structures();
+                Liens();
+                ExistingUses();
+                AgriculturalUseProduction();
+                EquineUses();
+                Signatory();
+                OtherDocuments();
+                // Default Navigation Item
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = TermAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                    SortOrder = 1
+                };
+                break;
+
+            default:
+                Location();
+                OwnerDetails();
+                Roles();
+                Exceptions();
+                Structures();
+                Liens();
+                ExistingUses();
+                AgriculturalUseProduction();
+                EquineUses();
+                Signatory();
+                OtherDocuments();
+                // Default Navigation Item
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = TermAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                    SortOrder = 1
+                };
+                break;
+        }
     }
 
 
