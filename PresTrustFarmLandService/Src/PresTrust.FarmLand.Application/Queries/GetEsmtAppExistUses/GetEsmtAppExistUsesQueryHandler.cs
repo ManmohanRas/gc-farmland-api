@@ -51,7 +51,7 @@ public class GetEsmtAppExistUsesQueryHandler : BaseHandler, IRequestHandler<GetE
     public async Task<List<DocumentTypeViewModel>> GetDocuments(int ApplicationId)
     {
 
-        var documents = await repoDocuments.GetTermDocumentsAsync(ApplicationId, (int)TermAppSectionEnum.ESMT_EXIS_NON_AGRI_USES);
+        var documents = await repoDocuments.GetTermDocumentsAsync(ApplicationId, (int)EsmtAppSectionEnum.EXIS_NON_AGRI_USES);
 
         List<DocumentTypeViewModel> documentsTree = new List<DocumentTypeViewModel>();
 
