@@ -324,14 +324,14 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanDeleteDocument = true;
                 esmtPermission.CanViewFeedback = true;
 
-                correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.LOCATION).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
                 {
                     Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                     this.defaultNavigationItem = new NavigationItemEntity()
                     {
-                        Title = TermAppNavigationItemTitles.LOCATION,
-                        RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                        Title = EsmtAppNavigationItemTitles.LOCATION,
+                        RouterLink = EsmtAppRouterLinks.LOCATION_VIEW,
                         SortOrder = 1
                     };
                 }
@@ -340,8 +340,8 @@ public class FarmEsmtAppSecurityManager
                     Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                     this.defaultNavigationItem = new NavigationItemEntity()
                     {
-                        Title = TermAppNavigationItemTitles.LOCATION,
-                        RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
+                        Title = EsmtAppNavigationItemTitles.LOCATION,
+                        RouterLink = EsmtAppRouterLinks.LOCATION_EDIT,
                         SortOrder = 1
                     };
                 }
@@ -615,8 +615,8 @@ public class FarmEsmtAppSecurityManager
                     Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                     this.defaultNavigationItem = new NavigationItemEntity()
                     {
-                        Title = TermAppNavigationItemTitles.LOCATION,
-                        RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                        Title = EsmtAppNavigationItemTitles.LOCATION,
+                        RouterLink = EsmtAppRouterLinks.LOCATION_VIEW,
                         SortOrder = 1
                     };
                 }
@@ -625,8 +625,8 @@ public class FarmEsmtAppSecurityManager
                     Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                     this.defaultNavigationItem = new NavigationItemEntity()
                     {
-                        Title = TermAppNavigationItemTitles.LOCATION,
-                        RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
+                        Title = EsmtAppNavigationItemTitles.LOCATION,
+                        RouterLink = EsmtAppRouterLinks.LOCATION_EDIT,
                         SortOrder = 1
                     };
                 }
@@ -895,8 +895,8 @@ public class FarmEsmtAppSecurityManager
                     Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
                     this.defaultNavigationItem = new NavigationItemEntity()
                     {
-                        Title = TermAppNavigationItemTitles.LOCATION,
-                        RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                        Title = EsmtAppNavigationItemTitles.LOCATION,
+                        RouterLink = EsmtAppRouterLinks.LOCATION_VIEW,
                         SortOrder = 1
                     };
                 }
@@ -905,8 +905,8 @@ public class FarmEsmtAppSecurityManager
                     Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                     this.defaultNavigationItem = new NavigationItemEntity()
                     {
-                        Title = TermAppNavigationItemTitles.LOCATION,
-                        RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
+                        Title = EsmtAppNavigationItemTitles.LOCATION,
+                        RouterLink = EsmtAppRouterLinks.LOCATION_EDIT,
                         SortOrder = 1
                     };
                 }
@@ -1181,8 +1181,8 @@ public class FarmEsmtAppSecurityManager
                 // Default Navigation Item
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
-                    Title = TermAppNavigationItemTitles.LOCATION,
-                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                    Title = EsmtAppNavigationItemTitles.LOCATION,
+                    RouterLink = EsmtAppRouterLinks.LOCATION_VIEW,
                     SortOrder = 1
                 };
                 break;
@@ -1211,8 +1211,8 @@ public class FarmEsmtAppSecurityManager
                 // Default Navigation Item
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
-                    Title = TermAppNavigationItemTitles.LOCATION,
-                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                    Title = EsmtAppNavigationItemTitles.LOCATION,
+                    RouterLink = EsmtAppRouterLinks.LOCATION_VIEW,
                     SortOrder = 1
                 };
                 break;
@@ -1232,8 +1232,8 @@ public class FarmEsmtAppSecurityManager
                 // Default Navigation Item
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
-                    Title = TermAppNavigationItemTitles.LOCATION,
-                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                    Title = EsmtAppNavigationItemTitles.LOCATION,
+                    RouterLink = EsmtAppRouterLinks.LOCATION_VIEW,
                     SortOrder = 1
                 };
                 break;

@@ -10,6 +10,8 @@ public class ResponseToRequestForApplicationCorrectionCommandHandler : BaseHandl
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
     private readonly IApplicationFeedbackRepository repoFeedback;
+    private readonly int enumSection;
+
     //private readonly IEmailManager repoEmailManager;
 
 
@@ -57,7 +59,12 @@ public class ResponseToRequestForApplicationCorrectionCommandHandler : BaseHandl
         {
             foreach (var section in request.Sections)
             {
+                if (application.ApplicationTypeId == 1)
                 Enum.TryParse(value: section, ignoreCase: true, out TermAppSectionEnum enumSection);
+               else
+                 Enum.TryParse(value: section, ignoreCase: true, out EsmtAppSectionEnum enumSection);
+
+                
                 await repoFeedback.ResponseToRequestForApplicationCorrectionAsync(application.Id, (int)enumSection);
             }
 

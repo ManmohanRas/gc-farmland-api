@@ -37,15 +37,20 @@ public class GetEsmtApplicationDetailsQueryHandler : BaseHandler, IRequestHandle
         var result = mapper.Map<FarmApplicationEntity, GetEsmtApplicationDetailsQueryViewModel>(application);
 
         FarmEsmtAppSecurityManager securityMgr = default;
-        userContext.DeriveRole(application.AgencyId);
+        //userContext.DeriveRole(application.AgencyId);
 
         switch (application.Status)
         {
-            case EsmtAppStatusEnum.DRAFT_APPLICATION:
+
+            case EsmtAppStatusEnum.APPLICATION_SUBMITTED:
+            case EsmtAppStatusEnum.IN_REVIEW:
+            case EsmtAppStatusEnum.PENDING:
+            case EsmtAppStatusEnum.REJECTED:
                 var feedbacksReqForCorrections = feedbacks.Where(f => f.RequestForCorrection == true && string.Compare(f.CorrectionStatus, ApplicationCorrectionStatusEnum.REQUEST_SENT.ToString(), true) == 0).ToList();
                 securityMgr = new FarmEsmtAppSecurityManager(userContext.Role, application.Status, feedbacksReqForCorrections);
                 break;
             default:
+
                 securityMgr = new FarmEsmtAppSecurityManager(userContext.Role, application.Status);
                 break;
         }
