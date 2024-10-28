@@ -60,12 +60,16 @@ public class ResponseToRequestForApplicationCorrectionCommandHandler : BaseHandl
             foreach (var section in request.Sections)
             {
                 if (application.ApplicationTypeId == 1)
-                Enum.TryParse(value: section, ignoreCase: true, out TermAppSectionEnum enumSection);
-               else
-                 Enum.TryParse(value: section, ignoreCase: true, out EsmtAppSectionEnum enumSection);
+                {
+                    Enum.TryParse(value: section, ignoreCase: true, out TermAppSectionEnum enumSection);
+                    await repoFeedback.ResponseToRequestForApplicationCorrectionAsync(application.Id, (int)enumSection);
+                }
+                else 
+                {
+                    Enum.TryParse(value: section, ignoreCase: true, out EsmtAppSectionEnum enumSection);
+                    await repoFeedback.ResponseToRequestForApplicationCorrectionAsync(application.Id, (int)enumSection);
+                }
 
-                
-                await repoFeedback.ResponseToRequestForApplicationCorrectionAsync(application.Id, (int)enumSection);
             }
 
             // If reponse's description/feedback is not empty
@@ -77,7 +81,8 @@ public class ResponseToRequestForApplicationCorrectionCommandHandler : BaseHandl
                     ApplicationId = application.Id,
                     CorrectionStatus = ApplicationCorrectionStatusEnum.NONE.ToString(),
                     Feedback = request.Feedback,
-                    Section = TermAppSectionEnum.NONE,
+
+                    Section = EsmtAppSectionEnum.NONE,
                     RequestForCorrection = false,
                     LastUpdatedBy = userContext.Name
                 };
