@@ -620,7 +620,7 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanDeleteDocument = true;
                 esmtPermission.CanViewFeedback = true;
 
-                correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.LOCATION).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
                 {
                     Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
@@ -900,7 +900,7 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanDeleteDocument = true;
                 esmtPermission.CanViewFeedback = true;
 
-                correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.LOCATION).FirstOrDefault();
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
                 {
                     Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.VIEW);
