@@ -35,6 +35,6 @@
         public string CurrentZoning { get; set; }
         public decimal? CADBEasement { get; set; }
         public decimal? CADBBefore { get; set; }
-        public string CADBEaseBefore { get; set; }
+        public decimal? CADBEaseBefore { get; set; }
     }
 }
