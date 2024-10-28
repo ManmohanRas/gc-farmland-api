@@ -21,5 +21,6 @@ public class GetEsmtApplicationDetailsQueryViewModel
     public IEnumerable<NavigationItemEntity> NavigationItems { get; set; } = new List<NavigationItemEntity>();
     public IEnumerable<NavigationItemEntity> AdminNavigationItems { get; set; } = new List<NavigationItemEntity>();
     public IEnumerable<NavigationItemEntity> PostApprovedNavigationItems { get; set; } = new List<NavigationItemEntity>();
+    public IEnumerable<NavigationItemEntity> SADCNavigationItems { get; set; } = new List<NavigationItemEntity>();
     public NavigationItemEntity DefaultNavigationItem { get; set; } = new NavigationItemEntity();
 }

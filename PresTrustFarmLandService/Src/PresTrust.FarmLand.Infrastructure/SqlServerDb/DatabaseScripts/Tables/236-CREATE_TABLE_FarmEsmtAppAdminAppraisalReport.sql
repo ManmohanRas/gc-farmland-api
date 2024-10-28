@@ -42,6 +42,11 @@ CREATE TABLE [Farm].[FarmEsmtAppAdminAppraisalReport](
 	[AppraisedZoning]									   [varchar](128)		               NULL,
 	[ApraisedZoningClass]								   [varchar](128)		               NULL,
 	[AppraisalComments]									   [varchar](4000)					   NULL,
+	[FreeHolderDate]									   [datetime]						   NULL,
+	[CurrentZoning]										   [varchar](128)		               NULL,
+	[CADBEasement]										   [decimal](18,2)					   NULL,
+	[CADBBefore]										   [decimal](18,2)					   NULL,
+	[CADBEaseBefore]									   [decimal](18,2)		               NULL,
 	[LastUpdatedBy]										   [varchar](128)		               NULL,
 	[LastUpdatedOn]										   [datetime]			           NOT NULL,
 CONSTRAINT [PK_FarmEsmtAppAdminAppraisalReport _Id] PRIMARY KEY CLUSTERED 

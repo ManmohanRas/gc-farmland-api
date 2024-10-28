@@ -102,5 +102,30 @@ public partial class FarmLandDomainConstants
         /// </summary>
         public const string ADMIN_CONTACTS = "Contacts";
 
+        /// <summary>
+        /// Constant to hold title for SADC Farm Information
+        /// </summary>
+        public const string SADC_FARM_INFORMATION = "Farm Information";
+
+        /// <summary>
+        /// Constant to hold title for SADC Residence on Easement Area
+        /// </summary>
+        public const string SADC_RESI_ON_ESMT_AREA = "Residence on Easement Area";
+
+        /// <summary>
+        /// Constant to hold title for SADC Farm History
+        /// </summary>
+        public const string SADC_FARM_HISTORY= "Farm History";
+
+        /// <summary>
+        /// Constant to hold title for SADC Application Eligibility I
+        /// </summary>
+        public const string SADC_APP_ELIGIBILITY_I = "Application Eligibility I";
+
+        /// <summary>
+        /// Constant to hold title for SADC Application Eligibility II
+        /// </summary>
+        public const string SADC_APP_ELIGIBILITY_II = "Application Eligibility II";
+
     }
 }
