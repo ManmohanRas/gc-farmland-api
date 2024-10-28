@@ -883,6 +883,15 @@ public class FarmEsmtAppSecurityManager
                 AdminClosingDocs(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminContacts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
+                if (userRole == UserRoleEnum.PROGRAM_ADMIN && IsSADC)
+                {
+                    SADCFarmInformation(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCResiOnEsmtArea(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCFarmHistory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCAppEligibilityI(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCAppEligibilityII(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
                     Title = EsmtAppNavigationItemTitles.LOCATION,
@@ -1051,7 +1060,9 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanViewFeedback = true;
                 esmtPermission.CanViewComments = true;
                 esmtPermission.CanEditComments = true;
+                esmtPermission.CanEditFeedback = true;
                 esmtPermission.CanDeleteComments = true;
+                esmtPermission.CanRequestForAnApplicationCorrection = true;
 
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
