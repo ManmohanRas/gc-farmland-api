@@ -1164,11 +1164,9 @@ public class FarmEsmtAppSecurityManager
             
             case UserRoleEnum.PROGRAM_COMMITTEE:
             case UserRoleEnum.PROGRAM_READONLY:
-                if (userRole == UserRoleEnum.PROGRAM_COMMITTEE || userRole == UserRoleEnum.PROGRAM_READONLY)
-                {
-                    esmtPermission.CanViewComments = true;
-                    esmtPermission.CanSwitchSADC = false;
-                }
+            case UserRoleEnum.PROGRAM_EDITOR:
+            esmtPermission.CanViewComments = true;
+
                 Location();
                 OwnerDetails();
                 Roles();
