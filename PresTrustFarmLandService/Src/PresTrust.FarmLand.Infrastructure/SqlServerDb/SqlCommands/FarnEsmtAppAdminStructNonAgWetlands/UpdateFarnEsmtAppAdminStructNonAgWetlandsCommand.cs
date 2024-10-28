@@ -1,6 +1,6 @@
 ﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
 
-public class UpdateFarnEsmtAppAdminStructNonAgWetlandsSqlCommand
+public class UpdateFarmEsmtAppAdminStructNonAgWetlandsSqlCommand
 {
     private readonly string _sqlCommand =
         @" UPDATE [Farm].[FarmEsmtAppAdminStructNonAgriWetlands]
@@ -20,7 +20,7 @@ public class UpdateFarnEsmtAppAdminStructNonAgWetlandsSqlCommand
 						    ,LastUpdatedOn             = @p_LastUpdatedOn
                       WHERE Id = @p_Id AND ApplicationId = @p_ApplicationId";
 
-    public UpdateFarnEsmtAppAdminStructNonAgWetlandsSqlCommand()
+    public UpdateFarmEsmtAppAdminStructNonAgWetlandsSqlCommand()
     {
     }
 

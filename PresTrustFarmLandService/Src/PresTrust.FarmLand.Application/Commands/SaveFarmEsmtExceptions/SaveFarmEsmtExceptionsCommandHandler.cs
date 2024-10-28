@@ -1,26 +1,81 @@
-﻿
+﻿using PresTrust.FarmLand.Application.Queries;
+using System;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace PresTrust.FarmLand.Application.Commands;
 
-public class SaveFarmEsmtExceptionsCommandHandler : IRequestHandler<SaveFarmEsmtExceptionsCommand , int>
+public class SaveFarmEsmtExceptionsCommandHandler : BaseHandler, IRequestHandler<SaveFarmEsmtExceptionsCommand , int>
 {
+
     private readonly IMapper mapper;
+    private readonly IApplicationRepository repoApplication;
+    private readonly ITermBrokenRuleRepository repoBrokenRules;
     private readonly IFarmEsmtExceptionsRepository repoExceptionsRepository;
+    private readonly IFarmEsmtAttachmentBRepository farmEsmtAttachmentBRepository;
+    private readonly SystemParameterConfiguration systemParamOptions;
 
     public SaveFarmEsmtExceptionsCommandHandler(
         IMapper mapper,
-        IFarmEsmtExceptionsRepository repoExceptionsRepository
-        )
+        IFarmEsmtExceptionsRepository repoExceptionsRepository,
+        IApplicationRepository repoApplication,
+         ITermBrokenRuleRepository repoBrokenRules,
+         IFarmEsmtAttachmentBRepository repoAttachmentB,
+          IOptions<SystemParameterConfiguration> systemParamOptions
+        ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
+        this.repoApplication = repoApplication;
         this.repoExceptionsRepository = repoExceptionsRepository;
+        this.repoBrokenRules = repoBrokenRules;
+        this.farmEsmtAttachmentBRepository = repoAttachmentB;
+        this.systemParamOptions = systemParamOptions.Value;
 
     }
 
     public async Task<int> Handle( SaveFarmEsmtExceptionsCommand request , CancellationToken cancellationToken )
     {
-        var reqExceptions = mapper.Map<SaveFarmEsmtExceptionsCommand, FarmEsmtExceptionsEntity>(request);
-        var result = await repoExceptionsRepository.SaveAsync(reqExceptions);
+       
+        var application = await GetIfApplicationExists(request.ApplicationId);
 
-        return result.Id;
+        var reqExceptions = mapper.Map<SaveFarmEsmtExceptionsCommand, FarmEsmtExceptionsEntity>(request);
+        var brokenRules = ReturnBrokenRulesIfAny(application,reqExceptions);
+
+        using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
+        {
+
+            // Delete old Broken Rules, if any
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, EsmtAppSectionEnum.EXCEPTIONS);
+
+            // Save current Broken Rules, if any
+            await repoBrokenRules.SaveBrokenRules(brokenRules);
+
+            reqExceptions = await repoExceptionsRepository.SaveAsync(reqExceptions);
+
+            scope.Complete();
+        }
+
+        return reqExceptions.Id;
+
+    }
+
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application,FarmEsmtExceptionsEntity reqExceptions)
+    {
+        int sectionId = (int)EsmtAppSectionEnum.EXCEPTIONS;
+        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
+
+        var attachments = farmEsmtAttachmentBRepository.GetEsmtAttachmentBAsync(application.Id);
+
+        // add based on the empty check conditions
+        if (reqExceptions.ExpectedTaxLots == true && attachments.Result.Count() == 0)
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = sectionId,
+            Message = "All required fileds in Attachment B must be filled.",
+            IsApplicantFlow = true
+        });
+
+        return brokenRules;
+
     }
 }

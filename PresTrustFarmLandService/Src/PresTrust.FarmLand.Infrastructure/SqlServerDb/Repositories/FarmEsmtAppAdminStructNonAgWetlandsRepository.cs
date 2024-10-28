@@ -35,7 +35,7 @@ public class FarmEsmtAppAdminStructNonAgWetlandsRepository : IFarmEsmtAppAdminSt
     {
         FarmEsmtAppAdminStructNonAgWetlandsEntity result = default;
         using var conn = context.CreateConnection();
-        var sqlCommand = new GetFarnEsmtAppAdminStructNonAgWetlandsSqlQuires();
+        var sqlCommand = new GetFarmEsmtAppAdminStructNonAgWetlandsSqlQuires();
         var results = await conn.QueryAsync<FarmEsmtAppAdminStructNonAgWetlandsEntity>(sqlCommand.ToString(),
                             commandType: CommandType.Text,
                             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
@@ -72,7 +72,7 @@ public class FarmEsmtAppAdminStructNonAgWetlandsRepository : IFarmEsmtAppAdminSt
         int id = default;
 
         using var conn = context.CreateConnection();
-        var sqlCommand = new CreateFarnEsmtAppAdminStructNonAgWetlandsSqlCommand();
+        var sqlCommand = new CreateFarmEsmtAppAdminStructNonAgWetlandsSqlCommand();
         id = await conn.ExecuteScalarAsync<int>(sqlCommand.ToString(),
             commandType: CommandType.Text,
             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
@@ -105,7 +105,7 @@ public class FarmEsmtAppAdminStructNonAgWetlandsRepository : IFarmEsmtAppAdminSt
     private async Task<FarmEsmtAppAdminStructNonAgWetlandsEntity> UpdateAsync(FarmEsmtAppAdminStructNonAgWetlandsEntity farmEsmtAppAdminStructNonAgWetlands)
     {
         using var conn = context.CreateConnection();
-        var sqlCommand = new UpdateFarnEsmtAppAdminStructNonAgWetlandsSqlCommand();
+        var sqlCommand = new UpdateFarmEsmtAppAdminStructNonAgWetlandsSqlCommand();
         await conn.ExecuteAsync(sqlCommand.ToString(),
             commandType: CommandType.Text,
             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,

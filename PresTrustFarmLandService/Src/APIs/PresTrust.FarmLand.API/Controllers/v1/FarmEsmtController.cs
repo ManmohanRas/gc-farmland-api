@@ -331,5 +331,14 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
+    
+
+    [HttpPost("esmtRejectApplication")]
+    [ProducesResponseType(typeof(EsmtRejectApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<Unit>> EsmtRejectApplication([FromBody] EsmtRejectApplicationCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
 
 }
