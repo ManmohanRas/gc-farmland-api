@@ -186,5 +186,50 @@ public partial class FarmLandDomainConstants
         /// </summary>
         public const string ADMIN_CONTACTS_EDIT = "appadmin/contacts/edit";
 
+        /// <summary>
+        /// Constant to hold router link for SADC Farm Information View screen
+        /// </summary>
+        public const string SADC_FARM_INFORMATION_VIEW = "sadc/farminfo/view";
+        /// <summary>
+        /// Constant to hold router link for SADC Farm Information Edit screen
+        /// </summary>
+        public const string SADC_FARM_INFORMATION_EDIT = "sadc/farminfo/edit";
+
+        /// <summary>
+        /// Constant to hold router link for SADC Residence on Easement Area View screen
+        /// </summary>
+        public const string SADC_RESI_ON_ESMT_AREA_VIEW = "sadc/resiarea/view";
+        /// <summary>
+        /// Constant to hold router link for SADC Residence on Easement Area Edit screen
+        /// </summary>
+        public const string SADC_RESI_ON_ESMT_AREA_EDIT = "sadc/resiarea/edit";
+
+        /// <summary>
+        /// Constant to hold router link for SADC Farm History View screen
+        /// </summary>
+        public const string SADC_FARM_HISTORY_VIEW = "sadc/farmhistory/view";
+        /// <summary>
+        /// Constant to hold router link for SADC Farm History Edit screen
+        /// </summary>
+        public const string SADC_FARM_HISTORY_EDIT = "sadc/farmhistory/edit";
+
+        /// <summary>
+        /// Constant to hold router link for SADC Application Eligibility I View screen
+        /// </summary>
+        public const string SADC_APP_ELIGIBILITY_I_VIEW = "sadc/eligibilityone/view";
+        /// <summary>
+        /// Constant to hold router link for SADC Application Eligibility I Edit screen
+        /// </summary>
+        public const string SADC_APP_ELIGIBILITY_I_EDIT = "sadc/eligibilityone/edit";
+
+        /// <summary>
+        /// Constant to hold router link for SADC Application Eligibility II View screen
+        /// </summary>
+        public const string SADC_APP_ELIGIBILITY_II_VIEW = "sadc/eligbilitytwo/view";
+        /// <summary>
+        /// Constant to hold router link for SADC Application Eligibility II Edit screen
+        /// </summary>
+        public const string SADC_APP_ELIGIBILITY_II_EDIT = "sadc/eligbilitytwo/edit";
+
     }
 }
