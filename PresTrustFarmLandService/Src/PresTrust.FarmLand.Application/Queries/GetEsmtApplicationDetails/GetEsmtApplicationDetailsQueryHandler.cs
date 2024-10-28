@@ -47,7 +47,7 @@ public class GetEsmtApplicationDetailsQueryHandler : BaseHandler, IRequestHandle
             case EsmtAppStatusEnum.PENDING:
             case EsmtAppStatusEnum.REJECTED:
                 var feedbacksReqForCorrections = feedbacks.Where(f => f.RequestForCorrection == true && string.Compare(f.CorrectionStatus, ApplicationCorrectionStatusEnum.REQUEST_SENT.ToString(), true) == 0).ToList();
-                securityMgr = new FarmEsmtAppSecurityManager(userContext.Role, application.Status, feedbacksReqForCorrections);
+                securityMgr = new FarmEsmtAppSecurityManager(userContext.Role, application.Status, feedbacksReqForCorrections, application.IsSADC);
                 break;
             default:
 
@@ -63,6 +63,7 @@ public class GetEsmtApplicationDetailsQueryHandler : BaseHandler, IRequestHandle
         result.NavigationItems = securityMgr.NavigationItems;
         result.AdminNavigationItems = securityMgr.AdminNavigationItems;
         result.PostApprovedNavigationItems = securityMgr.PostApprovedNavigationItems;
+        result.SADCNavigationItems = securityMgr.SADCNavigationItems;
         result.DefaultNavigationItem = securityMgr.DefaultNavigationItem;
 
         return result;

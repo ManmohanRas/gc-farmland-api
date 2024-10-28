@@ -48,9 +48,24 @@ public class EsmtAppPermissionEntity
     public bool CanViewAdminClosingDocsSection { get; set; } = false;
     public bool CanEditAdminClosingDocsection { get; set; } = false;
 
-
     public bool CanViewAdminContactsSection { get; set; } = false;
     public bool CanEditAdminContactsSection { get; set; } = false;
+
+    //SADC section
+    public bool CanViewSADCFarmInformationSection { get; set; } = false;
+    public bool CanEditSADCFarmInformationSection { get; set; } = false;
+
+    public bool CanViewSADCResionEsmtAreaSection { get; set; } = false;
+    public bool CanEditSADCResionEsmtAreaSection { get; set; } = false;
+
+    public bool CanViewSADCFarmHistorySection { get; set; } = false;
+    public bool CanEditSADCFarmHistorySection { get; set; } = false;
+
+    public bool CanViewSADCAppEligibilityISection { get; set; } = false;
+    public bool CanEditSADCAppEligibilityISection { get; set; } = false;
+
+    public bool CanViewSADCAppEligibilityIISection { get; set; } = false;
+    public bool CanEditSADCAppEligibilityIISection { get; set; } = false;
 
     public bool CanSubmitApplication { get; set; } = false;
     public bool CanReviewApplication { get; set; } = false;

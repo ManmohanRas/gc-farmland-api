@@ -86,6 +86,7 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
         result.NavigationItems = securityMgr.NavigationItems;
         result.AdminNavigationItems = securityMgr.AdminNavigationItems;
         result.PostApprovedNavigationItems = securityMgr.PostApprovedNavigationItems;
+        result.SADCNavigationItems = securityMgr.SADCNavigationItems;
         result.DefaultNavigationItem = securityMgr.DefaultNavigationItem;
 
         return result;

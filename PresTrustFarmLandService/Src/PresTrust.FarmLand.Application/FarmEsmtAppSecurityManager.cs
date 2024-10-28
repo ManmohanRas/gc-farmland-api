@@ -1,22 +1,22 @@
-﻿using System.Security;
-
-namespace PresTrust.FarmLand.Application;
+﻿namespace PresTrust.FarmLand.Application;
 
 public class FarmEsmtAppSecurityManager
 {
     private UserRoleEnum userRole = default;
     private EsmtAppStatusEnum applicationStatus = default;
-    private ApplicationTypeEnum applicationTypeEnum = default;
     private EsmtAppPermissionEntity esmtPermission = default;
     private List<NavigationItemEntity> navigationItems = default;
     private List<NavigationItemEntity> adminNavigationItems = default;
     private List<NavigationItemEntity> postApprovedNavigationItems = default;
+    private List<NavigationItemEntity> sadcNavigationItems = default;
     private NavigationItemEntity defaultNavigationItem = default;
+    private bool IsSADC = default;
     private List<FarmFeedbacksEntity> corrections = new List<FarmFeedbacksEntity>();
-    public FarmEsmtAppSecurityManager(UserRoleEnum userRole, EsmtAppStatusEnum applicationStatus, List<FarmFeedbacksEntity> corrections = null)
+    public FarmEsmtAppSecurityManager(UserRoleEnum userRole, EsmtAppStatusEnum applicationStatus, List<FarmFeedbacksEntity> corrections = null, bool IsSADC = false)
     {
         this.userRole = userRole;
         this.applicationStatus = applicationStatus;
+        this.IsSADC = IsSADC;
         this.corrections = corrections ?? new List<FarmFeedbacksEntity>();
 
         ConfigurePermissions();
@@ -26,6 +26,7 @@ public class FarmEsmtAppSecurityManager
     public List<NavigationItemEntity> NavigationItems { get => navigationItems; }
     public List<NavigationItemEntity> AdminNavigationItems { get => adminNavigationItems; }
     public List<NavigationItemEntity> PostApprovedNavigationItems { get => postApprovedNavigationItems; }
+    public List<NavigationItemEntity> SADCNavigationItems { get => sadcNavigationItems; }
     public NavigationItemEntity DefaultNavigationItem { get => defaultNavigationItem; }
 
     public void ConfigurePermissions()
@@ -33,7 +34,7 @@ public class FarmEsmtAppSecurityManager
         esmtPermission = new EsmtAppPermissionEntity();
         navigationItems = new List<NavigationItemEntity>();
         adminNavigationItems = new List<NavigationItemEntity>();
-        postApprovedNavigationItems = new List<NavigationItemEntity>();
+        sadcNavigationItems = new List<NavigationItemEntity>();
 
         if (userRole == UserRoleEnum.AGENCY_ADMIN || userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN || userRole == UserRoleEnum.PROGRAM_EDITOR || userRole == UserRoleEnum.AGENCY_EDITOR)
         {
@@ -478,6 +479,7 @@ public class FarmEsmtAppSecurityManager
                 if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
                 {
                     esmtPermission.CanRejectApplication = true;
+                    esmtPermission.CanSwitchSADC = true;
                 }
 
                 esmtPermission.CanRequestForAnApplicationCorrection = true;
@@ -591,6 +593,15 @@ public class FarmEsmtAppSecurityManager
                 AdminSADC(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminClosingDocs(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminContacts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                if (userRole == UserRoleEnum.PROGRAM_ADMIN && IsSADC)
+                {
+                    SADCFarmInformation(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCResiOnEsmtArea(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCFarmHistory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCAppEligibilityI(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCAppEligibilityII(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
 
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
@@ -1566,6 +1577,93 @@ public class FarmEsmtAppSecurityManager
             case ApplicationTabEditOrViewEnum.EDIT:
                 esmtPermission.CanEditAdminContactsSection = true;
                 adminNavigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.ADMIN_CONTACTS, RouterLink = EsmtAppRouterLinks.ADMIN_CONTACTS_EDIT, SortOrder = 20, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    //SADC tabs
+    private void SADCFarmInformation(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                esmtPermission.CanViewSADCFarmInformationSection = true;
+                sadcNavigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SADC_FARM_INFORMATION, RouterLink = EsmtAppRouterLinks.SADC_FARM_INFORMATION_VIEW, SortOrder = 22, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                esmtPermission.CanEditSADCFarmInformationSection = true;
+                sadcNavigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SADC_FARM_INFORMATION, RouterLink = EsmtAppRouterLinks.SADC_FARM_INFORMATION_EDIT, SortOrder = 22, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void SADCResiOnEsmtArea(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                esmtPermission.CanViewSADCResionEsmtAreaSection = true;
+                sadcNavigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SADC_RESI_ON_ESMT_AREA, RouterLink = EsmtAppRouterLinks.SADC_RESI_ON_ESMT_AREA_VIEW, SortOrder = 23, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                esmtPermission.CanEditSADCResionEsmtAreaSection = true;
+                sadcNavigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SADC_RESI_ON_ESMT_AREA, RouterLink = EsmtAppRouterLinks.SADC_RESI_ON_ESMT_AREA_EDIT, SortOrder = 23, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void SADCFarmHistory(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                esmtPermission.CanViewSADCFarmHistorySection = true;
+                sadcNavigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SADC_FARM_HISTORY, RouterLink = EsmtAppRouterLinks.SADC_FARM_HISTORY_VIEW, SortOrder = 24, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                esmtPermission.CanEditSADCFarmHistorySection = true;
+                sadcNavigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SADC_FARM_HISTORY, RouterLink = EsmtAppRouterLinks.SADC_FARM_HISTORY_EDIT, SortOrder = 24, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void SADCAppEligibilityI(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                esmtPermission.CanViewSADCAppEligibilityISection = true;
+                sadcNavigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SADC_APP_ELIGIBILITY_I, RouterLink = EsmtAppRouterLinks.SADC_APP_ELIGIBILITY_I_VIEW, SortOrder = 25, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                esmtPermission.CanEditSADCAppEligibilityISection = true;
+                sadcNavigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SADC_APP_ELIGIBILITY_I, RouterLink = EsmtAppRouterLinks.SADC_APP_ELIGIBILITY_I_EDIT, SortOrder = 25, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void SADCAppEligibilityII(bool correction = false, ApplicationTabEditOrViewEnum enumViewOrEdit = ApplicationTabEditOrViewEnum.VIEW)
+    {
+        switch (enumViewOrEdit)
+        {
+            case ApplicationTabEditOrViewEnum.VIEW:
+                esmtPermission.CanViewSADCAppEligibilityIISection = true;
+                sadcNavigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SADC_APP_ELIGIBILITY_II, RouterLink = EsmtAppRouterLinks.SADC_APP_ELIGIBILITY_II_VIEW, SortOrder = 26, Icon = (correction == true ? "report_problem" : "") });
+                break;
+            case ApplicationTabEditOrViewEnum.EDIT:
+                esmtPermission.CanEditSADCAppEligibilityIISection = true;
+                sadcNavigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.SADC_APP_ELIGIBILITY_II, RouterLink = EsmtAppRouterLinks.SADC_APP_ELIGIBILITY_II_EDIT, SortOrder = 26, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
                 break;
