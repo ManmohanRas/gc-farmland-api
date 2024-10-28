@@ -16,15 +16,15 @@ public class ResponseToRequestForApplicationCorrectionCommandValidator : Abstrac
         RuleFor(command => command.ApplicationId)
            .GreaterThan(0).WithMessage("Not a valid Application Id");
 
-        RuleFor(query => query.Sections)
+        RuleFor(command => command.Sections)
            .NotNull().Must(list => list.Count > 0).WithMessage("Please include at least one corrected section name.");
 
-        RuleForEach(query => query.Sections).ChildRules(section =>
-        {
-            section.RuleFor(section => section)
-                 .NotNull().NotEmpty()
-                 .Must(x => ValidSectionType(x)).WithMessage("Invalid application's section");
-        });
+        //RuleForEach(command => command.Sections).ChildRules(section =>
+        //{
+        //    section.RuleFor(section => section)
+        //         .NotNull().NotEmpty()
+        //         .Must(x => ValidSectionType(x)).WithMessage("Invalid application's section");
+        //});
 
     }
 
@@ -33,6 +33,16 @@ public class ResponseToRequestForApplicationCorrectionCommandValidator : Abstrac
     /// </summary>
     /// <param name="section"></param>
     /// <returns></returns>
+    public bool ValidTermSectionType(string section)
+    {
+        bool result = false;
+        TermAppSectionEnum enumSectionType;
+        Enum.TryParse(section, ignoreCase: true, out enumSectionType);
+        if (enumSectionType > 0)
+            result = true;
+        return result;
+    }
+
     public bool ValidSectionType(string section)
     {
         bool result = false;
