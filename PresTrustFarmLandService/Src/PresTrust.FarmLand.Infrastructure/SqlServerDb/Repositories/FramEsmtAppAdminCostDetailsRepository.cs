@@ -100,6 +100,7 @@ public class FarmEsmtAppAdminCostDetailsRepository : IFarmEsmtAppAdminCostDetail
                 @p_MCCostShareTotal                   = farmEsmtAppAdminCostDetails.MCCostShareTotal,
                 @p_TotalCost                          = farmEsmtAppAdminCostDetails.TotalCost,
                 @p_TotalCostPerAcre                   = farmEsmtAppAdminCostDetails.TotalCostPerAcre,
+                @p_CountyFunds                        = farmEsmtAppAdminCostDetails.CountyFunds,
                 @p_LastUpdatedBy                      = farmEsmtAppAdminCostDetails.LastUpdatedBy
             });
 
@@ -144,6 +145,7 @@ public class FarmEsmtAppAdminCostDetailsRepository : IFarmEsmtAppAdminCostDetail
                 @p_MCCostShareTotal = farmEsmtAppAdminCostDetails.MCCostShareTotal,
                 @p_TotalCost = farmEsmtAppAdminCostDetails.TotalCost,
                 @p_TotalCostPerAcre = farmEsmtAppAdminCostDetails.TotalCostPerAcre,
+                @p_CountyFunds = farmEsmtAppAdminCostDetails.CountyFunds,
                 @p_LastUpdatedBy = farmEsmtAppAdminCostDetails.LastUpdatedBy,
                 @p_LastUpdatedOn = DateTime.Now
             });

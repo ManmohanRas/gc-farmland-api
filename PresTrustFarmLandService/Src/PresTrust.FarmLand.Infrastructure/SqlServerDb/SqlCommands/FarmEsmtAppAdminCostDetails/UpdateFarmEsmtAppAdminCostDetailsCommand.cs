@@ -26,6 +26,7 @@ public class UpdateFarmEsmtAppAdminCostDetailsCommand
                    ,MCCostShareTotal                   = @p_MCCostShareTotal                    
                    ,TotalCost                          = @p_TotalCost                     
                    ,TotalCostPerAcre                   = @p_TotalCostPerAcre
+                   ,CountyFunds                        = @p_CountyFunds
                    ,LastUpdatedBy                      = @p_LastUpdatedBy
                    ,LastUpdatedOn                      = @p_LastUpdatedOn
              WHERE Id = @p_Id AND ApplicationId = @p_ApplicationId";
