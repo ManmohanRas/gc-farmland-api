@@ -26,6 +26,7 @@ public class GetFarmEsmtAppAdminCostDetailsSqlQuery
                 ,[MCCostShareTotal]                    
                 ,[TotalCost]                           
                 ,[TotalCostPerAcre]
+                ,[CountyFunds]
                 ,[LastUpdatedBy]
                 ,[LastUpdatedOn]
                 FROM [Farm].[FarmEsmtAppAdminCostDetails] 

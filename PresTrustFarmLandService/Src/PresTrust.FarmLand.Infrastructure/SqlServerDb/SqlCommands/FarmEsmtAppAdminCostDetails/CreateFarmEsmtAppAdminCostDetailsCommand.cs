@@ -26,7 +26,8 @@ public class CreateFarmEsmtAppAdminCostDetailsCommand
                 ,[MCCostSharePct]                      
                 ,[MCCostShareTotal]                    
                 ,[TotalCost]                           
-                ,[TotalCostPerAcre]                    
+                ,[TotalCostPerAcre]
+                ,[CountyFunds]
                 ,LastUpdatedBy
 			    ,LastUpdatedOn
                )
@@ -54,6 +55,7 @@ public class CreateFarmEsmtAppAdminCostDetailsCommand
                 ,@p_MCCostShareTotal                    
                 ,@p_TotalCost                     
                 ,@p_TotalCostPerAcre
+                ,@p_CountyFunds
                 ,@p_LastUpdatedBy  
 			    ,GETDATE()
                );

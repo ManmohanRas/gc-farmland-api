@@ -25,6 +25,7 @@ public class FarmEsmtAppAdminCostDetailsEntity
     public decimal? OtherCostShare { get; set; }
     public decimal? TotalCost { get; set; }
     public decimal? TotalCostPerAcre { get; set; }
+    public string CountyFunds { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
 }
