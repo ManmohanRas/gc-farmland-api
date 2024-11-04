@@ -341,4 +341,11 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
+    [HttpPost("esmtActiveApplication")]
+    [ProducesResponseType(typeof(EsmtActiveApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<EsmtActiveApplicationCommandViewModel>> RequestApplication([FromBody] EsmtActiveApplicationCommand query)
+    {
+        return Single(await CommandAsync(query));
+    }
+
 }
