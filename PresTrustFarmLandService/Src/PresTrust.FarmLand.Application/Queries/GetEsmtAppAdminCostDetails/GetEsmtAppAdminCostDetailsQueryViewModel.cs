@@ -25,4 +25,5 @@ public class GetEsmtAppAdminCostDetailsQueryViewModel
     public decimal? OtherCostShare { get; set; }
     public decimal? TotalCost { get; set; }
     public decimal? TotalCostPerAcre { get; set; }
+    public string CountyFunds { get;set; }
 }
