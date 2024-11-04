@@ -1,7 +1,4 @@
-﻿using System.Security;
-
-namespace PresTrust.FarmLand.Application;
-
+﻿namespace PresTrust.FarmLand.Application;
 public class FarmEsmtAppSecurityManager
 {
     private UserRoleEnum userRole = default;
@@ -1356,6 +1353,7 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanEditFeedback = true;
                 esmtPermission.CanDeleteComments = true;
                 esmtPermission.CanRequestForAnApplicationCorrection = true;
+                esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
 
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
@@ -1470,6 +1468,7 @@ public class FarmEsmtAppSecurityManager
             case UserRoleEnum.PROGRAM_READONLY:
             case UserRoleEnum.PROGRAM_EDITOR:
             esmtPermission.CanViewComments = true;
+            esmtPermission.CanViewFeedback = true;
 
                 Location();
                 OwnerDetails();
@@ -1504,23 +1503,106 @@ public class FarmEsmtAppSecurityManager
             case UserRoleEnum.AGENCY_EDITOR:
             case UserRoleEnum.AGENCY_READONLY:
             case UserRoleEnum.AGENCY_SIGNATORY:
+                if (userRole == UserRoleEnum.AGENCY_ADMIN || userRole == UserRoleEnum.AGENCY_EDITOR)
+                {
+                    esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
+                }
 
                 if (userRole != UserRoleEnum.AGENCY_READONLY)
                 {
                     esmtPermission.CanViewFeedback = true;
                     esmtPermission.CanSwitchSADC = false;
                 }
-                Location();
-                OwnerDetails();
-                Roles();
-                Exceptions();
-                Structures();
-                Liens();
-                ExistingUses();
-                AgriculturalUseProduction();
-                EquineUses();
-                Signatory();
-                OtherDocuments();
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
+                if (correction == null)
+                {
+                    Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.OWNER_DETAILS).FirstOrDefault();
+                if (correction == null)
+                {
+                    OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    OwnerDetails(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.ROLES).FirstOrDefault();
+                if (correction == null)
+                {
+                    Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Roles(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.EXCEPTIONS).FirstOrDefault();
+                if (correction == null)
+                {
+                    Exceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Exceptions(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.RESI_NON_RESI_STRUCTURES).FirstOrDefault();
+                if (correction == null)
+                {
+                    Structures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Structures(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LIENS_EASEMENT_ROW).FirstOrDefault();
+                if (correction == null)
+                {
+                    Liens(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Liens(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.EXIS_NON_AGRI_USES).FirstOrDefault();
+                if (correction == null)
+                {
+                    ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    ExistingUses(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.AGRICULTURAL_USE_PRODUCTION).FirstOrDefault();
+                if (correction == null)
+                {
+                    AgriculturalUseProduction(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    AgriculturalUseProduction(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.EQUINE_USES).FirstOrDefault();
+                if (correction == null)
+                {
+                    EquineUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    EquineUses(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.SIGNATORY).FirstOrDefault();
+                if (correction == null)
+                {
+                    Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Signatory(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.OTHER_DOCUMENTS).FirstOrDefault();
+                if (correction == null)
+                {
+                    OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
                 // Default Navigation Item
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
