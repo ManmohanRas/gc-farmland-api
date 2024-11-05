@@ -5,8 +5,8 @@ public class FarmEsmtAttachmentBEntity
     public int Id { get; set; }
     public int ApplicationId { get; set; }
     public string LocationOfException { get; set; }
-    public string Block {  get; set; }
-    public int? Lot {  get; set; }
+    public decimal? Block {  get; set; }
+    public decimal? Lot {  get; set; }
     public decimal? ExceptionSize { get; set; }
     public string ReasonForException { get; set; }
     public bool IsExceptionSoldFromPreserved { get; set; }
