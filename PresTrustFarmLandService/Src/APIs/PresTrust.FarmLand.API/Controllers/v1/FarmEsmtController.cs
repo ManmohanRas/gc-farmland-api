@@ -343,9 +343,16 @@ public class FarmEsmtController : FarmController
 
     [HttpPost("esmtActiveApplication")]
     [ProducesResponseType(typeof(EsmtActiveApplicationCommandViewModel), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<EsmtActiveApplicationCommandViewModel>> RequestApplication([FromBody] EsmtActiveApplicationCommand query)
+    public async Task<ActionResult<EsmtActiveApplicationCommandViewModel>> RequestApplication([FromBody] EsmtActiveApplicationCommand command)
     {
-        return Single(await CommandAsync(query));
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("esmtClosingApplication")]
+    [ProducesResponseType(typeof(EsmtClosingApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<EsmtClosingApplicationCommandViewModel>> ClosingApplication([FromBody] EsmtClosingApplicationCommand command)
+    {
+        return Single(await CommandAsync(command));
     }
 
 }
