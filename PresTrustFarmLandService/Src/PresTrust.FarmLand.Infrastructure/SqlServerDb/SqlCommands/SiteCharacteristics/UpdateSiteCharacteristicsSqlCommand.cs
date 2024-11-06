@@ -14,9 +14,11 @@ public  class UpdateSiteCharacteristicsSqlCommand
                         [Pasture]                  = @p_Pasture,                   
                         [Orchard]                  = @p_Orchard,  
                        [Other]                    = @p_Other,
-                        [EasementRightOfway]       = @p_EasementRightOfway,                            
+                        [IsEasement]               = @p_IsEasement, 
+                       [IsRightOfway]             = @p_IsRightOfway,
                         [NoteEasementRightOfway]   = @p_NoteEasementRightOfway,                    
-                        [MortgageLiens]           = @p_MortgageLiens,                 
+                       [IsMortgage]               = @p_IsMortgage,
+                       [IsLiens]                  = @p_IsLiens,
                         [NoteMortgageLiens]       = @p_NoteMortgageLiens,  
                        [LastUpdatedBy]            = @p_LastUpdatedBy,
                        [LastUpdatedOn]            = @p_LastUpdatedOn

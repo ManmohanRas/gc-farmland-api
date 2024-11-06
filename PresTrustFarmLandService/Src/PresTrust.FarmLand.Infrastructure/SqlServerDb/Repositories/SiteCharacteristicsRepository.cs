@@ -88,9 +88,11 @@ public class SiteCharacteristicsRepository : ISiteCharacteristicsRepository
                 @p_Pasture = siteCharacteristics.Pasture,
                 @p_Orchard = siteCharacteristics.Orchard,
                 @p_Other = siteCharacteristics.Other,
-                @p_EasementRightOfway = siteCharacteristics.EasementRightOfway,
+                @p_IsEasement = siteCharacteristics.IsEasement,
+                @p_IsRightOfway = siteCharacteristics.IsRightOfway,
                 @p_NoteEasementRightOfway = siteCharacteristics.NoteEasementRightOfway,
-                @p_MortgageLiens = siteCharacteristics.MortgageLiens,
+                @p_IsMortgage = siteCharacteristics.IsMortgage,
+                @p_IsLiens = siteCharacteristics.IsLiens,
                 @p_NoteMortgageLiens = siteCharacteristics.NoteMortgageLiens,
                 @p_LastUpdatedBy = siteCharacteristics.LastUpdatedBy,
             });
@@ -122,14 +124,14 @@ public class SiteCharacteristicsRepository : ISiteCharacteristicsRepository
             @p_Pasture = siteCharacteristics.Pasture,
             @p_Orchard = siteCharacteristics.Orchard,
             @p_Other = siteCharacteristics.Other,
-            @p_EasementRightOfway = siteCharacteristics.EasementRightOfway,
+            @p_IsEasement = siteCharacteristics.IsEasement,
+            @p_IsRightOfway = siteCharacteristics.IsRightOfway,
             @p_NoteEasementRightOfway = siteCharacteristics.NoteEasementRightOfway,
-            @p_MortgageLiens = siteCharacteristics.MortgageLiens,
+            @p_IsMortgage = siteCharacteristics.IsMortgage,
+            @p_IsLiens = siteCharacteristics.IsLiens,
             @p_NoteMortgageLiens = siteCharacteristics.NoteMortgageLiens,
             @p_LastUpdatedBy = siteCharacteristics.LastUpdatedBy,
             @p_LastUpdatedOn = DateTime.Now,
-
-
         });
         return  siteCharacteristics;
     }

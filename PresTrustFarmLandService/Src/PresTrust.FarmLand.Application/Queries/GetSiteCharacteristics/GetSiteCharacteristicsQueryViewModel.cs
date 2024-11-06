@@ -4,6 +4,7 @@ namespace PresTrust.FarmLand.Application.Queries;
 
 public class GetSiteCharacteristicsQueryViewModel
 {
+
     public int Id { get; set; }
     public int ApplicationId { get; set; }
     public string Area { get; set; }
@@ -13,12 +14,14 @@ public class GetSiteCharacteristicsQueryViewModel
     public decimal Pasture { get; set; }
     public decimal Orchard { get; set; }
     public decimal Other { get; set; }
-    public string EasementRightOfway { get; set; }
+    public bool IsEasement { get; set; }
+    public bool IsRightOfway { get; set; }
     public string NoteEasementRightOfway { get; set; }
-    public string MortgageLiens { get; set; }
+    public bool IsMortgage { get; set; }
+    public bool IsLiens { get; set; }
     public string NoteMortgageLiens { get; set; }
     public string LastUpdatedBy { get; set; }
-   // public DateTime? LastUpdatedOn { get; set; }
+  //  public DateTime? LastUpdatedOn { get; set; }
 
 
 
