@@ -23,7 +23,7 @@ public  class GetFarmBlockLotSqlQuery
 			  ,MBL.ChangeType
 			  ,MBL.ChangeDate
 			  ,MBL.ReasonForChange
-			  ,MBL.PropertyClassCode
+			  ,CP.PropertyClassCode AS PropertyClassCode
 			  ,MBL.DeedBook
 			  ,MBL.DeedPage
 			  ,MBL.IsWarning
@@ -32,9 +32,9 @@ public  class GetFarmBlockLotSqlQuery
 		      ,MBL.[IsValidPamsPin]
 			  ,CP.PropertyClassCode AS CorePropertyClassCode
 			  ,CASE 
-				WHEN CP.PropertyClassCode = '3B' AND MBL.PropertyClassCode <> CP.PropertyClassCode
+				WHEN CP.PropertyClassCode IS NOT NULL AND CP.PropertyClassCode <> '3B' 
 				THEN 1
-				ELSE 0 
+				ELSE 0
 				END AS IsClassCodeWarning
               FROM [Farm].[FarmMunicipalityBlockLotParcel] MBL
 			  LEFT JOIN CORE.Parcels CP ON (CP.PAMS_PIN = MBL.PamsPin);";

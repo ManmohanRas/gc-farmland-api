@@ -24,7 +24,7 @@ public class GetParcelsByFarmId
 			  ,MBL.ChangeType
 			  ,MBL.ChangeDate
 			  ,MBL.ReasonForChange
-			  ,MBL.PropertyClassCode
+			  ,CP.PropertyClassCode AS PropertyClassCode
 			  ,MBL.DeedBook
 			  ,MBL.DeedPage
 			  ,MBL.IsWarning
@@ -36,9 +36,9 @@ public class GetParcelsByFarmId
             CM.[Municipality] AS Municipality,
             CP.PropertyClassCode AS CorePropertyClassCode,
             CASE 
-            WHEN CP.PropertyClassCode = '3B' AND MBL.PropertyClassCode <> CP.PropertyClassCode
+            WHEN CP.PropertyClassCode IS NOT NULL AND CP.PropertyClassCode <> '3B'
             THEN 1
-            ELSE 0 
+            ELSE 0
             END AS IsClassCodeWarning
             FROM [Farm].[FarmMunicipalityBlockLotParcel] AS MBL
            LEFT JOIN [Farm].[FarmTermAppLocation] AS L ON (MBL.FarmListID = L.FarmListID and MBL.Id = L.ParcelId AND L.applicationId = @p_ApplicationId)
