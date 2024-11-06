@@ -22,7 +22,7 @@ CREATE TABLE [Farm].[FarmEsmtAppAdminCostDetails](
 [SADCCostShareAC]                     [decimal](10,2)               NULL,
 [SADCCostShareTotal]                  [decimal](10,2)               NULL,
 [SADCCostShareAcqTotal]               [decimal](10,2)               NULL,
-[NoteOfBreakdown]                     [varchar](2000)               NULL,  
+[NoteOfBreakdown]                     [varchar](4000)               NULL,  
 [SADCCostShareofOfferPct]             [decimal](10,2)               NULL,
 [SADCCertifiedEasementValuePerAcre]   [decimal](10,2)               NULL,
 [SADCPctofCertifiedEaseValue]         [decimal](10,4)               NULL,

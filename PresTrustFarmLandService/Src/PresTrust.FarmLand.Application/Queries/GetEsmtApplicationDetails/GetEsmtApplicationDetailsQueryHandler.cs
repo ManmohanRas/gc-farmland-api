@@ -46,6 +46,7 @@ public class GetEsmtApplicationDetailsQueryHandler : BaseHandler, IRequestHandle
             case EsmtAppStatusEnum.IN_REVIEW:
             case EsmtAppStatusEnum.PENDING:
             case EsmtAppStatusEnum.REJECTED:
+            case EsmtAppStatusEnum.ACTIVE:
                 var feedbacksReqForCorrections = feedbacks.Where(f => f.RequestForCorrection == true && string.Compare(f.CorrectionStatus, ApplicationCorrectionStatusEnum.REQUEST_SENT.ToString(), true) == 0).ToList();
                 securityMgr = new FarmEsmtAppSecurityManager(userContext.Role, application.Status, feedbacksReqForCorrections, application.IsSADC);
                 break;
