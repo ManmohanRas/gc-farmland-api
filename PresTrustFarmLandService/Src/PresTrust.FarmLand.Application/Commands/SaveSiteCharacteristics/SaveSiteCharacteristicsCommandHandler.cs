@@ -73,14 +73,14 @@ public class SaveSiteCharacteristicsCommandHandler : BaseHandler, IRequestHandle
 
                 });
             }
-            if(string.IsNullOrEmpty(reqSiteCharacteristics.EasementRightOfway))
+            if(!(reqSiteCharacteristics.IsEasement || reqSiteCharacteristics.IsRightOfway))
             {
-
+                
                 brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
                     SectionId = sectionId,
-                    Message = "Easement Right Of Way  required field on Site Characteristics Tab have not been filled.",
+                    Message = "Easement / Right of Way  required field on Site Characteristics Tab have not been filled.",
                     IsApplicantFlow = false
                 });
 
