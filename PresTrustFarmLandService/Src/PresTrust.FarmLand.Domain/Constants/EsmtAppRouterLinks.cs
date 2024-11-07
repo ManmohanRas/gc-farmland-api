@@ -178,6 +178,15 @@ public partial class FarmLandDomainConstants
         public const string ADMIN_CLOSING_DOCS_EDIT = "appadmin/closingdocs/edit";
 
         /// <summary>
+        /// Constant to hold router link for Admin Details View screen
+        /// </summary>
+        public const string ADMIN_DETAILS_VIEW = "appadmin/details/view";
+        /// <summary>
+        /// Constant to hold router link for Admin Details Edit screen
+        /// </summary>
+        public const string ADMIN_DETAILS_EDIT = "appadmin/details/edit";
+
+        /// <summary>
         /// Constant to hold router link for Admin Contacts View screen
         /// </summary>
         public const string ADMIN_CONTACTS_VIEW = "appadmin/contacts/view";

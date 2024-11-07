@@ -48,6 +48,9 @@ public class EsmtAppPermissionEntity
     public bool CanViewAdminClosingDocsSection { get; set; } = false;
     public bool CanEditAdminClosingDocsection { get; set; } = false;
 
+    public bool CanViewAdminDetailsSection { get; set; } = false;
+    public bool CanEditAdminDetailsSection {  get; set; } = false;
+
     public bool CanViewAdminContactsSection { get; set; } = false;
     public bool CanEditAdminContactsSection { get; set; } = false;
 
