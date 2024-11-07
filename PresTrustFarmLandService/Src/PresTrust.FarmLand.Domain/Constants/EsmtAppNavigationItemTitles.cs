@@ -98,6 +98,11 @@ public partial class FarmLandDomainConstants
         public const string ADMIN_CLOSING_DOCS = "Closing Docs/Status";
 
         /// <summary>
+        /// Constant to hold title for Admin Details 
+        /// </summary>
+        public const string ADMIN_DETAILS = "Admin Details";
+
+        /// <summary>
         /// Constant to hold title for Admin Contacts
         /// </summary>
         public const string ADMIN_CONTACTS = "Contacts";
