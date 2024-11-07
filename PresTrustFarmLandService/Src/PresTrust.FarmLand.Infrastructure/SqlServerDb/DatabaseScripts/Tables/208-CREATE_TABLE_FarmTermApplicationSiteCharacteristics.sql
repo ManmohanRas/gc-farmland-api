@@ -22,9 +22,11 @@ CREATE TABLE [Farm].[FarmTermAppSiteCharacteristics](
 	[Pasture]						[decimal](18,2)						NULL,
 	[Orchard]						[decimal](18,2)						NULL,
 	[Other]							[decimal](18,2)						NULL,--like this OrchardAcres, OtherAcres
-	[EasementRightOfway]			[varchar](50)						NULL,
+	[IsEasement]			        [bit]						        NULL,
+	[IsRightOfway]		        	[bit]						        NULL,
 	[NoteEasementRightOfway]		[varchar](4000)						NULL,
-	[MortgageLiens]					[varchar](50)						NULL,
+	[IsMortgage]			        [bit]						        NULL,
+	[IsLiens]					    [bit]								NULL,
 	[NoteMortgageLiens]				[varchar](4000)						NULL,
 	[LastUpdatedBy]					[varchar](128)						NULL,
 	[LastUpdatedOn]					[datetime]						NOT NULL,

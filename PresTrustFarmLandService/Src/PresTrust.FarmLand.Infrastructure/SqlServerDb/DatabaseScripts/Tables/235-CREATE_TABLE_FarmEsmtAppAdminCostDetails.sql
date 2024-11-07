@@ -36,8 +36,9 @@ CREATE TABLE [Farm].[FarmEsmtAppAdminCostDetails](
 [MCCostShareTotal]                    [decimal](10,2)               NULL,
 [TotalCost]                           [decimal](10,2)               NULL,
 [TotalCostPerAcre]                    [decimal](10,2)               NULL,
+[CountyFunds]                         [varchar](128)                NULL,
 [LastUpdatedBy]					      [varchar](128)			    NULL, 
-[LastUpdatedOn]					      [dateTime]				NOT NULL,
+[LastUpdatedOn]					      [DateTime]				NOT NULL,
 CONSTRAINT [PK_FarmEsmtAppAdminCostDetails_Id] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

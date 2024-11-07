@@ -23,14 +23,15 @@ public class GetFarmBlockLotByIdSqlQuery
 			  ,MBL.ChangeType
 			  ,MBL.ChangeDate
 			  ,MBL.ReasonForChange
-			  ,MBL.PropertyClassCode
 			  ,MBL.DeedBook
 			  ,MBL.DeedPage
 			  ,MBL.IsWarning
 			  ,MBL.[Notes]
 			  ,MBL.[CreatedByProgramUser]
 			  ,MBL.[IsValidPamsPin]
+			  ,CP.PropertyClassCode AS PropertyClassCode
               FROM [Farm].[FarmMunicipalityBlockLotParcel] MBL
+			  LEFT JOIN CORE.Parcels CP ON (CP.PAMS_PIN = MBL.PamsPin)
 			  WHERE  MBL.Id = @p_Id;";
 
     public GetFarmBlockLotByIdSqlQuery()

@@ -23,7 +23,7 @@ public class SaveFeedbackCommandHandler : BaseHandler, IRequestHandler<SaveFeedb
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
         IApplicationFeedbackRepository repoFeedback
-    ): base(repoApplication: repoApplication)
+    ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
         this.userContext = userContext;
@@ -42,14 +42,28 @@ public class SaveFeedbackCommandHandler : BaseHandler, IRequestHandler<SaveFeedb
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 
-        request.ApplicationTypeId = application.ApplicationTypeId;  
+        request.ApplicationTypeId = application.ApplicationTypeId;
 
         var feedback = mapper.Map<SaveFeedbackCommand, FarmFeedbacksEntity>(request);
         feedback.LastUpdatedBy = userContext.Email;
+
         if (application.ApplicationTypeId == 1)
-        feedback.CorrectionStatus = feedback.Section == TermAppSectionEnum.NONE ? ApplicationCorrectionStatusEnum.NONE.ToString() : ApplicationCorrectionStatusEnum.PENDING.ToString();
+        {
+            feedback.CorrectionStatus = feedback.Section == TermAppSectionEnum.NONE ? ApplicationCorrectionStatusEnum.NONE.ToString() : ApplicationCorrectionStatusEnum.PENDING.ToString();
+        }
         else
-        feedback.CorrectionStatus = feedback.Section == EsmtAppSectionEnum.NONE ? ApplicationCorrectionStatusEnum.NONE.ToString() : ApplicationCorrectionStatusEnum.PENDING.ToString();
+        {
+            if (request.Section == "NONE")
+            {
+                feedback.CorrectionStatus = "NONE";
+                //feedback.CorrectionStatus = feedback.Section == EsmtAppSectionEnum.NONE ?? ApplicationCorrectionStatusEnum.NONE.ToString(); 
+            }
+            else
+            {
+                feedback.CorrectionStatus = ApplicationCorrectionStatusEnum.PENDING.ToString();
+            }
+        }
+
 
         feedback = await repoFeedback.SaveAsync(feedback);
         return feedback.Id;

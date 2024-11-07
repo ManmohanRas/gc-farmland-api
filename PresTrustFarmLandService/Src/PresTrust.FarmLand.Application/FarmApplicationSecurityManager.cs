@@ -956,6 +956,9 @@ public class FarmApplicationSecurityManager
                 permission.CanViewComments = true;
                 permission.CanEditComments = true;
                 permission.CanDeleteComments = true;
+                permission.CanEditFeedback =  true;
+                permission.CanDeleteFeedback =  true;
+
 
                 Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -981,7 +984,9 @@ public class FarmApplicationSecurityManager
                 };
                 break;
             case UserRoleEnum.PROGRAM_EDITOR:
+                permission.CanViewComments = true;
                 permission.CanEditComments = true;
+                permission.CanViewFeedback = true;
                 Location();
                 OwnerDetails();
                 Roles();
@@ -1021,6 +1026,7 @@ public class FarmApplicationSecurityManager
                 {
                     permission.CanViewComments = true;
                     permission.CanSwitchSADC = false;
+                    permission.CanViewFeedback = true;
                 }
                 Location();
                 OwnerDetails();

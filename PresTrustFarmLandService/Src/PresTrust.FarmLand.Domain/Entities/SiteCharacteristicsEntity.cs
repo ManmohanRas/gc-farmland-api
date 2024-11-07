@@ -12,9 +12,11 @@ public class SiteCharacteristicsEntity
     public decimal Pasture { get; set; }
     public decimal Orchard { get; set; }
     public decimal Other { get; set; }
-    public string EasementRightOfway { get; set; }
+    public bool IsEasement { get; set; }
+    public bool IsRightOfway { get; set; }
     public string NoteEasementRightOfway { get; set; }
-    public string MortgageLiens { get; set; }
+    public bool IsMortgage { get; set; }
+    public bool IsLiens { get; set; }
     public string NoteMortgageLiens { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime? LastUpdatedOn { get; set; }

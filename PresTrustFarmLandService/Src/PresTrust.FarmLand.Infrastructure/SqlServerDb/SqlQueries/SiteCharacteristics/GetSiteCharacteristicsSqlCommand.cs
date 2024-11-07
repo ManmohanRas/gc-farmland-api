@@ -14,9 +14,11 @@ public class GetSiteCharacteristicsSqlCommand
                  [Pasture],
                  [Orchard],
                  [Other],
-                 [EasementRightOfway],
+                 [IsEasement],
+                 [IsRightOfway],
                  [NoteEasementRightOfway],
-                 [MortgageLiens],
+                 [IsMortgage],
+                 [IsLiens],
                  [NoteMortgageLiens],
                  [LastUpdatedBy],
                  [LastUpdatedOn]
