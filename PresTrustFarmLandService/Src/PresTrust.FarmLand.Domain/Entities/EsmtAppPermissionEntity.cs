@@ -72,6 +72,7 @@ public class EsmtAppPermissionEntity
 
     public bool CanSubmitApplication { get; set; } = false;
     public bool CanReviewApplication { get; set; } = false;
+    public bool CanPendingApplication { get; set; } = false;
     public bool CanApproveApplication { get; set; } = false;
     public bool CanActivateApplication { get; set; } = false;
     public bool CanCloseApplication { get; set; } = false;
