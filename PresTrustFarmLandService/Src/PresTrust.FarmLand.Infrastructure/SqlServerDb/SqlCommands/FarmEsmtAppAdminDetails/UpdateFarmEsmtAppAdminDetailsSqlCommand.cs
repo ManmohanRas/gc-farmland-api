@@ -27,9 +27,6 @@ public class UpdateFarmEsmtAppAdminDetailsSqlCommand
                             ,RFPIsWetlands             = @p_RFPIsWetlands
                             ,CADBAppYear               = @p_CADBAppYear
                             ,ProjectYear               = @p_ProjectYear
-                            ,ContactPerson             = @p_ContactPerson
-                            ,ContactPhone              = @p_ContactPhone
-                            ,ContactFax                = @p_ContactFax
                             ,LastUpdatedBy             = @p_LastUpdatedBy
                             ,LastUpdatedOn             = @p_LastUpdatedOn
                     WHERE Id = @p_Id AND ApplicationId = @p_ApplicationId";

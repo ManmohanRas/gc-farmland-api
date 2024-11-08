@@ -24,11 +24,8 @@ public class SaveFarmEsmtAppAdminDetailsCommand : IRequest<int>
     public bool RFPIsAppraisal { get; set; }
     public bool RFPIsSurvey { get; set; }
     public bool RFPIsWetlands { get; set; }
-    public int CADBAppYear { get; set; }
-    public int ProjectYear { get; set; }
-    public string ContactPerson { get; set; }
-    public string ContactPhone { get; set; }
-    public string ContactFax { get; set; }
+    public int? CADBAppYear { get; set; }
+    public int? ProjectYear { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime? LastUpdatedOn { get; set; }
 }
