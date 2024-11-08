@@ -101,9 +101,6 @@ public class FarmEsmtAppAdminDetailsRepository : IFarmEsmtAppAdminDetailsReposit
                 @p_RFPIsWetlands = farmEsmtAppAdminDetails.RFPIsWetlands,
                 @p_CADBAppYear = farmEsmtAppAdminDetails.CADBAppYear,
                 @p_ProjectYear = farmEsmtAppAdminDetails.ProjectYear,
-                @p_ContactPerson = farmEsmtAppAdminDetails.ContactPerson,
-                @p_ContactPhone = farmEsmtAppAdminDetails.ContactPhone,
-                @p_ContactFax = farmEsmtAppAdminDetails.ContactFax,
                 @p_LastUpdatedBy = farmEsmtAppAdminDetails.LastUpdatedBy,
                 @p_LastUpdatedOn = DateTime.Now
             });
@@ -150,9 +147,6 @@ public class FarmEsmtAppAdminDetailsRepository : IFarmEsmtAppAdminDetailsReposit
                 @p_RFPIsWetlands = farmEsmtAppAdminDetails.RFPIsWetlands,
                 @p_CADBAppYear = farmEsmtAppAdminDetails.CADBAppYear,
                 @p_ProjectYear = farmEsmtAppAdminDetails.ProjectYear,
-                @p_ContactPerson = farmEsmtAppAdminDetails.ContactPerson,
-                @p_ContactPhone = farmEsmtAppAdminDetails.ContactPhone,
-                @p_ContactFax = farmEsmtAppAdminDetails.ContactFax,
                 @p_LastUpdatedBy = farmEsmtAppAdminDetails.LastUpdatedBy,
                 @p_LastUpdatedOn = DateTime.Now
             });

@@ -28,9 +28,6 @@ public class CreateFarmEsmtAppAdminDetailsSqlCommand
                             ,[RFPIsWetlands]
                             ,[CADBAppYear]
                             ,[ProjectYear]
-                            ,[ContactPerson]
-                            ,[ContactPhone]
-                            ,[ContactFax]
                             ,[LastUpdatedBy] 
 							,[LastUpdatedOn]
 						)
@@ -60,9 +57,6 @@ public class CreateFarmEsmtAppAdminDetailsSqlCommand
                             ,@p_RFPIsWetlands
                             ,@p_CADBAppYear
                             ,@p_ProjectYear
-                            ,@p_ContactPerson
-                            ,@p_ContactPhone
-                            ,@p_ContactFax
 							,@p_LastUpdatedBy  
 							,GETDATE()	
 						);
