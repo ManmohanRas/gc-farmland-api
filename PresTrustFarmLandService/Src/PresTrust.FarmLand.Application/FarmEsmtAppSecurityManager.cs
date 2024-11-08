@@ -500,6 +500,7 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanSaveDocument = true;
                 esmtPermission.CanDeleteDocument = true;
                 esmtPermission.CanApproveApplication = true;
+                esmtPermission.CanPendingApplication = true;
 
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
