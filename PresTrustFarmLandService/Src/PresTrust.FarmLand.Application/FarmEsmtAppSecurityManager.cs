@@ -482,7 +482,7 @@ public class FarmEsmtAppSecurityManager
             case UserRoleEnum.SYSTEM_ADMIN:
             case UserRoleEnum.PROGRAM_ADMIN:
             case UserRoleEnum.PROGRAM_EDITOR:
-
+                esmtPermission.CanViewSADC = true;
                 if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
                 {
                     esmtPermission.CanRejectApplication = true;
@@ -499,7 +499,6 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanDeleteComments = true;
                 esmtPermission.CanSaveDocument = true;
                 esmtPermission.CanDeleteDocument = true;
-                esmtPermission.CanApproveApplication = true;
                 esmtPermission.CanPendingApplication = true;
 
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
@@ -779,7 +778,7 @@ public class FarmEsmtAppSecurityManager
             case UserRoleEnum.PROGRAM_ADMIN:
             case UserRoleEnum.PROGRAM_EDITOR:
 
-
+                esmtPermission.CanViewSADC = true;
                 esmtPermission.CanRequestForAnApplicationCorrection = true;
                 esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
                 esmtPermission.CanEditFeedback = true;
@@ -793,7 +792,7 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanActivateApplication = true;
                 esmtPermission.CanRejectApplication = true;
                 esmtPermission.CanWithdrawApplication = true;
-
+                esmtPermission.CanViewSADC = true;
 
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
@@ -1072,21 +1071,20 @@ public class FarmEsmtAppSecurityManager
             case UserRoleEnum.PROGRAM_ADMIN:
             case UserRoleEnum.PROGRAM_EDITOR:
 
+                esmtPermission.CanViewSADC = true;
                 esmtPermission.CanViewFeedback = true;
                 esmtPermission.CanViewComments = true;
                 esmtPermission.CanEditComments = true;
                 esmtPermission.CanDeleteComments = true;
                 esmtPermission.CanSaveDocument = true;
                 esmtPermission.CanDeleteDocument = true;
+                esmtPermission.CanCloseApplication = true;
+                esmtPermission.CanRequestForAnApplicationCorrection = true;
+                esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
+                esmtPermission.CanEditFeedback = true;
+                esmtPermission.CanDeleteFeedback = true;
+                esmtPermission.CanWithdrawApplication = true;
 
-                if (userRole == UserRoleEnum.PROGRAM_ADMIN || userRole == UserRoleEnum.SYSTEM_ADMIN)
-                {
-                    esmtPermission.CanRequestForAnApplicationCorrection = true;
-                    esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
-                    esmtPermission.CanEditFeedback = true;
-                    esmtPermission.CanDeleteFeedback = true;
-                    esmtPermission.CanWithdrawApplication = true;
-                }
 
                 Location();
 
@@ -1309,7 +1307,6 @@ public class FarmEsmtAppSecurityManager
             case UserRoleEnum.AGENCY_READONLY:
             case UserRoleEnum.AGENCY_SIGNATORY:
 
-                esmtPermission.CanSwitchSADC = false;
                 if (userRole != UserRoleEnum.AGENCY_READONLY)
                 {
                     esmtPermission.CanViewFeedback = true;
@@ -1357,6 +1354,7 @@ public class FarmEsmtAppSecurityManager
             case UserRoleEnum.PROGRAM_ADMIN:
             case UserRoleEnum.PROGRAM_EDITOR:
 
+                esmtPermission.CanViewSADC = true;
                 esmtPermission.CanViewFeedback = true;
                 esmtPermission.CanViewComments = true;
                 esmtPermission.CanEditComments = true;
@@ -1593,20 +1591,20 @@ public class FarmEsmtAppSecurityManager
             case UserRoleEnum.PROGRAM_READONLY:
             case UserRoleEnum.AGENCY_READONLY:
             case UserRoleEnum.AGENCY_SIGNATORY:
+                esmtPermission.CanViewFeedback = true;
 
-                esmtPermission.CanSwitchSADC = false;
-                if (userRole != UserRoleEnum.AGENCY_READONLY)
+                if (userRole == UserRoleEnum.PROGRAM_COMMITTEE  || userRole == UserRoleEnum.PROGRAM_READONLY)
                 {
-                    esmtPermission.CanViewFeedback = true;
-                }
-                if (userRole == UserRoleEnum.PROGRAM_COMMITTEE || userRole == UserRoleEnum.PROGRAM_READONLY)
-                {
-                    SADCFarmInformation();
-                    SADCResiOnEsmtArea();
-                    SADCFarmHistory();
-                    SADCAppEligibilityI();
-                    SADCAppEligibilityII();
                     esmtPermission.CanViewComments = true;
+                    if (IsSADC)
+                    {
+                        SADCFarmInformation();
+                        SADCResiOnEsmtArea();
+                        SADCFarmHistory();
+                        SADCAppEligibilityI();
+                        SADCAppEligibilityII();
+                    }
+                    
                 }
 
                 Location();
@@ -1647,6 +1645,8 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanDeleteComments = true;
                 esmtPermission.CanRequestForAnApplicationCorrection = true;
                 esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
+                esmtPermission.CanViewSADC = true;
+
 
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
@@ -1806,7 +1806,6 @@ public class FarmEsmtAppSecurityManager
                 if (userRole != UserRoleEnum.AGENCY_READONLY)
                 {
                     esmtPermission.CanViewFeedback = true;
-                    esmtPermission.CanSwitchSADC = false;
                 }
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
