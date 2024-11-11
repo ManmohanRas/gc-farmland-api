@@ -37,3 +37,26 @@ GO
 
 INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (203,'IN_REVIEW',2);
 GO
+
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (204,'PENDING',2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (205,'ACTIVE',2);	
+GO
+
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (206,'PRESERVED',2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (207,'REJECTED',2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (208,'WITHDRAWN',2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (209,'CLOSING',2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationStatus] ([Id],[Name],[ApplicationTypeId]) VALUES (210,'POST_CLOSING',2);
+GO
+
+
