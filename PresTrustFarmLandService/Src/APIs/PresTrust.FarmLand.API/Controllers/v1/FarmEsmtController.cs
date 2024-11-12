@@ -372,4 +372,17 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
+    [HttpPost("esmtPostClosingApplication")]
+    [ProducesResponseType(typeof(EsmtPostClosingApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<EsmtPostClosingApplicationCommandViewModel>> PostClosingApplication([FromBody] EsmtPostClosingApplicationCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("esmtPreservedApplication")]
+    [ProducesResponseType(typeof(EsmtPreservedApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<EsmtPreservedApplicationCommandViewModel>> PreservedApplication([FromBody] EsmtPreservedApplicationCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
 }
