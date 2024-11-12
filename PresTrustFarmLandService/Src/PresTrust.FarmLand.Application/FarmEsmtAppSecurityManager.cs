@@ -62,6 +62,12 @@ public class FarmEsmtAppSecurityManager
             case EsmtAppStatusEnum.CLOSING:
                 this.DeriveClosingStatePermissions();
                 break;
+            case EsmtAppStatusEnum.POST_CLOSING:
+                this.DeriveClosingStatePermissions();
+                break;
+            case EsmtAppStatusEnum.PRESERVED:
+                this.DeriveClosingStatePermissions();
+                break;
             case EsmtAppStatusEnum.REJECTED:
             case EsmtAppStatusEnum.WITHDRAWN:
                 this.DeriveRejectedStatePermissions();
