@@ -1367,15 +1367,13 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanDeleteComments = true;
                 esmtPermission.CanSaveDocument = true;
                 esmtPermission.CanDeleteDocument = true;
+                esmtPermission.CanRequestForAnApplicationCorrection = true;
+                esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
+                esmtPermission.CanEditFeedback = true;
+                esmtPermission.CanDeleteFeedback = true;
+                esmtPermission.CanWithdrawApplication = true;
 
-                if (userRole == UserRoleEnum.PROGRAM_ADMIN || userRole == UserRoleEnum.SYSTEM_ADMIN)
-                {
-                    esmtPermission.CanRequestForAnApplicationCorrection = true;
-                    esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
-                    esmtPermission.CanEditFeedback = true;
-                    esmtPermission.CanDeleteFeedback = true;
-                    esmtPermission.CanWithdrawApplication = true;
-                }
+
 
                 Location();
 
