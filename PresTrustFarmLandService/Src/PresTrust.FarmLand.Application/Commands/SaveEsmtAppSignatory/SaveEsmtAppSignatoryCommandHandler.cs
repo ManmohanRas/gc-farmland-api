@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.Application.Commands;
+﻿using Azure.Core;
+
+namespace PresTrust.FarmLand.Application.Commands;
 
 public class SaveEsmtAppSignatoryCommandHandler : BaseHandler, IRequestHandler<SaveEsmtAppSignatoryCommand, int>
 {
@@ -8,6 +10,7 @@ public class SaveEsmtAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
     private readonly IApplicationRepository repoApplication;
     private IEsmtAppSignatoryRepository repoSignatory;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
+    private readonly IFarmEsmtAttachmentARepository repoAttachmentA;
 
 
     public SaveEsmtAppSignatoryCommandHandler
@@ -17,7 +20,8 @@ public class SaveEsmtAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
         IEsmtAppSignatoryRepository repoSignatory,
-        ITermBrokenRuleRepository repoBrokenRules
+        ITermBrokenRuleRepository repoBrokenRules,
+        IFarmEsmtAttachmentARepository repoAttachmentA
     ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
@@ -26,6 +30,7 @@ public class SaveEsmtAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         this.repoApplication = repoApplication;
         this.repoSignatory = repoSignatory;
         this.repoBrokenRules = repoBrokenRules;
+        this.repoAttachmentA = repoAttachmentA;
     }
 
     /// <summary>
@@ -44,8 +49,9 @@ public class SaveEsmtAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         // map command object to the FarmEsmtAppSignatoryEntity
         var reqSignatory = mapper.Map<SaveEsmtAppSignatoryCommand, FarmEsmtAppSignatoryEntity>(request);
 
+
         // Check Broken Rules
-        var brokenRules = ReturnBrokenRulesIfAny(reqSignatory);
+        var brokenRules = ReturnBrokenRulesIfAny(application.Id, reqSignatory);
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
@@ -68,8 +74,10 @@ public class SaveEsmtAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
         return signatoryId;
     }
 
-    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmEsmtAppSignatoryEntity reqSignatory)
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(int applicationId , FarmEsmtAppSignatoryEntity reqSignatory)
     {
+        var attachmentAs = repoAttachmentA.GetEsmtAttachmentAAsync(applicationId);
+
         int sectionId = (int)EsmtAppSectionEnum.SIGNATORY;
         List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 
@@ -107,6 +115,15 @@ public class SaveEsmtAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
                 ApplicationId = reqSignatory.ApplicationId,
                 SectionId = sectionId,
                 Message = "Date required field on Signatory tab have not been filled.",
+                IsApplicantFlow = true
+            });
+
+        if (attachmentAs.Result.Count() == 0)
+            brokenRules.Add(new FarmBrokenRuleEntity()
+            {
+                ApplicationId = reqSignatory.ApplicationId,
+                SectionId = sectionId,
+                Message = "Attachment A is mandatory.",
                 IsApplicantFlow = true
             });
 

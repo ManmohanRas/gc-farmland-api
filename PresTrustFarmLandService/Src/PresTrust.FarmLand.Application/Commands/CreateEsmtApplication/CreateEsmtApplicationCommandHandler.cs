@@ -137,6 +137,70 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
             IsApplicantFlow = true
         });
 
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.SIGNATORY,
+            Message = "Attachment A is mandatory.",
+            IsApplicantFlow = true
+        });
+
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.EXCEPTIONS,
+            Message = "Attachment B is mandatory.",
+            IsApplicantFlow = true
+        });
+
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.EXIS_NON_AGRI_USES,
+            Message = "Attachment C is mandatory.",
+            IsApplicantFlow = true
+        });
+
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.EXIS_NON_AGRI_USES,
+            Message = "Attachment E is mandatory.",
+            IsApplicantFlow = true
+        });
+
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.EQUINE_USES,
+            Message = "Attachment D is mandatory.",
+            IsApplicantFlow = true
+        });
+
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.OTHER_DOCUMENTS,
+            Message = "Attachment F is mandatory.",
+            IsApplicantFlow = true
+        });
+
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.OTHER_DOCUMENTS,
+            Message = "Attachment G is mandatory.",
+            IsApplicantFlow = true
+        });
+
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.OTHER_DOCUMENTS,
+            Message = "Attachment H is mandatory.",
+            IsApplicantFlow = true
+        });
+
 
         return brokenRules;
     }
