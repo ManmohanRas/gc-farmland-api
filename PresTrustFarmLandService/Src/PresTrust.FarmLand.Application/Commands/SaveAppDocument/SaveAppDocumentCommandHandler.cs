@@ -35,18 +35,18 @@ public class SaveAppDocumentCommandHandler : BaseHandler, IRequestHandler<SaveAp
         var application = await GetIfApplicationExists(request.ApplicationId);
         var response = new SaveAppDocumentCommandViewModel();
 
-        // map command object to the HistDocumentEntity
+        // map command object to the OtherDocumentsEntity
         var reqDocument = mapper.Map<SaveAppDocumentCommand, TermOtherDocumentsEntity>(request);
         reqDocument.LastUpdatedBy = userContext.Email;
 
         // map entity object to the SaveDocumentCommandViewModel
 
-        var brokenRules = await ReturnBrokenRulesIfAny(application);
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             var entityDocument = await repoDocument.SaveTermDocumentDetailsAsync(reqDocument);
             response = mapper.Map<TermOtherDocumentsEntity, SaveAppDocumentCommandViewModel>(entityDocument);
+            var brokenRules = ReturnBrokenRulesIfAny(application);
 
             await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, EsmtAppSectionEnum.OTHER_DOCUMENTS);
 
@@ -58,57 +58,72 @@ public class SaveAppDocumentCommandHandler : BaseHandler, IRequestHandler<SaveAp
         return response;
     }
 
-    private async Task<List<FarmBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
     {
         int sectionId = (int)EsmtAppSectionEnum.OTHER_DOCUMENTS;
         List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
         TermOtherDocumentsEntity attachmentsF = default;
         TermOtherDocumentsEntity attachmentsG = default;
         TermOtherDocumentsEntity attachmentsH = default;
+        TermOtherDocumentsEntity landOwnerDocs = default;
 
 
-        var documents = await repoDocument.GetTermDocumentsAsync(application.Id, sectionId);
+        var documents = repoDocument.GetTermDocumentsAsync(application.Id, sectionId).Result;
 
-        if (documents != null && documents.Count() > 0)
+        if (documents != null)
         {
+            landOwnerDocs = documents.Where(d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.ESMT_LANDOWNER_SIGNATURE).FirstOrDefault();
             attachmentsF = documents.Where(d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.ATTACHMENT_F).FirstOrDefault();
             attachmentsG = documents.Where(d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.ATTACHMENT_G).FirstOrDefault();
             attachmentsH = documents.Where(d => d.DocumentTypeId == (int)ApplicationDocumentTypeEnum.ATTACHMENT_H).FirstOrDefault();
         }
 
-        if (attachmentsF == null)
+        if (application.ApplicationType == ApplicationTypeEnum.EASEMENT)
         {
-            brokenRules.Add(new FarmBrokenRuleEntity()
-        {
-            ApplicationId = application.Id,
-            SectionId = (int)EsmtAppSectionEnum.OTHER_DOCUMENTS,
-            Message = "Attachment F is mandatory.",
-            IsApplicantFlow = true
-        });
-        }
-
-        if (attachmentsG == null)
-        {
-            brokenRules.Add(new FarmBrokenRuleEntity()
+            if (attachmentsF == null)
             {
-                ApplicationId = application.Id,
-                SectionId = (int)EsmtAppSectionEnum.OTHER_DOCUMENTS,
-                Message = "Attachment G is mandatory.",
-                IsApplicantFlow = true
-            });
-        }
+                brokenRules.Add(new FarmBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = (int)EsmtAppSectionEnum.OTHER_DOCUMENTS,
+                    Message = "Attachment F is mandatory.",
+                    IsApplicantFlow = true
+                });
+            }
 
-        if (attachmentsH == null)
-        {
-            brokenRules.Add(new FarmBrokenRuleEntity()
+            if (attachmentsG == null)
             {
-                ApplicationId = application.Id,
-                SectionId = (int)EsmtAppSectionEnum.OTHER_DOCUMENTS,
-                Message = "Attachment H is mandatory.",
-                IsApplicantFlow = true
-            });
-        }
+                brokenRules.Add(new FarmBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = (int)EsmtAppSectionEnum.OTHER_DOCUMENTS,
+                    Message = "Attachment G is mandatory.",
+                    IsApplicantFlow = true
+                });
+            }
 
+            if (attachmentsH == null)
+            {
+                brokenRules.Add(new FarmBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = (int)EsmtAppSectionEnum.OTHER_DOCUMENTS,
+                    Message = "Attachment H is mandatory.",
+                    IsApplicantFlow = true
+                });
+            }
+
+            if (landOwnerDocs == null)
+            {
+                brokenRules.Add(new FarmBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = (int)EsmtAppSectionEnum.OTHER_DOCUMENTS,
+                    Message = "Landowner Signature is mandatory.",
+                    IsApplicantFlow = true
+                });
+            }
+        }
 
         return brokenRules;
     }

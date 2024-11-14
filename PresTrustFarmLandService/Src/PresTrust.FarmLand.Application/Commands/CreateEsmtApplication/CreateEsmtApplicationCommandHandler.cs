@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.Application.Commands;
+﻿using static System.Collections.Specialized.BitVector32;
+
+namespace PresTrust.FarmLand.Application.Commands;
 
 /// <summary>
 /// This class handles the command to update data and build response
@@ -145,27 +147,12 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
             IsApplicantFlow = true
         });
 
-        brokenRules.Add(new FarmBrokenRuleEntity()
-        {
-            ApplicationId = application.Id,
-            SectionId = (int)EsmtAppSectionEnum.EXCEPTIONS,
-            Message = "Attachment B is mandatory.",
-            IsApplicantFlow = true
-        });
 
         brokenRules.Add(new FarmBrokenRuleEntity()
         {
             ApplicationId = application.Id,
             SectionId = (int)EsmtAppSectionEnum.EXIS_NON_AGRI_USES,
             Message = "Attachment C is mandatory.",
-            IsApplicantFlow = true
-        });
-
-        brokenRules.Add(new FarmBrokenRuleEntity()
-        {
-            ApplicationId = application.Id,
-            SectionId = (int)EsmtAppSectionEnum.EXIS_NON_AGRI_USES,
-            Message = "Attachment E is mandatory.",
             IsApplicantFlow = true
         });
 
@@ -201,6 +188,13 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
             IsApplicantFlow = true
         });
 
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.OWNER_DETAILS,
+            Message = "At least One Record Should be filled in OwnerDetails Tab.",
+            IsApplicantFlow = true
+        });
 
         return brokenRules;
     }
