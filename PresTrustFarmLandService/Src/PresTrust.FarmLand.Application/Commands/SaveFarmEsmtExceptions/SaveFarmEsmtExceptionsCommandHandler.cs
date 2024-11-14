@@ -1,8 +1,4 @@
-﻿using PresTrust.FarmLand.Application.Queries;
-using System;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace PresTrust.FarmLand.Application.Commands;
+﻿namespace PresTrust.FarmLand.Application.Commands;
 
 public class SaveFarmEsmtExceptionsCommandHandler : BaseHandler, IRequestHandler<SaveFarmEsmtExceptionsCommand , int>
 {
@@ -42,6 +38,7 @@ public class SaveFarmEsmtExceptionsCommandHandler : BaseHandler, IRequestHandler
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
+            reqExceptions = await repoExceptionsRepository.SaveAsync(reqExceptions);
 
             // Delete old Broken Rules, if any
             await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, EsmtAppSectionEnum.EXCEPTIONS);
@@ -49,7 +46,6 @@ public class SaveFarmEsmtExceptionsCommandHandler : BaseHandler, IRequestHandler
             // Save current Broken Rules, if any
             await repoBrokenRules.SaveBrokenRules(brokenRules);
 
-            reqExceptions = await repoExceptionsRepository.SaveAsync(reqExceptions);
 
             scope.Complete();
         }
@@ -71,7 +67,7 @@ public class SaveFarmEsmtExceptionsCommandHandler : BaseHandler, IRequestHandler
         {
             ApplicationId = application.Id,
             SectionId = sectionId,
-            Message = "All required fileds in Attachment B must be filled.",
+            Message = "Attachment B is mandatory.",
             IsApplicantFlow = true
         });
 

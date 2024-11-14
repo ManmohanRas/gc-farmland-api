@@ -1,4 +1,7 @@
-﻿namespace PresTrust.FarmLand.Application.Commands;
+﻿using Azure.Core;
+using MediatR;
+
+namespace PresTrust.FarmLand.Application.Commands;
 
 public class SaveEsmtOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<SaveEsmtOwnerDetailsCommand, int>
 {
@@ -8,7 +11,7 @@ public class SaveEsmtOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<S
     private readonly IApplicationRepository repoApplication;
     private IEsmtOwnerDetailsRepository repoOwner;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
-
+    private readonly IOwnerDetailsRepository repoOwnerDetails;
 
     public SaveEsmtOwnerDetailsCommandHandler(
        IMapper mapper,
@@ -16,7 +19,8 @@ public class SaveEsmtOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<S
        IOptions<SystemParameterConfiguration> systemParamOptions,
        IApplicationRepository repoApplication,
        IEsmtOwnerDetailsRepository repoOwner,
-        ITermBrokenRuleRepository repoBrokenRules
+        ITermBrokenRuleRepository repoBrokenRules,
+        IOwnerDetailsRepository repoOwnerDetails
       ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
@@ -25,6 +29,7 @@ public class SaveEsmtOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<S
         this.repoApplication = repoApplication;
         this.repoOwner = repoOwner;
         this.repoBrokenRules = repoBrokenRules;
+        this.repoOwnerDetails = repoOwnerDetails;
     }
 
     public async Task<int> Handle(SaveEsmtOwnerDetailsCommand request, CancellationToken cancellationToken)
@@ -35,10 +40,11 @@ public class SaveEsmtOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<S
         var reqEsmtOwner = mapper.Map<SaveEsmtOwnerDetailsCommand, EsmtOwnerDetailsEntity>(request);
 
         // Check Broken Rules
-        var brokenRules = ReturnBrokenRulesIfAny(reqEsmtOwner);
+        var brokenRules = ReturnBrokenRulesIfAny(application, reqEsmtOwner);
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
+            reqEsmtOwner = await repoOwner.SaveOwnerDetailsAsync(reqEsmtOwner);
 
             // Delete old Broken Rules, if any
             await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, EsmtAppSectionEnum.OWNER_DETAILS);
@@ -46,7 +52,6 @@ public class SaveEsmtOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<S
             // Save current Broken Rules, if any
             await repoBrokenRules.SaveBrokenRules(brokenRules);
 
-            reqEsmtOwner = await repoOwner.SaveOwnerDetailsAsync(reqEsmtOwner);
             
             scope.Complete();
         }
@@ -55,10 +60,24 @@ public class SaveEsmtOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<S
 
     }
 
-    private  List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(EsmtOwnerDetailsEntity reqEsmtOwner)
+    private  List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application, EsmtOwnerDetailsEntity reqEsmtOwner)
     {
         int sectionId = (int)EsmtAppSectionEnum.OWNER_DETAILS;
         List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
+
+        var ownerDetails = repoOwnerDetails.GetOwnerDetailsAsync(application.Id);
+
+        if (ownerDetails.Result.Count() == 0)
+        {
+            brokenRules.Add(new FarmBrokenRuleEntity()
+            {
+                ApplicationId = reqEsmtOwner.ApplicationId,
+                SectionId = sectionId,
+                Message = "At least One Record Should be filled in OwnerDetails Tab.",
+                IsApplicantFlow = true
+            });
+        }
+
 
         // add based on the empty check conditions
         if (string.IsNullOrEmpty(reqEsmtOwner.FarmName))

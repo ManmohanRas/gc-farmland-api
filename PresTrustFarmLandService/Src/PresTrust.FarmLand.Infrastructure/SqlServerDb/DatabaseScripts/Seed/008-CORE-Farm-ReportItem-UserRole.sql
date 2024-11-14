@@ -17,3 +17,7 @@ INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (38
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (38, 3);
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (38, 5);
 
+INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (39, 1);
+INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (39, 3);
+INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (39, 5);
+

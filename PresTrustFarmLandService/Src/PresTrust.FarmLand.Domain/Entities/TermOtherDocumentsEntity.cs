@@ -29,11 +29,17 @@ public class TermOtherDocumentsEntity
             this.DocumentTypeId = (int)value;
         }
     }
-    public TermAppSectionEnum Section
+
+    public dynamic Section
     {
         get
         {
-            return (TermAppSectionEnum)SectionId;
+            if (this.SectionId > 199)
+            {
+                return (EsmtAppSectionEnum)SectionId;
+            }
+            else
+                return (TermAppSectionEnum)SectionId;
         }
         set
         {
