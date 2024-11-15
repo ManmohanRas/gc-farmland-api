@@ -11,5 +11,5 @@ public interface IFarmBlockLotRepository
 
     public Task<bool> DeleteFarmBlockLotById(int id);
 
-
+    public Task<bool> CheckParcelExists(string PamsPin, int farmListId);
 }

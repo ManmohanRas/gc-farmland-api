@@ -1372,8 +1372,7 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanEditFeedback = true;
                 esmtPermission.CanDeleteFeedback = true;
                 esmtPermission.CanWithdrawApplication = true;
-
-
+                esmtPermission.CanPostCloseApplication = true;
 
                 Location();
 
@@ -1656,8 +1655,7 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanEditFeedback = true;
                 esmtPermission.CanDeleteFeedback = true;
                 esmtPermission.CanWithdrawApplication = true;
-
-
+                esmtPermission.CanPreserveApplication = true;
 
                 Location();
 
