@@ -1,9 +1,9 @@
-﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands.EsmtAppAdminApprisalReport
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
+
+public class CreateEsmtAppAdminAppraisalReportSqlCommand
 {
-    public class CreateEsmtAppAdminAppraisalReportSqlCommand
-    {
-        private readonly string _sqlCommand =
-                 @"INSERT INTO [Farm].[FarmEsmtAppAdminAppraisalReport]
+    private readonly string _sqlCommand =
+             @"INSERT INTO [Farm].[FarmEsmtAppAdminAppraisalReport]
 						(
                              ApplicationId
                             ,AsOfDate
@@ -81,14 +81,13 @@
                         );
                         SELECT CAST( SCOPE_IDENTITY() AS INT);";
 
-        public CreateEsmtAppAdminAppraisalReportSqlCommand()
-        {
-        }
-
-        public override string ToString()
-        {
-            return _sqlCommand;
-        }
-    
+    public CreateEsmtAppAdminAppraisalReportSqlCommand()
+    {
     }
+
+    public override string ToString()
+    {
+        return _sqlCommand;
+    }
+
 }
