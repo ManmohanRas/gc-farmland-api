@@ -2527,7 +2527,6 @@ public class FarmEsmtAppSecurityManager
                 Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Exceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Structures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Liens(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
