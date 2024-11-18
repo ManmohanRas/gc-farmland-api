@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.Application;
+﻿using System.Security;
+
+namespace PresTrust.FarmLand.Application;
 public class FarmEsmtAppSecurityManager
 {
     private UserRoleEnum userRole = default;
@@ -69,8 +71,10 @@ public class FarmEsmtAppSecurityManager
                 this.DerivePreservedStatePermissions();
                 break;
             case EsmtAppStatusEnum.REJECTED:
-            case EsmtAppStatusEnum.WITHDRAWN:
                 this.DeriveRejectedStatePermissions();
+                break;
+            case EsmtAppStatusEnum.WITHDRAWN:
+                this.DeriveWithdrawnStatePermissions();
                 break;
         }
 
@@ -2200,7 +2204,6 @@ public class FarmEsmtAppSecurityManager
 
     }
 
-
     private void DeriveRejectedStatePermissions()
     {
         FarmFeedbacksEntity correction = default;
@@ -2502,6 +2505,110 @@ public class FarmEsmtAppSecurityManager
                 {
                     Title = EsmtAppNavigationItemTitles.LOCATION,
                     RouterLink = EsmtAppRouterLinks.LOCATION_VIEW,
+                    SortOrder = 1
+                };
+                break;
+        }
+    }
+
+    private void DeriveWithdrawnStatePermissions()
+    {
+        switch (userRole)
+        {
+            case UserRoleEnum.SYSTEM_ADMIN:
+            case UserRoleEnum.PROGRAM_ADMIN:
+                esmtPermission.CanViewFeedback = true;
+                esmtPermission.CanViewComments = true;
+                esmtPermission.CanEditComments = true;
+                esmtPermission.CanDeleteComments = true;
+                esmtPermission.CanEditFeedback = true;
+                esmtPermission.CanDeleteFeedback = true;
+
+
+                Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Admin Document Checklist
+                AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Admin Details
+                AdminDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                //Admin Contacts
+                AdminContacts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                // Default Navigation Item
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = EsmtAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
+                    SortOrder = 1
+                };
+                break;
+            case UserRoleEnum.PROGRAM_EDITOR:
+                esmtPermission.CanViewComments = true;
+                esmtPermission.CanEditComments = true;
+                esmtPermission.CanViewFeedback = true;
+                Location();
+                OwnerDetails();
+                Roles();
+                OtherDocuments();
+                Signatory();
+                AdminDocumentChecklist();
+                AdminDetails();
+                AdminContacts();
+                // Default Navigation Item
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = EsmtAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                    SortOrder = 1
+                };
+
+                break;
+
+            case UserRoleEnum.AGENCY_ADMIN:
+            case UserRoleEnum.AGENCY_EDITOR:
+            case UserRoleEnum.PROGRAM_COMMITTEE:
+            case UserRoleEnum.PROGRAM_READONLY:
+            case UserRoleEnum.AGENCY_READONLY:
+            case UserRoleEnum.AGENCY_SIGNATORY:
+                if (userRole != UserRoleEnum.AGENCY_READONLY)
+                {
+                    esmtPermission.CanViewFeedback = true;
+                    esmtPermission.CanSwitchSADC = false;
+                }
+                if (userRole == UserRoleEnum.PROGRAM_COMMITTEE || userRole == UserRoleEnum.PROGRAM_READONLY)
+                {
+                    esmtPermission.CanViewComments = true;
+                    esmtPermission.CanSwitchSADC = false;
+                    esmtPermission.CanViewFeedback = true;
+                }
+                Location();
+                OwnerDetails();
+                Roles();
+                OtherDocuments();
+                Signatory();
+                // Default Navigation Item
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = EsmtAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
+                    SortOrder = 1
+                };
+                break;
+
+            default:
+                Location();
+                OwnerDetails();
+                Roles();
+                OtherDocuments();
+                Signatory();
+                // Default Navigation Item
+                this.defaultNavigationItem = new NavigationItemEntity()
+                {
+                    Title = EsmtAppNavigationItemTitles.LOCATION,
+                    RouterLink = TermApplicationRouterLinks.LOCATION_VIEW,
                     SortOrder = 1
                 };
                 break;

@@ -67,8 +67,6 @@ public class FarmEsmtController : FarmController
     public async Task<ActionResult<GetEsmtAppStructureQueryViewModel>> GetEsmtAppStructure([FromBody] GetEsmtAppStructureQuery query)
     {
         return Single(await QueryAsync(query));
-
-
     }
 
     [HttpPost("saveEsmtAppStructure")]
@@ -331,8 +329,6 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
-    
-
     [HttpPost("esmtRejectApplication")]
     [ProducesResponseType(typeof(EsmtRejectApplicationCommandViewModel), (int)HttpStatusCode.OK)]
 
@@ -382,6 +378,13 @@ public class FarmEsmtController : FarmController
     [HttpPost("esmtPreservedApplication")]
     [ProducesResponseType(typeof(EsmtPreservedApplicationCommandViewModel), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<EsmtPreservedApplicationCommandViewModel>> PreservedApplication([FromBody] EsmtPreservedApplicationCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("esmtWithdrawApplication")]
+    [ProducesResponseType(typeof(EsmtWithdrawApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Unit>> esmtWithdrawApplication([FromBody] EsmtWithdrawApplicationCommand command)
     {
         return Single(await CommandAsync(command));
     }
