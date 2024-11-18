@@ -2524,18 +2524,39 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanEditFeedback = true;
                 esmtPermission.CanDeleteFeedback = true;
 
-
                 Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Roles(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Exceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Structures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                Liens(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                ExistingUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AgriculturalUseProduction(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                EquineUses(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 Signatory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                //Admin Document Checklist
+                OtherDocuments(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+
                 AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                //Admin Details
+                AdminCostDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminAppraisalReport(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminOfferCosts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminStructures(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminExceptions(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminSADC(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                AdminClosingDocs(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
-                //Admin Contacts
                 AdminContacts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+                if (IsSADC)
+                {
+                    SADCFarmInformation(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCResiOnEsmtArea(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCFarmHistory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCAppEligibilityI(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCAppEligibilityII(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
 
                 // Default Navigation Item
                 this.defaultNavigationItem = new NavigationItemEntity()
@@ -2552,11 +2573,35 @@ public class FarmEsmtAppSecurityManager
                 Location();
                 OwnerDetails();
                 Roles();
-                OtherDocuments();
+                Exceptions();
+                Structures();
+                Liens();
+                ExistingUses();
+                AgriculturalUseProduction();
+                EquineUses();
                 Signatory();
+                OtherDocuments();
+
                 AdminDocumentChecklist();
+                AdminCostDetails();
+                AdminAppraisalReport();
+                AdminOfferCosts();
+                AdminStructures();
+                AdminExceptions();
+                AdminSADC();
+                AdminClosingDocs();
                 AdminDetails();
                 AdminContacts();
+
+                if (IsSADC)
+                {
+                    SADCFarmInformation();
+                    SADCResiOnEsmtArea();
+                    SADCFarmHistory();
+                    SADCAppEligibilityI();
+                    SADCAppEligibilityII();
+                }
+
                 // Default Navigation Item
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
@@ -2582,13 +2627,18 @@ public class FarmEsmtAppSecurityManager
                 {
                     esmtPermission.CanViewComments = true;
                     esmtPermission.CanSwitchSADC = false;
-                    esmtPermission.CanViewFeedback = true;
                 }
                 Location();
                 OwnerDetails();
                 Roles();
-                OtherDocuments();
+                Exceptions();
+                Structures();
+                Liens();
+                ExistingUses();
+                AgriculturalUseProduction();
+                EquineUses();
                 Signatory();
+                OtherDocuments();
                 // Default Navigation Item
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
@@ -2602,8 +2652,14 @@ public class FarmEsmtAppSecurityManager
                 Location();
                 OwnerDetails();
                 Roles();
-                OtherDocuments();
+                Exceptions();
+                Structures();
+                Liens();
+                ExistingUses();
+                AgriculturalUseProduction();
+                EquineUses();
                 Signatory();
+                OtherDocuments();
                 // Default Navigation Item
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
