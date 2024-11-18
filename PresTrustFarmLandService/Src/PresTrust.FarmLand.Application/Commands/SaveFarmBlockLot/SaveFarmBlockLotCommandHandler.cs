@@ -57,6 +57,8 @@ public class SaveFarmBlockLotCommandHandler: IRequestHandler<SaveFarmBlockLotCom
                 }
 
                 var blockLotParcel = await repoBlockLot.SaveAsync(reqBlockLot);
+                blockLotParcel.IsClassCodeWarning = currentParcel.IsClassCodeWarning;
+                blockLotParcel.PropertyClassCode = currentParcel.PropertyClassCode;
 
                 result = mapper.Map<FarmBlockLotEntity, SaveFarmBlockLotCommandViewModel>(blockLotParcel);
             }
