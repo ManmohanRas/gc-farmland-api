@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
 
-namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands.EsmtAppAdminApprisalReport
+public class UpdateEsmtAppAdminAppraisalReportSqlCommand
 {
-    public class UpdateEsmtAppAdminAppraisalReportSqlCommand
-    {
-        private readonly string _sqlCommand =
-     @" UPDATE [Farm].[FarmEsmtAppAdminAppraisalReport]
+    private readonly string _sqlCommand =
+ @" UPDATE [Farm].[FarmEsmtAppAdminAppraisalReport]
             SET              ApplicationId          = @p_ApplicationId
                             ,AsOfDate               = @p_AsOfDate
                             ,AppraiserName1         = @p_AppraiserName1
@@ -47,13 +41,12 @@ namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands.EsmtAppAdmin
                             ,LastUpdatedOn          = @p_LastUpdatedOn
                  WHERE Id = @p_Id AND ApplicationId = @p_ApplicationId;";
 
-        public UpdateEsmtAppAdminAppraisalReportSqlCommand()
-        { }
+    public UpdateEsmtAppAdminAppraisalReportSqlCommand()
+    { }
 
 
-        public override string ToString()
-        {
-            return _sqlCommand;
-        }
+    public override string ToString()
+    {
+        return _sqlCommand;
     }
 }

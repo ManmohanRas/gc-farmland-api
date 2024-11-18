@@ -76,6 +76,8 @@ public class EsmtAppPermissionEntity
     public bool CanApproveApplication { get; set; } = false;
     public bool CanActivateApplication { get; set; } = false;
     public bool CanCloseApplication { get; set; } = false;
+    public bool CanPostCloseApplication { get; set; } = false;
+    public bool CanPreserveApplication { get; set; } = false;
     public bool CanRejectApplication { get; set; } = false;
     public bool CanWithdrawApplication { get; set; } = false;
     public bool CanAgreementApproveApplication { get; set; } = false;
