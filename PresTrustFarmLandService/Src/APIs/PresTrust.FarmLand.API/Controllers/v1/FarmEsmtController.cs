@@ -382,10 +382,25 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
+    [HttpPost("saveEsmtSadcHistory")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveEsmtSadcHistory([FromBody] SaveFarmEsmtSadcHistoryCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("getEsmtSadcHistory")]
+    [ProducesResponseType(typeof(GetFarmEsmtSadcHistoryQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetFarmEsmtSadcHistoryQueryViewModel>> GetEsmtSadcHistory([FromBody] GetFarmEsmtSadcHistoryQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
     [HttpPost("esmtWithdrawApplication")]
     [ProducesResponseType(typeof(EsmtWithdrawApplicationCommandViewModel), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<Unit>> esmtWithdrawApplication([FromBody] EsmtWithdrawApplicationCommand command)
     {
         return Single(await CommandAsync(command));
     }
+
 }
