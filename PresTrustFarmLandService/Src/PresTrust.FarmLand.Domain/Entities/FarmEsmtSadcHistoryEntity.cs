@@ -7,9 +7,9 @@ public class FarmEsmtSadcHistoryEntity
     public string TypeOfDevelopment { get; set; }
     public decimal? SquareFootage  { get; set; }
     public DateTime? PreliminaryApprovalDate { get; set; }
-    public DateTime PreliminaryExpiration {  get; set; }
+    public DateTime? PreliminaryExpiration {  get; set; }
     public DateTime? FinalApprovalDate { get; set; }
-    public DateTime FinalExpiration { get; set; }
+    public DateTime? FinalExpiration { get; set; }
     public bool PropertySale { get; set; }
     public bool EstateSituation { get; set; }
     public bool EstateWill {  get; set; }
