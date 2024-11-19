@@ -250,6 +250,22 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
+    [HttpPost("getFarmSadcAppEligibilityDetails")]
+    [ProducesResponseType(typeof(GetFarmSadcAppEligibilityQueryViewModel), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<GetFarmSadcAppEligibilityQueryViewModel>> getFarmSadcAppEligibilityDetails([FromBody] GetFarmSadcAppEligibilityQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveFarmSadcAppEligibilityDetails")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveFarmSadcAppEligibilityDetails([FromBody] SaveFarmSadcAppEligibilityCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+
     //ESMT WORK FLOWS
 
     [HttpPost("esmtSubmitteApplication")]
@@ -385,4 +401,6 @@ public class FarmEsmtController : FarmController
     {
         return Single(await CommandAsync(command));
     }
+
+
 }
