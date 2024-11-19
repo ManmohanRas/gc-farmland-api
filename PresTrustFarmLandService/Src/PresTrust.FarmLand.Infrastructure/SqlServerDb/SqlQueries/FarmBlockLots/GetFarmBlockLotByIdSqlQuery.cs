@@ -29,7 +29,13 @@ public class GetFarmBlockLotByIdSqlQuery
 			  ,MBL.[Notes]
 			  ,MBL.[CreatedByProgramUser]
 			  ,MBL.[IsValidPamsPin]
-			  ,CP.PropertyClassCode AS PropertyClassCode
+			  ,CP.PropertyClassCode AS CorePropertyClassCode
+			  ,ISNULL(CP.PropertyClassCode,NULL) AS PropertyClassCode
+			  ,CASE 
+				WHEN CP.PropertyClassCode IS NOT NULL AND CP.PropertyClassCode <> '3B' 
+				THEN 1
+				ELSE 0
+				END AS IsClassCodeWarning
               FROM [Farm].[FarmMunicipalityBlockLotParcel] MBL
 			  LEFT JOIN CORE.Parcels CP ON (CP.PAMS_PIN = MBL.PamsPin)
 			  WHERE  MBL.Id = @p_Id;";
