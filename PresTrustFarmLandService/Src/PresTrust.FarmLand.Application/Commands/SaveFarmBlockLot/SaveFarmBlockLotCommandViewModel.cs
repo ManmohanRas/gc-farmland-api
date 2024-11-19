@@ -31,5 +31,6 @@ public class SaveFarmBlockLotCommandViewModel
     public bool IsValidPamsPin { get; set; }
     public string Status { get; set; } = "";
     public bool IsWarning { get; set; }
+    public bool IsClassCodeWarning { get; set; }
     public bool CreatedByProgramUser { get; set; }
 }
