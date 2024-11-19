@@ -34,10 +34,26 @@ public class EsmtRejectApplicationCommandHandler :BaseHandler,IRequestHandler<Es
     {
         var application = await repoApplication.GetApplicationAsync(request.ApplicationId);
 
+
+        //update application
+        if (application != null)
+        {
+            application.StatusId = (int)EsmtAppStatusEnum.REJECTED;
+            application.LastUpdatedBy = userContext.Email;
+        }
+
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             await repoApplication.UpdateApplicationStatusAsync(application, EsmtAppStatusEnum.REJECTED);
-            await repoBrokenRules.DeleteAllBrokenRulesAsync(application.Id);
+            FarmApplicationStatusLogEntity appStatusLog = new()
+            {
+                ApplicationId = application.Id,
+                StatusId = application.StatusId,
+                StatusDate = DateTime.Now,
+                Notes = string.Empty,
+                LastUpdatedBy = application.LastUpdatedBy
+            };
+            await repoApplication.SaveStatusLogAsync(appStatusLog);
             scope.Complete();
         }
 
