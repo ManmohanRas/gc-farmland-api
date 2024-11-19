@@ -41,11 +41,26 @@ public class EsmtWithdrawApplicationCommandHandler : BaseHandler, IRequestHandle
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 
+        //update application
+        if (application != null)
+        {
+            application.StatusId = (int)EsmtAppStatusEnum.WITHDRAWN;
+            application.LastUpdatedBy = userContext.Email;
+        }
+
         // update application status
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             await repoApplication.UpdateApplicationStatusAsync(application, EsmtAppStatusEnum.WITHDRAWN);
-
+            FarmApplicationStatusLogEntity appStatusLog = new()
+            {
+                ApplicationId = application.Id,
+                StatusId = application.StatusId,
+                StatusDate = DateTime.Now,
+                Notes = string.Empty,
+                LastUpdatedBy = application.LastUpdatedBy
+            };
+            await repoApplication.SaveStatusLogAsync(appStatusLog);
             scope.Complete();
         };
 

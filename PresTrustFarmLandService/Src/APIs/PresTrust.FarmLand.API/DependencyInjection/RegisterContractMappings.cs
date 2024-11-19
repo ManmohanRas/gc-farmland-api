@@ -45,8 +45,8 @@
             services.AddTransient<IFarmEsmtAppAdminAppraisalReportRepository, EsmtAppAdminAppraisalReportRepository>();
             services.AddTransient<IFarmEsmtAppAdminStructNonAgWetlandsRepository, FarmEsmtAppAdminStructNonAgWetlandsRepository>();
             services.AddTransient<IFarmEsmtAppAdminDetailsRepository, FarmEsmtAppAdminDetailsRepository>();
+            services.AddTransient<IFarmSadcAppEligibilityRepository, FarmSadcAppEligibilityRepository>();
             services.AddTransient<IFarmEsmtSadcHistoryRepository, FarmEsmtSadcHistoryRepository>();
-
 
 
     }
