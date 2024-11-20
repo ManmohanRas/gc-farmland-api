@@ -3,4 +3,6 @@
 public class EsmtPreservedApplicationCommandViewModel
 {
     public bool IsSuccess { get; set; } = false;
+    public IEnumerable<BrokenRuleViewModel> BrokenRules { get; set; } = new List<BrokenRuleViewModel>();
+
 }
