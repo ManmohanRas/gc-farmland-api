@@ -85,6 +85,9 @@ public class OwnerDetailsRepository : IOwnerDetailsRepository
                 @p_City = farmOwnerDetails.City,
                 @p_State = farmOwnerDetails.State,
                 @p_ZipCode = farmOwnerDetails.ZipCode,
+                @p_Salutation = farmOwnerDetails.Salutation,
+                @p_EmailAddress = farmOwnerDetails.EmailAddress,
+                @p_CurrentOwnerMailingName = farmOwnerDetails.CurrentOwnerMailingName,
                 @p_LastUpdatedBy = farmOwnerDetails.LastUpdatedBy,
 
             });
@@ -119,6 +122,9 @@ public class OwnerDetailsRepository : IOwnerDetailsRepository
                 @p_City = farmOwnerDetails.City,
                 @p_State = farmOwnerDetails.State,
                 @p_ZipCode = farmOwnerDetails.ZipCode,
+                @p_Salutation = farmOwnerDetails.Salutation,
+                @p_EmailAddress = farmOwnerDetails.EmailAddress,
+                @p_CurrentOwnerMailingName = farmOwnerDetails.CurrentOwnerMailingName,
                 @p_LastUpdatedBy = farmOwnerDetails.LastUpdatedBy,
                 @p_LastUpdatedOn = DateTime.Now
             });

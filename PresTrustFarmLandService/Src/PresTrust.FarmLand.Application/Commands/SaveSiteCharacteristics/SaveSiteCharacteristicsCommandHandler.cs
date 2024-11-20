@@ -42,12 +42,12 @@ public class SaveSiteCharacteristicsCommandHandler : BaseHandler, IRequestHandle
 
         var reqSiteCharacteristics = mapper.Map<SaveSiteCharacteristicsCommand, SiteCharacteristicsEntity>(request);
 
-        var brokenRules = ReturnBrokenRulesIfAny(application, reqSiteCharacteristics);
+     //   var brokenRules = ReturnBrokenRulesIfAny(application, reqSiteCharacteristics);
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, TermAppSectionEnum.SITE_CHARACTERISTICS);
-            await repoBrokenRules.SaveBrokenRules(brokenRules);
+         //   await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, TermAppSectionEnum.SITE_CHARACTERISTICS);
+         //   await repoBrokenRules.SaveBrokenRules(brokenRules);
             reqSiteCharacteristics = await repoSiteCharacteristics.SaveSiteCharacteristicsAsync(reqSiteCharacteristics);
             reqSiteCharacteristics.LastUpdatedBy = userContext.Email;
             scope.Complete();
@@ -57,37 +57,37 @@ public class SaveSiteCharacteristicsCommandHandler : BaseHandler, IRequestHandle
 
     }
 
-    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SiteCharacteristicsEntity reqSiteCharacteristics)
-    {
-        int sectionId = (int)TermAppSectionEnum.SITE_CHARACTERISTICS;
-        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
+    //private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application, SiteCharacteristicsEntity reqSiteCharacteristics)
+    //{
+    //    int sectionId = (int)TermAppSectionEnum.SITE_CHARACTERISTICS;
+    //    List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 
-            if(string.IsNullOrEmpty( reqSiteCharacteristics.Area))
-            {
-                brokenRules.Add(new FarmBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "Area  required field on Site Characteristics Tab have not been filled.",
-                    IsApplicantFlow = false
+    //        if(string.IsNullOrEmpty( reqSiteCharacteristics.Area))
+    //        {
+    //            brokenRules.Add(new FarmBrokenRuleEntity()
+    //            {
+    //                ApplicationId = application.Id,
+    //                SectionId = sectionId,
+    //                Message = "Area  required field on Site Characteristics Tab have not been filled.",
+    //                IsApplicantFlow = false
 
-                });
-            }
-            if(!(reqSiteCharacteristics.IsEasement || reqSiteCharacteristics.IsRightOfway))
-            {
+    //            });
+    //        }
+    //        if(!(reqSiteCharacteristics.IsEasement || reqSiteCharacteristics.IsRightOfway))
+    //        {
                 
-                brokenRules.Add(new FarmBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "Easement / Right of Way  required field on Site Characteristics Tab have not been filled.",
-                    IsApplicantFlow = false
-                });
+    //            brokenRules.Add(new FarmBrokenRuleEntity()
+    //            {
+    //                ApplicationId = application.Id,
+    //                SectionId = sectionId,
+    //                Message = "Easement / Right of Way  required field on Site Characteristics Tab have not been filled.",
+    //                IsApplicantFlow = false
+    //            });
 
-            }
+    //        }
         
-        return brokenRules;
-    }
+    //    return brokenRules;
+    //}
 
 
 }
