@@ -15,7 +15,10 @@ public class CreateOwnerDetailsSqlCommand
                         ,[PhoneNumber]                                      
                         ,[City]                                     
                         ,[State]                                  
-                        ,[ZipCode]                                   
+                        ,[ZipCode] 
+                       ,[Salutation]
+                       ,[EmailAddress]
+                       ,[CurrentOwnerMailingName]
                         ,[LastUpdatedBy]      
                        ,[LastUpdatedOn]
               )
@@ -32,7 +35,10 @@ public class CreateOwnerDetailsSqlCommand
                        @p_PhoneNumber,
                        @p_City,                            
                        @p_State,                                  
-                       @p_ZipCode,                                   
+                       @p_ZipCode, 
+                      @p_Salutation,
+                      @p_EmailAddress,
+                      @p_CurrentOwnerMailingName,
                        @p_LastUpdatedBy,
                        GETDATE()
 						);
