@@ -418,4 +418,21 @@ public class FarmEsmtController : FarmController
     {
         return Single(await CommandAsync(command));
     }
+
+    [HttpPost("getFarmEsmtSadcFarmInFo")]
+    [ProducesResponseType(typeof(GetFarmEsmtSadcFarmInfoQueryViewModel), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<GetFarmEsmtSadcFarmInfoQueryViewModel>> GetFarmEsmtSadcFarmInfo([FromBody] GetFarmEsmtSadcFarmInfoQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+   
+    [HttpPost("saveFarmEsmtSadcFarmInfo")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveFarmEsmtSadcFarmInfo([FromBody] SaveFarmEsmtSadcFarmInfoCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
 }
