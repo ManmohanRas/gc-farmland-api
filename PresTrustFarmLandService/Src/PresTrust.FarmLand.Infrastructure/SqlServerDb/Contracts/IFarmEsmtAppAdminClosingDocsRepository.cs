@@ -1,6 +1,4 @@
-﻿using PresTrust.FarmLand.Infrastructure.SqlServerDb.Repositories;
-
-namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.Contracts
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.Contracts
 {
     public interface IFarmEsmtAppAdminClosingDocsRepository
     {

@@ -50,6 +50,7 @@ public class GetEsmtApplicationDetailsQueryHandler : BaseHandler, IRequestHandle
             case EsmtAppStatusEnum.CLOSING:
             case EsmtAppStatusEnum.POST_CLOSING:
             case EsmtAppStatusEnum.PRESERVED:
+            case EsmtAppStatusEnum.WITHDRAWN:
                 var feedbacksReqForCorrections = feedbacks.Where(f => f.RequestForCorrection == true && string.Compare(f.CorrectionStatus, ApplicationCorrectionStatusEnum.REQUEST_SENT.ToString(), true) == 0).ToList();
                 securityMgr = new FarmEsmtAppSecurityManager(userContext.Role, application.Status, feedbacksReqForCorrections, application.IsSADC);
                 break;
