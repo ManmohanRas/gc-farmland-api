@@ -1941,8 +1941,6 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
                 esmtPermission.CanEditFeedback = true;
                 esmtPermission.CanDeleteFeedback = true;
-                esmtPermission.CanWithdrawApplication = true;
-
 
 
                 Location();
@@ -2525,6 +2523,7 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanDeleteFeedback = true;
                 esmtPermission.CanRequestForAnApplicationCorrection = true;
                 esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
+                esmtPermission.CanViewSADC = true;
 
                 Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 OwnerDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
