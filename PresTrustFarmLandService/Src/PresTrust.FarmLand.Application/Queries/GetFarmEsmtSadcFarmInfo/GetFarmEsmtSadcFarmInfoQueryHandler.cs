@@ -38,41 +38,22 @@ public class GetFarmEsmtSadcFarmInfoQueryHandler : BaseHandler,IRequestHandler<G
         var SadcFarmInfo = await repoFarmInfo.GetEsmtSadcFarmInfo(request.ApplicationId);
         var esmtOwner = await repoEsmtOwner.GetOwnerDetailsAsync(request.ApplicationId);
         esmtOwner = esmtOwner ?? new EsmtOwnerDetailsEntity();
-        //var farmBlockLot = await repoFarmBlockLot.GetFarmBlockLotByIdAsync(request.ApplicationId);
-        //farmBlockLot = farmBlockLot ?? new FarmBlockLotEntity();
         var attachmentCList = await repoAttachmentC.GetEsmtAppAttachmentCAsync(request.ApplicationId);
         var attachmentC = attachmentCList.FirstOrDefault() ?? new EsmtAppAttachmentCEntity();
-
         var ownerDetailsList = await repoOwnerDetails.GetOwnerDetailsAsync(request.ApplicationId);
         var ownerDetails = ownerDetailsList.FirstOrDefault() ?? new OwnerDetailsEntity();
-        string FullName = $"{ownerDetails.FirstName},{ownerDetails.LastName}";
-        string MailingAdress = $"{ownerDetails.MailingAddress1},{ownerDetails.MailingAddress1},{ownerDetails.State},{ownerDetails.City}, {ownerDetails.ZipCode}";
-
         var locationBlockLot = await repoLocation.GetParcelsByFarmID(request.ApplicationId,application.FarmListId);
-
         var BlockLot = locationBlockLot?.FirstOrDefault() != null ? mapper.Map<FarmBlockLotEntity>(locationBlockLot.FirstOrDefault()) :   new FarmBlockLotEntity() ;
-
         var result = mapper.Map<FarmEsmtSadcFarmInfoEntity, GetFarmEsmtSadcFarmInfoQueryViewModel>(SadcFarmInfo);
         result.PdStreetAddress = esmtOwner.PdStreetAddress;
         result.IsNonAgriPremisesPreserved = attachmentC.IsNonAgriPremisesPreserved;
         result.DescNonAgriUses = attachmentC.DescNonAgriUses;
         result.BlockAndLot = string.Join(",", locationBlockLot.Where(x => x.IsChecked).Select(x => string.Join("&", x.Block, x.Lot))) ?? string.Empty;
         result.Salutation = ownerDetails.Salutation;
-        result.FullName = FullName;
+        result.FullName = string.Join( ",",ownerDetailsList.Select(x => string.Join(",", x.FirstName, x.LastName))) ?? string.Empty;       
         result.Email = ownerDetails.EmailAddress;
         result.PhoneNumber = ownerDetails.PhoneNumber;
-        result.MailingAdress = MailingAdress;
-        
-
-        //result.FullName = $"{ FullName}";
-        //result.MailingAdress = MailingAdress;
-
-
-
-
-
-
-
+        result.MailingAdress = string.Join(",", ownerDetailsList.Select(x => string.Join(",", x.MailingAddress1, x.MailingAddress2, x.State, x.City, x.ZipCode))) ?? string.Empty;        
         return result;
     }
 }
