@@ -48,9 +48,9 @@ public class GetFarmEsmtSadcFarmInfoQueryHandler : BaseHandler,IRequestHandler<G
         result.PdStreetAddress = esmtOwner.PdStreetAddress;
         result.IsNonAgriPremisesPreserved = attachmentC.IsNonAgriPremisesPreserved;
         result.DescNonAgriUses = attachmentC.DescNonAgriUses;
-        result.BlockAndLot = string.Join(",", locationBlockLot.Where(x => x.IsChecked).Select(x => string.Join("&", x.Block, x.Lot))) ?? string.Empty;
+        result.BlockAndLot = string.Join(",   ", locationBlockLot.Where(x => x.IsChecked).Select(x => string.Join(" & ", x.Block, x.Lot))) ?? string.Empty;
         result.Salutation = ownerDetails.Salutation;
-        result.FullName = string.Join( ",",ownerDetailsList.Select(x => string.Join(",", x.FirstName, x.LastName))) ?? string.Empty;       
+        result.FullName = string.Join(", ", ownerDetailsList.Select(x => string.Join(". ", x.Salutation, x.FirstName + " " + x.LastName))) ?? string.Empty;
         result.Email = ownerDetails.EmailAddress;
         result.PhoneNumber = ownerDetails.PhoneNumber;
         result.MailingAdress = string.Join(",", ownerDetailsList.Select(x => string.Join(",", x.MailingAddress1, x.MailingAddress2, x.State, x.City, x.ZipCode))) ?? string.Empty;        
