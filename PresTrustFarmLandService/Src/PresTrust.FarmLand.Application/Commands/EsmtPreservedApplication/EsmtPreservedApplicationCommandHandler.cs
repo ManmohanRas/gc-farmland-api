@@ -6,19 +6,27 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
+    private readonly ITermBrokenRuleRepository repoBrokenRules;
+    private readonly IApplicationLocationRepository repoLocation;
+
 
     public EsmtPreservedApplicationCommandHandler 
     (
       IMapper mapper,
       IPresTrustUserContext userContext,
       IOptions<SystemParameterConfiguration> systemParamOptions,
-      IApplicationRepository repoApplication
+      IApplicationRepository repoApplication,
+      ITermBrokenRuleRepository repoBrokenRules,
+      IApplicationLocationRepository repoLocation
+
     ) : base(repoApplication)
     {
         this.mapper = mapper;
         this.userContext = userContext;
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;
+        this.repoBrokenRules = repoBrokenRules;
+        this.repoLocation = repoLocation;
     }
 
     public async Task<EsmtPreservedApplicationCommandViewModel> Handle(EsmtPreservedApplicationCommand request, CancellationToken cancellationToken)
@@ -35,8 +43,22 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
             application.LastUpdatedBy = userContext.Email;
         }
 
+        // check if any broken rules exists, if yes then return
+        var brokenRules = (await repoBrokenRules.GetBrokenRulesAsync(application.Id));
+
+        if (brokenRules != null && brokenRules.Any())
+        {
+            result.BrokenRules = mapper.Map<IEnumerable<FarmBrokenRuleEntity>, IEnumerable<BrokenRuleViewModel>>(brokenRules);
+            return result;
+        }
+
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
+            // returns broken rules  
+            var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
+            // save broken rules
+            await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
+
             await repoApplication.UpdateApplicationStatusAsync(application, EsmtAppStatusEnum.PRESERVED);
             FarmApplicationStatusLogEntity appStatusLog = new()
             {
@@ -54,5 +76,34 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
         }
 
         return result;
+    }
+
+    // <summary>
+    /// Return broken rules in case of any business rule failure
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="application"></param>
+    /// <returns></returns>
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    {
+        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
+
+        //List<FarmTermAppLocationEntity> locationDeatils = new List<FarmTermAppLocationEntity>();
+
+        var locationDeatils = repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId).Result;
+
+        if (locationDeatils.Where(x => !x.IsValidPamsPin).Count() > 0 || locationDeatils.Where(x => x.IsWarning).Count() > 0 || locationDeatils.Where(x => x.IsClassCodeWarning).Count() > 0)
+        {
+            // add default broken rule while initiating application flow
+            brokenRules.Add(new FarmBrokenRuleEntity()
+            {
+                ApplicationId = application.Id,
+                SectionId = (int)EsmtAppSectionEnum.LOCATION,
+                Message = "All warnings must be resolved on Location tab.",
+
+            });
+
+        }
+        return brokenRules;
     }
 }
