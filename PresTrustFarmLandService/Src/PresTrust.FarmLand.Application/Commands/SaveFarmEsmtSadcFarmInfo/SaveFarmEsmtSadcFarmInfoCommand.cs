@@ -22,7 +22,7 @@ public class SaveFarmEsmtSadcFarmInfoCommand:IRequest<int>
     public string VisitPhoneNumber { get; set; }
     public string VisitEmail { get; set; }
     public string VisitSADCID { get; set; }
-    public DateTime VisitDateRecieved { get; set; }
+    public DateTime ? VisitDateRecieved { get; set; }
     public bool IsImmediateCurrentMember { get; set; }
     public string Position { get; set; }
     public string Term { get; set; }
