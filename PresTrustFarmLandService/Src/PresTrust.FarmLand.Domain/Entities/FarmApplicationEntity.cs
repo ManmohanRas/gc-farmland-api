@@ -8,6 +8,7 @@ public class FarmApplicationEntity
     public string Title { get; set; }
     public int ApplicationTypeId { get; set; }
     public int StatusId { get; set; }
+    public int PrevStatusId { get; set; }
     public bool CreatedByProgramUser { get; set; }
     public bool IsApprovedByMunicipality { get; set; }
     public string LastUpdatedBy { get; set; }
@@ -43,7 +44,7 @@ public class FarmApplicationEntity
     {
         get
         {
-            if (this.StatusId > 199)
+            if (this.StatusId > 199 || this.PrevStatusId>199)
             {
                 return (EsmtAppStatusEnum)StatusId;
             }
@@ -55,6 +56,24 @@ public class FarmApplicationEntity
             this.StatusId = (int)value;
         }
     }
+
+    public dynamic PrevStatus
+    {
+        get
+        {
+            if ( this.PrevStatusId > 199)
+            {
+                return (EsmtAppStatusEnum)PrevStatusId;
+            }
+            else
+                return (TermAppStatusEnum)PrevStatusId;
+        }
+        set
+        {
+            this.PrevStatusId = (int)value;
+        }
+    }
+
 
     public FarmAgencyEntity Agency
     {
