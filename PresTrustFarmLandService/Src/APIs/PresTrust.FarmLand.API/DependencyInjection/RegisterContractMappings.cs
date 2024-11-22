@@ -48,8 +48,7 @@
             services.AddTransient<IFarmSadcAppEligibilityRepository, FarmSadcAppEligibilityRepository>();
             services.AddTransient<IFarmEsmtSadcHistoryRepository, FarmEsmtSadcHistoryRepository>();
             services.AddTransient<IFarmSadcResidenceRepository, FarmSadcResidenceRepository>();
-
-
+            services.AddTransient<IFarmEsmtSadcFarmInfoRepository,FarmEsmtSadcFarmInfoRepository>();
     }
 }
 
