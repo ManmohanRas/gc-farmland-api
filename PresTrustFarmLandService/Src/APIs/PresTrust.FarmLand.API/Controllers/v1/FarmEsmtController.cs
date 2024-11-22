@@ -412,6 +412,20 @@ public class FarmEsmtController : FarmController
         return Single(await QueryAsync(query));
     }
 
+    [HttpPost("saveSadcResidence")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveSadcResidence([FromBody] SaveFarmSadcResidenceCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("getSadcResidence")]
+    [ProducesResponseType(typeof(GetFarmSadcResidenceQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetFarmSadcResidenceQueryViewModel>> GetSadcResidence([FromBody] GetFarmSadcResidenceQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
     [HttpPost("esmtWithdrawApplication")]
     [ProducesResponseType(typeof(EsmtWithdrawApplicationCommandViewModel), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<Unit>> esmtWithdrawApplication([FromBody] EsmtWithdrawApplicationCommand command)
