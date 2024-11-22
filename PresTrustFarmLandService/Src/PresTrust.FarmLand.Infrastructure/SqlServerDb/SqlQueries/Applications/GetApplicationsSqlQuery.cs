@@ -9,6 +9,7 @@ public class GetApplicationsSqlQuery
 				A.[Title],
 			    A.[ApplicationTypeId],
                 A.[StatusId],
+				Max(ASL.[StatusId] )AS PrevStatusId,
                 A.[CreatedOn],
                 A.[FarmListId],
                 A.[IsSADC],
@@ -30,8 +31,25 @@ public class GetApplicationsSqlQuery
 			  LEFT JOIN [Farm].[FarmTermAppLocation] AS L ON (MBL.Id = L.ParcelId AND L.Ischecked = 1)
 			  GROUP BY L.ApplicationId
 			   ) AS LP ON (A.Id = LP.ApplicationId)
-               WHERE A.IsActive = 1
-               ORDER BY A.[CreatedOn] DESC;";
+			   LEFT JOIN	[Farm].[FarmApplicationStatusLog] ASL ON ASL.StatusId != A.StatusId AND A.Id = ASL.ApplicationId
+               WHERE AP.IsActive = 1
+			   Group by
+			   A.[Id],
+				A.[AgencyId],
+				A.[Title],
+			    A.[ApplicationTypeId],
+                A.[StatusId],
+				A.[CreatedOn],
+                A.[FarmListId],
+                A.[IsSADC],
+				FL.[FarmName],
+				FL.[MunicipalID],
+				FL.[Municipality],
+                FL.[OriginalLandowner],
+                AgencyEntity.[AgencyLabel] ,
+                AD.[EnrollmentDate],
+                LP.Acres
+               ORDER BY AP.[CreatedOn] DESC;";
 
 
     public GetApplicationsSqlQuery(bool isExternalUser = false)
@@ -45,6 +63,7 @@ public class GetApplicationsSqlQuery
 				A.[Title],
 			    A.[ApplicationTypeId],
                 A.[StatusId],
+                Max(ASL.[StatusId] )AS PrevStatusId,
                 A.[CreatedOn],
                 A.[FarmListId],
                 A.[IsSADC],
@@ -66,7 +85,25 @@ public class GetApplicationsSqlQuery
 			  LEFT JOIN [Farm].[FarmTermAppLocation] AS L ON (MBL.Id = L.ParcelId AND L.Ischecked = 1)
 			  GROUP BY L.ApplicationId
 			   ) AS LP ON (A.Id = LP.ApplicationId)
-               WHERE A.IsActive = 1 AND A.AgencyId IN @p_agencyIds
+                LEFT JOIN	[Farm].[FarmApplicationStatusLog] ASL ON ASL.StatusId != A.StatusId AND A.Id = ASL.ApplicationId
+                  WHERE A.IsActive = 1 AND A.AgencyId IN @p_agencyIds
+                 Group by
+			   A.[Id],
+				A.[AgencyId],
+				A.[Title],
+			    A.[ApplicationTypeId],
+                A.[StatusId],
+				A.[CreatedOn],
+                A.[FarmListId],
+                A.[IsSADC],
+				FL.[FarmName],
+				FL.[MunicipalID],
+				FL.[Municipality],
+                FL.[OriginalLandowner],
+                AgencyEntity.[AgencyLabel] ,
+                AD.[EnrollmentDate],
+                LP.Acres
+             
                ORDER BY A.[CreatedOn] DESC;";
         }else
         {
@@ -77,6 +114,7 @@ public class GetApplicationsSqlQuery
 				A.[Title],
 			    A.[ApplicationTypeId],
                 A.[StatusId],
+               Max(ASL.[StatusId] )AS PrevStatusId,
                 A.[CreatedOn],
                 A.[FarmListId],
                 A.[IsSADC],
@@ -98,7 +136,24 @@ public class GetApplicationsSqlQuery
 			  LEFT JOIN [Farm].[FarmTermAppLocation] AS L ON (MBL.Id = L.ParcelId AND L.Ischecked = 1)
 			  GROUP BY L.ApplicationId
 			   ) AS LP ON (A.Id = LP.ApplicationId)
-               WHERE A.IsActive = 1
+                 LEFT JOIN	[Farm].[FarmApplicationStatusLog] ASL ON ASL.StatusId != A.StatusId AND A.Id = ASL.ApplicationId
+                WHERE A.IsActive = 1
+                 Group by
+			   A.[Id],
+				A.[AgencyId],
+				A.[Title],
+			    A.[ApplicationTypeId],
+                A.[StatusId],
+				A.[CreatedOn],
+                A.[FarmListId],
+                A.[IsSADC],
+				FL.[FarmName],
+				FL.[MunicipalID],
+				FL.[Municipality],
+                FL.[OriginalLandowner],
+                AgencyEntity.[AgencyLabel] ,
+                AD.[EnrollmentDate],
+                LP.Acres
                ORDER BY A.[CreatedOn] DESC;";
         }
     }

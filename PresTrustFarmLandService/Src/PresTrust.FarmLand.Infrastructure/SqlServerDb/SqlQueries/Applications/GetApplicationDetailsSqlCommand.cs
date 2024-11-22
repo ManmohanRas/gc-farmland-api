@@ -9,6 +9,7 @@ public class GetApplicationDetailsSqlCommand
 				A.[Title],
 			    A.[ApplicationTypeId],
                 A.[StatusId],
+				MAX(ASL.StatusId) AS PrevStatusId,
                 A.[CreatedOn],
 				A.[IsApprovedByMunicipality],
 				A.[FarmListID],
@@ -45,7 +46,22 @@ public class GetApplicationDetailsSqlCommand
 			) FARM_AGENCY ON A.[AgencyId] = FARM_AGENCY.[AgencyId]
 			LEFT JOIN [Farm].[OwnerPropertyLEGACY_Rev01] AS PropertyLEGACY ON (A.[AgencyId] = PropertyLEGACY.[AgencyId] AND A.[FarmListID] = PropertyLEGACY.[FarmListID])
 			LEFT JOIN [Farm].[FarmList] FL ON (A.FarmListID = FL.FarmListID)
-               WHERE A.Id = @p_Id;";
+			LEFT JOIN	[Farm].[FarmApplicationStatusLog] ASL ON ASL.StatusId != A.StatusId AND A.Id = ASL.ApplicationId
+               WHERE A.Id = @p_Id
+				GROUP BY
+				A.[Id],
+				A.[AgencyId],
+				A.[Title],
+			    A.[ApplicationTypeId],
+                A.[StatusId],
+				 A.[CreatedOn],
+				A.[IsApprovedByMunicipality],
+				A.[FarmListID],
+				A.[IsSADC],
+				[AgencyJSON],
+				PropertyLEGACY.[Municipality],
+				PropertyLEGACY.[MunicipalID],
+				FL.[FarmName];";
 
     public override string ToString()
     {
