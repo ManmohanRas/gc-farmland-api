@@ -6,8 +6,8 @@ public class FarmEsmtSadcFarmInfoEntity
 
     public string AlternatePhoneNumber { get; set; } 
     public string County { get; set; }
-    public int TotalFarmAcreage {get; set; }
-    public int ?Acres {  get; set; }
+    public decimal TotalFarmAcreage {get; set; }
+    public decimal ?Acres {  get; set; }
     public bool IsContactSame { get; set; }
     public bool IsOtherContact { get; set; }
     public string OtherPrimaryFirstName { get; set; }
