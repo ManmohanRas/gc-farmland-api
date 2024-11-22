@@ -50,10 +50,10 @@ public class GetFarmEsmtSadcFarmInfoQueryHandler : BaseHandler,IRequestHandler<G
         result.DescNonAgriUses = attachmentC.DescNonAgriUses;
         result.BlockAndLot = string.Join(",   ", locationBlockLot.Where(x => x.IsChecked).Select(x => string.Join(" & ", x.Block, x.Lot))) ?? string.Empty;
         result.Salutation = ownerDetails.Salutation;
-        result.FullName = string.Join(", ", ownerDetailsList.Select(x => string.Join(". ", x.Salutation, x.FirstName + " " + x.LastName))) ?? string.Empty;
+        result.FullName = string.Join(", ", ownerDetailsList.Select(x => string.Join(". ", x.Salutation, x.FirstName + " " + x.LastName)).FirstOrDefault()) ?? string.Empty ;
         result.Email = ownerDetails.EmailAddress;
         result.PhoneNumber = ownerDetails.PhoneNumber;
-        result.MailingAdress = string.Join(",", ownerDetailsList.Select(x => string.Join(",", x.MailingAddress1, x.MailingAddress2, x.State, x.City, x.ZipCode))) ?? string.Empty;        
+        result.MailingAdress = string.Join(", ", ownerDetailsList.Select(x => string.Join(",  ", x.MailingAddress1, x.MailingAddress2, x.State, x.City, x.ZipCode)).FirstOrDefault()) ?? string.Empty;        
         return result;
     }
 }

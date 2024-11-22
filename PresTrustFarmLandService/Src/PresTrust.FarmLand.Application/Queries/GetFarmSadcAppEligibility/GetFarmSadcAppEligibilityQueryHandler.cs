@@ -13,7 +13,6 @@
             ) : base(repoApplication: repoApplication)
         {
             this.mapper = mapper;
-            this.repoApplication = repoApplication;
             this.repoAppEligibility = repoAppEligibility;
         }
 

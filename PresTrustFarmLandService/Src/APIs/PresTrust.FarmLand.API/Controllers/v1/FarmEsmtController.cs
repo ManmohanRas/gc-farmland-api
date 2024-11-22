@@ -449,4 +449,21 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
+
+    [HttpPost("getFarmEmstSadcEligibilityTwo")]
+    [ProducesResponseType(typeof(GetFarmEsmtSadcAppEligiblityTwoQueryViewModel), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<GetFarmEsmtSadcAppEligiblityTwoQueryViewModel>> getFarmEmstSadcEligibilityTwo([FromBody] GetFarmEsmtSadcAppEligiblityTwoQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+
+    [HttpPost("saveFarmEmstSadcEligibilityTwo")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveFarmEmstSadcEligibilityTwo([FromBody] SaveFarmEsmtSadcAppEligiblityTwoCommand  command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
 }
