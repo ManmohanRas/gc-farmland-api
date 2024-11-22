@@ -1,8 +1,8 @@
 ﻿namespace PresTrust.FarmLand.Application.Commands;
 
-public class SaveFarmEsmtSadcHistoryCommandValidator : AbstractValidator<SaveFarmEsmtSadcHistoryCommand>
+public class SaveFarmSadcResidenceCommandValidator : AbstractValidator<SaveFarmSadcResidenceCommand>
 {
-    public SaveFarmEsmtSadcHistoryCommandValidator()
+    public SaveFarmSadcResidenceCommandValidator()
     {
         RuleFor(query => query.ApplicationId)
                 .GreaterThan(0)
