@@ -1,4 +1,4 @@
-DELETE FROM [Core].[ReportItemUserRole] WHERE ReportItemId IN (36, 37,38,39);
+DELETE FROM [Core].[ReportItemUserRole] WHERE ReportItemId IN (36, 37,38,39, 40);
 
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (36, 1);
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (36, 3);
