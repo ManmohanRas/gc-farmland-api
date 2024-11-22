@@ -10,6 +10,7 @@ public class GetEsmtApplicationDetailsQueryViewModel
     public int ApplicationTypeId { get; set; }
     public string ApplicationType { get; set; }
     public string Status { get; set; }
+    public string PrevStatus { get; set; }
     public bool IsApprovedByMunicipality { get; set; }
     public FarmAgencyEntity Agency { get; set; }
     public int MunicipalID { get; set; }

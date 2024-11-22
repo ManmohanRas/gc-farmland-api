@@ -9,6 +9,7 @@
         public string ApplicationType { get; set; }
         public int ApplicationTypeId { get; set; }
         public string Status { get; set; }
+        public string PrevStatus { get; set; }
         public bool CreatedByProgramUser { get; set; }
         public bool IsApprovedByMunicipality { get; set; }
         public string CreatedBy { get; set; }
