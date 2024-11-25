@@ -2,7 +2,9 @@
 
 public interface IApplicationLocationRepository
 {
-    Task<List<FarmBlockLotEntity>> GetParcelsByFarmID(int applicationId, int farmListID);
+    Task<List<FarmBlockLotEntity>> GetParcelsByFarmID(int applicationId, int farmListID, int applicationTypeId = default);
+
+    Task<List<FarmBlockLotEntity>> GetUnLinkedParcelsByFarmID(int applicationId, int farmListID, int applicationTypeId = default);
 
     Task<bool> CheckLocationParcel(int applicationId, FarmTermAppLocationEntity parcel);
 
