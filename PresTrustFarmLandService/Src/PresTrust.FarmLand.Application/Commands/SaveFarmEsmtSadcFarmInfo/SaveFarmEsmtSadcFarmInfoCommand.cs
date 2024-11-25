@@ -5,7 +5,7 @@ public class SaveFarmEsmtSadcFarmInfoCommand:IRequest<int>
     public int ApplicationId { get; set; }
     public string AlternatePhoneNumber { get; set; }
     public string County { get; set; }
-    public decimal TotalFarmAcreage { get; set; }
+    public decimal? TotalFarmAcreage { get; set; }
     public decimal ? Acres { get; set; }
     public bool IsContactSame { get; set; }
     public bool IsOtherContact { get; set; }
