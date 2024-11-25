@@ -134,13 +134,13 @@ public class CreateTermApplicationCommandHandler : BaseHandler, IRequestHandler<
             IsApplicantFlow = true
         });
 
-        brokenRules.Add(new FarmBrokenRuleEntity()
-        {
-            ApplicationId = application.Id,
-            SectionId = (int)TermAppSectionEnum.SITE_CHARACTERISTICS,
-            Message = "All required fields on Site Charecteristics tab have not been filled.",
-            IsApplicantFlow = true
-        });
+        //brokenRules.Add(new FarmBrokenRuleEntity()
+        //{
+        //    ApplicationId = application.Id,
+        //    SectionId = (int)TermAppSectionEnum.SITE_CHARACTERISTICS,
+        //    Message = "All required fields on Site Charecteristics tab have not been filled.",
+        //    IsApplicantFlow = true
+        //});
         brokenRules.Add(new FarmBrokenRuleEntity()
         {
             ApplicationId = application.Id,
