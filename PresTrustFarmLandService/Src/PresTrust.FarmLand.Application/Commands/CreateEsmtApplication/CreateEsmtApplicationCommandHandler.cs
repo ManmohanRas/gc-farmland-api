@@ -192,7 +192,7 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
         {
             ApplicationId = application.Id,
             SectionId = (int)EsmtAppSectionEnum.OWNER_DETAILS,
-            Message = "At least One Record Should be filled in OwnerDetails Tab.",
+            Message = "At least One Record Should be filled in Owner Details Tab.",
             IsApplicantFlow = true
         });
 

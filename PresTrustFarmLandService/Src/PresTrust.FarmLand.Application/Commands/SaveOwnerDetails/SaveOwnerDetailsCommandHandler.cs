@@ -70,7 +70,7 @@ public class SaveOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<SaveO
             {
                 ApplicationId = application.Id,
                 SectionId = sectionId,
-                Message = "At least One Record Should be filled in OwnerDetails Tab.",
+                Message = "At least One Record Should be filled in Owner Details Tab.",
                 IsApplicantFlow = false,
             });
         }
