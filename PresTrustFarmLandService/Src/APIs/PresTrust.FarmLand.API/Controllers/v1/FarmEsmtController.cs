@@ -67,8 +67,6 @@ public class FarmEsmtController : FarmController
     public async Task<ActionResult<GetEsmtAppStructureQueryViewModel>> GetEsmtAppStructure([FromBody] GetEsmtAppStructureQuery query)
     {
         return Single(await QueryAsync(query));
-
-
     }
 
     [HttpPost("saveEsmtAppStructure")]
@@ -250,6 +248,22 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
+    [HttpPost("getFarmSadcAppEligibilityDetails")]
+    [ProducesResponseType(typeof(GetFarmSadcAppEligibilityQueryViewModel), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<GetFarmSadcAppEligibilityQueryViewModel>> getFarmSadcAppEligibilityDetails([FromBody] GetFarmSadcAppEligibilityQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveFarmSadcAppEligibilityDetails")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveFarmSadcAppEligibilityDetails([FromBody] SaveFarmSadcAppEligibilityCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+
     //ESMT WORK FLOWS
 
     [HttpPost("esmtSubmitteApplication")]
@@ -331,8 +345,6 @@ public class FarmEsmtController : FarmController
         return Single(await CommandAsync(command));
     }
 
-    
-
     [HttpPost("esmtRejectApplication")]
     [ProducesResponseType(typeof(EsmtRejectApplicationCommandViewModel), (int)HttpStatusCode.OK)]
 
@@ -385,4 +397,73 @@ public class FarmEsmtController : FarmController
     {
         return Single(await CommandAsync(command));
     }
+
+    [HttpPost("saveEsmtSadcHistory")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveEsmtSadcHistory([FromBody] SaveFarmEsmtSadcHistoryCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("getEsmtSadcHistory")]
+    [ProducesResponseType(typeof(GetFarmEsmtSadcHistoryQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetFarmEsmtSadcHistoryQueryViewModel>> GetEsmtSadcHistory([FromBody] GetFarmEsmtSadcHistoryQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveSadcResidence")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveSadcResidence([FromBody] SaveFarmSadcResidenceCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("getSadcResidence")]
+    [ProducesResponseType(typeof(GetFarmSadcResidenceQueryViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetFarmSadcResidenceQueryViewModel>> GetSadcResidence([FromBody] GetFarmSadcResidenceQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("esmtWithdrawApplication")]
+    [ProducesResponseType(typeof(EsmtWithdrawApplicationCommandViewModel), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Unit>> esmtWithdrawApplication([FromBody] EsmtWithdrawApplicationCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("getFarmEsmtSadcFarmInFo")]
+    [ProducesResponseType(typeof(GetFarmEsmtSadcFarmInfoQueryViewModel), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<GetFarmEsmtSadcFarmInfoQueryViewModel>> GetFarmEsmtSadcFarmInfo([FromBody] GetFarmEsmtSadcFarmInfoQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+   
+    [HttpPost("saveFarmEsmtSadcFarmInfo")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveFarmEsmtSadcFarmInfo([FromBody] SaveFarmEsmtSadcFarmInfoCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+
+    [HttpPost("getFarmEmstSadcEligibilityTwo")]
+    [ProducesResponseType(typeof(GetFarmEsmtSadcAppEligiblityTwoQueryViewModel), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<GetFarmEsmtSadcAppEligiblityTwoQueryViewModel>> getFarmEmstSadcEligibilityTwo([FromBody] GetFarmEsmtSadcAppEligiblityTwoQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+
+    [HttpPost("saveFarmEmstSadcEligibilityTwo")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> saveFarmEmstSadcEligibilityTwo([FromBody] SaveFarmEsmtSadcAppEligiblityTwoCommand  command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
 }

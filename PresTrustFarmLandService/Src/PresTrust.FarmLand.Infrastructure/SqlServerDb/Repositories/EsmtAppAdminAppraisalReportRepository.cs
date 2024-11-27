@@ -1,7 +1,4 @@
-﻿using PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands.EsmtAppAdminApprisalReport;
-using PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries.EsmtAppAdminAppraisalReport;
-
-namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.Repositories
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.Repositories
 {
     public class EsmtAppAdminAppraisalReportRepository : IFarmEsmtAppAdminAppraisalReportRepository
     {

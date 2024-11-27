@@ -26,7 +26,7 @@ public class ApplicationLocationRepository: IApplicationLocationRepository
 
     #endregion
 
-    public async Task<List<FarmBlockLotEntity>> GetParcelsByFarmID(int applicationId, int farmListID)
+    public async Task<List<FarmBlockLotEntity>> GetParcelsByFarmID(int applicationId, int farmListID, int applicationTypeId = default)
     {
         List<FarmBlockLotEntity> results;
         using var conn = context.CreateConnection();
@@ -36,7 +36,25 @@ public class ApplicationLocationRepository: IApplicationLocationRepository
             commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
                             param: new 
                             { @p_ApplicationId = applicationId, 
-                              @p_FarmListID  = farmListID
+                              @p_FarmListID  = farmListID,
+                              @p_ApplicationTypeId = applicationTypeId,
+                            })).ToList();
+        return results ?? new();
+    }
+
+    public async Task<List<FarmBlockLotEntity>> GetUnLinkedParcelsByFarmID(int applicationId, int farmListID, int applicationTypeId)
+    {
+        List<FarmBlockLotEntity> results;
+        using var conn = context.CreateConnection();
+        var sqlCommand = new GetUnLinkedParcelsByFarmId();
+        results = (await conn.QueryAsync<FarmBlockLotEntity>(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+                            param: new
+                            {
+                                @p_ApplicationId = applicationId,
+                                @p_FarmListID = farmListID,
+                                @p_applicationTypeId = applicationTypeId
                             })).ToList();
         return results ?? new();
     }

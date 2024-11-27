@@ -5,6 +5,7 @@ public class GetOwnerDetailsSqlCommand
     private readonly string _sqlCommand =
     @"  SELECT         [Id]                                                        
                         ,[ApplicationId]
+                       ,[Salutation]
                        ,[FirstName]
                        ,[LastName]                      
                         ,[PropertyLocation]                            
@@ -14,7 +15,9 @@ public class GetOwnerDetailsSqlCommand
                         ,[PhoneNumber]                                      
                         ,[City]                                     
                         ,[State]                                  
-                        ,[ZipCode]                                   
+                        ,[ZipCode] 
+                       ,[EmailAddress]
+                       ,[CurrentOwnerMailingName]
                         ,[LastUpdatedBy]                                           
                         ,[LastUpdatedOn]
             FROM [Farm].[FarmTermAppOwnerDetails] WHERE ApplicationId = @p_ApplicationId";

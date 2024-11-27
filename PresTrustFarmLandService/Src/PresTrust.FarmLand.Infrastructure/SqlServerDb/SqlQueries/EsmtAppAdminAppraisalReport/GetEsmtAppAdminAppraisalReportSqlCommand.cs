@@ -1,16 +1,9 @@
-﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries;
 
-namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries.EsmtAppAdminAppraisalReport
+public class GetEsmtAppAdminAppraisalReportSqlCommand
 {
-    public class GetEsmtAppAdminAppraisalReportSqlCommand
-    {
-        private readonly string _sqlCommand =
-                            @"select
+    private readonly string _sqlCommand =
+                        @"select
                                       Id
                                     , ApplicationId
                                     , AsOfDate
@@ -50,12 +43,11 @@ namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries.EsmtAppAdminA
                                      from  [Farm].[FarmEsmtAppAdminAppraisalReport]
                                      WHERE ApplicationId = @p_ApplicationId;";
 
-        public GetEsmtAppAdminAppraisalReportSqlCommand()
-        { }
+    public GetEsmtAppAdminAppraisalReportSqlCommand()
+    { }
 
-        public override string ToString()
-        {
-            return _sqlCommand;
-        }
+    public override string ToString()
+    {
+        return _sqlCommand;
     }
 }

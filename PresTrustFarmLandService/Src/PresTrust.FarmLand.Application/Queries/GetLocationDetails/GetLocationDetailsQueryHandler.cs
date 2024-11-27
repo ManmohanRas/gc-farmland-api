@@ -24,7 +24,7 @@ public class GetLocationDetailsQueryHandler: BaseHandler, IRequestHandler<GetLoc
         var application = await GetIfApplicationExists(request.ApplicationId);
 
         GetLocationDetailsQueryViewModel result; 
-        var reqParcels = await repoLocation.GetParcelsByFarmID(application.Id, request.FarmListID);
+        var reqParcels = await repoLocation.GetUnLinkedParcelsByFarmID(application.Id, request.FarmListID, application.ApplicationTypeId);
         var parcels = mapper.Map<List<FarmBlockLotEntity>, List<GetFarmParcelViewModel>>(reqParcels);
 
         result = new GetLocationDetailsQueryViewModel()

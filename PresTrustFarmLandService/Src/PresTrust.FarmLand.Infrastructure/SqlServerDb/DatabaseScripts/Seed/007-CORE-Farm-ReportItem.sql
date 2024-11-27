@@ -15,6 +15,12 @@ VALUES (38, 'Farm Esmt Program Permanently Preserved Farms Report', 'FarmEsmtPer
 INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive) 
 VALUES (39, 'Farm Esmt Program Purchase Breakdown Report', 'FarmEasementPurchaseBreakdownReport', 'Farm Land Esmt Purchase Breakdown Report', 'description', 4, 1, 1);
 
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive) 
+VALUES (40, 'Morris CADB Easement Purchase Program – SADC Appraised Values', 'FarmEsmtCADBPurchPrgmSADCAppraisedReport', 'Morris CADB Easement Purchase Program – SADC Appraised Values', 'description', 5, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive) 
+VALUES (41, 'Preserved Farms in Morris County', 'FarmEsmtPreservedFarmsInMorrisCounty', 'Preserved Farms in Morris County Report', 'description', 6, 1, 1);
+
 SET IDENTITY_INSERT [Core].[ReportItem] OFF
 
 

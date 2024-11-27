@@ -73,7 +73,7 @@ public class SaveEsmtOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<S
             {
                 ApplicationId = reqEsmtOwner.ApplicationId,
                 SectionId = sectionId,
-                Message = "At least One Record Should be filled in OwnerDetails Tab.",
+                Message = "At least One Record Should be filled in Owner Details Tab.",
                 IsApplicantFlow = true
             });
         }

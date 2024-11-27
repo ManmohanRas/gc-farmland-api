@@ -120,7 +120,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
                 {
                     ApplicationId = applicationId,
                     SectionId = (int)TermAppSectionEnum.OTHER_DOCUMENTS,
-                    Message = "CADB_PETITION document is not uploaded in OtherDocuments Tab"
+                    Message = "CADB_PETITION document is not uploaded in Other Documents Tab"
                 });
             }
             if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.DEED).Count() == 0)
@@ -129,7 +129,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
                 {
                     ApplicationId = applicationId,
                     SectionId = (int)TermAppSectionEnum.OTHER_DOCUMENTS,
-                    Message = "DEED document is not uploaded in OtherDocuments Tab"
+                    Message = "DEED document is not uploaded in Other Documents Tab"
                 });
             }
             if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.TAX_MAP).Count() == 0)
@@ -138,7 +138,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
                 {
                     ApplicationId = applicationId,
                     SectionId = (int)TermAppSectionEnum.OTHER_DOCUMENTS,
-                    Message = "TAX_MAP document is not uploaded in OtherDocuments Tab"
+                    Message = "TAX_MAP document is not uploaded in Other Documents Tab"
                 });
             }
             if (documents.Where(o => o.DocumentTypeId == (int)ApplicationDocumentTypeEnum.LANDOWNER_SIGNATURE).Count() == 0)
@@ -147,7 +147,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
                 {
                     ApplicationId = applicationId,
                     SectionId = (int)TermAppSectionEnum.OTHER_DOCUMENTS,
-                    Message = "LandOwner Signature document is not uploaded in OtherDocuments Tab"
+                    Message = "Landowner Signature document is not uploaded in Other Documents Tab"
                 });
             }
 

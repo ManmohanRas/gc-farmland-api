@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries;
+﻿namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlQueries;
 
 public class GetFarmEsmtAttachmentDSourceByApplicationIdSqlCommand
 {

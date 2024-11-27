@@ -182,4 +182,34 @@ public class FarmBlockLotRepository: IFarmBlockLotRepository
         return true;
     }
 
+    public async Task<bool> CheckParcelExists(string pamsPin, int farmListId, int id)
+    {
+        bool result = false;
+        using var conn = context.CreateConnection();
+        var sqlCommand = new CheckParcelExistsSqlCommand();
+        var count = await conn.ExecuteScalarAsync<int>(sqlCommand.ToString(),
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+            param: new
+            {
+                @p_PamsPin = pamsPin,
+                @p_FarmListId = farmListId
+
+            });
+
+        if (count > 0 && id == 0)
+        {
+            result = true;
+        }else if(count > 1 && id > 0)
+        {
+            result = true;
+        }else
+        {
+            result = false;
+        }
+
+        return result;
+
+    }
+
 }
