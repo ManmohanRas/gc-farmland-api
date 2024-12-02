@@ -444,5 +444,21 @@ public class FarmController : ApiBaseController
         return Single(await CommandAsync(command));
     }
 
+
+    //Emails
+    [HttpPost("getAllEmailTemplates")]
+    [ProducesResponseType(typeof(IEnumerable<GetAllEmailTemplatesQueryViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<GetAllEmailTemplatesQueryViewModel>>> GetAllEmailTemplates([FromBody] GetAllEmailTemplatesQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveEmailTemplate")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveEmailTemplate([FromBody] SaveEmailTemplateCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
 }
 
