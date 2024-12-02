@@ -21,6 +21,25 @@ VALUES (40, 'Morris CADB Easement Purchase Program – SADC Appraised Values', 'Fa
 INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive) 
 VALUES (41, 'Preserved Farms in Morris County', 'FarmEsmtPreservedFarmsInMorrisCounty', 'Preserved Farms in Morris County Report', 'description', 6, 1, 1);
 
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive) 
+VALUES (42, 'Permanently Preserved Farms with a Residence on Preserved Ground', 'FarmEsmtPermPresFarmsWithResiOnPresGround', 'Permanently Preserved Farms with a Residence on Preserved Ground', 'description', 7, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive) 
+VALUES (43, 'Permanently Preserved Farms – Town Summaries', 'FarmEsmtPermPresFarmsTownSummaries', 'Permanently Preserved Farms Town Summaries', 'description', 8, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive) 
+VALUES (44, 'Permanently Preserved Farms with Farm Name', 'FarmEsmtPermPresFarmsWithFarmName', 'Permanently Preserved Farms with Farm Name', 'description', 9, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive) 
+VALUES (45, 'RDSO’s on Preserved Farms', 'FarmEsmtRdsoPresFarmsReport', 'RDSO on Preserved Farms', 'description', 10, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (46, 'Preserved Farms – Exception Areas', 'FarmEsmtPresFarmsExceptionAreaReport', 'Preserved Farms – Exception Areas', 'description', 11, 1, 1);
+ 
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (47, 'Permanently Preserved Farms with Severable Exceptions', 'FarmPremPresFarmsWithServableExceptionsReport', 'Permanently Preserved Farms with Severable Exceptions', 'description', 12, 1, 1);
+ 
+
 SET IDENTITY_INSERT [Core].[ReportItem] OFF
 
 
