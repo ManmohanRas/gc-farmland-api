@@ -196,7 +196,7 @@ GO
 INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
 8,		'CHANGE_STATUS_FROM_IN_REVIEW_TO_REJECTED', 
 		'Change status From In_Review to Rejected',
-		'<p>Easement Purchase Program - {{FarmName}}</p>',
+		'Easement Purchase Program - {{FarmName}}',
 		'<p>Dear {{PrimaryContactName}}:</p>
 
 <p>At its {{PreviousMeetingDate}} meeting, the Morris County Agriculture Development Board (CADB) reviewed your application for the sale of development easement.</p>
