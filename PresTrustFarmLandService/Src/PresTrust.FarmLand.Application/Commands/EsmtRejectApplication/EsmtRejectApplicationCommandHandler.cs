@@ -1,6 +1,4 @@
-﻿
-
-namespace PresTrust.FarmLand.Application.Commands;
+﻿namespace PresTrust.FarmLand.Application.Commands;
 public class EsmtRejectApplicationCommandHandler :BaseHandler,IRequestHandler<EsmtRejectApplicationCommand,Unit>
 {
     private readonly IMapper mapper;
@@ -8,7 +6,8 @@ public class EsmtRejectApplicationCommandHandler :BaseHandler,IRequestHandler<Es
     private readonly IApplicationRepository repoApplication;
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
-
+    private readonly IEmailTemplateRepository repoEmailTemplate;
+    private readonly IEmailManager repoEmailManager;
 
 
     public EsmtRejectApplicationCommandHandler
@@ -16,13 +15,17 @@ public class EsmtRejectApplicationCommandHandler :BaseHandler,IRequestHandler<Es
         IPresTrustUserContext userContext, 
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationRepository repoApplication,
-         ITermBrokenRuleRepository repoBrokenRules) :base(repoApplication)
+        IEmailTemplateRepository repoEmailTemplate,
+        IEmailManager repoEmailManager,
+        ITermBrokenRuleRepository repoBrokenRules) :base(repoApplication)
     {
         this.mapper = mapper;
         this.userContext = userContext;
         this.repoApplication = repoApplication;
         this.systemParamOptions = systemParamOptions.Value;
-        this.repoBrokenRules = repoBrokenRules;     
+        this.repoBrokenRules = repoBrokenRules;
+        this.repoEmailTemplate = repoEmailTemplate;
+        this.repoEmailManager = repoEmailManager;
     }
     /// <summary>
     ///
@@ -54,6 +57,11 @@ public class EsmtRejectApplicationCommandHandler :BaseHandler,IRequestHandler<Es
                 LastUpdatedBy = application.LastUpdatedBy
             };
             await repoApplication.SaveStatusLogAsync(appStatusLog);
+            //Send Email 
+            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_IN_REVIEW_TO_REJECTED.ToString());
+            if (template != null)
+                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
+
             scope.Complete();
         }
 
