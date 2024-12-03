@@ -8,5 +8,5 @@ public interface IFarmReSaleRepository
 
     public Task<FarmReSaleEntity> SaveFarmReSaleAsync(FarmReSaleEntity farmResale);
 
-    public Task<bool> DeleteFarmReSaleById(int id);
+    public Task DeleteFarmReSaleById(FarmReSaleEntity farmResale);
 }

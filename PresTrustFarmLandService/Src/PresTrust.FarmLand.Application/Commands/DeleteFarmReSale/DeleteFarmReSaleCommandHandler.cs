@@ -17,9 +17,9 @@ public class DeleteFarmReSaleCommandHandler : IRequestHandler<DeleteFarmReSaleCo
 
     public async Task<bool> Handle(DeleteFarmReSaleCommand request, CancellationToken cancellationToken)
     {
-        await repoFarmReSale.DeleteFarmReSaleById(request.Id);
+        var FarmResaleDetails = mapper.Map<DeleteFarmReSaleCommand, FarmReSaleEntity>(request);
 
+        await repoFarmReSale.DeleteFarmReSaleById(FarmResaleDetails);
         return true;
-
     }
 }

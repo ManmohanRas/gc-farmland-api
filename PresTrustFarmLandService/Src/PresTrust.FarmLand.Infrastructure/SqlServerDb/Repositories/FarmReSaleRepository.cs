@@ -66,7 +66,10 @@ public class FarmReSaleRepository : IFarmReSaleRepository
                     @p_CurrentDeedBook = farmResale.CurrentDeedBook,
                     @p_CurrentDeedPage = farmResale.CurrentDeedPage,
                     @p_CurrentDeedFiled = farmResale.CurrentDeedFiled,
-                    @p_InterestedinSelling = farmResale.InterestedinSelling
+                    @p_InterestedinSelling = farmResale.InterestedinSelling,
+                    @p_LastUpdatedBy = farmResale.LastUpdatedBy,
+                    @p_LastUpdatedOn = DateTime.Now
+
                 });
 
             farmResale.Id = id;
@@ -92,7 +95,9 @@ public class FarmReSaleRepository : IFarmReSaleRepository
                     @p_CurrentDeedBook = farmResale.CurrentDeedBook,
                     @p_CurrentDeedPage = farmResale.CurrentDeedPage,
                     @p_CurrentDeedFiled = farmResale.CurrentDeedFiled,
-                    @p_InterestedinSelling = farmResale.InterestedinSelling
+                    @p_InterestedinSelling = farmResale.InterestedinSelling,
+                    @p_LastUpdatedBy = farmResale.LastUpdatedBy,
+                    @p_LastUpdatedOn = DateTime.Now
                 });
 
             return farmResale;
@@ -100,16 +105,18 @@ public class FarmReSaleRepository : IFarmReSaleRepository
 
     //Delete Re-Sale Data By ID
 
-    public async Task<bool> DeleteFarmReSaleById(int id)
+    public async Task DeleteFarmReSaleById(FarmReSaleEntity farmResale)
     {
         using var conn = context.CreateConnection();
         var sqlCommand = new DeleteFarmReSaleSqlCommand();
         await conn.ExecuteAsync(sqlCommand.ToString(),
-                    commandType: CommandType.Text,
-                    commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
-                    param: new { @p_Id = id });
+            commandType: CommandType.Text,
+            commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
+            param: new
+            {
+                @p_Id = farmResale.Id,
+            });
 
-        return true;
     }
 }
 
