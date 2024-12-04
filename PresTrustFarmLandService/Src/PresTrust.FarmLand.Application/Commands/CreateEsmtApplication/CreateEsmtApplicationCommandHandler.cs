@@ -13,6 +13,8 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationCommentRepository repoComment;
     private readonly IApplicationFeedbackRepository repoFeedback;
+    private readonly IEmailTemplateRepository repoEmailTemplate;
+    private readonly IEmailManager repoEmailManager;
     private readonly ITermBrokenRuleRepository repoBrokenRule;
 
 
@@ -24,6 +26,8 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IApplicationCommentRepository repoComment,
         IApplicationFeedbackRepository repoFeedback,
+        IEmailTemplateRepository repoEmailTemplate,
+        IEmailManager repoEmailManager,
         ITermBrokenRuleRepository  repoBrokenRule
         ) : base(repoApplication: repoApplication)
     {
@@ -32,6 +36,8 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
         this.userContext = userContext;
         this.systemParamOptions = systemParamOptions.Value;
         this.repoComment = repoComment;
+        this.repoEmailTemplate = repoEmailTemplate;
+        this.repoEmailManager = repoEmailManager;
         this.repoFeedback = repoFeedback;
         this.repoBrokenRule = repoBrokenRule;
     }
@@ -40,7 +46,7 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
         var reqApplication = mapper.Map<CreateEsmtApplicationCommand, FarmApplicationEntity>(request);
         
         
-            reqApplication.Status = EsmtAppStatusEnum.DRAFT_APPLICATION;
+        reqApplication.Status = EsmtAppStatusEnum.DRAFT_APPLICATION;
         
         reqApplication.CreatedByProgramUser = userContext.Role == UserRoleEnum.PROGRAM_ADMIN;
         reqApplication.LastUpdatedBy = userContext.Email;
@@ -49,6 +55,7 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             await repoApplication.SaveAsync(reqApplication);
+
             FarmApplicationStatusLogEntity appStatusLog = new()
             {
                 ApplicationId = reqApplication.Id,
@@ -63,6 +70,11 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
             await repoBrokenRule.SaveBrokenRules(brokenRule);
 
             await repoApplication.SaveStatusLogAsync(appStatusLog);
+
+            // Send Email
+            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_CREATE_TO_DRAFT_APPLICATION.ToString());
+            if (template != null)
+                await repoEmailManager.SendMail(subject: template.Subject, applicationId: reqApplication.Id, applicationName: reqApplication.Title, htmlBody: template.Description, agencyId: reqApplication.AgencyId);
 
             scope.Complete();
         }

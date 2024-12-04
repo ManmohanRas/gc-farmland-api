@@ -21,7 +21,7 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 <p> Municipal Tax Assessor</p>
 <p> Morris County Soil Conservation District</p>
  <br>
-Sincerely,</p>
+<p>Sincerely,</p>
 <p>{{ProgramAdmin}}<br>
 
 <p>Director</p>
@@ -51,7 +51,7 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 		<p>Copy of owner of last record search.</p>
 		<p>If you have any questions or require additional information, please contact me.</p>
 		<br>
-		Sincerely,</p>
+		<p>Sincerely,</p>
 		<p>{{ProgramAdmin}}<br>
 
 		<p>Director</p>
@@ -78,7 +78,7 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 		<p>I will then present the document for signature to the Morris County Agriculture Development Board (CADB) and to the State Agriculture Development Committee (SADC) for certification. Lastly, the County will record the document in the Hall of Records.</p>
 		<p>If you have any questions or require additional information, please contact me.</p>
 		<br>
-		Sincerely,</p>
+		<p>Sincerely,</p>
 		<p>{{ProgramAdmin}}<br>
 
 		<p>Director</p>
@@ -105,7 +105,7 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 		<p>Approval of the Petition by the CADB and creation of the farmland preservation program will be signified by an agreement between you and the CADB to retain the land in agricultural production for a minimum period of eight years.</p>
 		<p>If you have any questions or require additional information, please contact me.</p>
 		<br>
-		Sincerely,</p>
+		<p>Sincerely,</p>
 		<p>{{ProgramAdmin}}<br>
 
 		<p>Director</p>
@@ -120,3 +120,125 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 
 4);
 GO
+
+
+--Easement 
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+5,		'CHANGE_STATUS_FROM_CREATE_TO_DRAFT_APPLICATION', 
+		'Change status From Create to Draft Application', 
+
+		'<p>Farm Land Preservation Program.</p>', 
+
+		'<p>Dear {{PrimaryContactName}},</p>
+		 <p>Thank you for your interest in the Morris County Farmland Preservation Program. Please complete and submit the application. I am happy to provide help with completing the application by phone, e-mail or in person. </p>
+		 <p>I look forward to working with you and welcome any questions you may have.</p>
+		 <br>
+		  <p>Best regards,</p>
+	     <p>{{ProgramAdmin}}<br>
+
+		 <p>Director</p>
+		 Morris County Agriculture Development Board<br>
+		 Morris County Office of Planning & Preservation<br>
+		 P.O. Box 900<br>
+		 Morristown, NJ 07963-0900<br>
+		 Phone: (973) 829-8120
+		 Fax: (973) 326-9025<br>
+		 E-Mail: kcoyle@co.morris.nj.us<br>
+		 Website: https://www.morriscountynj.gov/agriculture </p>', 
+1);
+GO
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+6,		'CHANGE_STATUS_FROM_DRAFT_APPLICATION_TO_APPLICATION_SUBMITTED', 
+		'Change status From Draft Application to Application Submitted',
+		'<p>Farm Land Preservation Program.</p>',
+		'<p>Dear {{PrimaryContactName}},</p>
+		 <p>Thank you for submitting your application. we will review the application and, if any additional information is needed, we will contact you. </p>
+		 <p>I look forward to working with you and welcome any questions you may have.</p>
+		 <br>
+		  <p>Best regards,</p>
+	     <p>{{ProgramAdmin}}<br>
+		 <p>Director</p>
+		 Morris County Agriculture Development Board<br>
+		 Morris County Office of Planning & Preservation<br>
+		 P.O. Box 900<br>
+		 Morristown, NJ 07963-0900<br>
+		 Phone: (973) 829-8120
+		 Fax: (973) 326-9025<br>
+		 E-Mail: kcoyle@co.morris.nj.us<br>
+		 Website: https://www.morriscountynj.gov/agriculture </p>', 
+1);
+GO
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+7,		'CHANGE_STATUS_FROM_IN_REVIEW_TO_PENDING', 
+		'Change status From In_Review to Pending',
+		'<p>Easement Purchase Program - {{FarmName}}</p>',
+		'<p>Congratulations, {{PrimaryContactName}}!</p>
+		<p>At its {{PreviousMeetingDate}} meeting, the Morris County Agriculture Development Board (CADB) granted preliminary approval of your application to sell a development easement. A copy of the resolution is enclosed.</p>
+		<p>Also enclosed you will find &ldquo;Notice to Proceed&rdquo; and &ldquo;Notice of Withdrawal&rdquo; forms. Please complete the appropriate form and return it to the Morris CADB before (insert due date).</p>
+		<p>If you wish to continue with the preservation process, please also include your $1,000 application fee (see enclosed Morris CADB Policy P-3). A check for the application fee should be made out to &ldquo;Treasurer of Morris County.&rdquo; The application fee will be refunded upon successful sale of the development easement, or if the Morris CADB decides against purchase of the development easement. The $1,000 application fee will be forfeited if you decide to withdraw at any point prior to the closing of the development easement purchase.</p>
+         <p>The Morris CADB looks forward to working with you to see your farm permanently preserved. If you have any questions, please contact Ms. Katherine Coyle at (973) 829-8120 or via e-mail at kcoyle@co.morris.nj.us.</p>
+		  <p>Sincerely</p>
+	     <p>{{ProgramAdmin}}<br>
+		 <p>Director</p>
+		 Morris County Agriculture Development Board<br>
+		 Morris County Office of Planning & Preservation<br>
+		 P.O. Box 900<br>
+		 Morristown, NJ 07963-0900<br>
+		 Phone: (973) 829-8120
+		 Fax: (973) 326-9025<br>
+		 E-Mail: kcoyle@co.morris.nj.us<br>
+		 Website: https://www.morriscountynj.gov/agriculture </p>', 
+1);
+GO
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+8,		'CHANGE_STATUS_FROM_IN_REVIEW_TO_REJECTED', 
+		'Change status From In_Review to Rejected',
+		'Easement Purchase Program - {{FarmName}}',
+		'<p>Dear {{PrimaryContactName}}:</p>
+
+<p>At its {{PreviousMeetingDate}} meeting, the Morris County Agriculture Development Board (CADB) reviewed your application for the sale of development easement.</p>
+
+<p> Although the merit of your application is worthwhile, I must regretfully inform you that your application was not selected. Applications are selected for a combination of reasons including: significance and financial viability of the agricultural operation, soils, amount of tillable acreage, stewardship of the land, asking price, total acquisition cost, the likelihood the property would be sold in the near future for development, the location to other preserved lands, as well as the location within Morris County.</p>
+
+<p> The board thanks you for your continued interest in supporting preservation of farmland in our county. If you have any questions, please do not hesitate to contact Ms. Katherine Coyle at (973) 829-8120 or via e-mail at kcoyle@co.morris.nj.us.</p>
+		 <br>
+		  <p>Best regards,</p>
+	     <p>{{ProgramAdmin}}<br>
+
+		 <p>Director</p>
+		 Morris County Agriculture Development Board<br>
+		 Morris County Office of Planning & Preservation<br>
+		 P.O. Box 900<br>
+		 Morristown, NJ 07963-0900<br>
+		 Phone: (973) 829-8120
+		 Fax: (973) 326-9025<br>
+		 E-Mail: kcoyle@co.morris.nj.us<br>
+		 Website: https://www.morriscountynj.gov/agriculture </p>', 
+1);
+GO
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+9,		'CHANGE_STATUS_PENDING_TO_ACTIVE', 
+		'Change status Pending to Active',
+		 '<p>Easement Purchase Program - {{FarmName}}</p>',
+		 '<p>Dear {{PrimaryContactName}},</p>
+		 <p>The Morris CADB has reviewed the appraisals of your farm and agreed on an offer amount. An offer letter will be sent to you via regular mail.</p>
+		 <p>I look forward to working with you and welcome any questions you may have.</p>
+		 <br>
+		  <p>Best regards,</p>
+	     <p>{{ProgramAdmin}}<br>
+		 <p>Director</p>
+		 Morris County Agriculture Development Board<br>
+		 Morris County Office of Planning & Preservation<br>
+		 P.O. Box 900<br>
+		 Morristown, NJ 07963-0900<br>
+		 Phone: (973) 829-8120
+		 Fax: (973) 326-9025<br>
+		 E-Mail: kcoyle@co.morris.nj.us<br>
+		 Website: https://www.morriscountynj.gov/agriculture </p>', 
+1);
+GO
+

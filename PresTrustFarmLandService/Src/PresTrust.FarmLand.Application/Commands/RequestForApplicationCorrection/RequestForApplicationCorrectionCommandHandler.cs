@@ -7,7 +7,8 @@ public class RequestForApplicationCorrectionCommandHandler : BaseHandler, IReque
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
     private readonly IApplicationFeedbackRepository repoFeedback;
-   // private readonly IEmailManager repoEmailManager;
+    private readonly IEmailManager repoEmailManager;
+    private readonly IEmailTemplateRepository repoEmailTemplate;
 
     /// <summary>
     /// 
@@ -24,7 +25,9 @@ public class RequestForApplicationCorrectionCommandHandler : BaseHandler, IReque
          IPresTrustUserContext userContext,
          IOptions<SystemParameterConfiguration> systemParamOptions,
          IApplicationRepository repoApplication,
-         IApplicationFeedbackRepository repoFeedback
+         IApplicationFeedbackRepository repoFeedback,
+         IEmailManager repoEmailManager,
+        IEmailTemplateRepository repoEmailTemplate
      ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
@@ -32,6 +35,8 @@ public class RequestForApplicationCorrectionCommandHandler : BaseHandler, IReque
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;
         this.repoFeedback = repoFeedback;
+        this.repoEmailManager = repoEmailManager;
+        this.repoEmailTemplate = repoEmailTemplate;
     }
     /// <summary>
     /// 
@@ -49,6 +54,13 @@ public class RequestForApplicationCorrectionCommandHandler : BaseHandler, IReque
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             await repoFeedback.RequestForApplicationCorrectionAsync(application.Id);
+
+            // Send Email
+            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.FEEDBACK_RECEIVED_EMAIL.ToString());
+            if (template != null)
+                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
+
+
             scope.Complete();
         };
 

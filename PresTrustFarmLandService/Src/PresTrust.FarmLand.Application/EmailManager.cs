@@ -105,6 +105,8 @@ public class EmailManager : IEmailManager
         htmlBody = htmlBody.Replace("{{FarmName}}", applicationName ?? "");
         htmlBody = htmlBody.Replace("{{SADCContact}}", contactName  ?? "");
         htmlBody = htmlBody.Replace("{{NextMeetingDate}}", fifthNextMonth.ToString("dddd, MMMM dd, yyyy"));
+        //htmlBody = htmlBody.Replace("{{PreviousMeetingDate}}", DateTime.Now.ToString("dddd, MMMM dd, yyyy"));
+
         if (owner!=null)
         {
             htmlBody = htmlBody.Replace("{{OwnerFirst}}", owner.FirstName ?? "");
@@ -140,12 +142,10 @@ public class EmailManager : IEmailManager
             subject = subject.Replace("{{Municipality}}",  "");
         }
        
-
-
-       
         subject = subject.Replace("{{FarmName}}", applicationName ?? "");
-      
-      //oEmails = systemParamOptions.IsDevelopment == false ? string.Join(",", primaryContact.Item2) : systemParamOptions.TestEmailIds;
+
+        //toEmails = systemParamOptions.IsDevelopment == false ? string.Join(",", primaryContact.Item2) : systemParamOptions.TestEmailIds;
+        //toEmails = string.Join(",", primaryContact.Item2);
         toEmails = systemParamOptions.TestEmailIds;
 
         var senderName = systemParamOptions.IsDevelopment == false ? userContext.Name : systemParamOptions.TestEmailFromUserName;
