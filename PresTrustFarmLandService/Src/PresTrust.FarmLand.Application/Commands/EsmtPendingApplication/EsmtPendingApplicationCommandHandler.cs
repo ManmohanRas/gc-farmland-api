@@ -6,19 +6,25 @@ public class EsmtPendingApplicationCommandHandler : BaseHandler, IRequestHandler
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
+    private readonly IEmailTemplateRepository repoEmailTemplate;
+    private readonly IEmailManager repoEmailManager;
 
     public EsmtPendingApplicationCommandHandler
    (
      IMapper mapper,
      IPresTrustUserContext userContext,
      IOptions<SystemParameterConfiguration> systemParamOptions,
-     IApplicationRepository repoApplication
+     IApplicationRepository repoApplication,
+     IEmailTemplateRepository repoEmailTemplate,
+     IEmailManager repoEmailManager
    ) : base(repoApplication)
     {
         this.mapper = mapper;
         this.userContext = userContext;
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;
+        this.repoEmailTemplate = repoEmailTemplate;
+        this.repoEmailManager = repoEmailManager;
     }
 
     /// <summary>
@@ -54,6 +60,10 @@ public class EsmtPendingApplicationCommandHandler : BaseHandler, IRequestHandler
                 LastUpdatedBy = application.LastUpdatedBy
             };
             await repoApplication.SaveStatusLogAsync(appStatusLog);
+
+            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_IN_REVIEW_TO_PENDING.ToString());
+            if (template != null)
+                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
 
             scope.Complete();
             result.IsSuccess = true;
