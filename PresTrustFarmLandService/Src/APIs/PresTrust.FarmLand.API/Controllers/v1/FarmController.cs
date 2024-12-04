@@ -445,6 +445,27 @@ public class FarmController : ApiBaseController
     }
 
 
+    [HttpPost("getFarmReSale")]
+    [ProducesResponseType(typeof(IEnumerable<GetFarmReSaleQueryViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<GetFarmReSaleQueryViewModel>>> GetFarmReSale([FromBody] GetFarmReSaleQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveFarmReSale")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveFarmReSale([FromBody] SaveFarmReSaleCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+    [HttpPost("deleteFarmReSale")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<bool>> DeleteFarmReSale([FromBody] DeleteFarmReSaleCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
     //Emails
     [HttpPost("getAllEmailTemplates")]
     [ProducesResponseType(typeof(IEnumerable<GetAllEmailTemplatesQueryViewModel>), (int)HttpStatusCode.OK)]
@@ -452,6 +473,8 @@ public class FarmController : ApiBaseController
     {
         return Single(await QueryAsync(query));
     }
+
+   
 
     [HttpPost("saveEmailTemplate")]
     [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
