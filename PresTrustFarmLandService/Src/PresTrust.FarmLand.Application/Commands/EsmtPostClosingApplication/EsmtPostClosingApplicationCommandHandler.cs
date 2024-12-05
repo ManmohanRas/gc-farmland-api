@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.Application.Commands;
+﻿using PresTrust.FarmLand.Application.Queries;
+
+namespace PresTrust.FarmLand.Application.Commands;
 
 public class EsmtPostClosingApplicationCommandHandler : BaseHandler, IRequestHandler<EsmtPostClosingApplicationCommand, EsmtPostClosingApplicationCommandViewModel>
 {
@@ -7,6 +9,10 @@ public class EsmtPostClosingApplicationCommandHandler : BaseHandler, IRequestHan
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
+    private readonly IEmailTemplateRepository repoEmailTemplate;
+    private readonly IEmailManager repoEmailManager;
+    private readonly IOwnerDetailsRepository repoOwner;
+    private readonly IApplicationLocationRepository repoLocation;
 
 
     public EsmtPostClosingApplicationCommandHandler
@@ -15,7 +21,11 @@ public class EsmtPostClosingApplicationCommandHandler : BaseHandler, IRequestHan
     IPresTrustUserContext userContext,
     IOptions<SystemParameterConfiguration> systemParamOptions,
     IApplicationRepository repoApplication,
-    ITermBrokenRuleRepository repoBrokenRules
+    ITermBrokenRuleRepository repoBrokenRules,
+    IEmailTemplateRepository repoEmailTemplate,
+    IEmailManager repoEmailManager,
+    IOwnerDetailsRepository repoOwner,
+    IApplicationLocationRepository repoLocation
   ) : base(repoApplication)
     {
         this.mapper = mapper;
@@ -23,14 +33,25 @@ public class EsmtPostClosingApplicationCommandHandler : BaseHandler, IRequestHan
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;
         this.repoBrokenRules = repoBrokenRules;
+        this.repoEmailManager = repoEmailManager;
+        this.repoEmailTemplate = repoEmailTemplate;
+        this.repoOwner = repoOwner;
+        this.repoLocation = repoLocation;
     }
 
     public async Task<EsmtPostClosingApplicationCommandViewModel> Handle(EsmtPostClosingApplicationCommand request, CancellationToken cancellationToken)
     {
         EsmtPostClosingApplicationCommandViewModel result = new();
+        IEnumerable<OwnerDetailsEntity> ownerDetails;
+        FarmBlockLotEntity blockLot = new FarmBlockLotEntity();
 
         // check if application exists
         var application = await GetIfApplicationExists(request.ApplicationId);
+
+        ownerDetails = await repoOwner.GetOwnerDetailsAsync(request.ApplicationId);
+
+        var locationDetails = await repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId);
+        blockLot = locationDetails.Where(x => x.IsChecked).FirstOrDefault();
 
         //update application
         if (application != null)
@@ -44,10 +65,6 @@ public class EsmtPostClosingApplicationCommandHandler : BaseHandler, IRequestHan
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-            // returns broken rules  
-           // var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
-            // save broken rules
-           // await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
 
             await repoApplication.UpdateApplicationStatusAsync(application, EsmtAppStatusEnum.POST_CLOSING);
             FarmApplicationStatusLogEntity appStatusLog = new()
@@ -59,6 +76,10 @@ public class EsmtPostClosingApplicationCommandHandler : BaseHandler, IRequestHan
                 LastUpdatedBy = application.LastUpdatedBy
             };
             await repoApplication.SaveStatusLogAsync(appStatusLog);
+
+            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_CLOSING_TO_POST_CLOSING.ToString());
+            if (template != null)
+                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, owner: ownerDetails.FirstOrDefault(), blockLot: blockLot);
 
             scope.Complete();
             result.IsSuccess = true;
