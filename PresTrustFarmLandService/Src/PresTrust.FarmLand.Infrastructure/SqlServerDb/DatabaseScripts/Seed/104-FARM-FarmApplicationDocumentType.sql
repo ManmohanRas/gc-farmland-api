@@ -51,7 +51,7 @@ GO
 INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (16, 'COUNTY_APPLICATION', 'County Application', 210 , 2);
 GO
 
-INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (17, 'ESMT_DEED', 'Esmt Deed', 219 , 2);
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (17, 'ESMT_DEED', 'Esmt Deed', 210 , 2);
 GO
 
 INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (18, 'TAX_MAP', 'Tax Map', 210 , 2);
@@ -159,8 +159,11 @@ INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [
 GO
 
 
+--05/12/2024
 --UPDATE [Farm].[FarmApplicationDocumentType] 
 --SET SectionId = 218 WHERE Id IN (32, 34, 35, 36, 37)
 
 --UPDATE [Farm].[FarmApplicationDocumentType] 
---SET SectionId = 219 WHERE Id IN (17, 41, 42)
+--SET SectionId = 219 WHERE Id IN (40, 41, 42)
+
+--Update [Farm].[FarmApplicationDocumentType] SET TITLE ='DEED_WITH_EXCEPTIONS_SADC' Where Id = 34
