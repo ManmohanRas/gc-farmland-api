@@ -96,22 +96,22 @@ GO
 INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (31, 'FINAL_CADB_APPROVAL', 'Final CADB Approval', 210 , 2);
 GO
 
-INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (32, 'PRELIMINARY_APPROVAL', 'Preliminary Approval Document', 210 , 2);
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (32, 'PRELIMINARY_APPROVAL', 'Preliminary Approval Document', 218 , 2);
 GO
 
 INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (33, 'ORDER_CHECKLIST', 'Order Checklist SADC Only', 210 , 2);
 GO
 
-INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (34, 'DEED_WITH_EXCEPTIONS_SADC', 'Deed With Exception SADC', 210 , 2);
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (34, 'DEED_WITH_EXCEPTIONS_SADC', 'Deed With Exception SADC', 218 , 2);
 GO
 
-INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (35, 'DEED_WITHOUT_EXCEPTION_SADC', 'Deed Without Exception SADC', 210 , 2);
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (35, 'DEED_WITHOUT_EXCEPTION_SADC', 'Deed Without Exception SADC', 218 , 2);
 GO
 
-INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (36, 'FINAL_APPROVAL_WITH_SADC', 'Final Approval With SADC', 210 , 2);
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (36, 'FINAL_APPROVAL_WITH_SADC', 'Final Approval With SADC', 218 , 2);
 GO
 
-INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (37, 'ESMT_OTHER_DOCUMENTS', 'Esmt Other Documents', 210 , 2);
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (37, 'ESMT_OTHER_DOCUMENTS', 'Esmt Other Documents', 218 , 2);
 GO
 
 INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (38, 'DEED_SIGNED_BY_ALL_PARTIES', 'Deed Signed By All Parties', 210 , 2);
@@ -123,10 +123,10 @@ GO
 INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (40, 'ESMT_DEED_PRESERVED', 'Preserved Deed', 210 , 2);
 GO
 
-INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (41, 'ESMT_TITLE_POLICY', 'Title Policy', 210 , 2);
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (41, 'ESMT_TITLE_POLICY', 'Title Policy', 219 , 2);
 GO
 
-INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (42, 'ESMT_PRESERVED_SURVEY', 'Preserved Survey', 210 , 2);
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (42, 'ESMT_PRESERVED_SURVEY', 'Preserved Survey', 219 , 2);
 GO 
 
 INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (43, 'ESMT_LANDOWNER_SIGNATURE', 'Easement LandOwner Signature', 210 , 2);
@@ -157,3 +157,13 @@ GO
 
 INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (51, 'CLOSING_SERVVEY', 'Closing Survey', 212 , 2);
 GO
+
+
+--05/12/2024
+--UPDATE [Farm].[FarmApplicationDocumentType] 
+--SET SectionId = 218 WHERE Id IN (32, 34, 35, 36, 37)
+
+--UPDATE [Farm].[FarmApplicationDocumentType] 
+--SET SectionId = 219 WHERE Id IN (40, 41, 42)
+
+--Update [Farm].[FarmApplicationDocumentType] SET TITLE ='DEED_WITH_EXCEPTIONS_SADC' Where Id = 34

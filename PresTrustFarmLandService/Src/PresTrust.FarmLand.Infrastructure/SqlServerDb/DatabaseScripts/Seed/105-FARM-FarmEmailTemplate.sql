@@ -312,3 +312,25 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 1);
 GO
 
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+12,		'FEEDBACK_RECEIVED_EMAIL', 
+		'Feedback Received Email',
+		'<p> Feedback Received</p>',
+		 '<p>Dear {{PrimaryContactName}},</p>
+		 <p>You have received the feedback for the {{ApplicationName}} application from the Morris County.</p>
+		 <p>Kindly login to Morris County Preservation Trust and select the application to view feedback.</p>
+		 <br>
+		  Sincerely,</p>
+	     <p>{{ProgramAdmin}}<br>
+
+		 <p>Director</p>
+		 Morris County Agriculture Development Board<br>
+		 Morris County Office of Planning & Preservation<br>
+		 P.O. Box 900<br>
+		 Morristown, NJ 07963-0900<br>
+		 Phone: (973) 829-8120
+		 Fax: (973) 326-9025<br>
+		 E-Mail: kcoyle@co.morris.nj.us<br>
+		 Website: https://www.morriscountynj.gov/Departments/County-Agriculture-Development-Board </p>', 
+1);
+GO
