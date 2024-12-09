@@ -191,6 +191,9 @@ public class ApplicationDocumentTreeBuilder
             case EsmtAppSectionEnum.ADMIN_CLOSING_DOCS:
                 title = "Admin Closing Docs";
                 break;
+            case EsmtAppSectionEnum.ADMIN_SADC:
+                title = "Admin SADC";
+                break;
 
         }
         return title;

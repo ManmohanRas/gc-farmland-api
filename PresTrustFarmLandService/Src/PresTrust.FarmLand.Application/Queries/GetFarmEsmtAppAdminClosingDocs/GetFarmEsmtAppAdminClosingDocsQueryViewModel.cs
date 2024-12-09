@@ -15,6 +15,7 @@
         public string surveyor { get; set; }
         public string titleCompany { get; set; }
         public string titlePolicy { get; set; }
+        public List<DocumentTypeViewModel> DocumentsTree { get; set; } = new List<DocumentTypeViewModel>();
         public DateTime? closingDate { get; set; }
         public string endorsementDates { get; set; }
     }
