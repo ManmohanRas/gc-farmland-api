@@ -129,7 +129,7 @@
     /// <summary>
     /// 
     /// </summary>
-    COUNTY_COMMISSIONER_RESOLUTION_APPROVING_CONTRACT= 26,
+    COUNTY_COMMISSIONER_RESOLUTION  = 26,
     /// <summary>
     /// 
     /// </summary>
