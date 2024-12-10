@@ -208,6 +208,14 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
             IsApplicantFlow = true
         });
 
+        brokenRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.ROLES,
+
+            Message = "Primary Contact must be assigned to the application.",
+            IsApplicantFlow = true
+        });
         return brokenRules;
     }
 }
