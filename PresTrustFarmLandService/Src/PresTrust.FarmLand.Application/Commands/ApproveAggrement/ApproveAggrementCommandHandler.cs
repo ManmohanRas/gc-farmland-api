@@ -79,20 +79,4 @@ public class ApproveAggrementCommandHandler : BaseHandler, IRequestHandler<Appro
         return result;
     }
 
-    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
-    {
-        List<FarmBrokenRuleEntity> statusChangeRules = new List<FarmBrokenRuleEntity>();
-
-        // add default broken rule while initiating application flow
-        statusChangeRules.Add(new FarmBrokenRuleEntity()
-        {
-            ApplicationId = application.Id,
-            SectionId = (int)TermAppSectionEnum.NONE,
-            Message = "SADC toggle should be enabled filled.",
-
-        });
-
-
-        return statusChangeRules;
-    }
 }
