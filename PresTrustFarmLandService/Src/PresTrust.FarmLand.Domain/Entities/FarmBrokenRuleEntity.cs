@@ -106,7 +106,10 @@ public class FarmBrokenRuleEntity
                     case TermAppSectionEnum.ADMIN_CONTACTS:
                         val = TermApplicationRouterLinks.ADMIN_CONTACTS_EDIT;
                         break;
-                    default:
+                    case TermAppStatusEnum.ENABLE_SADC:
+                        val = TermApplicationRouterLinks.LOCATION_EDIT;
+                        break;
+                    default: 
                         break;
                 }
             }

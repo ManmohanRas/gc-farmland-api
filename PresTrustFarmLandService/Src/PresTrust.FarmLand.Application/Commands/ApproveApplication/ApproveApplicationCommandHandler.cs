@@ -122,6 +122,18 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
             Message = "All required fields on ADMIN_DEED_DETAILS tab have not been filled.",
         });
 
+        if (application.IsSADC == false) {
+            statusChangeRules.Add(new FarmBrokenRuleEntity()
+            {
+
+                ApplicationId = application.Id,
+                SectionId = (int)TermAppSectionEnum.NONE,
+                Message = "SADC toggle should be enabled.",
+                IsApplicantFlow = true
+            });
+        }
+
+       
         return statusChangeRules;
     }
 
