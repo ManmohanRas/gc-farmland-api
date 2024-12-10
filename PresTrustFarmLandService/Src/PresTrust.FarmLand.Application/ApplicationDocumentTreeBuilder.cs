@@ -1,5 +1,6 @@
 ﻿
 using PresTrust.FarmLand.Domain.CommonViewModels;
+using PresTrust.FarmLand.Domain.Enums;
 
 namespace PresTrust.FarmLand.Application;
 
@@ -91,7 +92,7 @@ public class ApplicationDocumentTreeBuilder
         var mapper = _autoMapperConfig.CreateMapper();
         documentChecklistItems = documents.OrderBy(s => s.SectionId).GroupBy(s => s.Section).Select(s => new DocumentChecklistViewModel()
         {
-            Section = SetTermSectionTitle(s.Key),
+            Section = SetTermSectionTitle((TermAppSectionEnum)s.Key),
             DocumentChecklistDocTypeItems = s.GroupBy(d => d.DocumentType).Select(d =>
             {
                 var item = d.FirstOrDefault();
@@ -152,11 +153,12 @@ public class ApplicationDocumentTreeBuilder
             case TermAppSectionEnum.LOCATION:
                 title = "Location";
                 break;
-            case TermAppSectionEnum.ROLES:
-                title = "Roles";
-                break;
+           
             case TermAppSectionEnum.OWNER_DETAILS:
                 title = "Owner Details";
+                break;
+            case TermAppSectionEnum.ROLES:
+                title = "Roles";
                 break;
             case TermAppSectionEnum.SITE_CHARACTERISTICS:
                 title = "Site Characteristics";
@@ -190,6 +192,9 @@ public class ApplicationDocumentTreeBuilder
                 break;
             case EsmtAppSectionEnum.ADMIN_CLOSING_DOCS:
                 title = "Admin Closing Docs";
+                break;
+            case EsmtAppSectionEnum.ADMIN_SADC:
+                title = "Admin SADC";
                 break;
 
         }

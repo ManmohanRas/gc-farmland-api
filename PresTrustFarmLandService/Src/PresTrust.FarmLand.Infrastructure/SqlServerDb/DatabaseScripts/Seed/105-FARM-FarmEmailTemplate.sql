@@ -242,3 +242,95 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 1);
 GO
 
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+10,		'CHANGE_STATUS_FROM_CLOSING_TO_POST_CLOSING', 
+		'Change status From Closing to Post Closing',
+		'<p>Easement Purchase Program - {{FarmName}}</p>',
+
+		'<p>Date: {{TodaysDate}}</p>
+		 <p>Enclosed are copies of the following closing documents for the {{ProjectName}}:</p>
+		 <p>Recorded Deed of Easement</P>
+		 <p>Affidavit of Title</P>
+		 <p>Title Closing Statement</P>
+		 <p>Title Insurance Policy</P>
+
+		 <p>If you have any questions, please contact me.</p>
+		 <p>Re: Post Closing Documents: {{OwnerLast}}, {{OwnerFirst}} </p>
+		 <p>SADC # {{SADCNumber}} </p>
+		 <p>{{Block}}, {{Lot}} </p>
+		 <p>{{Municipality}} </p>
+		 <p>County PIG Easement Purchase </p>
+
+		 <p> Date: {{TodaysDate}}</p>
+
+		 <p>Enclosed are copies of the following closing documents for the Williams Farm:</p>
+
+		 <p>Recorded Deed of Easement</P>
+		 <p>Affidavit of Title</P>
+		 <p>Title Closing Statement</P>
+		 <p>Title Insurance Policy</P>
+
+		 <p>If you have any questions, please contact me. </p>
+		 <p>{{ProgramAdmin}} </p>
+	
+		 <p>Director</p>
+		 Morris County Agriculture Development Board<br>
+		 Morris County Office of Planning & Preservation<br>
+		 P.O. Box 900<br>
+		 Morristown, NJ 07963-0900<br>
+		 Phone: (973) 829-8120
+		 Fax: (973) 326-9025<br>
+		 E-Mail: kcoyle@co.morris.nj.us<br>
+		 Website: https://www.morriscountynj.gov/agriculture </p>', 
+1);
+GO
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+11,		'CHANGE_STATUS_FROM_IN_POST_CLOSING_TO_PRESERVED', 
+		'Change status From Post_Closing to Preserved', 
+		'<p>Easement Purchase Program - {{FarmName}}</p>',
+		'<p>Re: Morris County Agriculture Development Board</p>
+
+		 <p>NOTICE OF PURCHASE OF DEVELOPMENT EASEMENT</p>
+
+		 <p>Please take notice that the following property has been permanently preserved with funding from the Morris County Open Space, 
+		   Recreation, Farmland and Historic Preservation Trust through the Morris County Agriculture Development Board:</p>
+		
+		<p>Landowner: {{OwnerFirst}} {{OwnerLast}} </p>
+		<p> Municipality: {{Municipality}}</p>
+		<p>Block/Lot: {{Block}}/{{Lot}} </p>
+		<p>Acres Preserved: {{Acres}} </p>
+
+		<p> The Deed has been filed at the Morris County Hall of Records in Deed Book {{DeedBook}} at Page {{DeedPage}}. A copy is enclosed. If you have any questions regarding this matter please contact me at (973) 829 8120 or at kcoyle@co.morris.nj.us. </p>
+
+		<p>Per N.J.A.C. 2:76-6.13(d)2, the Notice of Development Easement Purchase is also being forwarded to: </p>
+		<p>Morris County Planning Board </p>
+		<p>Municipal Governing Body </p>
+		<p>Municipal Tax Assessor </p>
+		<p>Municipal Planning Board </p>
+		<p>Morris County Soil Conservation District </p>', 
+1);
+GO
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+12,		'FEEDBACK_RECEIVED_EMAIL', 
+		'Feedback Received Email',
+		'<p> Feedback Received</p>',
+		 '<p>Dear {{PrimaryContactName}},</p>
+		 <p>You have received the feedback for the {{ApplicationName}} application from the Morris County.</p>
+		 <p>Kindly login to Morris County Preservation Trust and select the application to view feedback.</p>
+		 <br>
+		  Sincerely,</p>
+	     <p>{{ProgramAdmin}}<br>
+
+		 <p>Director</p>
+		 Morris County Agriculture Development Board<br>
+		 Morris County Office of Planning & Preservation<br>
+		 P.O. Box 900<br>
+		 Morristown, NJ 07963-0900<br>
+		 Phone: (973) 829-8120
+		 Fax: (973) 326-9025<br>
+		 E-Mail: kcoyle@co.morris.nj.us<br>
+		 Website: https://www.morriscountynj.gov/Departments/County-Agriculture-Development-Board </p>', 
+1);
+GO
