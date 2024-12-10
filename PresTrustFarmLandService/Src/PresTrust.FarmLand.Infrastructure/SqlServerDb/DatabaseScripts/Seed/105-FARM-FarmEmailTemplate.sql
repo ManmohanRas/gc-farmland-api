@@ -125,9 +125,8 @@ GO
 --Easement 
 INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
 5,		'CHANGE_STATUS_FROM_CREATE_TO_DRAFT_APPLICATION', 
-		'Change status From Create to Draft Application', 
-
-		'<p>Farm Land Preservation Program.</p>', 
+		'Change status From Create to Draft Application',
+		'Easement Purchase Program - {{FarmName}}', 
 
 		'<p>Dear {{PrimaryContactName}},</p>
 		 <p>Thank you for your interest in the Morris County Farmland Preservation Program. Please complete and submit the application. I am happy to provide help with completing the application by phone, e-mail or in person. </p>
@@ -151,7 +150,7 @@ GO
 INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
 6,		'CHANGE_STATUS_FROM_DRAFT_APPLICATION_TO_APPLICATION_SUBMITTED', 
 		'Change status From Draft Application to Application Submitted',
-		'<p>Farm Land Preservation Program.</p>',
+		'Farm Land Preservation Program.',
 		'<p>Dear {{PrimaryContactName}},</p>
 		 <p>Thank you for submitting your application. we will review the application and, if any additional information is needed, we will contact you. </p>
 		 <p>I look forward to working with you and welcome any questions you may have.</p>
@@ -173,7 +172,7 @@ GO
 INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
 7,		'CHANGE_STATUS_FROM_IN_REVIEW_TO_PENDING', 
 		'Change status From In_Review to Pending',
-		'<p>Easement Purchase Program - {{FarmName}}</p>',
+		'Easement Purchase Program - {{FarmName}}',
 		'<p>Congratulations, {{PrimaryContactName}}!</p>
 		<p>At its {{PreviousMeetingDate}} meeting, the Morris County Agriculture Development Board (CADB) granted preliminary approval of your application to sell a development easement. A copy of the resolution is enclosed.</p>
 		<p>Also enclosed you will find &ldquo;Notice to Proceed&rdquo; and &ldquo;Notice of Withdrawal&rdquo; forms. Please complete the appropriate form and return it to the Morris CADB before (insert due date).</p>
@@ -223,7 +222,7 @@ GO
 INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
 9,		'CHANGE_STATUS_PENDING_TO_ACTIVE', 
 		'Change status Pending to Active',
-		 '<p>Easement Purchase Program - {{FarmName}}</p>',
+		 'Easement Purchase Program - {{FarmName}}',
 		 '<p>Dear {{PrimaryContactName}},</p>
 		 <p>The Morris CADB has reviewed the appraisals of your farm and agreed on an offer amount. An offer letter will be sent to you via regular mail.</p>
 		 <p>I look forward to working with you and welcome any questions you may have.</p>
@@ -245,7 +244,7 @@ GO
 INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
 10,		'CHANGE_STATUS_FROM_CLOSING_TO_POST_CLOSING', 
 		'Change status From Closing to Post Closing',
-		'<p>Easement Purchase Program - {{FarmName}}</p>',
+		'Easement Purchase Program - {{FarmName}}',
 
 		'<p>Date: {{TodaysDate}}</p>
 		 <p>Enclosed are copies of the following closing documents for the {{ProjectName}}:</p>
@@ -288,7 +287,7 @@ GO
 INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
 11,		'CHANGE_STATUS_FROM_IN_POST_CLOSING_TO_PRESERVED', 
 		'Change status From Post_Closing to Preserved', 
-		'<p>Easement Purchase Program - {{FarmName}}</p>',
+		'Easement Purchase Program - {{FarmName}}',
 		'<p>Re: Morris County Agriculture Development Board</p>
 
 		 <p>NOTICE OF PURCHASE OF DEVELOPMENT EASEMENT</p>
@@ -315,7 +314,7 @@ GO
 INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
 12,		'FEEDBACK_RECEIVED_EMAIL', 
 		'Feedback Received Email',
-		'<p> Feedback Received</p>',
+		'Feedback Received',
 		 '<p>Dear {{PrimaryContactName}},</p>
 		 <p>You have received the feedback for the {{ApplicationName}} application from the Morris County.</p>
 		 <p>Kindly login to Morris County Preservation Trust and select the application to view feedback.</p>
