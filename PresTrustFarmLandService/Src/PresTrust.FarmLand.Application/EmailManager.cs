@@ -106,7 +106,9 @@ public class EmailManager : IEmailManager
         htmlBody = htmlBody.Replace("{{SADCContact}}", contactName  ?? "");
         htmlBody = htmlBody.Replace("{{NextMeetingDate}}", fifthNextMonth.ToString("dddd, MMMM dd, yyyy"));
         htmlBody = htmlBody.Replace("{{ProjectName}}", applicationName ?? "");
-        htmlBody = htmlBody.Replace("{{TodaysDate}}", DateTime.Now.ToString("dddd, MMMM dd, yyyy") ?? "");
+        htmlBody = htmlBody.Replace("{{TodaysDate}}", DateTime.Now.ToString("MMMM dd, yyyy") ?? "");
+        htmlBody = htmlBody.Replace("{{ApplicationName}}", applicationName ?? "");
+
 
         if (owner!=null)
         {
