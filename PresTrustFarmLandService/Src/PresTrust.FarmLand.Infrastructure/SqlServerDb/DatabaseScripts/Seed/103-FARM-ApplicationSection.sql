@@ -69,3 +69,31 @@ GO
 
 INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (211, 'SIGNATORY', 'Signatory', 2);
 GO
+
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (212, 'ADMIN_DOCUMENT_CHECK_LIST', 'Admin Document Checklist', 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (213, 'ADMIN_COST_DETAILS', 'Admin Cost Details', 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (214, 'ADMIN_APPRAISAL_REPORTS', 'Admin Appraisal Reports', 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (215, 'ADMIN_OFFER_COSTS', 'Admin Offer Costs', 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (216, 'ADMIN_STRUCTURES', 'Admin Structures', 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (217, 'ADMIN_EXCEPTIONS', 'Admin Exceptions', 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (218, 'ADMIN_SADC', 'Admin SADC', 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (219, 'ADMIN_CLOSING_DOCS', 'Admin Closing Docs', 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (220, 'ADMIN_CONTACTS', 'Admin Contacts', 2);
+GO
+

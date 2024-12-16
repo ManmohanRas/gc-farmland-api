@@ -120,7 +120,7 @@ GO
 INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (39, 'ESMT_DEED_RECORDED', 'Deed Recorded', 210 , 2);
 GO  
 
-INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (40, 'ESMT_DEED_PRESERVED', 'Preserved Deed', 210 , 2);
+INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (40, 'ESMT_DEED_PRESERVED', 'Preserved Deed', 219 , 2);
 GO
 
 INSERT INTO [Farm].[FarmApplicationDocumentType]([Id], [Title], [Description], [SectionId], [ApplicationTypeId]) VALUES (41, 'ESMT_TITLE_POLICY', 'Title Policy', 219 , 2);
