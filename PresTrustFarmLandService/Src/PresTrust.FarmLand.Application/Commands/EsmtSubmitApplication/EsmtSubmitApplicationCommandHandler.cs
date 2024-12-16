@@ -7,6 +7,8 @@ public class EsmtSubmitApplicationCommandHandler : BaseHandler, IRequestHandler<
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IApplicationRepository repoApplication;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
+    private readonly IEmailManager repoEmailManager;
+    private readonly IEmailTemplateRepository repoEmailTemplate;
 
     public EsmtSubmitApplicationCommandHandler
    (
@@ -14,7 +16,9 @@ public class EsmtSubmitApplicationCommandHandler : BaseHandler, IRequestHandler<
        IPresTrustUserContext userContext,
        IOptions<SystemParameterConfiguration> systemParamOptions,
        IApplicationRepository repoApplication,
-       ITermBrokenRuleRepository repoBrokenRules
+       ITermBrokenRuleRepository repoBrokenRules,
+       IEmailManager repoEmailManager,
+       IEmailTemplateRepository repoEmailTemplate
    ) : base(repoApplication)
     {
         this.mapper = mapper;
@@ -22,6 +26,8 @@ public class EsmtSubmitApplicationCommandHandler : BaseHandler, IRequestHandler<
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplication = repoApplication;
         this.repoBrokenRules = repoBrokenRules;
+        this.repoEmailManager = repoEmailManager;
+        this.repoEmailTemplate = repoEmailTemplate;
     }
 
     /// <summary>
@@ -74,6 +80,10 @@ public class EsmtSubmitApplicationCommandHandler : BaseHandler, IRequestHandler<
             };
             await repoApplication.SaveStatusLogAsync(appStatusLog);
 
+            //send Email
+            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_DRAFT_APPLICATION_TO_APPLICATION_SUBMITTED.ToString());
+            if (template != null)
+                await repoEmailManager.SendMail(subject: template.Subject, applicationId: request.ApplicationId, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
             scope.Complete();
             result.IsSuccess = true;
 
