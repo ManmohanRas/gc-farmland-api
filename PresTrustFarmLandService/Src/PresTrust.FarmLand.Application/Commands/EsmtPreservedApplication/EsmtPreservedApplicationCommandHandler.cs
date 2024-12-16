@@ -12,7 +12,7 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
     private readonly IApplicationLocationRepository repoLocation;
     private readonly IEmailTemplateRepository repoEmailTemplate;
     private readonly IEmailManager repoEmailManager;
-    private readonly IOwnerDetailsRepository repoOwner
+    private readonly IOwnerDetailsRepository repoOwner;
 
     public EsmtPreservedApplicationCommandHandler 
     (

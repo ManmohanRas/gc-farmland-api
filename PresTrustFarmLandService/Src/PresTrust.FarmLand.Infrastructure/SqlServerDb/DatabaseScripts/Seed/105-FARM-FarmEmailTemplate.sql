@@ -314,7 +314,7 @@ GO
 INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
 12,		'FEEDBACK_RECEIVED_EMAIL', 
 		'Feedback Received Email',
-		'Feedback Received',
+		'Easement Purchase Program - {{FarmName}}',
 		 '<p>Dear {{PrimaryContactName}},</p>
 		 <p>You have received the feedback for the {{ApplicationName}} application from the Morris County.</p>
 		 <p>Kindly login to Morris County Preservation Trust and select the application to view feedback.</p>
