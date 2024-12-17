@@ -1,6 +1,4 @@
-﻿using System.Security;
-
-namespace PresTrust.FarmLand.Application;
+﻿namespace PresTrust.FarmLand.Application;
 public class FarmEsmtAppSecurityManager
 {
     private UserRoleEnum userRole = default;

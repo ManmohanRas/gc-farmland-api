@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.Application.Commands;
+﻿using static System.Collections.Specialized.BitVector32;
+
+namespace PresTrust.FarmLand.Application.Commands;
 
 public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcCommand, Unit>
 {
@@ -9,6 +11,7 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
     private readonly IEmailTemplateRepository repoEmailTemplate;
     private readonly IEmailManager repoEmailManager;
     private readonly IApplicationLocationRepository repoLocation;
+    private readonly ITermBrokenRuleRepository repoBrokenRules;
 
     public EnableSadcCommandHandler
         (
@@ -19,7 +22,8 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
         IApplicationRepository repoApplication,
         IEmailTemplateRepository repoEmailTemplate,
         IEmailManager repoEmailManager,
-        IApplicationLocationRepository repoLocation
+        IApplicationLocationRepository repoLocation,
+        ITermBrokenRuleRepository repoBrokenRules
 
         ) : base (repoApplication)
     {
@@ -30,6 +34,7 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
         this.repoEmailTemplate = repoEmailTemplate;
         this.repoEmailManager = repoEmailManager;
         this.repoLocation = repoLocation;
+        this.repoBrokenRules = repoBrokenRules;
     }
 
 
@@ -60,8 +65,44 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
             scope.Complete();
         }
 
-           
+        application = await GetIfApplicationExists(request.ApplicationId);
+        // Check Broken Rules
+        var brokenRules = ReturnBrokenRulesIfAny(application);
+
+        using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
+        {
+            // Delete old Broken Rules, if any
+            await repoBrokenRules.DeleteBrokenRulesAsync(request.ApplicationId, TermAppStatusEnum.NONE);
+
+            // Save current Broken Rules, if any
+            await repoBrokenRules.SaveBrokenRules(brokenRules);
+         
+
+            scope.Complete();
+        }
 
         return Unit.Value;
+
+
+
+    }
+
+
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity reqSADC)
+    {
+        int sectionId = (int)TermAppSectionEnum.NONE;
+        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
+
+        // add based on the empty check conditions
+        if ((reqSADC.IsSADC == false))
+            brokenRules.Add(new FarmBrokenRuleEntity()
+            {
+                ApplicationId = reqSADC.Id,
+                SectionId = sectionId,
+                Message = "SADC toggle should be enabled.",
+                IsApplicantFlow = true
+            });
+
+        return brokenRules;
     }
 }

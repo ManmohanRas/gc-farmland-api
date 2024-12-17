@@ -7,12 +7,16 @@ public class AssignRolesCommandHandler : BaseHandler, IRequestHandler<AssignRole
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly IFarmRolesRepository repoApplicationUser;
     private readonly IApplicationRepository repoApplication;
+    private readonly ITermBrokenRuleRepository repoBrokenRules;
+
+
     public AssignRolesCommandHandler(
          IMapper mapper,
          IPresTrustUserContext userContext,
          IOptions<SystemParameterConfiguration> systemParamOptions,
          IFarmRolesRepository repoApplicationUser,
-         IApplicationRepository repoApplication
+         IApplicationRepository repoApplication,
+         ITermBrokenRuleRepository repoBrokenRules
          ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
@@ -20,6 +24,7 @@ public class AssignRolesCommandHandler : BaseHandler, IRequestHandler<AssignRole
         this.systemParamOptions = systemParamOptions.Value;
         this.repoApplicationUser = repoApplicationUser;
         this.repoApplication = repoApplication;
+        this.repoBrokenRules = repoBrokenRules;
     }
 
     public async Task<Unit> Handle(AssignRolesCommand request, CancellationToken cancellationToken)
@@ -39,7 +44,7 @@ public class AssignRolesCommandHandler : BaseHandler, IRequestHandler<AssignRole
         }
 
         // returns broken rules  
-        //var brokenRules = ReturnBrokenRulesIfAny(application, reqApplicationUsers);
+        var brokenRules = ReturnBrokenRulesIfAny(application, reqApplicationUsers);
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
@@ -48,11 +53,43 @@ public class AssignRolesCommandHandler : BaseHandler, IRequestHandler<AssignRole
 
             await repoApplicationUser.SaveAsync(users);
 
-            //if (brokenRules.Count() > 0)
-            //    await repoBrokenRules.SaveBrokenRules(brokenRules);
+            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, EsmtAppSectionEnum.ROLES);
+
+            if (brokenRules.Count() > 0)
+            await repoBrokenRules.SaveBrokenRules(brokenRules);
 
             scope.Complete();
         }
         return Unit.Value;
+    }
+
+
+    /// <summary>
+    /// Return broken rules in case of any business rule failure
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="application"></param>
+    /// <returns></returns>
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application, List<FarmRolesEntity> reqApplicationUsers)
+    {
+        int sectionId = (int)EsmtAppSectionEnum.ROLES;
+        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
+
+        var primaryContacts = reqApplicationUsers.Where(au => au.IsPrimaryContact).ToList();
+
+        // empty primary contacts list
+        if (application.Status == EsmtAppStatusEnum.DRAFT_APPLICATION)
+        {
+            if (primaryContacts == null || primaryContacts.Count() == 0)
+                brokenRules.Add(new FarmBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Primary Contact must be assigned to the application.",
+                    IsApplicantFlow = true
+                });
+        }
+
+        return brokenRules;
     }
 }

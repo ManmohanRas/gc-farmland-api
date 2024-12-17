@@ -1,4 +1,4 @@
-DELETE FROM [Core].[ReportItem] WHERE [Id] IN (36, 37);
+DELETE FROM [Core].[ReportItem] WHERE [Id] IN (36, 37,38,39, 40,41, 42, 43, 44, 45, 46, 47, 48);
 
 SET IDENTITY_INSERT [Core].[ReportItem] ON
 
@@ -39,6 +39,8 @@ VALUES (46, 'Preserved Farms – Exception Areas', 'FarmEsmtPresFarmsExceptionArea
 INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
 VALUES (47, 'Permanently Preserved Farms with Severable Exceptions', 'FarmPremPresFarmsWithServableExceptionsReport', 'Permanently Preserved Farms with Severable Exceptions', 'description', 12, 1, 1);
  
+ INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (48, 'Permanently Preserved Farms with TF Info', 'FarmEsmtPermPresFarmsWithTFInfo', 'Permanently Preserved Farms with TF Info', 'description', 13, 1, 1);
 
 SET IDENTITY_INSERT [Core].[ReportItem] OFF
 

@@ -106,8 +106,9 @@ public class EmailManager : IEmailManager
         htmlBody = htmlBody.Replace("{{SADCContact}}", contactName  ?? "");
         htmlBody = htmlBody.Replace("{{NextMeetingDate}}", fifthNextMonth.ToString("dddd, MMMM dd, yyyy"));
         htmlBody = htmlBody.Replace("{{ProjectName}}", applicationName ?? "");
+        htmlBody = htmlBody.Replace("{{TodaysDate}}", DateTime.Now.ToString("MMMM dd, yyyy") ?? "");
+        htmlBody = htmlBody.Replace("{{ApplicationName}}", applicationName ?? "");
 
-        //htmlBody = htmlBody.Replace("{{PreviousMeetingDate}}", DateTime.Now.ToString("dddd, MMMM dd, yyyy"));
 
         if (owner!=null)
         {
@@ -127,17 +128,22 @@ public class EmailManager : IEmailManager
             htmlBody = htmlBody.Replace("{{Block}}", blockLot.Block ?? "");
             htmlBody = htmlBody.Replace("{{Lot}}", blockLot.Lot ?? "");
             htmlBody = htmlBody.Replace("{{Municipality}}", blockLot.Municipality ?? "");
+            htmlBody = htmlBody.Replace("{{Acres}}", blockLot.Acres.ToString() ?? "");
+
 
             subject = subject.Replace("{{Block}}", blockLot.Block ?? "");
             subject = subject.Replace("{{Lot}}", blockLot.Lot ?? "");
             subject = subject.Replace("{{Municipality}}", blockLot.Municipality ?? "");
-        }else
+        }
+        else
         {
             htmlBody = htmlBody.Replace("{{DeedBook}}",  "");
             htmlBody = htmlBody.Replace("{{DeedPage}}",  "");
             htmlBody = htmlBody.Replace("{{Block}}", "");
             htmlBody = htmlBody.Replace("{{Lot}}","");
             htmlBody = htmlBody.Replace("{{Municipality}}",  "");
+            htmlBody = htmlBody.Replace("{{Acres}}", "");
+
 
             subject = subject.Replace("{{Block}}","");
             subject = subject.Replace("{{Lot}}", "");
