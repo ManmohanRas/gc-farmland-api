@@ -150,7 +150,7 @@ GO
 INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
 6,		'CHANGE_STATUS_FROM_DRAFT_APPLICATION_TO_APPLICATION_SUBMITTED', 
 		'Change status From Draft Application to Application Submitted',
-		'Farm Land Preservation Program.',
+		'Easement Purchase Program - {{FarmName}}.',
 		'<p>Dear {{PrimaryContactName}},</p>
 		 <p>Thank you for submitting your application. we will review the application and, if any additional information is needed, we will contact you. </p>
 		 <p>I look forward to working with you and welcome any questions you may have.</p>
