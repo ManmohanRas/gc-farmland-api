@@ -24,10 +24,11 @@ public class ApplicationDocumentTreeBuilder
     {
 
         this.documents = documents ?? Enumerable.Empty<TermOtherDocumentsEntity>();
-        _autoMapperConfig = new MapperConfiguration(cfg =>
+        _autoMapperConfig = new MapperConfiguration(static cfg =>
        {
            cfg.CreateMap<TermOtherDocumentsEntity, DocumentsViewModel>()
-            .ForMember(dest => dest.DocumentType, opt => opt.MapFrom(src => src.DocumentType.ToString()));
+            .ForMember(dest => dest.DocumentType, opt => opt.MapFrom(src => src.DocumentType.ToString()))
+            .ForMember(dest => dest.Section, opt => opt.MapFrom(src => src.Section));
        });
 
         if (buildChecklist == true && applicationTypeId == (int)ApplicationTypeEnum.TERM)
