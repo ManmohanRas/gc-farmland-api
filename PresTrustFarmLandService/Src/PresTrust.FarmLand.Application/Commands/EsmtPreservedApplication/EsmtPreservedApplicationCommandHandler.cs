@@ -1,6 +1,4 @@
-﻿using PresTrust.FarmLand.Application.Queries;
-
-namespace PresTrust.FarmLand.Application.Commands;
+﻿namespace PresTrust.FarmLand.Application.Commands;
 
 public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandler<EsmtPreservedApplicationCommand, EsmtPreservedApplicationCommandViewModel>
 {
@@ -13,6 +11,7 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
     private readonly IEmailTemplateRepository repoEmailTemplate;
     private readonly IEmailManager repoEmailManager;
     private readonly IOwnerDetailsRepository repoOwner;
+    private readonly IFarmEsmtAppAdminClosingDocsRepository repoClosingDocs;
 
     public EsmtPreservedApplicationCommandHandler 
     (
@@ -24,7 +23,8 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
       IApplicationLocationRepository repoLocation,
       IEmailTemplateRepository repoEmailTemplate,
       IEmailManager repoEmailManager,
-      IOwnerDetailsRepository repoOwner
+      IOwnerDetailsRepository repoOwner,
+      IFarmEsmtAppAdminClosingDocsRepository repoClosingDocs
     ) : base(repoApplication)
     {
         this.mapper = mapper;
@@ -36,6 +36,7 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
         this.repoEmailTemplate = repoEmailTemplate;
         this.repoEmailManager = repoEmailManager;
         this.repoOwner  = repoOwner;
+        this.repoClosingDocs = repoClosingDocs;
     }
 
     public async Task<EsmtPreservedApplicationCommandViewModel> Handle(EsmtPreservedApplicationCommand request, CancellationToken cancellationToken)
@@ -67,6 +68,12 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
 
         var locationDetails = await repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId);
         blockLot = locationDetails.Where(x => x.IsChecked).FirstOrDefault();
+
+        var closingDocs = await repoClosingDocs.GetClosingDocsAsync(application.Id);
+        closingDocs = closingDocs ?? new FarmEsmtAppAdminClosingDocsEntity();
+        //for email template placeholders
+        blockLot.DeedBook = closingDocs.EPDeedBook.ToString();
+        blockLot.DeedPage = closingDocs.EPDeedPage.ToString();
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
