@@ -355,7 +355,7 @@ public class GetFarmMonitoringSqlQuery
                     LEFT JOIN 
                         Farm.FarmMonitoringDetails FM
                     ON 
-                        (CTE_FarmData.FarmListID = FM.FarmListId);";
+                        (CTE_FarmData.FarmListID = FM.FarmListId AND CTE_FarmData.FarmName = FM.FarmName AND CTE_FarmData.FarmNumber = FM.FarmNumber);";
 
                 public GetFarmMonitoringSqlQuery()
                 {
