@@ -48,7 +48,7 @@ public class UpdateFarmMonitoringSqlCommand
                             ,CurrentDeedFiled           = @p_CurrentDeedFiled            
                             ,LastUpdatedBy              = @p_LastUpdatedBy
                             ,LastUpdatedOn              = GETDATE()
-                 WHERE Id = @p_Id;";
+                 WHERE Id = @p_Id AND FarmName = @p_FarmName AND FarmNumber = @p_FarmNumber;";
 
     public UpdateFarmMonitoringSqlCommand()
     { }
