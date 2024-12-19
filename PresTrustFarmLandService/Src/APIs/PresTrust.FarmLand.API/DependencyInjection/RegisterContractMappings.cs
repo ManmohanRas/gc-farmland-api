@@ -50,7 +50,8 @@
             services.AddTransient<IFarmSadcResidenceRepository, FarmSadcResidenceRepository>();
             services.AddTransient<IFarmEsmtSadcFarmInfoRepository,FarmEsmtSadcFarmInfoRepository>();
             services.AddTransient<IFarmEsmtSadcAppEligiblityTwoRepository,FarmEsmtSadcAppEligiblityTwoRepository>();
-           services.AddTransient<IFarmReSaleRepository,FarmReSaleRepository>();
+            services.AddTransient<IFarmReSaleRepository,FarmReSaleRepository>();
+            services.AddTransient<IFarmMonitoringRepository, FarmMonitoringRepository>();
     }
 }
 

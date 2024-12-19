@@ -474,7 +474,21 @@ public class FarmController : ApiBaseController
         return Single(await QueryAsync(query));
     }
 
-   
+    [HttpPost("getFarmMonitoring")]
+    [ProducesResponseType(typeof(IEnumerable<GetFarmMonitoringQueryViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<GetFarmMonitoringQueryViewModel>>> GetFarmMonitoring([FromBody] GetFarmMonitoringQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
+    [HttpPost("saveFarmMonitoring")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> SaveFarmMonitoring([FromBody] SaveFarmMonitoringCommand command)
+    {
+        return Single(await CommandAsync(command));
+    }
+
+
 
     [HttpPost("saveEmailTemplate")]
     [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
