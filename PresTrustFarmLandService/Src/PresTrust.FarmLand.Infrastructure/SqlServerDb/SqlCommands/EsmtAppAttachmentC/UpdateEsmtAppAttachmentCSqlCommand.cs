@@ -3,7 +3,7 @@ namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
 
 public class UpdateEsmtAppAttachmentCSqlCommand
 {
-    private readonly String _sqlCommand = @"
+    private readonly string _sqlCommand = @"
                                   UPDATE   [Farm].[FarmEsmtAttachmentC]
                                  SET    ApplicationId                  =   @p_ApplicationId,
                                         IsExceptionAreaPreserved       =  @p_IsExceptionAreaPreserved,

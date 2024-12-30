@@ -8,7 +8,10 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
     private readonly IApplicationRepository repoApplication;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
     private readonly IApplicationLocationRepository repoLocation;
-
+    private readonly IEmailTemplateRepository repoEmailTemplate;
+    private readonly IEmailManager repoEmailManager;
+    private readonly IOwnerDetailsRepository repoOwner;
+    private readonly IFarmEsmtAppAdminClosingDocsRepository repoClosingDocs;
 
     public EsmtPreservedApplicationCommandHandler 
     (
@@ -17,8 +20,11 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
       IOptions<SystemParameterConfiguration> systemParamOptions,
       IApplicationRepository repoApplication,
       ITermBrokenRuleRepository repoBrokenRules,
-      IApplicationLocationRepository repoLocation
-
+      IApplicationLocationRepository repoLocation,
+      IEmailTemplateRepository repoEmailTemplate,
+      IEmailManager repoEmailManager,
+      IOwnerDetailsRepository repoOwner,
+      IFarmEsmtAppAdminClosingDocsRepository repoClosingDocs
     ) : base(repoApplication)
     {
         this.mapper = mapper;
@@ -27,11 +33,18 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
         this.repoApplication = repoApplication;
         this.repoBrokenRules = repoBrokenRules;
         this.repoLocation = repoLocation;
+        this.repoEmailTemplate = repoEmailTemplate;
+        this.repoEmailManager = repoEmailManager;
+        this.repoOwner  = repoOwner;
+        this.repoClosingDocs = repoClosingDocs;
     }
 
     public async Task<EsmtPreservedApplicationCommandViewModel> Handle(EsmtPreservedApplicationCommand request, CancellationToken cancellationToken)
     {
         EsmtPreservedApplicationCommandViewModel result = new();
+        IEnumerable<OwnerDetailsEntity> ownerDetails;
+        FarmBlockLotEntity blockLot = new FarmBlockLotEntity();
+
 
         // check if application exists
         var application = await GetIfApplicationExists(request.ApplicationId);
@@ -51,6 +64,16 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
             result.BrokenRules = mapper.Map<IEnumerable<FarmBrokenRuleEntity>, IEnumerable<BrokenRuleViewModel>>(brokenRules);
             return result;
         }
+        ownerDetails = await repoOwner.GetOwnerDetailsAsync(request.ApplicationId);
+
+        var locationDetails = await repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId);
+        blockLot = locationDetails.Where(x => x.IsChecked).FirstOrDefault();
+
+        var closingDocs = await repoClosingDocs.GetClosingDocsAsync(application.Id);
+        closingDocs = closingDocs ?? new FarmEsmtAppAdminClosingDocsEntity();
+        //for email template placeholders
+        blockLot.DeedBook = closingDocs.EPDeedBook.ToString();
+        blockLot.DeedPage = closingDocs.EPDeedPage.ToString();
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
@@ -69,6 +92,10 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
                 LastUpdatedBy = application.LastUpdatedBy
             };
             await repoApplication.SaveStatusLogAsync(appStatusLog);
+
+            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_IN_POST_CLOSING_TO_PRESERVED.ToString());
+            if (template != null)
+                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, owner: ownerDetails.FirstOrDefault(), blockLot: blockLot);
 
             scope.Complete();
             result.IsSuccess = true;

@@ -10,6 +10,7 @@ public class GetEsmtAppAdminSADCQueryViewModel
     public int SADCPrelimRank { get; set; }
     public int SADCFinalRank { get; set; }
     public int SADCFinalScore { get; set; }
+    public List<DocumentTypeViewModel> DocumentsTree { get; set; } = new List<DocumentTypeViewModel>();
     public string LastUpdatedBy { get; set; }
     public DateTime? LastUpdatedOn { get; set; }
 }

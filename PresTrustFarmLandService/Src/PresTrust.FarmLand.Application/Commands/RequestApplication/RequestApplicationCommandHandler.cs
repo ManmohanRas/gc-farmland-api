@@ -180,6 +180,13 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
             Message = "All required fields on ADMIN_DEED_DETAILS tab have not been filled.",
         });
 
+        statusChangeRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)TermAppSectionEnum.ADMIN_DOCUMENT_CHECKLIST,
+            Message = "All Documents should be uploaded in ADMIN_DOCUMENT_CHECKLIST tab",
+        });
+
         return statusChangeRules;
     }
 }

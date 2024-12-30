@@ -105,6 +105,11 @@ public class EmailManager : IEmailManager
         htmlBody = htmlBody.Replace("{{FarmName}}", applicationName ?? "");
         htmlBody = htmlBody.Replace("{{SADCContact}}", contactName  ?? "");
         htmlBody = htmlBody.Replace("{{NextMeetingDate}}", fifthNextMonth.ToString("dddd, MMMM dd, yyyy"));
+        htmlBody = htmlBody.Replace("{{ProjectName}}", applicationName ?? "");
+        htmlBody = htmlBody.Replace("{{TodaysDate}}", DateTime.Now.ToString("MMMM dd, yyyy") ?? "");
+        htmlBody = htmlBody.Replace("{{ApplicationName}}", applicationName ?? "");
+
+
         if (owner!=null)
         {
             htmlBody = htmlBody.Replace("{{OwnerFirst}}", owner.FirstName ?? "");
@@ -123,29 +128,32 @@ public class EmailManager : IEmailManager
             htmlBody = htmlBody.Replace("{{Block}}", blockLot.Block ?? "");
             htmlBody = htmlBody.Replace("{{Lot}}", blockLot.Lot ?? "");
             htmlBody = htmlBody.Replace("{{Municipality}}", blockLot.Municipality ?? "");
+            htmlBody = htmlBody.Replace("{{Acres}}", blockLot.Acres.ToString() ?? "");
+
 
             subject = subject.Replace("{{Block}}", blockLot.Block ?? "");
             subject = subject.Replace("{{Lot}}", blockLot.Lot ?? "");
             subject = subject.Replace("{{Municipality}}", blockLot.Municipality ?? "");
-        }else
+        }
+        else
         {
             htmlBody = htmlBody.Replace("{{DeedBook}}",  "");
             htmlBody = htmlBody.Replace("{{DeedPage}}",  "");
             htmlBody = htmlBody.Replace("{{Block}}", "");
             htmlBody = htmlBody.Replace("{{Lot}}","");
             htmlBody = htmlBody.Replace("{{Municipality}}",  "");
+            htmlBody = htmlBody.Replace("{{Acres}}", "");
+
 
             subject = subject.Replace("{{Block}}","");
             subject = subject.Replace("{{Lot}}", "");
             subject = subject.Replace("{{Municipality}}",  "");
         }
        
-
-
-       
         subject = subject.Replace("{{FarmName}}", applicationName ?? "");
-      
-      //oEmails = systemParamOptions.IsDevelopment == false ? string.Join(",", primaryContact.Item2) : systemParamOptions.TestEmailIds;
+
+        //toEmails = systemParamOptions.IsDevelopment == false ? string.Join(",", primaryContact.Item2) : systemParamOptions.TestEmailIds;
+        //toEmails = string.Join(",", primaryContact.Item2);
         toEmails = systemParamOptions.TestEmailIds;
 
         var senderName = systemParamOptions.IsDevelopment == false ? userContext.Name : systemParamOptions.TestEmailFromUserName;
