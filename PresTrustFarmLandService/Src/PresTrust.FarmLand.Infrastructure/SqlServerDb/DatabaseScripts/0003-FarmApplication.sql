@@ -45,10 +45,10 @@ CONSTRAINT [PK_#FarmApplication_Id] PRIMARY KEY CLUSTERED
 			)
             SELECT 
 					[Id],
-					NULL AS [Title], -- [ID]
-					NULL AS [AgencyId],
+					[ProjectName] AS [Title], -- [ID]
+					[AgencyId],
 					[FarmListID],
-					'1' AS [ApplicationTypeId],
+					NULL AS [ApplicationTypeId],
 					NULL AS [StatusId],
 					NULL AS [CreatedByProgramUser],
 					[Municipally Approved?],
@@ -59,7 +59,7 @@ CONSTRAINT [PK_#FarmApplication_Id] PRIMARY KEY CLUSTERED
                 FROM  [Farm].[TermProgram_Legacy]  
 
             COMMIT;
-            PRINT 'Term application table has been populated';
+            PRINT 'Application table has been populated';
 END TRY
 BEGIN CATCH
     DECLARE     @ErrorMessage  NVARCHAR(4000);
