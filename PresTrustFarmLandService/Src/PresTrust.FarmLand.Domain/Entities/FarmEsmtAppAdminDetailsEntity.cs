@@ -26,6 +26,10 @@ public class FarmEsmtAppAdminDetailsEntity
     public bool RFPIsWetlands { get; set; }
     public int? CADBAppYear { get; set; }
     public int? ProjectYear { get; set; }
+    public string OriginalDeed { get; set; }
+    public string OriginalPage { get; set; }
+    public string SmallOrLargeSign { get; set; }     
+    public DateTime Year {get; set;}     
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
 }
