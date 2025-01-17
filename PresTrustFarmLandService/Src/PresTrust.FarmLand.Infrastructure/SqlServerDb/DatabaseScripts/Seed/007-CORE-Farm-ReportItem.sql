@@ -67,6 +67,15 @@ VALUES (55, 'Summary of Farmland Preservation Pending Project', 'FarmEsmtSumOfFa
 INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
 VALUES (56, 'Farm Easement Summary of Preserved Farms', 'FarmEsmtSummaryOfPreservedFarms', 'Farm Easement Summary of Preserved Farms', 'description', 21, 1, 1);
 
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (57, 'Targeted Farm Eligibility', 'FarmEsmtTargetedFarmEligibilityReport', 'Targeted Farm Eligibility', 'description', 22, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (58, 'Morris County Municipal Land Area and Farmland Acreage', 'FarmEsmtMCMuniLandAreaandFarmlandAcreageReport', 'Morris County Municipal Land Area and Farmland Acreage', 'description', 23, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (59, 'Farm Easement EXHIBIT A', 'FarmEsmtEXHIBITA', 'Farm Easement EXHIBIT A', 'description', 24, 1, 1); 
+
 SET IDENTITY_INSERT [Core].[ReportItem] OFF
 
 
