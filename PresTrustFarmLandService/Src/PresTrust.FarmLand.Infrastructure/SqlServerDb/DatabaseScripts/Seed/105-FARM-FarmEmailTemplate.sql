@@ -333,3 +333,28 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 		 Website: https://www.morriscountynj.gov/Departments/County-Agriculture-Development-Board </p>', 
 1);
 GO
+
+--RAS
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+13,		'FARM_MONITORING', 
+		'Farm Monitoring',
+		'Farm Land Monitoring',
+		'<p>Dear {{PrimaryContactName}},</p>
+<p>It is time for our annual monitoring.The State Agriculture Development Committee''s (SADC’s) Regulation N.J.A.C. 2:76-6.18A(d) requires the Morris County Agriculture Development Board (Morris CADB) to perform annual onsite inspections of all permanently preserved farms. The purpose of the inspection is to ensure that each farm is in compliance with the terms of the Deed of Easement. </p>
+<br>
+<p>Morris CADB staff will be performing a site inspection of your farm between {{MonitoringDateStart}} and {{MonitoringDateEnd}}. We may utilize a drone to help us inspect the farm in a more time-efficient manner. Your presence is not required. We are unable to give you an exact date as to when we will be on your specific property. If, however, you require a set time for the inspection, please contact our office at your earliest convenience. In addition, if access to the property is blocked (locked gates), please contact our office to schedule an appointment so that we may access the farm. Upon completion, an inspection report will be mailed to you for your review.</p>
+<br>
+		Sincerely,</p>
+<p>{{ProgramAdmin}}<br>
+ 
+		<p>Director</p>
+		Morris County Agriculture Development Board<br>
+		Morris County Office of Planning & Preservation<br>
+		P.O. Box 900<br>
+		Morristown, NJ 07963-0900<br>
+		Phone: (973) 829-8120
+		Fax: (973) 326-9025<br>
+		E-Mail: kcoyle@co.morris.nj.us<br>
+		Website: https://www.morriscountynj.gov/Departments/County-Agriculture-Development-Board </p>', 
+1);
+GO
