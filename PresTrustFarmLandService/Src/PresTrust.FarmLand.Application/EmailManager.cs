@@ -2,7 +2,7 @@
 
 public interface IEmailManager
 {
-    Task SendMail(string subject, string htmlBody, int applicationId, string applicationName, string? emailTemplateCode = default, int agencyId = default, OwnerDetailsEntity? owner = default, FarmBlockLotEntity? blockLot = default, string municapality = default);
+    Task SendMail(string subject, string htmlBody, int applicationId, string applicationName, string? emailTemplateCode = default, int agencyId = default, OwnerDetailsEntity? owner = default, FarmBlockLotEntity? blockLot = default, string municapality = default , DateTime? MonitoringDateStart = default , DateTime? MonitoringDateEnd = default);
 
 }
 
@@ -82,7 +82,7 @@ public class EmailManager : IEmailManager
     /// <param name="htmlBody"></param>
     /// <param name="flagTestEmail"></param>
     /// <returns></returns>
-    public async Task SendMail(string subject, string htmlBody, int applicationId,  string applicationName, string? emailTemplateCode = default, int agencyId = default, OwnerDetailsEntity? owner = default, FarmBlockLotEntity? blockLot = default, string municapality = default)
+    public async Task SendMail(string subject, string htmlBody, int applicationId,  string applicationName, string? emailTemplateCode = default, int agencyId = default, OwnerDetailsEntity? owner = default, FarmBlockLotEntity? blockLot = default, string municapality = default, DateTime? MonitoringDateStart = default, DateTime? MonitoringDateEnd = default)
     {
         var primaryContact = await GetPrimaryContact(applicationId, agencyId);
         string contactEmails = default;
@@ -108,7 +108,8 @@ public class EmailManager : IEmailManager
         htmlBody = htmlBody.Replace("{{ProjectName}}", applicationName ?? "");
         htmlBody = htmlBody.Replace("{{TodaysDate}}", DateTime.Now.ToString("MMMM dd, yyyy") ?? "");
         htmlBody = htmlBody.Replace("{{ApplicationName}}", applicationName ?? "");
-
+        htmlBody = htmlBody.Replace("{{MonitoringDateStart}}", MonitoringDateStart?.ToString("dddd, MMMM dd, yyyy"));
+        htmlBody = htmlBody.Replace("{{MonitoringDateStart}}", MonitoringDateEnd?.ToString("dddd, MMMM dd, yyyy"));
 
         if (owner!=null)
         {
