@@ -48,17 +48,14 @@
 					TP.[ID] AS [TermID],
 					TP.[FarmName],
 					TP.[ProjectName],
-					CASE WHEN [Status] = '5 Expired' THEN 106
-						 WHEN [Status] = '4 Current' THEN 105
-						 WHEN [Status] = '2 Petition Approved' THEN 103
-						 END AS [StatusId],
+					OP.[StatusId],
 					ISNULL(TP.[AgencyID],0) AS [AgencyID],
 					OP.[OriginalLandowner],
 					[Address1],
 					[Address2],
 					[MunicipalId],
 					NULL AS [LastUpdatedBy],
-					NULL AS [LastUpdatedOn]
+					GetDate() AS [LastUpdatedOn]
                 FROM  [Farm].[TermProgram_Legacy] TP
 				LEFT JOIN [Farm].[OwnerProperty_Legacy] OP ON TP.FarmListId = OP.FarmListId
 

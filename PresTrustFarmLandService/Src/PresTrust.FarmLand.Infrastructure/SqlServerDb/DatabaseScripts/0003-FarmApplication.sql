@@ -17,7 +17,9 @@
 	[CreatedOn]                          [DateTime]             NOT NULL,
 	[CreatedBy]                          [varchar](128)         NULL,    
 	[IsActive]                           [bit]                  NULL,
-	[IsSADC]                             [bit]                  NULL
+	[IsSADC]                             [bit]                  NULL,
+	[LastUpdatedBy]						VARCHAR(128)			NULL, 
+	[LastUpdatedOn]						Datetime				NOT NULL, 
 CONSTRAINT [PK_#FarmApplication_Id] PRIMARY KEY CLUSTERED
 (
 	[Id] ASC
@@ -40,22 +42,28 @@ CONSTRAINT [PK_#FarmApplication_Id] PRIMARY KEY CLUSTERED
 			[CreatedOn],
 			[CreatedBy],
 			[IsActive],
-			[IsSADC]
-			  
+			[IsSADC],
+			[LastUpdatedBy],
+			[LastUpdatedOn]
 			)
             SELECT 
 					[Id],
 					[ProjectName] AS [Title], -- [ID]
 					[AgencyId],
 					[FarmListID],
-					NULL AS [ApplicationTypeId],
-					NULL AS [StatusId],
+					'1' AS [ApplicationTypeId],
+					CASE WHEN [Status] = '5 Expired' THEN 106
+						 WHEN [Status] = '4 Current' THEN 105
+						 WHEN [Status] = '2 Petition Approved' THEN 103
+						 END AS [StatusId],
 					NULL AS [CreatedByProgramUser],
 					[Municipally Approved?],
 					NULL AS [CreatedOn],
 					NULL AS [CreatedBy],
 					NULL AS [IsActive],
-					NULL AS [IsSADC]
+					NULL AS [IsSADC],
+					NULL AS LastUpdatedBy,
+					GetDate()
                 FROM  [Farm].[TermProgram_Legacy]  
 
             COMMIT;
