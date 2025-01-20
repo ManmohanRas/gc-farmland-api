@@ -20,6 +20,8 @@
 		 ,[Address1]           VARCHAR(256)            NULL
 		 ,[Address2]           VARCHAR(128)            NULL
 		 ,[MunicipalID]        VARCHAR(4)              NULL 
+		 ,[LastUpdatedBy]	   VARCHAR(128)			   NULL 
+		 ,[LastUpdatedOn]	   Datetime				NOT NULL,    
 	);
 
 	        INSERT INTO [Farm].[#FarmList]
@@ -35,22 +37,30 @@
 			[OriginalLandowner],                 
 			[Address1],                         
 			[Address2],	
-			[MunicipalId]				  
+			[MunicipalId],
+			[LastUpdatedBy],
+			[LastUpdatedOn]
 			)
             SELECT 
-					[FarmListID],
+					TP.[FarmListID],
 					NULL AS [ProjectID], -- [ID]
 					NULL AS [FarmNumber],
-					NULL AS [TermID],
-					[FarmName],
-					NULL AS [ProjectName],
-					[Status],
-					ISNULL([AgencyID],0) AS [AgencyID],
-					NULL AS [OriginalLandowner],
+					TP.[ID] AS [TermID],
+					TP.[FarmName],
+					TP.[ProjectName],
+					CASE WHEN [Status] = '5 Expired' THEN 106
+						 WHEN [Status] = '4 Current' THEN 105
+						 WHEN [Status] = '2 Petition Approved' THEN 103
+						 END AS [StatusId],
+					ISNULL(TP.[AgencyID],0) AS [AgencyID],
+					OP.[OriginalLandowner],
 					[Address1],
 					[Address2],
-					[MunicipalId]
-                FROM  [Farm].[TermProgram_Legacy]  
+					[MunicipalId],
+					NULL AS [LastUpdatedBy],
+					NULL AS [LastUpdatedOn]
+                FROM  [Farm].[TermProgram_Legacy] TP
+				LEFT JOIN [Farm].[OwnerProperty_Legacy] OP ON TP.FarmListId = OP.FarmListId
 
             COMMIT;
             PRINT 'Term application FarmList legacy table has been populated';

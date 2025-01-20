@@ -34,6 +34,8 @@ CREATE TABLE [FARM].[#FarmMunicipalityBlockLotParcel](
 		,[Status]                VARCHAR(50)                  NULL
 		,[IsWarning]             BIT                          NULL
 		,[CreatedByProgramUser]  BIT                          NULL
+		,[LastUpdatedBy]	     VARCHAR(128)			      NULL 
+		,[LastUpdatedOn]	     Datetime				  NOT NULL, 
  );
 
 WITH CoreParcelCTE AS
@@ -99,7 +101,9 @@ WITH CoreParcelCTE AS
 			[ReasonForChange],					  
 			[IsActive],						  
 			[IsWarning],						  
-			[CreatedByProgramUser]
+			[CreatedByProgramUser],
+			[LastUpdatedBy],
+			[LastUpdatedOn]
 		)
 		 SELECT 
 					[MunicipalId],
