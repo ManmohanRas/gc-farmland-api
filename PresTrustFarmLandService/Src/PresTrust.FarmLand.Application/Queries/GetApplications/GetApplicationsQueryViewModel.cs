@@ -21,6 +21,8 @@
         public string PresentOwner { get; set; }
         public DateTime? EnrollmentDate { get; set; }
         public double Acres { get; set; }
+        public DateTime? ClosingDate { get; set; }
+
 
     }
 }

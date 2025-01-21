@@ -72,24 +72,40 @@ public class AssignRolesCommandHandler : BaseHandler, IRequestHandler<AssignRole
     /// <returns></returns>
     private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application, List<FarmRolesEntity> reqApplicationUsers)
     {
-        int sectionId = (int)EsmtAppSectionEnum.ROLES;
+        int esmtSectionId = (int)EsmtAppSectionEnum.ROLES;
+        int termesmtSectionId = (int)TermAppSectionEnum.ROLES;
+
         List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 
+        // Get primary contacts list
         var primaryContacts = reqApplicationUsers.Where(au => au.IsPrimaryContact).ToList();
 
-        // empty primary contacts list
-        if (application.Status == EsmtAppStatusEnum.DRAFT_APPLICATION)
+        // Check if primaryContacts list is empty
+        if (primaryContacts == null || primaryContacts.Count == 0)
         {
-            if (primaryContacts == null || primaryContacts.Count() == 0)
+            if (application.Status == EsmtAppStatusEnum.DRAFT_APPLICATION)
+            {
                 brokenRules.Add(new FarmBrokenRuleEntity()
                 {
                     ApplicationId = application.Id,
-                    SectionId = sectionId,
+                    SectionId = esmtSectionId,
                     Message = "Primary Contact must be assigned to the application.",
                     IsApplicantFlow = true
                 });
+            }
+            else if (application.Status == TermAppStatusEnum.PETITION_DRAFT)
+            {
+                brokenRules.Add(new FarmBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = termesmtSectionId,
+                    Message = "Primary Contact must be assigned to the application.",
+                    IsApplicantFlow = true
+                });
+            }
         }
 
         return brokenRules;
+
     }
 }
