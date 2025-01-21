@@ -29,5 +29,5 @@ public class GetFarmEsmtAppAdminDetailsQueryViewModel
     public string OriginalDeed { get; set; }
     public string OriginalPage { get; set; }
     public string SmallOrLargeSign { get; set; }
-    public DateTime? Year { get; set; }
+    public DateTime? AdYear { get; set; }
 }

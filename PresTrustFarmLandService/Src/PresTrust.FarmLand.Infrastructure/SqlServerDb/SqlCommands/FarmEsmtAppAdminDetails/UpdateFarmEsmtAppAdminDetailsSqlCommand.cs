@@ -30,7 +30,7 @@ public class UpdateFarmEsmtAppAdminDetailsSqlCommand
                             ,OriginalDeed              = @p_OriginalDeed        
                             ,OriginalPage              = @p_OriginalPage
                             ,SmallOrLargeSign          = @p_SmallOrLargeSign
-                            ,Year                      = @p_Year
+                            ,AdYear                    = @p_AdYear
                             ,LastUpdatedBy             = @p_LastUpdatedBy
                             ,LastUpdatedOn             = @p_LastUpdatedOn
                     WHERE Id = @p_Id AND ApplicationId = @p_ApplicationId";
