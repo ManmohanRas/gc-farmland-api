@@ -19,7 +19,8 @@ public class GetApplicationsSqlQuery
                 FL.[OriginalLandowner],
                 AgencyEntity.[AgencyLabel] AS PresentOwner,
                 AD.[EnrollmentDate],
-                LP.Acres
+                LP.Acres,
+                FCDS.[ClosingDate]
                FROM [Farm].[FarmApplication] AS A
                LEFT JOIN [Farm].[OwnerPropertyLEGACY_Rev01] AS FL ON (A.AgencyId = FL.AgencyId AND A.FarmListId = FL.FarmListID)
                LEFT JOIN [Core].[View_AgencyEntities_FARM] AS AgencyEntity ON (AgencyEntity.AgencyId = A.AgencyId)
@@ -32,6 +33,7 @@ public class GetApplicationsSqlQuery
 			  GROUP BY L.ApplicationId
 			   ) AS LP ON (A.Id = LP.ApplicationId)
 			   LEFT JOIN	[Farm].[FarmApplicationStatusLog] ASL ON ASL.StatusId != A.StatusId AND A.Id = ASL.ApplicationId
+			   LEFT JOIN [Farm].[FarmEsmtAppAdminClosingDocStatus] FCDS On A.Id = FCDS.ApplicationId	
                WHERE AP.IsActive = 1
 			   Group by
 			   A.[Id],
@@ -48,7 +50,8 @@ public class GetApplicationsSqlQuery
                 FL.[OriginalLandowner],
                 AgencyEntity.[AgencyLabel] ,
                 AD.[EnrollmentDate],
-                LP.Acres
+                LP.Acres,
+                FCDS.[ClosingDate]
                ORDER BY AP.[CreatedOn] DESC;";
 
 
@@ -73,7 +76,8 @@ public class GetApplicationsSqlQuery
                 FL.[OriginalLandowner],
                 AgencyEntity.[AgencyLabel] AS PresentOwner,
                 AD.[EnrollmentDate],
-                LP.Acres
+                LP.Acres,
+                FCDS.[ClosingDate]
                FROM [Farm].[FarmApplication] AS A
                LEFT JOIN [Farm].[OwnerPropertyLEGACY_Rev01] AS FL ON (A.AgencyId = FL.AgencyId AND A.FarmListId = FL.FarmListID)
                LEFT JOIN [Core].[View_AgencyEntities_FARM] AS AgencyEntity ON (AgencyEntity.AgencyId = A.AgencyId)
@@ -86,6 +90,7 @@ public class GetApplicationsSqlQuery
 			  GROUP BY L.ApplicationId
 			   ) AS LP ON (A.Id = LP.ApplicationId)
                 LEFT JOIN	[Farm].[FarmApplicationStatusLog] ASL ON ASL.StatusId != A.StatusId AND A.Id = ASL.ApplicationId
+			   LEFT JOIN [Farm].[FarmEsmtAppAdminClosingDocStatus] FCDS On A.Id = FCDS.ApplicationId	
                   WHERE A.IsActive = 1 AND A.AgencyId IN @p_agencyIds
                  Group by
 			   A.[Id],
@@ -102,7 +107,8 @@ public class GetApplicationsSqlQuery
                 FL.[OriginalLandowner],
                 AgencyEntity.[AgencyLabel] ,
                 AD.[EnrollmentDate],
-                LP.Acres
+                LP.Acres,
+                FCDS.[ClosingDate]
              
                ORDER BY A.[CreatedOn] DESC;";
         }else
@@ -124,7 +130,8 @@ public class GetApplicationsSqlQuery
                 FL.[OriginalLandowner],
                 AgencyEntity.[AgencyLabel] AS PresentOwner,
                 AD.[EnrollmentDate],
-                LP.Acres
+                LP.Acres,
+                FCDS.[ClosingDate]
                FROM [Farm].[FarmApplication] AS A
                LEFT JOIN [Farm].[OwnerPropertyLEGACY_Rev01] AS FL ON (A.AgencyId = FL.AgencyId AND A.FarmListId = FL.FarmListID)
                LEFT JOIN [Core].[View_AgencyEntities_FARM] AS AgencyEntity ON (AgencyEntity.AgencyId = A.AgencyId)
@@ -137,6 +144,8 @@ public class GetApplicationsSqlQuery
 			  GROUP BY L.ApplicationId
 			   ) AS LP ON (A.Id = LP.ApplicationId)
                  LEFT JOIN	[Farm].[FarmApplicationStatusLog] ASL ON ASL.StatusId != A.StatusId AND A.Id = ASL.ApplicationId
+			   LEFT JOIN [Farm].[FarmEsmtAppAdminClosingDocStatus] FCDS On A.Id = FCDS.ApplicationId	
+
                 WHERE A.IsActive = 1
                  Group by
 			   A.[Id],
@@ -153,7 +162,8 @@ public class GetApplicationsSqlQuery
                 FL.[OriginalLandowner],
                 AgencyEntity.[AgencyLabel] ,
                 AD.[EnrollmentDate],
-                LP.Acres
+                LP.Acres,
+                FCDS.[ClosingDate]
                ORDER BY A.[CreatedOn] DESC;";
         }
     }
