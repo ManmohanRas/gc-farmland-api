@@ -42,6 +42,40 @@ VALUES (47, 'Permanently Preserved Farms with Severable Exceptions', 'FarmPremPr
  INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
 VALUES (48, 'Permanently Preserved Farms with TF Info', 'FarmEsmtPermPresFarmsWithTFInfo', 'Permanently Preserved Farms with TF Info', 'description', 13, 1, 1);
 
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (49, 'All pending Farmland Preservation Projects', 'FarmEsmtAllPendingFarmPreservationProject', 'All pending Farmland Preservation Projects', 'description', 14, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (50, 'Summary of Permanently Preserved Farmlands Whose Owners May Be Interested in Selling', 'FarmEsmtSummPermntlyPresFarmsInSelling', 'Summary of Permanently Preserved Farmlands Whose Owners May Be Interested in Selling', 'description', 15, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (51, 'EXHIBIT A – Property Surveys', 'FarmEsmtExhibitAPropertySurveysReport', 'EXHIBIT A – Property Surveys', 'description', 16, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (52, 'Targeted Farm Eligibility', 'FarmEsmtTargetedFarmEligibilityReport', 'Targeted Farm Eligibility', 'description', 17, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (53, 'Preserved Farms with Signs Installed', 'FarmPreservedFarmswithSignsInstalled', 'Preserved Farms with Signs Installed', 'description', 18, 1, 1);
+
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (54, 'Farm Easement Permanently Preserved Farms In Morris County', 'FarmEsmtPermanentlyPreservedFarmsInMorrisCounty', 'Farm Easement Permanently Preserved Farms In Morris County', 'description', 19, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (55, 'Summary of Farmland Preservation Pending Project', 'FarmEsmtSumOfFarmLandPreservationPendingProject', 'Summary of Farmland Preservation Pending Project', 'description', 20, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (56, 'Farm Easement Summary of Preserved Farms', 'FarmEsmtSummaryOfPreservedFarms', 'Farm Easement Summary of Preserved Farms', 'description', 21, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (57, 'Targeted Farm Eligibility', 'FarmEsmtTargetedFarmEligibilityReport', 'Targeted Farm Eligibility', 'description', 22, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (58, 'Morris County Municipal Land Area and Farmland Acreage', 'FarmEsmtMCMuniLandAreaandFarmlandAcreageReport', 'Morris County Municipal Land Area and Farmland Acreage', 'description', 23, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (59, 'Farm Easement EXHIBIT A', 'FarmEsmtEXHIBITA', 'Farm Easement EXHIBIT A', 'description', 24, 1, 1); 
+
 SET IDENTITY_INSERT [Core].[ReportItem] OFF
 
 

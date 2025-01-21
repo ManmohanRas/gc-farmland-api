@@ -37,6 +37,10 @@ CREATE TABLE [Farm].[FarmEsmtAppAdminDetails](
 	[RFPIsWetlands]                 [bit]                               NULL,
 	[CADBAppYear]                   [integer]                           NULL,
 	[ProjectYear]                   [integer]                           NULL,
+	[OriginalDeed]					[varchar](128)                      NULL,
+	[OriginalPage]					[varchar](128)                      NULL,
+	[SmallOrLargeSign]				[varchar](128)                      NULL,
+	[Year]							[datetime]							NULL,
 	[LastUpdatedBy]					[varchar](128)						NULL,
 	[LastUpdatedOn]					[datetime]							NULL,
 CONSTRAINT [PK_FarmEsmtAppAdminDetails_Id] PRIMARY KEY CLUSTERED 
