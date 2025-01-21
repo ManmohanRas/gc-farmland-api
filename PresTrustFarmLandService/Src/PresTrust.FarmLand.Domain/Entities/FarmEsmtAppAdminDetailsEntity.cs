@@ -29,7 +29,7 @@ public class FarmEsmtAppAdminDetailsEntity
     public string OriginalDeed { get; set; }
     public string OriginalPage { get; set; }
     public string SmallOrLargeSign { get; set; }     
-    public DateTime Year {get; set;}     
+    public DateTime? AdYear {get; set;}     
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
 }

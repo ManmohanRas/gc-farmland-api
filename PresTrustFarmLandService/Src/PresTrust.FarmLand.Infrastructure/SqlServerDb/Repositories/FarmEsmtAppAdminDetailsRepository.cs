@@ -104,7 +104,7 @@ public class FarmEsmtAppAdminDetailsRepository : IFarmEsmtAppAdminDetailsReposit
                 @p_OriginalDeed = farmEsmtAppAdminDetails.OriginalDeed,
                 @p_OriginalPage = farmEsmtAppAdminDetails.OriginalPage,
                 @p_SmallOrLargeSign = farmEsmtAppAdminDetails.SmallOrLargeSign,
-                @p_Year = farmEsmtAppAdminDetails.Year,
+                @p_AdYear = farmEsmtAppAdminDetails.AdYear,
                 @p_LastUpdatedBy = farmEsmtAppAdminDetails.LastUpdatedBy,
                 @p_LastUpdatedOn = DateTime.Now
             });
@@ -154,7 +154,7 @@ public class FarmEsmtAppAdminDetailsRepository : IFarmEsmtAppAdminDetailsReposit
                 @p_OriginalDeed = farmEsmtAppAdminDetails.OriginalDeed,
                 @p_OriginalPage = farmEsmtAppAdminDetails.OriginalPage,
                 @p_SmallOrLargeSign = farmEsmtAppAdminDetails.SmallOrLargeSign,
-                @p_Year = farmEsmtAppAdminDetails.Year,
+                @p_AdYear = farmEsmtAppAdminDetails.AdYear,
                 @p_LastUpdatedBy = farmEsmtAppAdminDetails.LastUpdatedBy,
                 @p_LastUpdatedOn = DateTime.Now
             }); 
