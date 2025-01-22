@@ -59,7 +59,7 @@ public class ApplicationLocationRepository: IApplicationLocationRepository
         return results ?? new();
     }
 
-    public async Task<bool> CheckLocationParcel(int applicationId,FarmTermAppLocationEntity parcel)
+    public async Task<bool> CheckLocationParcel(int applicationId,FarmAppLocationDetailsEntity parcel)
     {
         using var conn = context.CreateConnection();
        

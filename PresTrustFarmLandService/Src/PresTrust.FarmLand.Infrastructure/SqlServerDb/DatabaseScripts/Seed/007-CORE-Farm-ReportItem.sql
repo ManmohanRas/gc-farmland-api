@@ -1,4 +1,4 @@
-DELETE FROM [Core].[ReportItem] WHERE [Id] IN (36, 37,38,39, 40,41, 42, 43, 44, 45, 46, 47, 48);
+DELETE FROM [Core].[ReportItem] WHERE [Id] IN (SELECT  Id FROM [CORE].[ReportItem] WHERE ProgramTypeId = 1);
 
 SET IDENTITY_INSERT [Core].[ReportItem] ON
 
@@ -75,6 +75,9 @@ VALUES (58, 'Morris County Municipal Land Area and Farmland Acreage', 'FarmEsmtM
 
 INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
 VALUES (59, 'Farm Easement EXHIBIT A', 'FarmEsmtEXHIBITA', 'Farm Easement EXHIBIT A', 'description', 24, 1, 1); 
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (60, 'Re-Sale Info of Preserved Farms', 'FarmEsmtReSaleInfoOfPreservedFarmsReport', 'Re-Sale Info of Preserved Farms', 'description', 25, 1, 1); 
 
 SET IDENTITY_INSERT [Core].[ReportItem] OFF
 

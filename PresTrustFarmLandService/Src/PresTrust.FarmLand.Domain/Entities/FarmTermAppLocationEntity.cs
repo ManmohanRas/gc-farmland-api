@@ -1,6 +1,6 @@
 ﻿namespace PresTrust.FarmLand.Domain.Entities;
 
-public class FarmTermAppLocationEntity
+public class FarmAppLocationDetailsEntity
 {
     public int ApplicationId { get; set; }
     public int ParcelId { get; set; }

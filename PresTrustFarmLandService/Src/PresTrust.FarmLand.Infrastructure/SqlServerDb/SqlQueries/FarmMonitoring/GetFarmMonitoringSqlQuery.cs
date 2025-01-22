@@ -56,8 +56,8 @@ public class GetFarmMonitoringSqlQuery
                             Farm.FarmList 
                             ON Farm.FarmList.FarmListID = Farm.FarmApplication.FarmListId
                         LEFT JOIN 
-                            Farm.FarmTermAppOwnerDetails 
-                            ON Farm.FarmTermAppOwnerDetails.ApplicationId = Farm.FarmApplication.Id
+                            Farm.FarmAppOwnerDetailList 
+                            ON Farm.FarmAppOwnerDetailList.ApplicationId = Farm.FarmApplication.Id
                         LEFT JOIN 
                             Farm.FarmEsmtAppAdminDetails 
                             ON Farm.FarmEsmtAppAdminDetails.ApplicationId = Farm.FarmApplication.Id
@@ -104,7 +104,7 @@ public class GetFarmMonitoringSqlQuery
                                                     BPL.PamsPin,
                                                     ROW_NUMBER() OVER (PARTITION BY L.ApplicationId ORDER BY Id) AS rn
                                                 FROM 
-                                                    Farm.FarmTermAppLocation L
+                                                    [Farm].[FarmAppLocationDetails] L
                                                 LEFT JOIN 
                                                     Farm.FarmMunicipalityBlockLotParcel BPL 
                                                     ON BPL.Id = L.ParcelId
@@ -128,7 +128,7 @@ public class GetFarmMonitoringSqlQuery
                                                     BPL.PamsPin,
                                                     ROW_NUMBER() OVER (PARTITION BY L.ApplicationId ORDER BY Id) AS rn
                                                 FROM 
-                                                    Farm.FarmTermAppLocation L
+                                                    [Farm].[FarmAppLocationDetails] L
                                                 LEFT JOIN 
                                                     Farm.FarmMunicipalityBlockLotParcel BPL 
                                                     ON BPL.Id = L.ParcelId
@@ -152,7 +152,7 @@ public class GetFarmMonitoringSqlQuery
                                 FROM 
                                     Farm.FarmMunicipalityBlockLotParcel AS MBL
                                 LEFT JOIN 
-                                    Farm.FarmTermAppLocation AS L 
+                                    [Farm].[FarmAppLocationDetails] AS L 
                                     ON (MBL.Id = L.ParcelId AND L.IsChecked = 1)
                                 GROUP BY 
                                     L.ApplicationId
@@ -184,7 +184,7 @@ public class GetFarmMonitoringSqlQuery
                                             PhoneNumber,
                                             ROW_NUMBER() OVER (PARTITION BY ApplicationId ORDER BY Id) AS rn
                                         FROM 
-                                            Farm.FarmTermAppOwnerDetails
+                                            Farm.FarmAppOwnerDetailList
                                     ) AS subquery  
                                 WHERE rn = 1
                             ) AS AppOwnerDetails 

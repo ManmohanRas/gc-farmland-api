@@ -9,7 +9,6 @@
 							,SADCId						
 							,MaxGrant						
 							,PermanentlyPreserved			
-							,MunicipallyApproved			
 							,EnrollmentDate				
 							,RenewalDate					
 							,ExpirationDate				
@@ -25,7 +24,6 @@
 							,@p_SADCId						
 							,@p_MaxGrant						
 							,@p_PermanentlyPreserved			
-							,@p_MunicipallyApproved			
 							,@p_EnrollmentDate				
 							,@p_RenewalDate					
 							,@p_ExpirationDate				

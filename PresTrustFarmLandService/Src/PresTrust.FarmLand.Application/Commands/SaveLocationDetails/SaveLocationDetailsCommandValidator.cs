@@ -4,6 +4,6 @@ public class SaveLocationDetailsCommandValidator: Profile
 {
     public SaveLocationDetailsCommandValidator()
     {
-        CreateMap<SaveBlockLot, FarmTermAppLocationEntity>();
+        CreateMap<SaveBlockLot, FarmAppLocationDetailsEntity>();
     }
 }

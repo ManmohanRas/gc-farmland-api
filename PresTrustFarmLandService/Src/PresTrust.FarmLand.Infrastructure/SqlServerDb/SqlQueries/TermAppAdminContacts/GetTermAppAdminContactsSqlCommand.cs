@@ -15,7 +15,7 @@ public class GetTermAppAdminContactsSqlCommand
                    ,[SelectContact]
                    ,[LastUpdatedOn]
                    ,[LastUpdatedBy]
-                FROM [Farm].[FarmTermAppAdminContact] 
+                FROM [Farm].[FarmAppAdminContact] 
                 WHERE [ApplicationId] = @p_ApplicationId;"
        ;
 
