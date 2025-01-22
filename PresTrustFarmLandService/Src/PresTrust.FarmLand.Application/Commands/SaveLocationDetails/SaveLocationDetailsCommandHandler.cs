@@ -38,7 +38,7 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
 
         var application = await GetIfApplicationExists(request.ApplicationId);
 
-        var parcels =  mapper.Map<List<SaveBlockLot>, List<FarmTermAppLocationEntity>>(request.Parcels);
+        var parcels =  mapper.Map<List<SaveBlockLot>, List<FarmAppLocationDetailsEntity>>(request.Parcels);
        
 
         deedParcels = await repoDeedDetails.GetTermAppAdminDeedLocationDetails(request.ApplicationId);

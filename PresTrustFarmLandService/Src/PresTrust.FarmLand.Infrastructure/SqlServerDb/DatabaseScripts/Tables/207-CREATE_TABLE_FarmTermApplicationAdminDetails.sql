@@ -18,7 +18,6 @@ CREATE TABLE [Farm].[FarmTermAppAdminDetails](
 	[SADCId]						[integer]							NULL,
 	[MaxGrant]						[decimal](18,2)						NULL,
 	[PermanentlyPreserved]			[bit]								NULL,
-	[MunicipallyApproved]			[bit]								NULL,
 	[EnrollmentDate]				[dateTime]							NULL,
 	[RenewalDate]					[dateTime]							NULL,
 	[ExpirationDate]				[dateTime]							NULL,

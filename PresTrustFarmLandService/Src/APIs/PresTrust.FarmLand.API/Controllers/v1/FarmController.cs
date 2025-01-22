@@ -328,6 +328,13 @@ public class FarmController : ApiBaseController
         return Single(await QueryAsync(query));
     }
 
+    [HttpPost("getProgramManagerParcels")]
+    [ProducesResponseType(typeof(IEnumerable<GetProgramManagerParcelsQueryViewModel>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<GetProgramManagerParcelsQueryViewModel>>> getProgramManagerParcels([FromBody] GetProgramManagerParcelsQuery query)
+    {
+        return Single(await QueryAsync(query));
+    }
+
     [HttpPost("saveFarmList")]
     [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<int>> SaveFarmList([FromBody] SaveFarmListCommand command)

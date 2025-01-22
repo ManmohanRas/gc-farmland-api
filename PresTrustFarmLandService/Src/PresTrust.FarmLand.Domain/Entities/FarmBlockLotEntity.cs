@@ -39,4 +39,8 @@ public class FarmBlockLotEntity
     public string CorePropertyClassCode { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
+    public string AgencyName {  get; set; }
+    public string LandOwner { get; set; }
+    public string PropertyAddress { get; set; }
+
 }

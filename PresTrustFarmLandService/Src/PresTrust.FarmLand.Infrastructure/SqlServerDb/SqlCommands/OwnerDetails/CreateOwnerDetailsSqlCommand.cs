@@ -3,7 +3,7 @@
 public class CreateOwnerDetailsSqlCommand
 {
     private readonly string _sqlCommand =
-    @"INSERT INTO  [Farm].[FarmTermAppOwnerDetails]
+    @"INSERT INTO  [Farm].[FarmAppOwnerDetailList]
               (
                          [ApplicationId]
                        ,[FirstName]

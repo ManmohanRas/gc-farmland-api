@@ -1,4 +1,3 @@
-IF OBJECT_ID('[Farm].[FarmEsmtAttachmentDActivityType] ') IS NOT NULL
 -- Drop Table
 DROP TABLE IF EXISTS [Farm].[FarmEsmtAttachmentDActivityType]
 GO

@@ -115,7 +115,7 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
     {
         List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 
-        //List<FarmTermAppLocationEntity> locationDeatils = new List<FarmTermAppLocationEntity>();
+        //List<FarmAppLocationDetailsEntity> locationDeatils = new List<FarmAppLocationDetailsEntity>();
 
         var locationDeatils = repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId).Result;
 

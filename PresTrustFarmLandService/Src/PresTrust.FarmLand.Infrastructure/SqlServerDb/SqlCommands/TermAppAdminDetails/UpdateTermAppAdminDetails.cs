@@ -8,7 +8,6 @@ public class UpdateTermAppAdminDetails
                     ,SADCId					=   @p_SADCId						
                     ,MaxGrant				=   @p_MaxGrant						
                     ,PermanentlyPreserved	=   @p_PermanentlyPreserved			
-                    ,MunicipallyApproved	=   @p_MunicipallyApproved			
                     ,EnrollmentDate			=   @p_EnrollmentDate				
                     ,RenewalDate			=   @p_RenewalDate					
                     ,ExpirationDate			=   @p_ExpirationDate				

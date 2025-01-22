@@ -3,7 +3,7 @@
 public class UpdateOwnerDetailsSqlCommand
 {
     private readonly string _sqlCommand =
-  @"UPDATE  [Farm].[FarmTermAppOwnerDetails]
+  @"UPDATE  [Farm].[FarmAppOwnerDetailList]
                  SET
                         [ApplicationId]         = @p_ApplicationId,
                        [FirstName]             = @p_FirstName,

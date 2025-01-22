@@ -20,7 +20,7 @@ public class GetOwnerDetailsSqlCommand
                        ,[CurrentOwnerMailingName]
                         ,[LastUpdatedBy]                                           
                         ,[LastUpdatedOn]
-            FROM [Farm].[FarmTermAppOwnerDetails] WHERE ApplicationId = @p_ApplicationId";
+            FROM [Farm].[FarmAppOwnerDetailList] WHERE ApplicationId = @p_ApplicationId";
 
      public GetOwnerDetailsSqlCommand()
     {

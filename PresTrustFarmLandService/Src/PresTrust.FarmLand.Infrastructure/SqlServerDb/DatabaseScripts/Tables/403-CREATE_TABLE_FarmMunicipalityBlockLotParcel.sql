@@ -1,4 +1,3 @@
-USE Prestrust_ras
 IF OBJECT_ID('[Farm].[FarmMunicipalityBlockLotParcel]') IS NOT NULL
 BEGIN
 	-- Drop Constraints
