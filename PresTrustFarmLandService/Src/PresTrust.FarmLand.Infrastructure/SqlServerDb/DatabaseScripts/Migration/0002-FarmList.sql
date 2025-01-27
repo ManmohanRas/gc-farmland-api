@@ -4,27 +4,27 @@
 
 	--===================================================================================================================================================
 
-	DROP TABLE IF EXISTS [Farm].[#FarmList];
+	DROP TABLE IF EXISTS Farm.#FarmList;
 
-	CREATE TABLE [Farm].[#FarmList](
-		  [Id]                 INT                     NOT NULL
-		 ,[FarmListID]         INT                     NOT NULL
-		 ,[ProjectID]          INT                     NULL
-		 ,[FarmNumber]         VARCHAR(5)              NULL
-		 ,[TermID]             INT                     NULL
-		 ,[FarmName]           VARCHAR(128)            NULL
-		 ,[ProjectName]        VARCHAR(128)            NULL
-		 ,[Status]			   VARCHAR(50)             NULL
-		 ,[AgencyID]           INT                     NULL
-		 ,[OriginalLandowner]  VARCHAR(128)            NULL
-		 ,[Address1]           VARCHAR(256)            NULL
-		 ,[Address2]           VARCHAR(128)            NULL
-		 ,[MunicipalID]        VARCHAR(4)              NULL 
-		 ,[LastUpdatedBy]	   VARCHAR(128)			   NULL 
-		 ,[LastUpdatedOn]	   Datetime				NOT NULL,    
+	CREATE TABLE Farm.#FarmList(
+		  [Id]                 [int]                    NOT NULL
+		 ,[FarmListID]         [int]                    NOT NULL
+		 ,[ProjectID]          [int]                    NULL
+		 ,[FarmNumber]         [varchar](5)             NULL
+		 ,[TermID]             [int]                    NULL
+		 ,[FarmName]           [varchar](128)           NULL
+		 ,[ProjectName]        [varchar](128)           NULL
+		 ,[Status]			   [varchar](50)            NULL
+		 ,[AgencyID]           [int]                    NULL
+		 ,[OriginalLandowner]  [varchar](128)           NULL
+		 ,[Address1]           [varchar](256)           NULL
+		 ,[Address2]           [varchar](128)           NULL
+		 ,[MunicipalID]        [varchar](4)             NULL 
+		 ,[LastUpdatedBy]	   [varchar](128)			NULL 
+		 ,[LastUpdatedOn]	   [Datetime]				NOT NULL,    
 	);
 
-	        INSERT INTO [Farm].[#FarmList]
+	        INSERT INTO Farm.#FarmList
 		(
 			[FarmListId],						                                                                                                                                             
 			[ProjectID],	                                                                                    

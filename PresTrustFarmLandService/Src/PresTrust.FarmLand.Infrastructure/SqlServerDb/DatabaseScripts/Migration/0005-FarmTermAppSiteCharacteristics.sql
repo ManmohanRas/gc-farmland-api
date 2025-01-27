@@ -3,9 +3,9 @@ BEGIN TRY
    BEGIN TRANSACTION
 
    --Drop Table
-   TRUNCATE TABLE [Farm].[#FarmTermAppSiteCharacteristics]
+   TRUNCATE TABLE Farm.#FarmTermAppSiteCharacteristics
 
-CREATE TABLE [Farm].[#FarmTermAppSiteCharacteristics]
+CREATE TABLE Farm.#FarmTermAppSiteCharacteristics
 (
 	[ApplicationId]						[integer]				    NOT NULL,                                                                                                                                            
     [Area]  							[varchar](50)               NULL,
@@ -21,6 +21,8 @@ CREATE TABLE [Farm].[#FarmTermAppSiteCharacteristics]
 	[IsMortgage]                        [bit]                       NULL,
 	[IsLines]                           [bit]                       NULL,
 	[NoteMortgageLines]                 [varchar](256)              NULL,
+	[LastUpdatedBy]					    [varchar](128)				NULL,
+	[LastUpdatedOn]					    [datetime]					NULL,
 
 CONSTRAINT [PK_#FarmTermAppSiteCharacteristics_Id] PRIMARY KEY CLUSTERED
 (
@@ -34,7 +36,7 @@ CONSTRAINT [PK_#FarmTermAppSiteCharacteristics_Id] PRIMARY KEY CLUSTERED
   
 		-- Insert From Legacy Table
 
-        INSERT INTO [Farm].[#FarmTermAppSiteCharacteristics]
+        INSERT INTO Farm.#FarmTermAppSiteCharacteristics
 		(
 			[ApplicationId],
 			[Area],  		

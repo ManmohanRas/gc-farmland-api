@@ -17,7 +17,7 @@ CREATE TABLE [Farm].[FarmTermAppAdminDetails](
 	[RenewalExpirationDate]			[dateTime]							NULL,
 	[Comment]						[varchar](128)						Null,
 	[LastUpdatedBy]					[varchar](128)						NULL,
-	[LastUpdatedOn]					[datetime]							NULL,
+	[LastUpdatedOn]					[datetime]							NOT NULL,
 );
 
 	  INSERT INTO [Farm].[#FarmList]

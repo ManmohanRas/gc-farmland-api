@@ -2,11 +2,11 @@
    BEGIN TRANSACTION
 
    --Drop Table
-   TRUNCATE TABLE [Farm].[#FarmTermAppOwnerDetails]
+   DROP TABLE Farm.#FarmAppOwnerDetailList
 
-CREATE TABLE [Farm].[#FarmTermAppOwnerDetails]
+CREATE TABLE Farm.#FarmAppOwnerDetailList
 (
-	[ApplicationId]						[integer]				    NOT NULL,                                                                                                                                            
+	[ApplicationId]						[integer]				      NOT NULL,                                                                                                                                            
     [FirstName]							[varchar](128)              NULL,
 	[LastName]                          [varchar](128)              NULL,
     [PropertyLocation]                  [varchar](128)              NULL,                                                                        
@@ -20,8 +20,10 @@ CREATE TABLE [Farm].[#FarmTermAppOwnerDetails]
 	[Salutation]                        [varchar](15)               NOT NULL,
 	[EmailAddress]                      [varchar](128)              NOT NULL,
 	[CurrentOwnerMailingName]           [varchar](128)              NOT NULL,
+	[LastUpdatedBy]						[varchar](128)				    NULL, 
+	[LastUpdatedOn]						[Datetime]				    NOT NULL,
 
-CONSTRAINT [PK_#FarmTermAppOwnerDetails_Id] PRIMARY KEY CLUSTERED
+CONSTRAINT [PK_#FarmAppOwnerDetailList_Id] PRIMARY KEY CLUSTERED
 (
 	[ApplicationId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -33,7 +35,7 @@ CONSTRAINT [PK_#FarmTermAppOwnerDetails_Id] PRIMARY KEY CLUSTERED
   
 		-- Insert From Legacy Table
 
-        INSERT INTO [Farm].[#FarmTermAppOwnerDetails]
+        INSERT INTO Farm.#FFarmAppOwnerDetailList
 		(
 			[ApplicationId],
 			[FirstName],                                                                                                                                            
@@ -56,8 +58,8 @@ CONSTRAINT [PK_#FarmTermAppOwnerDetails_Id] PRIMARY KEY CLUSTERED
 					[LastName],
 					NULL AS [PropertyLocation],
 					[MunicipalID],
-					NULL AS [MailingAddress1],
-					NULL AS [MailingAddress2],
+					[Address1] AS [MailingAddress1],
+					[Address2] AS [MailingAddress2],
 					NULL AS [PhoneNumber],
 					[Town] AS [City],
 					[State],
@@ -79,4 +81,3 @@ BEGIN CATCH
 
     SELECT @ErrorMessage;
 END CATCH
-

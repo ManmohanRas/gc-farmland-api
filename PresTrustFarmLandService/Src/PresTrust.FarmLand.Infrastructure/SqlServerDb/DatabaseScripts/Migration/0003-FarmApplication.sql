@@ -2,9 +2,9 @@
    BEGIN TRANSACTION
 
    --Drop Table
-   TRUNCATE TABLE [Farm].[FarmApplication]
+   DROP TABLE Farm.#FarmApplication
 
-  CREATE TABLE [Farm].[#FarmApplication]
+  CREATE TABLE Farm.#FarmApplication
 (
 	[Id]								 [integer]              NOT NULL,                                                                                                                                            
     [Title]								 [varchar](256)         NOT NULL,                                                                                    
@@ -12,14 +12,14 @@
     [FarmListId]                         [integer]              NOT NULL,                                                                                                                                     
     [ApplicationTypeId]                  [integer]              NOT NULL,
 	[StatusId]                           [integer]              NOT NULL, 
-	[CreatedByProgramUser]               [bit]                  NOT NULL,
-	[IsApprovedByMunicipality]           [bit]                  NOT NULL,
-	[CreatedOn]                          [DateTime]             NOT NULL,
+	[CreatedByProgramUser]               [bit]					NOT NULL,
+	[IsApprovedByMunicipality]           [bit]					NOT NULL,
+	[CreatedOn]                          [Datetime]             NOT NULL,
 	[CreatedBy]                          [varchar](128)         NULL,    
 	[IsActive]                           [bit]                  NULL,
 	[IsSADC]                             [bit]                  NULL,
-	[LastUpdatedBy]						VARCHAR(128)			NULL, 
-	[LastUpdatedOn]						Datetime				NOT NULL, 
+	[LastUpdatedBy]						 [varchar](128)		    NULL, 
+	[LastUpdatedOn]						 [Datetime]				NOT NULL, 
 CONSTRAINT [PK_#FarmApplication_Id] PRIMARY KEY CLUSTERED
 (
 	[Id] ASC
@@ -29,7 +29,7 @@ CONSTRAINT [PK_#FarmApplication_Id] PRIMARY KEY CLUSTERED
 
 		-- Insert From Legacy Table
 
-        INSERT INTO [Farm].[#FarmApplication]
+        INSERT INTO Farm.#FarmApplication
 		(
 			[Id] ,
 			[Title],
