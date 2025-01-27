@@ -41,7 +41,7 @@ INSERT INTO [Core].[NavigationItemUserRole]([NavigationItemId], [UserRoleId]) VA
 INSERT INTO [Core].[NavigationItemUserRole]([NavigationItemId], [UserRoleId]) VALUES (32, 5);
 
 -- Manage Agency Users
-INSERT INTO [Core].[NavigationItemUserRole]([NavigationItemId], [UserRoleId]) VALUES (33, 3);
+--INSERT INTO [Core].[NavigationItemUserRole]([NavigationItemId], [UserRoleId]) VALUES (33, 3);
 INSERT INTO [Core].[NavigationItemUserRole]([NavigationItemId], [UserRoleId]) VALUES (33, 7);
 INSERT INTO [Core].[NavigationItemUserRole]([NavigationItemId], [UserRoleId]) VALUES (33, 8);
 
