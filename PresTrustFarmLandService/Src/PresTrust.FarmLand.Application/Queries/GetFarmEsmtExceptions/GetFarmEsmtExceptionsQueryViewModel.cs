@@ -9,7 +9,7 @@ public class GetFarmEsmtExceptionsQueryViewModel
     public string ExceptionTotalNonSeverable { get; set; }
     public string ExceptionSeverable { get; set; }
     public string ExceptionTotalSeverable { get; set; }
-    public decimal Acres { get; set; }
+    public decimal? Acres { get; set; }
 
     public string LastUpdatedBy { get; set; }
     public DateTime? LastUpdatedOn { get; set; }
