@@ -78,9 +78,9 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             // returns broken rules  
-            var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
-            // save broken rules
-            await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
+            //var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
+            //// save broken rules
+            //await repoBrokenRules.SaveBrokenRules(await defaultBrokenRules);
 
             await repoApplication.UpdateApplicationStatusAsync(application, EsmtAppStatusEnum.PRESERVED);
             FarmApplicationStatusLogEntity appStatusLog = new()
@@ -111,26 +111,24 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
     /// <param name="request"></param>
     /// <param name="application"></param>
     /// <returns></returns>
-    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
-    {
-        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
+    //private async  Task<List<FarmBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    //{
+    //    List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 
-        //List<FarmAppLocationDetailsEntity> locationDeatils = new List<FarmAppLocationDetailsEntity>();
+    //    var locationDeatils = repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId).Result;
 
-        var locationDeatils = repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId).Result;
+    //    if (locationDeatils.Where(x => !x.IsValidPamsPin).Count() > 0 || locationDeatils.Where(x => x.IsWarning).Count() > 0 || locationDeatils.Where(x => x.IsClassCodeWarning).Count() > 0)
+    //    {
+    //        // add default broken rule while initiating application flow
+    //        brokenRules.Add(new FarmBrokenRuleEntity()
+    //        {
+    //            ApplicationId = application.Id,
+    //            SectionId = (int)EsmtAppSectionEnum.LOCATION,
+    //            Message = "All warnings must be resolved on Location tab.",
 
-        if (locationDeatils.Where(x => !x.IsValidPamsPin).Count() > 0 || locationDeatils.Where(x => x.IsWarning).Count() > 0 || locationDeatils.Where(x => x.IsClassCodeWarning).Count() > 0)
-        {
-            // add default broken rule while initiating application flow
-            brokenRules.Add(new FarmBrokenRuleEntity()
-            {
-                ApplicationId = application.Id,
-                SectionId = (int)EsmtAppSectionEnum.LOCATION,
-                Message = "All warnings must be resolved on Location tab.",
+    //        });
 
-            });
-
-        }
-        return brokenRules;
-    }
+    //    }
+    //    return  brokenRules;
+    //}
 }

@@ -1,6 +1,9 @@
 ﻿namespace PresTrust.FarmLand.Application.Commands;
 
-public class EsmtPreservedApplicationCommandMappingProfile
+public class EsmtPreservedApplicationCommandMappingProfile: Profile
 {
-    public EsmtPreservedApplicationCommandMappingProfile() { }
+    public EsmtPreservedApplicationCommandMappingProfile() 
+    {
+        CreateMap<FarmBrokenRuleEntity, BrokenRuleViewModel>();
+    }
 }
