@@ -1,5 +1,3 @@
-IF OBJECT_ID('[Farm].[FarmEsmtAgricultureProdSourceType] ') IS NOT NULL
-
 -- Drop Table
 DROP TABLE IF EXISTS [Farm].[FarmEsmtAgricultureProdSourceType];
 GO

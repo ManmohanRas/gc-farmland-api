@@ -30,7 +30,7 @@ public class GetFarmEsmtAppAdminDetailsSqlQuery
                             ,[OriginalDeed]
                             ,[OriginalPage]
                             ,[SmallOrLargeSign]
-                            ,[Year]
+                            ,[AdYear]
                             ,[LastUpdatedBy]
                             ,[LastUpdatedOn]
             FROM [Farm].[FarmEsmtAppAdminDetails]

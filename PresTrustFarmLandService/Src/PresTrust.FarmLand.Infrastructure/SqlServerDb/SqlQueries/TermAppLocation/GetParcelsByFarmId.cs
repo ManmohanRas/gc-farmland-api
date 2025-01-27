@@ -41,7 +41,7 @@ public class GetParcelsByFarmId
             ELSE 0
             END AS IsClassCodeWarning
             FROM [Farm].[FarmMunicipalityBlockLotParcel] AS MBL
-           LEFT JOIN [Farm].[FarmTermAppLocation] AS L ON (MBL.FarmListID = L.FarmListID and MBL.Id = L.ParcelId AND L.applicationId = @p_ApplicationId)
+           LEFT JOIN [Farm].[FarmAppLocationDetails] AS L ON (MBL.FarmListID = L.FarmListID and MBL.Id = L.ParcelId AND L.applicationId = @p_ApplicationId)
            LEFT JOIN [Core].[View_AgencyEntities_FARM] ViewAgency ON (MBL.MunicipalityId = ViewAgency.AgencyId)
            LEFT JOIN [Core].[Municipality] CM ON (MBL.MunicipalityId = CM.MunicipalId AND CM.InCounty = 1)
            LEFT JOIN CORE.Parcels CP ON (CP.PAMS_PIN = MBL.PamsPin)

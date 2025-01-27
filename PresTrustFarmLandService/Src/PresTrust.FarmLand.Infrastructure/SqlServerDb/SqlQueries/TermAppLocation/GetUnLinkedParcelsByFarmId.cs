@@ -41,7 +41,7 @@ public class GetUnLinkedParcelsByFarmId
         ELSE 0
     END AS IsClassCodeWarning
 FROM [Farm].[FarmMunicipalityBlockLotParcel] AS MBL
-LEFT JOIN [Farm].[FarmTermAppLocation] AS L 
+LEFT JOIN [Farm].[FarmAppLocationDetails] AS L 
     ON MBL.FarmListID = L.FarmListID 
     AND MBL.Id = L.ParcelId 
     AND L.ApplicationId = @p_ApplicationId
@@ -59,7 +59,7 @@ WHERE MBL.FarmListID = @p_FarmListID
       OR NOT EXISTS (
           -- The subquery checks if there is another ParcelId with a different ApplicationId
           SELECT 1
-          FROM [Farm].[FarmTermAppLocation] AS L2
+          FROM [Farm].[FarmAppLocationDetails] AS L2
           LEFT JOIN [Farm].[FarmApplication] FA2 
               ON FA2.Id = L2.ApplicationId
           WHERE L2.ParcelId = MBL.Id

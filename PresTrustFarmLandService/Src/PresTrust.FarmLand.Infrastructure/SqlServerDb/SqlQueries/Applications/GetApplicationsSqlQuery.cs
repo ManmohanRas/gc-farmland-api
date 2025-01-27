@@ -29,7 +29,7 @@ public class GetApplicationsSqlQuery
 			   (
 			    SELECT L.ApplicationId, SUM(MBL.AcresToBeAcquired) AS Acres
 				FROM [Farm].[FarmMunicipalityBlockLotParcel]  AS MBL
-			  LEFT JOIN [Farm].[FarmTermAppLocation] AS L ON (MBL.Id = L.ParcelId AND L.Ischecked = 1)
+			  LEFT JOIN [Farm].[FarmAppLocationDetails] AS L ON (MBL.Id = L.ParcelId AND L.Ischecked = 1)
 			  GROUP BY L.ApplicationId
 			   ) AS LP ON (A.Id = LP.ApplicationId)
 			   LEFT JOIN	[Farm].[FarmApplicationStatusLog] ASL ON ASL.StatusId != A.StatusId AND A.Id = ASL.ApplicationId
@@ -86,7 +86,7 @@ public class GetApplicationsSqlQuery
 			   (
 			    SELECT L.ApplicationId, SUM(MBL.AcresToBeAcquired) AS Acres
 				FROM [Farm].[FarmMunicipalityBlockLotParcel]  AS MBL
-			  LEFT JOIN [Farm].[FarmTermAppLocation] AS L ON (MBL.Id = L.ParcelId AND L.Ischecked = 1)
+			  LEFT JOIN [Farm].[FarmAppLocationDetails] AS L ON (MBL.Id = L.ParcelId AND L.Ischecked = 1)
 			  GROUP BY L.ApplicationId
 			   ) AS LP ON (A.Id = LP.ApplicationId)
                 LEFT JOIN	[Farm].[FarmApplicationStatusLog] ASL ON ASL.StatusId != A.StatusId AND A.Id = ASL.ApplicationId
@@ -140,7 +140,7 @@ public class GetApplicationsSqlQuery
 			   (
 			    SELECT L.ApplicationId, SUM(MBL.AcresToBeAcquired) AS Acres
 				FROM [Farm].[FarmMunicipalityBlockLotParcel]  AS MBL
-			  LEFT JOIN [Farm].[FarmTermAppLocation] AS L ON (MBL.Id = L.ParcelId AND L.Ischecked = 1)
+			  LEFT JOIN [Farm].[FarmAppLocationDetails] AS L ON (MBL.Id = L.ParcelId AND L.Ischecked = 1)
 			  GROUP BY L.ApplicationId
 			   ) AS LP ON (A.Id = LP.ApplicationId)
                  LEFT JOIN	[Farm].[FarmApplicationStatusLog] ASL ON ASL.StatusId != A.StatusId AND A.Id = ASL.ApplicationId

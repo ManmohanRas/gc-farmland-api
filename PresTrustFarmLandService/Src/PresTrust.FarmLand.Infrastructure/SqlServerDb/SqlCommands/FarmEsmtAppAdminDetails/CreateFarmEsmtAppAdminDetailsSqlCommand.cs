@@ -31,7 +31,7 @@ public class CreateFarmEsmtAppAdminDetailsSqlCommand
                             ,[OriginalDeed]
                             ,[OriginalPage]
                             ,[SmallOrLargeSign]
-                            ,[Year]
+                            ,[AdYear]
                             ,[LastUpdatedBy] 
 							,[LastUpdatedOn]
 						)
@@ -64,7 +64,7 @@ public class CreateFarmEsmtAppAdminDetailsSqlCommand
                             ,@p_OriginalDeed
                             ,@p_OriginalPage
                             ,@p_SmallOrLargeSign
-                            ,@p_Year
+                            ,@p_AdYear
 							,@p_LastUpdatedBy  
 							,GETDATE()	
 						);

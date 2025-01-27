@@ -5,7 +5,7 @@ namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
 public class CreateTermAppAdminContactsSqlCommand
 {
     private readonly string _sqlCommand =
-      @"INSERT INTO [Farm].[FarmTermAppAdminContact]
+      @"INSERT INTO [Farm].[FarmAppAdminContact]
               (
                  ApplicationId
                 ,ContactName

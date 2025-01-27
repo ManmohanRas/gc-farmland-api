@@ -8,7 +8,6 @@ public class GetTermAppAdminDetailsSqlCommand
                   ,[SADCId]						 
                   ,[MaxGrant]						 
                   ,[PermanentlyPreserved]			 
-                  ,[MunicipallyApproved]			 
                   ,[EnrollmentDate]				 
                   ,[RenewalDate]					 
                   ,[ExpirationDate]				 

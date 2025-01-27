@@ -3,6 +3,8 @@ public interface IFarmBlockLotRepository
 {
     Task<IEnumerable<FarmBlockLotEntity>> GetFarmBlockLotAsync();
 
+    Task<IEnumerable<FarmBlockLotEntity>> GetProgramManagerBlockLotAsync();
+
     public Task<FarmBlockLotEntity> GetFarmBlockLotByIdAsync(int id);
 
     Task<FarmBlockLotEntity> SaveAsync(FarmBlockLotEntity parcel);
