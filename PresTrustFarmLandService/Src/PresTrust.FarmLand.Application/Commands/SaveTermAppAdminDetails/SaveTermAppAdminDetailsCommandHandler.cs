@@ -160,14 +160,6 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                     Message = "Permanently Preserved required field on AdminDetails tab have not been filled.",
                     IsApplicantFlow = false,
                 });
-            if (request?.MunicipallyApproved == false)
-                brokenRules.Add(new FarmBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "Municipally Approved required field on AdminDetails tab have not been filled.",
-                    IsApplicantFlow = false,
-                });
             if (request.EnrollmentDate == null)
                 brokenRules.Add(new FarmBrokenRuleEntity()
                 {
