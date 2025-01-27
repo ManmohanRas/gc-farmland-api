@@ -83,8 +83,8 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-            var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
-            await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
+           // var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
+            //await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
 
             // save broken rules
             await repoApplication.UpdateApplicationStatusAsync(application, TermAppStatusEnum.ACTIVE);
@@ -120,16 +120,16 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
     /// <param name="request"></param>
     /// <param name="application"></param>
     /// <returns></returns>
-    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
-    {
-        List<FarmBrokenRuleEntity> statusChangeRules = new List<FarmBrokenRuleEntity>();
+    //private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    //{
+    //    List<FarmBrokenRuleEntity> statusChangeRules = new List<FarmBrokenRuleEntity>();
 
-        statusChangeRules.Add(new FarmBrokenRuleEntity()
-        {
-            ApplicationId = application.Id,
-            SectionId = (int)TermAppSectionEnum.ADMIN_DETAILS,
-            Message = "All required fields on ADMIN DETAILS tab have not been filled.",
-        });
-        return statusChangeRules;
-    }
+    //    statusChangeRules.Add(new FarmBrokenRuleEntity()
+    //    {
+    //        ApplicationId = application.Id,
+    //        SectionId = (int)TermAppSectionEnum.ADMIN_DETAILS,
+    //        Message = "All required fields on ADMIN DETAILS tab have not been filled.",
+    //    });
+    //    return statusChangeRules;
+    //}
 }
