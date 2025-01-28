@@ -3,7 +3,7 @@
 public class CreateTermAppLocationSqlCommand
 {
     private readonly string _sqlCommand =
-           @"INSERT INTO [Farm].[FarmTermAppLocation]
+           @"INSERT INTO [Farm].[FarmAppLocationDetails]
 						(
 							 ApplicationId
 							,FarmListID

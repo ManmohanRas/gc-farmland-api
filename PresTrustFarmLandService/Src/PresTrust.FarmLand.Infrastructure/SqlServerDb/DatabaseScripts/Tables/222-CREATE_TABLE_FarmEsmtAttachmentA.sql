@@ -23,7 +23,7 @@ CREATE TABLE [Farm].[FarmEsmtAttachmentA](
    [ApplicationId]                 [integer]                              NOT NULL,
    [IsOfferPriceIndicated]	       [bit]                                  NOT NULL,
    [OfferPriceOpinion]		       [varchar](50)                              NULL, 
-   [AveragePerAcre]	     	       [integer]		                          NULL, 
+   [AveragePerAcre]	     	       [decimal](18,4)		                      NULL, 
    [OfferPriceComments] 		   [varchar](4000)		                      NULL, 
    [LastUpdatedBy]				   [varchar](128)		                      NULL, 
    [LastUpdatedOn]				   [datetime]			                  NOT NULL

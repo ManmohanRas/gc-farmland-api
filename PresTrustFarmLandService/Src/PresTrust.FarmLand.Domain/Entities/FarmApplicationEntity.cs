@@ -27,6 +27,7 @@ public class FarmApplicationEntity
     public bool IsSADC {  get; set; }
     public DateTime? EnrollmentDate { get; set; }
     public double Acres { get; set; }
+    public DateTime? ClosingDate { get; set; }
 
     public ApplicationTypeEnum ApplicationType
     {

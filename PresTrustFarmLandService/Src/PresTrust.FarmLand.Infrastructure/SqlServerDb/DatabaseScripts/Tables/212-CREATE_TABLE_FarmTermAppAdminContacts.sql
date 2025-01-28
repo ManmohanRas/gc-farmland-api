@@ -1,18 +1,18 @@
-IF OBJECT_ID('[Farm].[FarmTermAppAdminContact]') IS NOT NULL
+IF OBJECT_ID('[Farm].[FarmAppAdminContact]') IS NOT NULL
 BEGIN
 
-	ALTER TABLE [Farm].[FarmTermAppAdminContact] DROP CONSTRAINT IF EXISTS [FK_ApplicationId_FarmTermAppAdminContact];
+	ALTER TABLE [Farm].[FarmAppAdminContact] DROP CONSTRAINT IF EXISTS [FK_ApplicationId_FarmAppAdminContact];
 
-	ALTER TABLE [Farm].[FarmTermAppAdminContact] DROP CONSTRAINT IF EXISTS [DF_LastUpdatedOn_FarmTermAppAdminContact];
+	ALTER TABLE [Farm].[FarmAppAdminContact] DROP CONSTRAINT IF EXISTS [DF_LastUpdatedOn_FarmAppAdminContact];
 
 	
 END;
 GO
 
-DROP TABLE IF EXISTS [Farm].[FarmTermAppAdminContact]
+DROP TABLE IF EXISTS [Farm].[FarmAppAdminContact]
 GO
 
-CREATE TABLE [Farm].[FarmTermAppAdminContact](
+CREATE TABLE [Farm].[FarmAppAdminContact](
 	[Id]					[integer]			IDENTITY(1,1)	NOT NULL,
 	[ApplicationId]			[integer]							NOT NULL,
 	[ContactName]			[varchar](76)						NULL,
@@ -23,7 +23,7 @@ CREATE TABLE [Farm].[FarmTermAppAdminContact](
 	[SelectContact]			[bit]								NULL,
 	[LastUpdatedBy]			[varchar](128)						NULL	,
 	[LastUpdatedOn]			[datetime]							NOT NULL,
-CONSTRAINT [PK_FarmTermAppAdminContact_Id] PRIMARY KEY CLUSTERED 
+CONSTRAINT [PK_FarmAppAdminContact_Id] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -31,8 +31,8 @@ CONSTRAINT [PK_FarmTermAppAdminContact_Id] PRIMARY KEY CLUSTERED
 
 GO
 
-ALTER TABLE [Farm].[FarmTermAppAdminContact] ADD CONSTRAINT [FK_ApplicationId_FarmTermAppAdminContact]  FOREIGN KEY (ApplicationId) REFERENCES [Farm].[FarmApplication](Id);
+ALTER TABLE [Farm].[FarmAppAdminContact] ADD CONSTRAINT [FK_ApplicationId_FarmAppAdminContact]  FOREIGN KEY (ApplicationId) REFERENCES [Farm].[FarmApplication](Id);
 GO
 
-ALTER TABLE [Farm].[FarmTermAppAdminContact] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmTermAppAdminContact]  DEFAULT (GETDATE()) FOR [LastUpdatedOn]
+ALTER TABLE [Farm].[FarmAppAdminContact] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmAppAdminContact]  DEFAULT (GETDATE()) FOR [LastUpdatedOn]
 GO

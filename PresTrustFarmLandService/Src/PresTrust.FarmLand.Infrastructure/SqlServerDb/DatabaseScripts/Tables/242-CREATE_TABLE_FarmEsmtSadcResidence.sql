@@ -1,4 +1,3 @@
-use PresTrust_RAS
 IF OBJECT_ID('[Farm].[FarmEsmtSadcResidence]') IS NOT NULL
 BEGIN
 	-- Drop Constraints

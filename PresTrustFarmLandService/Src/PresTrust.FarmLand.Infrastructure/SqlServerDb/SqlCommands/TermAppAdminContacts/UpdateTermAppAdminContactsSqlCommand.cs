@@ -5,7 +5,7 @@ namespace PresTrust.FarmLand.Infrastructure.SqlServerDb.SqlCommands;
 public class UpdateTermAppAdminContactsSqlCommand
 {
     private readonly string _sqlCommand =
-      @"  UPDATE [Farm].[FarmTermAppAdminContact]
+      @"  UPDATE [Farm].[FarmAppAdminContact]
                 SET ContactName = @p_ContactName
                     ,Agency = @p_Agency
                     ,Email = @p_Email

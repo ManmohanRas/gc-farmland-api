@@ -13,7 +13,7 @@ public class GetTermAppSignatorySqlCommand
                             FROM 
                                 Farm.FarmMunicipalityBlockLotParcel BP
                             LEFT JOIN 
-                                Farm.FarmTermAppLocation TL ON BP.Id = TL.ParcelId 
+                                [Farm].[FarmAppLocationDetails] TL ON BP.Id = TL.ParcelId 
                             LEFT JOIN 
                                 Core.View_AgencyEntities_FLOOD AG ON AG.AgencyId = BP.MunicipalityId 
                             WHERE 

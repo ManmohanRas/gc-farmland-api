@@ -1,18 +1,18 @@
-IF OBJECT_ID('[Farm].[FarmTermAppOwnerDetails]') IS NOT NULL
+IF OBJECT_ID('[Farm].[FarmAppOwnerDetailList] ') IS NOT NULL
 BEGIN
 	-- Drop Constraints
-	ALTER TABLE [Farm].[FarmTermAppOwnerDetails] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmTermAppOwnerDetails];
+	ALTER TABLE [Farm].[FarmAppOwnerDetailList]  DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmAppOwnerDetailList];
 		
-	ALTER TABLE [Farm].[FarmTermAppOwnerDetails] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmTermAppOwnerDetails];
+	ALTER TABLE [Farm].[FarmAppOwnerDetailList]  DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmAppOwnerDetailList];
 END;
 GO
 
 -- Drop Table
-DROP TABLE IF EXISTS [Farm].[FarmTermAppOwnerDetails]
+DROP TABLE IF EXISTS [Farm].[FarmAppOwnerDetailList] 
 GO
 
 -- Create Table
-CREATE TABLE [Farm].[FarmTermAppOwnerDetails](
+CREATE TABLE [Farm].[FarmAppOwnerDetailList] (
 	[Id]							[integer] 		IDENTITY(1,1)	NOT NULL,
 	[ApplicationId]					[integer]						NOT NULL,
 	[FirstName]						[varchar](128)					NULL	,
@@ -30,7 +30,7 @@ CREATE TABLE [Farm].[FarmTermAppOwnerDetails](
 	[CurrentOwnerMailingName]       [varchar](128)                  NOT NULL,
 	[LastUpdatedBy]					[varchar](128)					NULL	, 
 	[LastUpdatedOn]					[datetime]						NOT NULL, 
-CONSTRAINT [PK_FarmTermAppOwnerDetails_Id] PRIMARY KEY CLUSTERED 
+CONSTRAINT [PK_FarmAppOwnerDetailList_Id] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -39,8 +39,8 @@ CONSTRAINT [PK_FarmTermAppOwnerDetails_Id] PRIMARY KEY CLUSTERED
 GO
 
 -- Create Constraint
-ALTER TABLE [Farm].[FarmTermAppOwnerDetails] ADD CONSTRAINT [FK_ApplicationId_FarmTermAppOwnerDetails]  FOREIGN KEY (ApplicationId) REFERENCES [Farm].FarmApplication(Id);
+ALTER TABLE [Farm].[FarmAppOwnerDetailList]  ADD CONSTRAINT [FK_ApplicationId_FarmAppOwnerDetailList]  FOREIGN KEY (ApplicationId) REFERENCES [Farm].FarmApplication(Id);
 GO 
 
-ALTER TABLE [Farm].[FarmTermAppOwnerDetails] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmTermAppOwnerDetails]  DEFAULT (GETDATE()) FOR [LastUpdatedOn]
+ALTER TABLE [Farm].[FarmAppOwnerDetailList]  WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmAppOwnerDetailList]  DEFAULT (GETDATE()) FOR [LastUpdatedOn]
 GO  

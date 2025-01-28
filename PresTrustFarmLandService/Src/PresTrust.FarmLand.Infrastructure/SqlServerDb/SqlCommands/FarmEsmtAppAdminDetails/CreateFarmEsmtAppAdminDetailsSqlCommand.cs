@@ -28,6 +28,10 @@ public class CreateFarmEsmtAppAdminDetailsSqlCommand
                             ,[RFPIsWetlands]
                             ,[CADBAppYear]
                             ,[ProjectYear]
+                            ,[OriginalDeed]
+                            ,[OriginalPage]
+                            ,[SmallOrLargeSign]
+                            ,[AdYear]
                             ,[LastUpdatedBy] 
 							,[LastUpdatedOn]
 						)
@@ -57,6 +61,10 @@ public class CreateFarmEsmtAppAdminDetailsSqlCommand
                             ,@p_RFPIsWetlands
                             ,@p_CADBAppYear
                             ,@p_ProjectYear
+                            ,@p_OriginalDeed
+                            ,@p_OriginalPage
+                            ,@p_SmallOrLargeSign
+                            ,@p_AdYear
 							,@p_LastUpdatedBy  
 							,GETDATE()	
 						);

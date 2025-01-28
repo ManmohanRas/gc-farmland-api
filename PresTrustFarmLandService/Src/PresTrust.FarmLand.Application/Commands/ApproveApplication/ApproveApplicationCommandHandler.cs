@@ -1,8 +1,4 @@
-﻿using Azure.Core;
-using System.Reflection.Metadata;
-using static System.Collections.Specialized.BitVector32;
-
-namespace PresTrust.FarmLand.Application.Commands;
+﻿namespace PresTrust.FarmLand.Application.Commands;
 
 public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<ApproveApplicationCommand, ApproveApplicationCommandViewModel>
 {

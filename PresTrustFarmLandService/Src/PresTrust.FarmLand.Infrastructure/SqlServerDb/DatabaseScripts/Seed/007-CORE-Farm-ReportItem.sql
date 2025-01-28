@@ -1,4 +1,4 @@
-DELETE FROM [Core].[ReportItem] WHERE [Id] IN (36, 37,38,39, 40,41, 42, 43, 44, 45, 46, 47, 48);
+DELETE FROM [Core].[ReportItem] WHERE [Id] IN (SELECT  Id FROM [CORE].[ReportItem] WHERE ProgramTypeId = 1);
 
 SET IDENTITY_INSERT [Core].[ReportItem] ON
 
@@ -60,6 +60,24 @@ VALUES (53, 'Preserved Farms with Signs Installed', 'FarmPreservedFarmswithSigns
 
 INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
 VALUES (54, 'Farm Easement Permanently Preserved Farms In Morris County', 'FarmEsmtPermanentlyPreservedFarmsInMorrisCounty', 'Farm Easement Permanently Preserved Farms In Morris County', 'description', 19, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (55, 'Summary of Farmland Preservation Pending Project', 'FarmSumOfFarmLandPresPendingProject', 'Summary of Farmland Preservation Pending Project', 'description', 20, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (56, 'Farm Easement Summary of Preserved Farms', 'FarmEsmtSummaryOfPreservedFarms', 'Farm Easement Summary of Preserved Farms', 'description', 21, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (57, 'Targeted Farm Eligibility', 'FarmEsmtTargetedFarmEligibilityReport', 'Targeted Farm Eligibility', 'description', 22, 1, 0);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (58, 'Morris County Municipal Land Area and Farmland Acreage', 'FarmEsmtMCMuniLandAreaandFarmlandAcreageReport', 'Morris County Municipal Land Area and Farmland Acreage', 'description', 23, 1, 1);
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (59, 'Farm Easement EXHIBIT A', 'FarmEsmtEXHIBITA', 'Farm Easement EXHIBIT A', 'description', 24, 1, 1); 
+
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (60, 'Re-Sale Info of Preserved Farms', 'FarmEsmtReSaleInfoOfPreservedFarmsReport', 'Re-Sale Info of Preserved Farms', 'description', 25, 1, 1); 
 
 SET IDENTITY_INSERT [Core].[ReportItem] OFF
 

@@ -67,5 +67,10 @@ public enum EmailTemplateCodeTypeEnum
     /// <summary>
     /// Email Template Code Type for FEEDBACK_RECEIVED_EMAIL
     /// </summary>
-    FEEDBACK_RECEIVED_EMAIL
+    FEEDBACK_RECEIVED_EMAIL,
+
+    /// <summary>
+    /// Email Template Code Type for FARM_MONITORING
+    /// </summary>
+    FARM_MONITORING
 }

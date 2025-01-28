@@ -139,7 +139,7 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
         {
             ApplicationId = application.Id,
             SectionId = (int)EsmtAppSectionEnum.OWNER_DETAILS,
-            Message = "All fields on Owner Details tab have not been filled.",
+            Message = "All required fields on Owner Details tab have not been filled.",
             IsApplicantFlow = true
         });
 

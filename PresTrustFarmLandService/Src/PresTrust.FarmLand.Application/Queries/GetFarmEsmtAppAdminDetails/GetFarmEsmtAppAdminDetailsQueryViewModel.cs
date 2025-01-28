@@ -26,4 +26,8 @@ public class GetFarmEsmtAppAdminDetailsQueryViewModel
     public bool RFPIsWetlands { get; set; }
     public int? CADBAppYear { get; set; }
     public int? ProjectYear { get; set; }
+    public string OriginalDeed { get; set; }
+    public string OriginalPage { get; set; }
+    public string SmallOrLargeSign { get; set; }
+    public DateTime? AdYear { get; set; }
 }
