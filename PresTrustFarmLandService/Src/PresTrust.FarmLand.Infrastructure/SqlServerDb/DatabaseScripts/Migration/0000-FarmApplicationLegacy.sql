@@ -2,7 +2,7 @@
    BEGIN TRANSACTION
 
    --Drop Table
-   TRUNCATE TABLE [Farm].[FarmTermApplicationLegacy]
+   DROP TABLE [Farm].[FarmTermApplicationLegacy]
 
 
 CREATE TABLE [Farm].[FarmTermApplicationLegacy]

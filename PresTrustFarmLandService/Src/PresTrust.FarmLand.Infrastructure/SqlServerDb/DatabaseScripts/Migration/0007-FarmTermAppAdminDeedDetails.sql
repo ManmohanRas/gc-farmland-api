@@ -4,7 +4,7 @@
 
 	--===================================================================================================================================================
 -- Drop Table
-DROP TABLE IF EXISTS [Farm].[#FarmTermAppDeedDetails]
+DROP TABLE IF EXISTS #FarmTermAppDeedDetails
 
 
 -- Create Table
@@ -25,7 +25,7 @@ CREATE TABLE [Farm].[#FarmTermAppDeedDetails](
 	[LastUpdatedOn]					[datetime]						NOT NULL, 
 
 	);
-	        INSERT INTO [Farm].[#FarmTermAppDeedDetails]
+	        INSERT INTO #FarmTermAppDeedDetails
 		(
 			[ApplicationId],
 			[ParcelId],

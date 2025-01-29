@@ -4,61 +4,98 @@
 
 	--===================================================================================================================================================
 
-	DROP TABLE IF EXISTS Farm.#FarmList;
+		
 
-	CREATE TABLE Farm.#FarmList(
-		  [Id]                 [int]                    NOT NULL
-		 ,[FarmListID]         [int]                    NOT NULL
-		 ,[ProjectID]          [int]                    NULL
-		 ,[FarmNumber]         [varchar](5)             NULL
-		 ,[TermID]             [int]                    NULL
-		 ,[FarmName]           [varchar](128)           NULL
-		 ,[ProjectName]        [varchar](128)           NULL
-		 ,[Status]			   [varchar](50)            NULL
-		 ,[AgencyID]           [int]                    NULL
-		 ,[OriginalLandowner]  [varchar](128)           NULL
-		 ,[Address1]           [varchar](256)           NULL
-		 ,[Address2]           [varchar](128)           NULL
-		 ,[MunicipalID]        [varchar](4)             NULL 
-		 ,[LastUpdatedBy]	   [varchar](128)			NULL 
-		 ,[LastUpdatedOn]	   [Datetime]				NOT NULL,    
-	);
+		DROP TABLE IF EXISTS [Farm].[LegacyFarmList];
 
-	        INSERT INTO Farm.#FarmList
+		CREATE TABLE [Farm].[LegacyFarmList] (
+			LegacyFarmListId    INT,
+			LegacyFarmName      VARCHAR(128),
+			NewFarmListId		INT,
+		);
+
+		INSERT INTO [Farm].[LegacyFarmList]
 		(
-			[FarmListId],						                                                                                                                                             
-			[ProjectID],	                                                                                    
-			[FarmNumber],                                                                                               
-			[TermID],                                                                                                                                                                
-			[FarmName],                        
-			[ProjectName],                      
-			[Status],                         
-			[AgencyID],                       
-			[OriginalLandowner],                 
-			[Address1],                         
-			[Address2],	
-			[MunicipalId],
-			[LastUpdatedBy],
-			[LastUpdatedOn]
-			)
-            SELECT 
-					TP.[FarmListID],
-					NULL AS [ProjectID], -- [ID]
-					NULL AS [FarmNumber],
-					TP.[ID] AS [TermID],
-					TP.[FarmName],
-					TP.[ProjectName],
-					OP.[StatusId],
-					ISNULL(TP.[AgencyID],0) AS [AgencyID],
-					OP.[OriginalLandowner],
-					[Address1],
-					[Address2],
-					[MunicipalId],
-					NULL AS [LastUpdatedBy],
-					GetDate() AS [LastUpdatedOn]
-                FROM  [Farm].[TermProgram_Legacy] TP
-				LEFT JOIN [Farm].[OwnerProperty_Legacy] OP ON TP.FarmListId = OP.FarmListId
+			LegacyFarmListId,
+			LegacyFarmName
+		)
+		SELECT
+			LegacyFarmListId,
+			LegacyFarmName
+		FROM [Farm].[TermProgram_LEGACY];
 
+
+		DECLARE
+			@v_LEGACY_RECORD_COUNT INT,
+			@v_LEGACY_RECORD_INDEX INT;
+
+		DROP TABLE IF EXISTS #FarmList;
+		CREATE TABLE #FarmList(
+		  Id				   INTEGER IDENTITY(1,1), 
+		  LegacyFarmListId     INTEGER
+		  )
+
+		  INSERT INTO		#FarmList (LegacyFarmListId)
+SELECT		LegacyFarmListId
+FROM		[Farm].[LegacyFarmList]
+WHERE		ISNULL(NewFarmListId,0) = 0;
+
+		
+
+		--SET	@v_LEGACY_RECORD_COUNT = @@ROWCOUNT;
+		--SET	@v_LEGACY_RECORD_INDEX = 1;
+
+		--WHILE (@v_LEGACY_RECORD_INDEX <= @v_LEGACY_RECORD_COUNT)
+		--BEGIN
+
+		--	DECLARE
+		--		@v_LEGACY_FARMLIST_ID INT,
+		--		@v_NEW_FARMLIST_ID INT;
+
+		--	SELECT
+		--		@v_LEGACY_FARMLIST_ID = LegacyFarmListId 
+		--	FROM		[LegacyFarmList]
+		--	WHERE		ID = @v_LEGACY_RECORD_INDEX;
+
+
+	
+
+	 --       INSERT INTO Farm.FarmList
+		--(
+		--	[FarmNumber],                                                                                               
+		--	[FarmName],                        
+		--	[Status],                         
+		--	[AgencyID],                       
+		--	[OriginalLandowner],                 
+		--	[Address1],                         
+		--	[Address2],	
+		--	[MunicipalId],
+		--	[LastUpdatedBy],
+		--	[LastUpdatedOn]
+		--	)
+  --          SELECT 
+		--			NULL AS [FarmNumber],
+		--			TP.[FarmName],
+		--			OP.[StatusId],
+		--			ISNULL(TP.[AgencyID],0) AS [AgencyID],
+		--			OP.[OriginalLandowner],
+		--			[Address1],
+		--			[Address2],
+		--			[MunicipalId],
+		--			NULL AS [LastUpdatedBy],
+		--			GetDate() AS [LastUpdatedOn]
+  --              FROM  [Farm].[TermProgram_Legacy] TP
+		--		LEFT JOIN [Farm].[OwnerProperty_Legacy] OP ON TP.FarmListId = OP.FarmListId;
+
+		--	SET @v_NEW_FARMLIST_ID = @@IDENTITY;
+
+		--	UPDATE	[Farm].[LegacyFarmList]
+		--	SET   NewFarmListId  = @v_NEW_FarmList_ID
+		--	WHERE	LegacyFarmListId = @v_LEGACY_FARMLIST_ID;
+				
+
+
+			END;
             COMMIT;
             PRINT 'Term application FarmList legacy table has been populated';
 END TRY

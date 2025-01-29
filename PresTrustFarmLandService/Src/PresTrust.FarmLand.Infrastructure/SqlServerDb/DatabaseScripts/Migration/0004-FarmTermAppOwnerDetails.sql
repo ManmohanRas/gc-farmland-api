@@ -2,9 +2,9 @@
    BEGIN TRANSACTION
 
    --Drop Table
-   DROP TABLE Farm.#FarmAppOwnerDetailList
+   DROP TABLE #FarmAppOwnerDetailList
 
-CREATE TABLE Farm.#FarmAppOwnerDetailList
+CREATE TABLE #FarmAppOwnerDetailList
 (
 	[ApplicationId]						[integer]				      NOT NULL,                                                                                                                                            
     [FirstName]							[varchar](128)              NULL,
@@ -35,7 +35,7 @@ CONSTRAINT [PK_#FarmAppOwnerDetailList_Id] PRIMARY KEY CLUSTERED
   
 		-- Insert From Legacy Table
 
-        INSERT INTO Farm.#FFarmAppOwnerDetailList
+        INSERT INTO #FarmAppOwnerDetailList
 		(
 			[ApplicationId],
 			[FirstName],                                                                                                                                            

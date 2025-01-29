@@ -3,9 +3,9 @@ BEGIN TRY
    BEGIN TRANSACTION
 
    --Drop Table
-   TRUNCATE TABLE Farm.#FarmTermAppSiteCharacteristics
+   TRUNCATE TABLE #FarmTermAppSiteCharacteristics
 
-CREATE TABLE Farm.#FarmTermAppSiteCharacteristics
+CREATE TABLE #FarmTermAppSiteCharacteristics
 (
 	[ApplicationId]						[integer]				    NOT NULL,                                                                                                                                            
     [Area]  							[varchar](50)               NULL,
@@ -36,7 +36,7 @@ CONSTRAINT [PK_#FarmTermAppSiteCharacteristics_Id] PRIMARY KEY CLUSTERED
   
 		-- Insert From Legacy Table
 
-        INSERT INTO Farm.#FarmTermAppSiteCharacteristics
+        INSERT INTO #FarmTermAppSiteCharacteristics
 		(
 			[ApplicationId],
 			[Area],  		

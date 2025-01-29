@@ -4,7 +4,7 @@
 
 	--===================================================================================================================================================
 -- Create Table
-CREATE TABLE [Farm].[FarmTermAppAdminDetails](
+CREATE TABLE #FarmTermAppAdminDetails(
 	[Id]							[integer] 		IDENTITY(1,1)	NOT NULL,
 	[ApplicationId]					[integer]						NOT NULL,
 	[SADCId]						[integer]							NULL,
@@ -20,7 +20,7 @@ CREATE TABLE [Farm].[FarmTermAppAdminDetails](
 	[LastUpdatedOn]					[datetime]							NOT NULL,
 );
 
-	  INSERT INTO [Farm].[#FarmList]
+	  INSERT INTO #FarmTermAppAdminDetails
 		(
 			[ApplicationId],						                                                                                                                                             
 			[SADCId],	                                                                                    
