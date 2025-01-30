@@ -2,9 +2,9 @@
    BEGIN TRANSACTION
 
    --Drop Table
-   DROP TABLE Farm.#FarmApplication
+   DROP TABLE #FarmApplication
 
-  CREATE TABLE Farm.#FarmApplication
+  CREATE TABLE #FarmApplication
 (
 	[Id]								 [integer]              NOT NULL,                                                                                                                                            
     [Title]								 [varchar](256)         NOT NULL,                                                                                    
@@ -29,7 +29,7 @@ CONSTRAINT [PK_#FarmApplication_Id] PRIMARY KEY CLUSTERED
 
 		-- Insert From Legacy Table
 
-        INSERT INTO Farm.#FarmApplication
+        INSERT INTO #FarmApplication
 		(
 			[Id] ,
 			[Title],
@@ -60,11 +60,52 @@ CONSTRAINT [PK_#FarmApplication_Id] PRIMARY KEY CLUSTERED
 					[Municipally Approved?],
 					NULL AS [CreatedOn],
 					NULL AS [CreatedBy],
-					NULL AS [IsActive],
+					1 AS [IsActive],
 					NULL AS [IsSADC],
 					NULL AS LastUpdatedBy,
 					GetDate()
-                FROM  [Farm].[TermProgram_Legacy]  
+                FROM  [Farm].[TermProgram_Legacy] ;
+				
+					SET IDENTITY_INSERT [Farm].[FarmApplication] ON
+
+
+					INSERT INTO [Farm].[FarmApplication]
+				(	[Id],
+					[Title],
+					[AgencyId],
+					[FarmListId],
+					[ApplicationTypeId],
+					[StatusId],
+					[CreatedByProgramUser],
+					[IsApprovedByMunicipality] ,
+					[CreatedOn],
+					[CreatedBy],
+					[IsActive],
+					[IsSADC],
+					[LastUpdatedBy],
+					[LastUpdatedOn]
+					)
+					SELECT  [Id],
+							[ProjectName] AS [Title], -- [ID]
+							[AgencyId],
+							[FarmListID],
+							'1' AS [ApplicationTypeId],
+							CASE WHEN [Status] = '5 Expired' THEN 106
+								 WHEN [Status] = '4 Current' THEN 105
+								 WHEN [Status] = '2 Petition Approved' THEN 103
+								 END AS [StatusId],
+							NULL AS [CreatedByProgramUser],
+							[Municipally Approved?],
+							NULL AS [CreatedOn],
+							NULL AS [CreatedBy],
+							NULL AS [IsActive],
+							NULL AS [IsSADC],
+							NULL AS LastUpdatedBy,
+							GetDate()
+						FROM  #FarmApplication;
+
+						SET IDENTITY_INSERT [Farm].[FarmApplication] OFF;
+						
 
             COMMIT;
             PRINT 'Application table has been populated';

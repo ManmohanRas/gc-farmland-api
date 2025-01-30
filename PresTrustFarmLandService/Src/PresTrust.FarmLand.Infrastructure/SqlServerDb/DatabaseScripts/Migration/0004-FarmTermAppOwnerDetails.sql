@@ -50,7 +50,9 @@ CONSTRAINT [PK_#FarmAppOwnerDetailList_Id] PRIMARY KEY CLUSTERED
 			[ZipCode],
 			[Salutation],
 			[EmailAddress],
-			[CurrentOwnerMailingName]
+			[CurrentOwnerMailingName],
+			[LastUpdatedBy],
+			[LastUpdatedOn]
 			)
             SELECT 
 					[Id],
@@ -66,7 +68,9 @@ CONSTRAINT [PK_#FarmAppOwnerDetailList_Id] PRIMARY KEY CLUSTERED
 					[Zip Code],
 					NULL AS [Salutation],
 					NULL AS [EmailAddress],
-					NULL AS  [CurrentOwnerMailingName]
+					NULL AS  [CurrentOwnerMailingName],
+					NULL AS [LastUpdatedBy],
+					GetDate() AS [LastUpdatedOn]
                 FROM  [Farm].[TermProgram_Legacy]  
 
             COMMIT;
