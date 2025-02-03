@@ -1,9 +1,6 @@
-﻿BEGIN TRY
-   BEGIN TRANSACTION
-
-   --Drop Table
-   DROP TABLE [Farm].[FarmTermApplicationLegacy]
-
+﻿-- Create FarmTermApplicationLegacy
+DROP TABLE IF EXISTS [Farm].[FarmTermApplicationLegacy]
+GO
 
 CREATE TABLE [Farm].[FarmTermApplicationLegacy]
 (
@@ -19,44 +16,22 @@ CONSTRAINT [PK_FarmTermApplicationLegacy_Id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-
---script to migrate legacy term application into bridge table FarmTermApplicationLegacy
-
+GO
 
 
+-- Create FarmListLegacy
+DROP TABLE IF EXISTS [Farm].[FarmListLegacy]
+GO
 
-		-- Insert From Legacy Table
+CREATE TABLE [Farm].[FarmListLegacy] (
+			LegacyFarmListId    INT				NOT NULL,
+			LegacyFarmName      VARCHAR(128)    NULL,
+			NewFarmListId		INT             NULL,
+CONSTRAINT [PK_LegacyFarmList_Id] PRIMARY KEY CLUSTERED
+(
+	[LegacyFarmListId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-       INSERT INTO [Farm].[FarmTermApplicationLegacy]
-		(
-        LegacyApplicationId,
-        LegacyApplicationTitle,
-        LegacyFarmListId,
-        LegacyApplicationStatus,
-        LegacyAgencyId,
-        FarmApplicationId
-        )
-      SELECT 
-			[Id],
-			[ProjectName],
-			ISNULL([FarmListID], 0) AS [FarmListID],
-			[Status],
-            [AgencyID],
-			NULL AS [FarmApplicationId]
-     FROM  [Farm].[TermProgram_Legacy] 
-
-            COMMIT;
-            PRINT 'Term application legacy table has been populated';
-END TRY
-BEGIN CATCH
-    DECLARE     @ErrorMessage  NVARCHAR(4000);
-
-    SET         @ErrorMessage = ERROR_MESSAGE();
-    ROLLBACK;
-
-
-    SELECT @ErrorMessage;
-END CATCH
-
-
+GO;
 
