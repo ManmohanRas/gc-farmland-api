@@ -1,6 +1,4 @@
-﻿using PresTrust.FarmLand.Application.Queries;
-
-namespace PresTrust.FarmLand.Application.Commands;
+﻿namespace PresTrust.FarmLand.Application.Commands;
 
 public class EsmtPostClosingApplicationCommandHandler : BaseHandler, IRequestHandler<EsmtPostClosingApplicationCommand, EsmtPostClosingApplicationCommandViewModel>
 {
@@ -81,6 +79,11 @@ public class EsmtPostClosingApplicationCommandHandler : BaseHandler, IRequestHan
             if (template != null)
                 await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, owner: ownerDetails.FirstOrDefault(), blockLot: blockLot);
 
+            // returns broken rules
+            var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
+            // Save current Broken Rules, if any
+            await repoBrokenRules.SaveBrokenRules(await defaultBrokenRules);
+
             scope.Complete();
             result.IsSuccess = true;
 
@@ -95,19 +98,25 @@ public class EsmtPostClosingApplicationCommandHandler : BaseHandler, IRequestHan
     /// <param name="request"></param>
     /// <param name="application"></param>
     /// <returns></returns>
-    //private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
-    //{
-    //    List<FarmBrokenRuleEntity> statusChangeRules = new List<FarmBrokenRuleEntity>();
+    private async Task<List<FarmBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    {
+        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 
-    //    // add default broken rule while initiating application flow
-    //    statusChangeRules.Add(new FarmBrokenRuleEntity()
-    //    {
-    //        ApplicationId = application.Id,
-    //        SectionId = (int)EsmtAppSectionEnum.LOCATION,
-    //        Message = "All required fields on ADMIN_DETAILS tab have not been filled.",
+        var locationDeatils = repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId).Result;
 
-    //    });
+        if (locationDeatils.Where(x => !x.IsValidPamsPin).Count() > 0 || locationDeatils.Where(x => x.IsWarning).Count() > 0 || locationDeatils.Where(x => x.IsClassCodeWarning).Count() > 0)
+        {
+            // add default broken rule while initiating application flow
+            brokenRules.Add(new FarmBrokenRuleEntity()
+            {
+                ApplicationId = application.Id,
+                SectionId = (int)EsmtAppSectionEnum.LOCATION,
+                Message = "All warnings must be resolved on Location tab.",
 
-    //    return statusChangeRules;
-    //}
+            });
+
+        }
+        return brokenRules;
+    }
+
 }

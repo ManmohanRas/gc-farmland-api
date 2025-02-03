@@ -62,13 +62,13 @@ INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, So
 VALUES (54, 'Farm Easement Permanently Preserved Farms In Morris County', 'FarmEsmtPermanentlyPreservedFarmsInMorrisCounty', 'Farm Easement Permanently Preserved Farms In Morris County', 'description', 19, 1, 1);
 
 INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
-VALUES (55, 'Summary of Farmland Preservation Pending Project', 'FarmEsmtSumOfFarmLandPreservationPendingProject', 'Summary of Farmland Preservation Pending Project', 'description', 20, 1, 1);
+VALUES (55, 'Summary of Farmland Preservation Pending Project', 'FarmSumOfFarmLandPresPendingProject', 'Summary of Farmland Preservation Pending Project', 'description', 20, 1, 1);
 
 INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
 VALUES (56, 'Farm Easement Summary of Preserved Farms', 'FarmEsmtSummaryOfPreservedFarms', 'Farm Easement Summary of Preserved Farms', 'description', 21, 1, 1);
 
 INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
-VALUES (57, 'Targeted Farm Eligibility', 'FarmEsmtTargetedFarmEligibilityReport', 'Targeted Farm Eligibility', 'description', 22, 1, 1);
+VALUES (57, 'Targeted Farm Eligibility', 'FarmEsmtTargetedFarmEligibilityReport', 'Targeted Farm Eligibility', 'description', 22, 1, 0);
 
 INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
 VALUES (58, 'Morris County Municipal Land Area and Farmland Acreage', 'FarmEsmtMCMuniLandAreaandFarmlandAcreageReport', 'Morris County Municipal Land Area and Farmland Acreage', 'description', 23, 1, 1);

@@ -83,7 +83,7 @@ public class SaveAppDocumentChecklistCommandHandler : BaseHandler, IRequestHandl
 
         int sectionId = application.ApplicationTypeId == 1 ?  (int)TermAppSectionEnum.ADMIN_DOCUMENT_CHECKLIST : (int)EsmtAppSectionEnum.ADMIN_DOCUMENT_CHECK_LIST;
         List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
-        // map command object to the FloodDocumentEntity
+        // map command object to the FarmDocumentEntity
         var documents = mapper.Map<IEnumerable<DocumentsViewModel>,  IEnumerable<TermOtherDocumentsEntity>>(request.Documents);
 
         var unapprovedDocs = request.Documents.Where(doc => doc.Approved == false).Count();
