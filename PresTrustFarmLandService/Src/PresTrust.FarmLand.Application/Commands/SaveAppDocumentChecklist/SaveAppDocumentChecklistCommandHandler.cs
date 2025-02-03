@@ -38,9 +38,9 @@ public class SaveAppDocumentChecklistCommandHandler : BaseHandler, IRequestHandl
     {
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
-
         // consider only add/updated records
         var viewmodelDocuments = request.Documents.Where(doc => string.Compare(doc.RowStatus, "U", ignoreCase: true) == 0).ToList();
+        var entityDocments= mapper.Map<IEnumerable<DocumentsViewModel>, IEnumerable<TermOtherDocumentsEntity>>(viewmodelDocuments);
 
         // check if any broken rules exists, if yes then return
         var brokenRules = ReturnBrokenRulesIfAny(application, request);
@@ -55,8 +55,15 @@ public class SaveAppDocumentChecklistCommandHandler : BaseHandler, IRequestHandl
                 var mapDoc = mapper.Map<DocumentsViewModel, TermOtherDocumentsEntity>(doc);
                 await repoDocument.SaveTermDocumentChecklistAsync(mapDoc);
             }
-            await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, TermAppSectionEnum.ADMIN_DOCUMENT_CHECKLIST);
+            if (application.ApplicationTypeId == 1)
+            {
+                await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, TermAppSectionEnum.ADMIN_DOCUMENT_CHECKLIST);
+            }
+            else if (application.ApplicationTypeId == 2) 
+            {
+                await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, EsmtAppSectionEnum.ADMIN_DOCUMENT_CHECK_LIST);
 
+            }
             // Save current Broken Rules, if any
             await repoBrokenRules.SaveBrokenRules(await brokenRules);
             scope.Complete();
@@ -79,27 +86,26 @@ public class SaveAppDocumentChecklistCommandHandler : BaseHandler, IRequestHandl
         // map command object to the FloodDocumentEntity
         var documents = mapper.Map<IEnumerable<DocumentsViewModel>,  IEnumerable<TermOtherDocumentsEntity>>(request.Documents);
 
-        var unapprovedDocs = request.Documents.Where(doc => doc.Approved == false).FirstOrDefault();
-
+        var unapprovedDocs = request.Documents.Where(doc => doc.Approved == false).Count();
       
-        if (request.Documents == null || request.Documents.Count() == 0)
+        if (documents == null || documents.Count() == 0)
         {
             brokenRules.Add(new FarmBrokenRuleEntity()
             {
                 ApplicationId = application.Id,
                 SectionId = sectionId,
-                Message = "All required documents (Admin-Document-Checklist) are not yet uploaded for committee review.",
+                Message = "All required documents (Admin-Document-Checklist) are not yet uploaded",
                 IsApplicantFlow = false
             });
         }
 
-        if (unapprovedDocs != null)
+        if (unapprovedDocs == null|| unapprovedDocs > 0)
         {
             brokenRules.Add(new FarmBrokenRuleEntity()
             {
                 ApplicationId = application.Id,
                 SectionId = sectionId,
-                Message = "All required documents (Admin-Document-Checklist) are not yet approved for committee review.",
+                Message = "All required documents (Admin-Document-Checklist) are not yet approved",
                 IsApplicantFlow = false
             });
         }
