@@ -1,4 +1,5 @@
-﻿BEGIN TRY
+﻿USE PrestrustTemp;
+BEGIN TRY
    BEGIN TRANSACTION
 
 		DECLARE		 @v_LEGACY_RECORD_COUNT	AS INT
@@ -27,7 +28,7 @@
 			WHERE		ID = @v_LEGACY_RECORD_INDEX;
 
 			--select * from [PresTrust_DEV].Farm.FarmList
-			INSERT INTO [PresTrust_DEV].Farm.FarmList
+			INSERT INTO Farm.FarmList
 					(	[FarmNumber],                                                                                               
 						[FarmName],                        
 						[Status],                         
@@ -51,16 +52,17 @@
 
 			 SET @v_NEW_FarmList_ID = @@IDENTITY;
 
-			 UPDATE [Farm].[FarmListLegacy] SET NewFarmListId = @v_NEW_FarmList_ID WHERE LegacyFarmListId = @v_LEGACY_FARMLIST_ID;
+			 UPDATE [Farm].[FarmListLegacy] SET NewFarmListId = @v_NEW_FarmList_ID 
+			 WHERE LegacyFarmListId = @v_LEGACY_FARMLIST_ID;
 			 SET @v_LEGACY_RECORD_INDEX = @v_LEGACY_RECORD_INDEX + 1;
 		END
 
-		select * from [PresTrust_DEV].Farm.FarmList;
+		select * from Farm.FarmList;
 		SELECT * FROM [Farm].[FarmListLegacy];
 		 
 		  
 
-		select 1/0;
+		--select 1/0;
 		COMMIT;
 		PRINT 'FarmList legacy table has been populated';
 END TRY

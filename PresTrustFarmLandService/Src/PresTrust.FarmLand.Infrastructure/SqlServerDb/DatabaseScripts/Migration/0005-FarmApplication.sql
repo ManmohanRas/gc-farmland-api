@@ -65,12 +65,37 @@ CONSTRAINT [PK_#FarmApplication_Id] PRIMARY KEY CLUSTERED
 					NULL AS LastUpdatedBy,
 					GetDate()
                 FROM  [Farm].[TermProgram_Legacy] ;
-				
-					SET IDENTITY_INSERT [Farm].[FarmApplication] ON
+
+-------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 
-					INSERT INTO [Farm].[FarmApplication]
-				(	[Id],
+	DECLARE		 @v_LEGACY_RECORD_COUNT	AS INT
+				,@v_LEGACY_RECORD_INDEX AS INT;
+
+	DROP TABLE IF EXISTS #temp_application_legacy;
+	CREATE TABLE #temp_application_legacy (Id INT IDENTITY(1,1), LegacyApplicationId INTEGER)
+
+	INSERT INTO		#temp_application_legacy (LegacyApplicationId)
+	SELECT		LegacyApplicationId
+	FROM		[Farm].[FarmApplicationLegacy]
+	WHERE		ISNULL(FarmApplicationId,0) = 0;
+
+	SET	@v_LEGACY_RECORD_COUNT = @@ROWCOUNT;
+	SET	@v_LEGACY_RECORD_INDEX = 1;
+
+	WHILE (@v_LEGACY_RECORD_INDEX <= @v_LEGACY_RECORD_COUNT)
+	BEGIN
+			DECLARE		@v_LEGACY_APPLICATION_ID AS INT,
+						@v_NEW_APPLICATION_ID AS INT;
+
+			SELECT		@v_LEGACY_APPLICATION_ID = LegacyApplicationId 
+			FROM		#temp_application_legacy
+			WHERE		ID = @v_LEGACY_RECORD_INDEX;
+
+
+	 INSERT INTO [Farm].[FarmApplication]
+				(	
 					[Title],
 					[AgencyId],
 					[FarmListId],
@@ -85,26 +110,35 @@ CONSTRAINT [PK_#FarmApplication_Id] PRIMARY KEY CLUSTERED
 					[LastUpdatedBy],
 					[LastUpdatedOn]
 					)
-					SELECT  [Id],
-							[ProjectName] AS [Title], -- [ID]
-							[AgencyId],
-							[FarmListID],
-							'1' AS [ApplicationTypeId],
-							CASE WHEN [Status] = '5 Expired' THEN 106
-								 WHEN [Status] = '4 Current' THEN 105
-								 WHEN [Status] = '2 Petition Approved' THEN 103
-								 END AS [StatusId],
-							NULL AS [CreatedByProgramUser],
-							[Municipally Approved?],
-							NULL AS [CreatedOn],
-							NULL AS [CreatedBy],
-							NULL AS [IsActive],
-							NULL AS [IsSADC],
-							NULL AS LastUpdatedBy,
-							GetDate()
-						FROM  #FarmApplication;
+					SELECT 
+					   AL.[ProjectName] AS [Title], -- [ID]
+					   AL.[AgencyId],
+					   AL.[FarmListID],
+					   '1' AS [ApplicationTypeId],
+					   CASE WHEN [AL.Status] = '5 Expired' THEN 106
+					   	 WHEN [AL.Status] = '4 Current' THEN 105
+					   	 WHEN [AL.Status] = '2 Petition Approved' THEN 103
+					   	 END AS [StatusId],
+					   NULL AS [CreatedByProgramUser],
+					   [TL.Municipally Approved?],
+					   NULL AS [CreatedOn],
+					   NULL AS [CreatedBy],
+					    1 AS [IsActive],
+					   NULL AS [IsSADC],
+					   NULL AS LastUpdatedBy,
+					   GetDate()
+			FROM  [Farm].[TermProgram_Legacy] TL
+			LEFT JOIN [Farm].[FarmApplicationLegacy] AL ON TL.ID = AL.LegacyApplicationId 
+			WHERE ID = @v_LEGACY_APPLICATION_ID
 
-						SET IDENTITY_INSERT [Farm].[FarmApplication] OFF;
+		
+			SET @v_NEW_APPLICATION_ID = @@IDENTITY;
+
+			UPDATE	[Farm].[FarmApplicationLegacy]
+			SET FarmApplicationId = @v_NEW_APPLICATION_ID
+			WHERE	LegacyApplicationId = @v_LEGACY_APPLICATION_ID;
+
+END;
 						
 
             COMMIT;
