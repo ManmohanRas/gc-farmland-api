@@ -41,7 +41,7 @@ public class SaveFarmEsmtAppAdminStructNonAgWetlandsCommandHandler : BaseHandler
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 
-        // map command object to the FloodApplicationSignatoryEntity
+        // map command object to the FarmEsmtApplicationSignatoryEntity
         var reqWetlands = mapper.Map<SaveFarmEsmtAppAdminStructNonAgWetlandsCommand, FarmEsmtAppAdminStructNonAgWetlandsEntity>(request);
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))

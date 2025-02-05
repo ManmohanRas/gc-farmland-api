@@ -68,6 +68,33 @@ public class FarmBrokenRuleEntity
                     case EsmtAppSectionEnum.SIGNATORY:
                         val = EsmtAppRouterLinks.SIGNATORY_EDIT;
                         break;
+                    case EsmtAppSectionEnum.ADMIN_DOCUMENT_CHECK_LIST:
+                        val= EsmtAppRouterLinks.ADMIN_DOCUMENT_CHECK_LIST_EDIT;
+                        break;
+                    case EsmtAppSectionEnum.ADMIN_COST_DETAILS:
+                        val = EsmtAppRouterLinks.ADMIN_COST_DETAILS_EDIT;
+                        break;
+                    case EsmtAppSectionEnum.ADMIN_APPRAISAL_REPORTS:
+                        val = EsmtAppRouterLinks.ADMIN_APPRAISAL_REPORTS_EDIT;
+                        break;
+                    case EsmtAppSectionEnum.ADMIN_OFFER_COSTS:
+                        val = EsmtAppRouterLinks.ADMIN_OFFER_COSTS_EDIT;
+                        break;
+                    case EsmtAppSectionEnum.ADMIN_STRUCTURES:
+                        val = EsmtAppRouterLinks.ADMIN_STRUCTURES_EDIT;
+                        break;
+                    case EsmtAppSectionEnum.ADMIN_EXCEPTIONS:
+                        val = EsmtAppRouterLinks.ADMIN_EXCEPTIONS_EDIT;
+                        break;
+                    case EsmtAppSectionEnum.ADMIN_SADC:
+                        val = EsmtAppRouterLinks.ADMIN_SADC_EDIT;
+                        break;
+                    case EsmtAppSectionEnum.ADMIN_CLOSING_DOCS:
+                        val = EsmtAppRouterLinks.ADMIN_CLOSING_DOCS_EDIT;
+                        break;
+                    case EsmtAppSectionEnum.ADMIN_CONTACTS:
+                        val = EsmtAppRouterLinks.ADMIN_CONTACTS_EDIT;
+                        break;
                     default:
                         break;
                 }
