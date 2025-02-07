@@ -81,8 +81,16 @@ public class EsmtPostClosingApplicationCommandHandler : BaseHandler, IRequestHan
 
             // returns broken rules
             var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
-            // Save current Broken Rules, if any
-            await repoBrokenRules.SaveBrokenRules(await defaultBrokenRules);
+
+            if (defaultBrokenRules.Result.Count() > 0)
+            {
+                // Save current Broken Rules, if any
+                await repoBrokenRules.SaveBrokenRules(await defaultBrokenRules);
+
+            }else
+            {
+                await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, EsmtAppSectionEnum.LOCATION);
+            }
 
             scope.Complete();
             result.IsSuccess = true;
