@@ -11,7 +11,6 @@ public class SaveAppDocumentChecklistCommandValidator : AbstractValidator<SaveAp
            .GreaterThan(0).WithMessage("Not a valid Application Id");
 
         //RuleForEach(command => command.Documents).SetValidator(new DocumentValidator());
-
         RuleForEach(command => command.Documents).ChildRules(docs =>
         {
             docs.RuleFor(doc => doc.FileName).NotNull().NotEmpty().WithMessage("One or more document's name has not been provided.");
@@ -19,9 +18,17 @@ public class SaveAppDocumentChecklistCommandValidator : AbstractValidator<SaveAp
             docs.RuleFor(doc => doc.DocumentType)
                     .NotNull().NotEmpty()
                     .Must(docType => ValidDocumentType(docType)).WithMessage("One or more document's types are not valid.");
-            docs.RuleFor(doc => doc.Section)
-                .NotNull().NotEmpty()
-                .Must(section => ValidApplicationSection(section)).WithMessage("One or more document's section-names are not valid.");
+            docs.RuleFor(command => command.Section)
+                .NotNull().NotEmpty().WithMessage("Application section must be provided")
+                .Must(appSection => EnumUtils.TryParseWithMemberName<TermAppSectionEnum>(appSection, out _))
+                .WithMessage("Not a valid Term application section")
+                .When(x => x.ApplicationTypeId == 1);
+
+            docs.RuleFor(command => command.Section)
+                .NotNull().NotEmpty().WithMessage("Application section must be provided")
+                .Must(appSection => EnumUtils.TryParseWithMemberName<EsmtAppSectionEnum>(appSection, out _))
+                .WithMessage("Not a valid Easement application section")
+                .When(x => x.ApplicationTypeId == 2);
         });
     }
 
@@ -33,6 +40,7 @@ public class SaveAppDocumentChecklistCommandValidator : AbstractValidator<SaveAp
     public bool ValidDocumentType(string docType)
     {
         bool result = false;
+       
         Enum.TryParse(value: docType, ignoreCase: true, out ApplicationDocumentTypeEnum enumDocType);
 
         if (enumDocType > 0)
@@ -46,10 +54,23 @@ public class SaveAppDocumentChecklistCommandValidator : AbstractValidator<SaveAp
     /// </summary>
     /// <param name="section"></param>
     /// <returns></returns>
-    public bool ValidApplicationSection(string section)
+    public bool ValidTermSection(string section)
     {
         bool result = false;
+
         Enum.TryParse(value: section, ignoreCase: true, out TermAppSectionEnum enumSection);
+
+        if (enumSection > 0)
+            result = true;
+
+        return result;
+    }
+
+    public bool ValidEsmtSection(string section)
+    {
+        bool result = false;
+
+        Enum.TryParse(value: section, ignoreCase: true, out EsmtAppSectionEnum enumSection);
 
         if (enumSection > 0)
             result = true;

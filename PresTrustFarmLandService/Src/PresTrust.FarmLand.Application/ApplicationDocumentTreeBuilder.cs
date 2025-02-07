@@ -188,9 +188,9 @@ public class ApplicationDocumentTreeBuilder
             case EsmtAppSectionEnum.OTHER_DOCUMENTS:
                 title= "Other Documents";
                 break;
-            case EsmtAppSectionEnum.ADMIN_DOCUMENT_CHECK_LIST:
-                title = "Admin Document Checklist";
-                break;
+            //case EsmtAppSectionEnum.ADMIN_DOCUMENT_CHECK_LIST:
+            //    title = "Admin Document Checklist";
+            //    break;
             case EsmtAppSectionEnum.ADMIN_CLOSING_DOCS:
                 title = "Admin Closing Docs";
                 break;
