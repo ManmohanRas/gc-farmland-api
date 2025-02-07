@@ -97,3 +97,20 @@ GO
 INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (220, 'ADMIN_CONTACTS', 'Admin Contacts', 2);
 GO
 
+--SADC tabs
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (301, 'SADC_FARM_INFORMATION', 'SADC Farm Information', 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (302, 'SADC_RESI_ON_ESMT_AREA', 'SADC Resi on ESMT Area', 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (303, 'SADC_FARM_HISTORY', 'SADC Farm History', 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (304, 'SADC_APP_ELIGIBILITY_I', 'SADC Application Eligibility I', 2);
+GO
+
+INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (305, 'SADC_APP_ELIGIBILITY_II', 'SADC Application Eligibility II', 2);
+GO
+
+
