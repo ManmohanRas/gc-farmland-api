@@ -19,7 +19,8 @@ BEGIN TRY
 				[Status],
 				[AgencyID],
 				NULL AS [FarmApplicationId]
-		 FROM  [PresTrust_DEV].[Farm].[TermProgram_Legacy]; 
+		 FROM  [Farm].[TermProgram_Legacy]
+		 WHERE FarmListId NOT IN (116,187,271,276,277); 
 
 
          COMMIT;

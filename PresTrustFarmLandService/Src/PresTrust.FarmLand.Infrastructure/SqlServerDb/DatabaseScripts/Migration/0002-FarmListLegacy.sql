@@ -11,7 +11,7 @@
 			FarmListId,
 			ISNULL(FarmName, '')
 		FROM [PresTrust_DEV].[Farm].[OwnerPropertyLEGACY_Rev02]
-		WHERE ISNULL(FarmName,'') <> '' AND FarmlistID NOT IN (199, 95, 105)
+		WHERE ISNULL(FarmName,'') <> '' AND Status NOT IN ('Dropped')
 		ORDER BY FarmListID;
 		COMMIT;
 		PRINT 'FarmList legacy table has been populated';
@@ -23,4 +23,6 @@ BEGIN CATCH
 
     SELECT @ErrorMessage;
 END CATCH
+
+
 

@@ -2,69 +2,72 @@
 BEGIN TRY
    BEGIN TRANSACTION
 
-		DECLARE		 @v_LEGACY_RECORD_COUNT	AS INT
-					,@v_LEGACY_RECORD_INDEX AS INT;
+               DECLARE  @v_LEGACY_RECORD_COUNT  AS INT
+                        ,@v_LEGACY_RECORD_INDEX AS INT;
 
-		DROP TABLE IF EXISTS #temp_farmlist_legacy;
-		CREATE TABLE #temp_farmlist_legacy (Id INT IDENTITY(1,1), LegacyFarmListId INTEGER)
+             DROP TABLE IF EXISTS #temp_farmlist_legacy;
+             CREATE TABLE #temp_farmlist_legacy (Id INT IDENTITY(1,1), LegacyFarmListId INTEGER)
 
-		INSERT INTO		#temp_farmlist_legacy (LegacyFarmListId)
-		SELECT		LegacyFarmListId
-		FROM		[Farm].[FarmListLegacy]
-		WHERE		ISNULL(NewFarmListId,0) = 0;
+             INSERT INTO      #temp_farmlist_legacy (LegacyFarmListId)
+                   SELECT     LegacyFarmListId
+                    FROM      [Farm].[FarmListLegacy]
+                    WHERE    ISNULL(NewFarmListId,0) = 0;
 
-		SET	@v_LEGACY_RECORD_COUNT = @@ROWCOUNT;
-		SET	@v_LEGACY_RECORD_INDEX = 1;
-			 
+                     SET   @v_LEGACY_RECORD_COUNT = @@ROWCOUNT;
+                     SET   @v_LEGACY_RECORD_INDEX = 1;
+                                                
+                   WHILE (@v_LEGACY_RECORD_INDEX <= @v_LEGACY_RECORD_COUNT)
+                   BEGIN
+                   DECLARE   @v_LEGACY_FARMLIST_ID AS INT,
+                              @v_NEW_FARMLIST_ID AS INT;
+                                                                                                
 
-		WHILE (@v_LEGACY_RECORD_INDEX <= @v_LEGACY_RECORD_COUNT)
-		BEGIN
-			DECLARE		@v_LEGACY_FARMLIST_ID AS INT,
-						@v_NEW_FARMLIST_ID AS INT;
-						
+                   SELECT @v_LEGACY_FARMLIST_ID = LegacyFarmListId 
+                   FROM   #temp_farmlist_legacy
+                   WHERE  ID = @v_LEGACY_RECORD_INDEX;
 
-			SELECT		@v_LEGACY_FARMLIST_ID = LegacyFarmListId 
-			FROM		#temp_farmlist_legacy
-			WHERE		ID = @v_LEGACY_RECORD_INDEX;
+                  --select * from [PresTrust_DEV].Farm.FarmList
+                  INSERT INTO Farm.FarmList
+                            ([FarmNumber],                                                                                               
+                             [FarmName],                        
+                             [Status],                         
+                             [AgencyID],                       
+                             [OriginalLandowner],                 
+                             [Address1],                         
+                             [Address2],     
+                             [MunicipalId]
+                           )
+                    SELECT  TOP(1)
+                           [FarmNumber],
+                           [FarmName],
+                           [Status],
+                           ISNULL([AgencyID],0) AS [AgencyID],
+                           [OriginalLandowner],
+                           [Street1],
+                           [Street2],
+                           [MunicipalId]
+                     FROM  [Farm].[OwnerPropertyLEGACY_Rev02]
+                     WHERE   FarmlistId = @v_LEGACY_FARMLIST_ID AND
+                     ISNULL(FarmName,'') <> '' AND Status NOT IN ('Dropped')
 
-			--select * from [PresTrust_DEV].Farm.FarmList
-			INSERT INTO Farm.FarmList
-					(	[FarmNumber],                                                                                               
-						[FarmName],                        
-						[Status],                         
-						[AgencyID],                       
-						[OriginalLandowner],                 
-						[Address1],                         
-						[Address2],	
-						[MunicipalId]
-					)
-			SELECT		DISTINCT
-						[FarmNumber],
-						[FarmName],
-						[Status],
-						ISNULL([AgencyID],0) AS [AgencyID],
-						[OriginalLandowner],
-						[Street1],
-						[Street2],
-						[MunicipalId]
- 		    FROM  [PresTrust_DEV].[Farm].[OwnerPropertyLEGACY_Rev02]
-			WHERE	FarmlistId = @v_LEGACY_FARMLIST_ID
+                    SET @v_NEW_FarmList_ID = SCOPE_IDENTITY();
 
-			 SET @v_NEW_FarmList_ID = @@IDENTITY;
+                     --SELECT @v_NEW_FarmList_ID;
 
-			 UPDATE [Farm].[FarmListLegacy] SET NewFarmListId = @v_NEW_FarmList_ID 
-			 WHERE LegacyFarmListId = @v_LEGACY_FARMLIST_ID;
-			 SET @v_LEGACY_RECORD_INDEX = @v_LEGACY_RECORD_INDEX + 1;
-		END
+                    UPDATE [Farm].[FarmListLegacy] 
+                    SET NewFarmListId = @v_NEW_FarmList_ID 
+                    WHERE LegacyFarmListId = @v_LEGACY_FARMLIST_ID;
 
-		select * from Farm.FarmList;
-		SELECT * FROM [Farm].[FarmListLegacy];
-		 
-		  
+                   SET @v_LEGACY_RECORD_INDEX = @v_LEGACY_RECORD_INDEX + 1;
+ END
 
-		--select 1/0;
-		COMMIT;
-		PRINT 'FarmList legacy table has been populated';
+                                --select * from Farm.FarmList;
+                                --SELECT * FROM [Farm].[FarmListLegacy];
+                                                                 
+
+                                --select 1/0;
+   COMMIT;
+   PRINT 'FarmList legacy table has been populated';
 END TRY
 BEGIN CATCH
     DECLARE     @ErrorMessage  NVARCHAR(4000);
@@ -73,4 +76,3 @@ BEGIN CATCH
 
     SELECT @ErrorMessage;
 END CATCH
- 
