@@ -18,7 +18,7 @@ public interface IEmailTemplateRepository
     /// <summary>
     /// Save Email Template.
     /// </summary>
-    /// <param name="floodEmailTemplate"></param>
+    /// <param name="farmEmailTemplate"></param>
     /// <returns></returns>
-    Task<FarmEmailTemplateEntity> SaveEmailAsync(FarmEmailTemplateEntity floodEmailTemplate);
+    Task<FarmEmailTemplateEntity> SaveEmailAsync(FarmEmailTemplateEntity farmEmailTemplate);
 }
