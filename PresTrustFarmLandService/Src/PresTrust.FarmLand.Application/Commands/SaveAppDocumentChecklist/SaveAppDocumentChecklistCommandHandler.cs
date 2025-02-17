@@ -82,22 +82,29 @@ public class SaveAppDocumentChecklistCommandHandler : BaseHandler, IRequestHandl
     {
 
         int sectionId = application.ApplicationTypeId == 1 ?  (int)TermAppSectionEnum.ADMIN_DOCUMENT_CHECKLIST : (int)EsmtAppSectionEnum.ADMIN_DOCUMENT_CHECK_LIST;
+        string section = application.ApplicationTypeId == 1 ? TermAppSectionEnum.ADMIN_DOCUMENT_CHECKLIST.ToString() : EsmtAppSectionEnum.ADMIN_DOCUMENT_CHECK_LIST.ToString();
+
         List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
         // map command object to the FarmDocumentEntity
         var documents = mapper.Map<IEnumerable<DocumentsViewModel>,  IEnumerable<TermOtherDocumentsEntity>>(request.Documents);
 
-        var unapprovedDocs = request.Documents.Where(doc => doc.Approved == false).Count();
+        var unapprovedDocs = request.Documents
+                            .Where(doc => doc.Section == section && doc.Approved == false)
+                            .Count();
+
+
+        //var unapprovedDocs = request.Documents.Select(x => x.Section = TermAppSectionEnum.OTHER_DOCUMENTS.ToString()).Where(doc => doc.Approved == false).Count();
       
-        if (documents == null || documents.Count() == 0)
-        {
-            brokenRules.Add(new FarmBrokenRuleEntity()
-            {
-                ApplicationId = application.Id,
-                SectionId = sectionId,
-                Message = "All required documents (Admin-Document-Checklist) are not yet uploaded",
-                IsApplicantFlow = false
-            });
-        }
+        //if (documents == null || documents.Count() == 0)
+        //{
+        //    brokenRules.Add(new FarmBrokenRuleEntity()
+        //    {
+        //        ApplicationId = application.Id,
+        //        SectionId = sectionId,
+        //        Message = "All required documents (Admin-Document-Checklist) are not yet uploaded",
+        //        IsApplicantFlow = false
+        //    });
+        //}
 
         if (unapprovedDocs == null|| unapprovedDocs > 0)
         {
@@ -105,7 +112,7 @@ public class SaveAppDocumentChecklistCommandHandler : BaseHandler, IRequestHandl
             {
                 ApplicationId = application.Id,
                 SectionId = sectionId,
-                Message = "All required documents (Admin-Document-Checklist) are not yet approved",
+                Message = "All documents need to be marked as Approved in the Other Documents section of the Document Checklist",
                 IsApplicantFlow = false
             });
         }

@@ -65,10 +65,10 @@ public class EsmtSubmitApplicationCommandHandler : BaseHandler, IRequestHandler<
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
             // returns broken rules  
-           // var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
+            var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
 
             // save broken rules
-           // await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
+            await repoBrokenRules.SaveBrokenRules(defaultBrokenRules);
             await repoApplication.UpdateApplicationStatusAsync(application, EsmtAppStatusEnum.APPLICATION_SUBMITTED);
             FarmApplicationStatusLogEntity appStatusLog = new()
             {
@@ -92,4 +92,25 @@ public class EsmtSubmitApplicationCommandHandler : BaseHandler, IRequestHandler<
         return result;
     }
 
+    // <summary>
+    /// Return broken rules in case of any business rule failure
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="application"></param>
+    /// <returns></returns>
+    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
+    {
+        List<FarmBrokenRuleEntity> statusChangeRules = new List<FarmBrokenRuleEntity>();
+
+        statusChangeRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)EsmtAppSectionEnum.ADMIN_DOCUMENT_CHECK_LIST,
+            Message = "All documents need to be marked as Approved in the Other Documents section of the Document Checklist",
+            IsApplicantFlow = false
+        });
+        return statusChangeRules;
+    }
+
 }
+

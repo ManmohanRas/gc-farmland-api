@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.Application.Commands;
+﻿using static System.Collections.Specialized.BitVector32;
+
+namespace PresTrust.FarmLand.Application.Commands;
 
 public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<RequestApplicationCommand, RequestApplicationCommandViewModel>
 {
@@ -178,6 +180,14 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
             ApplicationId = application.Id,
             SectionId = (int)TermAppSectionEnum.ADMIN_DEED_DETAILS,
             Message = "All required fields on ADMIN_DEED_DETAILS tab have not been filled.",
+        });
+
+        statusChangeRules.Add(new FarmBrokenRuleEntity()
+        {
+            ApplicationId = application.Id,
+            SectionId = (int)TermAppSectionEnum.ADMIN_DOCUMENT_CHECKLIST,
+            Message = "All documents need to be marked as Approved in the Other Documents section of the Document Checklist",
+            IsApplicantFlow = false
         });
         return statusChangeRules;
     }

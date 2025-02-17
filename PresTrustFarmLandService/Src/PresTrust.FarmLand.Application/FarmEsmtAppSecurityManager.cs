@@ -2726,9 +2726,11 @@ public class FarmEsmtAppSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
+                esmtPermission.CanViewExceptionsSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXCEPTIONS, RouterLink = EsmtAppRouterLinks.EXCEPTIONS_VIEW, SortOrder = 4, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
+                esmtPermission.CanEditExceptionsSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXCEPTIONS, RouterLink = EsmtAppRouterLinks.EXCEPTIONS_EDIT, SortOrder = 4, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
@@ -2741,9 +2743,11 @@ public class FarmEsmtAppSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
+                esmtPermission.CanViewStructureSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.RESI_NON_RESI_STRUCTURES, RouterLink = EsmtAppRouterLinks.RESI_NON_RESI_STRUCTURES_VIEW, SortOrder = 5, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
+                esmtPermission.CanEditStructureSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.RESI_NON_RESI_STRUCTURES, RouterLink = EsmtAppRouterLinks.RESI_NON_RESI_STRUCTURES_EDIT, SortOrder = 5, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
@@ -2756,9 +2760,11 @@ public class FarmEsmtAppSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
+                esmtPermission.CanViewLiensSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.LIENS_EASEMENT_ROW, RouterLink = EsmtAppRouterLinks.LIENS_EASEMENT_ROW_VIEW, SortOrder = 6, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
+                esmtPermission.CanEditLiensSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.LIENS_EASEMENT_ROW, RouterLink = EsmtAppRouterLinks.LIENS_EASEMENT_ROW_EDIT, SortOrder = 6, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
@@ -2771,9 +2777,11 @@ public class FarmEsmtAppSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
+                esmtPermission.CanViewExistingUsesSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXIS_NON_AGRI_USES, RouterLink = EsmtAppRouterLinks.EXIS_NON_AGRI_USES_VIEW, SortOrder = 7, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
+                esmtPermission.CanEditExistingUsesSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EXIS_NON_AGRI_USES, RouterLink = EsmtAppRouterLinks.EXIS_NON_AGRI_USES_EDIT, SortOrder = 7, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
@@ -2786,9 +2794,11 @@ public class FarmEsmtAppSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
+                esmtPermission.CanViewAgriculturalUseProductionSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.AGRICULTURAL_USE_PRODUCTION, RouterLink = EsmtAppRouterLinks.AGRICULTURAL_USE_PRODUCTION_VIEW, SortOrder = 8, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
+                esmtPermission.CanEditAgriculturalUseProductionSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.AGRICULTURAL_USE_PRODUCTION, RouterLink = EsmtAppRouterLinks.AGRICULTURAL_USE_PRODUCTION_EDIT, SortOrder = 8, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:
@@ -2801,9 +2811,11 @@ public class FarmEsmtAppSecurityManager
         switch (enumViewOrEdit)
         {
             case ApplicationTabEditOrViewEnum.VIEW:
+                esmtPermission.CanViewEquineUsesSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EQUINE_USES, RouterLink = EsmtAppRouterLinks.EQUINE_USES_VIEW, SortOrder = 9, Icon = (correction == true ? "report_problem" : "") });
                 break;
             case ApplicationTabEditOrViewEnum.EDIT:
+                esmtPermission.CanEditEquineUsesSection = true;
                 navigationItems.Add(new NavigationItemEntity() { Title = EsmtAppNavigationItemTitles.EQUINE_USES, RouterLink = EsmtAppRouterLinks.EQUINE_USES_EDIT, SortOrder = 9, Icon = (correction == true ? "report_problem" : "") });
                 break;
             default:

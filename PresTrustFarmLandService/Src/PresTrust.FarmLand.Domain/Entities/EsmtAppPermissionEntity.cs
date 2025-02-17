@@ -11,6 +11,24 @@ public class EsmtAppPermissionEntity
     public bool CanViewRolesSection { get; set; } = false;
     public bool CanEditRolesSection { get; set; } = false;
 
+    public bool CanViewExceptionsSection { get; set; } = false;
+    public bool CanEditExceptionsSection { get; set; } = false;
+
+    public bool CanViewStructureSection { get; set; } = false;
+    public bool CanEditStructureSection { get; set; } = false;
+
+    public bool CanViewLiensSection { get; set; } = false;
+    public bool CanEditLiensSection { get; set; } = false;
+
+    public bool CanViewExistingUsesSection { get; set; } = false;
+    public bool CanEditExistingUsesSection { get; set; } = false;
+
+    public bool CanViewAgriculturalUseProductionSection { get; set; } = false;
+    public bool CanEditAgriculturalUseProductionSection { get; set; } = false;
+
+    public bool CanViewEquineUsesSection { get; set; } = false;
+    public bool CanEditEquineUsesSection { get; set; } = false;
+
     public bool CanViewSiteCharacteristicsSection { get; set; } = false;
     public bool CanEditSiteCharacteristicsSection { get; set; } = false;
 
