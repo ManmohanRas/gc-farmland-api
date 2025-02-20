@@ -4,7 +4,7 @@ public class GetTermAdminDetailsQueryViewModel
 {
     public int       Id                     { get; set; }
     public int       ApplicationId          { get; set; }
-    public int?       SADCId                 { get; set; }
+    public string?       SADCId                 { get; set; }
     public decimal?   MaxGrant               { get; set; }
     public bool      PermanentlyPreserved   { get; set; }
     public bool      MunicipallyApproved    { get; set; }

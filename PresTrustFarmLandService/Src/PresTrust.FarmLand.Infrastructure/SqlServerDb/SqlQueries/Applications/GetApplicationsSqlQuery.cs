@@ -14,15 +14,13 @@ public class GetApplicationsSqlQuery
                 A.[FarmListId],
                 A.[IsSADC],
 				FL.[FarmName],
-				FL.[MunicipalID],
-				FL.[Municipality],
                 FL.[OriginalLandowner],
                 AgencyEntity.[AgencyLabel] AS PresentOwner,
                 AD.[EnrollmentDate],
                 LP.Acres,
                 FCDS.[ClosingDate]
                FROM [Farm].[FarmApplication] AS A
-               LEFT JOIN [Farm].[OwnerPropertyLEGACY_Rev01] AS FL ON (A.AgencyId = FL.AgencyId AND A.FarmListId = FL.FarmListID)
+               LEFT JOIN [Farm].[FarmList] AS FL ON (A.AgencyId = FL.AgencyId AND A.FarmListId = FL.FarmListID)
                LEFT JOIN [Core].[View_AgencyEntities_FARM] AS AgencyEntity ON (AgencyEntity.AgencyId = A.AgencyId)
                LEFT JOIN [Farm].[FarmTermAppAdminDetails] AS AD ON (A.Id = AD.ApplicationId)
                 LEFT JOIN
@@ -45,8 +43,6 @@ public class GetApplicationsSqlQuery
                 A.[FarmListId],
                 A.[IsSADC],
 				FL.[FarmName],
-				FL.[MunicipalID],
-				FL.[Municipality],
                 FL.[OriginalLandowner],
                 AgencyEntity.[AgencyLabel] ,
                 AD.[EnrollmentDate],
@@ -71,15 +67,13 @@ public class GetApplicationsSqlQuery
                 A.[FarmListId],
                 A.[IsSADC],
 				FL.[FarmName],
-				FL.[MunicipalID],
-				FL.[Municipality],
                 FL.[OriginalLandowner],
                 AgencyEntity.[AgencyLabel] AS PresentOwner,
                 AD.[EnrollmentDate],
                 LP.Acres,
                 FCDS.[ClosingDate]
                FROM [Farm].[FarmApplication] AS A
-               LEFT JOIN [Farm].[OwnerPropertyLEGACY_Rev01] AS FL ON (A.AgencyId = FL.AgencyId AND A.FarmListId = FL.FarmListID)
+               LEFT JOIN [Farm].[FarmList] AS FL ON (A.AgencyId = FL.AgencyId AND A.FarmListId = FL.FarmListID)
                LEFT JOIN [Core].[View_AgencyEntities_FARM] AS AgencyEntity ON (AgencyEntity.AgencyId = A.AgencyId)
                LEFT JOIN [Farm].[FarmTermAppAdminDetails] AS AD ON (A.Id = AD.ApplicationId)
                 LEFT JOIN
@@ -125,15 +119,13 @@ public class GetApplicationsSqlQuery
                 A.[FarmListId],
                 A.[IsSADC],
 				FL.[FarmName],
-				FL.[MunicipalID],
-				FL.[Municipality],
                 FL.[OriginalLandowner],
                 AgencyEntity.[AgencyLabel] AS PresentOwner,
                 AD.[EnrollmentDate],
                 LP.Acres,
                 FCDS.[ClosingDate]
                FROM [Farm].[FarmApplication] AS A
-               LEFT JOIN [Farm].[OwnerPropertyLEGACY_Rev01] AS FL ON (A.AgencyId = FL.AgencyId AND A.FarmListId = FL.FarmListID)
+               LEFT JOIN [Farm].[FarmList] AS FL ON (A.AgencyId = FL.AgencyId AND A.FarmListId = FL.FarmListID)
                LEFT JOIN [Core].[View_AgencyEntities_FARM] AS AgencyEntity ON (AgencyEntity.AgencyId = A.AgencyId)
                LEFT JOIN [Farm].[FarmTermAppAdminDetails] AS AD ON (A.Id = AD.ApplicationId)
                LEFT JOIN
@@ -157,8 +149,6 @@ public class GetApplicationsSqlQuery
                 A.[FarmListId],
                 A.[IsSADC],
 				FL.[FarmName],
-				FL.[MunicipalID],
-				FL.[Municipality],
                 FL.[OriginalLandowner],
                 AgencyEntity.[AgencyLabel] ,
                 AD.[EnrollmentDate],
