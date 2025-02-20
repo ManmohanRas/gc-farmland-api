@@ -18,6 +18,13 @@ SELECT ownerprop.FarmListId, ownerprop.FarmName FROM [PresTrust_DEV].[Farm].[Own
 INNER JOIN cte_farmlist_duplicates cte on (cte.FarmListId = ownerprop.FarmListId)
 ORDER BY FarmListID desc
 
+--To check FarmList Status is dropped having count greater than 1.
+SELECT count(*),FarmListID FROM [Farm].[OwnerPropertyLEGACY_Rev02]
+WHERE Status = 'Dropped' 
+GROUP BY FarmListId
+ORDER BY FarmListID
+
+
 --UPDATE [PresTrust_DEV].[Farm].[OwnerPropertyLEGACY_Rev02]
 --SET		FarmName = 'Charters Farm'
 --WHERE	FarmListID = 5;
@@ -29,3 +36,5 @@ ORDER BY FarmListID desc
 --UPDATE [PresTrust_DEV].[Farm].[OwnerPropertyLEGACY_Rev02]
 --SET		FarmName = 'Kincaid Farm'
 --WHERE	FarmListID = 95;
+
+ 

@@ -1,4 +1,5 @@
 ﻿USE PrestrustTemp;
+
 BEGIN TRY
    BEGIN TRANSACTION
 
@@ -46,9 +47,11 @@ BEGIN TRY
                            [Street1],
                            [Street2],
                            [MunicipalId]
-                     FROM  [Farm].[OwnerPropertyLEGACY_Rev02]
-                     WHERE   FarmlistId = @v_LEGACY_FARMLIST_ID AND
-                     ISNULL(FarmName,'') <> '' AND Status NOT IN ('Dropped')
+
+                     FROM  [Farm].[FarmListLegacy] FLL
+					 LEFT JOIN
+					 [Farm].[OwnerPropertyLEGACY_Rev02] OWRL ON (FLL.LegacyFarmListId =  OWRL.FarmListID)
+                     WHERE   LegacyFarmListId = @v_LEGACY_FARMLIST_ID
 
                     SET @v_NEW_FarmList_ID = SCOPE_IDENTITY();
 

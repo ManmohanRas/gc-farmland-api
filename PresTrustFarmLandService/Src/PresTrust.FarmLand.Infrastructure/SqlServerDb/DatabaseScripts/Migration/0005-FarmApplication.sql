@@ -1,6 +1,6 @@
 ﻿BEGIN TRY
    BEGIN TRANSACTION
-
+   
 -------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------
 
@@ -16,7 +16,6 @@
 	FROM		[Farm].[FarmTermApplicationLegacy]
 	WHERE		ISNULL(FarmApplicationId,0) = 0;
 
-	select * from #temp_application_legacy;
 	SET	@v_LEGACY_RECORD_COUNT = @@ROWCOUNT;
 	SET	@v_LEGACY_RECORD_INDEX = 1;
 
@@ -29,7 +28,6 @@
 			FROM		#temp_application_legacy
 			WHERE		ID = @v_LEGACY_RECORD_INDEX;
 
-			select  @v_LEGACY_RECORD_COUNT,@v_LEGACY_RECORD_INDEX;
 
 
 	 INSERT INTO [Farm].[FarmApplication]
@@ -59,7 +57,7 @@
 					   	 END AS [StatusId],
 					   1 AS [CreatedByProgramUser],
 					   TL.[Municipally Approved?],
-					   GetDate() AS [CreatedOn],
+					   '01-01-1900' AS [CreatedOn],
 					   NULL AS [CreatedBy],
 					    1 AS [IsActive],
 					   NULL AS [IsSADC],
@@ -67,7 +65,7 @@
 					   GetDate()
 			FROM  [Farm].[TermProgram_Legacy] TL
 			 JOIN [Farm].[FarmListLegacy] AL ON TL.FarmListID = AL.LegacyFarmListId 
-		WHERE ID = @v_LEGACY_APPLICATION_ID AND TL.FarmListId NOT IN(116,187,271,276,277)
+		WHERE ID = @v_LEGACY_APPLICATION_ID 
 
 		
 			SET @v_NEW_APPLICATION_ID = SCOPE_IDENTITY();

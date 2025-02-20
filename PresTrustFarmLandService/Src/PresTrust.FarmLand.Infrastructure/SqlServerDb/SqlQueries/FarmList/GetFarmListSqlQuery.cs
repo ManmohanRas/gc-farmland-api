@@ -6,9 +6,7 @@
             @" SELECT
                FL.[FarmListID]
               ,FL.[FarmNumber]
-              ,FL.[TermID]
               ,FL.[FarmName]
-              ,FL.[ProjectName]
               ,FL.[Status]
               ,FL.[AgencyID]
               ,FL.[OriginalLandowner]

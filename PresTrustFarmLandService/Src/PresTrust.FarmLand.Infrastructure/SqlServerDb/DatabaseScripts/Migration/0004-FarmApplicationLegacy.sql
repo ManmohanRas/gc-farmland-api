@@ -2,25 +2,26 @@
 
 BEGIN TRY
    BEGIN TRANSACTION
-   
+	
+	   TRUNCATE TABLE [Farm].[FarmTermApplicationLegacy];
 	   INSERT INTO [Farm].[FarmTermApplicationLegacy]
 			(
 				LegacyApplicationId,
 				LegacyApplicationTitle,
-				LegacyFarmListId,
+				NewFarmListId,
 				LegacyApplicationStatus,
 				LegacyAgencyId,
 				FarmApplicationId
 			)
 		  SELECT 
-				[Id],
-				[ProjectName],
-				ISNULL([FarmListID], 0) AS [FarmListID],
-				[Status],
-				[AgencyID],
+				TL.[Id],
+				TL.[ProjectName],
+				ISNULL(FL.[NewFarmListID], 0) AS [FarmListID],
+				TL.[Status],
+				TL.[AgencyID],
 				NULL AS [FarmApplicationId]
-		 FROM  [Farm].[TermProgram_Legacy]
-		 WHERE FarmListId NOT IN (116,187,271,276,277); 
+		 FROM  [Farm].[TermProgram_Legacy] TL
+		 LEFT JOIN [Farm].[FarmListLegacy] FL ON TL.FarmListId = FL.LegacyFarmListId; 
 
 
          COMMIT;

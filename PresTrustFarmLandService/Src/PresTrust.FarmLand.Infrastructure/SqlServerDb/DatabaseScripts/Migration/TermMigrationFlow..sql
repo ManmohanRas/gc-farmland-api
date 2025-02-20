@@ -1,3 +1,5 @@
+Use PresTrustTemp;
+
 BEGIN TRY
 	BEGIN TRANSACTION
 
@@ -12,7 +14,7 @@ CREATE TABLE #temp_application_legacy (Id INT IDENTITY(1,1), LegacyApplicationId
 INSERT INTO		#temp_application_legacy (LegacyApplicationId)
 SELECT		LegacyApplicationId
 FROM		[Farm].[FarmTermApplicationLegacy]
---WHERE		ISNULL(FarmApplicationId,0) = 0;
+WHERE		ISNULL(FarmApplicationId,0) = 0;
 
 SET	@v_LEGACY_RECORD_COUNT = @@ROWCOUNT;
 SET	@v_LEGACY_RECORD_INDEX = 1;
@@ -47,7 +49,7 @@ INSERT INTO Farm.FarmApplication
     SELECT 
 			[ProjectName] AS [Title], -- [ID]
 			[AgencyId],
-			[FarmListID],
+			AL.[NewFarmListID],
 			'1' AS [ApplicationTypeId],
 			CASE WHEN [Status] = '5 Expired' THEN 106
 				 WHEN [Status] = '4 Current' THEN 105
@@ -55,22 +57,22 @@ INSERT INTO Farm.FarmApplication
 				 END AS [StatusId],
 			1 AS [CreatedByProgramUser],
 			[Municipally Approved?],
-			GetDate() AS [CreatedOn],
+			'01-01-1900' AS [CreatedOn],
 			NULL AS [CreatedBy],
-			NULL AS [IsActive],
+			1 AS [IsActive],
 			NULL AS [IsSADC],
-			NULL AS LastUpdatedBy,
+			SUSER_SNAME() AS LastUpdatedBy,
 			GetDate()
         FROM  [Farm].[TermProgram_Legacy] TL
+	   JOIN [Farm].[FarmListLegacy] AL ON TL.FarmListID = AL.LegacyFarmListId 
 		WHERE ID = @v_LEGACY_APPLICATION_ID
 
 		
-			SET @v_NEW_APPLICATION_ID = @@IDENTITY;
+			SET @v_NEW_APPLICATION_ID = SCOPE_IDENTITY();
 
 			UPDATE	[Farm].[FarmTermApplicationLegacy]
 			SET FarmApplicationId = @v_NEW_APPLICATION_ID
 			WHERE	LegacyApplicationId = @v_LEGACY_APPLICATION_ID;
-
 			
 		---Farm owner details 
 		-- Insert From Legacy Table
@@ -100,17 +102,17 @@ INSERT INTO Farm.FarmApplication
 					[MunicipalID],
 					ISNULL([Address1],' ') AS [MailingAddress1],
 					ISNULL([Address2],' ') AS [MailingAddress2],
-					1234 AS [PhoneNumber],
+					[Phone] AS [PhoneNumber],
 					ISNULL([Town],' ') AS [City], 
 					ISNULL([State],' '),
 					ISNULL([Zip Code],0),
-					'NULL' AS [Salutation],  
-					'NULL' AS [EmailAddress], 
-					'NULL' AS  [CurrentOwnerMailingName],  
-					'NULL' AS [LastUpdatedBy],
+					[Salutation],  
+					[Email], 
+					CONCAT([FirstName],' ',[LastName]) AS  [CurrentOwnerMailingName],  
+					NULL AS [LastUpdatedBy],
 					GetDate()
 				FROM  [Farm].[TermProgram_Legacy]
-				WHERE [Id] = @v_LEGACY_APPLICATION_ID
+				WHERE [Id] = @v_LEGACY_APPLICATION_ID;
 
 	--			--Site Characteristics Tab
 
@@ -147,7 +149,7 @@ INSERT INTO Farm.FarmApplication
 						NULL AS [IsLines],
 						NULL AS  [NoteMortgageLines]
 					FROM  [Farm].[TermProgram_Legacy] 
-					WHERE [Id] = @v_LEGACY_APPLICATION_ID
+					WHERE [Id] = @v_LEGACY_APPLICATION_ID;
 
 	--	--Signatory Tab
 		
@@ -172,65 +174,33 @@ INSERT INTO Farm.FarmApplication
 		INSERT INTO [Farm].[FarmTermAppAdminDetails]
 					(
 						[ApplicationId],						                                                                                                                                             
-						--[SADCId],	                                                                                    
+						[SADCId],	                                                                                    
 						[MaxGrant],                                                                                               
 						[PermanentlyPreserved],                                                                                                                                                                
 						[EnrollmentDate],                      
 						[RenewalDate],                         
 						[ExpirationDate],                       
 						[RenewalExpirationDate],                 
-						--[Comment],                         
+						[Comment],                         
 						[LastUpdatedBy],	
 						[LastUpdatedOn]
 			        )
 		 SELECT 
 						@v_NEW_APPLICATION_ID,
-						--[SADC ID#] AS [SADCId], -- [ID]
+						[SADC ID#] AS [SADCId], -- [ID]
 						[Max Grant $] AS [MaxGrant],
 						[Permanently Preserved?] AS [PermanentlyPreserved],
 						[Enrollment Date] AS [EnrollmentDate],
 						[Renewal Date] AS [RenewalDate],
 						[Expiration Date] AS [ExpirationDate],
 						[Renew Expir Date] AS [RenewalExpirationDate],
-						--[Comment],
+						[Comment],
 						NULL AS LastUpdatedBy,
 						GetDate() AS [LastUpdatedOn]
 					  FROM  [Farm].[TermProgram_Legacy] 
-					  WHERE [Id] = @v_LEGACY_APPLICATION_ID
+					  WHERE [Id] = @v_LEGACY_APPLICATION_ID;
 
-	--			--Deed Details
-		--INSERT INTO [Farm].[FarmTermAppDeedDetails]
-		--(
-		--	[ApplicationId],
-		--	[ParcelId],
-		--	[NOTBlock],
-		--	[NOTLot],
-		--	[NOTBook],
-		--	[NOTPage],
-		--	[RDBlock],
-		--	[RDLot],
-		--	[RDBook],
-		--	[RDPage],
-		--	[IsChecked],
-		--	[LastUpdatedBy],
-		--	[LastUpdatedOn]
-		--	)
-  --  SELECT 
-		--	@v_NEW_APPLICATION_ID,
-		--	NULL AS [ParcelId], -- [ID]
-		--	NULL AS [NOTBlock],
-		--	NULL AS [NOTLot],
-		--	[N-O-T Book] AS [NOTBook],
-		--	[N-O-T Page] AS [NOTPage],
-		--	NULL AS [RDBlock],
-		--	NULL AS [RDLOT],
-		--	[Renew Book] AS [RDBook],
-		--	[Renew Page] AS [RDPage],
-		--	'1' AS [IsChecked],
-		--	NULL AS [LastUpdatedBy],
-		--	GetDate() AS [LastUpdatedOn]
-  --      FROM  [Farm].[TermProgram_Legacy] 
-		--WHERE [Id] = @v_LEGACY_APPLICATION_ID
+	--			
 
 	--	--Admin Contacts
 		 INSERT INTO [Farm].[FarmAppAdminContact]
@@ -256,7 +226,7 @@ INSERT INTO Farm.FarmApplication
 				NULL AS [LastUpdatedBy],
 				GetDate() AS [LastUpdatedOn]
          FROM  [Farm].[TermProgram_Legacy] 
-		 WHERE [Id] = @v_LEGACY_APPLICATION_ID
+		 WHERE [Id] = @v_LEGACY_APPLICATION_ID;
 		 
 		 -------------------------------------------------------
 

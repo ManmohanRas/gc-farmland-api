@@ -6,7 +6,7 @@ CREATE TABLE [Farm].[FarmTermApplicationLegacy]
 (
 	[LegacyApplicationId]               [integer]              NOT NULL,  
     [LegacyApplicationTitle]            [varchar](128)         NOT NULL,
-    [LegacyFarmListId]                  [integer]              NOT NULL,                                                                                    
+    [NewFarmListId]                     [integer]              NOT NULL,                                                                                    
     [LegacyApplicationStatus]           [varchar](128)         NOT NULL,                                                                        
     [LegacyAgencyId]                    [integer]              NOT NULL,                                                                                                                                     
     [FarmApplicationId]                 [integer]              NULL,
@@ -17,7 +17,6 @@ CONSTRAINT [PK_FarmTermApplicationLegacy_Id] PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-
 
 -- Create FarmListLegacy
 DROP TABLE IF EXISTS [Farm].[FarmListLegacy]

@@ -1,14 +1,19 @@
-﻿BEGIN TRY
+﻿USE PrestrustTemp;
+
+BEGIN TRY
 	BEGIN TRANSACTION
 
-	------Legacy Table
+	----Farm Application
+	
+
+	--------Legacy Table
 	DROP TABLE IF EXISTS [Farm].[FarmTermApplicationLegacy]
 
 	CREATE TABLE [Farm].[FarmTermApplicationLegacy]
 	(
 		[LegacyApplicationId]               [integer]              NOT NULL,  
 		[LegacyApplicationTitle]            [varchar](128)         NOT NULL,
-		[LegacyFarmListId]                  [integer]              NOT NULL,                                                                                    
+		[NewFarmListId]                     [integer]              NOT NULL,                                                                                    
 		[LegacyApplicationStatus]           [varchar](128)         NOT NULL,                                                                        
 		[LegacyAgencyId]                    [integer]              NOT NULL,                                                                                                                                     
 		[FarmApplicationId]                 [integer]              NULL,
@@ -17,6 +22,7 @@
 		[LegacyApplicationId] ASC
 	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY];
+
 
 	--Farm.FarmApplicationType
 	-- Drop Table
@@ -32,7 +38,7 @@
 	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY];
 
-	---Application Status
+
 	-- Drop Constraints
 	ALTER TABLE [Farm].[FarmApplicationStatus] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationStatus]; 
 
@@ -55,7 +61,8 @@
 	-- Create Constraints
 	ALTER TABLE [Farm].[FarmApplicationStatus] ADD CONSTRAINT [FK_ApplicationTypeId_FarmApplicationStatus]  FOREIGN KEY (ApplicationTypeId) REFERENCES [Farm].FarmApplicationType(Id);
 
-
+	
+	
 	--Application Section
 	-- Drop Constraints
 	IF OBJECT_ID('[Farm].[FarmApplicationSection]') IS NOT NULL
@@ -65,7 +72,7 @@
 		ALTER TABLE [Farm].[FarmApplicationSection] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationSection] 	
 	END;
 
-	-- Drop Table
+	 --Drop Table
 	DROP TABLE IF EXISTS [Farm].[FarmApplicationSection];
  
 	-- Create Table
@@ -146,6 +153,62 @@
 	ALTER TABLE [Farm].[FarmAppCommentType] WITH NOCHECK ADD  CONSTRAINT [DF_FarmAppCommentType_Description]  DEFAULT ('') FOR [Description]
  
 	ALTER TABLE [Farm].[FarmAppCommentType] WITH NOCHECK ADD  CONSTRAINT [DF_FarmAppCommentType_IsActive]  DEFAULT (1) FOR [IsActive];
+
+	IF OBJECT_ID('[Farm].[FarmApplication]') IS NOT NULL
+	BEGIN
+		-- Drop Constraints
+		ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_CreatedByProgramUser_FarmApplication];
+
+		ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmApplication];
+	
+		ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_CreatedOn_FarmApplication];
+
+		ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_IsActive_FarmApplication];
+
+		ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_IsApprovedByMunicipality_FarmApplication];
+
+		ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_IsSADC_FarmApplication];
+	END;
+ 
+ 
+	 --Drop Table
+	DROP TABLE IF EXISTS [Farm].[FarmApplication];
+
+	-- Create Table
+	CREATE TABLE [Farm].[FarmApplication](
+		[Id]						[integer] 		IDENTITY(1,1)	NOT NULL,
+		[Title]						[varchar](256)					NOT NULL,
+		[AgencyId]					[integer]						NOT NULL,
+		[FarmListId]                [integer]						NOT NULL,
+		[ApplicationTypeId]			[smallint]						NOT NULL,
+		[StatusId]					[smallint]						NOT NULL,
+		[CreatedByProgramUser]		[bit]							NOT NULL,
+		[IsApprovedByMunicipality]	[bit]							NOT NULL,
+		[CreatedOn]					[datetime]						NOT NULL,
+		[CreatedBy]					[varchar](128)					NULL	,
+		[IsActive]					[bit]							NULL    ,
+		[IsSADC]					[bit]                           NULL    , 
+		[LastUpdatedBy]				[varchar](128)					NULL	,
+		[LastUpdatedOn]				[datetime]						NOT NULL,
+	CONSTRAINT [PK_FarmApplication_Id] PRIMARY KEY CLUSTERED 
+	(
+		[Id] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+	) ON [PRIMARY];
+
+	-- Create Constraints
+	ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_CreatedByProgramUser_FarmApplication]  DEFAULT (0) FOR [CreatedByProgramUser];
+
+	ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmApplication]  DEFAULT (GETDATE()) FOR [LastUpdatedOn];
+
+	ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_CreatedOn_FarmApplication]  DEFAULT (GETDATE()) FOR [CreatedOn];
+
+	ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_IsActive_FarmApplication]  DEFAULT (1) FOR [IsActive];
+
+	ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_IsApprovedByMunicipality_FarmApplication]  DEFAULT (0) FOR [IsApprovedByMunicipality];
+
+	ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_IsSADC_FarmApplication]  DEFAULT (0) FOR [IsSADC];
+ 
 
 	--Farm Document
 	IF OBJECT_ID('[Farm].[FarmApplicationDocument]') IS NOT NULL
@@ -230,62 +293,7 @@
  
 	ALTER TABLE [Farm].FarmApplicationBrokenRules WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmApplicationBrokenRules]  DEFAULT (GETDATE()) FOR [LastUpdatedOn];
 
-	--Farm Application
-	IF OBJECT_ID('[Farm].[FarmApplication]') IS NOT NULL
-	BEGIN
-		-- Drop Constraints
-		ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_CreatedByProgramUser_FarmApplication];
-
-		ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmApplication];
 	
-		ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_CreatedOn_FarmApplication];
-
-		ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_IsActive_FarmApplication];
-
-		ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_IsApprovedByMunicipality_FarmApplication];
-
-		ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [DF_IsSADC_FarmApplication];
-	END;
- 
- 
-	-- Drop Table
-	DROP TABLE IF EXISTS [Farm].[FarmApplication]
-
-	-- Create Table
-	CREATE TABLE [Farm].[FarmApplication](
-		[Id]						[integer] 		IDENTITY(1,1)	NOT NULL,
-		[Title]						[varchar](256)					NOT NULL,
-		[AgencyId]					[integer]						NOT NULL,
-		[FarmListId]                [integer]						NOT NULL,
-		[ApplicationTypeId]			[smallint]						NOT NULL,
-		[StatusId]					[smallint]						NOT NULL,
-		[CreatedByProgramUser]		[bit]							NOT NULL,
-		[IsApprovedByMunicipality]	[bit]							NOT NULL,
-		[CreatedOn]					[datetime]						NOT NULL,
-		[CreatedBy]					[varchar](128)					NULL	,
-		[IsActive]					[bit]							NULL    ,
-		[IsSADC]					[bit]                           NULL    , 
-		[LastUpdatedBy]				[varchar](128)					NULL	,
-		[LastUpdatedOn]				[datetime]						NOT NULL,
-	CONSTRAINT [PK_FarmApplication_Id] PRIMARY KEY CLUSTERED 
-	(
-		[Id] ASC
-	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-	) ON [PRIMARY];
-
-	-- Create Constraints
-	ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_CreatedByProgramUser_FarmApplication]  DEFAULT (0) FOR [CreatedByProgramUser];
-
-	ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmApplication]  DEFAULT (GETDATE()) FOR [LastUpdatedOn];
-
-	ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_CreatedOn_FarmApplication]  DEFAULT (GETDATE()) FOR [CreatedOn];
-
-	ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_IsActive_FarmApplication]  DEFAULT (1) FOR [IsActive];
-
-	ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_IsApprovedByMunicipality_FarmApplication]  DEFAULT (0) FOR [IsApprovedByMunicipality];
-
-	ALTER TABLE [Farm].[FarmApplication] WITH NOCHECK ADD  CONSTRAINT [DF_IsSADC_FarmApplication]  DEFAULT (0) FOR [IsSADC];
- 
 	--FarmApplicationStatusLog
 	IF OBJECT_ID('[Farm].[FarmApplicationStatusLog]') IS NOT NULL
 	BEGIN
@@ -422,9 +430,9 @@
 
 	ALTER TABLE [Farm].[FarmApplicationUser] WITH NOCHECK ADD  CONSTRAINT [DF_LastName_FarmApplicationUser]  DEFAULT ('') FOR [LastName];
 
-	ALTER TABLE [Farm].[FarmApplicationUser] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmApplicationUser]  DEFAULT (GETDATE()) FOR [LastUpdatedOn]
+	ALTER TABLE [Farm].[FarmApplicationUser] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmApplicationUser]  DEFAULT (GETDATE()) FOR [LastUpdatedOn];
 
-	---FarmAppOwnerDetails
+	-----FarmAppOwnerDetails
 	IF OBJECT_ID('[Farm].[FarmAppOwnerDetailList]') IS NOT NULL
 	BEGIN
 		-- Drop Constraints
@@ -466,7 +474,7 @@
 
 	ALTER TABLE [Farm].[FarmAppOwnerDetailList] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmAppOwnerDetailList]  DEFAULT (GETDATE()) FOR [LastUpdatedOn];
 
-	--Term App SiteCharacteristics
+	----Term App SiteCharacteristics
 	IF OBJECT_ID('[Farm].[FarmTermAppSiteCharacteristics]') IS NOT NULL
 	BEGIN
 		-- Drop Constraints
@@ -508,7 +516,7 @@
 
 	ALTER TABLE [Farm].[FarmTermAppSiteCharacteristics] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmTermAppSiteCharacteristics]  DEFAULT (GETDATE()) FOR [LastUpdatedOn];
 
-	--TermApp Signature
+	----TermApp Signature
 	IF OBJECT_ID('[Farm].[FarmTermAppSignature]') IS NOT NULL
 	BEGIN
 		-- Drop Constraints
@@ -541,7 +549,7 @@
 	ALTER TABLE [Farm].[FarmTermAppSignature] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmTermAppSignature]  DEFAULT (GETDATE()) FOR [LastUpdatedOn];
 
 	
-	---Term App Admin Details
+	-----Term App Admin Details
 	IF OBJECT_ID('[Farm].[FarmTermAppAdminDetails]') IS NOT NULL
 	BEGIN
 		-- Drop Constraints
@@ -557,14 +565,14 @@
 	CREATE TABLE [Farm].[FarmTermAppAdminDetails](
 		[Id]							[integer] 		IDENTITY(1,1)	NOT NULL,
 		[ApplicationId]					[integer]						NOT NULL,
-		[SADCId]						[integer]							NULL,
+		[SADCId]						[varchar](80)						NULL,
 		[MaxGrant]						[decimal](18,2)						NULL,
 		[PermanentlyPreserved]			[bit]								NULL,
 		[EnrollmentDate]				[dateTime]							NULL,
 		[RenewalDate]					[dateTime]							NULL,
 		[ExpirationDate]				[dateTime]							NULL,
 		[RenewalExpirationDate]			[dateTime]							NULL,
-		[Comment]						[varchar](128)						Null,
+		[Comment]						[varchar](4000)						Null,
 		[LastUpdatedBy]					[varchar](128)						NULL,
 		[LastUpdatedOn]					[datetime]							NULL,
 	CONSTRAINT [PK_FarmTermAppAdminDetails_Id] PRIMARY KEY CLUSTERED 
@@ -708,7 +716,7 @@
 
 	ALTER TABLE [Farm].[FarmAppAdminContact] WITH NOCHECK ADD  CONSTRAINT [DF_LastUpdatedOn_FarmAppAdminContact]  DEFAULT (GETDATE()) FOR [LastUpdatedOn];
 
-	--Farm Esmt App Structure
+	----Farm Esmt App Structure
 	IF OBJECT_ID('[Farm].[FarmEsmtAppStructure]') IS NOT NULL
 	BEGIN
 		-- Drop Constraints
@@ -2190,7 +2198,7 @@ END TRY
 BEGIN CATCH
 	DECLARE @ErrorMessage NVARCHAR(4000); 
 
-	SET   @ErrorMessage = ERROR_MESSAGE() + ' ' + cast(@v_LEGACY_APPLICATION_ID as varchar);
+	SET   @ErrorMessage = ERROR_MESSAGE();
 	ROLLBACK;
 
 	SELECT @ErrorMessage;

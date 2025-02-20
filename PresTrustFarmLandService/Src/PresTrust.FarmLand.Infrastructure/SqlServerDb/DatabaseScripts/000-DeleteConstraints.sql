@@ -1,59 +1,48 @@
+USE PrestrustTemp;
+
 BEGIN TRY
 	BEGIN TRANSACTION
 	--==============================================================================================================--
 	-- Drop Constraints
-	----------------------------------------------CORE APP----------------------------------------------------------
-    ALTER TABLE [Farm].[FarmApplicationStatus] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationStatus]; 
-	ALTER TABLE [Farm].[FarmApplicationStatus] DROP CONSTRAINT IF EXISTS  [PK_FarmApplicationStatus_Id];
+	----------------------------------------------Term----------------------------------------------------------
 
-	ALTER TABLE [Farm].[FarmApplicationType] DROP CONSTRAINT IF EXISTS  [PK_FarmApplicationType_Id];
-
-
+    ALTER TABLE [Farm].[FarmApplicationStatus] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationStatus];
 	ALTER TABLE [Farm].[FarmApplicationSection] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationSection];
-	ALTER TABLE [Farm].[FarmApplicationSection] DROP CONSTRAINT IF EXISTS  [PK_FarmApplicationSection_Id];
-	
 	ALTER TABLE [Farm].[FarmApplicationDocument] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmApplicationDocument];
-	ALTER TABLE [Farm].[FarmApplicationDocument] DROP CONSTRAINT IF EXISTS [PK_FarmApplicationDocument_Id];
 	ALTER TABLE [Farm].[FarmApplicationDocument] DROP CONSTRAINT IF EXISTS  [FK_DocumentTypeId_FarmApplicationDocument];
-
 	ALTER TABLE [Farm].[FarmApplicationDocumentType] DROP CONSTRAINT IF EXISTS  [FK_SectionId_FarmApplicationDocumentType];
-	ALTER TABLE [Farm].[FarmApplicationDocumentType] DROP CONSTRAINT IF EXISTS [PK_FarmApplicationDocumentType_Id];
 	ALTER TABLE [Farm].[FarmApplicationDocumentType] DROP CONSTRAINT IF EXISTS  [FK_ApplicationTypeId_FarmApplicationDocumentType];
-
-
 	ALTER TABLE [Farm].[FarmApplicationComment] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmApplicationComment];
-	ALTER TABLE [Farm].[FarmApplicationComment] DROP CONSTRAINT IF EXISTS  [PK_FarmApplicationComment_Id];
-	ALTER TABLE [Farm].[FarmAppCommentType] DROP CONSTRAINT IF EXISTS [PK_FarmAppCommentType_Id];
-
 	ALTER TABLE [Farm].[FarmApplicationFeedback] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmApplicationFeedback];
-	ALTER TABLE [Farm].[FarmApplicationFeedback] DROP CONSTRAINT IF EXISTS [PK_FarmApplicationFeedback_Id];
-
 	ALTER TABLE [Farm].[FarmApplicationBrokenRules] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmApplicationBrokenRules];
 
 	ALTER TABLE [Farm].[FarmAppLocationDetails] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmAppLocationDetails];
-
 	ALTER TABLE [Farm].[FarmAppOwnerDetailList] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmAppOwnerDetailList];
-	ALTER TABLE [Farm].[FarmAppOwnerDetailList] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmAppOwnerDetailList];
-
 	ALTER TABLE [Farm].[FarmAppAdminContact] DROP CONSTRAINT IF EXISTS [FK_ApplicationId_FarmAppAdminContact];
-	ALTER TABLE [Farm].[FarmAppAdminContact] DROP CONSTRAINT IF EXISTS [PK_FarmAppAdminContact_Id];
-	----------------------------------------------TERM-----------------------------------------------------------------
 	ALTER TABLE [Farm].[FarmTermAppDeedLocation] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmTermAppDeedLocation];
-
 	ALTER TABLE [Farm].[FarmTermAppAdminDetails] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmTermAppAdminDetails];
-	ALTER TABLE [Farm].[FarmTermAppAdminDetails] DROP CONSTRAINT IF EXISTS [PK_FarmTermAppAdminDetails_Id];
-	
-
 	ALTER TABLE [Farm].[FarmTermAppSiteCharacteristics] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmTermAppSiteCharacteristics];
-	ALTER TABLE [Farm].[FarmTermAppSiteCharacteristics] DROP CONSTRAINT IF EXISTS [PK_FarmTermAppSiteCharacteristics_Id];
-	
-	
 	ALTER TABLE [Farm].[FarmTermAppDeedDetails] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmTermAppDeedDetails];
-	ALTER TABLE [Farm].[FarmTermAppDeedDetails] DROP CONSTRAINT IF EXISTS [PK_FarmTermAppDeedDetails_Id];
-	
-
 	ALTER TABLE [Farm].[FarmTermAppSignature] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmTermAppSignature];
+
+	ALTER TABLE [Farm].[FarmApplicationStatus] DROP CONSTRAINT IF EXISTS  [PK_FarmApplicationStatus_Id];
+	ALTER TABLE [Farm].[FarmApplicationType] DROP CONSTRAINT IF EXISTS  [PK_FarmApplicationType_Id];
+	ALTER TABLE [Farm].[FarmApplicationSection] DROP CONSTRAINT IF EXISTS  [PK_FarmApplicationSection_Id];
+	ALTER TABLE [Farm].[FarmApplicationDocument] DROP CONSTRAINT IF EXISTS [PK_FarmApplicationDocument_Id];
+	ALTER TABLE [Farm].[FarmApplicationDocumentType] DROP CONSTRAINT IF EXISTS [PK_FarmApplicationDocumentType_Id];
+	ALTER TABLE [Farm].[FarmApplicationComment] DROP CONSTRAINT IF EXISTS  [PK_FarmApplicationComment_Id];
+	ALTER TABLE [Farm].[FarmAppCommentType] DROP CONSTRAINT IF EXISTS [PK_FarmAppCommentType_Id];
+	ALTER TABLE [Farm].[FarmApplicationFeedback] DROP CONSTRAINT IF EXISTS [PK_FarmApplicationFeedback_Id];
+	ALTER TABLE [Farm].[FarmAppOwnerDetailList] DROP CONSTRAINT IF EXISTS  [PK_FarmAppOwnerDetailList_Id];
+	ALTER TABLE [Farm].[FarmAppOwnerDetailList] DROP CONSTRAINT IF EXISTS  [DF_LastUpdatedOn_FarmAppOwnerDetailList];
+	ALTER TABLE [Farm].[FarmAppAdminContact] DROP CONSTRAINT IF EXISTS [PK_FarmAppAdminContact_Id];
+    ALTER TABLE [Farm].[FarmApplicationUser] DROP CONSTRAINT IF EXISTS [PK_FarmRole_Id];
+
+	ALTER TABLE [Farm].[FarmTermAppAdminDetails] DROP CONSTRAINT IF EXISTS [PK_FarmTermAppAdminDetails_Id];
+	ALTER TABLE [Farm].[FarmTermAppSiteCharacteristics] DROP CONSTRAINT IF EXISTS [PK_FarmTermAppSiteCharacteristics_Id];
+	ALTER TABLE [Farm].[FarmTermAppDeedDetails] DROP CONSTRAINT IF EXISTS [PK_FarmTermAppDeedDetails_Id];
 	ALTER TABLE [Farm].[FarmTermAppSignature] DROP CONSTRAINT IF EXISTS [PK_FarmTermAppSignature_Id];
+
 	
 
 	----------------------------------------------ESMT-----------------------------------------------------------------
@@ -160,20 +149,20 @@ BEGIN TRY
 
 	ALTER TABLE [Farm].[FarmMonitoringDetails] DROP CONSTRAINT IF EXISTS  [PK_FarmMonitoringDetails_Id];
 
-	------------------------------------------------TEMP----------------------------------------------------
-	--Need to remove temp
-	ALTER TABLE [Farm].[FarmTermAppAdminContact] DROP CONSTRAINT IF EXISTS [FK_ApplicationId_FarmTermAppAdminContact];
-	ALTER TABLE [Farm].[FarmTermAppAdminContact] DROP CONSTRAINT IF EXISTS [PK_FarmTermAppAdminContact_Id];
-	--Need to remove temp
+   ALTER TABLE [Farm].[FarmList] DROP CONSTRAINT IF EXISTS  [PK_FarmList_Id];
+   ALTER TABLE [Farm].[FarmList] DROP CONSTRAINT IF EXISTS [PK_FarmList];
 
-	--Need to remove temp
-	ALTER TABLE [Farm].[FarmTermAppLocation] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmTermAppLocation];
-	--Need to remove temp
+   ALTER TABLE [Farm].[FarmMunicipalTrustFundPermittedUses] DROP CONSTRAINT IF EXISTS  [PK_FarmMunicipalTrustFundPermittedUses_Id];
+   ALTER TABLE [Farm].[FarmApplication] DROP CONSTRAINT IF EXISTS  [PK_FarmApplication_Id];
 
-		--Need to remove temp
-	ALTER TABLE [Farm].[FarmTermAppOwnerDetails] DROP CONSTRAINT IF EXISTS  [FK_ApplicationId_FarmTermAppOwnerDetails];
-	ALTER TABLE [Farm].[FarmTermAppOwnerDetails] DROP CONSTRAINT IF EXISTS [PK_FarmTermAppOwnerDetails_Id];
-	--Need to remove temp
+
+--Legacy
+   ALTER TABLE [Farm].[FarmListLegacy] DROP CONSTRAINT IF EXISTS [PK_LegacyFarmList_Id];
+
+   ALTER TABLE [Farm].[FarmTermApplicationLegacy] DROP CONSTRAINT IF EXISTS [PK_FarmTermApplicationLegacy_Id];
+
+	--------------------------------------------------TEMP----------------------------------------------------
+	
 		
 	--==============================================================================================================--
 	--SELECT 1/0;
