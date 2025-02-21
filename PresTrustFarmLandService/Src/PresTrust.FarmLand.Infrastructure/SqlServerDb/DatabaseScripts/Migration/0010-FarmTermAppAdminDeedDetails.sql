@@ -30,10 +30,14 @@ CONSTRAINT [PK_#FarmTermAppSiteCharacteristics_Id] PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 
-	        INSERT INTO #FarmTermAppDeedDetails
+	   INSERT INTO [Farm].[FarmTermAppDeedDetails]
 		(
 			[ApplicationId],
 			[ParcelId],
+			[OriginalBlock],
+			[OriginalLot],
+			[OriginalBook],	
+			[OriginalPage],
 			[NOTBlock],
 			[NOTLot],
 			[NOTBook],
@@ -46,24 +50,32 @@ CONSTRAINT [PK_#FarmTermAppSiteCharacteristics_Id] PRIMARY KEY CLUSTERED
 			[LastUpdatedBy],
 			[LastUpdatedOn]
 			)
-            SELECT 
-					[ID],
-					NULL AS [ParcelId], -- [ID]
-					NULL AS [NOTBlock],
-					NULL AS [NOTLot],
-					[N-O-T Book] AS [NOTBook],
-					[N-O-T Page] AS [NOTPage],
-					NULL AS [RDBlock],
-					NULL AS [RDLOT],
-					[Renew Book] AS [RDBook],
-					[Renew Page] AS [RDPage],
-					'1' AS [IsChecked],
-					NULL AS [LastUpdatedBy],
-					GetDate() AS [LastUpdatedOn]
-                FROM  [Farm].[TermProgram_Legacy] 
 
+	 SELECT 
+			TL.[ID],
+			DL.ParcelId AS [ParcelId],
+			MBL.Block,
+			MBL.Lot,
+			TL.[Orig Book],
+			TL.[Orig Page],
+			NULL AS [NOTBlock],
+			NULL AS [NOTLot],
+			TL.[N-O-T Book] AS [NOTBook],
+			TL.[N-O-T Page] AS [NOTPage],
+			NULL AS [RDBlock],
+			NULL AS [RDLOT],
+			TL.[Renew Book] AS [RDBook],
+			TL.[Renew Page] AS [RDPage],
+			'1' AS [IsChecked],
+			SUSER_NAME() AS [LastUpdatedBy],
+			GetDate() AS [LastUpdatedOn]
+		FROM  [Farm].[TermProgram_Legacy] TL
+		LEFT JOIN Farm.FarmTermApplicationLegacy TAL ON TAL.LegacyApplicationId = TL.Id
+		LEFT JOIN [Farm].[FarmTermAppDeedLocation] DL ON TAL.FarmApplicationId = DL.ApplicationId
+		LEFT JOIN [Farm].FarmMunicipalityBlockLotParcel MBL ON MBL.Id = DL.ParcelId AND MBL.FarmListID = TAL.NewFarmListId
+	 WHERE MBL.Block IS NOT NULL AND MBL.LOT IS NOT NULL; 
             COMMIT;
-            PRINT 'Term application FarmList legacy table has been populated';
+            PRINT 'Term App Admin Deed details table has been populated';
 END TRY
 BEGIN CATCH
     DECLARE     @ErrorMessage  NVARCHAR(4000);
