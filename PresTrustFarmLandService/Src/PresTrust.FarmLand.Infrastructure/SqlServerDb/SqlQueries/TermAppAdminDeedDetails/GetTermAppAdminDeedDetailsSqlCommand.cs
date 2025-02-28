@@ -9,16 +9,15 @@ public class GetTermAppAdminDeedDetailsSqlCommand
                      AD.Id AS Id 
                     ,DL.[ApplicationId]
 					,DL.ParcelId AS ParcelId
+                    ,MBL.MunicipalityId
+                    ,CM.Municipality
+                    ,MBL.QualificationCode
                     ,MBL.[Block] AS OriginalBlock
                     ,MBL.[Lot] AS OriginalLot
                     ,AD.[OriginalBook]
                     ,AD.[OriginalPage]
-                    ,AD.[NOTBlock]						
-                    ,AD.[NOTLot]						
                     ,AD.[NOTBook]						
                     ,AD.[NOTPage]						
-                    ,AD.[RDBlock]						
-                    ,AD.[RDLot]							
                     ,AD.[RDBook]						
                     ,AD.[RDPage]	
 					,DL.IsChecked AS IsChecked
@@ -28,7 +27,8 @@ public class GetTermAppAdminDeedDetailsSqlCommand
                 FROM [Farm].[FarmTermAppDeedLocation]  AS DL
                 LEFT JOIN   [Farm].[FarmMunicipalityBlockLotParcel]  AS  MBL ON (DL.ParcelId = MBL.Id)
 				LEFT JOIN [Farm].[FarmTermAppDeedDetails] AS AD ON (DL.ParcelId = AD.ParcelId)
-                WHERE DL.IsChecked = 1 AND DL.ApplicationId = @p_ApplicationId;";
+                LEFT JOIN [Core].[Municipality] CM ON (MBL.MunicipalityId = CM.MunicipalId AND CM.InCounty = 1)
+                WHERE DL.IsChecked = 1  AND DL.ApplicationId = @p_ApplicationId;";
    
     public GetTermAppAdminDeedDetailsSqlCommand()
     { }

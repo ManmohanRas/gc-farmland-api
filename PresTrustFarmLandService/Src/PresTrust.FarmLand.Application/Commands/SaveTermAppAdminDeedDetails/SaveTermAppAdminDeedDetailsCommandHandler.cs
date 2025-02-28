@@ -91,30 +91,6 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
         {
             foreach (var deed in reqDeedDetails) 
             {
-                if (string.IsNullOrEmpty(deed.NOTBlock))
-                {
-
-                    brokenRules.Add(new FarmBrokenRuleEntity()
-                    {
-                        ApplicationId = application.Id,
-                        SectionId = sectionId,
-                        Message = "Notice Of Termination Block required field on Deed Details Tab have not been filled.",
-                        IsApplicantFlow = false
-                    });
-
-                }
-                if (string.IsNullOrEmpty(deed.NOTLot))
-                {
-
-                    brokenRules.Add(new FarmBrokenRuleEntity()
-                    {
-                        ApplicationId = application.Id,
-                        SectionId = sectionId,
-                        Message = "Notice Of Termination Lot required field on Deed Details Tab have not been filled.",
-                        IsApplicantFlow = false
-                    });
-
-                }
                 if (string.IsNullOrEmpty(deed.NOTBook))
                 {
 
@@ -135,30 +111,6 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
                         ApplicationId = application.Id,
                         SectionId = sectionId,
                         Message = "Notice Of Termination Page required field on Deed Details Tab have not been filled.",
-                        IsApplicantFlow = false
-                    });
-
-                }
-                if (string.IsNullOrEmpty(deed.RDBlock))
-                {
-
-                    brokenRules.Add(new FarmBrokenRuleEntity()
-                    {
-                        ApplicationId = application.Id,
-                        SectionId = sectionId,
-                        Message = "Renewal Deed Block required field on Deed Details Tab have not been filled.",
-                        IsApplicantFlow = false
-                    });
-
-                }
-                if (string.IsNullOrEmpty(deed.RDLot))
-                {
-
-                    brokenRules.Add(new FarmBrokenRuleEntity()
-                    {
-                        ApplicationId = application.Id,
-                        SectionId = sectionId,
-                        Message = "Renewal Deed Lot required field on Deed Details Tab have not been filled.",
                         IsApplicantFlow = false
                     });
 

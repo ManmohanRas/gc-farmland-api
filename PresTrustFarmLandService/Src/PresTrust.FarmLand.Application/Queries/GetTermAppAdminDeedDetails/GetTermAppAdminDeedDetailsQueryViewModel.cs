@@ -14,14 +14,14 @@ public class TermAppAdminDeedDetailsViewModel
     public int ParcelId { get; set; }
     public string OriginalBlock { get; set; }
     public string OriginalLot { get; set; }
+    public int? MunicipalityId { get; set; }
+    public string? QualificationCode { get; set; }
+ 
+    public string? Municipality { get; set; }
     public string OriginalBook { get; set; }
     public string OriginalPage { get; set; }
-    public string NOTBlock { get; set; }
-    public string NOTLot { get; set; }
     public string NOTBook { get; set; }
     public string NOTPage { get; set; }
-    public string RDBlock { get; set; }
-    public string RDLot { get; set; }
     public string RDBook { get; set; }
     public string RDPage { get; set; }
     public bool IsChecked { get; set; }
