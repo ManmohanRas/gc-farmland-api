@@ -11,12 +11,8 @@ public class CreateTermAppAdminDeedDetailsSqlCommand
 	            ,OriginalLot					
 	            ,OriginalBook				
 	            ,OriginalPage					
-                ,NOTBlock						
-                ,NOTLot						
                 ,NOTBook						
                 ,NOTPage						
-                ,RDBlock						
-                ,RDLot							
                 ,RDBook						
                 ,RDPage	
                 ,IsChecked
@@ -30,12 +26,8 @@ public class CreateTermAppAdminDeedDetailsSqlCommand
                ,@p_OriginalLot					
                ,@p_OriginalBook				
                ,@p_OriginalPage					
-               ,@p_NOTBlock						
-               ,@p_NOTLot						
                ,@p_NOTBook						
                ,@p_NOTPage						
-               ,@p_RDBlock						
-               ,@p_RDLot							
                ,@p_RDBook						
                ,@p_RDPage	
                ,@p_IsChecked
