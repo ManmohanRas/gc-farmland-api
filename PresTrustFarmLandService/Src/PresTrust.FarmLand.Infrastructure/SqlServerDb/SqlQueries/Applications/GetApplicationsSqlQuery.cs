@@ -97,7 +97,6 @@ public class GetApplicationsSqlQuery
                 A.[IsSADC],
 				FL.[FarmName],
 				FL.[MunicipalID],
-				FL.[Municipality],
                 FL.[OriginalLandowner],
                 AgencyEntity.[AgencyLabel] ,
                 AD.[EnrollmentDate],
