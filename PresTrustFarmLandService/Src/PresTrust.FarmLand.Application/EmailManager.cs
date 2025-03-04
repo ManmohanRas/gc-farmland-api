@@ -153,9 +153,16 @@ public class EmailManager : IEmailManager
        
         subject = subject.Replace("{{FarmName}}", applicationName ?? "");
 
-        //toEmails = systemParamOptions.IsDevelopment == false ? string.Join(",", primaryContact.Item2) : systemParamOptions.TestEmailIds;
-        //toEmails = string.Join(",", primaryContact.Item2);
-        toEmails = systemParamOptions.TestEmailIds;
+   
+
+        if (primaryContact.Item2.Count() > 0)
+        {
+            toEmails = string.Join(",", primaryContact.Item2);
+        }
+        else
+        {
+            toEmails = systemParamOptions.ProgramAdminEmail ?? String.Empty;
+        }
 
         var senderName = systemParamOptions.IsDevelopment == false ? userContext.Name : systemParamOptions.TestEmailFromUserName;
         var senderEmail = systemParamOptions.IsDevelopment == false ? userContext.Email : "mcgis@co.morris.nj.us";
