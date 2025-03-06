@@ -209,6 +209,8 @@ public class FarmEsmtAppSecurityManager
             case UserRoleEnum.PROGRAM_ADMIN:
             case UserRoleEnum.PROGRAM_EDITOR:
 
+
+
                 esmtPermission.CanReviewApplication = true;
                 esmtPermission.CanRequestForAnApplicationCorrection = true;
                 esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
@@ -312,7 +314,14 @@ public class FarmEsmtAppSecurityManager
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
-                AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                if (userRole == UserRoleEnum.PROGRAM_EDITOR)
+                {
+                    AdminDocumentChecklist();
+                }
+                else
+                    AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+
+
                 AdminCostDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminAppraisalReport(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminOfferCosts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -599,7 +608,12 @@ public class FarmEsmtAppSecurityManager
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
-                AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                if (userRole == UserRoleEnum.PROGRAM_EDITOR)
+                {
+                    AdminDocumentChecklist();
+                }
+                else
+                    AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminCostDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminAppraisalReport(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminOfferCosts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -892,7 +906,12 @@ public class FarmEsmtAppSecurityManager
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
-                AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                if (userRole == UserRoleEnum.PROGRAM_EDITOR)
+                {
+                    AdminDocumentChecklist();
+                }
+                else
+                    AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminCostDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminAppraisalReport(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminOfferCosts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -1178,7 +1197,12 @@ public class FarmEsmtAppSecurityManager
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
-                AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                if (userRole == UserRoleEnum.PROGRAM_EDITOR)
+                {
+                    AdminDocumentChecklist();
+                }
+                else
+                    AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminCostDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminAppraisalReport(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminOfferCosts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -1460,7 +1484,12 @@ public class FarmEsmtAppSecurityManager
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
-                AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                if (userRole == UserRoleEnum.PROGRAM_EDITOR)
+                {
+                    AdminDocumentChecklist();
+                }
+                else
+                    AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminCostDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminAppraisalReport(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminOfferCosts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -1743,7 +1772,12 @@ public class FarmEsmtAppSecurityManager
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
-                AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                if (userRole == UserRoleEnum.PROGRAM_EDITOR)
+                {
+                    AdminDocumentChecklist();
+                }
+                else
+                    AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminCostDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminAppraisalReport(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminOfferCosts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -2025,7 +2059,12 @@ public class FarmEsmtAppSecurityManager
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
-                AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                if (userRole == UserRoleEnum.PROGRAM_EDITOR)
+                {
+                    AdminDocumentChecklist();
+                }
+                else
+                    AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminCostDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminAppraisalReport(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminOfferCosts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -2308,6 +2347,7 @@ public class FarmEsmtAppSecurityManager
                 else
                     OtherDocuments(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
+
                 AdminDocumentChecklist(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminCostDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminAppraisalReport(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
@@ -2319,6 +2359,15 @@ public class FarmEsmtAppSecurityManager
                 AdminDetails(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                 AdminContacts(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
+
+                if (IsSADC)
+                {
+                    SADCFarmInformation(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCResiOnEsmtArea(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCFarmHistory(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCAppEligibilityI(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                    SADCAppEligibilityII(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
                     Title = EsmtAppNavigationItemTitles.LOCATION,
