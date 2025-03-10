@@ -1,6 +1,4 @@
-﻿using static System.Collections.Specialized.BitVector32;
-
-namespace PresTrust.FarmLand.Application.Commands;
+﻿namespace PresTrust.FarmLand.Application.Commands;
 
 public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcCommand, Unit>
 {

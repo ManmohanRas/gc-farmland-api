@@ -1688,7 +1688,13 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanWithdrawApplication = true;
                 esmtPermission.CanPreserveApplication = true;
 
-                Location();
+                correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
+                if (correction == null)
+                {
+                    Location(enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
+                }
+                else
+                    Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
 
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.OWNER_DETAILS).FirstOrDefault();
                 if (correction == null)
@@ -1800,7 +1806,7 @@ public class FarmEsmtAppSecurityManager
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
                     Title = EsmtAppNavigationItemTitles.LOCATION,
-                    RouterLink = EsmtAppRouterLinks.LOCATION_VIEW,
+                    RouterLink = EsmtAppRouterLinks.LOCATION_EDIT,
                     SortOrder = 1
                 };
 

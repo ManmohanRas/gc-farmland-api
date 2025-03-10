@@ -5,7 +5,7 @@
         private readonly string _sqlCommand =
             @" SELECT
                FL.[FarmListID]
-              ,FL.[FarmNumber]
+              ,ISNULL(FL.[FarmNumber], '') AS FarmNumber
               ,FL.[FarmName]
               ,FL.[Status]
               ,FL.[AgencyID]
