@@ -45,7 +45,7 @@
 					NULL AS [MainNumber],
 					NULL AS [AlternateNumber],
 					NULL AS [SelectContact],
-					NULL AS [LastUpdatedBy],
+					SUSER_NAME() AS [LastUpdatedBy],
 					GetDate() AS [LastUpdatedOn]
                 FROM  [Farm].[TermProgram_Legacy]  
 

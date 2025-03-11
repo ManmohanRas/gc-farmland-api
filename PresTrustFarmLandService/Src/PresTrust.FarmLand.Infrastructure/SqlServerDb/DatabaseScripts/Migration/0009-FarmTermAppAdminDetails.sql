@@ -51,7 +51,7 @@ CONSTRAINT [PK_#FarmTermAppSiteCharacteristics_Id] PRIMARY KEY CLUSTERED
 					[Expiration Date] AS [ExpirationDate],
 					[Renew Expir Date] AS [RenewalExpirationDate],
 					[Comment],
-					NULL AS LastUpdatedBy,
+					SUSER_NAME() AS LastUpdatedBy,
 					GetDate() AS [LastUpdatedOn]
                 FROM  [Farm].[TermProgram_Legacy] 
 

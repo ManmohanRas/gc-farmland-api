@@ -61,7 +61,7 @@
 					   NULL AS [CreatedBy],
 					    1 AS [IsActive],
 					   NULL AS [IsSADC],
-					   NULL AS LastUpdatedBy,
+					   SUSER_NAME() AS LastUpdatedBy,
 					   GetDate()
 			FROM  [Farm].[TermProgram_Legacy] TL
 			 JOIN [Farm].[FarmListLegacy] AL ON TL.FarmListID = AL.LegacyFarmListId 

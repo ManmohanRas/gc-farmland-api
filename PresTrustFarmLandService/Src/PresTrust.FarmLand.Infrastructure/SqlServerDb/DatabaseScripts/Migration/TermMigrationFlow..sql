@@ -109,7 +109,7 @@ INSERT INTO Farm.FarmApplication
 					[Salutation],  
 					[Email], 
 					CONCAT([FirstName],' ',[LastName]) AS  [CurrentOwnerMailingName],  
-					NULL AS [LastUpdatedBy],
+					SUSER_SNAME() AS [LastUpdatedBy],
 					GetDate()
 				FROM  [Farm].[TermProgram_Legacy]
 				WHERE [Id] = @v_LEGACY_APPLICATION_ID;
@@ -131,7 +131,9 @@ INSERT INTO Farm.FarmApplication
 				[NoteEasementRightOfway],
 				[IsMortgage],       
 				[IsLiens],          
-				[NoteMortgageLiens]
+				[NoteMortgageLiens],
+				[LastUpdatedBy],
+				[LastUpdatedOn]
 				)
 				SELECT 
 						@v_NEW_APPLICATION_ID,
@@ -147,7 +149,9 @@ INSERT INTO Farm.FarmApplication
 						NULL AS [NoteEasementRightOfway],
 						NULL AS [IsMortgage],
 						NULL AS [IsLines],
-						NULL AS  [NoteMortgageLines]
+						NULL AS  [NoteMortgageLines],
+						SUSER_SNAME() AS [LastUpdatedBy],
+						GetDate() AS [LastUpdatedOn]
 					FROM  [Farm].[TermProgram_Legacy] 
 					WHERE [Id] = @v_LEGACY_APPLICATION_ID;
 
@@ -195,7 +199,7 @@ INSERT INTO Farm.FarmApplication
 						[Expiration Date] AS [ExpirationDate],
 						[Renew Expir Date] AS [RenewalExpirationDate],
 						[Comment],
-						NULL AS LastUpdatedBy,
+						SUSER_SNAME() AS LastUpdatedBy,
 						GetDate() AS [LastUpdatedOn]
 					  FROM  [Farm].[TermProgram_Legacy] 
 					  WHERE [Id] = @v_LEGACY_APPLICATION_ID;
@@ -223,7 +227,7 @@ INSERT INTO Farm.FarmApplication
 				NULL AS [MainNumber],
 				NULL AS [AlternateNumber],
 				NULL AS [SelectContact],
-				NULL AS [LastUpdatedBy],
+				SUSER_SNAME() AS [LastUpdatedBy],
 				GetDate() AS [LastUpdatedOn]
          FROM  [Farm].[TermProgram_Legacy] 
 		 WHERE [Id] = @v_LEGACY_APPLICATION_ID;
