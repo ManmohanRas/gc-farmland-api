@@ -69,7 +69,7 @@ CONSTRAINT [PK_#FarmAppOwnerDetailList_Id] PRIMARY KEY CLUSTERED
 					NULL AS [Salutation],
 					NULL AS [EmailAddress],
 					NULL AS  [CurrentOwnerMailingName],
-					NULL AS [LastUpdatedBy],
+					SUSER_NAME() AS [LastUpdatedBy],
 					GetDate() AS [LastUpdatedOn]
                 FROM  [Farm].[TermProgram_Legacy]  
 

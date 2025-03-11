@@ -51,11 +51,13 @@ CONSTRAINT [PK_#FarmTermAppSiteCharacteristics_Id] PRIMARY KEY CLUSTERED
 			[NoteEasementRightOfway],
 			[IsMortgage],       
 			[IsLines],          
-			[NoteMortgageLines]
+			[NoteMortgageLines],
+			[LastUpdatedBy],
+			[LastUpdatedOn]
 			)
             SELECT 
 					[Id],
-					NULL AS [Area],
+					LP.Acres AS [Area],
 					NULL AS [LandUse],
 					NULL AS [CropLand],
 					NULL AS [WoodLand],
@@ -67,8 +69,17 @@ CONSTRAINT [PK_#FarmTermAppSiteCharacteristics_Id] PRIMARY KEY CLUSTERED
 					NULL AS [NoteEasementRightOfway],
 					NULL AS [IsMortgage],
 					NULL AS [IsLines],
-					NULL AS  [NoteMortgageLines]
-                FROM  [Farm].[TermProgram_Legacy]  
+					NULL AS  [NoteMortgageLines],
+					SUSER_NAME() AS [LastUpdatedBy],
+					GetDate() AS [LastUpdatedOn]
+                FROM  [Farm].[TermProgram_Legacy]  TL
+				LEFT JOIN
+			   (
+			    SELECT L.ApplicationId, SUM(MBL.AcresToBeAcquired) AS Acres
+				FROM [Farm].[FarmMunicipalityBlockLotParcel]  AS MBL
+			  LEFT JOIN [Farm].[FarmAppLocationDetails] AS L ON (MBL.Id = L.ParcelId AND L.Ischecked = 1)
+			  GROUP BY L.ApplicationId
+			   ) AS LP ON (TL.Id = LP.ApplicationId)
 
             COMMIT;
             PRINT 'Term application SiteCharacteristics legacy table has been populated';
