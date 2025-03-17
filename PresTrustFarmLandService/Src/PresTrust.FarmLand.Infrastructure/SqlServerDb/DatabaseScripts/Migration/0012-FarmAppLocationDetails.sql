@@ -19,6 +19,7 @@
 			FROM 
 			 [Farm].[FarmMunicipalityBlockLotParcel] MBL
 			JOIN   [Farm].[FarmApplication] FA ON(MBL.FarmListId = FA.FarmListId)
+			Where FA.ApplicationTypeId = 1
 			ORDER BY FA.Id
 			
 

@@ -14,7 +14,7 @@ public class GetTermAppAdminDetailsSqlCommand
                   ,[RenewalExpirationDate]
                   ,[Comment]
                   ,[LastUpdatedBy]					 
-                   [LastUpdatedOn]					 
+                  ,[LastUpdatedOn]					 
             FROM [Farm].[FarmTermAppAdminDetails]
             WHERE ApplicationId = @p_ApplicationId";
 
