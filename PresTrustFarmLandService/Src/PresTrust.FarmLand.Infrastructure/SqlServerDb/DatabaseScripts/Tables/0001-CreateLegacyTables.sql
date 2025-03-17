@@ -32,5 +32,32 @@ CONSTRAINT [PK_LegacyFarmList_Id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+GO
+
+
+-- Create FarmEsmtApplicationLegacy
+DROP TABLE IF EXISTS [Farm].[FarmEsmtApplicationLegacy];
+GO
+
+CREATE TABLE [Farm].[FarmEsmtApplicationLegacy]
+(
+	[LegacyApplicationId]               [integer]              NOT NULL,  
+    [LegacyApplicationTitle]            [varchar](128)         NOT NULL,
+    [NewFarmListId]                     [integer]              NOT NULL,                                                                                    
+    [LegacyApplicationStatus]           [varchar](128)         NOT NULL,                                                                        
+    [LegacyAgencyId]                    [integer]              NOT NULL,                                                                                                                                     
+    [FarmApplicationId]                 [integer]              NULL,
+CONSTRAINT [PK_FarmEsmtApplicationLegacy_Id] PRIMARY KEY CLUSTERED
+(
+	[LegacyApplicationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
 GO;
+
+ 
+
+ 
+ 
+
 

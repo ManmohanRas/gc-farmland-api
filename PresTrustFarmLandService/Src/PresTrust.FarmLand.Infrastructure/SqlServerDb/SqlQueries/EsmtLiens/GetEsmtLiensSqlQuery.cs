@@ -29,7 +29,7 @@ public class GetEsmtLiensSqlQuery
                        ,[Bankruptcy]	
                        ,[ForeClosure]
                         ,[LastUpdatedBy]                                           
-                         [LastUpdatedOn]
+                        ,[LastUpdatedOn]
             FROM [Farm].[FarmEsmtLiens] 
             WHERE ApplicationId = @p_ApplicationId";
 
