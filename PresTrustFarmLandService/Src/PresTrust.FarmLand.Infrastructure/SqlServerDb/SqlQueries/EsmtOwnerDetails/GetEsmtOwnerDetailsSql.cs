@@ -23,7 +23,7 @@ public class GetEsmtOwnerDetailsSql
  					   ,[OwnedContinuesly]                                  
                         ,[SubjectProperty]  
                         ,[LastUpdatedBy]                                           
-                        [LastUpdatedOn]
+                        ,ISNULL(LastUpdatedOn, GETDATE()) AS LastUpdatedOn
             FROM [Farm].[FarmEsmtAppOwnerDetails] 
             WHERE ApplicationId = @p_ApplicationId";
 
