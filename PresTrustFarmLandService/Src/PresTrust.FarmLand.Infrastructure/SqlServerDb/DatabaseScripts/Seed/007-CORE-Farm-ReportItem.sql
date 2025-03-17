@@ -79,6 +79,9 @@ VALUES (59, 'Farm Easement EXHIBIT A', 'FarmEsmtEXHIBITA', 'Farm Easement EXHIBI
 INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
 VALUES (60, 'Re-Sale Info of Preserved Farms', 'FarmEsmtReSaleInfoOfPreservedFarmsReport', 'Re-Sale Info of Preserved Farms', 'description', 25, 1, 1); 
 
+INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+VALUES (61, 'Monitoring Inspection Report for year – All Farms', 'FarmEsmtMonitoringInspectionReport', 'Monitoring Inspection Report for year – All Farms', 'description', 26, 1, 1); 
+
 SET IDENTITY_INSERT [Core].[ReportItem] OFF
 
 

@@ -231,6 +231,9 @@ BEGIN TRY
        
        INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
        VALUES (60, 'Re-Sale Info of Preserved Farms', 'FarmEsmtReSaleInfoOfPreservedFarmsReport', 'Re-Sale Info of Preserved Farms', 'description', 25, 1, 1); 
+
+       INSERT INTO [Core].[ReportItem] ([Id], Title, ReportUrl, [Description], Icon, SortOrder, ProgramTypeId, IsActive)
+       VALUES (61, 'Monitoring Inspection Report for year – All Farms', 'FarmEsmtMonitoringInspectionReport', 'Monitoring Inspection Report for year – All Farms', 'description', 26, 1, 1); 
        
        SET IDENTITY_INSERT [Core].[ReportItem] OFF
 
@@ -362,6 +365,11 @@ BEGIN TRY
        INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (60, 3);
        INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (60, 4);
        INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (60, 5);
+
+       INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (61, 1);
+       INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (61, 3);
+       INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (61, 4);
+       INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (61, 5);
 
 	   --101
 

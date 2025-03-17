@@ -3,47 +3,6 @@
 	BEGIN TRANSACTION
 
 	--===================================================================================================================================================
-DROP TABLE IF EXISTS #FarmMunicipalityBlockLotParcel
-
-
--- Create Table
-CREATE TABLE #FarmMunicipalityBlockLotParcel(
-	[Id]					[int] IDENTITY(1,1)		 NOT NULL,
-	[MunicipalityId]	    [varchar](4)			 NOT NULL,
-	[FarmListID]            [int]					 NOT NULL,
-	[PropertyClassCode]     [varchar](50)			 NULL,
-	[DeedBook]              [varchar](50)			 NULL,			
-	[DeedPage]              [varchar](50)			 NULL,			
-	[DeedDate]              [date]					 NULL,					 
-	[Block]                 [varchar](50)		     NULL,
-	[Lot]					[varchar](50)            NULL,
-	[QualificationCode]     [varchar](50)            NULL,
-	[Section]               [varchar](128)           NULL,
-	[Partial]               [bit]                    NULL,
-	[Acres]                 [numeric](10, 3)         NULL,
-	[AcresToBeAcquired]     [numeric](10, 3)         NULL,
-	[ExceptionAreaAcres]    [numeric](10, 3)         NULL,
-	[ExceptionArea]         [bit]                    NULL,
-	[Notes]                 [varchar](max)           NULL,
-	[PamsPin]               [varchar](100)           NULL,
-	[IsValidFeatureId]      [bit]                    NULL,
-	[IsValidPamsPin]        [bit]                    NULL,
-	[InterestType]          [varchar](100)           NULL,
-	[EasementId]            [varchar](100)           NULL,
-	[ChangeType]            [varchar](100)           NULL,
-	[ChangeDate]            [datetime]               NULL,
-	[ReasonForChange]       [varchar](max)           NULL,
-	[IsActive]              [bit]                    NULL,
-	[Status]	            [varchar](50)            NULL,
-	[IsWarning]             [bit]                    NULL,
-	[CreatedByProgramUser]  [bit]                    NULL,
-	[LastUpdatedOn]         [datetime]               NOT NULL,
-	[LastUpdatedBy]         [varchar](256)           NOT NULL,
-CONSTRAINT [PK_FarmMunicipalityBlockLotParcel_Id] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-)ON [PRIMARY]
 
 
 	   INSERT INTO [Farm].[FarmMunicipalityBlockLotParcel]
@@ -92,7 +51,7 @@ CONSTRAINT [PK_FarmMunicipalityBlockLotParcel_Id] PRIMARY KEY CLUSTERED
 			0,0,0,8,0,0,NULL,'1438_32.03_3',NULL,NULL,
 			NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,GetDate(),''),
 			 
-			 (1438,175,'3A',0,0,NULL,'20.10','44',NULL,
+			(1438,175,'3A',0,0,NULL,'20.10','44',NULL,
 		 0,0,0,55.54,0,0,NULL,'1438_20.10_44',NULL,NULL,
 		 NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,GetDate(),'') ,
 		 
