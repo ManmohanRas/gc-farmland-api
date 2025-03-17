@@ -100,14 +100,13 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 		'Term Program - {{FarmName}}', 
 
 		'<P>Dear {{PrimaryContactName}},</P>
-		<P>I am in receipt of your Petition document and have added this item to the Morris CADB’s {{NextMeetingDate}} meeting agenda. The board will discuss the matter and if found acceptable, will direct staff to prepare a resolution approving the Petition.</p> 
-		<p>By copy of this letter, per N.J.A.C. 2:76-3.5, I am requesting that the Morris County Counsel’s Office order an “owner of last record” title search, verifying your ownership of the land.</p>
-		<p>Approval of the Petition by the CADB and creation of the farmland preservation program will be signified by an agreement between you and the CADB to retain the land in agricultural production for a minimum period of eight years.</p>
-		<p>If you have any questions or require additional information, please contact me.</p>
+		<P>I am in receipt of your Petition document and have added this item to the Morris CADB’s {{NextMeetingDate}} meeting agenda. The board will discuss the matter and if found acceptable, will direct staff to prepare a resolution approving the Petition.</p>
+		<p>Approval of the Petition by the CADB and creation of the farmland preservation program will be signified by an agreement between you and the CADB to retain the land in agricultural production for an agreed upon number of years.</p>
+		<p>I will keep you posted of the progress. If you have any questions, please contact me.</p>
 		<br>
 		<p>Sincerely,</p>
 		<p>{{ProgramAdmin}}<br>
-
+ 
 		<p>Director</p>
 		Morris County Agriculture Development Board<br>
 		Morris County Office of Planning & Preservation<br>

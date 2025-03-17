@@ -29,7 +29,6 @@
 			WHERE		ID = @v_LEGACY_RECORD_INDEX;
 
 
-
 	 INSERT INTO [Farm].[FarmApplication]
 				(	
 					[Title],
