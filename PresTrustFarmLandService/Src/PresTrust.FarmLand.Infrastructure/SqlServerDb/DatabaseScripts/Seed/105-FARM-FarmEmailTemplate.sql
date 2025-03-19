@@ -99,13 +99,13 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 		'Change status from Draft to Requested', 
 		'Term Program - {{FarmName}}',
 		'<p>Dear {{PrimaryContactName}},</p>
-		<P>I am in receipt of your Petition document and have added this item to the Morris CADB’s {{NextMeetingDate}} meeting agenda. The board will discuss the matter and if found acceptable, will direct staff to prepare a resolution approving the Petition.</p> 
+		<P>I am in receipt of your Petition document and have added this item to the Morris CADBï¿½s {{NextMeetingDate}} meeting agenda. The board will discuss the matter and if found acceptable, will direct staff to prepare a resolution approving the Petition.</p> 
 		<p>Approval of the Petition by the CADB and creation of the farmland preservation program will be signified by an agreement between you and the CADB to retain the land in agricultural production for an agreed upon number of years.</p>
 		<p>I will keep you posted of the progress. If you have any questions, please contact me.</p>
 		<br>
 		<p>Sincerely,</p>
 		<p>{{ProgramAdmin}}<br>
-
+ 
 		<p>Director</p>
 		Morris County Agriculture Development Board<br>
 		Morris County Office of Planning & Preservation<br>
@@ -339,7 +339,7 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 		'Farm Monitoring',
 		'Farm Land Monitoring',
 		'<p>Dear {{PrimaryContactName}},</p>
-<p>It is time for our annual monitoring.The State Agriculture Development Committee''s (SADC’s) Regulation N.J.A.C. 2:76-6.18A(d) requires the Morris County Agriculture Development Board (Morris CADB) to perform annual onsite inspections of all permanently preserved farms. The purpose of the inspection is to ensure that each farm is in compliance with the terms of the Deed of Easement. </p>
+<p>It is time for our annual monitoring.The State Agriculture Development Committee''s (SADCï¿½s) Regulation N.J.A.C. 2:76-6.18A(d) requires the Morris County Agriculture Development Board (Morris CADB) to perform annual onsite inspections of all permanently preserved farms. The purpose of the inspection is to ensure that each farm is in compliance with the terms of the Deed of Easement. </p>
 <br>
 <p>Morris CADB staff will be performing a site inspection of your farm between {{MonitoringDateStart}} and {{MonitoringDateEnd}}. We may utilize a drone to help us inspect the farm in a more time-efficient manner. Your presence is not required. We are unable to give you an exact date as to when we will be on your specific property. If, however, you require a set time for the inspection, please contact our office at your earliest convenience. In addition, if access to the property is blocked (locked gates), please contact our office to schedule an appointment so that we may access the farm. Upon completion, an inspection report will be mailed to you for your review.</p>
 <p>Thank you for your anticipated cooperation with the monitoring process and for supporting the Farmland Preservation Program.</p><br>
