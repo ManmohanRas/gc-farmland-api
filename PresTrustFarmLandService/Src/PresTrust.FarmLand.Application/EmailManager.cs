@@ -85,6 +85,7 @@ public class EmailManager : IEmailManager
     public async Task SendMail(string subject, string htmlBody, int applicationId,  string applicationName, string? emailTemplateCode = default, int agencyId = default, OwnerDetailsEntity? owner = default, FarmBlockLotEntity? blockLot = default, string municapality = default, DateTime? MonitoringDateStart = default, DateTime? MonitoringDateEnd = default)
     {
         var primaryContact = await GetPrimaryContact(applicationId, agencyId);
+        List<string> alternateContactEmails = new List<string>();
         string contactEmails = default;
         string contactName = default;
 
@@ -93,6 +94,7 @@ public class EmailManager : IEmailManager
         contactName = contacts.Select(x => x.ContactName).FirstOrDefault();
 
         var toEmails = String.Empty;
+        var cc = String.Empty;
 
         DateTime today = DateTime.Today;
         DateTime nextMonth = today.AddMonths(1);
@@ -164,10 +166,19 @@ public class EmailManager : IEmailManager
             toEmails = systemParamOptions.ProgramAdminEmail ?? String.Empty;
         }
 
+        if (toEmails != systemParamOptions.ProgramAdminEmail)
+        {
+            cc = string.Join(",", systemParamOptions.ProgramAdminEmail);
+        }
+        else
+        {
+            cc = null;
+        }
+
         var senderName = systemParamOptions.IsDevelopment == false ? userContext.Name : systemParamOptions.TestEmailFromUserName;
         var senderEmail = systemParamOptions.IsDevelopment == false ? userContext.Email : "mcgis@co.morris.nj.us";
 
-        await this.Send(subject: subject, toEmails: toEmails, senderName: senderName, senderEmail: senderEmail, htmlBody: htmlBody);
+        await this.Send(subject: subject, toEmails: toEmails, senderName: senderName, senderEmail: senderEmail, htmlBody: htmlBody, cc: cc);
     }
 
     /// <summary>
