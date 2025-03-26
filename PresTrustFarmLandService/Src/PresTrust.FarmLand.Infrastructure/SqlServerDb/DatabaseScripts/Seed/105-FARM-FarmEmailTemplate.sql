@@ -314,21 +314,12 @@ INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject
 		'Feedback Received Email',
 		'Easement Purchase Program - {{FarmName}}',
 		 '<p>Dear {{PrimaryContactName}},</p>
-		 <p>You have received the feedback for the {{ApplicationName}} application from the Morris County.</p>
+		 <p>You have received the feedback for the {{ApplicationName}} application from the Morris County Farm Program.</p>
 		 <p>Kindly login to Morris County Preservation Trust and select the application to view feedback.</p>
 		 <br>
 		  Sincerely,</p>
-	     <p>{{ProgramAdmin}}<br>
-
-		 <p>Director</p>
-		 Morris County Agriculture Development Board<br>
-		 Morris County Office of Planning & Preservation<br>
-		 P.O. Box 900<br>
-		 Morristown, NJ 07963-0900<br>
-		 Phone: (973) 829-8120
-		 Fax: (973) 326-9025<br>
-		 E-Mail: kcoyle@co.morris.nj.us<br>
-		 Website: https://www.morriscountynj.gov/Departments/County-Agriculture-Development-Board </p>', 
+	     <p>{{ProgramAdmin}</p>
+		 <p>Farm Preservation Program Coordinator</p>', 
 1);
 GO
 
