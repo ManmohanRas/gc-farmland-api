@@ -36,16 +36,19 @@ public class EmailManager : IEmailManager
     }
 
 
-    private async Task<Tuple<List<string>, List<string>>> GetPrimaryContact(int applicationId, int agencyId)
+    private async Task<Tuple<List<string>, List<string>, List<string>>> GetPrimaryContact(int applicationId, int agencyId)
     {
         List<string> primaryContactNames = new List<string>();
         List<string> primaryContactEmails = new List<string>();
+        List<string> alternateContactEmails = new List<string>();
+
 
         var endPoint = $"{systemParamOptions.IdentityApiSubDomain}/UserAdmin/users/pres-trust/farm/{agencyId}";
         var agencyUsers = await identityApiConnect.GetDataAsync<List<IdentityApiUser>>(endPoint);
 
         var primaryContacts = await repoApplicationRole.GetRolesAsync(applicationId);
         var primaryAgencyUsers = agencyUsers.Where(o => primaryContacts.Select(x => x.Email?.Trim()).Contains(o.Email?.Trim()));
+        alternateContactEmails = primaryContacts.Where(x => x.IsPrimaryContact == true).Select(y => y.Email).ToList();
 
         if (primaryContacts.Count() > 0)
         {
@@ -70,7 +73,7 @@ public class EmailManager : IEmailManager
                 primaryContactEmails.Add(agencyAdmin.Email);
             }
         }
-        return new Tuple<List<string>, List<string>>(primaryContactNames, primaryContactEmails);
+        return new Tuple<List<string>, List<string>, List<string>>(primaryContactNames, primaryContactEmails, alternateContactEmails);
 
     }
 
@@ -166,14 +169,18 @@ public class EmailManager : IEmailManager
             toEmails = systemParamOptions.ProgramAdminEmail ?? String.Empty;
         }
 
-        if (toEmails != systemParamOptions.ProgramAdminEmail)
+        if (primaryContact.Item3.Count() > 0)
         {
-            cc = string.Join(",", systemParamOptions.ProgramAdminEmail);
+            alternateContactEmails.Add(string.Join(",", primaryContact.Item3));
         }
-        else
+
+        if (!toEmails.Contains(systemParamOptions.ProgramAdminEmail))
         {
-            cc = null;
+            alternateContactEmails.Add(string.Join(",", systemParamOptions.ProgramAdminEmail));
         }
+
+        cc = string.Join(",", alternateContactEmails);
+
 
         var senderName = systemParamOptions.IsDevelopment == false ? userContext.Name : systemParamOptions.TestEmailFromUserName;
         var senderEmail = systemParamOptions.IsDevelopment == false ? userContext.Email : "mcgis@co.morris.nj.us";
