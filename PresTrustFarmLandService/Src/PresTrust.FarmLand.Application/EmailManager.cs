@@ -48,12 +48,12 @@ public class EmailManager : IEmailManager
 
         var primaryContacts = await repoApplicationRole.GetRolesAsync(applicationId);
         var primaryAgencyUsers = agencyUsers.Where(o => primaryContacts.Select(x => x.Email?.Trim()).Contains(o.Email?.Trim()));
-        alternateContactEmails = primaryContacts.Where(x => x.IsPrimaryContact == true).Select(y => y.Email).ToList();
+        alternateContactEmails = primaryContacts.Where(x => x.IsAlternateContact == true).Select(y => y.Email).ToList();
 
         if (primaryContacts.Count() > 0)
         {
             //primaryContacts.Select(i => string.Concat(i.FirstName, ' ', i.LastName)).ToList();
-            primaryContactEmails = primaryContacts.Select(i => i.Email).ToList();
+            primaryContactEmails = primaryContacts.Where(x => x.IsPrimaryContact).Select(i => i.Email).ToList();
             if (primaryAgencyUsers.Count() > 0)
             //{
             //    primaryContactNames = primaryAgencyUsers.Where(x => x.IsEnabled).Select(o => string.Format("{0} {1}", o.FirstName, o.LastName)).ToList();
@@ -70,7 +70,6 @@ public class EmailManager : IEmailManager
             if (agencyAdmin != null)
             {
                 primaryContactNames.Add(string.Concat(agencyAdmin.FirstName, ' ', agencyAdmin.LastName));
-                primaryContactEmails.Add(agencyAdmin.Email);
             }
         }
         return new Tuple<List<string>, List<string>, List<string>>(primaryContactNames, primaryContactEmails, alternateContactEmails);
