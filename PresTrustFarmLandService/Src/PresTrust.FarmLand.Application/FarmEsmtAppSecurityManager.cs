@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.Application;
+﻿using System.Security;
+
+namespace PresTrust.FarmLand.Application;
 public class FarmEsmtAppSecurityManager
 {
     private UserRoleEnum userRole = default;
@@ -88,6 +90,7 @@ public class FarmEsmtAppSecurityManager
                 if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
                 {
                     esmtPermission.CanSubmitApplication = true;
+                    esmtPermission.CanWithdrawApplication = true;
                 }
 
                 esmtPermission.CanSaveDocument = true;
@@ -223,6 +226,11 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanSaveDocument = true;
                 esmtPermission.CanDeleteDocument = true;
                 esmtPermission.CanApproveApplication = true;
+
+                if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
+                {
+                    esmtPermission.CanWithdrawApplication = true;
+                }
 
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
@@ -504,6 +512,7 @@ public class FarmEsmtAppSecurityManager
                 {
                     esmtPermission.CanRejectApplication = true;
                     esmtPermission.CanSwitchSADC = true;
+                    esmtPermission.CanWithdrawApplication = true;
                 }
 
                 esmtPermission.CanRequestForAnApplicationCorrection = true;
@@ -1400,6 +1409,7 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanWithdrawApplication = true;
                 esmtPermission.CanPostCloseApplication = true;
 
+
                 Location();
 
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.OWNER_DETAILS).FirstOrDefault();
@@ -1687,6 +1697,7 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanDeleteFeedback = true;
                 esmtPermission.CanWithdrawApplication = true;
                 esmtPermission.CanPreserveApplication = true;
+
 
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
@@ -1979,6 +1990,11 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
                 esmtPermission.CanEditFeedback = true;
                 esmtPermission.CanDeleteFeedback = true;
+
+                if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
+                {
+                    esmtPermission.CanWithdrawApplication = true;
+                }
 
 
                 Location();
