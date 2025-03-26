@@ -90,6 +90,7 @@ public class FarmApplicationSecurityManager
                 if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
                 {
                     permission.CanSubmitApplication = true;
+                    permission.CanWithdrawApplication = true;
                 }
 
                 permission.CanSaveDocument = true;
@@ -196,6 +197,11 @@ public class FarmApplicationSecurityManager
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
                 permission.CanApproveApplication = true;
+
+                if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
+                {
+                    permission.CanWithdrawApplication = true;
+                }
                 //Location
                 correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
@@ -582,6 +588,13 @@ public class FarmApplicationSecurityManager
                 permission.CanDeleteDocument = true;
                 permission.CanActivateApplication = true;
 
+                if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
+                {
+                    permission.CanWithdrawApplication = true;
+                }
+
+
+
                 //LOCATION
                 correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
@@ -756,6 +769,11 @@ public class FarmApplicationSecurityManager
                 permission.CanDeleteComments = true;
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
+
+                if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
+                {
+                    permission.CanWithdrawApplication = true;
+                }
                 //LOCATION
                 //correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.LOCATION).FirstOrDefault();
                 //if (correction == null)
