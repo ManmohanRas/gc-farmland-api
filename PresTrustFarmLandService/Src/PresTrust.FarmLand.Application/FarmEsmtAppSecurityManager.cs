@@ -2426,6 +2426,14 @@ public class FarmEsmtAppSecurityManager
                 AdminClosingDocs();
                 AdminDetails();
                 AdminContacts();
+                if (IsSADC)
+                {
+                    SADCFarmInformation();
+                    SADCResiOnEsmtArea();
+                    SADCFarmHistory();
+                    SADCAppEligibilityI();
+                    SADCAppEligibilityII();
+                }
                 // Default Navigation Item
                 this.defaultNavigationItem = new NavigationItemEntity()
                 {
