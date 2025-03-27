@@ -669,6 +669,7 @@ public class FarmApplicationSecurityManager
                     };
                 }
                 else
+                {
                     Location(correction: true, enumViewOrEdit: ApplicationTabEditOrViewEnum.EDIT);
                     this.defaultNavigationItem = new NavigationItemEntity()
                     {
@@ -676,6 +677,7 @@ public class FarmApplicationSecurityManager
                         RouterLink = TermApplicationRouterLinks.LOCATION_EDIT,
                         SortOrder = 1
                     };
+                }
 
                 //Owner Details
                 correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.OWNER_DETAILS).FirstOrDefault();
