@@ -90,7 +90,6 @@ public class FarmEsmtAppSecurityManager
                 if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
                 {
                     esmtPermission.CanSubmitApplication = true;
-                    esmtPermission.CanWithdrawApplication = true;
                 }
 
                 esmtPermission.CanSaveDocument = true;
@@ -226,11 +225,6 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanSaveDocument = true;
                 esmtPermission.CanDeleteDocument = true;
                 esmtPermission.CanApproveApplication = true;
-
-                if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
-                {
-                    esmtPermission.CanWithdrawApplication = true;
-                }
 
                 correction = this.corrections.Where(c => c.Section == EsmtAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
@@ -512,7 +506,6 @@ public class FarmEsmtAppSecurityManager
                 {
                     esmtPermission.CanRejectApplication = true;
                     esmtPermission.CanSwitchSADC = true;
-                    esmtPermission.CanWithdrawApplication = true;
                 }
 
                 esmtPermission.CanRequestForAnApplicationCorrection = true;
@@ -1990,12 +1983,6 @@ public class FarmEsmtAppSecurityManager
                 esmtPermission.CanRespondToTheRequestForAnApplicationCorrection = true;
                 esmtPermission.CanEditFeedback = true;
                 esmtPermission.CanDeleteFeedback = true;
-
-                if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
-                {
-                    esmtPermission.CanWithdrawApplication = true;
-                }
-
 
                 Location();
 

@@ -160,40 +160,6 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                     Message = "Permanently Preserved required field on AdminDetails tab have not been filled.",
                     IsApplicantFlow = false,
                 });
-            if (request.EnrollmentDate == null)
-                brokenRules.Add(new FarmBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "Enrollment Date required field on AdminDetails tab have not been filled.",
-                    IsApplicantFlow = false,
-                });
-            if (request.RenewalDate == null)
-                brokenRules.Add(new FarmBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "Renewal Date required field on AdminDetails tab have not been filled.",
-                    IsApplicantFlow = false,
-                });
-
-            if (request.ExpirationDate == null)
-                brokenRules.Add(new FarmBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "Expiration Date required field on AdminDetails tab have not been filled.",
-                    IsApplicantFlow = false,
-                });
-
-            if (request.RenewalExpirationDate == null)
-                brokenRules.Add(new FarmBrokenRuleEntity()
-                {
-                    ApplicationId = application.Id,
-                    SectionId = sectionId,
-                    Message = "Renewal Expiration Date required field on AdminDetails tab have not been filled.",
-                    IsApplicantFlow = false,
-                });
 
             if (docsReceiptOfCertification == null)
                 brokenRules.Add(new FarmBrokenRuleEntity()

@@ -90,7 +90,6 @@ public class FarmApplicationSecurityManager
                 if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
                 {
                     permission.CanSubmitApplication = true;
-                    permission.CanWithdrawApplication = true;
                 }
 
                 permission.CanSaveDocument = true;
@@ -197,11 +196,8 @@ public class FarmApplicationSecurityManager
                 permission.CanSaveDocument = true;
                 permission.CanDeleteDocument = true;
                 permission.CanApproveApplication = true;
+                permission.CanRejectApplication = true;
 
-                if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
-                {
-                    permission.CanWithdrawApplication = true;
-                }
                 //Location
                 correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
@@ -531,7 +527,6 @@ public class FarmApplicationSecurityManager
             case UserRoleEnum.AGENCY_SIGNATORY:
             case UserRoleEnum.AGENCY_READONLY:
 
-                permission.CanSwitchSADC = false;
                 permission.CanViewFeedback = true;
                 Location();
                 OwnerDetails();
@@ -715,7 +710,7 @@ public class FarmApplicationSecurityManager
             case UserRoleEnum.PROGRAM_READONLY:
             case UserRoleEnum.AGENCY_SIGNATORY:
             case UserRoleEnum.AGENCY_READONLY:
-                permission.CanSwitchSADC = false;
+               
                 if (userRole == UserRoleEnum.PROGRAM_COMMITTEE || userRole == UserRoleEnum.PROGRAM_READONLY)
                 {
                     permission.CanViewComments = true;
@@ -912,7 +907,6 @@ public class FarmApplicationSecurityManager
             case UserRoleEnum.AGENCY_SIGNATORY:
             case UserRoleEnum.AGENCY_READONLY:
 
-                permission.CanSwitchSADC = false;
                 if (userRole != UserRoleEnum.AGENCY_READONLY) { 
                     permission.CanViewFeedback = true;
                 }
@@ -1040,12 +1034,11 @@ public class FarmApplicationSecurityManager
                 if (userRole != UserRoleEnum.AGENCY_READONLY)
                 {
                     permission.CanViewFeedback = true;
-                    permission.CanSwitchSADC = false;
                 }
                 if (userRole == UserRoleEnum.PROGRAM_COMMITTEE || userRole == UserRoleEnum.PROGRAM_READONLY)
                 {
                     permission.CanViewComments = true;
-                    permission.CanSwitchSADC = false;
+                   
                     permission.CanViewFeedback = true;
                 }
                 Location();
