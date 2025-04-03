@@ -63,21 +63,21 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
             scope.Complete();
         }
 
-        application = await GetIfApplicationExists(request.ApplicationId);
-        // Check Broken Rules
-        var brokenRules = ReturnBrokenRulesIfAny(application);
+        //application = await GetIfApplicationExists(request.ApplicationId);
+        //// Check Broken Rules
+        //var brokenRules = ReturnBrokenRulesIfAny(application);
 
-        using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
-        {
-            // Delete old Broken Rules, if any
-            await repoBrokenRules.DeleteBrokenRulesAsync(request.ApplicationId, TermAppStatusEnum.NONE);
+        //using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
+        //{
+        //    // Delete old Broken Rules, if any
+        //    await repoBrokenRules.DeleteBrokenRulesAsync(request.ApplicationId, TermAppStatusEnum.NONE);
 
-            // Save current Broken Rules, if any
-            await repoBrokenRules.SaveBrokenRules(brokenRules);
+        //    // Save current Broken Rules, if any
+        //    await repoBrokenRules.SaveBrokenRules(brokenRules);
          
 
-            scope.Complete();
-        }
+        //    scope.Complete();
+        //}
 
         return Unit.Value;
 
@@ -86,21 +86,21 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
     }
 
 
-    private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity reqSADC)
-    {
-        int sectionId = (int)TermAppSectionEnum.NONE;
-        List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
+    //private List<FarmBrokenRuleEntity> ReturnBrokenRulesIfAny(FarmApplicationEntity reqSADC)
+    //{
+    //    int sectionId = (int)TermAppSectionEnum.NONE;
+    //    List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 
-        // add based on the empty check conditions
-        if ((reqSADC.IsSADC == false))
-            brokenRules.Add(new FarmBrokenRuleEntity()
-            {
-                ApplicationId = reqSADC.Id,
-                SectionId = sectionId,
-                Message = "SADC toggle should be enabled.",
-                IsApplicantFlow = true
-            });
+    //    // add based on the empty check conditions
+    //    if ((reqSADC.IsSADC == false))
+    //        brokenRules.Add(new FarmBrokenRuleEntity()
+    //        {
+    //            ApplicationId = reqSADC.Id,
+    //            SectionId = sectionId,
+    //            Message = "SADC toggle should be enabled.",
+    //            IsApplicantFlow = true
+    //        });
 
-        return brokenRules;
-    }
+    //    return brokenRules;
+    //}
 }
