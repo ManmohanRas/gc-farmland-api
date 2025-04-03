@@ -87,64 +87,64 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
 
         }
 
-        if (application.Status == TermAppStatusEnum.PETITION_APPROVED)
-        {
-            foreach (var deed in reqDeedDetails) 
-            {
-                if (string.IsNullOrEmpty(deed.NOTBook))
-                {
-
-                    brokenRules.Add(new FarmBrokenRuleEntity()
-                    {
-                        ApplicationId = application.Id,
-                        SectionId = sectionId,
-                        Message = "Notice Of Termination Book required field on Deed Details Tab have not been filled.",
-                        IsApplicantFlow = false
-                    });
-
-                }
-                if (string.IsNullOrEmpty(deed.NOTPage))
-                {
-
-                    brokenRules.Add(new FarmBrokenRuleEntity()
-                    {
-                        ApplicationId = application.Id,
-                        SectionId = sectionId,
-                        Message = "Notice Of Termination Page required field on Deed Details Tab have not been filled.",
-                        IsApplicantFlow = false
-                    });
-
-                }
-                if (string.IsNullOrEmpty(deed.RDBook))
-                {
-
-                    brokenRules.Add(new FarmBrokenRuleEntity()
-                    {
-                        ApplicationId = application.Id,
-                        SectionId = sectionId,
-                        Message = "Renewal Deed Book  required field on Deed Details Tab have not been filled.",
-                        IsApplicantFlow = false
-                    });
-
-                }
-                if (string.IsNullOrEmpty(deed.RDPage))
-                {
-
-                    brokenRules.Add(new FarmBrokenRuleEntity()
-                    {
-                        ApplicationId = application.Id,
-                        SectionId = sectionId,
-                        Message = "Renewal Deed Page required field on Deed Details Tab have not been filled.",
-                        IsApplicantFlow = false
-                    });
-
-                }
-            }
-            
-        }      
-
-
         return brokenRules;
+        //if (application.Status == TermAppStatusEnum.PETITION_APPROVED)
+        //{
+        //    foreach (var deed in reqDeedDetails) 
+        //    {
+        //        if (string.IsNullOrEmpty(deed.NOTBook))
+        //        {
+
+        //            brokenRules.Add(new FarmBrokenRuleEntity()
+        //            {
+        //                ApplicationId = application.Id,
+        //                SectionId = sectionId,
+        //                Message = "Notice Of Termination Book required field on Deed Details Tab have not been filled.",
+        //                IsApplicantFlow = false
+        //            });
+
+        //        }
+        //        if (string.IsNullOrEmpty(deed.NOTPage))
+        //        {
+
+        //            brokenRules.Add(new FarmBrokenRuleEntity()
+        //            {
+        //                ApplicationId = application.Id,
+        //                SectionId = sectionId,
+        //                Message = "Notice Of Termination Page required field on Deed Details Tab have not been filled.",
+        //                IsApplicantFlow = false
+        //            });
+
+        //        }
+        //        if (string.IsNullOrEmpty(deed.RDBook))
+        //        {
+
+        //            brokenRules.Add(new FarmBrokenRuleEntity()
+        //            {
+        //                ApplicationId = application.Id,
+        //                SectionId = sectionId,
+        //                Message = "Renewal Deed Book  required field on Deed Details Tab have not been filled.",
+        //                IsApplicantFlow = false
+        //            });
+
+        //        }
+        //        if (string.IsNullOrEmpty(deed.RDPage))
+        //        {
+
+        //            brokenRules.Add(new FarmBrokenRuleEntity()
+        //            {
+        //                ApplicationId = application.Id,
+        //                SectionId = sectionId,
+        //                Message = "Renewal Deed Page required field on Deed Details Tab have not been filled.",
+        //                IsApplicantFlow = false
+        //            });
+
+        //        }
+        //    }
+            
+        //}      
+
+
     }
 
 }
