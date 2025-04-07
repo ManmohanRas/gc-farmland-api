@@ -111,12 +111,7 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
 
         });
 
-        statusChangeRules.Add(new FarmBrokenRuleEntity()
-        {
-            ApplicationId = application.Id,
-            SectionId = (int)TermAppSectionEnum.ADMIN_DEED_DETAILS,
-            Message = "All required fields on ADMIN_DEED_DETAILS tab have not been filled.",
-        });
+
       
         return statusChangeRules;
     }
