@@ -161,6 +161,26 @@ public class SaveTermAppAdminDetailsCommandHandler :BaseHandler, IRequestHandler
                     IsApplicantFlow = false,
                 });
 
+            if (request.EnrollmentDate == null)
+                brokenRules.Add(new FarmBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Enrollment Date required field on AdminDetails tab have not been filled.",
+                    IsApplicantFlow = false,
+                });
+
+            if (request.ExpirationDate == null)
+                brokenRules.Add(new FarmBrokenRuleEntity()
+                {
+                    ApplicationId = application.Id,
+                    SectionId = sectionId,
+                    Message = "Expiration Date required field on AdminDetails tab have not been filled.",
+                    IsApplicantFlow = false,
+                });
+
+
+
             if (docsReceiptOfCertification == null)
                 brokenRules.Add(new FarmBrokenRuleEntity()
                 {
