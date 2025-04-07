@@ -29,6 +29,7 @@ public class SaveFarmBlockLotCommandHandler: IRequestHandler<SaveFarmBlockLotCom
         SaveFarmBlockLotCommandViewModel result = new SaveFarmBlockLotCommandViewModel();
 
         var reqBlockLot = mapper.Map<SaveFarmBlockLotCommand, FarmBlockLotEntity>(request);
+        reqBlockLot.LastUpdatedBy = userContext.Email;
 
         var currentParcel = await repoBlockLot.GetFarmBlockLotByIdAsync(request.Id);
         currentParcel = currentParcel ?? new FarmBlockLotEntity() { IsClassCodeWarning= false, PropertyClassCode = string.Empty, CorePropertyClassCode = string.Empty};
