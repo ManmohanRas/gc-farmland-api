@@ -402,8 +402,14 @@ public class FarmApplicationSecurityManager
                 permission.CanRejectApplication = true;
                 permission.CanWithdrawApplication = true;
                 permission.CanAgreementApproveApplication = true;
-                permission.CanSwitchSADC = true;
+
+                if (userRole == UserRoleEnum.PROGRAM_ADMIN || userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_EDITOR)
+                {
+                    permission.CanSwitchSADC = true;
+                }
+
                 
+
                 //LOCATION
                 correction = this.corrections.Where(c => c.Section == TermAppSectionEnum.LOCATION).FirstOrDefault();
                 if (correction == null)
