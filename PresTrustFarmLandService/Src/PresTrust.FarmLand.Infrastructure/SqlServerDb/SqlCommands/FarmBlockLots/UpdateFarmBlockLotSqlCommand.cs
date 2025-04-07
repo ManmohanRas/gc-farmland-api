@@ -29,8 +29,8 @@ public class UpdateFarmBlockLotSqlCommand
                           ,[CreatedByProgramUser] = @p_CreatedByProgramUser
                           ,[IsWarning] = @p_IsWarning
                           ,[IsValidPamsPin] = @p_IsValidPamsPin
-                          ,[LastUpdatedOn] = @p_LastUpdatedBy
-                          ,[LastUpdatedBy] = @p_LastUpdatedOn
+                          ,[LastUpdatedOn] = @p_LastUpdatedOn
+                          ,[LastUpdatedBy] = @p_LastUpdatedBy
                      WHERE Id = @p_Id and FarmListID = @p_FarmListID;";
 
     public UpdateFarmBlockLotSqlCommand()
