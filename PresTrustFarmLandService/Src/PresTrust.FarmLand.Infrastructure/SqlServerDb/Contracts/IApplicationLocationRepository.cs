@@ -6,7 +6,7 @@ public interface IApplicationLocationRepository
 
     Task<List<FarmBlockLotEntity>> GetUnLinkedParcelsByFarmID(int applicationId, int farmListID, int applicationTypeId = default);
 
-    Task<bool> CheckLocationParcel(int applicationId, FarmAppLocationDetailsEntity parcel);
+    Task<FarmAppLocationDetailsEntity> CheckLocationParcel(int applicationId, FarmAppLocationDetailsEntity parcel);
 
     Task<bool> DeleteTermAppLocationBlockLot(int applicationId, int parcelId);
 

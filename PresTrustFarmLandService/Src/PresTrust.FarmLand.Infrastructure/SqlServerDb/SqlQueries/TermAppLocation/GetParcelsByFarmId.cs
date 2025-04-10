@@ -15,11 +15,11 @@ public class GetParcelsByFarmId
 			  ,MBL.InterestType
 			  ,MBL.Section
 			  ,MBL.PamsPin
-			  ,MBL.Acres
-			  ,MBL.AcresToBeAcquired
-              ,MBL.ExceptionAreaAcres
+			  ,L.Acres
+			  ,L.AcresToBeAcquired
+              ,L.ExceptionAreaAcres
 		      ,MBL.Partial
-			  ,MBL.ExceptionArea
+			  ,L.ExceptionArea
 			  ,MBL.EasementId
 			  ,MBL.ChangeType
 			  ,MBL.ChangeDate
@@ -28,7 +28,7 @@ public class GetParcelsByFarmId
 			  ,MBL.DeedBook
 			  ,MBL.DeedPage
 			  ,MBL.IsWarning
-			  ,MBL.[Notes]
+			  ,L.[Notes]
 			  ,MBL.[CreatedByProgramUser]
               ,MBL.[IsValidPamsPin],
               L.IsChecked,
