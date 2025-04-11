@@ -8,7 +8,7 @@ public interface IApplicationLocationRepository
 
     Task<FarmAppLocationDetailsEntity> CheckLocationParcel(int applicationId, FarmAppLocationDetailsEntity parcel);
 
-    Task<bool> DeleteTermAppLocationBlockLot(int applicationId, int parcelId);
+    Task<bool> DeleteAppLocationBlockLot(int applicationId, int parcelId);
 
 
 }

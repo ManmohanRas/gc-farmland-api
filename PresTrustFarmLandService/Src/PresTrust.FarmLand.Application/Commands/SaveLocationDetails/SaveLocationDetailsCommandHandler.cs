@@ -71,7 +71,7 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
                 }
                 else if (parcel.RowStatus == "D")
                 {
-                     await repoLocation.DeleteTermAppLocationBlockLot(request.ApplicationId, parcel.ParcelId);
+                     await repoLocation.DeleteAppLocationBlockLot(request.ApplicationId, parcel.ParcelId);
                      await repoDeedDetails.UpdateTermAppDeedLocation(request.ApplicationId, parcel.ParcelId, parcel.IsChecked);
 
                 }

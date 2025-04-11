@@ -86,7 +86,7 @@ public class EmailManager : IEmailManager
     /// <returns></returns>
     public async Task SendMail(string subject, string htmlBody, int applicationId,  string applicationName, string? emailTemplateCode = default, int agencyId = default, OwnerDetailsEntity? owner = default, FarmBlockLotEntity? blockLot = default, string municapality = default, DateTime? MonitoringDateStart = default, DateTime? MonitoringDateEnd = default)
     {
-        var primaryContact = await GetPrimaryContact(applicationId, agencyId);
+        Tuple<List<string>, List<string>, List<string>> primaryContact = await GetPrimaryContact(applicationId, agencyId);
         List<string> alternateContactEmails = new List<string>();
         string contactEmails = default;
         string contactName = default;
@@ -161,7 +161,7 @@ public class EmailManager : IEmailManager
 
         if (primaryContact.Item2.Count() > 0)
         {
-            toEmails = string.Join(",", primaryContact.Item2);
+            toEmails = string.Join(",", systemParamOptions.ProgramAdminEmail ?? String.Empty);
         }
         else
         {
@@ -178,8 +178,8 @@ public class EmailManager : IEmailManager
             alternateContactEmails.Add(string.Join(",", systemParamOptions.ProgramAdminEmail));
         }
 
-        cc = string.Join(",", alternateContactEmails);
-
+        string[] tempEMailArray = [.. primaryContact.Item2,..alternateContactEmails];
+        cc = tempEMailArray.Length > 0 ? string.Join(",", tempEMailArray) : String.Empty;
 
         var senderName = systemParamOptions.IsDevelopment == false ? userContext.Name : systemParamOptions.TestEmailFromUserName;
         var senderEmail = systemParamOptions.IsDevelopment == false ? userContext.Email : "mcgis@co.morris.nj.us";

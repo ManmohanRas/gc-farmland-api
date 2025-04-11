@@ -124,12 +124,12 @@ public class ApplicationLocationRepository: IApplicationLocationRepository
 
     }
 
-    public async Task<bool> DeleteTermAppLocationBlockLot(int applicationId, int parcelId)
+    public async Task<bool> DeleteAppLocationBlockLot(int applicationId, int parcelId)
     {
 
         using var conn = context.CreateConnection();
        
-            var sqlCommand = new DeleteTermAppLocationBlockLotSqlCommand();
+            var sqlCommand = new DeleteAppLocationBlockLotSqlCommand();
             await conn.ExecuteAsync(sqlCommand.ToString(),
                 commandType: CommandType.Text,
                 commandTimeout: systemParamConfig.SQLCommandTimeoutInSeconds,
