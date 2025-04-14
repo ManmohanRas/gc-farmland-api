@@ -10,6 +10,11 @@ public class CreateTermAppLocationSqlCommand
 							,ParcelId	
 							,PamsPin
 							,IsChecked
+							,AcresToBeAcquired
+							,ExceptionAreaAcres
+							,Notes
+							,Acres
+							,ExceptionArea
 						)
 
 						VALUES
@@ -19,6 +24,11 @@ public class CreateTermAppLocationSqlCommand
 							,@p_ParcelId	
 							,@p_PamsPin
 							,@p_IsChecked
+							,@p_AcresToBeAcquired
+							,@p_ExceptionAreaAcres
+							,@p_Notes
+							,@p_Acres
+							,@p_ExceptionArea
 						);";
 
     public CreateTermAppLocationSqlCommand() { }
@@ -28,3 +38,5 @@ public class CreateTermAppLocationSqlCommand
         return _sqlCommand;
     }
 }
+
+
