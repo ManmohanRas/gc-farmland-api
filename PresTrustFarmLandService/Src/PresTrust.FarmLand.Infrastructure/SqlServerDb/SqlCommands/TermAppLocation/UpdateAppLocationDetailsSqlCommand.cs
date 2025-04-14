@@ -16,7 +16,7 @@ public class UpdateLocationDetailsSqlCommand
 							,Acres = @p_Acres
 							,ExceptionArea = @p_ExceptionArea
 						
-					WHERE ParcelId =@p_ParcelId ;";
+					WHERE ParcelId =@p_ParcelId AND ApplicationId = @p_ApplicationId ;";
 
 	public UpdateLocationDetailsSqlCommand() { }
 
