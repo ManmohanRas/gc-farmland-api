@@ -1,5 +1,4 @@
-﻿
-namespace PresTrust.FarmLand.Application.Commands;
+﻿namespace PresTrust.FarmLand.Application.Commands;
 
 public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<SaveLocationDetailsCommand, Unit>
 {
@@ -10,6 +9,7 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
     private readonly IPresTrustUserContext userContext;
     private readonly SystemParameterConfiguration systemParamOptions;
     private readonly ITermAppAdminDeedDetailsRepository repoDeedDetails;
+    private readonly IFarmBlockLotRepository repoBlockLot;
 
 
     public SaveLocationDetailsCommandHandler
@@ -20,7 +20,7 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
             ITermBrokenRuleRepository repoBrokenRules,
             IPresTrustUserContext userContext,
             ITermAppAdminDeedDetailsRepository repoDeedDetails,
-    IOptions<SystemParameterConfiguration> systemParamOptions
+            IOptions<SystemParameterConfiguration> systemParamOptions
         ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
@@ -39,19 +39,23 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
         var application = await GetIfApplicationExists(request.ApplicationId);
 
         var parcels =  mapper.Map<List<SaveBlockLot>, List<FarmAppLocationDetailsEntity>>(request.Parcels);
-       
 
         deedParcels = await repoDeedDetails.GetTermAppAdminDeedLocationDetails(request.ApplicationId);
+
+        var reqParcels = await repoLocation.GetUnLinkedParcelsByFarmID(application.Id, application.FarmListId, application.ApplicationTypeId);
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
 
+
             foreach (var parcel in parcels)
             {
+                parcel.FarmListID = application.FarmListId;
+                
+                await repoLocation.CheckLocationParcel(request.ApplicationId, parcel);
+               
                 if ( parcel.RowStatus == "I")
                 {
-                    parcel.FarmListID = application.FarmListId;
-                    await repoLocation.CheckLocationParcel(request.ApplicationId, parcel);
                     deed.ApplicationId = application.Id;
                     deed.ParcelId = parcel.ParcelId;
                     deed.IsChecked  = parcel.IsChecked;
@@ -67,7 +71,7 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
                 }
                 else if (parcel.RowStatus == "D")
                 {
-                     await repoLocation.DeleteTermAppLocationBlockLot(request.ApplicationId, parcel.ParcelId);
+                     await repoLocation.DeleteAppLocationBlockLot(request.ApplicationId, parcel.ParcelId);
                      await repoDeedDetails.UpdateTermAppDeedLocation(request.ApplicationId, parcel.ParcelId, parcel.IsChecked);
 
                 }
