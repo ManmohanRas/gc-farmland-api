@@ -10,5 +10,6 @@ public class SaveFarmListCommand: IRequest<int>
     public string Address1 { get; set; }
     public string Address2 { get; set; }
     public string FarmListID { get; set; }
+    public int MunicipalId { get; set; }
 
 }
