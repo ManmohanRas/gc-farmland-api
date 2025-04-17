@@ -9,7 +9,7 @@
                     ,[DeedId]
                     ,[IsChecked]
                 FROM [Farm].[FarmTermAppDeedLocation] 
-                WHERE [ApplicationId] = @p_ApplicationId;"
+                WHERE [ApplicationId] = @p_ApplicationId AND IsChecked = 1;"
    ;
 
         public GetTermAppAdminDeedLocationDetails()

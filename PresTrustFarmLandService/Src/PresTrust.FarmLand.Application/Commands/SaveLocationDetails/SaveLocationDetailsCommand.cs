@@ -18,7 +18,7 @@ public class SaveBlockLot
     public double ExceptionAreaAcres { get; set; }
     public string Notes { get; set; }
     public double Acres { get; set; }
-    public bool ExceptionArea { get; set; }
+    public bool? ExceptionArea { get; set; }
     public string RowStatus {  get; set; }
 }
 

@@ -17,7 +17,7 @@ public class FarmBlockLotEntity
     public double ExceptionAreaAcres { get; set; }
     public bool Partial { get; set; }
     public string InterestType { get; set; }
-    public bool ExceptionArea { get; set; }
+    public bool ?ExceptionArea { get; set; }
     public string Notes { get; set; }
     public string PamsPin { get; set; }
     public string EasementId { get; set; }
