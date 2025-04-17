@@ -46,15 +46,12 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
 
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-
-
             foreach (var parcel in parcels)
             {
                 parcel.FarmListID = application.FarmListId;
                 
-                await repoLocation.CheckLocationParcel(request.ApplicationId, parcel);
                
-                if ( parcel.RowStatus == "I")
+                if (parcel.RowStatus == "I")
                 {
                     deed.ApplicationId = application.Id;
                     deed.ParcelId = parcel.ParcelId;
@@ -75,12 +72,16 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
                      await repoDeedDetails.UpdateTermAppDeedLocation(request.ApplicationId, parcel.ParcelId, parcel.IsChecked);
 
                 }
+                await repoLocation.CheckLocationParcel(request.ApplicationId, parcel);
+
             }
-            
+
 
             var brokenRules = await ReturnBrokenRulesIfAny(application);
 
             dynamic section = application.ApplicationTypeId == 1 ? TermAppSectionEnum.LOCATION : EsmtAppSectionEnum.LOCATION;
+
+
 
             await repoBrokenRules.DeleteBrokenRulesAsync(application.Id, section);
 
@@ -94,13 +95,16 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
 
     private async Task<List<FarmBrokenRuleEntity>> ReturnBrokenRulesIfAny(FarmApplicationEntity application)
     {
-        int sectionId = (int)TermAppSectionEnum.LOCATION;
+        dynamic sectionId = application.ApplicationTypeId == 1 ? (int) TermAppSectionEnum.LOCATION :(int) EsmtAppSectionEnum.LOCATION;
+
+
+
         List<FarmBrokenRuleEntity> brokenRules = new List<FarmBrokenRuleEntity>();
 
         var getLocationBlockLots = await repoLocation.GetParcelsByFarmID(application.Id, application.FarmListId);
 
 
-        if (getLocationBlockLots.Where(x => x.IsChecked).Count() == 0)
+        if (getLocationBlockLots.Where(x => x.IsChecked).Count() <= 0)
         {
             brokenRules.Add(new FarmBrokenRuleEntity()
             {
