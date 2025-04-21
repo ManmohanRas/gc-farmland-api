@@ -12,6 +12,7 @@ public class UpdateFarmSqlCommand
                       ,[Address1] = @p_Address1
                       ,[Address2] = @p_Address2
                       ,[FarmNumber] = @p_FarmNumber
+                      ,[MunicipalId] = @p_MunicipalId
                       WHERE  FarmListID = @p_FarmListID";
 
     public UpdateFarmSqlCommand()

@@ -65,7 +65,8 @@
                     @p_Address2 = farmList.Address2,
                     @p_AgencyID = farmList.AgencyID,
                     @p_OriginalLandowner = farmList.OriginalLandowner,
-                    @p_FarmNumber = farmList.FarmNumber
+                    @p_FarmNumber = farmList.FarmNumber,
+                    @p_MunicipalId = farmList.MunicipalID
                 });
 
             farmList.FarmListID = id;
@@ -89,7 +90,8 @@
                     @p_Address2 = farmList.Address2,
                     @p_AgencyID = farmList.AgencyID,
                     @p_OriginalLandowner = farmList.OriginalLandowner,
-                    @p_FarmNumber = farmList.FarmNumber
+                    @p_FarmNumber = farmList.FarmNumber,
+                    @p_MunicipalId = farmList.MunicipalID,
                 });
 
             return farmList;

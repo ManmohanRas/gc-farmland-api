@@ -14,6 +14,11 @@ public class SaveBlockLot
     public int FarmListID { get; set; }
     public string PamsPin { get; set; }
     public bool IsChecked { get; set; }
+    public double AcresToBeAcquired { get; set; }
+    public double ExceptionAreaAcres { get; set; }
+    public string Notes { get; set; }
+    public double Acres { get; set; }
+    public bool? ExceptionArea { get; set; }
     public string RowStatus {  get; set; }
 }
 

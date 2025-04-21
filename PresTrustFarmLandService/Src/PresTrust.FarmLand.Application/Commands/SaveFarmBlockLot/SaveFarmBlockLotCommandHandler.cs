@@ -29,6 +29,7 @@ public class SaveFarmBlockLotCommandHandler: IRequestHandler<SaveFarmBlockLotCom
         SaveFarmBlockLotCommandViewModel result = new SaveFarmBlockLotCommandViewModel();
 
         var reqBlockLot = mapper.Map<SaveFarmBlockLotCommand, FarmBlockLotEntity>(request);
+        reqBlockLot.LastUpdatedBy = userContext.Email;
 
         var currentParcel = await repoBlockLot.GetFarmBlockLotByIdAsync(request.Id);
         currentParcel = currentParcel ?? new FarmBlockLotEntity() { IsClassCodeWarning= false, PropertyClassCode = string.Empty, CorePropertyClassCode = string.Empty};
@@ -38,8 +39,8 @@ public class SaveFarmBlockLotCommandHandler: IRequestHandler<SaveFarmBlockLotCom
         
         using (var scope = TransactionScopeBuilder.CreateReadCommitted(systemParamOptions.TransScopeTimeOutInMinutes))
         {
-            if (!parcelExists)
-            {
+            //if (!parcelExists)
+            //{
                 if (request.Id > 0 && currentParcel.PamsPin != reqBlockLot.PamsPin)
                 {
                     FarmParcelHistoryEntity reqHistory = new FarmParcelHistoryEntity()
@@ -63,11 +64,11 @@ public class SaveFarmBlockLotCommandHandler: IRequestHandler<SaveFarmBlockLotCom
                 blockLotParcel.CorePropertyClassCode = currentParcel.CorePropertyClassCode;
 
                 result = mapper.Map<FarmBlockLotEntity, SaveFarmBlockLotCommandViewModel>(blockLotParcel);
-            }
-            else
-            {
-                throw new Exception("Parcel already exists");
-            }
+            //}
+            //else
+            //{
+            //    throw new Exception("Parcel already exists");
+            //}
 
             scope.Complete();
         }

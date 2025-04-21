@@ -57,10 +57,10 @@ public class CreateFarmBlockLotSqlCommand
                        ,@p_DeedPage
                        ,@p_CreatedByProgramUser
                        ,@p_IsWarning
-                       ,@p_LastUpdatedBy
                        ,@p_ExceptionAreaAcres
                        ,@p_IsValidPamsPin
-                       ,@p_LastUpdatedOn);
+                       ,GETDATE()
+                       ,@p_LastUpdatedBy);
 
                 SELECT CAST( SCOPE_IDENTITY() AS INT);";
 

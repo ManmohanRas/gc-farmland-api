@@ -12,6 +12,7 @@ public class CreateFarmSqlCommand
                       ,[OriginalLandowner]
                       ,[Address1]
                       ,[Address2]
+                      ,[MunicipalId]
                       )
 			  VALUES
 			  (  
@@ -21,7 +22,8 @@ public class CreateFarmSqlCommand
                        @p_AgencyID,                        
                        @p_OriginalLandowner,   
                        @p_Address1,
-                      @p_Address2
+                      @p_Address2,
+                      @p_MunicipalId
 						);
 
 				  SELECT CAST( SCOPE_IDENTITY() AS INT);";
