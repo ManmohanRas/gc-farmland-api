@@ -19,7 +19,7 @@ public class GetUnLinkedParcelsByFarmId
     L.AcresToBeAcquired,
     L.ExceptionAreaAcres,
     MBL.Partial,
-    MBL.ExceptionArea,
+    L.ExceptionArea,
     MBL.EasementId,
     MBL.ChangeType,
     MBL.ChangeDate,
