@@ -3,7 +3,16 @@
 public class GetUnLinkedParcelsByFarmId
 {
     private readonly string _sqlCommand =
-        @"  SELECT DISTINCT
+        @" WITH ExcludedParcels AS (
+    SELECT L.ParcelId
+    FROM [Farm].[FarmAppLocationDetails] L
+    JOIN [Farm].[FarmApplication] A ON L.ApplicationId = A.Id
+    WHERE L.IsChecked = 1
+      AND A.ApplicationTypeId = @p_ApplicationTypeId  -- Apply filter to match ApplicationTypeId
+      AND L.ApplicationId <> @p_ApplicationId        -- Exclude current application
+)
+
+SELECT DISTINCT
     MBL.Id AS ParcelId,
     MBL.[Id],
     MBL.[FarmListID],
@@ -53,19 +62,10 @@ LEFT JOIN [Core].[Municipality] CM
 LEFT JOIN CORE.Parcels CP 
     ON CP.PAMS_PIN = MBL.PamsPin
 WHERE MBL.FarmListID = @p_FarmListID
-  -- Main query condition: exclude records with ApplicationTypeId = 1
-  AND (
-      (L.ApplicationId = @p_ApplicationId)  -- Keep the exact application match
-      OR NOT EXISTS (
-          -- The subquery checks if there is another ParcelId with a different ApplicationId
-          SELECT 1
-          FROM [Farm].[FarmAppLocationDetails] AS L2
-          LEFT JOIN [Farm].[FarmApplication] FA2 
-              ON FA2.Id = L2.ApplicationId
-          WHERE L2.ParcelId = MBL.Id
-            AND L2.ApplicationId <> @p_ApplicationId  -- It must be a different application
-            AND FA2.ApplicationTypeId = @p_ApplicationTypeId
-      )
+  AND NOT EXISTS (
+        SELECT 1
+        FROM ExcludedParcels EP
+        WHERE EP.ParcelId = MBL.Id
   );";
     public GetUnLinkedParcelsByFarmId()
     {
