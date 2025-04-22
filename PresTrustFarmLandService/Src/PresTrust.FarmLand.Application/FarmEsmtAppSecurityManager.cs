@@ -213,7 +213,6 @@ public class FarmEsmtAppSecurityManager
 
                 if (userRole == UserRoleEnum.SYSTEM_ADMIN || userRole == UserRoleEnum.PROGRAM_ADMIN)
                 {
-                    esmtPermission.CanSubmitApplication = true;
                     esmtPermission.CanApproveApplication = true;
                     esmtPermission.CanReviewApplication = true;
                 }
