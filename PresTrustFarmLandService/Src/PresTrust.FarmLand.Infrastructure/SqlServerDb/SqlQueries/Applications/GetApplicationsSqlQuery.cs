@@ -78,7 +78,7 @@ public class GetApplicationsSqlQuery
                LEFT JOIN [Farm].[FarmTermAppAdminDetails] AS AD ON (A.Id = AD.ApplicationId)
                 LEFT JOIN
 			   (
-			    SELECT L.ApplicationId, SUM(MBL.AcresToBeAcquired) AS Acres
+			    SELECT L.ApplicationId, SUM(L.AcresToBeAcquired) AS Acres
 				FROM [Farm].[FarmMunicipalityBlockLotParcel]  AS MBL
 			  LEFT JOIN [Farm].[FarmAppLocationDetails] AS L ON (MBL.Id = L.ParcelId AND L.Ischecked = 1)
 			  GROUP BY L.ApplicationId
@@ -129,7 +129,7 @@ public class GetApplicationsSqlQuery
                LEFT JOIN [Farm].[FarmTermAppAdminDetails] AS AD ON (A.Id = AD.ApplicationId)
                LEFT JOIN
 			   (
-			    SELECT L.ApplicationId, SUM(MBL.AcresToBeAcquired) AS Acres
+			    SELECT L.ApplicationId, SUM(L.AcresToBeAcquired) AS Acres
 				FROM [Farm].[FarmMunicipalityBlockLotParcel]  AS MBL
 			  LEFT JOIN [Farm].[FarmAppLocationDetails] AS L ON (MBL.Id = L.ParcelId AND L.Ischecked = 1)
 			  GROUP BY L.ApplicationId
