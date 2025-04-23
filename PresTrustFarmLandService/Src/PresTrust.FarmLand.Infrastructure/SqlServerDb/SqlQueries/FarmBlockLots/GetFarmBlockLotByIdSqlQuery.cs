@@ -13,12 +13,8 @@ public class GetFarmBlockLotByIdSqlQuery
 			  ,MBL.IsActive
 			  ,MBL.InterestType
 			  ,MBL.Section
-			  ,MBL.PamsPin
-			  ,MBL.Acres
-			  ,MBL.AcresToBeAcquired
-			  ,MBL.ExceptionAreaAcres
+			  ,MBL.PamsPin			 
 		      ,MBL.Partial
-			  ,MBL.ExceptionArea
 			  ,MBL.EasementId
 			  ,MBL.ChangeType
 			  ,MBL.ChangeDate
@@ -26,7 +22,6 @@ public class GetFarmBlockLotByIdSqlQuery
 			  ,MBL.DeedBook
 			  ,MBL.DeedPage
 			  ,MBL.IsWarning
-			  ,MBL.[Notes]
 			  ,MBL.[CreatedByProgramUser]
 			  ,MBL.[IsValidPamsPin]
 			  ,CP.PropertyClassCode AS CorePropertyClassCode

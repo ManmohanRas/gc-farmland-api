@@ -10,11 +10,6 @@ public class UpdateFarmBlockLotSqlCommand
                           ,[QualificationCode] = @p_QualificationCode
                           ,[Partial]           = @p_Partial
                           ,[Section] = @p_Section
-                          ,[Acres] = @p_Acres
-                          ,[AcresToBeAcquired] = @p_AcresToBeAcquired
-                          ,[ExceptionAreaAcres] = @p_ExceptionAreaAcres
-                          ,[ExceptionArea] = @p_ExceptionArea
-                          ,[Notes] = @p_Notes
                           ,[PamsPin] = @p_PamsPin
                           ,[IsValidFeatureId] = @p_IsValidFeatureId
                           ,[InterestType] = @p_InterestType
