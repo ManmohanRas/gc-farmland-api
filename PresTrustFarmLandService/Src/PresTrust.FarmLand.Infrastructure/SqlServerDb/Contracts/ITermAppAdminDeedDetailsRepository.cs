@@ -42,4 +42,7 @@ public interface ITermAppAdminDeedDetailsRepository
     /// <param name="parcelId"></param>
     /// <returns></returns>
     Task<bool> UpdateTermAppDeedLocation(int applicationId, int parcelId, bool IsChecked);
+
+   Task<bool> DeleteTermAppDeedLocation(int applicationId, int parcelId);
+
 }
