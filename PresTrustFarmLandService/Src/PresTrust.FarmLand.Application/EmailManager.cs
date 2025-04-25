@@ -168,12 +168,8 @@ public class EmailManager : IEmailManager
 
         if (ApplicationDetails.StatusId == 102 || ApplicationDetails.StatusId == 103 || ApplicationDetails.StatusId == 104 || ApplicationDetails.StatusId == 105 || ApplicationDetails.StatusId == 204 || ApplicationDetails.StatusId == 206 || ApplicationDetails.StatusId == 209 || ApplicationDetails.StatusId == 210)
         {
-
             toEmails = string.Join(",", systemParamOptions.ProgramAdminEmail ?? string.Empty);
             cc = null;
-            toEmails = string.Join(",", systemParamOptions.ProgramAdminEmail);
-
-
         }
         else
         {
