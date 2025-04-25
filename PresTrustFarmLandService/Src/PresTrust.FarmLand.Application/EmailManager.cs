@@ -1,4 +1,6 @@
-﻿namespace PresTrust.FarmLand.Application;
+﻿using System.Runtime.InteropServices;
+
+namespace PresTrust.FarmLand.Application;
 
 public interface IEmailManager
 {
@@ -16,6 +18,7 @@ public class EmailManager : IEmailManager
     private readonly IPresTrustUserContext userContext;
     private readonly IIdentityApiConnect identityApiConnect;
     private readonly ITermAppAdminContactsRepository repoContact;
+    private readonly IApplicationRepository repoApplication;
 
     public EmailManager(
         IMapper mapper,
@@ -24,7 +27,8 @@ public class EmailManager : IEmailManager
         IOptions<SystemParameterConfiguration> systemParamOptions,
         IPresTrustUserContext userContext,
         IIdentityApiConnect identityApiConnect,
-        ITermAppAdminContactsRepository repoContact
+        ITermAppAdminContactsRepository repoContact,
+        IApplicationRepository repoApplication
     )
     {
         this.emailApiConnect = emailApiConnect;
@@ -33,6 +37,7 @@ public class EmailManager : IEmailManager
         this.userContext = userContext;
         this.identityApiConnect = identityApiConnect;
         this.repoContact = repoContact;
+        this.repoApplication = repoApplication;
     }
 
 
@@ -60,7 +65,8 @@ public class EmailManager : IEmailManager
             //}
             //else
             //{
-                primaryContactNames = primaryContacts.Where(x => x.IsPrimaryContact == true).Select(o => o.UserName).ToList();
+                primaryContactNames = primaryContacts.Where(x => x.IsPrimaryContact == true).Select(o =>string.Concat(o.FirstName, ' ', o.LastName)).ToList();
+
             //}
 
         }
@@ -90,7 +96,8 @@ public class EmailManager : IEmailManager
         List<string> alternateContactEmails = new List<string>();
         string contactEmails = default;
         string contactName = default;
-
+        var ApplicationDetails = await repoApplication.GetApplicationAsync(applicationId);
+       
         var contacts = await repoContact.GetAllContactsAsync(applicationId);
         contactEmails = contacts.Where(o => o.SelectContact).Select(x => x.Email).FirstOrDefault();
         contactName = contacts.Select(x => x.ContactName).FirstOrDefault();
@@ -157,29 +164,38 @@ public class EmailManager : IEmailManager
        
         subject = subject.Replace("{{FarmName}}", applicationName ?? "");
 
-   
 
-        if (primaryContact.Item2.Count() > 0)
+
+        if (ApplicationDetails.StatusId == 102 || ApplicationDetails.StatusId == 103 || ApplicationDetails.StatusId == 104 || ApplicationDetails.StatusId == 105 || ApplicationDetails.StatusId == 204 || ApplicationDetails.StatusId == 206 || ApplicationDetails.StatusId == 209 || ApplicationDetails.StatusId == 210)
         {
-            toEmails = string.Join(",", systemParamOptions.ProgramAdminEmail ?? String.Empty);
+            toEmails = string.Join(",", systemParamOptions.ProgramAdminEmail ?? string.Empty);
+            cc = null;
         }
         else
         {
-            toEmails = systemParamOptions.ProgramAdminEmail ?? String.Empty;
-        }
 
-        if (primaryContact.Item3.Count() > 0)
-        {
-            alternateContactEmails.Add(string.Join(",", primaryContact.Item3));
-        }
+            if (primaryContact.Item2.Count() > 0)
+            {
+                toEmails = string.Join(",", primaryContact.Item2);
 
-        if (!toEmails.Contains(systemParamOptions.ProgramAdminEmail))
-        {
-            alternateContactEmails.Add(string.Join(",", systemParamOptions.ProgramAdminEmail));
-        }
+            }
+            else
+            {
+                toEmails = systemParamOptions.ProgramAdminEmail ?? String.Empty;
+            }
 
-        string[] tempEMailArray = [.. primaryContact.Item2,..alternateContactEmails];
-        cc = tempEMailArray.Length > 0 ? string.Join(",", tempEMailArray) : String.Empty;
+            if (primaryContact.Item3.Count() > 0)
+            {
+                alternateContactEmails.Add(string.Join(",", primaryContact.Item3));
+            }
+
+            if (!toEmails.Contains(systemParamOptions.ProgramAdminEmail))
+            {
+                alternateContactEmails.Add(string.Join(",", systemParamOptions.ProgramAdminEmail));
+            }
+            string[] tempEMailArray = [.. alternateContactEmails];
+            cc = tempEMailArray.Length > 0 ? string.Join(",", tempEMailArray) : String.Empty;
+        }
 
         var senderName = systemParamOptions.IsDevelopment == false ? userContext.Name : systemParamOptions.TestEmailFromUserName;
         var senderEmail = systemParamOptions.IsDevelopment == false ? userContext.Email : "mcgis@co.morris.nj.us";
