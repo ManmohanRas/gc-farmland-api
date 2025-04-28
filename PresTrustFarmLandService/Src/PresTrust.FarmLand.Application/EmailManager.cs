@@ -170,6 +170,12 @@ public class EmailManager : IEmailManager
         {
             toEmails = string.Join(",", systemParamOptions.ProgramAdminEmail ?? string.Empty);
             cc = null;
+            if(ApplicationDetails.StatusId == 103 && ApplicationDetails.IsSADC == true)
+            {
+                toEmails = string.Join(",", contactEmails ?? systemParamOptions.ProgramAdminEmail);
+                cc = string.Join(",",primaryContact.Item2);
+            }
+
         }
         else
         {
@@ -195,6 +201,13 @@ public class EmailManager : IEmailManager
             }
             string[] tempEMailArray = [.. alternateContactEmails];
             cc = tempEMailArray.Length > 0 ? string.Join(",", tempEMailArray) : String.Empty;
+
+            if (ApplicationDetails.StatusId == 203 && ApplicationDetails.IsSADC == true)
+            {
+                toEmails = string.Join(",", contactEmails ?? systemParamOptions.ProgramAdminEmail);
+                cc = string.Join(",", primaryContact.Item2);
+            }
+
         }
 
         var senderName = systemParamOptions.IsDevelopment == false ? userContext.Name : systemParamOptions.TestEmailFromUserName;
