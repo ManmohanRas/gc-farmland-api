@@ -1,5 +1,5 @@
 ﻿USE PrestrustTemp;
-
+TRUNCATE TABLE [Farm].FarmList
 BEGIN TRY
    BEGIN TRANSACTION
 

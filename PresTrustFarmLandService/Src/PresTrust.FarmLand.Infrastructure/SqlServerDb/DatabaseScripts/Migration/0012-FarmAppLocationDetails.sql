@@ -7,7 +7,12 @@
 		ParcelId,
 		FarmListId,
 		PamsPin,
-		IsChecked
+		IsChecked,
+		Acres,
+		ExceptionAreaAcres,
+		AcresToBeAcquired,
+		ExceptionArea,
+		Notes
 		)
 		
 		SELECT 
@@ -15,11 +20,15 @@
 			MBL.Id AS ParcelId,
 			FA.FarmListId AS FarmListId,
 			MBL.PamsPin AS PamsPin,
-			1 AS IsChecked
+			1 AS IsChecked,
+			MBL.Acres,
+			MBL.ExceptionAreaAcres,
+			MBL.AcresToBeAcquired,
+			MBL.ExceptionArea,
+			MBL.Notes
 			FROM 
 			 [Farm].[FarmMunicipalityBlockLotParcel] MBL
 			JOIN   [Farm].[FarmApplication] FA ON(MBL.FarmListId = FA.FarmListId)
-			Where FA.ApplicationTypeId = 1
 			ORDER BY FA.Id
 			
 

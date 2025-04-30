@@ -129,3 +129,8 @@ INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (60
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (60, 3);
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (60, 4);
 INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (60, 5);
+
+INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (61, 1);
+INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (61, 3);
+INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (61, 4);
+INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (61, 5);

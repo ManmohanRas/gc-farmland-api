@@ -8,86 +8,161 @@ BEGIN TRY
     SET IsActive = 1
     WHERE Id = 1;
 
+	--002
+	DELETE FROM [Core].[Permission] WHERE [Id] IN (13, 14, 15, 16);
+
+    SET IDENTITY_INSERT [Core].[Permission] ON
+
+    INSERT INTO [Core].[Permission]
+	([Id],[Name],[Description],[ProgramTypeId],[IsActive]) 
+	VALUES 
+	(13, 'MANAGE_PROGRAM', 'Manage program sections, user management, parcels, email templates',	1,	1);
+		 
+		INSERT INTO [Core].[Permission]
+			([Id],[Name],[Description],[ProgramTypeId],[IsActive]) 
+			VALUES 
+			(14, 'MANAGE_AGENCY', 'Manage agency sections like user management', 1,	1);
+		 
+		INSERT INTO [Core].[Permission]
+			([Id],[Name],[Description],[ProgramTypeId],[IsActive]) 
+			VALUES 
+			(15, 'MANAGE_REPORTS', 'Generate or View reports', 1, 1);
+		 
+		INSERT INTO [Core].[Permission]
+			([Id],[Name],[Description],[ProgramTypeId],[IsActive]) 
+			VALUES 
+			(16, 'FARM', 'View and/or Edit Farm Mitigation Application', 1, 1);
+		 
+
+	SET IDENTITY_INSERT [Core].[Permission] OFF;
+
+
+   ---003
+   /*
+========== ========== ========== ========== ==========
+		No new users - Old users are sufficient
+========== ========== ========== ========== ==========
+*/
+
+ --004
+   -- delete previous records
+		DELETE FROM [Core].[PermissionUserRole] WHERE PermissionId IN (13, 14, 15, 16);
+
+
+		-- manage_program
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (13, 1);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (13, 3);
+
+		-- manage_agency
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (14, 1);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (14, 7);
+
+		-- manage_reports
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (15, 1);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (15, 2);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (15, 3);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (15, 4);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (15, 6);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (15, 7);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (15, 8);
+
+		-- farm mitigation view edit
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (16, 1);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (16, 3);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (16, 4);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (16, 5);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (16, 6);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (16, 7);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (16, 8);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (16, 9);
+		INSERT INTO [Core].[PermissionUserRole]([PermissionId], [UserRoleId]) VALUES (16, 10);
+
+
 	-- 005
-	DELETE FROM [Core].[NavigationItem] WHERE [Id] IN (28,29,30,31,32,33,34,35);
+	   DELETE FROM [Core].[NavigationItem] WHERE [Id] IN (28,29,30,31,32,33,34,35);
 
-    SET IDENTITY_INSERT [Core].[NavigationItem] ON
+		SET IDENTITY_INSERT [Core].[NavigationItem] ON
 
-    INSERT INTO [Core].[NavigationItem]
-    (
-    	[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly], [ProgramTypeId], [IsActive]
-    ) 
-    VALUES 
-    (
-    	28, 0, 'Dashboard','dashboard', 'flaticon2-protection', 1,0, 1, 1
-    );
-    
-    INSERT INTO [Core].[NavigationItem]
-    (
-    	[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly],  [ProgramTypeId],[IsActive]
-    ) 
-    VALUES 
-    (
-    	29, 0, 'Create An Application','farm/chooseapp', 'flaticon2-add-1', 2,0, 1, 1
-    );
-    
-    INSERT INTO [Core].[NavigationItem]
-    (
-    	[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly],  [ProgramTypeId],[IsActive]
-    ) 
-    VALUES 
-    (
-    	30, 0, 'Manage Applications','farm/applications', 'flaticon-squares-4', 3,0, 1, 1
-    );
-    
-    INSERT INTO [Core].[NavigationItem]
-    (
-    	[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly],  [ProgramTypeId],[IsActive]
-    ) 
-    VALUES 
-    (
-    	31, 0, 'Program Manager','farm-manageprogram', 'flaticon2-layers-2', 4,0, 1, 1
-    );
-    
-    INSERT INTO [Core].[NavigationItem]
-    (
-    	[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly], [ProgramTypeId], [IsActive]
-    ) 
-    VALUES 
-    (
-    	32, 0, 'Reports','reports/rptdashboard', 'flaticon2-document', 5,0, 1, 1
-    );
-    
-    
-    INSERT INTO [Core].[NavigationItem]
-    (
-    	[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly],  [ProgramTypeId],[IsActive]
-    ) 
-    VALUES 
-    (
-    	33, 0, 'Manage Agency Users','farm-manageagency', 'flaticon2-layers-2', 4,0, 1, 1
-    );
-    
-    INSERT INTO [Core].[NavigationItem]
-    (
-    	[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly], [ProgramTypeId], [IsActive]
-    ) 
-    VALUES 
-    (
-    	34, 0, 'Admin','#', 'flaticon2-calendar-3', 7,0, 1, 1
-    );
-    
-    
-    INSERT INTO [Core].[NavigationItem]
-    (
-    	[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly], [ProgramTypeId], [IsActive]
-    ) 
-    VALUES 
-    (
-    	35, 0, 'How To','howto', 'flaticon-questions-circular-button', 8,0, 1, 1
-    );
-    
-    SET IDENTITY_INSERT [Core].[NavigationItem] OFF
+		INSERT INTO [Core].[NavigationItem]
+		(
+			[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly], [ProgramTypeId], [IsActive]
+		) 
+		VALUES 
+		(
+			28, 0, 'Dashboard','dashboard', 'flaticon2-protection', 1,0, 1, 1
+		);
+		
+
+		INSERT INTO [Core].[NavigationItem]
+		(
+			[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly],  [ProgramTypeId],[IsActive]
+		) 
+		VALUES 
+		(
+			29, 0, 'Create An Application','farm/chooseapp', 'flaticon2-add-1', 2,0, 1, 1
+		);
+		
+
+		INSERT INTO [Core].[NavigationItem]
+		(
+			[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly],  [ProgramTypeId],[IsActive]
+		) 
+		VALUES 
+		(
+			30, 0, 'Manage Applications','farm/applications', 'flaticon-squares-4', 3,0, 1, 1
+		);
+		
+
+		INSERT INTO [Core].[NavigationItem]
+		(
+			[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly],  [ProgramTypeId],[IsActive]
+		) 
+		VALUES 
+		(
+			31, 0, 'Program Manager','farm-manageprogram', 'flaticon2-layers-2', 4,0, 1, 1
+		);
+		
+
+		INSERT INTO [Core].[NavigationItem]
+		(
+			[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly], [ProgramTypeId], [IsActive]
+		) 
+		VALUES 
+		(
+			32, 0, 'Reports','reports/rptdashboard', 'flaticon2-document', 5,0, 1, 1
+		);
+		
+
+		INSERT INTO [Core].[NavigationItem]
+		(
+			[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly],  [ProgramTypeId],[IsActive]
+		) 
+		VALUES 
+		(
+			33, 0, 'Manage Agency Users','farm-manageagency', 'flaticon2-layers-2', 4,0, 1, 1
+		);
+		
+
+		INSERT INTO [Core].[NavigationItem]
+		(
+			[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly], [ProgramTypeId], [IsActive]
+		) 
+		VALUES 
+		(
+			34, 0, 'Admin','#', 'flaticon2-calendar-3', 7,0, 1, 1
+		);
+		
+
+		INSERT INTO [Core].[NavigationItem]
+		(
+			[Id], [ParentId], [Title], [RouterLink], [Icon], [SortOrder], [IsViewOnly], [ProgramTypeId], [IsActive]
+		) 
+		VALUES 
+		(
+			35, 0, 'How To','howto', 'flaticon-questions-circular-button', 8,0, 1, 1
+		);
+		
+		SET IDENTITY_INSERT [Core].[NavigationItem] OFF
 
 	-- 006
 	-- delete previous records
@@ -152,7 +227,10 @@ BEGIN TRY
        INSERT INTO [Core].[NavigationItemUserRole]([NavigationItemId], [UserRoleId]) VALUES (35, 10);
 
        --- 007
+	   DELETE FROM [Core].[ReportItemUserRole] WHERE ReportItemId IN (SELECT  Id FROM [CORE].[ReportItem] WHERE ProgramTypeId = 1);
+
 	   DELETE FROM [Core].[ReportItem] WHERE [Id] IN (SELECT  Id FROM [CORE].[ReportItem] WHERE ProgramTypeId = 1);
+
 
        SET IDENTITY_INSERT [Core].[ReportItem] ON
        
@@ -238,9 +316,6 @@ BEGIN TRY
        SET IDENTITY_INSERT [Core].[ReportItem] OFF
 
 	   -- 008
-
-	   DELETE FROM [Core].[ReportItemUserRole] WHERE ReportItemId IN (SELECT  Id FROM [CORE].[ReportItem] WHERE ProgramTypeId = 1);
-
        INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (36, 1);
        INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (36, 3);
        INSERT INTO [Core].[ReportItemUserRole]([ReportItemId], [UserRoleId]) VALUES (36, 4);
@@ -490,6 +565,16 @@ BEGIN TRY
        
        INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (220, 'ADMIN_CONTACTS', 'Admin Contacts', 2);
 
+       --SADC tabs
+       INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (301, 'SADC_FARM_INFORMATION', 'SADC Farm Information', 2);
+       
+       INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (302, 'SADC_RESI_ON_ESMT_AREA', 'SADC Resi on ESMT Area', 2);
+       
+       INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (303, 'SADC_FARM_HISTORY', 'SADC Farm History', 2);
+       
+       INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (304, 'SADC_APP_ELIGIBILITY_I', 'SADC Application Eligibility I', 2);
+       
+       INSERT INTO [Farm].[FarmApplicationSection] ([Id], [Title], [Description], [ApplicationTypeId]) VALUES (305, 'SADC_APP_ELIGIBILITY_II', 'SADC Application Eligibility II', 2);
 
 	   ---104
 	   DELETE FROM  [Farm].[FarmApplicationDocumentType];
@@ -604,44 +689,45 @@ BEGIN TRY
 
 	   ---105
 	   INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
-	   1, 
-       'CHANGE_STATUS_FROM_AGREEMENT_APPROVED_TO_ACTIVE', 
-       'Change status from Agreement Approved to Active', 
-       'Term Program - {{FarmName}}', 
+	 1, 
+ 'CHANGE_STATUS_FROM_AGREEMENT_APPROVED_TO_ACTIVE', 
+ 'Change status from Agreement Approved to Active', 
+ 'Term Program - {{FarmName}}', 
 
-       '<p>Dear {{PrimaryContactName}},</p>
-       <p>Please take notice that the following property has been enrolled in a Farmland Preservation Program for a period of sixteen years:</p>
-       <p>LandOwner: {{OwnerFirst}}, {{OwnerLast}} </p>
-       <p>Municipality: {{Municipality}}</p>
-       <p>Block/Lots: {{Block}}, {{Lot}}</p>
-       <p> Deed Book/Page: {{DeedBook}}, {{DeedPage}}</p>
-       <p>A copy of the Agreement is enclosed for your records.</p>
-       <p>If you have any questions, please contact me at (973) 829 8120 or at kcoyle@co.morris.nj.us.<br>
-       <p>Per N.J.A.C. 2:76-3.8, the Notice is also being forwarded to:
-       <p> Landowner</p>
-       <p> Morris County Board of Chosen Freeholders</p>
-       <p> Morris County Planning Board</p>
-       <p> Municipal Governing Body</p>
-       <p> Municipal Planning Board</p>
-       <p> Municipal Tax Assessor</p>
-       <p> Morris County Soil Conservation District</p>
-        <br>
-       <p>Sincerely,</p>
-       <p>{{ProgramAdmin}}<br>
+'<p>Dear {{PrimaryContactName}},</p>
+<p>Please take notice that the following property has been enrolled in a Farmland Preservation Program for a period of sixteen years:</p>
+ <p>LandOwner: {{OwnerFirst}}, {{OwnerLast}} </p>
+ <p>Municipality: {{Municipality}}</p>
+ <p>Block/Lots: {{Block}}, {{Lot}}</p>
+ <p> Deed Book/Page: {{DeedBook}}, {{DeedPage}}</p>
+ <p>A copy of the Agreement is enclosed for your records.</p>
+ <p>If you have any questions, please contact me at (973) 829 8120 or at kcoyle@co.morris.nj.us.<br>
+ <p>Per N.J.A.C. 2:76-3.8, the Notice is also being forwarded to:
+<p> Landowner</p>
+<p> Morris County Board of Chosen Freeholders</p>
+<p> Morris County Planning Board</p>
+<p> Municipal verning Body</p>
+<p> Municipal Planning Board</p>
+<p> Municipal Tax Assessor</p>
+<p> Morris County Soil Conservation District</p>
+ <br>
+<p>Sincerely,</p>
+<p>{{ProgramAdmin}}<br>
 
-       <p>Director</p>
-       Morris County Agriculture Development Board<br>
-       Morris County Office of Planning & Preservation<br>
-       P.O. Box 900<br>
-       Morristown, NJ 07963-0900<br>
-       Phone: (973) 829-8120
-       Fax: (973) 326-9025<br>
-       E-Mail: kcoyle@co.morris.nj.us<br>
-       Website: https://www.morriscountynj.gov/agriculture </p>', 
-       1);
+<p>Director</p>
+Morris County Agriculture Development Board<br>
+Morris County Office of Planning & Preservation<br>
+P.O. Box 900<br>
+Morristown, NJ 07963-0900<br>
+Phone: (973) 829-8120
+Fax: (973) 326-9025<br>
+E-Mail: kcoyle@co.morris.nj.us<br>
+Website: https://www.morriscountynj.v/agriculture </p>', 
+    1);
 
-       INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
-       2, 'TRIGER_THE_EMAIL_WHEN_SADC_IS_ENABLED',
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+   2, 'TRIGER_THE_EMAIL_WHEN_SADC_IS_ENABLED',
 		'Triger The Email When SADC is Eanbled',
 		' Term Program - {{Block}}, {{Lot}}, {{Municipality}}', 
 
@@ -666,12 +752,13 @@ BEGIN TRY
 		Phone: (973) 829-8120
 		Fax: (973) 326-9025<br>
 		E-Mail: kcoyle@co.morris.nj.us<br>
-		Website: https://www.morriscountynj.gov/agriculture </p>', 
+		Website: https://www.morriscountynj.v/agriculture </p>', 
 
-        2);
+2);
 
-        INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
-        3,	'CHANGE_STATUS_FROM_REQUESTED_TO_APPROVED', 
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+   3,	'CHANGE_STATUS_FROM_REQUESTED_TO_APPROVED', 
 		'Change status from Requested to Approved', 
 		'Term Program - {{FarmName}}', 
 
@@ -692,24 +779,23 @@ BEGIN TRY
 		Phone: (973) 829-8120
 		Fax: (973) 326-9025<br>
 		E-Mail: kcoyle@co.morris.nj.us<br>
-		Website: https://www.morriscountynj.gov/agriculture </p>', 
+		Website: https://www.morriscountynj.v/agriculture </p>', 
 
-        3);
+3);
 
-        INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
-        4,	'CHANGE_STATUS_FROM_DRAFT_TO_REQUESTED', 
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+   4,	'CHANGE_STATUS_FROM_DRAFT_TO_REQUESTED', 
 		'Change status from Draft to Requested', 
-		'Term Program - {{FarmName}}', 
-
-		'<P>Dear {{PrimaryContactName}},</P>
-		<P>I am in receipt of your Petition document and have added this item to the Morris CADB’s {{NextMeetingDate}} meeting agenda. The board will discuss the matter and if found acceptable, will direct staff to prepare a resolution approving the Petition.</p> 
-		<p>By copy of this letter, per N.J.A.C. 2:76-3.5, I am requesting that the Morris County Counsel’s Office order an “owner of last record” title search, verifying your ownership of the land.</p>
-		<p>Approval of the Petition by the CADB and creation of the farmland preservation program will be signified by an agreement between you and the CADB to retain the land in agricultural production for a minimum period of eight years.</p>
-		<p>If you have any questions or require additional information, please contact me.</p>
+		'Term Program - {{FarmName}}',
+		'<p>Dear {{PrimaryContactName}},</p>
+		<P>I am in receipt of your Petition document and have added this item to the Morris CADB?s next meeting agenda. The board will discuss the matter and if found acceptable, will direct staff to prepare a resolution approving the Petition.</p> 
+		<p>Approval of the Petition by the CADB and creation of the farmland preservation program will be signified by an agreement between you and the CADB to retain the land in agricultural production for an agreed upon number of years.</p>
+		<p>I will keep you posted of the progress. If you have any questions, please contact me.</p>
 		<br>
 		<p>Sincerely,</p>
 		<p>{{ProgramAdmin}}<br>
-
+ 
 		<p>Director</p>
 		Morris County Agriculture Development Board<br>
 		Morris County Office of Planning & Preservation<br>
@@ -718,14 +804,15 @@ BEGIN TRY
 		Phone: (973) 829-8120
 		Fax: (973) 326-9025<br>
 		E-Mail: kcoyle@co.morris.nj.us<br>
-		Website: https://www.morriscountynj.gov/agriculture </p>', 
+		Website: https://www.morriscountynj.v/agriculture </p>', 
 
-        4);
+4);
+
 
 
 --Easement 
-        INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
-        5,		'CHANGE_STATUS_FROM_CREATE_TO_DRAFT_APPLICATION', 
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+5,		'CHANGE_STATUS_FROM_CREATE_TO_DRAFT_APPLICATION', 
 		'Change status From Create to Draft Application',
 		'Easement Purchase Program - {{FarmName}}', 
 
@@ -744,11 +831,12 @@ BEGIN TRY
 		 Phone: (973) 829-8120
 		 Fax: (973) 326-9025<br>
 		 E-Mail: kcoyle@co.morris.nj.us<br>
-		 Website: https://www.morriscountynj.gov/agriculture </p>', 
-         1);
+		 Website: https://www.morriscountynj.v/agriculture </p>', 
+1);
 
-         INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
-         6,		'CHANGE_STATUS_FROM_DRAFT_APPLICATION_TO_APPLICATION_SUBMITTED', 
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+6,		'CHANGE_STATUS_FROM_DRAFT_APPLICATION_TO_APPLICATION_SUBMITTED', 
 		'Change status From Draft Application to Application Submitted',
 		'Easement Purchase Program - {{FarmName}}.',
 		'<p>Dear {{PrimaryContactName}},</p>
@@ -765,11 +853,12 @@ BEGIN TRY
 		 Phone: (973) 829-8120
 		 Fax: (973) 326-9025<br>
 		 E-Mail: kcoyle@co.morris.nj.us<br>
-		 Website: https://www.morriscountynj.gov/agriculture </p>', 
-         1);
+		 Website: https://www.morriscountynj.v/agriculture </p>', 
+1);
 
-         INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
-         7,		'CHANGE_STATUS_FROM_IN_REVIEW_TO_PENDING', 
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+7,		'CHANGE_STATUS_FROM_IN_REVIEW_TO_PENDING', 
 		'Change status From In_Review to Pending',
 		'Easement Purchase Program - {{FarmName}}',
 		'<p>Congratulations, {{PrimaryContactName}}!</p>
@@ -787,20 +876,21 @@ BEGIN TRY
 		 Phone: (973) 829-8120
 		 Fax: (973) 326-9025<br>
 		 E-Mail: kcoyle@co.morris.nj.us<br>
-		 Website: https://www.morriscountynj.gov/agriculture </p>', 
-         1);
+		 Website: https://www.morriscountynj.v/agriculture </p>', 
+1);
 
-         INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
-         8,		'CHANGE_STATUS_FROM_IN_REVIEW_TO_REJECTED', 
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+8,		'CHANGE_STATUS_FROM_IN_REVIEW_TO_REJECTED', 
 		'Change status From In_Review to Rejected',
 		'Easement Purchase Program - {{FarmName}}',
 		'<p>Dear {{PrimaryContactName}}:</p>
 
-         <p>At its {{PreviousMeetingDate}} meeting, the Morris County Agriculture Development Board (CADB) reviewed your application for the sale of development easement.</p>
-         
-         <p> Although the merit of your application is worthwhile, I must regretfully inform you that your application was not selected. Applications are selected for a combination of reasons including: significance and financial viability of the agricultural operation, soils, amount of tillable acreage, stewardship of the land, asking price, total acquisition cost, the likelihood the property would be sold in the near future for development, the location to other preserved lands, as well as the location within Morris County.</p>
-         
-         <p> The board thanks you for your continued interest in supporting preservation of farmland in our county. If you have any questions, please do not hesitate to contact Ms. Katherine Coyle at (973) 829-8120 or via e-mail at kcoyle@co.morris.nj.us.</p>
+<p>At its {{PreviousMeetingDate}} meeting, the Morris County Agriculture Development Board (CADB) reviewed your application for the sale of development easement.</p>
+
+<p> Although the merit of your application is worthwhile, I must regretfully inform you that your application was not selected. Applications are selected for a combination of reasons including: significance and financial viability of the agricultural operation, soils, amount of tillable acreage, stewardship of the land, asking price, total acquisition cost, the likelihood the property would be sold in the near future for development, the location to other preserved lands, as well as the location within Morris County.</p>
+
+<p> The board thanks you for your continued interest in supporting preservation of farmland in our county. If you have any questions, please do not hesitate to contact Ms. Katherine Coyle at (973) 829-8120 or via e-mail at kcoyle@co.morris.nj.us.</p>
 		 <br>
 		  <p>Best regards,</p>
 	     <p>{{ProgramAdmin}}<br>
@@ -813,11 +903,12 @@ BEGIN TRY
 		 Phone: (973) 829-8120
 		 Fax: (973) 326-9025<br>
 		 E-Mail: kcoyle@co.morris.nj.us<br>
-		 Website: https://www.morriscountynj.gov/agriculture </p>', 
-         1);
+		 Website: https://www.morriscountynj.v/agriculture </p>', 
+1);
 
-         INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
-         9,		'CHANGE_STATUS_PENDING_TO_ACTIVE', 
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+9,		'CHANGE_STATUS_PENDING_TO_ACTIVE', 
 		'Change status Pending to Active',
 		 'Easement Purchase Program - {{FarmName}}',
 		 '<p>Dear {{PrimaryContactName}},</p>
@@ -834,11 +925,12 @@ BEGIN TRY
 		 Phone: (973) 829-8120
 		 Fax: (973) 326-9025<br>
 		 E-Mail: kcoyle@co.morris.nj.us<br>
-		 Website: https://www.morriscountynj.gov/agriculture </p>', 
-         1);
+		 Website: https://www.morriscountynj.v/agriculture </p>', 
+1);
 
-         INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
-         10,		'CHANGE_STATUS_FROM_CLOSING_TO_POST_CLOSING', 
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+10,		'CHANGE_STATUS_FROM_CLOSING_TO_POST_CLOSING', 
 		'Change status From Closing to Post Closing',
 		'Easement Purchase Program - {{FarmName}}',
 
@@ -876,11 +968,12 @@ BEGIN TRY
 		 Phone: (973) 829-8120
 		 Fax: (973) 326-9025<br>
 		 E-Mail: kcoyle@co.morris.nj.us<br>
-		 Website: https://www.morriscountynj.gov/agriculture </p>', 
-         1);
+		 Website: https://www.morriscountynj.v/agriculture </p>', 
+1);
 
-         INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
-         11,		'CHANGE_STATUS_FROM_IN_POST_CLOSING_TO_PRESERVED', 
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+11,		'CHANGE_STATUS_FROM_IN_POST_CLOSING_TO_PRESERVED', 
 		'Change status From Post_Closing to Preserved', 
 		'Easement Purchase Program - {{FarmName}}',
 		'<p>Re: Morris County Agriculture Development Board</p>
@@ -899,47 +992,40 @@ BEGIN TRY
 
 		<p>Per N.J.A.C. 2:76-6.13(d)2, the Notice of Development Easement Purchase is also being forwarded to: </p>
 		<p>Morris County Planning Board </p>
-		<p>Municipal Governing Body </p>
+		<p>Municipal verning Body </p>
 		<p>Municipal Tax Assessor </p>
 		<p>Municipal Planning Board </p>
 		<p>Morris County Soil Conservation District </p>', 
-        1);
+1);
 
-        INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
-        12,		'FEEDBACK_RECEIVED_EMAIL', 
+
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+12,		'FEEDBACK_RECEIVED_EMAIL', 
 		'Feedback Received Email',
-		'Easement Purchase Program - {{FarmName}}',
+		'Farm Preservation Application - {{FarmName}}',
 		 '<p>Dear {{PrimaryContactName}},</p>
-		 <p>You have received the feedback for the {{ApplicationName}} application from the Morris County.</p>
+		 <p>You have received the feedback for the {{ApplicationName}} application from the Morris County Farm Program.</p>
 		 <p>Kindly login to Morris County Preservation Trust and select the application to view feedback.</p>
 		 <br>
 		  Sincerely,</p>
-	     <p>{{ProgramAdmin}}<br>
+	     <p>{{ProgramAdmin}</p>
+		 <p>Farm Preservation Program Coordinator</p>', 
+1);
 
-		 <p>Director</p>
-		 Morris County Agriculture Development Board<br>
-		 Morris County Office of Planning & Preservation<br>
-		 P.O. Box 900<br>
-		 Morristown, NJ 07963-0900<br>
-		 Phone: (973) 829-8120
-		 Fax: (973) 326-9025<br>
-		 E-Mail: kcoyle@co.morris.nj.us<br>
-		 Website: https://www.morriscountynj.gov/Departments/County-Agriculture-Development-Board </p>', 
-         1);
 
 --RAS
-         INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
+INSERT INTO [Farm].[FarmEmailTemplate] ([Id] , [TemplateCode], [Title], [Subject], [Description], [IsActive]) VALUES  (
 		 13,		
 		'FARM_MONITORING', 
 		'Farm Monitoring',
 		'Farm Land Monitoring',
 		'<p>Dear {{PrimaryContactName}},</p>
-        <p>It is time for our annual monitoring.The State Agriculture Development Committee''s (SADC’s) Regulation N.J.A.C. 2:76-6.18A(d) requires the Morris County Agriculture Development Board (Morris CADB) to perform annual onsite inspections of all permanently preserved farms. The purpose of the inspection is to ensure that each farm is in compliance with the terms of the Deed of Easement. </p>
-        <br>
-        <p>Morris CADB staff will be performing a site inspection of your farm between {{MonitoringDateStart}} and {{MonitoringDateEnd}}. We may utilize a drone to help us inspect the farm in a more time-efficient manner. Your presence is not required. We are unable to give you an exact date as to when we will be on your specific property. If, however, you require a set time for the inspection, please contact our office at your earliest convenience. In addition, if access to the property is blocked (locked gates), please contact our office to schedule an appointment so that we may access the farm. Upon completion, an inspection report will be mailed to you for your review.</p>
-        <p>Thank you for your anticipated cooperation with the monitoring process and for supporting the Farmland Preservation Program.</p><br>
-        		Sincerely,</p>
-        <p>{{ProgramAdmin}}<br>
+<p>It is time for our annual monitoring.The State Agriculture Development Committee''s (SADC?s) Regulation N.J.A.C. 2:76-6.18A(d) requires the Morris County Agriculture Development Board (Morris CADB) to perform annual onsite inspections of all permanently preserved farms. The purpose of the inspection is to ensure that each farm is in compliance with the terms of the Deed of Easement. </p>
+<br>
+<p>Morris CADB staff will be performing a site inspection of your farm between {{MonitoringDateStart}} and {{MonitoringDateEnd}}. We may utilize a drone to help us inspect the farm in a more time-efficient manner. Your presence is not required. We are unable to give you an exact date as to when we will be on your specific property. If, however, you require a set time for the inspection, please contact our office at your earliest convenience. In addition, if access to the property is blocked (locked gates), please contact our office to schedule an appointment so that we may access the farm. Upon completion, an inspection report will be mailed to you for your review.</p>
+<p>Thank you for your anticipated cooperation with the monitoring process and for supporting the Farmland Preservation Program.</p><br>
+		Sincerely,</p>
+<p>{{ProgramAdmin}}<br>
  
 		<p>Director</p>
 		Morris County Agriculture Development Board<br>
@@ -949,8 +1035,10 @@ BEGIN TRY
 		Phone: (973) 829-8120
 		Fax: (973) 326-9025<br>
 		E-Mail: kcoyle@co.morris.nj.us<br>
-		Website: https://www.morriscountynj.gov/Departments/County-Agriculture-Development-Board </p>', 
-        1);
+		Website: https://www.morriscountynj.v/Departments/County-Agriculture-Development-Board </p>', 
+1);
+
+
 
 		---106
 		DELETE FROM  [Farm].[FarmAppCommentType];

@@ -67,6 +67,7 @@ BEGIN
 	----------------------------------------------------------------------------------------------
 
 	SELECT
+	     [AgencyId],
 		 [OriginalLandowner]
 		,[TotalFarms]
 		,[TotalApplications]
@@ -76,7 +77,6 @@ BEGIN
 		,[ExceptionAreaAcreage]
 		,[PreservedAcreage]
 		,[TillableAcreage]
-		,[UnPreservedAcreage]
 	FROM [rept].[FARMAnnualSummaryReport]
 
 	-------------------------------------------------

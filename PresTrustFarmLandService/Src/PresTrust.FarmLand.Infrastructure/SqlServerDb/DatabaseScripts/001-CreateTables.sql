@@ -23,6 +23,34 @@ BEGIN TRY
 	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 	) ON [PRIMARY];
 
+	-- Create FarmEsmtApplicationLegacy
+    DROP TABLE IF EXISTS [Farm].[FarmEsmtApplicationLegacy];
+	CREATE TABLE [Farm].[FarmEsmtApplicationLegacy]
+(
+	[LegacyApplicationId]               [integer]              NOT NULL,  
+    [LegacyApplicationTitle]            [varchar](128)         NOT NULL,
+    [NewFarmListId]                     [integer]              NOT NULL,                                                                                    
+    [LegacyApplicationStatus]           [varchar](128)         NOT NULL,                                                                        
+    [LegacyAgencyId]                    [integer]              NOT NULL,                                                                                                                                     
+    [FarmApplicationId]                 [integer]              NULL,
+    CONSTRAINT [PK_FarmEsmtApplicationLegacy_Id] PRIMARY KEY CLUSTERED
+    (
+    	[LegacyApplicationId] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+    ) ON [PRIMARY]
+
+
+	-- Create FarmListLegacy
+    DROP TABLE IF EXISTS [Farm].[FarmListLegacy]
+	CREATE TABLE [Farm].[FarmListLegacy] (
+			LegacyFarmListId    INT				NOT NULL,
+			LegacyFarmName      VARCHAR(128)    NULL,
+			NewFarmListId		INT             NULL,
+     CONSTRAINT [PK_LegacyFarmList_Id] PRIMARY KEY CLUSTERED
+     (
+     	[LegacyFarmListId] ASC
+     )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+     ) ON [PRIMARY]
 
 	--Farm.FarmApplicationType
 	-- Drop Table
@@ -607,12 +635,8 @@ BEGIN TRY
 		[OriginalLot]					[varchar](50)					NOT NULL,
 		[OriginalBook]					[varchar](50)					NULL,
 		[OriginalPage]					[varchar](50)					NULL,
-		[NOTBlock]						[varchar](50)					NULL,
-		[NOTLot]						[varchar](50)					NULL,
 		[NOTBook]						[varchar](50)					NULL,
 		[NOTPage]						[varchar](50)					NULL,
-		[RDBlock]						[varchar](50)					NULL,
-		[RDLot]							[varchar](50)					NULL,
 		[RDBook]						[varchar](50)					NULL,
 		[RDPage]						[varchar](50)					NULL,
 		[IsChecked]						[bit]							NOT NULL,
@@ -1293,7 +1317,12 @@ BEGIN TRY
 		[ParcelId]								[integer] 						NOT NULL,
 		[FarmListID]							[int]							NOT NULL,
 		[PamsPin]					            [varchar](76)				    NOT NULL,
-		[IsChecked]								[bit]                           NOT NULL
+		[IsChecked]								[bit]                           NOT NULL,
+		[Acres]                                 [numeric](10, 3)                    NULL,
+	    [ExceptionAreaAcres]                    [numeric](10, 3)                    NULL,
+	    [AcresToBeAcquired]                     [numeric](10, 3)                    NULL,
+	    [ExceptionArea]                         [bit]                               NULL,
+	    [Notes]                                 [varchar](max)                      NULL
 	) 
 
 	-- Create Constraint
@@ -1965,11 +1994,6 @@ BEGIN TRY
 		[QualificationCode]     [varchar](50)            NULL,
 		[Section]               [varchar](128)           NULL,
 		[Partial]               [bit]                    NULL,
-		[Acres]                 [numeric](10, 3)         NULL,
-		[AcresToBeAcquired]     [numeric](10, 3)         NULL,
-		[ExceptionAreaAcres]    [numeric](10, 3)         NULL,
-		[ExceptionArea]         [bit]                    NULL,
-		[Notes]                 [varchar](max)           NULL,
 		[PamsPin]               [varchar](100)           NULL,
 		[IsValidFeatureId]      [bit]                    NULL,
 		[IsValidPamsPin]        [bit]                    NULL,
@@ -2175,7 +2199,6 @@ BEGIN TRY
 			[ExceptionAreaAcreage]					DECIMAL(18, 2)      NULL,
 			[PreservedAcreage]						DECIMAL(18, 2)      NULL,
 			[TillableAcreage]						DECIMAL(18, 2)      NULL,
-			[UnPreservedAcreage]					DECIMAL(18, 2)      NULL,
 			[TermPendingApplications]				INT                 NULL,
 			[RejectedApplications]					INT                 NULL,
 			[WithdrawnApplication]					INT                 NULL,
@@ -2193,7 +2216,7 @@ BEGIN TRY
 	--Select 1/0 ;  -- To avoid accidental runs
 
 	COMMIT;
-	PRINT 'Legacy data migration has been completed.';
+	PRINT 'SUCCESS';
 END TRY
 BEGIN CATCH
 	DECLARE @ErrorMessage NVARCHAR(4000); 

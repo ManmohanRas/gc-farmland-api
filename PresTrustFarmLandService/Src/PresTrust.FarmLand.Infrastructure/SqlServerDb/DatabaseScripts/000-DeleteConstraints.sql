@@ -160,6 +160,7 @@ BEGIN TRY
    ALTER TABLE [Farm].[FarmListLegacy] DROP CONSTRAINT IF EXISTS [PK_LegacyFarmList_Id];
 
    ALTER TABLE [Farm].[FarmTermApplicationLegacy] DROP CONSTRAINT IF EXISTS [PK_FarmTermApplicationLegacy_Id];
+   ALTER TABLE [Farm].[FarmEsmtApplicationLegacy] DROP CONSTRAINT IF EXISTS [PK_FarmEsmtApplicationLegacy_Id];
 
 	--------------------------------------------------TEMP----------------------------------------------------
 	
