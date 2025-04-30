@@ -148,7 +148,7 @@ public class GetFarmMonitoringSqlQuery
                             (
                                 SELECT 
                                     L.ApplicationId, 
-                                    SUM(MBL.AcresToBeAcquired) AS Acres
+                                    SUM(L.AcresToBeAcquired) AS Acres
                                 FROM 
                                     Farm.FarmMunicipalityBlockLotParcel AS MBL
                                 LEFT JOIN 
