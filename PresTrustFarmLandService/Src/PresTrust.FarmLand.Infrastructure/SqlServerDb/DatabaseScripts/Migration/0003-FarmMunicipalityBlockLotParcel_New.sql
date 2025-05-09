@@ -673,6 +673,10 @@
         (1407,58,'3A',5343,143,'2001-01-30','12','1.03',NULL,
          0,0,'1407_12_1.03',NULL,NULL,
         NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,GetDate(),''),
+
+        (1407,58,'3A',NULL,NULL,NULL,'12','1',NULL,
+         0,0,'1407_12_1',NULL,NULL,
+        NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,GetDate(),''),
         
         (1407,59,NULL,NULL,NULL,NULL,'114','4',NULL,
          0,0,'1407_114_4',NULL,NULL,

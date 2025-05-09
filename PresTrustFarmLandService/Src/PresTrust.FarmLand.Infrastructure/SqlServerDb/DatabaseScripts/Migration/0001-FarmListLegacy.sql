@@ -23,15 +23,3 @@ BEGIN CATCH
 
     SELECT @ErrorMessage;
 END CATCH
-
-
-
-
-
-
-
-
-
-
-
-

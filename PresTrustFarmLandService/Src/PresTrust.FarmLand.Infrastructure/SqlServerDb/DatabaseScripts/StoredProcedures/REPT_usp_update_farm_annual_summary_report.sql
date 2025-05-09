@@ -169,7 +169,13 @@ FULL OUTER JOIN
             COUNT(CASE WHEN FA.StatusId IN (107, 207) THEN 1 END) AS Rejected,
             COUNT(CASE WHEN FA.StatusId IN (108,208) THEN 1 END) AS Withdrawn,
             SUM(CASE WHEN FA.StatusId = 206 THEN ET.exceptionTotalNetAcres END) AS [Tillable Acreage],
-            SUM(CASE WHEN FA.StatusId = 206 THEN ER.Excep1Acres + ER.Excep2Acres + ER.Excep3Acres END) AS [Exception Area Acreage]
+            SUM(CASE 
+                WHEN FA.StatusId = 206 THEN 
+                COALESCE(ER.Excep1Acres, 0) + 
+                COALESCE(ER.Excep2Acres, 0) + 
+                COALESCE(ER.Excep3Acres, 0)
+                ELSE 0
+                END) AS [Exception Area Acreage]        
         FROM Farm.FarmApplication FA
         RIGHT JOIN Farm.FarmList FL ON FA.FarmListId = FL.FarmListID
         LEFT JOIN Core.Municipality MU ON FL.MunicipalID = MU.MunicipalId
