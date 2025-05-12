@@ -195,7 +195,7 @@ FULL OUTER JOIN
             MU.Municipality,
             SUM(CASE WHEN FA.StatusId IN(206,105) AND FLD.IsChecked = 1 THEN FLD.AcresToBeAcquired END) AS PreservedAcres,
             SUM(CASE WHEN FA.StatusId IN(206,105) AND FLD.IsChecked = 1 THEN FLD.AcresToBeAcquired END) AS PreservedAcreage,
-            SUM(CASE WHEN FA.StatusId = 206 AND FLD.IsChecked = 1 THEN FLD.AcresToBeAcquired END) * MAX(FCD.MCCostSharePerAcre) AS [Funds Awarded]
+            SUM(CASE WHEN FA.StatusId = 206 AND FLD.IsChecked = 1 THEN FLD.AcresToBeAcquired * FCD.MCCostSharePerAcre END) AS [Funds Awarded]
         FROM Farm.FarmApplication FA
         RIGHT JOIN Farm.FarmList FL ON FA.FarmListId = FL.FarmListID
         LEFT JOIN Core.Municipality MU ON FL.MunicipalID = MU.MunicipalId
