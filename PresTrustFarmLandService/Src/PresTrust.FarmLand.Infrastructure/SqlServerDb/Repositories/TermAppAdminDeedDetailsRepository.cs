@@ -145,4 +145,18 @@ public class TermAppAdminDeedDetailsRepository : ITermAppAdminDeedDetailsReposit
         return true;
     }
 
+    public async Task<bool> DeleteTermAppDeedLocation(int applicationId, int parcelId)
+    {
+
+        using var conn = context.CreateConnection();
+        var sqlCommand = new DeleteTermAppDeedLocationSqlCommand();
+        await conn.ExecuteAsync(sqlCommand.ToString(), commandType: CommandType.Text,
+            param: new
+            {
+                @p_ApplicationId = applicationId,
+                @p_ParcelId = parcelId
+            });
+
+        return true;
+    }
 }

@@ -11,10 +11,6 @@ public class CreateFarmBlockLotSqlCommand
                        ,[QualificationCode]
                        ,[Partial]
                        ,[Section]
-                       ,[Acres]
-                       ,[AcresToBeAcquired]
-                       ,[ExceptionArea]
-                       ,[Notes]
                        ,[PamsPin]
                        ,[IsValidFeatureId]
                        ,[InterestType]
@@ -28,7 +24,6 @@ public class CreateFarmBlockLotSqlCommand
                        ,[DeedPage]
                        ,[CreatedByProgramUser]
                        ,[IsWarning]
-                       ,[ExceptionAreaAcres]
                        ,[IsValidPamsPin]
                        ,[LastUpdatedOn]
                        ,[LastUpdatedBy])
@@ -40,10 +35,6 @@ public class CreateFarmBlockLotSqlCommand
                        ,@p_QualificationCode
                        ,@p_Partial
                        ,@p_Section
-                       ,@p_Acres
-                       ,@p_AcresToBeAcquired
-                       ,@p_ExceptionArea
-                       ,@p_Notes
                        ,@p_PamsPin
                        ,@p_IsValidFeatureId
                        ,@p_InterestType
@@ -57,7 +48,6 @@ public class CreateFarmBlockLotSqlCommand
                        ,@p_DeedPage
                        ,@p_CreatedByProgramUser
                        ,@p_IsWarning
-                       ,@p_ExceptionAreaAcres
                        ,@p_IsValidPamsPin
                        ,GETDATE()
                        ,@p_LastUpdatedBy);
