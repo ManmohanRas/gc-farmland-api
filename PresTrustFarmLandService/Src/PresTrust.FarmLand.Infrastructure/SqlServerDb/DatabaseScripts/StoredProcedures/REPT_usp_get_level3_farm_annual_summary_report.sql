@@ -83,7 +83,6 @@ BEGIN
 		,[EsmtApplications]
 		,[ExceptionAreaAcreage]
 		,[TillableAcreage]
-		,[UnPreservedAcreage]
 		,[TermPendingApplications]
 		,[RejectedApplications]
 		,[WithdrawnApplication]

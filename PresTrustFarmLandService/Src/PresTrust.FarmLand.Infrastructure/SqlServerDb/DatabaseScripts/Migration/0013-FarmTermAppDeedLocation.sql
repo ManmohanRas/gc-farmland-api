@@ -9,11 +9,12 @@
 		 ,DeedId
 		 ,IsChecked
 		)
-		SELECT ApplicationId,
-			   ParcelId,
+		SELECT FLD.ApplicationId,
+			   FLD.ParcelId,
 			   NULL,
 			   1
-		FROM [Farm].[FarmAppLocationDetails];
+		FROM [Farm].[FarmAppLocationDetails] FLD
+		lEFT JOIN FARM.FarmApplication FA ON FLD.ApplicationId = FA.Id WHERE FA.ApplicationTypeId = 1
 						
 
 		COMMIT;
