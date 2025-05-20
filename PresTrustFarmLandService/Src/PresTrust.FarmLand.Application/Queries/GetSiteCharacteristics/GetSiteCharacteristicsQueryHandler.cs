@@ -5,25 +5,33 @@ public class GetSiteCharacteristicsQueryHandler : IRequestHandler<GetSiteCharact
 
     private readonly IMapper mapper;
     private readonly ISiteCharacteristicsRepository repoSiteCharacteristics;
-    private readonly IApplicationRepository applicationRepository;
-    
+    private readonly IApplicationRepository repoApplication;
+    private IApplicationLocationRepository repoLocation;
 
-    public GetSiteCharacteristicsQueryHandler(IMapper mapper, ISiteCharacteristicsRepository repoSiteCharacteristics, IApplicationRepository applicationRepository)
+
+    public GetSiteCharacteristicsQueryHandler(IMapper mapper, ISiteCharacteristicsRepository repoSiteCharacteristics, IApplicationRepository repoApplication, IApplicationLocationRepository repoLocation)
     {
         this.mapper = mapper;
         this.repoSiteCharacteristics = repoSiteCharacteristics;
-        this.applicationRepository = applicationRepository;
+        this.repoApplication = repoApplication;
+        this.repoLocation = repoLocation;
     }
 
     public async Task<GetSiteCharacteristicsQueryViewModel> Handle(GetSiteCharacteristicsQuery request, CancellationToken cancellationToken)
     {   
 
-    var siteCharacteristics = await repoSiteCharacteristics.GetSiteCharacteristicsAsync(request.ApplicationId);
+        var siteCharacteristics = await repoSiteCharacteristics.GetSiteCharacteristicsAsync(request.ApplicationId);
+        var application = await repoApplication.GetApplicationAsync(request.ApplicationId);
+        var GetDetailsfromLocation = await repoLocation.GetParcelsByFarmID(request.ApplicationId,application.FarmListId);
         var results = mapper.Map<SiteCharacteristicsEntity, GetSiteCharacteristicsQueryViewModel>(siteCharacteristics);
+        if (GetDetailsfromLocation.Count() > 0)
+        {
+            results.Area = GetDetailsfromLocation.Where(x => x.IsChecked).Sum(x => x.AcresToBeAcquired).ToString();
 
-        return results;
+        }else
+        {
+            results.Area = string.Empty;
+        }
+           return results;
     }
 }
-
-
-//public int ApplicationId { get; set; }
