@@ -47,6 +47,7 @@ public class ActiveApplicationCommandHandler : BaseHandler, IRequestHandler<Acti
     /// <returns></returns>
     public async Task<ActiveApplicationCommandViewModel> Handle(ActiveApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         ActiveApplicationCommandViewModel result = new();
         IEnumerable<OwnerDetailsEntity> ownerDetails;
         IEnumerable<TermAppAdminDeedDetailsEntity> deeddetails;

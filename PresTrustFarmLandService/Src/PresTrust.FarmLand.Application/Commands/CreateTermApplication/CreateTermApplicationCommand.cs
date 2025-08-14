@@ -9,5 +9,6 @@ public class CreateTermApplicationCommand: IRequest<CreateTermApplicationCommand
     public int AgencyId { get; set; }
     public string ApplicationType { get; set; }
     public bool IsApprovedByMunicipality { get; set; }
-    public int FarmListId { get; set; }  
+    public int FarmListId { get; set; }
+    public string UserId { get; set; }
 }

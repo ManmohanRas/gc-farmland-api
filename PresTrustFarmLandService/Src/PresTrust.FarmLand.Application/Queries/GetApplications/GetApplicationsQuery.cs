@@ -2,5 +2,6 @@
 {
     public class GetApplicationsQuery: IRequest<List<GetApplicationsQueryViewModel>>
     {
+        public string UserId { get; set; }
     }
 }

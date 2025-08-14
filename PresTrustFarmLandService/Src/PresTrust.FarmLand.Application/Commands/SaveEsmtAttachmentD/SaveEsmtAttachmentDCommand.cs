@@ -3,6 +3,7 @@
     public class SaveEsmtAttachmentDCommand : IRequest<Unit>
     {
         public int ApplicationId { get; set; }
+        public string UserId { get; set; }
         public IEnumerable<SaveEsmtAttachmentDViewModel> AttachmentDetails { get; set; }
 
     }

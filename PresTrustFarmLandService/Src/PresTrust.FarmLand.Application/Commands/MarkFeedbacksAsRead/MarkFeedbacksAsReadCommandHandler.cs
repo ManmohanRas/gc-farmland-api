@@ -18,6 +18,7 @@ public class MarkFeedbacksAsReadCommandHandler : IRequestHandler<MarkFeedbacksAs
 
     public async Task<bool> Handle(MarkFeedbacksAsReadCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         if (userContext.Role == UserRoleEnum.PROGRAM_ADMIN)
         {
             await repoFeedback.MarkFeedbacksAsReadAsync(request.FeedbackIds);

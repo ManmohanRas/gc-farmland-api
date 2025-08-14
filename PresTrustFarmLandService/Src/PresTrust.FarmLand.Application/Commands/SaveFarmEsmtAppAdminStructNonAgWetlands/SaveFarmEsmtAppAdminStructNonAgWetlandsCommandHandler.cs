@@ -36,6 +36,7 @@ public class SaveFarmEsmtAppAdminStructNonAgWetlandsCommandHandler : BaseHandler
     /// <returns></returns>
     public async Task<int> Handle(SaveFarmEsmtAppAdminStructNonAgWetlandsCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         int wetlandsId = 0;
 
         // get application details

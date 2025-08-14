@@ -34,6 +34,7 @@ public class SaveFarmEsmtSadcHistoryCommandHandler : BaseHandler, IRequestHandle
     /// <returns></returns>
     public async Task<int> Handle(SaveFarmEsmtSadcHistoryCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         int sadcHistoryId = 0;
 
         // get application details

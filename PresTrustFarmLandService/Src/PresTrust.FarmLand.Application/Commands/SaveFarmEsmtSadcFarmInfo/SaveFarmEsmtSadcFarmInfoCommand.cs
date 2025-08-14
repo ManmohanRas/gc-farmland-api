@@ -26,7 +26,7 @@ public class SaveFarmEsmtSadcFarmInfoCommand:IRequest<int>
     public bool IsImmediateCurrentMember { get; set; }
     public string Position { get; set; }
     public string Term { get; set; }
-
+    public string UserId { get; set; }
 
 
 }

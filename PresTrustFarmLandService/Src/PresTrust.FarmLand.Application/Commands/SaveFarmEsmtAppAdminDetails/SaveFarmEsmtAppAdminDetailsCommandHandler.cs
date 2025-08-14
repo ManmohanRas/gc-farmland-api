@@ -36,6 +36,7 @@ public class SaveFarmEsmtAppAdminDetailsCommandHandler : BaseHandler, IRequestHa
     /// <returns></returns>
     public async Task<int> Handle(SaveFarmEsmtAppAdminDetailsCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         int adminDetailsId = 0;
 
         // get application details

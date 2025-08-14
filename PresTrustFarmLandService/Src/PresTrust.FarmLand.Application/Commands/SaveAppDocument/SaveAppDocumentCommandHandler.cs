@@ -31,7 +31,7 @@ public class SaveAppDocumentCommandHandler : BaseHandler, IRequestHandler<SaveAp
 
     public async Task<SaveAppDocumentCommandViewModel> Handle(SaveAppDocumentCommand request, CancellationToken cancellationToken)
     {
-
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var application = await GetIfApplicationExists(request.ApplicationId);
         var response = new SaveAppDocumentCommandViewModel();
 

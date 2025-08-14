@@ -37,6 +37,7 @@ public class SaveSiteCharacteristicsCommandHandler : BaseHandler, IRequestHandle
     ///
     public async Task<int> Handle(SaveSiteCharacteristicsCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
 
         var application = await GetIfApplicationExists(request.ApplicationId);
 

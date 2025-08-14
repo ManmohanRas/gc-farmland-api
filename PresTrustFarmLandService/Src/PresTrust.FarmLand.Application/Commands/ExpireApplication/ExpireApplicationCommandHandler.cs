@@ -23,6 +23,7 @@ public class ExpireApplicationCommandHandler : BaseHandler, IRequestHandler<Expi
     }
     public async Task<Unit> Handle(ExpireApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 

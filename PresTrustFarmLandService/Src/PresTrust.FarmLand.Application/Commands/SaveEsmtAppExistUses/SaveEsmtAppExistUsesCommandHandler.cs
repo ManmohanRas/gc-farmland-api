@@ -34,6 +34,7 @@ public class SaveEsmtAppExistUsesCommandHandler : BaseHandler, IRequestHandler<S
 
     public async Task<int> Handle(SaveEsmtAppExistUsesCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var application = await repoApplication.GetApplicationAsync(request.ApplicationId);
         var reqExist = mapper.Map<SaveEsmtAppExistUsesCommand, EsmtAppExistUsesEntity>(request);
         var brokenRules = ReturnBrokenRulesIfAny(application, reqExist);

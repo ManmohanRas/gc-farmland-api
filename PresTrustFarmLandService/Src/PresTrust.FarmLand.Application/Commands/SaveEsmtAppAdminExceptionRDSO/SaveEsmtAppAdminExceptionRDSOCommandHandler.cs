@@ -21,6 +21,7 @@ public class SaveEsmtAppAdminExceptionRDSOCommandHandler : IRequestHandler<SaveE
 
     public async Task<int> Handle(SaveEsmtAppAdminExceptionRDSOCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var reqExceptionRDSODetails = mapper.Map<SaveEsmtAppAdminExceptionRDSOCommand, EsmtAppAdminExceptionRDSOEntity>(request);
         reqExceptionRDSODetails.LastUpdatedBy = userContext.Email;
         var result = await repoExceptionRDSORepository.SaveExceptionRDSOdetailsAsync(reqExceptionRDSODetails);

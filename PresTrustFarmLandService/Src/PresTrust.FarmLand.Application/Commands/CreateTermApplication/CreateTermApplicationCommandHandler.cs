@@ -37,6 +37,7 @@ public class CreateTermApplicationCommandHandler : BaseHandler, IRequestHandler<
     }
     public async Task<CreateTermApplicationCommandViewModel> Handle(CreateTermApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var reqApplication = mapper.Map<CreateTermApplicationCommand, FarmApplicationEntity>(request);
         if (request.ApplicationType == ApplicationTypeEnum.TERM.ToString())
         {
@@ -100,12 +101,12 @@ public class CreateTermApplicationCommandHandler : BaseHandler, IRequestHandler<
 
     /// Ensure that a user has the relevant authorizations to perform an action
     /// </summary>
-    private void AuthorizationCheck(FarmApplicationEntity application)
-    {
-        // security
-        userContext.DeriveRole(application.AgencyId);
-        IsAuthorizedOperation(userRole: userContext.Role, application: application, operation: TermUserPermissionEnum.CREATE_APPLICATION);
-    }
+    //private void AuthorizationCheck(FarmApplicationEntity application)
+    //{
+    //    // security
+    //    userContext.DeriveRole(application.AgencyId);
+    //    IsAuthorizedOperation(userRole: userContext.Role, application: application, operation: TermUserPermissionEnum.CREATE_APPLICATION);
+    //}
 
     /// <summary>
     /// Return broken rules in case of any business rule failure

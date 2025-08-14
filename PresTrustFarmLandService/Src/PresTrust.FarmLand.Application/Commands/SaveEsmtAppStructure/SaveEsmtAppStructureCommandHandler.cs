@@ -22,7 +22,7 @@ public class SaveEsmtAppStructureCommandHandler : BaseHandler, IRequestHandler<S
     }
     public async Task<int> Handle(SaveEsmtAppStructureCommand request, CancellationToken cancellationToken)
     {
-
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var application = await repoApplication.GetApplicationAsync(request.ApplicationId);
         var reqStructure = mapper.Map<SaveEsmtAppStructureCommand, EsmtStructureAppEntity>(request);
         reqStructure = await repoStructure.SaveEsmtStructureEntityAsync(reqStructure);

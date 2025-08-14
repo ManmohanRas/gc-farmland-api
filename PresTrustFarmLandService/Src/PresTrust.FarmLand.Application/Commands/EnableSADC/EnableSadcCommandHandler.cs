@@ -44,6 +44,7 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
     /// <returns></returns>
     public async Task<Unit> Handle(EnableSadcCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         FarmBlockLotEntity blockLot = new FarmBlockLotEntity();
 
         // check if application exists

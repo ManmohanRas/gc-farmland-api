@@ -19,4 +19,5 @@ public class SaveOwnerDetailsCommand : IRequest<int>
     public string Salutation { get; set; }
     public string EmailAddress { get; set; }
     public string CurrentOwnerMailingName { get; set; }
+    public string UserId { get; set; }
 }

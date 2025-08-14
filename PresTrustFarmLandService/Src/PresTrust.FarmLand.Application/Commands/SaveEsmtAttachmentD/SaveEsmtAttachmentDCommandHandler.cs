@@ -28,7 +28,8 @@ public class SaveEsmtAttachmentDCommandHandler : BaseHandler, IRequestHandler<Sa
 
         public async Task<Unit> Handle(SaveEsmtAttachmentDCommand request, CancellationToken cancellationToken)
         {
-            var application = await repoApplication.GetApplicationAsync(request.ApplicationId);
+        userContext.DeriveUserProfileFromUserId(request.UserId);
+        var application = await repoApplication.GetApplicationAsync(request.ApplicationId);
 
             //int attachmentId = 0;
             var brokenRules = ReturnBrokenRulesIfAny(application);

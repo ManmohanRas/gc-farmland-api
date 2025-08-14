@@ -43,6 +43,7 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
     }
     public async Task<CreateEsmtApplicationCommandViewModel> Handle(CreateEsmtApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var reqApplication = mapper.Map<CreateEsmtApplicationCommand, FarmApplicationEntity>(request);
         
         

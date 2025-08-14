@@ -32,7 +32,32 @@ public class GetRolesQueryHandler : BaseHandler, IRequestHandler<GetRolesQuery, 
         {
             // get identity users by agency id
             var endPoint = $"{systemparamoptions.IdentityApiSubDomain}/UserAdmin/users/pres-trust/farm/{request.AgencyId ?? application.AgencyId}";
-            var usersResult = await identityApiConnect.GetDataAsync<List<IdentityApiUser>>(endPoint);
+            var usersResult = new List<IdentityApiUser>() {
+                new IdentityApiUser() {   UserId =  "1" , UserName =  "Agencyadmin1401", Email =  "agencyadmin1401@gmail.com", PhoneNumber =  "(973) 999-9999", Title =  "",
+                    Roles = new List<IdentityUserRole>() { new IdentityUserRole() { Name ="ostf_agencyadmin"} }
+                },
+                new IdentityApiUser() {
+                     UserId =  "2",
+                     UserName =  "Consultant",
+                     Email =  "consultant1@gmail.com",
+                     PhoneNumber =  "",
+                     Roles = new List<IdentityUserRole>() { new IdentityUserRole() { Name = "ostf_agencyeditor" } }
+                },
+                new IdentityApiUser() {
+                     UserId =  "3",
+                     UserName =  "Planning Director",
+                     Email =  "adirector@mytown.com",
+                     PhoneNumber = "",
+                     Roles = new List<IdentityUserRole>() { new IdentityUserRole() { Name = "ostf_agencyreadonly" } }
+                },
+                new IdentityApiUser() {
+                    UserId =  "4",
+                    UserName =  "Agencysignatory1401",
+                    Email =  "agencysignatory1401@gmail.com",
+                    PhoneNumber =  "(973) 999-9999",
+                    Roles = new List<IdentityUserRole>() { new IdentityUserRole() { Name = "ostf_agencysignature" } }
+                }
+                };
             var vmAgencyUsers = mapper.Map<IEnumerable<IdentityApiUser>, IEnumerable<FarmRolesViewModel>>(usersResult);
 
             var applicationUsers = await repoRolesUser.GetRolesAsync(request.ApplicationId);

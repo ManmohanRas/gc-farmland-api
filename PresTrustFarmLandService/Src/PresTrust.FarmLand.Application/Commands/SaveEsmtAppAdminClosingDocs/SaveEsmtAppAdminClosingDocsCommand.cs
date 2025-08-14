@@ -18,5 +18,6 @@
         public string TitlePolicy { get; set; }
         public DateTime? ClosingDate { get; set; }
         public string EndorsementDates { get; set; }
+        public string UserId { get; set; }
     }
 }

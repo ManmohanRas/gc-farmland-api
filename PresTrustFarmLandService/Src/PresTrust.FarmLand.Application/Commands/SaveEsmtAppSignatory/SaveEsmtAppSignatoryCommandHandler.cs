@@ -41,6 +41,7 @@ public class SaveEsmtAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
     /// <returns></returns>
     public async Task<int> Handle(SaveEsmtAppSignatoryCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         int signatoryId = 0;
 
         // get application details

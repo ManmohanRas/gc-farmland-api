@@ -4,6 +4,7 @@ public class SaveFarmEsmtExceptionsCommandHandler : BaseHandler, IRequestHandler
 {
 
     private readonly IMapper mapper;
+    private readonly IPresTrustUserContext userContext;
     private readonly IApplicationRepository repoApplication;
     private readonly ITermBrokenRuleRepository repoBrokenRules;
     private readonly IFarmEsmtExceptionsRepository repoExceptionsRepository;
@@ -12,6 +13,7 @@ public class SaveFarmEsmtExceptionsCommandHandler : BaseHandler, IRequestHandler
 
     public SaveFarmEsmtExceptionsCommandHandler(
         IMapper mapper,
+        IPresTrustUserContext userContext,
         IFarmEsmtExceptionsRepository repoExceptionsRepository,
         IApplicationRepository repoApplication,
          ITermBrokenRuleRepository repoBrokenRules,
@@ -20,6 +22,7 @@ public class SaveFarmEsmtExceptionsCommandHandler : BaseHandler, IRequestHandler
         ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
+        this.userContext = userContext;
         this.repoApplication = repoApplication;
         this.repoExceptionsRepository = repoExceptionsRepository;
         this.repoBrokenRules = repoBrokenRules;
@@ -30,7 +33,8 @@ public class SaveFarmEsmtExceptionsCommandHandler : BaseHandler, IRequestHandler
 
     public async Task<int> Handle( SaveFarmEsmtExceptionsCommand request , CancellationToken cancellationToken )
     {
-       
+        userContext.DeriveUserProfileFromUserId(request.UserId);
+
         var application = await GetIfApplicationExists(request.ApplicationId);
 
         var reqExceptions = mapper.Map<SaveFarmEsmtExceptionsCommand, FarmEsmtExceptionsEntity>(request);

@@ -21,4 +21,5 @@ public class SaveSiteCharacteristicsCommand:IRequest<int>
     public string NoteMortgageLiens { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime? LastUpdatedOn { get; set; }
+    public string UserId { get; set; }
 }

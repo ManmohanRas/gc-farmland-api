@@ -29,7 +29,7 @@ public class AssignRolesCommandHandler : BaseHandler, IRequestHandler<AssignRole
 
     public async Task<Unit> Handle(AssignRolesCommand request, CancellationToken cancellationToken)
     {
-
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 

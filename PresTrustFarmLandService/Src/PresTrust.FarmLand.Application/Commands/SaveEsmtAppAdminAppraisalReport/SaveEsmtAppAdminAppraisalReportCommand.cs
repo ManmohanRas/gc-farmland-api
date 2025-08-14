@@ -36,5 +36,6 @@
         public decimal? CADBEasement { get; set; }
         public decimal? CADBBefore { get; set; }
         public decimal? CADBEaseBefore { get; set; }
+        public string UserId { get; set; }
     }
 }

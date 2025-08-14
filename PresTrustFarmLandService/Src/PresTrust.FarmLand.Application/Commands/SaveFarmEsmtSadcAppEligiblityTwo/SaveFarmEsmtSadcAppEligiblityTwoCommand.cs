@@ -38,4 +38,5 @@ public  class SaveFarmEsmtSadcAppEligiblityTwoCommand:IRequest<int>
     public decimal? CountyaverageRank { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
+    public string UserId { get; set; }
 }

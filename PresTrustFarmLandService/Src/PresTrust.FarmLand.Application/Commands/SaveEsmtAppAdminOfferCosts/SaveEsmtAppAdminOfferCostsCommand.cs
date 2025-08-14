@@ -14,5 +14,5 @@ public class SaveEsmtAppAdminOfferCostsCommand:IRequest<int>
     public decimal? OtherCostShareTotal { get; set; }
     public string? OtherSource { get; set; }
     public string CostNote { get; set; }
-   
+    public string UserId { get; set; }
 }

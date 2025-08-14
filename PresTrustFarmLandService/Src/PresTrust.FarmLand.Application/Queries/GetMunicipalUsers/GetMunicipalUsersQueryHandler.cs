@@ -40,15 +40,20 @@ public class GetMunicipalUsersQueryHandler : IRequestHandler<GetMunicipalUsersQu
         /// <returns></returns>
         public async Task<IEnumerable<PresTrustUserEntity>> Handle(GetMunicipalUsersQuery request, CancellationToken cancellationToken)
         {
-            // Identity's Users api - IdentityApi
-            var endPoint = $"{systemParamOptions.IdentityApiSubDomain}/UserAdmin/users/pres-trust/farm/{request.AgencyId}";
-            var resultUsers = await identityApiConnect.GetDataAsync<List<IdentityApiUser>>(endPoint);
-            var municipalUsers = mapper.Map<IEnumerable<IdentityApiUser>, IEnumerable<PresTrustUserEntity>>(resultUsers);
-            foreach (var item in municipalUsers)
-            {
-                item.Status = item.IsEnabled ? "Active" : "In-Active";
-            }
-            return municipalUsers;
-        }
+        //TBD
+        var resultUsers = new List<IdentityApiUser>() {
+                    new IdentityApiUser() { Email = "agencyadmin_1401@gmail.com", IsEnabled = true, PhoneNumber="9873734737", UserId="1401", UserName="agencyadmin_1401", Title="",
+                    Roles = new List<IdentityUserRole>(){ new IdentityUserRole() { Name = "farm_agencyadmin" } } },
+                    new IdentityApiUser() { Email = "agencyeditor_1402@gmail.com", IsEnabled = false, PhoneNumber="9786756756", UserId="1402", UserName="agencyeditor_1402", Title="",
+                    Roles = new List<IdentityUserRole>(){ new IdentityUserRole() { Name = "farm_agencyeditor" } } },
+                    new IdentityApiUser() { Email = "agencysignatory_1403@gmail.com", IsEnabled = false, PhoneNumber="9786756756", UserId="1403", UserName="agencysignatory_1403", Title="",
+                    Roles = new List<IdentityUserRole>(){ new IdentityUserRole() { Name = "farm_agencysignature" } } },
+                    new IdentityApiUser() { Email = "agencyreadonly_1404@gmail.com", IsEnabled = false, PhoneNumber="9786756756", UserId="1404", UserName="agencyreadonly_1404", Title="",
+                    Roles = new List<IdentityUserRole>(){ new IdentityUserRole() { Name = "farm_agencyreadonly" } } },
+                };
+        var agencyUsers = mapper.Map<IEnumerable<IdentityApiUser>, IEnumerable<PresTrustUserEntity>>(resultUsers);
+
+        return agencyUsers;
+    }
     
 }

@@ -3,6 +3,7 @@
 public class MarkFeedbacksAsReadCommand : IRequest<bool>
 {
     public List<int> FeedbackIds { get; set; }
+    public string UserId { get; set; }
 
 }
 

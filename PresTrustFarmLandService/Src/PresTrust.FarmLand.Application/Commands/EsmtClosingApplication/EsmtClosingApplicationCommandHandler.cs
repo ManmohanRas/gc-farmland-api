@@ -22,6 +22,7 @@ public class EsmtClosingApplicationCommandHandler : BaseHandler, IRequestHandler
     }
     public async Task<EsmtClosingApplicationCommandViewModel> Handle(EsmtClosingApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         EsmtClosingApplicationCommandViewModel result = new();
 
         // check if application exists

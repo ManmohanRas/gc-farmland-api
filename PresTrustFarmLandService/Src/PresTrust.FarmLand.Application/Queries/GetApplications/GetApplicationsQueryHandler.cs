@@ -21,6 +21,7 @@ public class GetApplicationsQueryHandler : IRequestHandler<GetApplicationsQuery,
 
     public async Task<List<GetApplicationsQueryViewModel>> Handle(GetApplicationsQuery request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var applications = await repoApplication.GetApplicationsAsync(userContext.AgencyIds, userContext.IsExternalUser);
         var results = mapper.Map<List<FarmApplicationEntity>, List<GetApplicationsQueryViewModel>>(applications);
 

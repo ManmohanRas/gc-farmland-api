@@ -34,6 +34,7 @@ public class SaveFarmSadcResidenceCommandHandler : BaseHandler, IRequestHandler<
     /// <returns></returns>
     public async Task<int> Handle(SaveFarmSadcResidenceCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         int sadcResidenceId = 0;
 
         // get application details

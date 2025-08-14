@@ -24,4 +24,5 @@ public class SaveFarmSadcResidenceCommand : IRequest<int>
     public bool IsSightTriangle { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
+    public string UserId { get; set; }
 }

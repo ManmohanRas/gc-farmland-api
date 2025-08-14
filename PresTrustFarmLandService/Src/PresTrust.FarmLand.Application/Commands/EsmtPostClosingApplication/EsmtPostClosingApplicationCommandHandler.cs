@@ -39,6 +39,7 @@ public class EsmtPostClosingApplicationCommandHandler : BaseHandler, IRequestHan
 
     public async Task<EsmtPostClosingApplicationCommandViewModel> Handle(EsmtPostClosingApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         EsmtPostClosingApplicationCommandViewModel result = new();
         IEnumerable<OwnerDetailsEntity> ownerDetails;
         FarmBlockLotEntity blockLot = new FarmBlockLotEntity();

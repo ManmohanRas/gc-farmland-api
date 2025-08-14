@@ -34,6 +34,7 @@ public class SaveOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<SaveO
     /// <returns></returns>
     public async Task<int> Handle(SaveOwnerDetailsCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 

@@ -13,5 +13,5 @@ public class SaveEsmtAppAttachmentCCommand:IRequest<int>
     public string NonAgriUseAccessParcel { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
-
+    public string UserId { get; set; }
 }

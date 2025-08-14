@@ -10,6 +10,7 @@ public class SaveFarmEsmtAgriEnterpriseCommand : IRequest<int>
     public DateTime? PlanDate { get; set; }
     public string ConservationPractices { get; set; }
     public string AgriculturalInvestments { get; set; }
+    public string UserId { get; set; }
     public IEnumerable<SaveFarmEsmtAgriCheckListViewModel> AgriCheckList { get; set; }
 
 }

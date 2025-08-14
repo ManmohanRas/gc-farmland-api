@@ -7,4 +7,5 @@ public class SaveCommentCommand : IRequest<int>
     public int ApplicationId { get; set; }
     public string? Comment { get; set; }
     public int CommentTypeId { get; set; }
+    public string UserId { get; set; }
 }

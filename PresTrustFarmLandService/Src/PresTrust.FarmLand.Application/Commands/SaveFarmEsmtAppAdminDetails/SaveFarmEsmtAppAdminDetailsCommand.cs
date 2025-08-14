@@ -32,4 +32,5 @@ public class SaveFarmEsmtAppAdminDetailsCommand : IRequest<int>
     public DateTime? AdYear { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime? LastUpdatedOn { get; set; }
+    public string UserId { get; set; }
 }

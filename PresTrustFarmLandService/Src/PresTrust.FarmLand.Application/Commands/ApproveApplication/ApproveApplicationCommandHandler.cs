@@ -41,6 +41,7 @@ public class ApproveApplicationCommandHandler : BaseHandler, IRequestHandler<App
     /// <returns></returns>
     public async Task<ApproveApplicationCommandViewModel> Handle(ApproveApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         ApproveApplicationCommandViewModel result = new();
 
         // check if application exists

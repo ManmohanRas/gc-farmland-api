@@ -26,7 +26,8 @@ public class SaveEmailTemplateCommandHandler: IRequestHandler<SaveEmailTemplateC
 
     public async Task<int> Handle(SaveEmailTemplateCommand request, CancellationToken cancellationToken)
 {
-    FarmEmailTemplateEntity emailTemplate = default;
+        userContext.DeriveUserProfileFromUserId(request.UserId);
+        FarmEmailTemplateEntity emailTemplate = default;
 
     // map command object to the HistEmailTemplateEntity
     var reqTemplate = mapper.Map<SaveEmailTemplateCommand, FarmEmailTemplateEntity>(request);
