@@ -4,6 +4,7 @@
 public class SaveAppAdminContactsCommand : IRequest<bool>
 {
     public int ApplicationId { get; set; }
+    public string UserId { get; set; }
     public List<SaveContactsModel> Contacts { get; set; }
 }
 public class SaveContactsModel

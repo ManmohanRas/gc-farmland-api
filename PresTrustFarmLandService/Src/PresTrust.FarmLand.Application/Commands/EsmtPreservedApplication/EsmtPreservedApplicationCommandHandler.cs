@@ -41,6 +41,7 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
 
     public async Task<EsmtPreservedApplicationCommandViewModel> Handle(EsmtPreservedApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         EsmtPreservedApplicationCommandViewModel result = new();
         IEnumerable<OwnerDetailsEntity> ownerDetails;
         FarmBlockLotEntity blockLot = new FarmBlockLotEntity();

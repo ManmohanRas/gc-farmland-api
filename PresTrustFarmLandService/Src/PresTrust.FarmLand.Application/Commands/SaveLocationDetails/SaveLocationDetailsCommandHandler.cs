@@ -33,6 +33,7 @@ public class SaveLocationDetailsCommandHandler : BaseHandler, IRequestHandler<Sa
     }
     public async Task<Unit> Handle(SaveLocationDetailsCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         List<FarmTermAppDeedLocationEntity> deedParcels = new List<FarmTermAppDeedLocationEntity>();
         FarmTermAppDeedLocationEntity deed = new FarmTermAppDeedLocationEntity();
 

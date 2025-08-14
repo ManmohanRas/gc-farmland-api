@@ -33,7 +33,8 @@ public class MunicipalUserRoleChangeRequestCommandHandler :  BaseHandler , IRequ
         /// <returns></returns>
         public async Task<bool> Handle(MunicipalUserRoleChangeRequestCommand request, CancellationToken cancellationToken)
         {
-            userContext.DeriveRole(request.AgencyId);
+        userContext.DeriveUserProfileFromUserId(request.UserId);
+        userContext.DeriveRole(request.AgencyId);
 
             if (userContext.Role != UserRoleEnum.AGENCY_ADMIN && userContext.Role != UserRoleEnum.PROGRAM_ADMIN && userContext.Role != UserRoleEnum.SYSTEM_ADMIN)
                 throw new UnauthorizedAccessException("Unauthorized operation.");

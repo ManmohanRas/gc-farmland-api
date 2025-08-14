@@ -23,6 +23,7 @@ public class SaveFarmEsmtSadcAppEligiblityTwoCommandHandler :BaseHandler, IReque
     }
     public async Task<int> Handle(SaveFarmEsmtSadcAppEligiblityTwoCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var reqEligibilityTwo = mapper.Map<SaveFarmEsmtSadcAppEligiblityTwoCommand, FarmEsmtSadcAppEligiblityTwoEntity>(request);
         reqEligibilityTwo.LastUpdatedBy = userContext.Email;
         var EligibilityTwo = await repoEligibilityTwo.SaveSadcEligibilityTwoAsync(reqEligibilityTwo);

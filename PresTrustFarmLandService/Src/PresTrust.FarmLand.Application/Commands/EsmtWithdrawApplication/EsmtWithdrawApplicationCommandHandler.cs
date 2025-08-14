@@ -38,6 +38,7 @@ public class EsmtWithdrawApplicationCommandHandler : BaseHandler, IRequestHandle
     /// <returns></returns>
     public async Task<Unit> Handle(EsmtWithdrawApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 

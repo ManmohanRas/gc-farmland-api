@@ -39,6 +39,7 @@ public class EsmtSubmitApplicationCommandHandler : BaseHandler, IRequestHandler<
     /// 
     public async Task<EsmtSubmitApplicationCommandViewModel> Handle(EsmtSubmitApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         EsmtSubmitApplicationCommandViewModel result = new();
 
         // check if application exists

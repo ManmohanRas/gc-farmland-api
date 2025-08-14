@@ -7,5 +7,6 @@ public class SaveTermAppSignatoryCommand : IRequest<int>
     public string Municipality { get; set; }
     public string? Title { get; set; }
     public DateTime? SignedOn { get; set; }
+    public string UserId { get; set; }
 }
 

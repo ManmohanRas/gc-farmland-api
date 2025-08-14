@@ -1,6 +1,6 @@
 namespace PresTrust.FarmLand.API.Controllers.v1;
 
-[Authorize()]
+//[Authorize()]
 [Route("api/v1/farm")]
 [ApiController]
 public class FarmController : ApiBaseController

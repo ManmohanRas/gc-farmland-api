@@ -36,6 +36,7 @@ public class EsmtPendingApplicationCommandHandler : BaseHandler, IRequestHandler
     /// 
     public async Task<EsmtPendingApplicationCommandViewModel> Handle(EsmtPendingApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         EsmtPendingApplicationCommandViewModel result = new();
 
         // check if application exists

@@ -26,7 +26,7 @@ public class SaveCommentCommandHandler : IRequestHandler<SaveCommentCommand, int
 
     public async Task<int> Handle(SaveCommentCommand request, CancellationToken cancellationToken)
     {
-
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var reqComment = mapper.Map<SaveCommentCommand, FarmCommentsEntity>(request);
 
 

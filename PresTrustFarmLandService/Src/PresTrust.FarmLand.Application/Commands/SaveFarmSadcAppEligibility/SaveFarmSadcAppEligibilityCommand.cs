@@ -22,5 +22,6 @@
         public bool Is50PercentLand { get; set; }
         public decimal? Percent50Land { get; set; }
         public decimal? Acre50Land { get; set; }
+        public string UserId { get; set; }
     }
 }

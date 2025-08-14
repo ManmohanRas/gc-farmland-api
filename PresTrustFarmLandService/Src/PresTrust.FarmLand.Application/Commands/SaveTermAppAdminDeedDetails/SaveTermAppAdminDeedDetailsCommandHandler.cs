@@ -33,6 +33,7 @@ public class SaveTermAppAdminDeedDetailsCommandHandler : BaseHandler, IRequestHa
 
     public async Task<Unit> Handle(SaveTermAppAdminDeedDetailsCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
         

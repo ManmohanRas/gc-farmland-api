@@ -34,7 +34,7 @@ public class SaveEsmtOwnerDetailsCommandHandler : BaseHandler, IRequestHandler<S
 
     public async Task<int> Handle(SaveEsmtOwnerDetailsCommand request, CancellationToken cancellationToken)
     {
-
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var application = await GetIfApplicationExists(request.ApplicationId);
 
         var reqEsmtOwner = mapper.Map<SaveEsmtOwnerDetailsCommand, EsmtOwnerDetailsEntity>(request);

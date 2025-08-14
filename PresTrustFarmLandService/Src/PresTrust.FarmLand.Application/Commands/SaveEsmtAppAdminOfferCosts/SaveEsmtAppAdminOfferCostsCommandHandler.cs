@@ -21,6 +21,7 @@ public class SaveEsmtAppAdminOfferCostsCommandHandler : IRequestHandler<SaveEsmt
     }
     public async Task<int> Handle(SaveEsmtAppAdminOfferCostsCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var application = await repoApplication.GetApplicationAsync( request.ApplicationId );
         var reqOfferCosts = mapper.Map<SaveEsmtAppAdminOfferCostsCommand, EsmtAppAdminOfferCostsEntity>(request);
         reqOfferCosts.LastUpdatedBy = userContext.Email;

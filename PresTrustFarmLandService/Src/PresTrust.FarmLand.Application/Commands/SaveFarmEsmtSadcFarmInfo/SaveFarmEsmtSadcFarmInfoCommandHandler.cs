@@ -22,6 +22,7 @@ public class SaveFarmEsmtSadcFarmInfoCommandHandler :BaseHandler,  IRequestHandl
     }
     public async Task<int> Handle(SaveFarmEsmtSadcFarmInfoCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var application = await repoApplication.GetApplicationAsync(request.ApplicationId);
         var reqFarmInfo = mapper.Map<SaveFarmEsmtSadcFarmInfoCommand, FarmEsmtSadcFarmInfoEntity>(request);
         reqFarmInfo.LastUpdatedBy = userContext.Email;

@@ -10,5 +10,6 @@ public class SaveFarmEsmtAttachmentACommand : IRequest<int>
     public string OfferPriceComments { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime? LastUpdatedOn { get; set; }
+    public string UserId { get; set; }
 
 }

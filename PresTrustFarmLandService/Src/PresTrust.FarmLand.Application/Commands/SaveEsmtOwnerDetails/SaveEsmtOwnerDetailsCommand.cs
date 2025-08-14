@@ -21,4 +21,5 @@ public class SaveEsmtOwnerDetailsCommand : IRequest<int>
     public string PdStreetAddress { get; set; }
     public bool OwnedContinuesly { get; set; }
     public bool SubjectProperty { get; set; }
+    public string UserId { get; set; }
 }

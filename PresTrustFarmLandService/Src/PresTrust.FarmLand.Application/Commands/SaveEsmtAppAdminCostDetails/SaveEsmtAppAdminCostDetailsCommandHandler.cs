@@ -35,6 +35,7 @@ public class SaveEsmtAppAdminCostDetailsCommandHandler : BaseHandler, IRequestHa
     /// <returns></returns>
     public async Task<int> Handle(SaveEsmtAppAdminCostDetailsCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         int costDetailsId = 0;
 
         // get application details

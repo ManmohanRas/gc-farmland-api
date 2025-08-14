@@ -12,4 +12,5 @@ public class SaveFarmEsmtExceptionsCommand: IRequest<int>
     public string ExceptionSeverable { get; set; }
     public string ExceptionTotalSeverable { get; set; }
     public decimal? Acres { get; set; }
+    public string UserId { get; set; }
 }

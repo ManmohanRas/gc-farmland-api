@@ -3,6 +3,7 @@
 public class SaveLocationDetailsCommand: IRequest<Unit>
 {
     public int ApplicationId { get; set; }
+    public string UserId { get; set; }
     public List<SaveBlockLot> Parcels { get; set; }
 
 }

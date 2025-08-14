@@ -27,6 +27,6 @@ namespace PresTrust.FarmLand.Application.Commands;
     public string NonResiOther { get; set; }
     public bool IsHistBuildingOrStructure { get; set; }
     public string HistoricSignificance { get; set; }
-
+    public string UserId { get; set; }
 }
 

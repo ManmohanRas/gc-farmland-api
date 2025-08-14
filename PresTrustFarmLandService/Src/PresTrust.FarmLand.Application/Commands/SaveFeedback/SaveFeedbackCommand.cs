@@ -8,4 +8,5 @@ public class SaveFeedbackCommand : IRequest<int>
     public string Feedback { get; set; }
     public string Section { get; set; }
     public bool RequestForCorrection { get; set; }
+    public string UserId { get; set; }
 }

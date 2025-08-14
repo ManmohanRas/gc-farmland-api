@@ -5,5 +5,5 @@ public class SaveEsmtAppExistUsesCommand:IRequest<int>
     public int ApplicationId { get; set; }
     public bool IsSubdivisionApproval { get; set; }
     public string InfoAboutPremises { get; set; }
-
+    public string UserId { get; set; }
 }

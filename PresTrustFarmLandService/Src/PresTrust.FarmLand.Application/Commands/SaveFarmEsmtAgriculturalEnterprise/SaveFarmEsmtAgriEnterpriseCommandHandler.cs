@@ -37,6 +37,7 @@ public class SaveFarmEsmtAgriEnterpriseCommandHandler : BaseHandler, IRequestHan
     /// <returns></returns>
     public async Task<int> Handle(SaveFarmEsmtAgriEnterpriseCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         int aggriId = 0;
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);

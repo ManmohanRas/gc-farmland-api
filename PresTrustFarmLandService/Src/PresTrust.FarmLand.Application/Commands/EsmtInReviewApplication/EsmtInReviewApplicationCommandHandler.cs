@@ -30,6 +30,7 @@ public class EsmtInReviewApplicationCommandHandler : BaseHandler, IRequestHandle
     /// 
     public async Task<EsmtInReviewApplicationCommandViewModel> Handle(EsmtInReviewApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         EsmtInReviewApplicationCommandViewModel result = new();
 
         // check if application exists

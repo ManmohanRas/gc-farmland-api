@@ -33,6 +33,7 @@ public class ApproveAggrementCommandHandler : BaseHandler, IRequestHandler<Appro
     /// <returns></returns>
     public async Task<ApproveAggrementCommandViewmodel> Handle(ApproveAggrementCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         ApproveAggrementCommandViewmodel result = new();
 
         // check if application exists

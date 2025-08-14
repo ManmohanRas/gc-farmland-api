@@ -36,6 +36,7 @@ public class SaveAppDocumentChecklistCommandHandler : BaseHandler, IRequestHandl
     /// <returns></returns>
     public async Task<Unit> Handle(SaveAppDocumentChecklistCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
         // consider only add/updated records

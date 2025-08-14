@@ -35,6 +35,7 @@ public class EsmtRejectApplicationCommandHandler :BaseHandler,IRequestHandler<Es
     /// <returns></returns>
     public async Task<Unit> Handle(EsmtRejectApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var application = await repoApplication.GetApplicationAsync(request.ApplicationId);
 
 

@@ -14,4 +14,5 @@ public class SaveFarmEsmtSadcHistoryCommand : IRequest<int>
     public bool TrustDocuments { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
+    public string UserId { get; set; }
 }

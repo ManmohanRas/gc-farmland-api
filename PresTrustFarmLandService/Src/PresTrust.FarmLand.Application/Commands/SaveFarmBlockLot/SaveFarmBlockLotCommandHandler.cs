@@ -26,6 +26,7 @@ public class SaveFarmBlockLotCommandHandler: IRequestHandler<SaveFarmBlockLotCom
 
     public async Task<SaveFarmBlockLotCommandViewModel> Handle(SaveFarmBlockLotCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         SaveFarmBlockLotCommandViewModel result = new SaveFarmBlockLotCommandViewModel();
 
         var reqBlockLot = mapper.Map<SaveFarmBlockLotCommand, FarmBlockLotEntity>(request);

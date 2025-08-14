@@ -5,5 +5,6 @@
 public class AssignRolesCommand : IRequest<Unit>
 {
     public int ApplicationId { get; set; }
+    public string UserId { get; set; }
     public IEnumerable<FarmRolesViewModel>? ApplicationUsers { get; set; }
 }

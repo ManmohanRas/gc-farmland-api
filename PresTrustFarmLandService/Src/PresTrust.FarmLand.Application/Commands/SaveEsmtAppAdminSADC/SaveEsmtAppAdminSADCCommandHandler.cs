@@ -22,6 +22,7 @@ public class SaveEsmtAppAdminSADCCommandHandler : IRequestHandler<SaveEsmtAppAdm
 
     public async Task<int> Handle(SaveEsmtAppAdminSADCCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var reqSADCDetails = mapper.Map<SaveEsmtAppAdminSADCCommand, EsmtAppAdminSADCEntity>(request);
         reqSADCDetails.LastUpdatedBy = userContext.Email;
         var result = await repoSADCRepository.SaveSADCdetailsAsync(reqSADCDetails);

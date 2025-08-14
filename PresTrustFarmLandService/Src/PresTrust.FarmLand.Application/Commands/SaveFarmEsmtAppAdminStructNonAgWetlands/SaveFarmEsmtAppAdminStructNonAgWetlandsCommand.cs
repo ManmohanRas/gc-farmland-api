@@ -17,4 +17,5 @@ public class SaveFarmEsmtAppAdminStructNonAgWetlandsCommand : IRequest<int>
     public string WetlandsClassification { get; set; }
     public string LastUpdatedBy { get; set; }
     public DateTime LastUpdatedOn { get; set; }
+    public string UserId { get; set; }
 }

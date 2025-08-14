@@ -27,6 +27,6 @@
         public bool EstateSituation { get; set; }
         public bool Bankruptcy { get; set; }
         public bool ForeClosure {  get; set; }
-
+        public string UserId { get; set; }
     }
 }

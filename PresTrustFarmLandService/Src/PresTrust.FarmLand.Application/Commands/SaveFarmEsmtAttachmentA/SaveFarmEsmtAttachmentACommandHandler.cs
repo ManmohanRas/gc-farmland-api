@@ -22,6 +22,7 @@ public class SaveFarmEsmtAttachmentACommandHandler : BaseHandler, IRequestHandle
 
     public async Task<int> Handle(SaveFarmEsmtAttachmentACommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var attachmentA = mapper.Map<SaveFarmEsmtAttachmentACommand, FarmEsmtAttachmentAEntity>(request);
         attachmentA.LastUpdatedBy = userContext.Name;
 

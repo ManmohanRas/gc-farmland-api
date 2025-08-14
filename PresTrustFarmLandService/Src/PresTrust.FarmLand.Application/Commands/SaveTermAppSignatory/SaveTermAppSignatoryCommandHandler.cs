@@ -35,6 +35,7 @@ public class SaveTermAppSignatoryCommandHandler : BaseHandler, IRequestHandler<S
     /// <returns></returns>
     public async Task<int> Handle(SaveTermAppSignatoryCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         int signatoryId = 0;
 
         // get application details

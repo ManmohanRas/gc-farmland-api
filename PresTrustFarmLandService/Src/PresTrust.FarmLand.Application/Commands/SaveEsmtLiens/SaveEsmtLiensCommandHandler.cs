@@ -27,7 +27,7 @@ namespace PresTrust.FarmLand.Application.Commands
 
         public async Task<int> Handle(SaveEsmtLiensCommand request, CancellationToken cancellationToken)
         {
-
+            userContext.DeriveUserProfileFromUserId(request.UserId);
             var application = await GetIfApplicationExists(request.ApplicationId);
 
             var reqEsmtLiens = mapper.Map<SaveEsmtLiensCommand, EsmtLiensEntity>(request);

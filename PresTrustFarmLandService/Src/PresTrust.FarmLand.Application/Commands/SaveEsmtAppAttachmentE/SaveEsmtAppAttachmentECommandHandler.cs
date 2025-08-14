@@ -21,6 +21,7 @@ public class SaveEsmtAppAttachmentECommandHandler : BaseHandler, IRequestHandler
     }
     public async Task<int> Handle(SaveEsmtAppAttachmentECommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         var attachmentE = mapper.Map<SaveEsmtAppAttachmentECommand, EsmtAppAttachmentEEntity>(request);
         attachmentE.LastUpdatedBy = userContext.Name;
 

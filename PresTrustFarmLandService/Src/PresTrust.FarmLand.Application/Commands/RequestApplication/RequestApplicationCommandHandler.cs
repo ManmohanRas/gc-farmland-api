@@ -43,6 +43,7 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
     /// <returns></returns>
     public async Task<RequestApplicationCommandViewModel> Handle(RequestApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         RequestApplicationCommandViewModel result = new();
 
         // check if application exists
@@ -93,9 +94,9 @@ public class RequestApplicationCommandHandler : BaseHandler, IRequestHandler<Req
             await repoApplication.SaveStatusLogAsync(appStatusLog);
 
             //Send Email 
-            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_DRAFT_TO_REQUESTED.ToString());
-            if (template != null)
-                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
+            //var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_DRAFT_TO_REQUESTED.ToString());
+            //if (template != null)
+            //    await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
             scope.Complete();
             result.IsSuccess = true;
         }
