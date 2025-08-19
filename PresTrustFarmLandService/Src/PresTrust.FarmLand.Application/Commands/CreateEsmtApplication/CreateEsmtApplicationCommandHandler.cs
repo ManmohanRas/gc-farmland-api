@@ -73,9 +73,9 @@ public class CreateEsmtApplicationCommandHandler : BaseHandler, IRequestHandler<
             await repoApplication.SaveStatusLogAsync(appStatusLog);
 
             // Send Email
-            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_CREATE_TO_DRAFT_APPLICATION.ToString());
-            if (template != null)
-                await repoEmailManager.SendMail(subject: template.Subject, applicationId: reqApplication.Id, applicationName: reqApplication.Title, htmlBody: template.Description, agencyId: reqApplication.AgencyId);
+            //var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_CREATE_TO_DRAFT_APPLICATION.ToString());
+            //if (template != null)
+            //    await repoEmailManager.SendMail(subject: template.Subject, applicationId: reqApplication.Id, applicationName: reqApplication.Title, htmlBody: template.Description, agencyId: reqApplication.AgencyId);
 
             scope.Complete();
         }

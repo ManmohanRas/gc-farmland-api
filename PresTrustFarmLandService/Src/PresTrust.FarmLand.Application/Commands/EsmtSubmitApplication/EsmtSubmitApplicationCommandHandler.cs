@@ -82,9 +82,9 @@ public class EsmtSubmitApplicationCommandHandler : BaseHandler, IRequestHandler<
             await repoApplication.SaveStatusLogAsync(appStatusLog);
 
             //send Email
-            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_DRAFT_APPLICATION_TO_APPLICATION_SUBMITTED.ToString());
-            if (template != null)
-                await repoEmailManager.SendMail(subject: template.Subject, applicationId: request.ApplicationId, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
+            //var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_DRAFT_APPLICATION_TO_APPLICATION_SUBMITTED.ToString());
+            //if (template != null)
+            //    await repoEmailManager.SendMail(subject: template.Subject, applicationId: request.ApplicationId, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
             scope.Complete();
             result.IsSuccess = true;
 

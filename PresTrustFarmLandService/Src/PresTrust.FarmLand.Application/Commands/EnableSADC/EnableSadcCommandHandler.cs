@@ -57,9 +57,9 @@ public class EnableSadcCommandHandler : BaseHandler, IRequestHandler<EnableSadcC
         {
             await repoApplication.UpdateSadcAsync(request.ApplicationId);
             //Send Email 
-            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.TRIGER_THE_EMAIL_WHEN_SADC_IS_ENABLED.ToString());
-            if (template != null)
-                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, blockLot: blockLot);
+            //var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.TRIGER_THE_EMAIL_WHEN_SADC_IS_ENABLED.ToString());
+            //if (template != null)
+            //    await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, blockLot: blockLot);
 
             scope.Complete();
         }

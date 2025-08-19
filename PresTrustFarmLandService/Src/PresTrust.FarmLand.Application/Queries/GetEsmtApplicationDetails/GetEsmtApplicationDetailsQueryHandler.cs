@@ -29,6 +29,7 @@ public class GetEsmtApplicationDetailsQueryHandler : BaseHandler, IRequestHandle
 
     public async Task<GetEsmtApplicationDetailsQueryViewModel> Handle(GetEsmtApplicationDetailsQuery request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
         var comments = await repoComment.GetAllCommentsAsync(request.ApplicationId);

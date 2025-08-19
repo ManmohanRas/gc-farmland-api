@@ -94,9 +94,9 @@ public class EsmtPreservedApplicationCommandHandler : BaseHandler, IRequestHandl
             };
             await repoApplication.SaveStatusLogAsync(appStatusLog);
 
-            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_IN_POST_CLOSING_TO_PRESERVED.ToString());
-            if (template != null)
-                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, owner: ownerDetails.FirstOrDefault(), blockLot: blockLot);
+            //var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_IN_POST_CLOSING_TO_PRESERVED.ToString());
+            //if (template != null)
+            //    await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, owner: ownerDetails.FirstOrDefault(), blockLot: blockLot);
 
             scope.Complete();
             result.IsSuccess = true;

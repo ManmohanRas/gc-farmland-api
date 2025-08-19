@@ -38,6 +38,7 @@ public class RejectApplicationCommandHandler : BaseHandler, IRequestHandler<Reje
     /// <returns></returns>
     public async Task<Unit> Handle(RejectApplicationCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 

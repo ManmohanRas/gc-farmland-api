@@ -76,9 +76,9 @@ public class EsmtPostClosingApplicationCommandHandler : BaseHandler, IRequestHan
             };
             await repoApplication.SaveStatusLogAsync(appStatusLog);
 
-            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_CLOSING_TO_POST_CLOSING.ToString());
-            if (template != null)
-                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, owner: ownerDetails.FirstOrDefault(), blockLot: blockLot);
+            //var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_FROM_CLOSING_TO_POST_CLOSING.ToString());
+            //if (template != null)
+            //    await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId, owner: ownerDetails.FirstOrDefault(), blockLot: blockLot);
 
             // returns broken rules
             var defaultBrokenRules = ReturnBrokenRulesIfAny(application);
