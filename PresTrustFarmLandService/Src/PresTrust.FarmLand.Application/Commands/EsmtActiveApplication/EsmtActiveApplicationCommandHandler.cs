@@ -57,9 +57,9 @@ public class EsmtActiveApplicationCommandHandler : BaseHandler, IRequestHandler<
             await repoApplication.SaveStatusLogAsync(appStatusLog);
 
             // Send Email
-            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_PENDING_TO_ACTIVE.ToString());
-            if (template != null)
-              await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
+            //var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.CHANGE_STATUS_PENDING_TO_ACTIVE.ToString());
+            //if (template != null)
+            //  await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
             scope.Complete();
             result.IsSuccess = true;
         }

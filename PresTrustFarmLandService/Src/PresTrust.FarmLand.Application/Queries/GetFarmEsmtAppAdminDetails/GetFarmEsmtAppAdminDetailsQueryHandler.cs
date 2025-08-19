@@ -5,20 +5,24 @@ public class GetFarmEsmtAppAdminDetailsQueryHandler : BaseHandler, IRequestHandl
     private IMapper mapper;
     private readonly IApplicationRepository repoApplication;
     private IFarmEsmtAppAdminDetailsRepository repoAdminDetails;
+    private readonly IPresTrustUserContext userContext;
 
     public GetFarmEsmtAppAdminDetailsQueryHandler(
         IMapper mapper,
         IApplicationRepository repoApplication,
-        IFarmEsmtAppAdminDetailsRepository repoAdminDetails
+        IFarmEsmtAppAdminDetailsRepository repoAdminDetails,
+        IPresTrustUserContext userContext
         ) : base(repoApplication: repoApplication)
     {
         this.mapper = mapper;
         this.repoApplication = repoApplication;
         this.repoAdminDetails = repoAdminDetails;
+        this.userContext = userContext;
     }
 
     public async Task<GetFarmEsmtAppAdminDetailsQueryViewModel> Handle(GetFarmEsmtAppAdminDetailsQuery request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
 
