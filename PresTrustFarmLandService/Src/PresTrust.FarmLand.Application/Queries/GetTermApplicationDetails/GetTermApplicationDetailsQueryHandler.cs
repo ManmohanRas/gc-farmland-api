@@ -29,6 +29,7 @@ public class GetTermApplicationDetailsQueryHandler : BaseHandler, IRequestHandle
 
     public async Task<GetTermApplicationDetailsQueryViewModel> Handle(GetTermApplicationDetailsQuery request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         // get application details
         var application = await GetIfApplicationExists(request.ApplicationId);
         var comments = await repoComment.GetAllCommentsAsync(request.ApplicationId);

@@ -34,6 +34,7 @@ public class CountyUserRoleChangeRequestCommandHandler : BaseHandler, IRequestHa
     /// <returns></returns>
     public async Task<bool> Handle(CountyUserRoleChangeRequestCommand request, CancellationToken cancellationToken)
     {
+        userContext.DeriveUserProfileFromUserId(request.UserId);
         JsonContent postUserJson = default;
         if (string.IsNullOrEmpty(request.Role))
         {
