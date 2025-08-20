@@ -117,7 +117,7 @@ public sealed class PresTrustUserContext : IPresTrustUserContext
         string agencyUser = agencyUserInfo[0];
         string agencyId = agencyUserInfo[1];
 
-        if (string.Compare(agencyUser, "agencyadmin", true) == 0)
+        if (string.Compare(agencyUser, "farm-agencyadmin", true) == 0)
         {
             userProfile.Role = UserRoleEnum.AGENCY_ADMIN;
             if (!string.IsNullOrEmpty(agencyId) && int.TryParse(agencyId, out number))
@@ -127,7 +127,7 @@ public sealed class PresTrustUserContext : IPresTrustUserContext
             }
         }
 
-        if (string.Compare(agencyUser, "agencyeditor", true) == 0)
+        if (string.Compare(agencyUser, "farm-agencyeditor", true) == 0)
         {
             userProfile.Role = UserRoleEnum.AGENCY_EDITOR;
             if (!string.IsNullOrEmpty(agencyId) && int.TryParse(agencyId, out number))
@@ -137,7 +137,7 @@ public sealed class PresTrustUserContext : IPresTrustUserContext
             }
         }
 
-        if (string.Compare(agencyUser, "agencysignatory", true) == 0)
+        if (string.Compare(agencyUser, "farm-agencysignatory", true) == 0)
         {
             userProfile.Role = UserRoleEnum.AGENCY_SIGNATORY;
             if (!string.IsNullOrEmpty(agencyId) && int.TryParse(agencyId, out number))
@@ -147,7 +147,7 @@ public sealed class PresTrustUserContext : IPresTrustUserContext
             }
         }
 
-        if (string.Compare(agencyUser, "agencyreadonly", true) == 0)
+        if (string.Compare(agencyUser, "farm-agencyreadonly", true) == 0)
         {
             userProfile.Role = UserRoleEnum.AGENCY_READONLY;
             if (!string.IsNullOrEmpty(agencyId) && int.TryParse(agencyId, out number))
