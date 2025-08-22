@@ -57,9 +57,9 @@ public class RequestForApplicationCorrectionCommandHandler : BaseHandler, IReque
             await repoFeedback.RequestForApplicationCorrectionAsync(application.Id);
 
             // Send Email
-            var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.FEEDBACK_RECEIVED_EMAIL.ToString());
-            if (template != null)
-                await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
+            //var template = await repoEmailTemplate.GetEmailTemplate(EmailTemplateCodeTypeEnum.FEEDBACK_RECEIVED_EMAIL.ToString());
+            //if (template != null)
+            //    await repoEmailManager.SendMail(subject: template.Subject, applicationId: application.Id, applicationName: application.Title, htmlBody: template.Description, agencyId: application.AgencyId);
 
 
             scope.Complete();
