@@ -53,6 +53,11 @@ public class GetMunicipalUsersQueryHandler : IRequestHandler<GetMunicipalUsersQu
                 };
         var agencyUsers = mapper.Map<IEnumerable<IdentityApiUser>, IEnumerable<PresTrustUserEntity>>(resultUsers);
 
+        foreach(var agency in agencyUsers)
+        {
+            agency.Status = agency.IsEnabled ? "Active" : "In-Active";
+        }
+
         return agencyUsers;
     }
     
