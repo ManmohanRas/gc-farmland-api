@@ -42,6 +42,10 @@ public class GetCountyUsersQueryHandler : IRequestHandler<GetCountyUsersQuery, I
                 };
         var result = mapper.Map<IEnumerable<IdentityApiUser>, IEnumerable<PresTrustUserEntity>>(users);
 
+        foreach(var item in result)
+        {
+            item.Status = item.IsEnabled ? "Active" : "In-Active";
+        }
         return result;
     }
 }
