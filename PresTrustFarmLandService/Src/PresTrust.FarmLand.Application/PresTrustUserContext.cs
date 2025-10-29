@@ -125,6 +125,7 @@ public sealed class PresTrustUserContext : IPresTrustUserContext
                 userProfile.AgencyIds.Add(number);
                 agencyUserRoles.Add(new AgencyUserRole() { AgencyId = number, UserRole = UserRoleEnum.AGENCY_ADMIN });
             }
+            this.isExternalUser = false;
         }
 
         if (string.Compare(agencyUser, "farm-agencyeditor", true) == 0)
